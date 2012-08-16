@@ -1,0 +1,669 @@
+/* 
+* 
+* $Revision:22 $
+* $LastChangedDate:2008-03-21 12:55:02 +0100 (Fr, 21 Mrz 2008) $
+* $Author:arvid $
+*
+*/
+/* -------------------------------------------------------- */
+/* Globale Einstellungen */
+/* --------------------- */
+* {
+	font-family:verdana,tahoma,arial,sans-serif;
+	font-size:11px;
+}
+html, body {
+	margin:0px;
+	padding:0px;
+	height:inherit;
+	height:100%;
+}
+body 	{
+	background-color:#EFEFEF;
+	text-align:center;
+}
+a {
+	color:#000077;
+	font-weight:bold;
+	font-size:inherit;
+}
+a:link {
+	text-decoration:none;
+}
+a:visited {
+	text-decoration:none;
+}
+a:hover	{
+	text-decoration:underline;
+}
+em {
+	font:inherit;
+	font-style:normal;
+}
+
+
+/* -------------------------------------------------------- */
+/* Haupt-Layer */
+/* ----------- */
+div.main {
+	width:780px;
+	min-height:inherit;
+	min-height:100%;
+	margin:0px auto;
+	padding:0px;
+	background-color:#FFFFFF;
+	text-align:justify;
+	border-left:2px solid #C0C0C0;
+	border-right:2px solid #C0C0C0;
+}
+
+
+/* -------------------------------------------------------- */
+/* Header */
+/* ------ */
+div.header {
+	background-color:#FFFFFF;
+	background-image:url("../grafiken/mozilo.jpg");
+	background-repeat:no-repeat;
+	height:150px;
+	text-align:right;
+}
+
+
+/* -------------------------------------------------------- */
+/* Detailmen� und Seiteninhalt */
+/* --------------------------- */
+div.catcontent {
+	float:right;
+	width:620px;
+	overflow:hidden;
+}
+
+
+/* -------------------------------------------------------- */
+/* Detailmen� und Seiteninhalt (Galerie) */
+/* ------------------------------------- */
+div.gallerycontent {
+	width:99%;
+	overflow:hidden;
+	text-align:center;
+}
+
+
+/* -------------------------------------------------------- */
+/* Hauptmen� */
+/* --------- */
+div.mainmenu {
+	padding-top:5px;
+	padding-bottom:5px;
+	border-top:1px solid #C0C0C0;
+	border-bottom:1px solid #C0C0C0;
+	background-color:#E0E0E0;
+	text-align:center;
+	font-size:12px;
+	font-weight:bold;
+}
+ul.mainmenu {
+	margin: 0px;
+	padding: 0px;
+}
+li.mainmenu {
+	display:inline;
+}
+
+
+/* -------------------------------------------------------- */
+/* Hauptmen� (Galerie) */
+/* ------------------- */
+div.gallerymenu {
+	padding:3px 10px 3px 10px;
+	border-bottom:1px solid #C0C0C0;
+	background-color:#EFEFEF;
+	text-align:center;
+}
+ul.gallerymenu, ul.gallerynumbermenu {
+	margin: 0px;
+	padding: 0px;
+}
+li.gallerymenu, li.gallerynumbermenu {
+	display:inline;
+	padding-right: 5px;
+}
+
+
+/* -------------------------------------------------------- */
+/* Detailmen� */
+/* ---------- */
+div.detailmenu {
+	padding:3px 10px 3px 10px;
+	border-bottom:1px solid #C0C0C0;
+	background-color:#EFEFEF;
+	text-align:center;
+}
+ul.detailmenu {
+	margin: 0px;
+	padding: 0px;
+}
+li.detailmenu {
+	display:inline;
+	padding-right: 5px;
+}
+
+
+/* -------------------------------------------------------- */
+/* Detailmen� (Galerie) */
+/* -------------------- */
+div.gallerynumbermenu {
+	padding:6px 8px 0px 8px;
+	line-height:30px;
+	text-align:center;width:99%;
+	float:none;
+	margin:0px auto;
+	line-height:16px;
+}
+
+
+/* -------------------------------------------------------- */
+/* Galerie-Tabelle (�bersichtsmodus) */
+/* --------------------------------- */
+table.gallerytable {
+	margin:0px auto;
+	border:1px solid #C0C0C0;
+	border-collapse:collapse;
+}
+td.gallerytd {
+	vertical-align:top;
+	border:1px solid #C0C0C0;
+}
+img.thumbnail {
+	margin:5px;
+}
+
+
+/* -------------------------------------------------------- */
+/* Seiteninhalt */
+/* ------------ */
+div.pagecontent {
+	padding:20px 20px 5px 20px;
+	text-align:justify;
+}
+
+
+/* -------------------------------------------------------- */
+/* Letzte �nderung */
+/* --------------- */
+div.lastchange {
+	text-align:center;
+	margin-top:26px;
+	padding-top:10px;
+	color:#C0C0C0;
+	font-size:10px;
+}
+
+
+/* -------------------------------------------------------- */
+/* Hauptmen�punkt */
+/* -------------- */
+a.menu {
+	font-size:12px;
+	margin:10px;
+	font-weight:bold;
+	color:#707070;
+}
+a.menu:hover {
+	color:#000000;
+	text-decoration:none;
+}
+
+
+/* -------------------------------------------------------- */
+/* Aktiver Hauptmen�punkt */
+/* ---------------------- */
+a.menuactive {
+	font-size:12px;
+	margin:10px;
+	font-weight:bold;
+	color:#000000;
+}
+a.menuactive:hover {
+	text-decoration:none;
+}
+
+
+/* -------------------------------------------------------- */
+/* Detailmen�punkt */
+/* --------------- */
+a.detailmenu {
+	margin:6px 10px;
+	color:#707070;
+}
+a.detailmenu:hover {
+	color:#000000;
+	text-decoration:none;
+}
+
+
+/* -------------------------------------------------------- */
+/* Aktiver Detailmen�punkt */
+/* ----------------------- */
+a.detailmenuactive {
+	margin:6px 10px;
+	color:#000000;
+	font-weight:bold;
+}
+a.detailmenuactive:hover {
+	text-decoration:none;
+}
+
+
+/* -------------------------------------------------------- */
+/* Galeriemen�punkt */
+/* --------------- */
+a.gallerymenu, a.gallerynumbermenu {
+	margin:6px 10px;
+	color:#707070;
+}
+a.gallerymenu:hover, a.gallerynumbermenu:hover {
+	color:#000000;
+	text-decoration:none;
+}
+
+
+/* -------------------------------------------------------- */
+/* Aktiver Galeriemen�punkt */
+/* ----------------------- */
+a.gallerymenuactive, a.gallerynumbermenuactive {
+	margin:6px 10px;
+	color:#000000;
+	font-weight:bold;
+}
+a.gallerymenuactive:hover, a.gallerynumbermenuactive:hover {
+	text-decoration:none;
+}
+
+
+/* -------------------------------------------------------- */
+/* Submen�punkt */
+/* --------------- */
+a.submenu {
+	font-size: 10px;
+	margin:2px 2px;
+	color:#707070;
+	font-weight:normal;
+}
+a.submenu:hover {
+	color:#000000;
+	text-decoration:none;
+}
+
+
+/* -------------------------------------------------------- */
+/* Aktiver Submen�punkt */
+/* ----------------------- */
+a.submenuactive {
+	font-size: 10px;
+	margin:2px 2px;
+	color:#000000;
+	font-weight:normal;
+}
+a.submenuactive:hover {
+	text-decoration:none;
+}
+
+
+/* -------------------------------------------------------- */
+/* Links im Footer */
+/* --------------- */
+div.lastchange a {
+	text-decoration:none;
+	font-size:10px;
+	color:#a0a0a0;
+	font-weight:bold;
+}
+div.lastchange a:hover {
+	text-decoration:underline;
+}
+
+
+/* -------------------------------------------------------- */
+/* Fehler in Tag-Attribut oder -Wert */
+/* --------------------------------- */
+.deadlink {
+	color:#ff4444;
+	font-weight:bold;
+}
+
+
+/* -------------------------------------------------------- */
+/* Suchwort-Hervorhebungen */
+/* ----------------------- */
+.highlight {
+	padding:0px 1px;
+	font-size:inherit;
+	background-color:#dd0000;
+	color:#ffffff;
+	font-size:inherit;
+}
+
+
+/* -------------------------------------------------------- */
+/* Suchformular */
+/* ------------ */
+form.searchform {
+	display:inline;
+	padding:3px;
+	color:#000000;
+	text-align:center;
+	width:120px;
+	margin:2px 5px;
+	font-weight:bold;
+}
+fieldset#searchfieldset {
+    border:none;
+    margin:0px;
+    padding:0px;
+}
+
+
+
+/* -------------------------------------------------------- */
+/* Suchfeld */
+/* -------- */
+input.searchtextfield {
+	border:none;
+	border-bottom:1px solid #C0C0C0;
+	width:85px;
+	margin:0px;
+}
+
+
+/* -------------------------------------------------------- */
+/* Suchbutton */
+/* ---------- */
+input.searchbutton {
+	margin-bottom:-5px;
+}
+
+
+/* -------------------------------------------------------- */
+/* Kontaktformular */
+/* --------------- */
+form#contact_form {
+}
+table#contact_table {
+}
+table#contact_table td {
+  vertical-align:top;
+  padding:5px;
+}
+span#contact_errormessage{
+  color:#880000;
+  font-weight:bold;
+}
+span#contact_successmessage{
+  color:#008800;
+  font-weight:bold;
+}
+input#contact_name, input#contact_mail, input#contact_website, input#contact_calculation {
+	border:1px solid #C0C0C0;
+  width:200px;
+}
+textarea#contact_message {
+	border:1px solid #C0C0C0;
+  width:200px;
+}
+input#contact_submit {
+	border:1px solid #C0C0C0;
+  width:200px;
+}
+
+
+
+
+/* -------------------------------------------------------- */
+/*                                                          */
+/* AB HIER: CMS-SYNTAX                                      */
+/*                                                          */
+/* -------------------------------------------------------- */
+
+
+/* -------------------------------------------------------- */
+/* [link|...]      */
+/* --------------- */
+a.link {
+}
+
+
+/* -------------------------------------------------------- */
+/* [mail|...]      */
+/* --------------- */
+a.mail {
+}
+
+
+/* -------------------------------------------------------- */
+/* [seite|...]      */
+/* --------------- */
+a.page {
+}
+
+
+/* -------------------------------------------------------- */
+/* [kategorie|...]      */
+/* --------------- */
+a.category {
+}
+
+
+/* -------------------------------------------------------- */
+/* [datei|...]      */
+/* --------------- */
+a.file {
+}
+
+
+/* -------------------------------------------------------- */
+/* [galerie|...]      */
+/* --------------- */
+a.gallery {
+}
+
+
+/* -------------------------------------------------------- */
+/* [bild|...] */
+/* ---------- */
+img {
+	border:none;
+}
+
+span.imagesubtitle {
+	margin:3px 3px;
+	text-align:justify;
+	font-size:0.9em;
+	line-height:1.1em;
+}
+
+span.contentimage {
+}
+
+/* -------------------------------------------------------- */
+/* [bildlinks|...] */
+/* --------------- */
+span.leftcontentimage {
+	margin:8px;
+	max-width:100px;
+	float:left;
+	margin-left:0px;
+}
+
+img.leftcontentimage {
+	max-width:100px;
+	border:1px solid;
+}
+
+
+/* -------------------------------------------------------- */
+/* [bildrechts|...] */
+/* ---------------- */
+span.rightcontentimage {
+	margin:8px;
+	max-width:100px;
+	float:right;
+	margin-right:0px;
+}
+
+img.rightcontentimage {
+	border:1px solid;
+	max-width:100px;
+}
+
+
+/* -------------------------------------------------------- */
+/* [fett|...] */
+/* ---------- */
+b {
+
+}
+
+
+/* -------------------------------------------------------- */
+/* [kursiv|...] */
+/* ------------ */
+i {
+
+}
+
+
+/* -------------------------------------------------------- */
+/* [unter|...] */
+/* ------------ */
+u {
+
+}
+
+
+/* -------------------------------------------------------- */
+/* [durch|...] */
+/* ------------ */
+s {
+
+}
+
+
+/* -------------------------------------------------------- */
+/* [ueber1|...] */
+/* ------------ */
+h1 {
+	font-size:16px;
+	margin-top:10px;
+	margin-bottom:5px;
+}
+
+
+/* -------------------------------------------------------- */
+/* [ueber2|...] */
+/* ------------ */
+h2 {
+	font-size:12px;
+	margin-top:10px;
+	margin-bottom:5px;
+}
+
+
+/* -------------------------------------------------------- */
+/* [ueber3|...] */
+/* ------------ */
+h3 {
+	margin-top:10px;
+	margin-bottom:5px;
+}
+
+
+/* -------------------------------------------------------- */
+/* [liste|...] */
+/* [numliste|...] */
+/* ------------ */
+ul, ol {
+	margin-top:0px;
+	margin-bottom:0px;
+}
+li {
+	margin-top:0px;
+	margin-bottom:0px;
+}
+
+
+/* -------------------------------------------------------- */
+/* [----] */
+/* ------ */
+hr {
+
+}
+
+/* -------------------------------------------------------- */
+/* [tabelle|...] */
+/* ------------- */
+table.contenttable {
+	margin:0px auto;
+	border:1px solid #C0C0C0;
+	border-collapse:collapse;
+	width:100%;
+}
+th.contenttable {
+	vertical-align:top;
+	border:1px solid #C0C0C0;
+	background-color:#E7E3E7;
+	padding:2px 5px;
+}
+td.contenttable1 {
+	vertical-align:top;
+	border:1px solid #C0C0C0;
+	background-color:#ffffff;
+	padding:2px 5px;
+}
+td.contenttable2 {
+	vertical-align:top;
+	border:1px solid #C0C0C0;
+	background-color:#EEEEEE;
+	padding:2px 5px;
+}
+
+
+/* -------------------------------------------------------- */
+/* [zentriert|...] */
+/* --------------- */
+.aligncenter {
+    text-align:center;
+}
+
+/* -------------------------------------------------------- */
+/* [links|...] */
+/* ----------- */
+.alignleft {
+    text-align:left;
+}
+
+/* -------------------------------------------------------- */
+/* [rechts|...] */
+/* ------------ */
+.alignright {
+    text-align:right;
+}
+
+/* -------------------------------------------------------- */
+/* [block|...] */
+/* ----------- */
+.alignjustify {
+    text-align:justify;
+}
+
+/* -------------------------------------------------------- */
+/* {TABLEOFCONTENTS} */
+/* ----------------- */
+div.tableofcontents ul ul {
+    /*padding-left:15px;*/
+}
+div.tableofcontents li.blind {
+    list-style-type:none;
+    list-style-image:none;
+}

@@ -1,0 +1,111 @@
+<div class="do-error-box">Mit Erstellung einer neuen Galerie wird hier automatisch ein Ordner für die zugehörigen Dateien angelegt.</div>
+<br />
+<table class="do-nowrap do-icon-legende" width="20%" cellspacing="0" border="0" cellpadding="0">
+<tr>
+<td class="do-title-legende" colspan="2">Icon Legende</td>
+</tr>
+<tr>
+<td>{ICON_edit}</td>
+<td>Öffnet und schliesst den Inhalt mit der Möglichkeit <b>Dateien / Bilder</b> hochzuladen, zu löschen, umzubenennen oder zur Vorschau aufzurufen bzw. zu öffnen.</td>
+</tr>
+<tr>
+<td>{ICON_work}</td>
+<td>Galerie umbennen.</td>
+</tr>
+<tr>
+<td>{ICON_delete}</td>
+<td>Galerie mit allen Bildern löschen.</td>
+</tr>
+<tr>
+<td>{ICON_menu}</td>
+<td>Das "NeuMenu" rechts am Rand mit dem eine neue Galerie erzeugt werden kann.<br />Öffnet sich automatisch, wenn der Mauszeiger über die Lasche bewegt wird.</td>
+</tr>
+</table>
+<br />
+Hier kannst Du Deine Galerien verwalten, welche eingebunden in Deine Inhaltsseiten, z.B. mit dem Slimbox-Plugin, zum Betrachten bereitgestellt werden.<br />
+<br />
+<b>Skalierungs Einstellungen vorbelegen:</b>
+<div class="do-example-box">
+<p class="do-error-box">Die hier getroffenen Einstellungen dienen dazu, im <b>Datei Manager</b> für die Galerien eine <b>Vorbelegung</b> der Textfelder und somit Standardparameter ("Defaultwerte") für die Bildgrössen zu hinterlegen.</p>
+<p class="do-error-box">Hierbei definiert das linke Textfeld stets die Breite. Die Höhe wird über das rechte Feld vorbelegt.</p>
+<b>Maximale Bildgrösse:</b>
+<p class="do-example-box">Gültige Einträge sind hier Zahlen (entspr. Pixel / Bildpunkte), "<i>auto</i>" oder keine Angabe (<i>Feld leer</i>).<br />
+Bei Eingabe von "auto" wird anhand des jeweiligen Galerieinhaltes das Bild mit der grössten Breite bzw. Höhe als Standardwert verwendet.</p>
+<br />
+<b>Maximale Vorschaugrösse:</b>
+<p class="do-example-box">Erlaubte Werte sind nur Zahlen (entspr. Pixel / Bildpunkte) oder keine Angabe (<i>Feld leer</i>).</p>
+<br />
+<b>Änderung der Grösse:</b>
+<p class="do-example-box">Wenn Du in beiden Feldern keinen Eintrag gemacht hast, wird auch die Bildgrösse nicht geändert, mit Ausnahme der Vorschaubilder - Hier wird dann der Standard ("Defaultwert") verwendet.<br />
+Wenn nur die Breite angegeben wurde, wird das Bild auf die angegebene Breite geändert - Die Höhe wird proportional dazu angepasst.<br />
+Bei Eingabe der Höhe wird das Bild auf die vorgegebene Höhe geändert, wiederum mit proportionaler Anpassung der Breite.<br />
+Wenn Breite <u>und</u> Höhe angegeben werden, wird das Bild auf die maximale Breite oder Höhe geändert - Die Proportion bleibt erhalten.</p>
+<p class="do-info-box">Bei den Textfelden Breite und Höhe reicht für die Bestätigung einmaliges Betätigen der Eingabetaste / Enter aus.</p>
+</div>
+<br />
+<b>Für jede Galerie existiert ein <u>individuelles</u> Anpassungsfeld:</b><br />
+{IMG_file_manager_gallery_value}<br />
+<br />
+<div class="do-error-box">Dies sind die <b>individuell</b> <u>nur für diese Galerie</u> gültigen Werte, die tatsächlich vom CMS angewendet werden.</div>
+<br />
+{MODUL_fileupload}
+<div class="do-example-box">
+Mit Mausklick auf ein Vorschaubild öffnet sich ein Infofenster mit dem eigentlichen Bild. Hier kannst Du dieses via Rechtsklick z.B. zur weiteren Bearbeitung lokal speichern / downloaden.<br />
+Mit einem Doppelklick rechts neben dem Untertitel kannst Du diesen vergeben / bearbeiten oder entfernen. Mittels Eingabetaste / Enter wird dieser Vorgang abgeschlossen.
+</div>
+<br />
+<div style="position:relative;">{IMG_file_manager_gallery}
+<div class="do-div-legende" style="left:630px;top:3px;">Einstellungen die nur hier gelten</div>
+<div class="do-div-legende" style="left:440px;top:40px;">Auf alle Dateien anwenden</div>
+<div class="do-div-legende" style="left:170px;top:130px;">umbennen</div>
+<div class="do-div-legende" style="left:190px;top:98px;">Untertitelfeld (Cursor / Mauszeiger ändert hier sein Aussehen). </div>
+<div class="do-div-legende" style="left:750px;top:83px;">Nur diese Datei</div>
+</div>
+<br />
+
+
+
+
+
+
+<!--
+<pre>
+rev 3 --------------------------------------------------------------------
+Der Galeriemanager von ???CMS.
+Bildergruppen/-alben/-serien/-sammlungen verwalten mit ???CMS.
+
+Hier werden Bilder verwaltet, die innerhalb eines Verbandes 
+über die Albumfunktionen wie z.B. Standard-Galererie oder 
+Slimbox-Galerie dargestellt/angezeigt werden können.
+
+Via "Drag-and-Drop"-Technik aus dem Seitenfuss wird eine neue 
+Galerie erzeugt.
+
+Mit Doppelklick auf einen Galerienamen oder Klick auf das 
+Einstellungsicon "Schraubschlüssel" lässt sich dieser umbenennen 
+oder korrigieren. 
+
+Zum Hochladen, Betrachten, Umbenennen oder Löschen von Bildern auf 
+dem Galerienamen rechts neben dem Bilddateizähler (X Bilder) 
+das Einstellungsicon "Hammer" klicken.
+
+Um ein Galeriebild anzuzeigen bzw. zu öffnen auf das Vorschaubild
+links neben dem Dateinamen klicken. Über den "Add-Files" Dialog können
+Bilder zum Simultanupload gewählt werden. Ist die Auswahl abge-
+schlossen kann das Hochladen / der Prozess über "Start upload" 
+initiert / ausgelöst / begonnen werden.
+
+Mit Doppelklick auf den Bilddateinamen lässt sich dieser (inklusiv
+der Extension!) umbenennen bzw. korrigieren / ändern. Ein eventueller 
+Bilduntertitel kann so ebenfalls erfasst bzw. editiert werden.
+
+Warnung: Die Funktion "Delete Files" löscht (derzeit) alle Bilder
+einer Galerie OHNE NACHFRAGE! Auch die Einzellöschung über das
+Papierkorbsymbol rechts erfolgt aktuell OHNE SICHERHEITS(AB)FRAGE.
+
+Zur Speicherung genügt bei aktivem Eingabefeld die Eingabe-/Entertaste,
+ausserhalb erneuter Klick auf das Einstellungsicon "Schraubschlüssel".
+--------------------------------------------------------------------
+</pre>
+<br />
+{MODUL_fileupload}-->

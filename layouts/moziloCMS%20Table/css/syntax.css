@@ -1,0 +1,245 @@
+/* -------------------------------------------------------- */
+/*                                                          */
+/* AB HIER: CMS-SYNTAX                                      */
+/*                                                          */
+/* -------------------------------------------------------- */
+
+/* -------------------------------------------------------- */
+/* [link|...]      */
+/* --------------- */
+a.link {
+}
+
+
+/* -------------------------------------------------------- */
+/* [mail|...]      */
+/* --------------- */
+a.mail {
+}
+
+
+/* -------------------------------------------------------- */
+/* [seite|...]      */
+/* --------------- */
+a.page {
+}
+
+
+/* -------------------------------------------------------- */
+/* [kategorie|...]      */
+/* --------------- */
+a.category {
+}
+
+
+/* -------------------------------------------------------- */
+/* [datei|...]      */
+/* --------------- */
+a.file {
+}
+
+
+/* -------------------------------------------------------- */
+/* [bild|...] */
+/* ---------- */
+span.imagesubtitle {
+    margin:3px 3px;
+    text-align:justify;
+    font-size:87%;
+    border:none;
+    /*line-height:120%;*/
+}
+
+img.contentimage {
+    border:none;
+}
+
+span.contentimage {
+    border:none;
+    display:inline-block;
+}
+
+/*1=oben, 2=rechts, 3=unten, 4=links*/
+/* -------------------------------------------------------- */
+/* [bildlinks|...] */
+/* --------------- */
+span.leftcontentimage {
+    margin:6px 20px 6px 0px;
+    float:left;
+/*text-align:left;*/
+/*clear:both;*/
+}
+
+img.leftcontentimage {
+    /*border:1px solid;*/
+}
+
+
+/* -------------------------------------------------------- */
+/* [bildrechts|...] */
+/* ---------------- */
+span.rightcontentimage {
+    margin:6px 0px 6px 20px;
+    float:right;
+/*clear:both;*/
+}
+img.rightcontentimage {
+    /*border:1px solid;*/
+}
+
+
+/* -------------------------------------------------------- */
+/* [fett|...] */
+/* ---------- */
+b {
+
+}
+
+
+/* -------------------------------------------------------- */
+/* [kursiv|...] */
+/* ------------ */
+i {
+
+}
+
+
+/* -------------------------------------------------------- */
+/* [unter|...] */
+/* ------------ */
+u {
+
+}
+
+
+/* -------------------------------------------------------- */
+/* [durch|...] */
+/* ------------ */
+s {
+
+}
+
+.fontsize {
+    line-height:1em;
+}
+
+/* -------------------------------------------------------- */
+/* [ueber1|...] */
+/* ------------ */
+h1 {
+    /*font-family: Arial, Helvetica, sans-serif;*/
+    font-size: 20px;
+    color: #0B1C47;
+    font-weight: normal;
+/*  font-size:130%;
+    margin-top:10px;
+    margin-bottom:5px;*/
+}
+
+
+/* -------------------------------------------------------- */
+/* [ueber2|...] */
+/* ------------ */
+h2 {
+    font-size: 115%;
+    margin-top:10px;
+    margin-bottom:5px;
+}
+
+
+/* -------------------------------------------------------- */
+/* [ueber3|...] */
+/* ------------ */
+h3 {
+    font-size:100%;
+    margin-top:10px;
+    margin-bottom:4px;
+}
+
+
+/* -------------------------------------------------------- */
+/* [zentriert|...] */
+/* --------------- */
+.aligncenter {
+    text-align:center;
+}
+
+/* -------------------------------------------------------- */
+/* [links|...] */
+/* ----------- */
+.alignleft {
+    text-align:left;
+}
+
+/* -------------------------------------------------------- */
+/* [rechts|...] */
+/* ------------ */
+.alignright {
+    text-align:right;
+}
+
+/* -------------------------------------------------------- */
+/* [block|...] */
+/* ----------- */
+.alignjustify {
+    text-align:justify;
+}
+
+/* -------------------------------------------------------- */
+/* [liste|...] */
+/* [numliste|...] */
+/* ------------ */
+.unorderedlist, .orderedlist {
+    margin-top:0px;
+    margin-bottom:0px;
+}
+.listitem {
+    margin-top:0px;
+    margin-bottom:0px;
+}
+
+
+/* -------------------------------------------------------- */
+/* [----] */
+/* ------ */
+hr {
+}
+
+/* -------------------------------------------------------- */
+/* [tabelle|...] */
+/* ------------- */
+table.contenttable {
+    font-size: 100%;
+    margin:0px auto;
+    border:1px solid #C0C0C0;
+    border-collapse:collapse;
+    width:100%;
+}
+th.contenttable {
+    vertical-align:top;
+    border:1px solid #666666;
+    background-color:#6B869C;
+    padding:2px 5px;
+    color:#ffffff;
+}
+td.contenttable1 {
+    vertical-align:top;
+    border:1px solid;
+    background-color:#ffffff;
+    padding:2px 5px;
+}
+td.contenttable2 {
+    vertical-align:top;
+    border:1px solid;
+    background-color:#ffffff;
+    padding:2px 5px;
+}
+
+/* -------------------------------------------------------- */
+/* Fehler in Tag-Attribut oder -Wert */
+/* --------------------------------- */
+.deadlink {
+    color:#ff4444;
+    font-weight:bold;
+}
+

@@ -1,0 +1,14 @@
+contactform_confirmation_0                      = Your message was sent.
+contactform_fieldnotset_0                       = Sorry, there's a mandatory field empty:
+contactform_mail_0                              = Mail
+contactform_mailsubject_1                       = Contact form of {PARAM1}: New message arrived
+contactform_mailsubject_confirm_1               = Confirmation: Contact form of {PARAM1}
+contactform_mandatory_fields_0                  = * Mandatory
+contactform_message_0                           = Message
+contactform_name_0                              = Name
+contactform_senttoofast_1                       = You have to wait {PARAM1} seconds until you may send your message.
+contactform_spamprotection_text_0               = Spam protection: Please enter the result of the following task.
+contactform_submit_0                            = Send message
+contactform_website_0                           = Website
+contactform_wrongresult_0                       = Your didn't answer the spam protection question correctly.
+tooltip_no_mail_error_0                         = Contact form can't be used - no mail adress in the plugin configured!

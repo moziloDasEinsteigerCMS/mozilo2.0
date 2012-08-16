@@ -1,0 +1,662 @@
+    body {
+    line-height: 16px;
+    font-family: "tahoma", sans-serif;
+    font-size: 76%;
+    margin-top: 0px;
+    background-image: url(../grafiken/back_blue.jpg);
+    background-repeat: repeat-x;
+    color:#666666;
+    background-color: #fff;
+    }
+    
+    p {    
+    margin: 0 0 5px 0;
+    
+}
+    
+h2{
+            font-size: 13px;
+            color: #6A849D;
+            margin-bottom:5px;
+            }
+        a{
+            color: #6A849D;
+            text-decoration: underline;
+        }    
+        a:hover{
+            color: #AE6427;
+        }
+        a:visited{
+        }
+            #container {
+            width:960px;                        
+            margin-left: auto;
+            margin-right: auto;
+                
+        }
+
+        #banner {
+        height: 230px;
+            padding: 0px;
+            margin-bottom:1px; ;
+            background-image: url(../grafiken/head_blue.jpg);
+            background-repeat: no-repeat;
+            text-align:center;
+        }
+
+        #content {
+/*        border-top: 1px dashed #EDF1F2;*/
+        text-align: justify;
+        font-size: 0.9em;        
+        padding: 5px;
+        margin-left: 200px;
+        background-color:#fff;
+        color: #666666;
+/*        background-image: url(../grafiken/shad.jpg); */
+        background-repeat: no-repeat;
+        }
+
+        #sidebar-a {        
+        float: left;
+       width:150px;
+        /*border-top: 1px dashed #EDF1F2;*/
+        background-image: url(../grafiken/shad.jpg);
+        background-repeat: no-repeat;
+        }
+        #sidebar-a h1{
+        border-bottom: 1px dotted #993333;
+            font-size: 12px;
+            font-weight: bold;
+            color: #993333;
+        }
+        #containerboth{ 
+        margin-top:-30px;
+        padding-right: 30px;
+        padding-left:30px;
+        }
+
+        #footer {
+           height: 50px;
+            clear: both;
+            background-image: url(../grafiken/footer.jpg);
+            background-repeat: no-repeat;
+            background-position: bottom;
+            text-align:center;
+        }
+        .fotext{
+        /*border-top: 1px dashed #EEEEEE;*/
+        margin-left: 30px;
+        margin-right: 30px;
+        font-size: 10px;
+        padding-top: 10px;
+        color:#6A849D;
+        }
+        .csschanger{
+color: #6A849D;
+font-size: 0.9em;
+float: right;
+margin-top: 10px;
+margin-right: 30px;
+height: 15px;
+
+}
+    
+    .navcontainer
+{
+margin: 200px 0 0 27px;
+padding: 0;
+height: 20px;
+}
+
+.navcontainer a
+{border-right: 1px solid #6A849D;
+background: #fff;
+width: 80px;
+height: 15px;
+border-top: 1px solid #6A849D;
+border-left: 1px solid #6A849D;
+border-bottom: 1px solid #6A849D;
+padding: 2px 5px;
+margin: 0 0 10px 0;
+color: #6A849D;
+text-decoration: none;
+text-align: center;
+font: 1.0em tahoma, lucida, sans-serif;
+}
+
+.navcontainer a:hover
+{
+color: White;
+background: #C9D3DC;
+}
+
+.navcontainer a:active
+{
+}
+
+.navcontainer li#active a
+{
+background: #6A849D;
+color: #fff;
+
+}
+
+#rightmenu {
+font-size:0.9em;
+    margin: 0;
+    padding: 0;
+}
+
+#rightmenu a {
+    display: block;
+    background: url(../grafiken/arrow.gif) no-repeat center left ;
+/*    color: #6A849D; */
+        padding: 2px 2px 5px 15px;
+    margin: 0 0 1px 0;
+    text-decoration: none;
+    background-position: 4px;
+}
+#rightmenu a.submenu {
+    background: url(../grafiken/arrow.gif) no-repeat;
+    background-position:20px center;
+        padding: 2px 2px 5px 35px;
+    margin: 0 0 1px 0;
+}
+#rightmenu a.submenuactive {
+    background: url(../grafiken/arrow.gif) no-repeat;
+    background-position:20px center;
+        padding: 2px 2px 5px 35px;
+    margin: 0 0 1px 0;
+    color: #AE6427;
+}
+
+#rightmenu a:hover {
+    color: #AE6427;
+}
+    
+input, textarea  {
+    border: 1pt solid #6A849D;
+    font: normal 10px tahoma;
+    color: #707070;
+    margin:0px 0px 5px 0px;
+}
+.search{
+padding: 5px;
+font-size: 0.9em;
+color: #6A849D;
+
+}
+.news{
+/*border-bottom: 1px dashed #ddd;*/
+padding:5px;
+color: #9D9C6A;
+    font-size: 0.9em;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.box{
+    background-color: #EDF1F2;
+    border: 1px solid #BFCAD5;
+    padding: 10px;
+    font-size: 0.9em;
+    color: #6A849D;
+}
+.box h2{
+    color: #993333;
+    font-size: 1.2em;
+    
+}
+.imgright{
+vertical-align: top;
+    border: 1px solid #eee;
+    padding: 3px;
+    float: right;
+    margin: 5px;
+}
+.imgleft{
+vertical-align: top;
+    float:left;
+    border: 1px solid #eee;
+    padding: 3px;
+    margin:5px;
+}
+
+div.embeddedgallery {
+    text-align:center;
+}
+
+ul.mainmenu {
+    margin: 0px;
+    padding: 0px;
+}
+li.mainmenu {
+    display:inline;
+}
+ul.detailmenu {
+    margin: 0px;
+    padding: 0px;
+}
+li.detailmenu {
+    display:inline;
+}
+ul.gallerymenu, ul.gallerynumbermenu {
+    margin: 0px;
+    padding: 0px;
+}
+li.gallerymenu, li.gallerynumbermenu {
+    display:inline;
+    padding-right: 7px;
+}
+a.gallerymenu, a.gallerynumbermenu {
+    text-decoration:none;
+}
+a.gallerymenuactive, a.gallerynumbermenuactive { 
+    color: #AE6427;
+    text-decoration:none;
+}
+
+/* -------------------------------------------------------- */
+/* Hauptmenüpunkt */
+/* -------------- */
+a.menu {
+    color: #993333;
+    font-size: 1.2em;
+}
+a.menu:hover {
+}
+
+
+/* -------------------------------------------------------- */
+/* Aktiver Hauptmenüpunkt */
+/* ---------------------- */
+a.menuactive {
+        border-bottom: 1px dotted #993333;
+            font-size: 12px;
+            font-weight: bold;
+            color: #993333;
+}
+a.menuactive:hover {
+        border-bottom: 1px dotted #993333;
+            font-size: 12px;
+            font-weight: bold;
+            color: #993333;
+
+}
+
+
+/* -------------------------------------------------------- */
+/* Detailmenüpunkt */
+/* --------------- */
+a.detailmenu {
+}
+a.detailmenu:hover {
+}
+
+
+/* -------------------------------------------------------- */
+/* Aktiver Detailmenüpunkt */
+/* ----------------------- */
+a.detailmenuactive {
+}
+a.detailmenuactive:hover {
+}
+
+
+/* -------------------------------------------------------- */
+/* Submenüpunkt */
+/* --------------- */
+a.submenu {
+}
+a.submenu:hover {
+}
+
+
+/* -------------------------------------------------------- */
+/* Aktiver Submenüpunkt */
+/* ----------------------- */
+a.submenuactive {
+}
+a.submenuactive:hover {
+}
+em {
+    font-style:normal;
+    font:inherit;
+}
+
+/* -------------------------------------------------------- */
+/* Fehler in Tag-Attribut oder -Wert */
+/* --------------------------------- */
+.deadlink {
+    color:#ff4444;
+    font-weight:bold;
+}
+
+
+/* -------------------------------------------------------- */
+/* Suchwort-Hervorhebungen */
+/* ----------------------- */
+.highlight {
+    padding:0px 1px;
+    font-size:inherit;
+    background-color:#dd0000;
+    color:#ffffff;
+    font-size:inherit;
+}
+
+
+/* -------------------------------------------------------- */
+/* Suchformular */
+/* ------------ */
+.search form, .news form {
+    padding:0px;
+    margin:0px;
+}
+form.searchform {
+}
+form.searchform:hover {
+}
+fieldset#searchfieldset {
+    border:none;
+    margin:0px;
+    padding:0px;
+}
+
+
+
+/* -------------------------------------------------------- */
+/* Suchfeld */
+/* -------- */
+input.searchtextfield {
+    width:100px;
+}
+
+
+/* -------------------------------------------------------- */
+/* Suchbutton */
+/* ---------- */
+input.searchbutton {
+    border:none;
+    margin:5px 0px -3px 10px;
+}
+
+
+/* -------------------------------------------------------- */
+/* Kontaktformular */
+/* --------------- */
+form#contact_form {
+}
+table#contact_table {
+}
+table#contact_table td {
+  vertical-align:top;
+  padding:5px;
+}
+span#contact_errormessage{
+  color:#880000;
+  font-weight:bold;
+}
+span#contact_successmessage{
+  color:#008800;
+  font-weight:bold;
+}
+input#contact_name, input#contact_mail, input#contact_website, input#contact_calculation {
+  width:200px;
+}
+textarea#contact_message {
+  width:200px;
+}
+input#contact_submit {
+  width:200px;
+}
+
+
+/* -------------------------------------------------------- */
+/*                                                          */
+/* AB HIER: CMS-SYNTAX                                      */
+/*                                                          */
+/* -------------------------------------------------------- */
+
+
+/* -------------------------------------------------------- */
+/* [link|...]      */
+/* --------------- */
+a.link {
+}
+
+
+/* -------------------------------------------------------- */
+/* [mail|...]      */
+/* --------------- */
+a.mail {
+}
+
+
+/* -------------------------------------------------------- */
+/* [seite|...]      */
+/* --------------- */
+a.page {
+}
+
+
+/* -------------------------------------------------------- */
+/* [kategorie|...]      */
+/* --------------- */
+a.category {
+}
+
+
+/* -------------------------------------------------------- */
+/* [datei|...]      */
+/* --------------- */
+a.file {
+}
+
+
+/* -------------------------------------------------------- */
+/* [galerie|...]      */
+/* --------------- */
+a.gallery {
+}
+
+
+/* -------------------------------------------------------- */
+/* [bild|...] */
+/* ---------- */
+img {
+    border:none;
+}
+
+span.imagesubtitle {
+    margin:3px 3px;
+    text-align:justify;
+    font-size:0.98em;
+    line-height:1.4em;
+}
+
+span.contentimage {
+}
+
+
+/* -------------------------------------------------------- */
+/* [bildlinks|...] */
+/* --------------- */
+span.leftcontentimage {
+    margin:6px 20px 6px 20px;
+    max-width:200px;
+    float:left;
+    margin-left:0px;
+}
+
+img.leftcontentimage {
+    max-width:200px;
+    border:1px solid;
+}
+
+
+/* -------------------------------------------------------- */
+/* [bildrechts|...] */
+/* ---------------- */
+span.rightcontentimage {
+    margin:6px 20px 6px 20px;
+    max-width:200px;
+    float:right;
+    margin-right:0px;
+}
+img.rightcontentimage {
+    max-width:200px;
+    border:1px solid;
+}
+
+
+/* -------------------------------------------------------- */
+/* [fett|...] */
+/* ---------- */
+b.contentbold {
+
+}
+
+
+/* -------------------------------------------------------- */
+/* [kursiv|...] */
+/* ------------ */
+i.contentitalic {
+
+}
+
+
+/* -------------------------------------------------------- */
+/* [unter|...] */
+/* ------------ */
+
+u.contentunderlined {
+
+}
+
+
+/* -------------------------------------------------------- */
+/* [durch|...] */
+/* ------------ */
+s.contentstrikethrough {
+
+}
+
+
+/* -------------------------------------------------------- */
+/* [ueber1|...] */
+/* ------------ */
+h1 {
+    font-size:16px;
+    margin-top:10px;
+    margin-bottom:5px;
+}
+
+
+/* -------------------------------------------------------- */
+/* [ueber2|...] */
+/* ------------ */
+h2 {
+/*    font-size:12px;
+    margin-top:10px;
+    margin-bottom:5px; */
+}
+
+
+/* -------------------------------------------------------- */
+/* [ueber3|...] */
+/* ------------ */
+h3 {
+    font-size:1em;
+    margin-top:10px;
+    margin-bottom:4px;
+}
+
+
+/* -------------------------------------------------------- */
+/* [liste|...] */
+/* [numliste|...] */
+/* ------------ */
+ul, ol {
+    margin-top:0px;
+    margin-bottom:0px;
+}
+li {
+    margin-top:0px;
+    margin-bottom:0px;
+}
+
+
+/* -------------------------------------------------------- */
+/* [----] */
+/* ------ */
+hr {
+
+}
+
+/* -------------------------------------------------------- */
+/* [tabelle|...] */
+/* ------------- */
+table.contenttable {
+    margin:0px auto;
+    border:1px solid #C0C0C0;
+    border-collapse:collapse;
+    width:100%;
+}
+th.contenttable {
+    vertical-align:top;
+    border:1px solid #666666;
+    background-color:#6B869C;
+    padding:2px 5px;
+    color:#ffffff;
+}
+td.contenttable1 {
+    vertical-align:top;
+    border:1px solid;
+    background-color:#ffffff;
+    padding:2px 5px;
+}
+td.contenttable2 {
+    vertical-align:top;
+    border:1px solid;
+    background-color:#ffffff;
+    padding:2px 5px;
+}
+
+
+/* -------------------------------------------------------- */
+/* [zentriert|...] */
+/* --------------- */
+.aligncenter {
+    text-align:center;
+}
+
+/* -------------------------------------------------------- */
+/* [links|...] */
+/* ----------- */
+.alignleft {
+    text-align:left;
+}
+
+/* -------------------------------------------------------- */
+/* [rechts|...] */
+/* ------------ */
+.alignright {
+    text-align:right;
+}
+
+/* -------------------------------------------------------- */
+/* [block|...] */
+/* ----------- */
+.alignjustify {
+    text-align:justify;
+}
+
+/* -------------------------------------------------------- */
+/* {TABLEOFCONTENTS} */
+/* ----------------- */
+div.tableofcontents ul ul {
+    /*padding-left:15px;*/
+}
+div.tableofcontents li.blind {
+    list-style-type:none;
+    list-style-image:none;
+}

@@ -1,0 +1,14 @@
+
+alttext_galleryimage_1                  = Zdjęcie z galerii "{PARAM1}"
+message_firstimage_0                    = Pierwsze zdjęcie
+message_gallery_no_preview              = 
+message_gallery_xoutofy_2               = (Zdjęcie {PARAM1} z {PARAM2})
+message_gallerydir_error_1              = Nieznany katalog galerii zdjęć "{PARAM1}"!
+message_gallerydir_error_0              = 
+message_galleryempty_0                  = Ta galeria jest pusta.
+message_lastimage_0                     = Ostatnie zdjęcie
+message_nextimage_0                     = Następne zdjęcie
+message_previousimage_0                 = Poprzednie zdjęcie
+tooltip_gallery_fullscreen_1            = Wyświetlanie w całym oknie: "{PARAM1}"
+tooltip_link_gallery_2                  = Podgląd galerii "{PARAM1}" ({PARAM2} Bilder)
+tooltip_link_gallery_error_1            = Brak galerii "{PARAM1}"

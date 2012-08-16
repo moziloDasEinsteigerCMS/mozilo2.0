@@ -1,0 +1,41 @@
+/*1=oben, 2=rechts, 3=unten, 4=links*/
+img.ed-syntax-icon {
+	padding: 2px;
+    margin:0 2px 0 2px;
+    vertical-align:middle;
+}
+
+.ui-state-active.fb-color-change {
+    background-image: none;
+}
+/*1=oben, 2=rechts, 3=unten, 4=links*/
+div.colordiv, #farbcode {
+    position:relative;
+	width:70px;
+	height: 20px;
+    margin:0 2px 0 2px;
+}
+
+#farbcode {
+	font-size:12px;
+	border:0px;
+	padding:0px;
+    margin:0px;
+    vertical-align:middle;
+}
+.colorimage {
+    position:absolute;
+    height:18px;
+    top:0px;
+    left:52px;
+    font-size:1px;
+	margin:0px;
+}
+
+.mo-menue-row-bottom {
+    margin-bottom:1.2em;
+}
+
+.mo-menue-row-top {
+    margin-top:.8em;
+}

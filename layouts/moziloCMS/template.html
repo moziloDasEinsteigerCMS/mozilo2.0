@@ -1,0 +1,67 @@
+<!-- usesubmenu = 1 -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta name="keywords" content="{WEBSITE_KEYWORDS}" />
+		<meta name="description" content="{WEBSITE_DESCRIPTION}" />
+		<title>{WEBSITE_TITLE}</title>
+		<script type="text/javascript"><!--
+			function setSearchFocus() {
+				if (document.search) {
+  				document.search.query.focus();
+  				document.search.query.select();
+  			}
+			}
+		--></script>
+        <link rel="SHORTCUT ICON" href="{LAYOUT_DIR}/favicon.ico" />
+        <style type="text/css"> @import "{LAYOUT_DIR}/css/style.css"; </style>
+		<meta http-equiv="Content-Type" content="text/html; charset={CHARSET}" />
+	</head>
+
+	<body id="a0">
+		<div id="container">
+			<div id="banner">
+				<!-- Grafik kann z.B. als Link zur Startseite genutzt werden -->
+				<!-- <a href="http://meineseite.de> -->
+				<img src="{LAYOUT_DIR}/grafiken/banner.gif" alt="{WEBSITE_TITLE}" />
+				<!-- </a> -->
+			</div>
+			
+			<div id="containerboth">
+
+
+		    <div id="sidebar-a">
+
+		  		<div id="rightmenu">
+		  			{MAINMENU}
+    			</div>
+
+				  <h1>Suche</h1>
+				  <div class="search">
+				  	{SEARCH}
+					</div>
+				
+				  <h1>Spenden</h1>
+				  <div class="news">
+				    {moziloPayPal}
+				  </div>
+
+			  </div>
+
+
+
+			  <div id="content">
+					{CONTENT}
+				</div>
+			</div>
+
+			<div id="footer">
+			  <div class="fotext">
+			  	| {CMSINFO} | {SITEMAPLINK} | {LASTCHANGE} | Design: <a href="http://www.wdesign-it.com" target="_blank">wedesignit</a> |
+			  </div>
+			</div>
+			
+			
+		</div>
+	</body>
+</html>

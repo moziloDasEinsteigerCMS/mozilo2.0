@@ -1,0 +1,449 @@
+/*------------------------------------------------------------*
+**  Global
+**------------------------------------------------------------*/
+body {
+    background: #fff url(../grafiken/bg2.gif); /* Optional */
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 75%;
+    text-align: center; /* IE Fix */
+    margin: 0;
+    color: #666;
+    }
+acronym { cursor: help; border-bottom: 1px dashed #999; }
+a { text-decoration: none; color: #369; border-bottom: 1px dashed #369; }
+a:hover { border-bottom: 1px dashed #49515C; color: #49515C; }
+em { font-style:normal; }
+.deadlink {
+color:#aa0000;
+}
+.highlight {
+    padding:0px 1px;
+    font-size:inherit;
+    background-color:#dd0000;
+    color:#ffffff;
+    font-size:inherit;
+}
+/*------------------------------------------------------------*
+**  Container
+**------------------------------------------------------------*/    
+#container {
+    margin: 0 auto;
+    width: 740px;
+    background: #fff url(../grafiken/dot_line.gif) repeat-y 25%;
+    border: 1px solid #ddd;
+    padding: 0 5px;
+    text-align: left; /* Cancel IE Fix */
+    }
+    
+/*------------------------------------------------------------*
+**  Header
+**------------------------------------------------------------*/        
+#header {
+    background: #49515C url(../grafiken/header_right.gif) no-repeat 100% 0;
+    border-bottom: 4px solid #fff;
+    border-top: 5px solid #fff;
+    padding: 28px 30px;
+    }    
+#header h1 {     
+    margin: 0;
+    color: #C6C4C5;
+    font-size: 1.8em;
+    font-weight: normal;
+    cursor: default;
+    }    
+#header h1 a {
+    color: #C6C4C5 !important;
+    border-bottom:none;
+}
+#header h2 {     
+    margin: 0;
+    color: #8D8E90;
+    font-size: 1.2em;
+    padding-left: 1px;
+    cursor: default;
+    }    
+#header #searchcontainer {
+    float:right;
+    padding-top:20px;
+}
+#header #searchcontainer input.searchbutton {
+    display:none;
+}
+#header #searchcontainer input.searchtextfield {
+    border:1px solid #49515C;
+    -moz-opacity:0.8; /* Transparenz - nur f%uFFFDr Mozilla-Browser */
+}
+fieldset#searchfieldset {
+    border:none;
+    margin:0px;
+    padding:0px;
+}
+
+/*------------------------------------------------------------*
+**  Nav
+**------------------------------------------------------------*/
+
+#nav {
+    background: #858F9E; 
+    border-bottom: 4px solid #fff;
+    margin: 0; 
+    padding: 0;
+    height: 2.2em;
+    }
+#nav ul {
+    padding:0px;
+}
+#nav li {
+    list-style-type: none;
+    display: inline;
+    line-height: 20px;
+    }        
+#nav li a { 
+    text-decoration: none; 
+    color: #ddd;
+    background-color: #858F9E;
+    border-right: 4px solid #fff; 
+    border-bottom: 0;
+    padding: 3px 8px;
+    font-size: 1em;
+    float: left;
+    font-weight: bold;
+    }
+#nav li a.menuactive { background-color: #6B7687; }
+#nav li a:hover { background-color: #6B7687; }
+#nav li a.on { background-color: #49515C; color: #C6C4C5; }
+
+/*------------------------------------------------------------*
+**  Galerie
+**------------------------------------------------------------*/
+ul.gallerynumbermenu {
+    margin: 0px;
+    padding: 0px;
+}
+li.gallerynumbermenu {
+    display:inline;
+    padding-right: 7px;
+}
+/*------------------------------------------------------------*
+**  Side Bar
+**------------------------------------------------------------*/
+#sidebar {
+    float: left;
+    width: 175px;
+    position: relative;
+    line-height: 20px; 
+    word-spacing: 2px;    
+    }
+#sidebar div { background: #fff url(../grafiken/para_bg.jpg) repeat-x; }    
+/*------------------------------------------------------------*
+**  Side Bar & Content
+**------------------------------------------------------------*/
+#sidebar h3, #content h3 { 
+    font-size: 1.1em; 
+    color: #49515C; 
+    margin: 0 10px 0 0; 
+    cursor: default;
+    }
+#content div, #sidebar div { 
+    padding: 1px 0 10px 0;  
+    border-top: 1px solid #ddd; 
+  padding: 10px;
+    }    
+/*------------------------------------------------------------*
+**  Content
+**------------------------------------------------------------*/
+#content {
+    float: left;
+    width: 550px;
+    position: relative;
+    margin-left: 15px;
+    line-height: 20px; 
+    text-align: justify; 
+    word-spacing: 2px;    
+    }    
+#gallerycontent {
+    float: left;
+    width: 550px;
+    position: relative;
+    margin-left: 15px;
+    line-height: 20px; 
+    text-align: center; 
+    word-spacing: 2px;    
+    }    
+#content div { background: #fff url(../grafiken/para_bg.jpg) repeat-x; }    
+.embeddedgallery {
+    text-align:center;
+}
+/*------------------------------------------------------------*
+**  Footer
+**------------------------------------------------------------*/
+#footer {
+    background: #49515C url(../grafiken/header_right.gif) no-repeat 100% 0;
+    border-bottom: 5px solid #fff;
+    border-top: 10px solid #fff;
+    text-align: center;    
+    color: #fff;
+    font-size: 0.8em;
+    padding: 10px;
+    line-height: 16px;
+    clear: both;
+    }
+    
+#footer a { text-decoration: none; color: #A2AFBF; border-bottom: 1px dashed #A2AFBF; }
+#footer a:hover { border-bottom: 1px dashed #fff; color: #fff; }
+
+
+
+/* -------------------------------------------------------- */
+/*                                                          */
+/* AB HIER: CMS-SYNTAX                                      */
+/*                                                          */
+/* -------------------------------------------------------- */
+
+
+/* -------------------------------------------------------- */
+/* [link|...]      */
+/* --------------- */
+a.link {
+}
+
+
+/* -------------------------------------------------------- */
+/* [mail|...]      */
+/* --------------- */
+a.mail {
+}
+
+
+/* -------------------------------------------------------- */
+/* [seite|...]      */
+/* --------------- */
+a.page {
+}
+
+
+/* -------------------------------------------------------- */
+/* [kategorie|...]      */
+/* --------------- */
+a.category {
+}
+
+
+/* -------------------------------------------------------- */
+/* [datei|...]      */
+/* --------------- */
+a.file {
+}
+
+
+/* -------------------------------------------------------- */
+/* [galerie|...]      */
+/* --------------- */
+a.gallery {
+}
+
+
+/* -------------------------------------------------------- */
+/* [bild|...] */
+/* ---------- */
+img {
+    border:none;
+}
+
+span.imagesubtitle {
+    margin:3px 0px !important;
+    text-align:justify;
+    font-size:0.8em;
+    line-height:1.4em;
+    padding:0px !important;
+    border:none !important;
+}
+
+span.contentimage {
+}
+
+
+/* -------------------------------------------------------- */
+/* [bildlinks|...] */
+/* --------------- */
+span.leftcontentimage {
+    margin:6px 20px 6px 20px;
+    max-width:200px;
+    float:left;
+    margin-left:0px;
+    border:none !important;
+}
+
+img.leftcontentimage {
+    max-width:200px;
+    border:1px solid;
+}
+
+
+/* -------------------------------------------------------- */
+/* [bildrechts|...] */
+/* ---------------- */
+span.rightcontentimage {
+    margin:6px 20px 6px 20px;
+    max-width:200px;
+    float:right;
+    margin-right:0px;
+    border:none !important;
+}
+img.rightcontentimage {
+    max-width:200px;
+    border:1px solid;
+}
+
+
+/* -------------------------------------------------------- */
+/* [fett|...] */
+/* ---------- */
+b {
+
+}
+
+
+/* -------------------------------------------------------- */
+/* [kursiv|...] */
+/* ------------ */
+i {
+
+}
+
+
+/* -------------------------------------------------------- */
+/* [unter|...] */
+/* ------------ */
+u {
+
+}
+
+
+/* -------------------------------------------------------- */
+/* [durch|...] */
+/* ------------ */
+s {
+
+}
+
+
+/* -------------------------------------------------------- */
+/* [ueber1|...] */
+/* ------------ */
+h1 {
+/*    font-size:16px;
+    margin-top:10px;
+    margin-bottom:5px;
+    */
+}
+
+
+/* -------------------------------------------------------- */
+/* [ueber2|...] */
+/* ------------ */
+h2 {
+/*    font-size:12px;
+    margin-top:10px;
+    margin-bottom:5px; */
+}
+
+
+/* -------------------------------------------------------- */
+/* [ueber3|...] */
+/* ------------ */
+h3 {
+    font-size:1em;
+    margin-top:10px;
+    margin-bottom:4px;
+}
+
+
+/* -------------------------------------------------------- */
+/* [liste|...] */
+/* [numliste|...] */
+/* ------------ */
+ul, ol {
+    margin-top:0px;
+    margin-bottom:0px;
+}
+li {
+    margin-top:0px;
+    margin-bottom:0px;
+}
+
+
+/* -------------------------------------------------------- */
+/* [----] */
+/* ------ */
+hr {
+
+}
+
+/* -------------------------------------------------------- */
+/* [tabelle|...] */
+/* ------------- */
+table.contenttable {
+    margin:0px auto;
+    border:1px solid #858F9E;
+    border-collapse:collapse;
+    width:100%;
+}
+th.contenttable {
+    vertical-align:top;
+    border:1px solid #858F9E;
+    background-color:#858F9E;
+    padding:2px 5px;
+    color:#ffffff;
+}
+td.contenttable1 {
+    vertical-align:top;
+    border:1px solid #858F9E;
+    background-color:#ffffff;
+    padding:2px 5px;
+}
+td.contenttable2 {
+    vertical-align:top;
+    border:1px solid #858F9E;
+    background-color:#ffffff;
+    padding:2px 5px;
+}
+
+/* -------------------------------------------------------- */
+/* [zentriert|...] */
+/* --------------- */
+.aligncenter {
+    text-align:center;
+}
+
+/* -------------------------------------------------------- */
+/* [links|...] */
+/* ----------- */
+.alignleft {
+    text-align:left;
+}
+
+/* -------------------------------------------------------- */
+/* [rechts|...] */
+/* ------------ */
+.alignright {
+    text-align:right;
+}
+
+/* -------------------------------------------------------- */
+/* [block|...] */
+/* ----------- */
+.alignjustify {
+    text-align:justify;
+}
+
+/* -------------------------------------------------------- */
+/* {TABLEOFCONTENTS} */
+/* ----------------- */
+div.tableofcontents ul ul {
+    /*padding-left:15px;*/
+}
+div.tableofcontents li.blind {
+    list-style-type:none;
+    list-style-image:none;
+}

@@ -1,0 +1,14 @@
+contactform_confirmation_0                      = Il tuo messaggio è stato inviato.
+contactform_fieldnotset_0                       = Spiacente, c'è un campo obbligatorio vuoto:
+contactform_mail_0                              = Indirizzo
+contactform_mailsubject_1                       = Modulo di contatto di {PARAM1}: Nuovo messaggio arrivato
+contactform_mailsubject_confirm_1               = 
+contactform_mandatory_fields_0                  = * Obbligatorio
+contactform_message_0                           = Messaggio
+contactform_name_0                              = Nome
+contactform_senttoofast_1                       =
+contactform_spamprotection_text_0               = 
+contactform_submit_0                            = Invia Messaggio
+contactform_website_0                           = Sito web
+contactform_wrongresult_0                       = 
+tooltip_no_mail_error_0                         = Il modulo di contatto non può essere utilizzato - nessun indirizzo amministrativo configurato!

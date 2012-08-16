@@ -1,0 +1,67 @@
+# Diese Zeilen nicht löschen / Do not remove these lines
+#
+# $Revision: 828 $
+# $LastChangedDate: 2011-01-06 20:21:05 +0100 (Do, 06. Jan 2011) $
+# $Author: hausl78 $
+#
+_dateformat_0                                   = %Y-%d-%m, %H:%M:%S
+_translator_0                                   = mozilo
+# alttext_galleryimage_1                          = Gallery image "{PARAM1}"
+alttext_image_1                                 = Image "{PARAM1}"
+anchor_top_0                                    = Back to top
+message_downloads                               = Downloads
+message_draft_0                                 = Draft
+# message_firstimage_0                            = First image
+message_galleries_0                             = Galleries
+message_gallery_1                               = Gallery "{PARAM1}"
+# message_gallery_xoutofy_2                       = (Image {PARAM1} out of {PARAM2})
+# message_gallerydir_error_1                      = Unknown gallery directory "{PARAM1}"!
+# message_gallerydir_error_0                      = No gallery directory given!
+message_galleryembed_error_0                    = Due to the current CMS settings, gallery can only be used embedded.
+# message_galleryempty_0                          = This gallery contains no images.
+message_gallerypreviewdir_error_1               = Missing preview directory "{PARAM1}"!
+# message_gallery_no_preview                      = Preview not available
+message_lastchange_0                            = Last change:
+# message_lastimage_0                             = Last image
+# message_nextimage_0                             = Next image
+message_nodatafound_0                           = No matching content found.
+# message_previousimage_0                         = Previous image
+message_search_0                                = Search
+message_searchresult_1                          = Search results for "{PARAM1}"
+message_sitemap_0                               = Sitemap
+message_template_error_1                        = Template file "{PARAM1}" missing! Please contact the admininstrator.
+passwordform_title_0                            = Password required
+passwordform_pagepasswordplease_0               = Please enter the password for this page:
+passwordform_message_passwordwrong_0            = Access denied: Wrong password.
+passwordform_send_0                             = Send
+plugin_error_1                                  = General error in plugin {PARAM1}. Please contact the plugin's autor.
+plugin_error_missing_pluginconf_1               = Error in plugin {PARAM1}: plugin.conf is missing. Please contact the plugin's autor.
+plugin_error_missing_method_2                   = Error in plugin {PARAM1}: Method {PARAM2} is missing. Please contact the plugin's autor.
+thirsty_programmer                              = Hello, I'd like to have a beer, please! ;)
+tooltip_anchor_error_1                          = Paragraph "{PARAM1}" doesn't exist
+tooltip_anchor_goto_1                           = Jump to paragraph "{PARAM1}"
+tooltip_anchor_gototop_0                        = Jump back to top
+tooltip_attribute_error_1                       = Erroneous syntax: Unknown attribute "{PARAM1}"
+tooltip_color_error_1                           = Erroneous color value "{PARAM1}"
+# tooltip_gallery_fullscreen_1                    = Full size view: "{PARAM1}"
+tooltip_image_error_1                           = Unknown file or erroneous adress: "{PARAM1}"
+tooltip_image_error_2                           = Missing image file "{PARAM1}" in category "{PARAM2}"
+tooltip_include_recursion_error_0               = Page can't include itself
+tooltip_include_reinclude_error_0               = Includes in included pages not allowed
+tooltip_link_category_1                         = Change to category "{PARAM1}"
+tooltip_link_category_error_1                   = Missing category "{PARAM1}"
+tooltip_link_extern_1                           = Call external adress "{PARAM1}"
+tooltip_link_extern_error_1                     = Erroneous link adress "{PARAM1}"
+tooltip_link_file_1                             = Download file "{PARAM1}"
+tooltip_link_file_2                             = Download file "{PARAM1}" from category "{PARAM2}"
+tooltip_link_file_error_1                       = Missing file "{PARAM1}"
+tooltip_link_file_error_2                       = Missing file "{PARAM1}" in category "{PARAM2}"
+# tooltip_link_gallery_2                          = View gallery "{PARAM1}" ({PARAM2} images)
+# tooltip_link_gallery_error_1                    = Missing gallery "{PARAM1}"
+tooltip_link_mail_1                             = Sent mail to "{PARAM1}"
+tooltip_link_mail_error_1                       = Erroneous mail adress "{PARAM1}"
+tooltip_link_page_1                             = Show page "{PARAM1}"
+tooltip_link_page_2                             = Show page "{PARAM1}" from category "{PARAM2}"
+tooltip_link_page_error_1                       = Missing page "{PARAM1}"
+tooltip_link_page_error_2                       = Missing page "{PARAM1}" in category "{PARAM2}"
+tooltip_showsitemap_0                           = Show sitemap

@@ -1,0 +1,14 @@
+contactform_confirmation_0                      = Su mensaje ha sido enviado.
+contactform_fieldnotset_0                       = Lo siento. Es un campo obligatorio:
+contactform_mail_0                              = Email
+contactform_mailsubject_1                       = Nuevo mensaje del formulario {PARAM1}:recibido
+contactform_mailsubject_confirm_1               = 
+contactform_mandatory_fields_0                  = * Obligatorio
+contactform_message_0                           = Mensaje
+contactform_name_0                              = Nombre
+contactform_senttoofast_1                       = 
+contactform_spamprotection_text_0               = 
+contactform_submit_0                            = Enviar mensaje
+contactform_website_0                           = Sitio Web
+contactform_wrongresult_0                       = 
+tooltip_no_mail_error_0                         = El formulario de contacto no puede usarse, falta configurar la dirección del admin.

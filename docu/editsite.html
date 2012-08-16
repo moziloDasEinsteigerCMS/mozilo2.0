@@ -1,0 +1,60 @@
+<div class="do-error-box">Die Dokumentation zu Plugins sowie die Einstellungen sind im adminTab "Plugins" zu finden.</div>
+<br />
+<table style="width:100%;" class="do-nowrap do-icon-legende ed-syntax-icon" cellspacing="0" border="1" cellpadding="0">
+<tr>
+<td class="do-title-legende" colspan="2">Editor Icon Legende</td>
+</tr>
+<tr>
+<td colspan="2"><b>CMS Syntax</b><br />{IMG_editor_row_syntax}<br />Das sind alles <b>umschliessende Elemente</b>, welche die umklammerten Daten (Texte,Zahlen) oder auch weitere Elemente weiterverarbeiten.</td>
+</tr>
+<tr>
+<td colspan="2"><b>Smileys</b><br />{IMG_editor_row_smiley}<br />Dies sind ausschliesslich <b>ersetzende Elemente</b>, d.h. es wird eine Variable / ein Platzhalter eingesetzt der durch hinterlegte Werte ersetzt wird, wie hier z.B. Emoticons / Smilies.</td>
+</tr>
+<tr>
+<td colspan="2"><b>Selectboxen Dateisystem</b><br />{IMG_editor_row_files}<br />Hier befinden sich ausschliesslich <b>ersetzende Elemente</b>.</td>
+</tr>
+<tr>
+<td colspan="2"><b>Selectboxen für: Plugins, Platzhalter und eigene Syntaxelemente</b><br />{IMG_editor_row_plug_place_user}<br />Können sowohl <b>umschliessende</b> alsauch <b>ersetzende Elemente</b> beinhalten. Umschliessende Elemente sind an "<b>...</b>" erkennbar - Es werden weitere Eingaben/Inhalte erwartet.</td>
+</tr>
+<tr>
+<td style="width:1%;">{IMG_editor_search}</td>
+<td>Suchen und auch Ersetzen</td>
+</tr>
+<tr>
+<td>{IMG_editor_undo_activ}&nbsp;{IMG_editor_redo_activ}</td>
+<td>Letzte Änderung rückgängig machen, letzte Änderung erneut herstellen ("undo" / "redo")</td>
+</tr>
+<tr>
+<td>{IMG_editor_change_smooth_selection_activ}</td>
+<td>Die Suche und Hervorhebung des Gegenstücks / der Umklammerung <b>{</b>, <b>[</b>, <b>]</b>, <b>}</b> an- / ausschalten. Funktioniert beidseitig (vor- und rückwärts).</td>
+</tr>
+<tr>
+<td>{IMG_editor_highlight_activ}</td>
+<td>Bekannte Elemente farblich Hervorheben an- / ausschalten (Syntaxhighlighting ein/aus).</td>
+</tr>
+<tr>
+<td>{IMG_editor_syntax_selection}</td>
+<td>Auswahl Hervorhebungsart.</td>
+</tr>
+</table>
+<br />
+<div class="do-error-box"><b>Achtung:</b> Wenn eines dieser Zeichen <b>{</b>, <b>[</b>, <b>|</b>, <b>]</b>, <b>}</b> (Eckige und geschwungene Klammern und Senkrechtstriche / "Pipes") innerhalb des Seitentextes verwendet wird, <b>muss</b> es jeweils mit einem vorangestellten <b>Hochdach</b> "<b>^</b>" geschützt (maskiert) werden, damit diese vom CMS <u>nicht</u> als Syntax interpretiert werden.</div>
+<br />
+<div class="do-info-box">Da die korrekte Klammerung essentiell / obligatorisch ist, kannst Du sie prüfen indem Du den Cursor auf eine einleitende oder abschliessende Klammer setzt - Das entsprechende Gegenstück wird dann automatisch farblich hervorgehoben z.B.
+<span style="background-color:#fff;font: 10pt monospace;line-hight:16px;"><span style="background-color:#F2ECB1;color:#f00;font: 10pt monospace;line-hight:16px;"><b>[</b></span>ELEMENT<b class="do-rot">|</b>
+<span style="background-color:#FF6633;color:#000;"><b>]</b></span>&nbsp;&nbsp;&nbsp;<span style="background-color:#FF6633;color:#000;font: 10pt monospace;line-hight:16px;"><b>[</b></span>ELEMENT<b class="do-rot">|</b>
+<span style="background-color:#F2ECB1;color:#f00;"><b>]</b></span></span></div>
+<br />
+<b>Umschliessende Elemente</b>
+<p class="do-example-box">Das bedeutet das selektierter / ausgewählter Text bei Mausklick auf das Element von diesem umschlossen / umklammert wird.
+<br />Ist kein Text selektiert wird es einfach an der aktuellen Cursorposition eingesetzt und kann so ggf. mit Inhalt ergänzt werden.</p>
+<br />
+<b>Ersetzende Elemente</b>
+<p class="do-example-box">Das bedeutet das selektierter / ausgewählter Text bei Mausklick auf das Element von diesem ersetzt wird.
+<br />Ist kein Text selektiert wird es einfach an der aktuellen Cursorposition eingesetzt.</p>
+<br />
+<div class="do-info-box">Wenn kein Text selektiert wurde und ein umschliessendes Element wird gewählt, kann entweder sofort weiterer Inhalt eingegeben werden oder auch ein zusätzliches umschliessendes Element gewählt werden, da sich der Cursor bereits an der richtigen Position befindet ("Verschachtelung").
+<br />
+</div>
+
+

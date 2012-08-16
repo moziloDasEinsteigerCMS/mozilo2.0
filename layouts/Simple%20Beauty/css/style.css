@@ -1,0 +1,471 @@
+body {
+	background: #CACACA url(../grafiken/background.png) repeat-x;
+	font-family: "Trebuchet MS", Verdana, serif
+}
+#container {
+	margin: 0 auto;
+	width: 750px
+}
+#header {
+	width: 100%
+}
+#sub_header {
+	text-align: right;
+	font-weight: bold;
+	font-size: 20px;
+	color: #FFFFFF;
+	padding-right: 20px;
+	padding-bottom: 20px;
+}
+#main_content {
+	margin: 0 auto;
+	width: 100%;
+	background: #FFFFFF url('../grafiken/background_content.gif');
+	background-repeat: repeat-y
+} 
+#main_content_top {
+	height: 30px;
+	background: #FFFFFF url('../grafiken/background_top.gif');
+} 
+#main_content_bottom {
+	height: 30px;
+	background: #FFFFFF url('../grafiken/background_bottom.gif');
+}
+#footer {
+	text-align: center;
+	font-size: 12px;
+	margin: 10px auto
+}
+.content {
+	float: left;
+	width: 510px;
+	text-align: justify;
+	padding: 0 30px 0 30px;
+	font-size: 12px
+}
+.gallerycontent {
+	float: left;
+	width: 650px;
+	padding: 0 30px 0 30px;
+	font-size: 12px
+}
+.gallerymenu, .gallerynumbermenu {
+	text-align:center;
+}
+.menubox {
+	width: 139px;
+	float: right;
+	padding: 0 20px 0 20px;
+	border-left: #8C8484 1px solid;
+	font-size: 12px
+}
+#header h1 {
+	margin-bottom: 0px;
+	font-size: 28px;
+	font-weight: bold;
+	color: #A40008
+}
+#clear {
+	display: block;
+	clear: both;
+	width: 100%;
+	height:1px;
+	overflow:hidden;
+}
+.menu, .menuactive{
+	display:block;
+	font-size: 18px;
+	font-weight: bold;
+	color: #A40008
+}
+a {
+	color: #A40008;
+	font-weight: bold;
+	text-decoration: none
+}
+a:hover {
+	color: #A40008;
+	font-weight: bold;
+	text-decoration: underline
+}
+a.submenu, a.submenuactive{
+	display:block;
+	padding-left:10px;
+	color: #000000;
+	font-weight: bold;
+	text-decoration: underline
+}
+a.submenu:hover, a.submenuactive:hover {
+	display:block;
+	color: #A40008;
+	font-weight: bold;
+	text-decoration: none
+}
+.quote {
+	margin: 20px;
+	text-align: center;
+	font-weight: bold;
+	font-style: italic
+}
+ul.mainmenu {
+	margin: 0px;
+	padding: 0px;
+}
+li.mainmenu {
+	display:inline;
+}
+ul.detailmenu {
+	margin: 0px;
+	padding: 0px;
+}
+li.detailmenu {
+	display:inline;
+}
+ul.gallerymenu, ul.gallerynumbermenu {
+	margin: 0px;
+	padding: 0px;
+}
+li.gallerymenu, li.gallerynumbermenu {
+	display:inline;
+	padding-right: 10px;
+}
+
+
+em {
+	font:inherit;
+	font-style:normal;
+}
+
+
+/* -------------------------------------------------------- */
+/* Fehler in Tag-Attribut oder -Wert */
+/* --------------------------------- */
+.deadlink {
+	color:#ff4444;
+	font-weight:bold;
+}
+
+
+/* -------------------------------------------------------- */
+/* Suchwort-Hervorhebungen */
+/* ----------------------- */
+.highlight {
+/*font-size:inherit;
+	color:#ffffff;
+	font-size:inherit;*/
+	padding:0px 2px;
+	background-color:#FFDDDD;
+	border-bottom:2px solid #dd0000;
+}
+
+
+/* -------------------------------------------------------- */
+/* Suchformular */
+/* ------------ */
+form.searchform {
+	display:block;
+}
+form.searchform:hover {
+}
+fieldset#searchfieldset {
+    border:none;
+    margin:0px;
+    padding:0px;
+}
+
+
+
+/* -------------------------------------------------------- */
+/* Suchfeld */
+/* -------- */
+input.searchtextfield {
+	border:1px solid #C0C0C0;
+	width:85px;
+	margin:0px;
+	margin:4px 1px;
+}
+
+
+/* -------------------------------------------------------- */
+/* Suchbutton */
+/* ---------- */
+input.searchbutton {
+}
+
+
+/* -------------------------------------------------------- */
+/* Kontaktformular */
+/* --------------- */
+form#contact_form {
+}
+table#contact_table {
+}
+table#contact_table td {
+  vertical-align:top;
+  padding:5px;
+}
+span#contact_errormessage{
+  color:#880000;
+  font-weight:bold;
+}
+span#contact_successmessage{
+  color:#008800;
+  font-weight:bold;
+}
+input#contact_name, input#contact_mail, input#contact_website, input#contact_calculation {
+  width:200px;
+}
+textarea#contact_message {
+  width:200px;
+}
+input#contact_submit {
+  width:200px;
+}
+
+
+/* -------------------------------------------------------- */
+/*                                                          */
+/* AB HIER: CMS-SYNTAX                                      */
+/*                                                          */
+/* -------------------------------------------------------- */
+
+
+/* -------------------------------------------------------- */
+/* [link|...]      */
+/* --------------- */
+a.link {
+}
+
+
+/* -------------------------------------------------------- */
+/* [mail|...]      */
+/* --------------- */
+a.mail {
+}
+
+
+/* -------------------------------------------------------- */
+/* [seite|...]      */
+/* --------------- */
+a.page {
+}
+
+
+/* -------------------------------------------------------- */
+/* [kategorie|...]      */
+/* --------------- */
+a.category {
+}
+
+
+/* -------------------------------------------------------- */
+/* [datei|...]      */
+/* --------------- */
+a.file {
+}
+
+
+/* -------------------------------------------------------- */
+/* [galerie|...]      */
+/* --------------- */
+a.gallery {
+}
+
+
+/* -------------------------------------------------------- */
+/* [bild|...] */
+/* ---------- */
+img {
+	border:none;
+}
+
+span.imagesubtitle {
+	margin:6px 3px 0px 3px;
+	text-align:justify;
+	font-size:0.9em;
+	line-height:1.1em;
+}
+
+span.contentimage {
+}
+
+
+/* -------------------------------------------------------- */
+/* [bildlinks|...] */
+/* --------------- */
+span.leftcontentimage {
+	margin:15px;
+	max-width:180px;
+	float:left;
+	margin-left:0px;
+}
+
+img.leftcontentimage {
+	max-width:180px;
+}
+
+
+/* -------------------------------------------------------- */
+/* [bildrechts|...] */
+/* ---------------- */
+span.rightcontentimage {
+	margin:15px;
+	max-width:180px;
+	float:right;
+	margin-right:0px;
+}
+
+img.rightcontentimage {
+	max-width:180px;
+}
+
+
+/* -------------------------------------------------------- */
+/* [fett|...] */
+/* ---------- */
+b {
+
+}
+
+
+/* -------------------------------------------------------- */
+/* [kursiv|...] */
+/* ------------ */
+i {
+
+}
+
+
+/* -------------------------------------------------------- */
+/* [unter|...] */
+/* ------------ */
+u {
+
+}
+
+
+/* -------------------------------------------------------- */
+/* [durch|...] */
+/* ------------ */
+s {
+
+}
+
+
+/* -------------------------------------------------------- */
+/* [ueber1|...] */
+/* ------------ */
+h1 {
+	font-size:1.6em;
+	margin-top:10px;
+	margin-bottom:5px;
+	color: #A40008;
+}
+
+
+/* -------------------------------------------------------- */
+/* [ueber2|...] */
+/* ------------ */
+h2 {
+	font-size:1.3em;
+	margin-top:10px;
+	margin-bottom:5px;
+}
+
+
+/* -------------------------------------------------------- */
+/* [ueber3|...] */
+/* ------------ */
+h3 {
+	margin-top:10px;
+	margin-bottom:5px;
+}
+
+
+/* -------------------------------------------------------- */
+/* [liste|...] */
+/* [numliste|...] */
+/* ------------ */
+ul, ol {
+	margin-top:0px;
+	margin-bottom:0px;
+}
+li {
+	margin-top:0px;
+	margin-bottom:0px;
+}
+
+
+/* -------------------------------------------------------- */
+/* [----] */
+/* ------ */
+hr {
+
+}
+
+/* -------------------------------------------------------- */
+/* [tabelle|...] */
+/* ------------- */
+table.contenttable {
+	margin:0px auto;
+	border:1px solid;
+	border-collapse:collapse;
+	width:100%;
+}
+th.contenttable {
+	vertical-align:top;
+	border:1px solid #000000;
+	background-color:#A40008;
+	color:#ffffff;
+	padding:1px 5px;
+}
+td.contenttable1 {
+	vertical-align:top;
+	border:1px solid;
+	padding:1px 5px;
+}
+td.contenttable2 {
+	vertical-align:top;
+	border:1px solid;
+	padding:1px 5px;
+}
+
+
+/* -------------------------------------------------------- */
+/* [zentriert|...] */
+/* --------------- */
+.aligncenter {
+    text-align:center;
+}
+
+/* -------------------------------------------------------- */
+/* [links|...] */
+/* ----------- */
+.alignleft {
+    text-align:left;
+}
+
+/* -------------------------------------------------------- */
+/* [rechts|...] */
+/* ------------ */
+.alignright {
+    text-align:right;
+}
+
+/* -------------------------------------------------------- */
+/* [block|...] */
+/* ----------- */
+.alignjustify {
+    text-align:justify;
+}
+
+/* -------------------------------------------------------- */
+/* {TABLEOFCONTENTS} */
+/* ----------------- */
+div.tableofcontents ul ul {
+    /*padding-left:15px;*/
+}
+div.tableofcontents li.blind {
+    list-style-type:none;
+    list-style-image:none;
+}

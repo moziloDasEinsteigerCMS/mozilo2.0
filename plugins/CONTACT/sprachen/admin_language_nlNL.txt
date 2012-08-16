@@ -1,0 +1,16 @@
+toolbar_platzhalter_CONTACT             = Contact formulier
+config_titel_contact            = Contact formulier instellingen
+config_text_formularmail        = Dit "Enkele invoer regel E-mail" is de ontvanger van de berichten verzonden via het contact formulier.<br /><span style="font-style:italic;">Op de moziloAdmin begin pagina kan je testen of de server e-mail kan versturen.</span>
+config_error_formularmail       = Geef een geldig e-mail adres op.
+config_text_contactformusespamprotection = Moet het contact formulier tegen spam beveiligd worden? Als je dit aanvinkt moeten de bezoekers een eenvoudige vraag beantwoorden om hun bericht te laten versturen. 
+config_text_contactformwaittime = Hoeveel seconden moeten bezoekers wachten voor ze het volgende bericht kunnen versturen?
+config_text_contact             = Welke velden wil je in het contact formulier hebben, en welke velden zijn verplicht om in te vullen ? Je kan ook de namen van de velden aanpassen.
+config_titel_contact_mandatory  = verplicht
+config_titel_contact_show       = tonen
+config_titel_contact_input      = Naam
+config_titel_contact_help       = Beschrijving
+config_input_contact_name       = Enkele invoer regel "Naam"
+config_input_contact_mail       = Enkele invoer regel "E-mail"
+config_input_contact_website    = Enkele invoer regel  "Website"
+config_input_contact_textarea   = Text veld "Uw bericht"
+config_titel_spam_question      = 

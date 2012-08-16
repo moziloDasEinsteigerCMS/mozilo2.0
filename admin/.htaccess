@@ -1,0 +1,3 @@
+Options -Indexes
+RewriteEngine On
+RewriteRule index.php$ index.php?link=rewrite [QSA,L]

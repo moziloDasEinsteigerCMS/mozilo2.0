@@ -1,0 +1,14 @@
+
+alttext_galleryimage_1                  = Afbeelding in foto album "{PARAM1}"
+message_firstimage_0                    = Eerste afbeelding
+message_gallery_no_preview              = Voorbeeld niet beschikbaar
+message_gallery_xoutofy_2               = (Afbeelding {PARAM1} van {PARAM2})
+message_gallerydir_error_1              = Onbekende foto album map "{PARAM1}"!
+message_gallerydir_error_0              = Geen foto album map opgegeven!
+message_galleryempty_0                  = Dit foto album bevat geen afbeeldingen.
+message_lastimage_0                     = Laatste afbeelding
+message_nextimage_0                     = Volgende afbeelding
+message_previousimage_0                 = Vorige afbeelding
+tooltip_gallery_fullscreen_1            = Volledig scherm: "{PARAM1}"
+tooltip_link_gallery_2                  = Bekijk foto album"{PARAM1}" ({PARAM2} afbeeldingen)
+tooltip_link_gallery_error_1            = Foto album ontbreekt "{PARAM1}"

@@ -1,0 +1,10 @@
+
+config_gallery_picsperrow               = 
+config_gallery_picsperrow_regex_error   = 
+config_gallery_target                   = 
+config_gallery_target_self              = 
+config_gallery_target_blank             = 
+config_gallery_usethumbs                = 
+config_gallery_placeholders             = 
+config_gallery_plugin_name              = 
+config_gallery_plugin_desc              = 

@@ -1,0 +1,14 @@
+contactform_confirmation_0                      = Je bericht is verzonden.
+contactform_fieldnotset_0                       = Sorry, er is een verpicht veld nog niet ingevuld:
+contactform_mail_0                              = Mail
+contactform_mailsubject_1                       = Contact formulier van {PARAM1}: Nieuw bericht ontvangen
+contactform_mailsubject_confirm_1               = 
+contactform_mandatory_fields_0                  = * Verplicht
+contactform_message_0                           = Bericht
+contactform_name_0                              = Naam
+contactform_senttoofast_1                       = Je moet {PARAM1} seconden wachten voordat je je bericht kan versturen.
+contactform_spamprotection_text_0               = Anti-Spam: Geef de antwoord op de volgende vraag.
+contactform_submit_0                            = Verstuur het bericht
+contactform_website_0                           = Website
+contactform_wrongresult_0                       = Je hebt de anti-spam vraag niet goed beantwoord.
+tooltip_no_mail_error_0                         = Contact formulier kan niet worden gebruikt - De instellingen zijn niet volledig (e-mail adres)!

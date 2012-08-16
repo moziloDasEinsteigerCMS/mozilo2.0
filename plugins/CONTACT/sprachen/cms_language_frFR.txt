@@ -1,0 +1,14 @@
+contactform_confirmation_0                      = Le message a été envoyé.
+contactform_fieldnotset_0                       = Suivants obligatoire n'est pas rempli:
+contactform_mail_0                              = Email
+contactform_mailsubject_1                       = De contact "{PARAM1}": Nouveau message reçu
+contactform_mailsubject_confirm_1               = Confirmation de livraison: Contacter par {PARAM1}
+contactform_mandatory_fields_0                  = * Obligatoire
+contactform_message_0                           = Personnel
+contactform_name_0                              = Nom
+contactform_senttoofast_1                       = Vous devez attendre au moins {PARAM1} secondes avant que vous puissiez envoyer votre message.
+contactform_spamprotection_text_0               = Protection contre les spams: S'il vous plaît entrez le résultat des tâches suivantes.
+contactform_submit_0                            = Envoyer
+contactform_website_0                           = Site web
+contactform_wrongresult_0                       = La réponse à la question protection anti-spam est malheureusement faux.
+tooltip_no_mail_error_0                         = De contact ne peut pas être utilisé - Admin pas configuré d'adresse!

@@ -1,0 +1,14 @@
+
+alttext_galleryimage_1                  = Galeriebild "{PARAM1}"
+message_firstimage_0                    = Erstes Bild
+message_gallery_no_preview              = Vorschaubild nicht vorhanden
+message_gallery_xoutofy_2               = (Bild {PARAM1} von {PARAM2})
+message_gallerydir_error_1              = Unbekanntes Galerieverzeichnis "{PARAM1}"!
+message_gallerydir_error_0              = Es wurde kein Galerieverzeichnis angegeben!
+message_galleryempty_0                  = Diese Galerie enthält keine Bilder.
+message_lastimage_0                     = Letztes Bild
+message_nextimage_0                     = Nächstes Bild
+message_previousimage_0                 = Voriges Bild
+tooltip_gallery_fullscreen_1            = Vollbildanzeige: "{PARAM1}"
+tooltip_link_gallery_2                  = Galerie "{PARAM1}" ({PARAM2} Bilder) ansehen
+tooltip_link_gallery_error_1            = Galerie "{PARAM1}" nicht vorhanden

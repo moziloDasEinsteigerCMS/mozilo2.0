@@ -1,0 +1,14 @@
+contactform_confirmation_0                      = Sua mensagem foi enviada.
+contactform_fieldnotset_0                       = Por favor, Preencha os campos:
+contactform_mail_0                              = Email
+contactform_mailsubject_1                       = Contact form of {PARAM1}: New message arrived
+contactform_mailsubject_confirm_1               = 
+contactform_mandatory_fields_0                  = * Campo obrigatório
+contactform_message_0                           = Mensagem
+contactform_name_0                              = Nome
+contactform_senttoofast_1                       =
+contactform_spamprotection_text_0               = 
+contactform_submit_0                            = Enviar
+contactform_website_0                           = Seu site
+contactform_wrongresult_0                       = 
+tooltip_no_mail_error_0                         = Formulário de contado não pode ser utilizado - Nenhum email de administrador configurado

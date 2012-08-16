@@ -1,0 +1,14 @@
+contactform_confirmation_0                      = Wiadomość wysłana
+contactform_fieldnotset_0                       = Nie wypełniono następującego pola:
+contactform_mail_0                              = Mail
+contactform_mailsubject_1                       = Formularz kontaktowy od {PARAM1}: Nadeszła nowa wiadomość
+contactform_mailsubject_confirm_1               = 
+contactform_mandatory_fields_0                  = * Pole obowiązkowe
+contactform_message_0                           = Wiadomość
+contactform_name_0                              = Nazwisko
+contactform_senttoofast_1                       = 
+contactform_spamprotection_text_0               = 
+contactform_submit_0                            = Wysyłanie
+contactform_website_0                           = Strona internetowa
+contactform_wrongresult_0                       = 
+tooltip_no_mail_error_0                         = Nie można skorzystać z formularza kontaktowego - nie skonfigurowano adresu administratora!

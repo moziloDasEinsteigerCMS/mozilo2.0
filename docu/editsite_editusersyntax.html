@@ -1,0 +1,48 @@
+<div class="do-error-box"><b>Achtung</b> diese Beschreibung gilt nur für <b>Eigene Syntaxelemente erstellen</b> in dem admin Tab <b>Einstelungen</b>.</div>
+<br />
+
+Ein Egenes Syntaxelement setzt sich aus dem <b>Namen</b> des Elements und dem <b>eigenen Code</b> zusamen.<br />
+<br />
+<div class="do-error-box">der <b>Name</b> darf nur aus den Buchstaben (<b>a</b>-<b>z</b> oder <b>A</b>-<b>Z</b>), Zahlen und als einziges Sonderzeichen dem Unterstrich "<b>_</b>" bestehen.<br />
+Als Trennug wird " <b>=</b> " benutzt. <b>Achtung</b> die Lehrzeichen um das "<b>=</b>" sind Pflicht.</div>
+Der <b>eigenen Code</b> darf <b>alles</b> enthalten, auch Zeilenumbrüche sind erlaubt.<br />
+Es gibt diese speziellen Platzhalter <b>{DESCRIPTION}</b> und <b>{VALUE}</b> die nur in <b>Eigene Syntaxelemente erstellen</b> benutzbar sind.<br />
+<b>{DESCRIPTION}</b> steht für den Inhalt zwischen dem <span class="do-b-syntax"><b>=</b> und dem <b>|</b></span> Zeichen<br />
+<b>{VALUE}</b> steht für den Inhalt zwischen dem <span class="do-b-syntax"><b>|</b> und dem <b>]</b></span> Zeichen<br />
+<br />
+<div class="do-error-box"><b>Achtung</b> wenn eins dieser <b>{</b>, <b>[</b>, <b>|</b>, <b>]</b>, <b>}</b> Zeichen als Zeichen im ersetzenden Teil benutzt werden soll, <b>muss</b> es mit einem <b>Hochdach</b> "<b>^</b>" geschützt werden.<br />Es kann auch vorkommen das das "<b>=</b>" geschützt werden muss, oder auch andere Sonderzeichen</div>
+<br />
+<b>Beispiel:</b>
+<div class="do-example-box"><b>Eigenes Syntaxelement</b>
+<p class="do-example-box">wikipedia = <b class="do-rot">[</b>link=<b>{DESCRIPTION}</b><b class="do-rot">|</b>http://de.wikipedia.org/wiki/<b>{VALUE}</b><b class="do-rot">]</b></p>
+<b>Im Editior sieht das dann so aus</b>
+<p class="do-example-box"><b class="do-rot">[</b>wikipedia= <b class="do-rot">|</b> <b class="do-rot">]</b></p>
+<b>wir setzen mal was ein</b>
+<p class="do-example-box"><b class="do-rot">[</b>wikipedia= was ist HTML <b class="do-rot">|</b> Html <b class="do-rot">]</b></p>
+<b>als ergebnis erhalten wir</b>
+<p class="do-example-box"><a href="http://de.wikipedia.org/wiki/Html" target="_blank">was ist HTML</a></p>
+
+
+</div>
+<br />
+<b>Hier ein Beispiel mit einem Fehler und wie man in beheben kann</b>
+<div class="do-example-box" style="font: 12px monospace; white-space : pre;">
+wikipedia = [link={DESCRIPTION}|http://de.wikipedia.org/wiki/{VALUE}]
+
+syntax_mit_fehler = &lt;a href="#"&gt;
+hier_ist_der = der fehler&lt;/a&gt; <b class="do-rot">Das gehhört zu "syntax_mit_fehler =" kann aber nicht erkant werden <br />da "hier_ist_der = " wie ein neuer Name aussieht</b>
+
+syntax_fehler_behoben1 = &lt;a href="#"&gt;
+hier_ist_der ^= der fehler behoben&lt;/a&gt; <b class="do-rot">Das ist Richtig da das "=" mit einem "^" geschützt wurde</b>
+
+syntax_fehler_behoben2 = &lt;a href="#"&gt;
+                    hier_ist_der = der fehler behoben&lt;/a&gt; <b class="do-rot">Das ist Richtig weil vor "hier_ist_der = " <br />Lehrzeichen oder Tabulatoren sind</b>
+</div>
+<br />
+<b>Aber keine Angst nach dem Speichern geht ein Fenster auf mit dem Inhalt und wie er Interpretiert wurde</b>
+<div class="do-example-box">{IMG_editor_usersyntax_messages}<br />
+<br />
+Hier kann man anhand vom Namen <b>FETT</b> und<br />
+<span class="do-rot">SYNTAX&gt;&gt;&gt;</span> eigenen Code <span class="do-rot">&lt;&lt;&lt;SYNTAX</span> erkennen wie die Elemnte erkant wurden und gegebnenfals den Fehler beheben.</div>
+<br />
+

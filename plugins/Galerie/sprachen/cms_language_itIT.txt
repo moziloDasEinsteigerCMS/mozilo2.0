@@ -1,0 +1,14 @@
+
+alttext_galleryimage_1                  = Galleria immagini "{PARAM1}"
+message_firstimage_0                    = Prima immagine
+message_gallery_no_preview              = 
+message_gallery_xoutofy_2               = (Immagine {PARAM1} su {PARAM2})
+message_gallerydir_error_1              = Cartella galleria sconosciuta "{PARAM1}"!
+message_gallerydir_error_0              = 
+message_galleryempty_0                  = Questa galleria non contiene immagini.
+message_lastimage_0                     = Ultima immagine
+message_nextimage_0                     = Prossima immagine
+message_previousimage_0                 = Immagine precedente
+tooltip_gallery_fullscreen_1            = Vista tutto schermo: "{PARAM1}"
+tooltip_link_gallery_2                  = Visualizza galleria "{PARAM1}" ({PARAM2} immagini)
+tooltip_link_gallery_error_1            = Galleria mancante "{PARAM1}"

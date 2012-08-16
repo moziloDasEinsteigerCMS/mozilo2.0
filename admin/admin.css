@@ -1,0 +1,637 @@
+/*1=oben, 2=rechts, 3=unten, 4=links*/
+html, body {
+    font-size:12px;/* !important*/
+    padding:0;
+    margin:0;
+margin: 0;
+padding: 0;
+height: 100%;
+
+}
+
+#mo-admin-td {
+    padding: 1em 0 1em 0;
+}
+
+form {
+    display:inline;
+}
+
+.mo-shadow {
+    -webkit-box-shadow: 4px 6px 10px #666;
+    -moz-box-shadow: 4px 6px 10px #666;
+    box-shadow: 4px 6px 10px #666;
+}
+/* wens kein javascript gibt */
+.mo-noscript {
+    position:absolute;
+    /* siehe mo-td-content-width */
+    width: 73em;
+    z-index:999999;
+}
+
+/*1=oben, 2=rechts, 3=unten, 4=links*/
+.mo-noscript div {
+    font-size:3em;
+    margin:2em 1em 2em 1em;
+    text-align:center;
+}
+
+/* 16 22 24 32 48 */
+.mo-td-content-width {
+    width: 75em;
+    padding:0;
+}
+
+.mo-icon-text-right {
+    margin-right:.4em;
+}
+/*
+.mo-butten-a-img {
+}
+*/
+.mo-butten-a-img img {
+    width: 2em;
+    border:0;
+    padding:0;
+    margin:.4em .8em .4em 0;
+    /*das ist nötig damits nicht son rand unten im a tag gibt*/
+    vertical-align:middle;
+}
+
+.mo-tool-icon {
+    width: 2em;
+    cursor: pointer;
+    border:0;
+    padding:0;
+    /*margin:0 0 0 .8em;*/
+   /**/ margin:0 .4em 0 .4em;
+    /*das ist nötig damits nicht son rand unten im a tag gibt*/
+    vertical-align:middle;
+}
+
+.js-menu-icon {
+    width: 1.5em;
+}
+
+.mo-icon-link {
+    cursor:pointer;
+    width: 1.4em;
+    vertical-align:middle;
+}
+
+/*
+#slider-zoom {
+width: 200px;
+font-size:12px;
+position:fixed;
+top:0;
+left:0;
+z-index:99999;
+}*/
+
+.mo-icon-blank {
+    cursor: default;
+}
+
+.mo-ui-tabs {
+    border-width: 0;
+    /*padding:0;*/
+}
+
+/*1=oben, 2=rechts, 3=unten, 4=links*/
+.mo-ui-tabs-panel {
+    /*padding: .8em .4em 0 .4em;*/
+    padding: 1px .4em .4em .4em;
+    min-height:3em;
+}
+
+.mo-ul {
+    list-style-type: none;
+    margin: 0;
+    /*den oben 1px brauchen wir damit der margin-top von der li greift*/
+    padding: 1px 0 0 0;
+    min-height:2em;
+}
+
+.mo-ul input {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.mo-li {
+     list-style-type: none;
+   /*padding: .4em;*/
+    margin-top: .8em;
+}
+/* das ist der cat head*/
+.mo-li-head-tag {
+    /*padding: .4em;*/
+    padding: .4em .4em 0 .4em;
+    /*margin-top: .8em;*/
+}
+
+/* das wird wens danach keine ul gibt dem head hinzugefügt
+weil ansonsten unter dem head die ul hinzu kommt (mo-in-ul-ul) */
+.mo-li-head-tag-no-ul {
+    padding-bottom: .4em;
+}
+
+.mo-li .mo-li-head-tag {
+    border-width:0;
+    /*padding: .4em;*/
+   /* margin-top: .8em;*/
+}
+
+/* für alle tags wo die tools icon enthaten sind damit beim hover die höhe nicht wackelt
+richtet sich nach der icon grösse = 2 * body font-size */
+.mo-tag-height-from-icon {
+    height:2em;
+}
+/*1=oben, 2=rechts, 3=unten, 4=links*/
+.mo-in-ul-ul {
+    list-style-type: none;
+    margin: 0 .4em 0 2.4em;
+    /*Achtung der wird auch gebraucht wir damit der drop geht*/
+    padding: 0 0 .4em 0;
+}
+
+.mo-settings-div {
+    /*Achtung der margin rechts ist der gleiche wie bei mo-in-ul-ul */
+    margin: 0 .4em .4em 2.4em;
+    padding: .4em;
+}
+
+.mo-in-ul-li {
+    list-style-type: none;
+    padding: .4em 0 .4em .8em;
+    margin-top: .4em;
+}
+
+.config .mo-in-ul-li, .admin .mo-in-ul-li, .plugins .mo-in-ul-li, .install .mo-in-ul-li {
+    padding-right:.8em;
+}
+
+.mo-input-text {
+    width:96%;
+    /*padding-right:.8em;*/
+}
+
+.mo-input-digit {
+    width:4em;
+    /*padding-right:.8em;*/
+}
+
+.mo-select-div {
+    margin-right:1em;
+}
+
+.mo-select {
+    width:97%;
+}
+
+.mo-checkbox {
+    margin-right: .4em;
+    /*padding-right:.8em;*/
+}
+
+.mo-radio {
+    margin-right: .4em;
+    /*padding-right:.8em;*/
+}
+
+.mo-submit {
+    /*margin-right: .4em;*/
+    /*padding-right:.8em;*/
+}
+
+.mo-plugin-input {
+    vertical-align: middle;
+    margin: 0px;
+    padding: 0px;
+    color: #000000;
+    border: 1px solid #C0C0C0;
+}
+
+.mo-plugin-textarea {
+    margin: 0px;
+    padding: 0px;
+    border: 1px solid #C0C0C0;
+}
+
+.mo-plugin-select {
+    margin: 0px;
+    padding: 0px;
+    border: 1px solid #C0C0C0;
+    /*width: 200px;*/
+}
+
+.mo-plugin-size-cols {
+    width: 100%;
+}
+
+/* 1=oben, 2=rechts, 3=unten, 4=links */
+.mo-content {
+    margin: .4em .4em .4em 2.4em;
+}
+
+.mo-staus {
+    margin:0 1.6em;
+}
+
+.mo-font-small {
+    font-size: .85em;
+}
+
+.mo-nowrap {
+    white-space:nowrap;
+}
+
+.mo-new-table {
+    margin: .4em 0;
+}
+
+.mo-new-td {
+    width:25%;
+}
+
+.mo-img-trans {
+    background-image:url('gfx/trans_background.gif');
+    background-repeat:repeat;
+}
+
+#menu-fix {
+    position:absolute;
+    overflow:hidden;
+    top:50px;
+    /* right = -width */
+    right:-20px;
+    /* geschlossene menu breite */
+    min-width:20px;
+    /* sichtbare menu breite */
+    max-width:200px;
+    background-image:url('gfx/menu.png');
+    background-position: 5px center;
+    background-repeat:no-repeat;
+    border-left-width:0;
+    z-index:99999;
+}
+
+#menu-fix-content {
+    overflow:hidden;
+    margin:0;
+    /* siehe #menu-fix width */
+    margin-left:20px;
+}
+
+/* 1=oben, 2=rechts, 3=unten, 4=links */
+#menu-fix-content ul {
+    overflow:hidden;
+    list-style-type: none;
+    padding: 0;
+    margin: 0 .8em .8em .8em;
+}
+
+#menu-fix-content li {
+    cursor:move;
+    overflow:hidden;
+    margin: .8em 0 0 0;
+}
+
+#menu-fix-content li span {
+    cursor:move;
+}
+
+#menu-fix-content .mo-in-ul-li {
+    padding-left:.4em;
+}
+
+li.ui-draggable-dragging {
+    /* siehe #menu-fix max-width */
+    width:200px;
+}
+
+/* der hilfe button im editor title  */
+.ui-dialog-titlebar .js-docu-link {
+/*border:1px solid #f00;*/
+    float:left;
+    display:block;
+    height:22px;
+    width: 22px;
+    margin:-3px 1em -3px -.6em;
+}
+
+/* 1=oben, 2=rechts, 3=unten, 4=links */
+.ui-dialog-titlebar .js-docu-link img {
+/*border:1px solid #00f;*/
+    width: 22px;
+    padding:0;
+    margin:0;
+    vertical-align:top;
+}
+
+.js-move-me-page, .js-move-me-cat {
+    cursor:move;
+}
+
+.js-page-name, .js-cat-name {
+    cursor:text;
+    vertical-align:middle;
+}
+
+.js-in-link, .js-in-name {
+    width:18em;
+    margin-right: 1em;
+}
+/*1=oben, 2=rechts, 3=unten, 4=links*/
+/*.mo-icon {
+    margin:.4em .8em .4em 0;
+}
+*/
+.mo-td-middle {
+    vertical-align:middle;
+}
+
+/* da wo wir keine td haben machens wir mit der line-height siehe mo-tag-height-from-icon */
+.mo-middle {
+    line-height:2em;
+}
+
+.mo-margin-bottom {
+    margin-bottom:.8em;
+}
+
+.mo-margin-top {
+    margin-top:.8em;
+}
+/*
+.mo-div-lr {
+    float:left;
+    width:50%;
+}*/
+
+.mo-in-li-l {
+    width:65%;
+}
+
+div.mo-in-li-l  {
+    float:left;
+}
+
+.mo-in-li-r {
+    width:34%;
+}
+
+div.mo-in-li-r  {
+    float:right;
+}
+
+.js-file-dir {
+/*position: relative;*/
+    /*margin-bottom:10px;*/
+    /*padding-bottom:10px;*/
+}
+
+.mo-no-border-top {
+  border-top-width: 0;
+    /*border-top:0;*/
+}
+
+.mo-no-border-bottom {
+  border-bottom-width: 0;
+    /*border-bottom:0;*/
+}
+
+.file-cat-content {
+    border-top:0;
+}
+/*
+.mo-file-dir-helper {
+    border-bottom:0;
+}
+*/
+/*
+.file-cat-header {
+    margin:5px 0px;
+}
+*/
+
+input.mo-input-margin-top  {
+    margin-top:.4em;
+}
+
+.mo-padding-left {
+    padding-left:.4em;
+}
+
+.mo-padding-top {
+    padding-top:.4em;
+}
+
+.mo-padding-right {
+    padding-right:.4em;
+}
+
+.mo-padding-plugin {
+    padding:.4em .4em .4em .8em;
+}
+
+.mo-help-box {
+    /*margin:.4em 0 0 .8em;*/
+    padding:.4em .8em .4em .4em;
+}
+
+/*1=oben, 2=rechts, 3=unten, 4=links*/
+.align-right {
+  /*padding-right:10px;*/
+  text-align: right;
+}
+
+.align-left {
+  /*padding: 0 0 0 10px;*/
+  text-align: left;
+}
+
+.mo-align-center {
+  /*padding: 0 0 0 10px;*/
+  text-align: center;
+}
+
+.js-file-dir-header {
+    /*padding:5px 0px;*/
+}
+
+.js-file-dir-header td {
+    vertical-align:middle;
+}
+/*
+.js-file-dir-header table {
+    height:38px;
+}*/
+
+.mo-hidden {
+    display:none;
+}
+
+.mo-bold {
+    font-weight: bold;
+}
+
+.mo-clear {
+    margin:0;
+    padding:0;
+    height:0;
+    width:0;
+    clear:both;
+}
+
+.mo-error {
+    font-weight: bold;
+    padding-bottom:.4em;
+}
+
+#dialog-del ul {
+    margin:0;
+    padding:0;
+    list-style-type:none;
+    text-align:left;
+}
+
+#dialog-del ul ul {
+    padding-left:2.4em;
+    list-style-type:disc;
+}
+
+#dialog-del li {
+    text-align:left;
+}
+
+.textarea_cms {
+    margin: 0px;
+    padding: 0px;
+    height: 120px;
+    border: 1px solid #C0C0C0;
+    width: 99%;
+}
+
+.mo-overlay {
+    /* must be initially hidden */
+    display:none;
+    
+    /* place overlay on top of other elements */
+    z-index:10000;
+    
+    /* styling */
+    background-color:#fff;
+    
+    width:300px;    
+    min-height:200px;
+    border:1px solid #666;
+    
+    /* CSS3 styling for latest browsers */
+    -moz-box-shadow:0 0 90px 5px #000;
+    -webkit-box-shadow: 0 0 90px #000;  
+}
+
+
+
+
+
+
+
+.mo-message-erfolg {
+    display: block;
+    padding: .8em 0;
+    /*font-weight: bolder;*/
+    background-position: .4em .4em;
+    background-repeat: no-repeat;
+}
+
+.mo-message-fehler {
+    display: block;
+    padding: .8em 0;
+    /*font-weight: bolder;*/
+    background-position: .4em .4em;
+    background-repeat: no-repeat;
+}
+
+.message_ask {
+    margin: 10px;
+    color: #aa0000;
+    border: 1px solid #aa0000;
+    padding: 8px;
+    font-weight: bolder;
+    background-color: #FFDDDD;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    border-radius: 3px;
+}
+
+div.message_fehler {
+    top: 100px;
+    border: 1px solid red;
+    width: 350px;
+    margin-left: -175px;
+    padding: 10px;
+    padding-left: 35px;
+    left: 50%;
+    position: absolute;
+    background-color: #FFECEC;
+    text-align: center;
+}
+
+/* login sachen */
+.mo-login_input {
+    border: 1px solid #c0c0c0;
+    width: 100%;
+}
+
+.mo-login_submit {
+    border: 1px solid #c0c0c0;
+    margin-top: .8em;
+    margin-bottom: .4em;
+    background-color: #ffffff;
+    cursor: pointer;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -khtml-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.mo-login {
+    width: 25em;
+    margin:0;
+    margin-left: 24em;
+    margin-top: 10em;
+    margin-bottom: 10em;
+    padding: 0;
+}
+
+div.mo-login-dialog {
+    margin:0;
+    /* mo-login_message_fehler width - mo-login width / 2 */
+    margin-left: 4em;
+    margin-right: 4em;
+}
+
+.mo-login_message_fehler {
+    float:left;
+    width: 33em;
+    margin:0;
+    margin-left: 20em;
+    margin-top:3em;
+}
+
+div#dialog-multi .mo-login_message_fehler {
+    margin:0;
+}
+
+.mo-login_message_fehler div {
+    margin:.4em;
+    text-align: center;
+    background-position: 5px 5px;
+    background-repeat: no-repeat;
+}
+
+

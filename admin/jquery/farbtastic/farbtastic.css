@@ -1,0 +1,125 @@
+
+.box-farbtastic {
+    position: absolute;
+    right:18px;
+    top: 0;
+    width: 305px;
+    z-index:9999;
+}
+
+.box-farbtastic input {
+    font-size:12px;
+}
+
+/* 1=oben, 2=rechts, 3=unten, 4=links */
+.fb-red, .fb-green, .fb-blue {
+/*cursor:pointer;*/
+    height: 100px;
+    margin: 10px 12px 10px 12px;
+}
+/*.fb-red a, .fb-green a, .fb-blue a {
+cursor:pointer;
+}*/
+
+.fb-color-prev {
+    width: 20px;
+    height: 40px;
+    float:right;
+    border:1px solid #000000;
+    background-image: none;
+}
+
+.fb-color-curent {
+    cursor:pointer;
+    width: 20px;
+    height: 40px;
+    float:right;
+    border-top:1px solid #000000;
+    border-right:1px solid #000000;
+    border-bottom:1px solid #000000;
+    background-image: none;
+}
+
+.fb-red .ui-slider-range { background: #ff0000; }
+.fb-red .ui-slider-handle { border-color: #ff0000; }
+.fb-green .ui-slider-range { background: #00ff00; }
+.fb-green .ui-slider-handle { border-color: #00ff00; }
+.fb-blue .ui-slider-range { background: #0000ff; }
+.fb-blue .ui-slider-handle { border-color: #0000ff; }
+
+.fb-td-prev {
+    padding:0;
+    padding-top:5px;
+    padding-right:5px;
+}
+
+.fb-td-slider {
+    text-align:center;
+    vertical-align:bottom;
+}
+.fb-td-slider input {
+    margin-bottom: 5px;
+    height: 12px;
+    width: 24px;
+}
+.fb-in-hex {
+    height: 12px;
+    width: 54px;
+}
+
+.fb-td-default {
+    font-size:1px;
+}
+
+.fb-default-color {
+    display:none;
+    white-space: normal;
+    margin:5px 0 5px 7px;
+    width: 295px;
+}
+
+/*1=oben, 2=rechts, 3=unten, 4=links*/
+.fb-default-color img {
+    cursor:pointer;
+    padding:0;
+    margin:-1px 0 0 -1px;
+    width: 15px;
+    height: 15px;
+    border: 1px solid silver;
+}
+
+.farbtastic {
+    position: relative;
+}
+.farbtastic * {
+    position: absolute;
+    cursor: crosshair;
+}
+.farbtastic, .farbtastic .fb-wheel {
+    width: 195px;
+    height: 195px;
+}
+.farbtastic .fb-color, .farbtastic .fb-overlay {
+    top: 47px;
+    left: 47px;
+    width: 101px;
+    height: 101px;
+}
+.farbtastic .fb-wheel {
+    background: url(wheel.png) no-repeat;
+    width: 195px;
+    height: 195px;
+}
+.farbtastic .fb-overlay {
+    background: url(mask.png) no-repeat;
+}
+.farbtastic .fb-marker {
+    width: 17px;
+    height: 17px;
+    margin: -8px 0 0 -8px;
+    overflow: hidden; 
+    background: url(marker.png) no-repeat;
+}
+
+
+

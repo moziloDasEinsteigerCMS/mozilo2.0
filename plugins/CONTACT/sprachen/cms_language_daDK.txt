@@ -1,0 +1,14 @@
+contactform_confirmation_0                      = Din besked blev sendt.
+contactform_fieldnotset_0                       = Desværre, der er et tomt obligatorisk felt:
+contactform_mail_0                              = E-mail
+contactform_mailsubject_1                       = Kontakt formular {PARAM1}: Ny besked modtaget
+contactform_mailsubject_confirm_1               = 
+contactform_mandatory_fields_0                  = * Obligatorisk
+contactform_message_0                           = Besked
+contactform_name_0                              = Navn
+contactform_senttoofast_1                       = 
+contactform_spamprotection_text_0               = 
+contactform_submit_0                            = Send besked
+contactform_website_0                           = Netsted
+contactform_wrongresult_0                       = 
+tooltip_no_mail_error_0                         = Kontakt formular kan ikke bruges - admin adresse er ikke konfigureret!

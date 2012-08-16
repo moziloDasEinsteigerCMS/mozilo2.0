@@ -1,0 +1,16 @@
+toolbar_platzhalter_CONTACT             = 
+config_titel_contact            = 
+config_text_formularmail        = 
+config_error_formularmail       = 
+config_text_contactformusespamprotection = 
+config_text_contactformwaittime = 
+config_text_contact             = 
+config_titel_contact_mandatory  = 
+config_titel_contact_show       = 
+config_titel_contact_input      = 
+config_titel_contact_help       = 
+config_input_contact_name       = 
+config_input_contact_mail       = 
+config_input_contact_website    = 
+config_input_contact_textarea   = 
+config_titel_spam_question      = 

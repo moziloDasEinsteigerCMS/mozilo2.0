@@ -1,0 +1,67 @@
+# Diese Zeilen nicht löschen / Do not remove these lines
+#
+# $Revision: 828 $
+# $LastChangedDate: 2011-01-06 20:21:05 +0100 (Do, 06. Jan 2011) $
+# $Author: hausl78 $
+#
+_dateformat_0                     		        = %H:%M:%S %d-%m-%Y
+_translator_0                     		        = T. Verhoef 
+# alttext_galleryimage_1                          = Afbeelding in foto album "{PARAM1}"
+alttext_image_1                                 = Afbeelding "{PARAM1}"
+anchor_top_0                                    = Terug naar boven
+message_downloads                               = Downloads
+message_draft_0                                 = Concept
+# message_firstimage_0                            = Eerste afbeelding
+message_galleries_0                             = Foto albums
+message_gallery_1                               = Foto album "{PARAM1}"
+# message_gallery_xoutofy_2                       = (Afbeelding {PARAM1} van {PARAM2})
+# message_gallerydir_error_1                      = Onbekende foto album map "{PARAM1}"!
+# message_gallerydir_error_0                      = Geen foto album map opgegeven!
+message_galleryembed_error_0                    = Het CMS is zo ingesteld dat het foto album alleen binnen de site kan worden bekeken.
+# message_galleryempty_0                          = Dit foto album bevat geen afbeeldingen.
+message_gallerypreviewdir_error_1               = De map met voorbeelden ontbreekt "{PARAM1}"!
+# message_gallery_no_preview                      = Voorbeeld niet beschikbaar
+message_lastchange_0                            = Laatste aanpassing:
+# message_lastimage_0                             = Laatste afbeelding
+# message_nextimage_0                             = Volgende afbeelding
+message_nodatafound_0                           = Geen overeenkomsten gevonden.
+# message_previousimage_0                         = Vorige afbeelding
+message_search_0                                = Zoeken
+message_searchresult_1                          = Zoek resultaat voor "{PARAM1}"
+message_sitemap_0                               = Website overzicht
+message_template_error_1                        = Template besand "{PARAM1}" ontbreekt! Informeer aub de beheerder.
+passwordform_title_0                            = Wachtwoord vereist
+passwordform_pagepasswordplease_0               = Geef het wachtwoord voor deze pagina:
+passwordform_message_passwordwrong_0            = Geen toegang: Verkeerd wachtwoord.
+passwordform_send_0                             = Ga verder
+plugin_error_1                                  = Fout in de plugin {PARAM1}. Neem svp contact op de de ontwikkelaar van deze plugin.
+plugin_error_missing_pluginconf_1               = Fout in de plugin {PARAM1}: plugin.conf ontbreekt. Neem svp contact op de de ontwikkelaar van deze plugin.
+plugin_error_missing_method_2                   = Fout in de plugin {PARAM1}: functie {PARAM2} ontbreekt. Neem svp contact op de de ontwikkelaar van deze plugin.
+thirsty_programmer                              = Hoi, voor mij graag een biertje! ;)
+tooltip_anchor_error_1                          = Paragraaf "{PARAM1}" bestaat niet
+tooltip_anchor_goto_1                           = Ga naar paragraaf "{PARAM1}"
+tooltip_anchor_gototop_0                        = Ga terug naar boven
+tooltip_attribute_error_1                       = Fout in de zinsbouw: onbekende kenmerken "{PARAM1}"
+tooltip_color_error_1                           = Foutieve kleur waarde "{PARAM1}"
+# tooltip_gallery_fullscreen_1                    = Volledig scherm: "{PARAM1}"
+tooltip_image_error_1                           = Bestand of adres niet gevonden: "{PARAM1}"
+tooltip_image_error_2                           = Afbeelding "{PARAM1}" ontbreekt in categorie "{PARAM2}"
+tooltip_include_recursion_error_0               = Pagina kan niet zichzelf bevatten
+tooltip_include_reinclude_error_0               = Ingevoegde webpagina's mogen geen invoeging bevatten
+tooltip_link_category_1                         = Verander naar categorie "{PARAM1}"
+tooltip_link_category_error_1                   = Ontbrekende categorie "{PARAM1}"
+tooltip_link_extern_1                           = Volg de koppeling naar "{PARAM1} (externe website)"
+tooltip_link_extern_error_1                     = Ongeldige koppeling "{PARAM1}"
+tooltip_link_file_1                             = Download bestand "{PARAM1}"
+tooltip_link_file_2                             = Download bestand "{PARAM1}" uit categorie "{PARAM2}"
+tooltip_link_file_error_1                       = Bestand ontbreekt "{PARAM1}"
+tooltip_link_file_error_2                       = Bestand ontbreekt "{PARAM1}" in categorie "{PARAM2}"
+# tooltip_link_gallery_2                          = Bekijk foto album"{PARAM1}" ({PARAM2} afbeeldingen)
+# tooltip_link_gallery_error_1                    = Foto album ontbreekt "{PARAM1}"
+tooltip_link_mail_1                             = E-mail verzonden aan "{PARAM1}"
+tooltip_link_mail_error_1                       = Ongeldig e-mail adres "{PARAM1}"
+tooltip_link_page_1                             = Toon pagina "{PARAM1}"
+tooltip_link_page_2                             = Toon pagina "{PARAM1}" in de categorie "{PARAM2}"
+tooltip_link_page_error_1                       = Ontbrekende webpagina "{PARAM1}"
+tooltip_link_page_error_2                       = Ontbrekende webpagina "{PARAM1}" in de categorie "{PARAM2}"
+tooltip_showsitemap_0                           = Toon het overzicht van de website pagina's

@@ -1,0 +1,47 @@
+<div class="do-error-box">Es kann vorkommen das der adminTab "Plugins" oder auch das komplette Browserfenster leer ist obwohl Plugins enthalten sind. Dann ist ein nicht-kompatibles oder fehlerhaftes Plugin enthalten.<br />
+<br><b><u>Lösungsansatz / Abhilfe:</u></b> (Das Deaktivieren / Abschalten von Plugins ist hierfür nicht ausreichend.)<br>
+<p class="do-example-box">1. Alle Plugins aus dem Ordner "plugins" entfernen, also ausserhalb des Verzeichnisses (lokal) sichern.<br />
+2. Nacheinander die Plugins <b>-einzeln-</b> erneut installieren und testen bis der beschriebene Fehler wieder auftritt.<br />
+3. Dem Pluginautor mitteilen das sein Plugin fehlerhaft ist.</p>
+</div>
+<br />
+<table class="do-nowrap do-icon-legende" width="20%" cellspacing="0" border="0" cellpadding="0">
+<tr>
+<td class="do-title-legende" colspan="2">Icon Legende</td>
+</tr>
+<tr>
+<td>{ICON_edit}</td>
+<td>Öffnet und schliesst die Inhaltsdetails eines Plugins.</td>
+</tr>
+<tr>
+<td>{ICON_info}</td>
+<td>Per Mausklick öffnet sich die Beschreibung des Plugins.</td>
+</tr>
+<tr>
+<td>{ICON_save}</td>
+<td><b>Wichtig:</b> Speichern der aktuellen Plugin-Einstellungen.</td>
+</tr>
+</table>
+<br />
+In dieser Liste werden alle installierten Plugins angezeigt.<br />
+<p class="do-error-box">Nur wenn das Häkchen <b>Aktivieren</b> gesetzt ist, wird das Plugin arbeiten, anderenfalls kommt es zu keiner Ersetzung und der Pluginplatzhalter / Name wird angezeigt.</p>
+<p class="do-error-box"><b>Achtung:</b> Um die Änderungen eins Plugins zu speichern muss auf dieses Icon {ICON_save} geklickt werden. Es erfolgt keine Rückfrage.</p>
+<b>Der Aufbau eines Plugins:</b>
+<p class="do-example-box">Ein Plugin besteht aus einem Ordner der den Namen des Plugins trägt.
+In dem Ordner muss <b>mindestens</b> eine "<b>index.php</b>"-Datei enthalten sein.<br>
+Es können je nach Funktion und Umfang aber auch wesentlich mehr Dateien und auch Unterordner sein.<br>
+{ICON_information} <b>Hinweis:</b> Ein Plugin ist <u>kein</u> PHP-include.</p>
+<br />
+<b>Beispiel</b>
+<div class="do-example-box">
+<pre class="do-pre">
+Pluginname/                 <span class="do-rot">Der Ordnername der so lautet wie der Plugin-Name.</span>
+           index.php        <span class="do-rot">Ohne die <u>obligatorische</u> index.php-Datei ist</span>
+			    <span class="do-rot">das Plugin nicht funktionsfähig.</span>
+</pre>
+</div>
+
+
+
+
+

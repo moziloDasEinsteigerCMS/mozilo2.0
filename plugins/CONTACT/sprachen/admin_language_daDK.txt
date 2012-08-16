@@ -1,0 +1,16 @@
+toolbar_platzhalter_CONTACT         = Kontakt formular
+config_titel_contact                     = Kontakt formular opsætning
+config_text_formularmail                 = Denne e-mail-adresse vil være modtager af beskeder der sendes fra kontaktformularen. <br /> <i>På moziloAdmin kan du se om din server er i stand til at sende e-mails.</ i>
+config_error_formularmail                = Indtast en gyldig e-mail adresse.
+config_text_contactformusespamprotection = Skal kontaktformularen være spam-beskyttet? Med denne mulighed afkrydset, vil dine besøgende skulle løse en simpel opgave for at sende deres besked.
+config_text_contactformwaittime          = Hvor mange sekunder skal en besøgende vente, inden næste besked kan sendes?
+config_text_contact                      = Hvilke felter skal være synlige i kontaktformularen og hvilke af dem skal være obligatorisk? Du kan også ændre felt navnene.
+config_titel_contact_mandatory           = obligatoriske
+config_titel_contact_show                = vis
+config_titel_contact_input               = Vis navn
+config_titel_contact_help                = Beskrivelse
+config_input_contact_name                = Enkel linje tekst indtastning "Navn"
+config_input_contact_mail                = Enkel linje tekst indtastning "E-mail"
+config_input_contact_website             = Enkel linje tekst indtastning "Websted"
+config_input_contact_textarea            = Flere linje tekst indtastning "Besked"
+config_titel_spam_question      = 

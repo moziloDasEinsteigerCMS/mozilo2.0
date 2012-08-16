@@ -1,0 +1,10 @@
+
+config_gallery_picsperrow               = Miniaturer pr række
+config_gallery_picsperrow_regex_error   = 
+config_gallery_target                   = Skal galleriet åbnes i et nyt browser vindue/faneblad eller i det nuværende?
+config_gallery_target_self              = 
+config_gallery_target_blank             = 
+config_gallery_usethumbs                = Opret miniature
+config_gallery_placeholders             = 
+config_gallery_plugin_name              = 
+config_gallery_plugin_desc              = 

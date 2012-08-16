@@ -1,0 +1,152 @@
+
+#rightmenu {
+    font-size:0.9em;
+    margin: 0;
+    padding: 0;
+    background-image: url(../grafiken/shad.jpg);
+    background-repeat: no-repeat;
+    background-position:8px 10px;
+    padding-top:10px;
+    padding-left:10px;
+}
+
+#rightmenu h1 {
+    border-bottom: 1px dotted #993333;
+    font-size: 12px;
+    font-weight: bold;
+    color: #993333;
+}
+
+#rightmenu a {
+    display: block;
+    background: url(../grafiken/arrow.gif) no-repeat center left ;
+    background-position: 4px;
+    padding: 2px 2px 5px 15px;
+    margin: 0 0 1px 0;
+    text-decoration: none;
+}
+
+#rightmenu a.submenu {
+    background: url(../grafiken/arrow.gif) no-repeat;
+    background-position:20px center;
+    padding: 2px 2px 5px 35px;
+    margin: 0 0 1px 0;
+}
+
+#rightmenu a.submenuactive {
+    background: url(../grafiken/arrow.gif) no-repeat;
+    background-position:20px center;
+    padding: 2px 2px 5px 35px;
+    margin: 0 0 1px 0;
+    color: #AE6427;
+}
+
+#rightmenu a:hover {
+    color: #AE6427;
+}
+
+ul.mainmenu {
+    margin: 0px;
+    padding: 0px;
+}
+
+li.mainmenu {
+    display:inline;
+}
+
+ul.detailmenu {
+    margin: 0px;
+    padding: 0px;
+}
+
+li.detailmenu {
+    display:inline;
+}
+
+ul.gallerymenu, ul.gallerynumbermenu {
+    margin: 0px;
+    padding: 0px;
+}
+
+li.gallerymenu, li.gallerynumbermenu {
+    display:inline;
+    padding-right: 7px;
+}
+
+/* -------------------------------------------------------- */
+/* Hauptmenüpunkt */
+/* -------------- */
+a.menu {
+    color: #993333;
+    font-size: 1.2em;
+}
+
+a.menu:hover {
+}
+
+
+/* -------------------------------------------------------- */
+/* Aktiver Hauptmenüpunkt */
+/* ---------------------- */
+a.menuactive {
+    border-bottom: 1px dotted #993333;
+    font-size: 12px;
+    font-weight: bold;
+    color: #993333;
+}
+
+a.menuactive:hover {
+     border-bottom: 1px dotted #993333;
+     font-size: 12px;
+     font-weight: bold;
+     color: #993333;
+}
+
+
+/* -------------------------------------------------------- */
+/* Detailmenüpunkt */
+/* --------------- */
+a.detailmenu {
+}
+
+a.detailmenu:hover {
+}
+
+
+/* -------------------------------------------------------- */
+/* Aktiver Detailmenüpunkt */
+/* ----------------------- */
+a.detailmenuactive {
+}
+
+a.detailmenuactive:hover {
+}
+
+
+/* -------------------------------------------------------- */
+/* Submenüpunkt */
+/* --------------- */
+a.submenu {
+}
+
+a.submenu:hover {
+}
+
+
+/* -------------------------------------------------------- */
+/* Aktiver Submenüpunkt */
+/* ----------------------- */
+a.submenuactive {
+}
+
+a.submenuactive:hover {
+}
+
+a.gallerymenu, a.gallerynumbermenu {
+    text-decoration:none;
+}
+
+a.gallerymenuactive, a.gallerynumbermenuactive { 
+    color: #AE6427;
+    text-decoration:none;
+}

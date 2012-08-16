@@ -1,0 +1,14 @@
+contactform_confirmation_0                      = Die Nachricht wurde versendet.
+contactform_fieldnotset_0                       = Folgendes Pflichtfeld ist nicht ausgefüllt:
+contactform_mail_0                              = Mail
+contactform_mailsubject_1                       = Kontaktformular von {PARAM1}: Neue Nachricht eingegangen
+contactform_mailsubject_confirm_1               = Versandbestätigung: Kontaktformular von {PARAM1}
+contactform_mandatory_fields_0                  = * Pflichtfeld
+contactform_message_0                           = Nachricht
+contactform_name_0                              = Name
+contactform_senttoofast_1                       = Sie müssen mindestens {PARAM1} Sekunden warten, bis Sie Ihre Nachricht absenden dürfen.
+contactform_spamprotection_text_0               = Spamschutz: Bitte geben Sie das Ergebnis der folgenden Aufgabe ein.
+contactform_submit_0                            = Absenden
+contactform_website_0                           = Website
+contactform_wrongresult_0                       = Die Antwort auf die Spamschutz-Frage war leider falsch.
+tooltip_no_mail_error_0                         = Kontaktformular kann nicht genutzt werden - keine Absender-Adresse im Plugin konfiguriert!

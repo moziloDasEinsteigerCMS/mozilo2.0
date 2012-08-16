@@ -1,0 +1,491 @@
+/*
+Theme Name: Flowers
+Version: 0.1
+Theme URI: http://www.bechti.de
+Author: bechti (Simone Bechtold)
+Author URI: http://www.bechti.de
+*/
+
+/*************************** Globale Einstellungen ***************************/
+*{margin  : 0;
+  padding : 0;
+ }
+
+html,
+body {height : 100%;}
+
+body {font-family       : Arial, Helvetica, sans-serif;
+      font-size         : 100.1%;
+      background        : #ffe9a1;
+      color             : #000;
+	  text-align        : left;
+     }
+
+a {font-weight      : bold;
+   color            : #669900;
+   text-decoration  : none;
+   padding          : 0px 2px 0px 2px;
+  }
+
+a:link, a:visited {text-decoration : none;}
+
+a:hover {text-decoration : underline;
+         color           : #ff6a27;}
+
+p {margin-bottom : 10px;
+   padding-top   : 5px;}
+
+em {font-style : normal;
+	font       : inherit;
+   }
+input, textarea {
+	border: 1px dotted #c08400;
+	background-color:#ffffff;
+}
+
+
+
+/********************** alle (Hintergrund)bilder *****************************/
+#header   { background : url(../grafiken/header.jpg) no-repeat top left; }
+#leftcol  { background : url(../grafiken/bg.jpg) no-repeat top left; }
+#mainmenu { background : url(../grafiken/menue.jpg) no-repeat;}
+
+
+/****************************** LAYOUT ***************************************/
+#wrapper {background : #ffe9a1;
+	      border     : 6px double #c08400;
+	      width      : 90%;
+          min-width  : 750px;
+	      max-width  : 1000px;
+	      margin     : 10px auto;
+	   	  text-align : left;
+	      min-height : 100%;
+	     }
+	 
+#header  {padding    : 10px 10px 0 0;
+		  height     : 120px;
+		  text-align : right;
+		 }
+
+#left {width  : 258px;
+	   float  : left;
+	   height : 100%;
+      }
+
+#leftcol {width  : 258px;
+		  height : 257px;
+         }
+
+#post {margin    : 0px 10px 20px 258px;
+       padding   : 20px 10px 20px 10px;
+	   font-size : 0.8em;
+      }
+		 
+#footer {text-align     : center;
+         font-size      : 0.6em;
+         padding-bottom : 5px;
+        }
+
+/*Seitenname*/
+.titel {color         : #ff6a27;
+	    padding-right : 30px;
+        margin-top    : 40px;
+        margin-right  : 5px;
+       }
+
+a#cmsinfolink { } /* "CMS-Version" */
+a#sitemaplink { } /* "Sitemap" */
+a#lastchangelink { } /* "Zuletzt ge�ndert"-Link */
+
+/* -------------------------------------------------------- */
+/* Suchformular */
+/* ------------ */
+div.search {
+	text-align:center;
+}
+form.searchform {
+	display:block;
+}
+input.searchtextfield {
+	width:160px;
+	margin:0px;
+	margin:4px 1px;
+}
+input.searchtextfield:hover {
+}
+input.searchbutton {
+	margin-left:7px;
+	border:none;
+	background-color:transparent;
+}
+fieldset#searchfieldset {
+    border:none;
+    margin:0px;
+    padding:0px;
+}
+
+
+/******************************* MENU ****************************************/
+/* Angaben zum Haupt-Menue oben */
+#mainmenu {text-align    : right;
+           padding-right : 10px;
+		   padding-top   : 6px;
+		   color         : #ffe9a1;
+		   font-weight   : bold;
+		   height        : 25px;
+		 }
+
+div.menu {padding-top : 3px;}
+
+/* Hauptmen�punkt */
+a.menu {padding       : 4px 4px 1px 4px;
+			color       : #74a235;
+	    text-align  : center;
+	    margin      : 0px;
+	    font-weight : bold;
+        background  : #755101;
+        border      : 1px solid #755101;
+       }
+
+a.menu:hover {color           : #ff6a27;
+	          text-decoration : none;
+             }
+
+/* Aktiver Hauptmen�punkt */
+a.menuactive {padding       : 4px 4px 1px 4px;
+	          color         : #003300;
+	          text-align    : left;
+	          margin        : 0px;
+	          font-weight   : bold;
+              background    : #ffe9a1;
+              border-left   : 1px solid #755101;
+              border-right  : 1px solid #755101;
+              border-top    : 1px solid #755101;
+              border-bottom : 1px solid #ffe9a1;
+             }
+
+a.menuactive:hover {text-decoration : none;}
+
+
+
+/* Detailmenu */
+.navcontainer {background  : transparent;
+               font-size   : 0.8em;
+               font-weight : bold;
+               text-align  : left;
+               margin      : 10px 20px 20px 20px;
+		       padding     : 10px;
+               border      : 1px dotted #c08400;
+              }
+.navcontainer div.detailmenu a {display : block;}
+
+a.detailmenu {line-height : 20px;}
+
+a.detailmenu:hover {color           : #ff6a27;
+	                text-decoration : none;
+	               }
+
+a.detailmenuactive {line-height : 20px;color : #000;}
+
+a.detailmenuactive:hover {text-decoration : none;}
+
+ul.mainmenu {
+	margin: 0px;
+	padding: 0px;
+}
+li.mainmenu {
+	display:inline;
+	padding     : 4px 4px 1px 4px;
+}
+li.detailmenu {
+	display:inline;
+}
+
+ul.gallerymenu, ul.gallerynumbermenu {
+	margin: 0px;
+	padding: 0px;
+}
+li.gallerymenu, li.gallerynumbermenu {
+	display:inline;
+	padding-right: 10px;
+}
+
+
+/*---------------------------------------------------------------------------*/
+/******************************* GALLERY LAYOUT ******************************/
+/*---------------------------------------------------------------------------*/
+div.gallerycontent {overflow     : hidden;
+	                text-align   : center;
+                    font-size    : 0.8em;
+                   }
+
+/* Seiteninhalt Gallery*/
+div.gallerypagecontent {text-align : center;
+                        margin     : 5px auto;}
+
+/* Hauptmen� (Galerie) */
+#gallerymenu {padding     : 10px 8px 11px 0px;
+              line-height : 23px;
+	          text-align  : center;
+             }
+
+/* Detailmen� (Galerie) */
+div.gallerynumbermenu {padding     : 6px 8px 0px 8px;
+	                   line-height : 20px;
+	                   text-align  : center;
+                       width       : 100%;
+	                   float       : none;
+	                   margin      : 2px auto;
+                      }
+
+/* Galerie-Tabelle (�bersichtsmodus) */
+table.gallerytable {margin          : 0px auto;
+                    border          : 3px double #663300;
+	                border-collapse : collapse;
+                   }
+
+td.gallerytd {vertical-align : top;
+              border         : 3px double #663300;
+             }
+
+img.thumbnail {margin : 5px;}
+
+
+/*---------------------------------------------------------------------------*/
+/**************************** GALLERY LAYOUT ENDE ****************************/
+/*---------------------------------------------------------------------------*/
+em {
+	font:inherit;
+	font-style:normal;
+}
+/* -------------------------------------------------------- */
+/* Fehler in Tag-Attribut oder -Wert */
+/* --------------------------------- */
+.deadlink {
+	color:#dd3333;
+	font-weight:bold;
+}
+
+
+/* -------------------------------------------------------- */
+/* Suchwort-Hervorhebungen */
+/* ----------------------- */
+.highlight {
+	padding:0px 2px;
+	background-color:#ff6a27;
+	color            : #000000;
+}
+
+
+/* -------------------------------------------------------- */
+/* Kontaktformular */
+/* --------------- */
+form#contact_form {
+}
+table#contact_table {
+}
+table#contact_table td {
+  vertical-align:top;
+  padding:5px;
+}
+span#contact_errormessage{
+  color:#880000;
+  font-weight:bold;
+}
+span#contact_successmessage{
+  color:#008800;
+  font-weight:bold;
+}
+input#contact_name, input#contact_mail, input#contact_website, input#contact_calculation {
+  width:200px;
+}
+textarea#contact_message {
+  width:200px;
+}
+input#contact_submit {
+  width:200px;
+}
+
+
+/**************************** AB HIER: CMS-SYNTAX ****************************/
+
+/* [link|...]
+a.link { } */
+
+/* [mail|...]
+a.mail { } */
+
+/* [seite|...]
+a.page { } */
+
+/* [kategorie|...]
+a.category { }  */
+
+/* [datei|...]
+a.file { }  */
+
+/* [galerie|...]
+a.gallery { }  */
+
+/* [bild|...] */
+img {border : none;}
+
+span.imagesubtitle {
+	margin:0px;
+	text-align:justify;
+	font-size:0.9em;
+	line-height:1.2em;
+	max-width : 140px;
+}
+
+span.contentimage {
+}
+
+/* [bildlinks|...] */
+span.leftcontentimage {
+	margin:15px;
+	max-width:150px;
+	float:left;
+	margin-left:0px;
+	border: 1px dotted #c08400;
+	padding:5px
+}
+
+img.leftcontentimage {margin-bottom:8px;
+	                  border    : none;
+	                  max-width : 140px;
+                     }
+
+/* [bildrechts|...] */
+span.rightcontentimage {
+	margin:15px;
+	max-width:150px;
+	float:right;
+	margin-right:0px;
+	border: 1px dotted #c08400;
+	padding:5px
+}
+
+img.rightcontentimage {margin-bottom:8px;
+	                   border    : none;
+	                   max-width : 140px;
+                      }
+
+/* [fett|...] */
+.bold {font-weight : bold;}
+
+/* [kursiv|...] */
+.italic {font-style : italic;}
+
+/* [fettkursiv|...] */
+.bolditalic {font-weight : bold;
+	           font-style  : italic;
+              }
+
+/* [unter|...] */
+.underlined {text-decoration : underline;}
+
+/* [durch|...] */
+.crossed {text-decoration : line-through;}
+
+/* [ueber1|...] */
+h1 {font-size     : 1.1em;
+	margin-top    : 10px;
+	margin-bottom : 5px;
+   }
+
+/* [ueber2|...] */
+h2 {font-size     : 1.0em;
+	margin-top    : 10px;
+	margin-bottom : 5px;
+   }
+
+/* [ueber3|...] */
+h3 {font-size     : 1.0em;
+	margin-top    : 10px;
+	margin-bottom : 5px;
+   }
+
+/* [liste|...] */
+/* [numliste|...] */
+ul {margin-top      : 0px;
+    margin-bottom   : 0px;
+    padding-left    : 25px;
+    list-style-type : circle;
+   }
+
+ol {margin-top      : 0px;
+    margin-bottom   : 0px;
+    padding-left    : 25px;
+    list-style-type : decimal-leading-zero;
+   }
+
+li {margin-top    : 0px;
+	margin-bottom : 0px;
+   }
+
+/* [----] */
+hr {border : 1px solid #74a235;}
+
+/* [tabelle|...] */
+table.contenttable {margin          : 0px auto;
+	                border          : 4px double #663300;
+               	    border-collapse : collapse;
+	                width           : 100%;
+                   }
+
+th.contenttable {vertical-align   : top;
+	             border           : 1px solid #663300;
+	             background-color : #c08400;
+	             padding          : 2px 5px;
+                }
+td.contenttable1 {vertical-align   : top;
+	              border           : 1px solid #663300;
+	              background-color : #ffffcc;
+	              padding          : 2px 5px;
+                 }
+
+td.contenttable2 {vertical-align   : top;
+	              border           : 1px solid #663300;
+	              background-color : transparent;
+	              padding          : 2px 5px;
+                 }
+
+/* -------------------------------------------------------- */
+/* [zentriert|...] */
+/* --------------- */
+.aligncenter {
+    text-align:center;
+}
+
+/* -------------------------------------------------------- */
+/* [links|...] */
+/* ----------- */
+.alignleft {
+    text-align:left;
+}
+
+/* -------------------------------------------------------- */
+/* [rechts|...] */
+/* ------------ */
+.alignright {
+    text-align:right;
+}
+
+/* -------------------------------------------------------- */
+/* [block|...] */
+/* ----------- */
+.alignjustify {
+    text-align:justify;
+}
+
+/* -------------------------------------------------------- */
+/* {TABLEOFCONTENTS} */
+/* ----------------- */
+div.tableofcontents ul ul {
+    /*padding-left:15px;*/
+}
+div.tableofcontents li.blind {
+    list-style-type:none;
+    list-style-image:none;
+}
