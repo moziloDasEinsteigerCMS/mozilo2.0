@@ -1,55 +1,5 @@
 <?php if(!defined('IS_CMS')) die();
 
-/*
-content steuerung:
-    page, mo suchtfreffer, mo sidemap, nichts (ist gut wenn das vom plugin sowiso ersetzt wird)
-
-menu steuerung:
-    aufklappen wird verhindert und es ist kein punkt activ
-
-deteilmenu steuerung:
-    pages, mo such worte, mo sidemap
-
-
-
-menue steuerung ob es einen activen eintrag geben darf
-
-content ist page oder suchtreffer oder sidemap
-
-detailmenu ist page oder suchwörter oder sidemap
-
-
-
-default:
-    searchfeld ist im template
-    treffer werden als content ausgegeben
-    im menu ist keine seite activ
-    bei DETAILMENUE werden die such begriffe ausgegeben
-
-
-varianten:
-    searchfeld in normaler page:
-        searchfeld ist in page
-        treffer werden in dieser page ausgegeben
-        menue diese page ist activ und ausgeklapt
-
-    searchfeld ist im template:
-        searchfeld ist im template
-        treffer werden in 
-
-action=search
-ACTION_REQUEST == "search"
-
-MENU_ACTIVE
-menuactiv=true/false
-
-$SEARCH_REQUEST
-search=
-
-$HIGHLIGHT_REQUEST
-highlight=
-
-*/
 
 class SearchClass {
     var $chars_to_lower;

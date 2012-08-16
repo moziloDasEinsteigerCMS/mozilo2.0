@@ -19,12 +19,6 @@ class UploadHandler
     function __construct($options=null) {
         global $ALOWED_IMG_ARRAY;
         $this->alowed_img_array = $ALOWED_IMG_ARRAY;
-/*if(isset($_REQUEST['resize'])) {
-$sort_array = var_export($_REQUEST,true);
-file_put_contents(BASE_DIR_ADMIN."jquery/File-Upload/options.txt",$sort_array."\n",FILE_APPEND);
-return;
-}*/
-#getRequestValue(,false)
         $curent_dir = str_replace("%2F","/",getRequestValue('curent_dir'));
         if(!strstr($curent_dir,"%"))
             $curent_dir = str_replace("%2F","/",mo_rawurlencode($curent_dir));
@@ -48,10 +42,6 @@ return;
 #        if(isset($_REQUEST['prev_img']) and $_REQUEST['prev_img'] == "true")
 #            $prev_img = true;
 
-#'QUERY_STRING''REQUEST_URI'
-#echo $_SERVER['REQUEST_URI']."\n";
-#echo $url_dir."<br />\n";
-#echo $dir."<br />\n";
         $this->options = array(
 #            'prev_img' => $prev_img,
             'curent_dir' => $curent_dir,
@@ -95,17 +85,8 @@ return;
 */
             )
         );
-# das ist prv_img true muss noch geändert werden
-// new_width
-// new_height
-// thumbnail_max_width
-// thumbnail_max_height
 
         if(ACTION == "gallery") {
-#$sort_array = var_export($_REQUEST,true);
-#file_put_contents(BASE_DIR_ADMIN."jquery/File-Upload/options.txt",$sort_array."\n",FILE_APPEND);
-#$sort_array = var_export($_FILES,true);
-#file_put_contents(BASE_DIR_ADMIN."jquery/File-Upload/options.txt",$sort_array."\n",FILE_APPEND);
 
             if(ctype_digit(getRequestValue('thumbnail_max_width',false,false)))
                 $thumbnail_max_width = getRequestValue('thumbnail_max_width');
@@ -141,8 +122,6 @@ return;
                         'jpeg_quality' => 95
                     );
             }
-#$sort_array = var_export($this->options,true);
-#file_put_contents(BASE_DIR_ADMIN."jquery/File-Upload/options.txt",$sort_array."\n",FILE_APPEND);
         }
         if ($options) {
             $this->options = array_replace_recursive($this->options, $options);
@@ -162,13 +141,6 @@ return;
     protected function set_file_delete_url($file) {
 #        $file->delete_url = $this->options['script_url']
 #            .'?file='.mo_rawurlencode($file->name);
-#echo $_REQUEST['curent_dir']."<br />\n";
-#echo $_REQUEST['chancefiles']."<br />\n";
-#echo $_REQUEST['action']."<br />\n";
-/*
-                <input type="hidden" name="curent_dir" value="'.$cat.'" />
-                <input type="hidden" name="chancefiles" value="true" />
-                <input type="hidden" name="action" value="'.ACTION.'" />*/
 
         $file->delete_url = $this->options['script_url']
             .'index.php?file='.rawurlencode($file->name)
@@ -183,9 +155,6 @@ return;
 
 
     protected function is_image($file_path) {
-#file_put_contents(BASE_DIR_ADMIN."jquery/File-Upload/options.txt",$file_path."\n",FILE_APPEND);
-#$sort_array = var_export($this->alowed_img_array,true);
-#file_put_contents(BASE_DIR_ADMIN."jquery/File-Upload/options.txt",$sort_array."\n\n",FILE_APPEND);
         if(in_array(strtolower(strrchr($file_path, '.')),$this->alowed_img_array))
             return getimagesize($file_path);
         else
@@ -199,21 +168,14 @@ return;
             $file->name = $file_name;
             $file->size = filesize($file_path);
             $file->url = $this->options['upload_url'].rawurlencode($file->name);
-#file_put_contents(BASE_DIR_ADMIN."jquery/File-Upload/options.txt",$file_path."\n".ACTION."\n\n",FILE_APPEND);
             if(ACTION == "gallery") {
-#file_put_contents(BASE_DIR_ADMIN."jquery/File-Upload/options.txt",ACTION."\n",FILE_APPEND);
-#                global $specialchars;
                 $file->pixel_w = "";
                 $file->pixel_h = "";
                 if(false !== ($getimagesize = $this->is_image($file_path))) {
                     $file->pixel_w = $getimagesize[0];
                     $file->pixel_h = $getimagesize[1];
                 }
-#file_put_contents(BASE_DIR_ADMIN."jquery/File-Upload/options.txt",$file->pixel_w." x ".$file->pixel_h."\n\n",FILE_APPEND);
-#                $file->subtitle = $specialchars->rebuildSpecialChars($this->subtitle->get($file->name), true, true);
-#                $file->subtitle = rawurlencode($specialchars->rebuildSpecialChars($this->subtitle->get($file->name), true, true));
                 $file->subtitle = mo_rawurlencode($this->subtitle->get($file->name));
-#file_put_contents(BASE_DIR_ADMIN."jquery/File-Upload/options.txt",$file->subtitle."\n\n",FILE_APPEND);
             }
             foreach($this->options['image_versions'] as $version => $options) {
                 if (is_file($options['upload_dir'].$file_name)) {
@@ -245,13 +207,6 @@ return;
     }
 
     protected function create_scaled_image($file_name, $options) {
-/*
-$sort_array = var_export($this->options,true);
-file_put_contents(BASE_DIR_ADMIN."jquery/File-Upload/options.txt",$sort_array."\n",FILE_APPEND);*/
-#$sort_array = var_export($options,true);
-#file_put_contents(BASE_DIR_ADMIN."jquery/File-Upload/options.txt",$sort_array."\n",FILE_APPEND);
-#file_put_contents(BASE_DIR_ADMIN."jquery/File-Upload/options.txt",$this->options['upload_dir'].$file_name."\n\n",FILE_APPEND);
-#$this->options['image_versions']
         $file_path = $this->options['upload_dir'].$file_name;
         $new_file_path = $options['upload_dir'].$file_name;
         list($img_width, $img_height) = @getimagesize($file_path);
@@ -270,8 +225,6 @@ file_put_contents(BASE_DIR_ADMIN."jquery/File-Upload/options.txt",$sort_array."\
             $options['max_width'] / $img_width,
             $options['max_height'] / $img_height
         );
-#$sort_array = var_export($options,true);
-#file_put_contents(BASE_DIR_ADMIN."jquery/File-Upload/options.txt",$sort_array."\n",FILE_APPEND);
         if ($scale >= 1) {
             if ($file_path !== $new_file_path) {
                 return copy($file_path, $new_file_path);
@@ -430,8 +383,6 @@ file_put_contents(BASE_DIR_ADMIN."jquery/File-Upload/options.txt",$sort_array."\
     }
     
     protected function handle_file_upload($uploaded_file, $name, $size, $type, $error) {
-#file_put_contents(BASE_DIR_ADMIN."jquery/File-Upload/options.txt",$uploaded_file." ".$name."\n",FILE_APPEND);
-#file_put_contents(BASE_DIR_ADMIN."jquery/File-Upload/options.txt",$this->options['upload_dir']."\n",FILE_APPEND);
 
 if(!is_dir($this->options['upload_dir'])
     and (ACTION == "gallery" or ACTION == "files")
@@ -444,13 +395,6 @@ if(!is_dir($this->options['upload_dir'])
         $file->size = intval($size);
         $file->type = $type;
         $error = $this->has_error($uploaded_file, $file, $error);
-/*
-$sort_array = var_export($this->options,true);
-file_put_contents(BASE_DIR_ADMIN."jquery/File-Upload/options.txt",$sort_array."\n",FILE_APPEND);
-$sort_array = var_export($file,true);
-file_put_contents(BASE_DIR_ADMIN."jquery/File-Upload/options.txt",$sort_array."\n",FILE_APPEND);
-file_put_contents(BASE_DIR_ADMIN."jquery/File-Upload/options.txt",$uploaded_file."\n\n",FILE_APPEND);
-*/
 
         if (!$error && $file->name) {
             $file_path = $this->options['upload_dir'].$file->name;
@@ -500,7 +444,6 @@ file_put_contents(BASE_DIR_ADMIN."jquery/File-Upload/options.txt",$uploaded_file
                         $file->pixel_w = $getimagesize[0];
                         $file->pixel_h = $getimagesize[1];
                     }
-#file_put_contents(BASE_DIR_ADMIN."jquery/File-Upload/options.txt","set=".$file->name."\n",FILE_APPEND);
 #                    $this->subtitle->set($file->name,"");
                     $file->subtitle = "";
                 }
@@ -567,7 +510,6 @@ file_put_contents(BASE_DIR_ADMIN."jquery/File-Upload/options.txt",$uploaded_file
         } else {
             $info = $this->get_file_objects();
         }
-#file_put_contents(BASE_DIR_ADMIN."jquery/File-Upload/options.txt",$this->my_json_encode($info)."\n",FILE_APPEND);
 #        header('Content-type: application/json');
 #        echo json_encode($info);
 header('content-type: text/html');
@@ -576,7 +518,6 @@ echo '<div id="json-data">'.$this->my_json_encode($info).'</div>';
     }
     
     public function post() {
-#file_put_contents(BASE_DIR_ADMIN."jquery/File-Upload/options.txt","post\n",FILE_APPEND);
         if (getRequestValue('_method') === 'DELETE') {
             return $this->delete();
         }
@@ -631,7 +572,6 @@ $json = $this->my_json_encode($info);
             header('Content-type: text/plain');
         }
 #        echo $json;
-#file_put_contents(BASE_DIR_ADMIN."jquery/File-Upload/options.txt",$json."\n",FILE_APPEND);
 header('content-type: text/html');
 echo '<div id="json-data">'.$json.'</div>';
     }
@@ -641,12 +581,8 @@ echo '<div id="json-data">'.$json.'</div>';
             basename(getRequestValue('file',false,false)) : null;
         $file_path = $this->options['upload_dir'].$file_name;
         $success = is_file($file_path) && $file_name[0] !== '.' && unlink($file_path);
-/**/
-#file_put_contents(BASE_DIR_ADMIN."jquery/File-Upload/options.txt",$file_name."\n",FILE_APPEND);
-
         if ($success) {
             if(ACTION == "gallery") {
-#file_put_contents(BASE_DIR_ADMIN."jquery/File-Upload/options.txt","sub=".$file_name."\n\n",FILE_APPEND);
                 $this->subtitle->delete($file_name);
             }
             foreach($this->options['image_versions'] as $version => $options) {
@@ -660,7 +596,6 @@ echo '<div id="json-data">'.$json.'</div>';
     
     public function resize_img() {
         $file_name = $this->trim_file_name(getRequestValue('file',false,false), null);
-#file_put_contents(BASE_DIR_ADMIN."jquery/File-Upload/options.txt","sub=".$file_name."\n\n",FILE_APPEND);
         foreach($this->options['image_versions'] as $version => $options) {
             $resize = $this->create_scaled_image($file_name, $options);
         }
@@ -692,28 +627,19 @@ switch ($_SERVER['REQUEST_METHOD']) {
         break;
     case 'POST':
         if (getRequestValue('resize',false,false) === 'true') {
-#sleep(10);
             $upload_handler->resize_img();
         } elseif (getRequestValue('_method',false,false) === 'DELETE') {
             $upload_handler->delete();
         } else {
-#sleep(0);
             $upload_handler->post();
         }
         break;
     case 'DELETE':
-#sleep(10);
         $upload_handler->delete();
         break;
     default:
         header('HTTP/1.1 405 Method Not Allowed');
 
 }
-#echo $_SERVER['REQUEST_METHOD']."<br />\n";
-
-
-
-
-
 
 ?>

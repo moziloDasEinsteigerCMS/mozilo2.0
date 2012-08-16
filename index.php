@@ -3,11 +3,6 @@ session_start();
 define("IS_CMS",true);
 define("IS_ADMIN",false);
 $start_time = get_executTime(false);
-/* 
-echo "<pre style=\"position:fixed;background-color:#000;color:#0f0;padding:5px;font-family:monospace;border:2px solid #777;\">";
-print_r($_REQUEST);
-echo "</pre>"; 
-*/
 
 // Initial: Fehlerausgabe unterdruecken, um Path-Disclosure-Attacken ins Leere laufen zu lassen
 @ini_set("display_errors", 1);
@@ -100,49 +95,7 @@ if(getRequestValue("galtemplate", "get")) {
 }
 
 $template = getTemplate($TEMPLATE_FILE);
-/*
-$plugin_such_ohne = "/\{([^\|\{]+)\}/U";
-$plugin_such = "/\{(.+)\|([^\{]*)\}/U";
 
-$find_first_plugins_content = substr($template,0,stripos($template,"<head>"));
-
-preg_match_all($plugin_such_ohne, $find_first_plugins_content, $plugins_first);
-if(count($plugins_first[0]) > 0)
-    $plugins_first[2] = array_fill(0, count($plugins_first[0]), false);
-else
-    $plugins_first[2] = array();
-preg_match_all($plugin_such, $find_first_plugins_content, $plugins_first1);
-$result[0] = array_merge($plugins_first1[0], $plugins_first[0]);
-$result[1] = array_merge($plugins_first1[1], $plugins_first[1]);
-$result[2] = array_merge($plugins_first1[2], $plugins_first[2]);
-foreach($result[0] as $pos => $string) {
-    $replace = $syntax->plugin_replace($result[1][$pos],$result[2][$pos]);
-    $template = str_replace($string,$replace,$template);
-}
-*/
-
-
-# bei false wird CAT_REQUEST, PAGE_REQUEST auf NULL gesetzt
-# dardurch gibts kein activen punkt im menu
-#if(getRequestValue('mactiv') and getRequestValue('mactiv') == "false")
-#    define("MENU_ACTIVE",false);
-
-# was soll als content gezeigt werden suchergebnis, sidemap, page, null(ist für plugins intresant)
-#if(in_array(getRequestValue('mpage'),array("sitemap","search","null")))
-#    define("ACTION_CONTENT",getRequestValue('mpage'));
-
-# default verhalten setzen
-#if(ACTION_REQUEST !== NULL) {
-#    if(!defined("MENU_ACTIVE"))
-#        define("MENU_ACTIVE",false);
-#    if(!defined("ACTION_CONTENT"))
-#        define("ACTION_CONTENT",ACTION_REQUEST);
-#} else {
-#    if(!defined("MENU_ACTIVE"))
-#        define("MENU_ACTIVE",true);
-#    if(!defined("ACTION_CONTENT"))
-#        define("ACTION_CONTENT","page");
-#}
 // Request-Parameter einlesen und dabei absichern
 $SEARCH_REQUEST = stripcslashes(getRequestValue('search'));
 $HIGHLIGHT_REQUEST = getRequestValue('highlight');
@@ -180,10 +133,7 @@ foreach($plugin_first as $plugin) {
         if(class_exists($plugin)) {
             $tmp_plugin = new $plugin();
             $tmp_plugin->getPluginContent("plugin_first");
-#            $replace = $tmp_plugin->getPluginContent("plugin_first");
         }
-#        if($replace !== false)
-#            $template = str_replace("{".$plugin."}",$replace,$template);
         unset($tmp_plugin);
     }
 }
@@ -201,16 +151,6 @@ if(!defined("ACTION_REQUEST")) {
 # default verhalten setzen
 if(!defined("ACTION_CONTENT"))
     define("ACTION_CONTENT",ACTION_REQUEST);
-/*if(ACTION_REQUEST !== false) {
-} else {
-    if(!defined("ACTION_CONTENT"))
-        define("ACTION_CONTENT",false);
-}
-*/
-
-/*echo "<pre>";
-print_r($CatPage->CatPageArray);
-echo "</pre><br>\n";*/
 
 // Zuerst: Uebergebene Parameter ueberpruefen
 set_CatPageRequest();

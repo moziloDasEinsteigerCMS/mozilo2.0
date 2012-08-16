@@ -221,15 +221,12 @@ class CatPageClass {
                 $requesturl = $add."search=".$specialchars->replaceSpecialChars($SEARCH_REQUEST, false);
             $lang = $language->getLanguageValue("message_searchresult_1", $specialchars->rebuildSpecialChars($SEARCH_REQUEST,false,true));
         }
-#$this->ActionLinksearch sitemap
         if(DRAFT) {
             if($requesturl === NULL)
                 $requesturl = $add."draft=true";
             else
                 $requesturl .= "&amp;draft=true";
         }
-/**/#$CatPage->get_Href(false,false,"action=search&search=".$specialchars->replaceSpecialChars($SEARCH_REQUEST, false))
-#    function create_LinkTag($url,$urltext,$css = false,$titel = false,$target = false,$id = false) {
         return $this->create_LinkTag($url.$requesturl
                 ,$lang
                 ,$cssprefix

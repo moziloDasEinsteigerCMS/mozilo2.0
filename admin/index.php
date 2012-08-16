@@ -20,65 +20,6 @@ else
     define("USE_CHMOD", true);
 
 define("DRAFT", true);
-
-#echo PHP_OS;
-#echo PHP_EOL;
-#echo DIRECTORY_SEPARATOR;
-#!!!!!!! min PHP 5.3.0
-#echo rawurldecode("%5Bueber1%7CDas%20ist%20eine%20Inhaltsseite%5D%0A%5E%7Bws_slideshow%5E%7D%20will%20nicht%20so%20recht%20%20%3Atraurig%3A%20%0AError%20while%20parsing%20the%20XML%20file%20Check%20out%20your%20XML%20structure%20for%20defining%20albums%20and%20slides.%0A%7Bws_slideshow%7C%7D%0A%20%3Alol%3A%20%20wer%20sagst%20denn%3A%20geht%20doch%20%20%3Airre%3A%0A%0A%0A%0A%7BSlimBox2%7CmoziloCMS%7D");
-/*
-[ueber1|Das ist eine Inhaltsseite] ^{ws_slideshow^} will nicht so recht :traurig: Error while parsing the XML file Check out your XML structure for defining albums and slides. {ws_slideshow|} :lol: wer sagst denn: geht doch :irre: {SlimBox2|moziloCMS}
-echo "<pre>";
-print_r($_POST);
-echo "</pre><br />\n";
-
-PHP_OS
-
-PHP_EOL
-
-
-echo serialize(array("3 + 7" => 10,
-"5 - 3" => 2,
-"1 plus 1" => 2,
-"17 minus 7" => 10,
-"4 * 2" => 8,
-"3x3" => 9,
-"2 durch 2" => 1,
-"Elvis Presleys Vorname" => "Elvis",
-"Angela Merkels Nachname" => "Merkel",
-"Bronze, Silber, ...?" => "Gold"));
-echo serialize(array("active" => true,
-"contactformcalcs" => "3 + 7 = 10<br />5 - 3 = 2<br />1 plus 1 = 2<br />17 minus 7 = 10<br />4 * 2 = 8<br />3x3 = 9<br />2 durch 2 = 1<br />Elvis Presleys Vorname = Elvis<br />Angela Merkels Nachname = Merkel<br />Bronze, Silber, ...? = Gold",
-"contactformusespamprotection" => true,
-"contactformwaittime" => 15,
-"formularmail" => false,
-"titel_mail_mandatory" => true,
-"titel_mail_show" => true,
-"titel_message_mandatory" => true,
-"titel_message_show" => true,
-"titel_name" => false,
-"titel_name_mandatory" => true,
-"titel_name_show" => true,
-"titel_website_mandatory" => false,
-"titel_website_show" => true));*/
-// echo cleanUploadFile("teßstäjj.txt")."<br />\n";
-// echo cleanUploadFile("t!e stäjj.txt")."<br />\n";
-// echo cleanUploadFile("t!e-st0 9äjj.txt")."<br />\n";
-//
-/*
-echo '<pre>';
-print_r($_SESSION);
-echo $_SESSION['PHPSESSID']."\n";
-echo SID."\n";
-echo session_id()."\n";
-#print_r($_REQUEST);
-#print_r($_SERVER);
-#print_r($_ENV);
-echo '</pre>';
-*/
-
-#echo session_id()."<br />\n";
-#echo session_name()."<br />\n";
 // Session Fixation durch Vergabe einer neuen Session-ID beim ersten Login verhindern
 if(!isset($_SESSION['MOZILOID'])) {
     session_regenerate_id(true);
@@ -90,8 +31,6 @@ if(!isset($_SESSION['PHPSESSID'])) {
     $_SESSION['PHPSESSID'] = true;
 #    $_SESSION['PHPSESSID'] = "on";
 }*/
-
-#echo session_id()."<br />\n";
 
 # -1 für debug
 error_reporting(-1);
@@ -155,16 +94,7 @@ $_GET = cleanREQUEST($_GET);
 $_REQUEST = cleanREQUEST($_REQUEST);
 $_POST = cleanREQUEST($_POST);
 if(isset($_FILE)) $_FILE = cleanREQUEST($_FILE);
-/*
-$_POST['ttt'] = array("sub1" => array("sub2" => "ergebnis sub2"));
-echo '<pre>';
-print_r($_POST['ttt']);
-echo "</pre><br />\n";
-echo getRequestValue(array('ttt','sub1','sub2'));
-*/
-#!!!!!!!!! wir solten auch über eine getPara function nachdenken
-#          der man parameter mit gibt welcher request und was für daten man erwartet bool int string tags
-#------------------------------------
+
 $message = NULL;
 
 define("ICON_SIZE","24x24"); # 16x16 22x22 24x24 32x32 48x48
@@ -260,10 +190,6 @@ if(LOGIN) { #-------------------------------
     $users_array = array();
     $tmp_action = getRequestValue('action');
     if(defined('MULTI_USER') and MULTI_USER) {
-#$sort_array = var_export($_POST,true);
-#file_put_contents(BASE_DIR_ADMIN."options.txt","POST=".$sort_array."\n",FILE_APPEND);
-#$sort_array = var_export($_GET,true);
-#file_put_contents(BASE_DIR_ADMIN."options.txt","GET=".$sort_array."\n",FILE_APPEND);
         $USERS = new Properties(BASE_DIR."tmp/users.conf.php");
         $id = md5(session_id());
         $users_array = $USERS->toArray();
@@ -280,11 +206,6 @@ if(LOGIN) { #-------------------------------
                 $hidden_action = substr($hidden_action,1);
             exit($hidden_action);
         }
-#$sort_array = var_export($users_array,true);
-#file_put_contents(BASE_DIR_ADMIN."options.txt","users_array=".$sort_array."\n",FILE_APPEND);
-#$sort_array = var_export($_GET,true);
-#file_put_contents(BASE_DIR_ADMIN."options.txt","tmp_action=".$tmp_action."\n",FILE_APPEND);
-#file_put_contents(BASE_DIR_ADMIN."options.txt","multi=".getRequestValue('multi','get')."\n",FILE_APPEND);
 
         # es gab ein redirect
         if(false !== ($tmp = strstr($USERS->get($id),"#"))) {
@@ -437,15 +358,6 @@ function buildCheckBox($name, $checked,$label = false) {
     return $checkbox.$label_tag;
 }
 
-/*
-$daten_array["titel 1"][] = true;
-$daten_array["titel 1"][] = array("l","r");
-$daten_array["titel 1"][] = array("l","r");
-$daten_array["titel 2"][] = true;
-$daten_array["titel 2"][] = array("l","r");
-$daten_array["titel 2"][] = array("l","r");*/
-
-
 function contend_template($daten_array,$error = false,$only_content = false) {
     $template = NULL;
     foreach($daten_array as $titel => $content) {
@@ -465,12 +377,9 @@ function contend_template($daten_array,$error = false,$only_content = false) {
             } else
                 $template_content .= '<li class="mo-in-ul-li mo-inline ui-widget-content ui-corner-all ui-helper-clearfix">';
             if(is_array($value)) {
-#echo $key."=key<br />\n";
                 $template_content .= '<div class="mo-in-li-l">'.$value[0].'</div>'
                         .'<div class="mo-in-li-r">'.$value[1].'</div>';
             } else  {
-#echo $key."=key<br />\n";
-#                $template_content .= '<div class="mo-div">'.$value.'</div>';
                 $template_content .= '<div>'.$value.'</div>';
             }
             $template_content .= '</li>';
@@ -502,11 +411,6 @@ function get_template_truss($content,$titel,$toggle = false) {
                     .'</table>'
                     .'</div>'
                     .'<ul class="mo-in-ul-ul js-toggle-content">';
-#    $(".js-tools-icon-show-hide").animate({"opacity": 0}, 0 );
-
-//    $(".js-toggle").animate({"opacity": 0}, 0 );
-#    $(".js-tools-show-hide").live({
-
         } else
             $template = '<ul class="mo-ul">'
                     .'<li class="mo-li ui-widget-content ui-corner-all">'

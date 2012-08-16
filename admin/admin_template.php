@@ -155,7 +155,6 @@ if(defined('PLUGINADMIN'))
 
 
     if((ACTION == "config" and (ROOT or in_array("editusersyntax",$ADMIN_CONF->get("config")))) or ACTION == "catpage" or ACTION == "template") {
-#echo "drin";
         $html .= '<script type="text/javascript" src="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/dialog-editor-ace.js"></script>';
         require_once(BASE_DIR_ADMIN."ace_editor/mozilo_edit_ace.php");
         $html .= $editor_area_html;
@@ -167,15 +166,9 @@ if(defined('PLUGINADMIN'))
 $html .= '<!-- Bootstrap CSS Toolkit styles -->
 <link type="text/css" rel="stylesheet" href="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/File-Upload/bootstrap.cms.css" />';
 
-#<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
 $html .= '<script type="text/javascript" src="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/File-Upload/load-image.min.js"></script>';
-#<!-- The Canvas to Blob plugin is included for image resizing functionality -->
-#$html .= '<script src="jquery/File-Upload/canvas-to-blob.min.js"></script>';
-
 
         $html .= '<script type="text/javascript" src="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/dialog_prev.js"></script>';
-
-#$html .= '<script src="jquery/File-Upload/tmpl.min.js"></script>';
 
         $html .= '<script type="text/javascript" src="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/File-Upload/jquery.iframe-transport.js"></script>';
 
@@ -192,14 +185,6 @@ else
 $html .= '<script type="text/javascript" src="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/File-Upload/fileupload.template_gal.js"></script>';
 $html .= '<script type="text/javascript" src="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/File-Upload/fileupload.js"></script>';
 
-#        if(file_exists(BASE_DIR_ADMIN."jquery/File-Upload/".ACTION.'-ui.js'))
-#            $html .= '<script type="text/javascript" src="jquery/File-Upload/'.ACTION.'-ui.js"></script>';
-#        if(file_exists(BASE_DIR_ADMIN."jquery/File-Upload/".ACTION.'_func.js'))
-#            $html .= '<script type="text/javascript" src="jquery/File-Upload/'.ACTION.'_func.js"></script>';
-#        if(file_exists(BASE_DIR_ADMIN."jquery/File-Upload/".ACTION.'.js'))
-#            $html .= '<script type="text/javascript" src="jquery/File-Upload/'.ACTION.'.js"></script>';
-
-#$html .= '<script type="text/javascript" src="jquery/File-Upload/main.js"></script>';
     }
     $html .= "</head>";
     return $html;
@@ -298,12 +283,7 @@ function get_Message($message) {
             }
         }
     }
-#$html .= '<span id="lastbackup">'.returnMessage(true,getLanguageValue("admin_messages_backup")).'</span><span style="display:none;" id="lastbackup_yes">lastbackup_yes=true</span>';
-#$html = '<span class="test" title="test Title">Test Meldung</span>';
-#$html = ajax_return("error",false,"test meldung",true,"js-dialog-reload");
-# ajax_return($success,$exit,$content = "",$title = false,$buttons = false)
-#$html = ajax_return("success",false,"test meldung1",true,"js-dialog-reload");
-#$html .= ajax_return("success",false,"test meldung2","title",true);
+
     if(strlen($html) > 1)
         return '<div id="dialog-auto" style="display:none;">'.$html.'</div>';
     else

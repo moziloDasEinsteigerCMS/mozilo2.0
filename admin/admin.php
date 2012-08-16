@@ -65,11 +65,6 @@ function admin() {
 $show = $ADMIN_CONF->get("admin");
 if(!is_array($show))
     $show = array();
-/*
-echo "<pre>";
-print_r($show);
-echo "</pre>";
-*/
 
     $titel = "admin_button";
 
@@ -127,7 +122,6 @@ echo "</pre>";
     }
     // Zeile "BACKUP-ERINNERUNG"
     if(ROOT or in_array("backupmsgintervall",$show)) {
-#echo in_array("backupmsgintervall",$show)."=\n<br>";
         $template[$titel][] = array(getLanguageValue("admin_text_backup"),'<input type="text" class="mo-input-digit js-in-digit" name="backupmsgintervall" value="'.$ADMIN_CONF->get("backupmsgintervall").'" />');
     }
  
@@ -203,11 +197,6 @@ echo "</pre>";
         .'<tr><td>&nbsp;</td><td>'.getLanguageValue("userpw_titel_newpwrepeat").'</td><td>'.'<input type="password" class="js-in-pwuser mo-input-text" value="" name="newuserpwrepeat" />'.'</td></tr>'
         ."</table>";
     }
-/*
-echo "<pre>";
-print_r($template[$titel]);
-echo "</pre>";
-*/
     $pagecontent .= contend_template($template,$error);
 
     return $pagecontent;

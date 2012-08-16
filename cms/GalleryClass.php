@@ -589,8 +589,6 @@ $description = $specialchars->rebuildSpecialChars($description,false,true);
                 if($index !== false) {
                     $inhalt = '<a href="'.$this->get_Href(false,$index).'" target="_blank" title="'.$lang->getLanguageValue("tooltip_gallery_fullscreen_1", $this->get_HtmlName($index)).'">'.$this->create_ImgTag($lang->getLanguageValue("alttext_galleryimage_1",$this->get_HtmlName($index)),"thumbnail",true,$index)."</a>".$description;
                 }
-# $this->get_HtmlName($index)
-#echo $lang->getLanguageValue("alttext_galleryimage_1",$this->get_HtmlName($index))."<br>\n";
                 $thumbs .= '<td class="'.$css.'td" style="width:'.$td_width.'%;">'.$inhalt.'</td>';
             }
             $thumbs .= "</tr>";

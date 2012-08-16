@@ -246,20 +246,6 @@ function updateFileNameInAll($old_name,$new_name) {
         $new_name = FILE_START.rawurldecode($new_name).FILE_END;
     } else
         return;
-#$sort_array = var_export($old_name,true);
-#$sort_array .= var_export($new_name,true);
-#file_put_contents(BASE_DIR_ADMIN."options.txt",$sort_array."\n",FILE_APPEND);
-#file_put_contents(BASE_DIR_ADMIN."options.txt",$cat."/".$page."\n",FILE_APPEND);
-/*if($plugin_dir == "SidebarPage") {
-    $sort_array = var_export($old_name_p,true);
-    file_put_contents(BASE_DIR_ADMIN."options.txt",$sort_array."\n",FILE_APPEND);
-}*/
-/*if($plugin_dir == "SidebarPage")
-    file_put_contents(BASE_DIR_ADMIN."options.txt","new=".$new_name_p[$pos]."\n",FILE_APPEND);*/
-/*if($plugin_dir == "SidebarPage")
-    file_put_contents(BASE_DIR_ADMIN."options.txt","if=".$test." == ".$value."\n",FILE_APPEND);*/
-/*if($plugin_dir == "SidebarPage")
-    file_put_contents(BASE_DIR_ADMIN."options.txt","set=".$value."\n",FILE_APPEND);*/
 
     # Inhaltseiten
     foreach(getDirAsArray(CONTENT_DIR_REL,"dir") as $cat) {

@@ -155,26 +155,6 @@ class Syntax {
 
         # alle <script und <style sachen raus wegen den {} und [] die da meistens drin sind
         $this->find_script_style();
-/*
-        # Plugins suchen die als estes ausgeführt werden sollen
-        $find_first_plugins_content = substr($this->content,0,stripos($this->content,"<head>"));
-#echo $find_first_plugins_content."#######";
-        preg_match_all($this->PLUGIN_SEARCH, $find_first_plugins_content, $plugins_first);
-        # hier stimt der array aufbau nicht deshalb passen wir in an
-        $plugins_first[3] = $plugins_first[2];
-        $matches = $this->clean_syntax_plugins_array($plugins_first);
-        preg_match_all($this->PLUGIN_SEARCH_OHNE, $find_first_plugins_content, $plugins_first);
-        $matches = $this->clean_syntax_plugins_array($plugins_first,$matches,false);
-        $last_clean = false;
-        if(count($matches[0]) > 0)
-            $last_clean = true;
-*/
-
-/*
-echo "<pre>";
-print_r($matches);
-#print_r($matches_2);
-echo "</pre>";*/
 
         preg_match_all($this->PLACE_SEARCH, $this->content, $place);
         $matches = $this->clean_syntax_plugins_array($place);
@@ -193,12 +173,7 @@ echo "</pre>";*/
         # Achtung hier false mit geben damit die Plugin $value ein false hat wenn im
         # Pluginplatzhalter kein | ist
         $matches = $this->clean_syntax_plugins_array($plugins_ohne,$matches,false);
-/*
-        # wenn im content vor dem <head> plugins gefunden worden dann sind sie im $matches dopelt
-        # deshalb noch mal clean um die raus zu nehmen
-        if($last_clean)
-            $matches = $this->clean_syntax_plugins_array($matches);
-*/
+
         # wenn was gefunden wurde
         if(isset($matches[0]) and count($matches[0]) > 0) {
             return $matches;
@@ -235,17 +210,10 @@ echo "</pre>";*/
         $not_exit = 0;
         $not_exit_max = 20;
 
-/*echo "<pre>";
-print_r($matches);
-echo "</pre>";*/
         while(isset($matches[0]) and count($matches[0]) > 0) {
             if($not_exit >= $not_exit_max)
                 break;
             foreach($matches[1] as $pos => $function) {
-#echo $function."<br />\n";
-/*if(strstr($matches[0][$pos],"my_SEARCH")) {
-echo "<br />\n----------content1 = ".$this->content."-------------<br />\n";
-}*/
                 # das gefundene element gibts nicht mehr also nächstes
                 if(!strstr($this->content,$matches[0][$pos])) {
                     continue;
@@ -279,14 +247,7 @@ echo "<br />\n----------content1 = ".$this->content."-------------<br />\n";
                 $replace = NULL;
                 # Plugin
                 if(in_array($function,$this->activ_plugins) or in_array($function,$this->deactiv_plugins)) {
-/*if(strstr($matches[0][$pos],"my_SEARCH")) {
-echo "<br />\n----------plug1 = ".$this->content."-------------<br />\n";
-}*/
                     $replace = $this->plugin_replace($function,$matches[3][$pos]);
-/*if(strstr($matches[0][$pos],"my_SEARCH")) {
-echo "<br />\n----------plug2 = ".$replace."-------------<br />\n";
-echo "<br />\n----------plug3 = ".$this->content."-------------<br />\n";
-}*/
                 # User Syntax
                 } elseif(USE_CMS_SYNTAX and isset($this->syntax_user[$function])) {
                     $replace = $this->syntax_user($matches[2][$pos],$matches[3][$pos],$function);
@@ -304,14 +265,7 @@ echo "<br />\n----------plug3 = ".$this->content."-------------<br />\n";
                     $match = str_replace($special_search,$special_replace,$matches[0][$pos]);
                     $replace = '<span style="color:red;font-weight:bold;text-decoration:line-through;">'.$match.'</span>';
                 }
-/*if(strstr($matches[0][$pos],"my_SEARCH")) {
-echo "<br />\n----------content2 = ".$this->content."-------------<br />\n";
-}*/
                 $this->content = str_replace($matches[0][$pos],$replace,$this->content);
-/*if(strstr($matches[0][$pos],"my_SEARCH")) {
-echo "<br />\n----------".$matches[0][$pos]." = ".$replace."-------------<br />\n";
-echo "<br />\n----------content3 = ".$this->content."-------------<br />\n";
-}*/
                 # wenn ein Plugin an sich was übergeben hat
                 $this->replacePluginSelfPlaceholderData();
             }
@@ -361,8 +315,6 @@ echo "<br />\n----------content3 = ".$this->content."-------------<br />\n";
         if(strstr($this->content,'<!-- WEBSITE_TITLE REPLACE-->')) {
             $this->content = str_replace('<!-- WEBSITE_TITLE REPLACE-->',$this->getWebsiteTitle(),$this->content);
         }
-/*if(strstr($this->content,"KKKKKKKK"))
-echo "<br />\n----------content = ".$this->content."-------------<br />\n";*/
         return $this->content;
     }
 
@@ -814,11 +766,6 @@ echo "<br />\n----------content = ".$this->content."-------------<br />\n";*/
         // Tabellenzeilen
 
         preg_match_all("/(&lt;|&lt;&lt;)(.*)(&gt;|&gt;&gt;)/Umsie", $value, $tablelines);
-/*
-echo $value."<br>\n###################################<br>\n";
-echo "<pre>";
-print_r($tablelines);
-echo "</pre><br>\n";*/
         foreach ($tablelines[0] as $j => $tablematch) {
             // Kopfzeilen
             if (preg_match("/&lt;&lt;([^&gt;]*)/Umsi", $tablematch)) {
@@ -958,7 +905,6 @@ echo "</pre><br>\n";*/
     }
 
     function placeholder_replace($function,$placeholder) {
-#echo $function."<br>\n";
         switch ($placeholder) {
             case '{CSS_FILE}':
                 global $CSS_FILE;
@@ -1001,7 +947,6 @@ echo "</pre><br>\n";*/
                     $replace = $this->getDetailMenu(CAT_REQUEST);
                 break;
             case '{SEARCH}':
-#echo "drin<br />\n";
                 require_once(BASE_DIR_CMS."SearchClass.php");
                 $search = new SearchClass();
                 $replace = $search->getSearchForm();

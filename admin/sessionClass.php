@@ -1,11 +1,5 @@
 <?php if(!defined('IS_ADMIN') or !IS_ADMIN) die();
 $TMP_DIR = "tmp/";
-# fals da bei winsystemen \\ drin sind in \ wandeln
-#$BASE_DIR = str_replace("\\\\", "\\",__FILE__);
-# zum schluss noch den teil denn wir nicht brauchen abschneiden
-#$BASE_DIR = substr($BASE_DIR,0,-(strlen(ADMIN_DIR_NAME."/sessionClass.php")));
-#$BASE_DIR .= "tmp/";
-#echo ini_get('session.save_path')."<br />\n";
 if(!is_dir(BASE_DIR.$TMP_DIR)) {
     @mkdir(BASE_DIR.$TMP_DIR);
     @chmod(BASE_DIR.$TMP_DIR,0700);
@@ -45,13 +39,6 @@ class SessionSaveHandler {
     }
 
     public function open($savePath, $sessionName) {
-/*
-echo $_SERVER['SERVER_NAME']."<br />\n";
-echo "open<br />\n";
-echo "<pre>";
-print_r(session_get_cookie_params());
-echo "</pre><br />\n";
-*/
         $this->savePath = $savePath;
         $this->sessionName = $sessionName;
         if(!is_file($this->savePath."users.conf.php")) {

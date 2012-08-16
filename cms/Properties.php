@@ -8,7 +8,6 @@ class Properties {
     private $isConf;
 
     function Properties($file = null) {
-#echo $file."<br>\n";
         $this->isConf = true;
         if(substr($file,-9) == ".conf.php")
             $this->isConf = true;
@@ -113,7 +112,6 @@ class Properties {
             $tmp = $this->properties;
             if(($key != "")) {
                 $this->properties[$key] = $value;
-#echo "save conf".$key." = ".$this->properties[$key]."<br>\n";
                 if(true === ($this->saveProperties()))
                 return true;
             }
@@ -175,12 +173,8 @@ class Properties {
             if(count($array) == 3) {
                 $key = trim($array[1]);
                 $syntax[$key] = $array[2];
-/*echo "<pre>";
-print_r($array);
-echo "</pre><br>\n";*/
             } else {
                 $syntax[$key] .= "\n".$value;#"<br />".
-/*echo $value."<br>\n";*/
             }
         }
 #        if(isset($syntax["d*u*m*y"]))
@@ -188,12 +182,6 @@ echo "</pre><br>\n";*/
         $this->properties = array();
         $this->setFromArray($syntax);
         return $syntax;
-/*
-echo "############";
-echo "<pre>";
-echo $tmp;
-print_r($syntax);
-echo "</pre><br>\n";*/
     }
 }
 
