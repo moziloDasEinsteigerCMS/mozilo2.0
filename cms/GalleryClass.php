@@ -587,7 +587,7 @@ $description = $specialchars->rebuildSpecialChars($description,false,true);
                     $description = "<br />".$description;
                 $inhalt = "&nbsp;";
                 if($index !== false) {
-                    $inhalt = '<a href="'.$this->get_Href(false,$index).'" target="_blank" title="'.$lang->getLanguageValue("tooltip_gallery_fullscreen_1", $this->get_HtmlName($index)).'">'.$this->create_ImgTag($lang->getLanguageValue("alttext_galleryimage_1",$this->get_HtmlName($index)),"thumbnail",true,$index)."</a>".$description;
+                    $inhalt = '<a href="'.$this->get_Href(false,$index).'" target="_blank" title="'.$lang->getLanguageHtml("tooltip_gallery_fullscreen_1", $this->get_HtmlName($index)).'">'.$this->create_ImgTag($lang->getLanguageValue("alttext_galleryimage_1",$this->get_HtmlName($index)),"thumbnail",true,$index)."</a>".$description;
                 }
                 $thumbs .= '<td class="'.$css.'td" style="width:'.$td_width.'%;">'.$inhalt.'</td>';
             }
@@ -619,7 +619,7 @@ $description = $specialchars->rebuildSpecialChars($description,false,true);
             $gallery = $this->currentGallery;
         if($target === false)
             $target = "_blank";
-        return '<a class="'.$css.'" href="'.$CatPage->get_Href(false, false, "galtemplate=true&gal=".$gallery).'" title="'.$lang->getLanguageValue("tooltip_link_gallery_2", $this->get_GalleryName($gallery), count($this->GalleryArray[$gallery])).'" target="'.$target.'">'.$linktext.'</a>';
+        return '<a class="'.$css.'" href="'.$CatPage->get_Href(false, false, "galtemplate=true&gal=".$gallery).'" title="'.$lang->getLanguageHtml("tooltip_link_gallery_2", $this->get_GalleryName($gallery), count($this->GalleryArray[$gallery])).'" target="'.$target.'">'.$linktext.'</a>';
     }
 
 

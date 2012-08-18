@@ -215,11 +215,11 @@ class CatPageClass {
         if(strpos($url,"?") > 1)
             $add = "&amp;";
         $requesturl = NULL;
-        $lang = $language->getLanguageValue("message_sitemap_0");
+        $lang = $language->getLanguageHtml("message_sitemap_0");
         if($action == "search") {
             if(strlen($SEARCH_REQUEST) > 0)
                 $requesturl = $add."search=".$specialchars->replaceSpecialChars($SEARCH_REQUEST, false);
-            $lang = $language->getLanguageValue("message_searchresult_1", $specialchars->rebuildSpecialChars($SEARCH_REQUEST,false,true));
+            $lang = $language->getLanguageHtml("message_searchresult_1", $specialchars->rebuildSpecialChars($SEARCH_REQUEST,false,true));
         }
         if(DRAFT) {
             if($requesturl === NULL)
@@ -239,10 +239,10 @@ class CatPageClass {
         global $language;
         if($page !== false) {
             if($this->get_Type($cat,$page) == EXT_LINK) {
-                $title = $language->getLanguageValue("tooltip_link_extern_1", $this->get_HrefText($cat,$page));
+                $title = $language->getLanguageHtml("tooltip_link_extern_1", $this->get_HrefText($cat,$page));
                 $target = $this->get_HrefTarget($cat,$page);
             } else {
-                $title = $language->getLanguageValue("tooltip_link_page_2", $this->get_HrefText($cat,$page),$this->get_HrefText($cat,false));
+                $title = $language->getLanguageHtml("tooltip_link_page_2", $this->get_HrefText($cat,$page),$this->get_HrefText($cat,false));
                 $target = false;
             }
             return $this->create_LinkTag(
@@ -252,10 +252,10 @@ class CatPageClass {
                     $title,$target);
         }
         if($this->get_Type($cat,false) == EXT_LINK) {
-            $title = $language->getLanguageValue("tooltip_link_extern_1", $this->get_HrefText($cat,false));
+            $title = $language->getLanguageHtml("tooltip_link_extern_1", $this->get_HrefText($cat,false));
             $target = $this->get_HrefTarget($cat,false);
         } else {
-            $title = $language->getLanguageValue("tooltip_link_category_1", $this->get_HrefText($cat,false));
+            $title = $language->getLanguageHtml("tooltip_link_category_1", $this->get_HrefText($cat,false));
             $target = false;
         }
         return $this->create_LinkTag(

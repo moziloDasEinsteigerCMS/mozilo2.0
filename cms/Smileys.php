@@ -13,9 +13,6 @@ class Smileys {
 
     function replaceEmoticons($content) {
         foreach ($this->smileysarray as $icon => $emoticon) {
-            if($icon == "readonly" or $icon == "error") {
-                continue;
-            }
             $icon = trim($icon);
             $emoticon = str_replace($this->search,$this->replace,$emoticon);
             $emoticon = '<img src="'.URL_BASE.CMS_DIR_NAME.'/smileys/'.$icon.'.gif" class="noborder" alt="'.$emoticon.'" />';

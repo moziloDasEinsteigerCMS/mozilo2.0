@@ -432,7 +432,7 @@ class Syntax {
             if ($CMS_CONF->get("targetblank_link") == "true") {
                 $target = ' target="_blank"';
             }
-            return '<a class="link" href="'.$link.'"'.$this->getTitleAttribute($language->getLanguageValue("tooltip_link_extern_1", $value)).$target.'>'.$desciption.'</a>';
+            return '<a class="link" href="'.$link.'"'.$this->getTitleAttribute($language->getLanguageHtml("tooltip_link_extern_1", $value)).$target.'>'.$desciption.'</a>';
         } else {
             if(empty($desciption))
                 $desciption = $value;
@@ -458,7 +458,7 @@ class Syntax {
             $mailto = str_replace(array('%3A','%3F','%26','%3B','%3D','%40'),array(':','?','&amp;',';','=','@'),$mailto);
             $mailto = $specialchars->obfuscateAdress('mailto:'.$mailto, 3);
             $value = $specialchars->replaceSpecialChars($value,false);
-            return '<a class="mail" href="'.$mailto.'"'.$this->getTitleAttribute($language->getLanguageValue("tooltip_link_mail_1", $specialchars->rebuildSpecialChars($specialchars->obfuscateAdress($value, 3), true, true))).'>'.$desciption.'</a>';
+            return '<a class="mail" href="'.$mailto.'"'.$this->getTitleAttribute($language->getLanguageHtml("tooltip_link_mail_1", $specialchars->rebuildSpecialChars($specialchars->obfuscateAdress($value, 3), true, true))).'>'.$desciption.'</a>';
         } else {
             if(empty($desciption))
                 $desciption = $value;
@@ -485,7 +485,7 @@ class Syntax {
             return $CatPage->create_LinkTag($CatPage->get_Href($cat,false)
                     ,$link_text
                     ,"category"
-                    ,$language->getLanguageValue("tooltip_link_category_1", $CatPage->get_HrefText($cat,false))
+                    ,$language->getLanguageHtml("tooltip_link_category_1", $CatPage->get_HrefText($cat,false))
                     );
         } else {
             return $this->createDeadlink($value, $language->getLanguageValue("tooltip_link_category_error_1", $value));
@@ -514,7 +514,7 @@ class Syntax {
         return $CatPage->create_LinkTag($CatPage->get_Href($cat,$page)
                     ,$link_text
                     ,"page"
-                    ,$language->getLanguageValue("tooltip_link_page_2", $CatPage->get_HrefText($cat,$page), $CatPage->get_HrefText($cat,false))
+                    ,$language->getLanguageHtml("tooltip_link_page_2", $CatPage->get_HrefText($cat,$page), $CatPage->get_HrefText($cat,false))
                     );
     }
 
@@ -568,7 +568,7 @@ class Syntax {
         return $CatPage->create_LinkTag($CatPage->get_HrefFile($cat,$datei,$force_download)
                     ,$link_text
                     ,"file"
-                    ,$language->getLanguageValue("tooltip_link_file_2", $CatPage->get_FileText($cat,$datei), $CatPage->get_HrefText($cat,false))
+                    ,$language->getLanguageHtml("tooltip_link_file_2", $CatPage->get_FileText($cat,$datei), $CatPage->get_HrefText($cat,false))
                     ,$target);
     }
 
@@ -629,15 +629,15 @@ class Syntax {
             if ($subtitle == "") {
                 // normales Bild: ohne <span> rundrum
                 if ($syntax == "bild") {
-                    return '<img src="'.$imgsrc.'" alt="'.$language->getLanguageValue("alttext_image_1", $alt).'" class="'.$cssclass.'" />';
+                    return '<img src="'.$imgsrc.'" alt="'.$language->getLanguageHtml("alttext_image_1", $alt).'" class="'.$cssclass.'" />';
                 }
                 else {
-                    return '<span class="'.$cssclass.'"><img src="'.$imgsrc.'" alt="'.$language->getLanguageValue("alttext_image_1", $alt).'" class="'.$cssclass.'" /></span>';
+                    return '<span class="'.$cssclass.'"><img src="'.$imgsrc.'" alt="'.$language->getLanguageHtml("alttext_image_1", $alt).'" class="'.$cssclass.'" /></span>';
                 }
             }
             // mit Untertitel
             else {
-                return '<span class="'.$cssclass.'"><img src="'.$imgsrc.'" alt="'.$language->getLanguageValue("alttext_image_1", $alt).'" class="'.$cssclass.'" /><br /><span class="imagesubtitle">'.$subtitle.'</span></span>';
+                return '<span class="'.$cssclass.'"><img src="'.$imgsrc.'" alt="'.$language->getLanguageHtml("alttext_image_1", $alt).'" class="'.$cssclass.'" /><br /><span class="imagesubtitle">'.$subtitle.'</span></span>';
             }
         }
     }
@@ -953,11 +953,11 @@ class Syntax {
                 break;
             case '{SITEMAPLINK}':
                 global $language;
-                $replace = '<a href="'.URL_BASE.'index.php?action=sitemap" id="sitemaplink"'.$this->getTitleAttribute($language->getLanguageValue("tooltip_showsitemap_0")).">".$language->getLanguageValue("message_sitemap_0")."</a>";
+                $replace = '<a href="'.URL_BASE.'index.php?action=sitemap" id="sitemaplink"'.$this->getTitleAttribute($language->getLanguageHtml("tooltip_showsitemap_0")).">".$language->getLanguageValue("message_sitemap_0")."</a>";
                 break;
             case '{CMSINFO}':
                 global $language;
-                $replace = "<a href=\"http://cms.mozilo.de/\" target=\"_blank\" id=\"cmsinfolink\"".$this->getTitleAttribute($language->getLanguageValue("tooltip_link_extern_1", "http://cms.mozilo.de")).">moziloCMS ".CMSVERSION."</a>";
+                $replace = "<a href=\"http://cms.mozilo.de/\" target=\"_blank\" id=\"cmsinfolink\"".$this->getTitleAttribute($language->getLanguageHtml("tooltip_link_extern_1", "http://cms.mozilo.de")).">moziloCMS ".CMSVERSION."</a>";
                 break;
             case '{TABLEOFCONTENTS}':
                 # Da es den Inhalt erst am schluss gibt setzen wir einen Verstägten Platzhalter
@@ -1028,7 +1028,7 @@ class Syntax {
         $tableofcontents = '<div class="tableofcontents">';
         $tableofcontents .= "<ul>";
         foreach($GLOBALS['syntax_anchor_ueber'] as $value => $count_type) {
-            $link = '<a class="page" href="#a'.$count_type['count'].'"'.$this->getTitleAttribute($language->getLanguageValue("tooltip_anchor_goto_1", $value)).'>'.$value.'</a>';
+            $link = '<a class="page" href="#a'.$count_type['count'].'"'.$this->getTitleAttribute($language->getLanguageHtml("tooltip_anchor_goto_1", $value)).'>'.$value.'</a>';
             if ($count_type['type'] >= "2") {
                 $tableofcontents .= '<li class="blind"><ul>';
             }
@@ -1114,9 +1114,9 @@ Solen wir den $content Anzeigen?????????
 # zur abwertskompatibelen drin neu einfach lehr lassen z.B. [absatz|] oder [absatz=Nach Oben|]
             if($ueber_array['ueber'] == $language->getLanguageValue("anchor_top_0")
                 or $ueber_array['ueber'] == "_absatztop-") {
-                $replace = '<a class="paragraph" href="#a0"'.$this->getTitleAttribute($language->getLanguageValue("tooltip_anchor_gototop_0")).'>'.$ueber_array['inhalt'].'</a>';
+                $replace = '<a class="paragraph" href="#a0"'.$this->getTitleAttribute($language->getLanguageHtml("tooltip_anchor_gototop_0")).'>'.$ueber_array['inhalt'].'</a>';
             } elseif(isset($GLOBALS['syntax_anchor_ueber'][$ueber_array['ueber']]['count'])) {
-                $replace = '<a class="paragraph" href="#a'.$GLOBALS['syntax_anchor_ueber'][$ueber_array['ueber']]['count'].'"'.$this->getTitleAttribute($language->getLanguageValue("tooltip_anchor_goto_1", $ueber_array['ueber'])).'>'.$ueber_array['inhalt'].'</a>';
+                $replace = '<a class="paragraph" href="#a'.$GLOBALS['syntax_anchor_ueber'][$ueber_array['ueber']]['count'].'"'.$this->getTitleAttribute($language->getLanguageHtml("tooltip_anchor_goto_1", $ueber_array['ueber'])).'>'.$ueber_array['inhalt'].'</a>';
             } else {
                 $replace = $this->createDeadlink($ueber_array['ueber'], $language->getLanguageValue("tooltip_anchor_error_1", $ueber_array['ueber']));
             }

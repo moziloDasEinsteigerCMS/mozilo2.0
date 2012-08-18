@@ -22,11 +22,19 @@ class Language {
         }
     }
 
-#!!!!!!!!! wir brauchen noch nee version die kein htmlentities benutzt?????
 // ------------------------------------------------------------------------------
 // Sprachelement mit keinem, einem oder zwei Parametern aus Sprachdatei holen
 // ------------------------------------------------------------------------------
      function getLanguageValue($phrase, $param1 = '', $param2 = '') {
+         $text = $this->LANG_CONF->get($phrase);
+         $text = str_replace(array("{PARAM1}","{PARAM2}"), array($param1, $param2), $text);
+##
+if ($text === "") $text = "Textvar: ". $phrase." gibts nicht!";
+##
+         return $text;
+     }
+
+     function getLanguageHtml($phrase, $param1 = '', $param2 = '') {
          $text = htmlentities($this->LANG_CONF->get($phrase), ENT_COMPAT, CHARSET);
          $text = str_replace(array("{PARAM1}","{PARAM2}"), array($param1, $param2), $text);
 ##

@@ -153,7 +153,7 @@ class SearchClass {
                         $CatPage->get_Href($cat,false,"highlight=".$serach_request.$serach),
                         $this->highlightSearchString($catname),
                         false,
-                        $language->getLanguageValue("tooltip_link_page_2", $catname, $catname)
+                        $language->getLanguageHtml("tooltip_link_page_2", $catname, $catname)
                     );
 
         } else {
@@ -162,7 +162,7 @@ class SearchClass {
                         $CatPage->get_Href($cat,$page,"highlight=".$serach_request.$serach),
                         $this->highlightSearchString($pagename),
                         false,
-                        $language->getLanguageValue("tooltip_link_page_2", $pagename, $catname)
+                        $language->getLanguageHtml("tooltip_link_page_2", $pagename, $catname)
                     );
         }
     }
@@ -253,7 +253,7 @@ function findInPage($cat,$page) {
                 .$draft
                 .'<input type="hidden" name="action" value="search" />'
                 .'<input type="text" name="search" value="'.$query.'" class="searchtextfield" />'
-                .'<input type="image" src="'.$LAYOUT_DIR_URL.'/grafiken/searchicon.gif" alt="'.$language->getLanguageValue("message_search_0").'" class="searchbutton" />'
+                .'<input type="image" src="'.$LAYOUT_DIR_URL.'/grafiken/searchicon.gif" alt="'.$language->getLanguageHtml("message_search_0").'" class="searchbutton" />'
                 .'</fieldset>'
                 .'</form>';
     }
@@ -276,9 +276,9 @@ function findInPage($cat,$page) {
         if($icon) { # string "src des icons" ,"default"
             global $language, $LAYOUT_DIR_URL;
             if($icon == "default")
-                $in_icon = '<input type="image" src="'.$LAYOUT_DIR_URL.'/grafiken/searchicon.gif" alt="'.$language->getLanguageValue("message_search_0").'" class="'.$id_class.'button" />';
+                $in_icon = '<input type="image" src="'.$LAYOUT_DIR_URL.'/grafiken/searchicon.gif" alt="'.$language->getLanguageHtml("message_search_0").'" class="'.$id_class.'button" />';
             else
-                $in_icon = '<input type="image" src="'.$icon.'" alt="'.$language->getLanguageValue("message_search_0").'" class="'.$id_class.'button" />';
+                $in_icon = '<input type="image" src="'.$icon.'" alt="'.$language->getLanguageHtml("message_search_0").'" class="'.$id_class.'button" />';
         }
         $query = str_replace(array('"',"'"),array("&quot;","&apos;"),trim(rawurldecode($SEARCH_REQUEST)));
         return '<form accept-charset="'.CHARSET.'" method="get" action="'.$CatPage->get_Href($cat,$page).'" class="'.$id_class.'form">'

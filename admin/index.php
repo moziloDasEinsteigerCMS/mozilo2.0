@@ -424,31 +424,12 @@ function get_template_truss($content,$titel,$toggle = false) {
     return $template;
 }
 
-function getLanguageString($key) {
+function getLanguageValue($confpara,$htnl = false,$param1 = '', $param2 = '') {
     global $LANGUAGE;
-    return str_replace(array("[","]","{","}","'",'"',"(",")"),
-                   array("\[","\]","\{","\}","\'",'\"',"\(","\)"),
-                    html_entity_decode($LANGUAGE->getLanguageValue($key),ENT_QUOTES,CHARSET));
-#!!!!!!!!! html_entity_decode ist ein würgarraunt
-}
-
-function makeJsLanguage($lang_array) {
-    $tmp = 'var mozilo_lang = new Object(); ';
-    foreach($lang_array as $key) {
-        if(is_array($key))
-            $tmp .= 'mozilo_lang["'.$key[0].'"] = "'.getLanguageString($key[1]).'"; ';
-        else
-            $tmp .= 'mozilo_lang["'.$key.'"] = "'.getLanguageString($key).'"; ';
-    }
-    return $tmp;
-}
-
-function getLanguageValue($confpara,$title = false,$param1 = '', $param2 = '') {
-    global $LANGUAGE;
-    $text = $LANGUAGE->getLanguageValue($confpara, $param1, $param2);
-    if(!$title)
-        $text = str_replace(array("&lt;","&gt;"),array("<",">"), $text);
-    return $text;
+    if($htnl)
+        return $LANGUAGE->getLanguageHtml($confpara, $param1, $param2);
+    else
+        return $LANGUAGE->getLanguageValue($confpara, $param1, $param2);
 }
 
 function getHelpIcon($artikel = false,$subartikel = false) {

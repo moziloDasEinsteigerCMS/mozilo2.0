@@ -1,4 +1,0 @@
-Options -Indexes
-RewriteEngine On
-RewriteRule admin/index\.php$ admin/index\.php [QSA,L]
-RewriteRule \.html$ index.php [QSA,L]

@@ -137,7 +137,7 @@ function returnFormatToolbar() {
     ."</td>"
     // Farben
     .'<td width="1%" class="mo-nowrap">'
-        .'<img class="ed-syntax-icon ui-state-active fb-color-change" alt="Farbe" title="[farbe=RRGGBB| ... ] - '.getLanguageValue("toolbar_desc_farbe").'" src="gfx/jsToolbar/farbe.png" onclick="insert_ace(\'[farbe=\' + document.getElementById(\'farbcode\').value + \'|\', \']\',true)" />'
+        .'<img class="ed-syntax-icon ui-state-active fb-color-change" alt="Farbe" title="[farbe=RRGGBB| ... ] - '.getLanguageValue("toolbar_desc_farbe",true).'" src="gfx/jsToolbar/farbe.png" onclick="insert_ace(\'[farbe=\' + document.getElementById(\'farbcode\').value + \'|\', \']\',true)" />'
     ."</td>"
     .'<td id="colordiv-mozilo" width="8%" class="mo-nowrap">'
         .'<div class="colordiv ui-state-active">'
@@ -218,21 +218,14 @@ function returnUserSyntaxSelectbox() {
     foreach($USER_SYNTAX->toArray() as $key => $value) {
         if(false !== strpos($value,"{DESCRIPTION}") and false === strpos($value,"{VALUE}")) {
             $inhalt = "[".$key."=...|]";
-#            $valinhalt = "[".$key."=|]";
         } elseif(false === strpos($value,"{DESCRIPTION}") and false !== strpos($value,"{VALUE}")) {
             $inhalt = "[".$key."|...]";
-#            $valinhalt = "[".$key."|]";
         } elseif(false !== strpos($value,"{DESCRIPTION}") and false !== strpos($value,"{VALUE}")) {
             $inhalt = "[".$key."=|...]";
-#            $valinhalt = "[".$key."=|]";
         } elseif(false === strpos($value,"{DESCRIPTION}") and false === strpos($value,"{VALUE}")) {
             $inhalt = "[".$key."]";
-#            $valinhalt = "[".$key."]";
         }
         $content .= '<option value="'.$inhalt.'">'.$inhalt.'</option>';
-
-/*
-        $content .= '<option value="'.$key.'">['.$key.'|...]</option>';*/
     }
     $content .= "</select>";
     return $content;
@@ -291,11 +284,8 @@ function returnSmileyBar() {
     $smileys = new Smileys(BASE_DIR_CMS."smileys");
     $content = "";
     foreach($smileys->getSmileysArray() as $icon => $emoticon) {
-        if($icon == "readonly" or $icon == "error") {
-            continue;
-        }
         $icon = trim($icon);
-        $content .= '<img class="ed-syntax-icon ed-syntax-hover ui-state-active" alt="'.$emoticon.'"title=":'.$icon.':" src="'.URL_BASE.CMS_DIR_NAME.'/smileys/'.$icon.'.gif" onclick="insert_ace(\' :'.$icon.': \', \'\',false)" />';
+        $content .= '<img class="ed-syntax-icon ed-syntax-hover ui-state-active" alt=":'.$icon.':" title=":'.$icon.':" src="'.URL_BASE.CMS_DIR_NAME.'/smileys/'.$icon.'.gif" onclick="insert_ace(\' :'.$icon.': \', \'\',false)" />';
     }
     return $content;
 }
@@ -304,7 +294,7 @@ function returnCatPagesSelectbox() {
     global $specialchars;
     global $CatPage;
 
-    $select = '<select name="pages" class="overviewselect" title="'.getLanguageValue("category_button")." &#047; ".getLanguageValue("page_button").':">';
+    $select = '<select name="pages" class="overviewselect" title="'.getLanguageValue("category_button",true)." &#047; ".getLanguageValue("page_button",true).':">';
     foreach ($CatPage->get_CatArray(true,false) as $catdir) {
         $cleancatname = $CatPage->get_HrefText($catdir,false);
         $select .= '<optgroup label="'.$cleancatname.'">';
@@ -324,7 +314,7 @@ function returnFilesSelectbox() {
     global $specialchars;
     global $CatPage;
 
-    $select = '<select name="files" class="overviewselect" title="'.getLanguageValue("files_button").':">';
+    $select = '<select name="files" class="overviewselect" title="'.getLanguageValue("files_button",true).':">';
     foreach($CatPage->get_CatArray(true,false) as $catdir) {
         $cleancatname = $CatPage->get_HrefText($catdir,false);
         if(count($CatPage->get_FileArray($catdir)) > 0) {
@@ -341,7 +331,7 @@ function returnFilesSelectbox() {
 
 function returnGalerySelectbox() {
     global $specialchars;
-    $select = '<select name="gals" class="overviewselect" title="'.getLanguageValue("gallery_button").':">';
+    $select = '<select name="gals" class="overviewselect" title="'.getLanguageValue("gallery_button",true).':">';
     $galleries = getDirAsArray(GALLERIES_DIR_REL,"dir","natcasesort");
     foreach ($galleries as $currentgallery) {
         $select .= '<option value="'.$specialchars->rebuildSpecialChars($currentgallery, false, false).'">'.$specialchars->rebuildSpecialChars($currentgallery, false, true)."</option>";

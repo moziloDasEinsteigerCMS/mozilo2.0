@@ -115,9 +115,9 @@ if(defined('PLUGINADMIN'))
 
 
     if(isset(${ACTION."_jslang"}) and is_array(${ACTION."_jslang"})) {
-        $html .= makeJsLanguage(array_merge($dialog_jslang,${ACTION."_jslang"} ));
+        $html .= makeJsLanguageObject(array_merge($dialog_jslang,${ACTION."_jslang"} ));
     } else
-        $html .= makeJsLanguage($dialog_jslang);
+        $html .= makeJsLanguageObject($dialog_jslang);
 
     $acceptfiletypes = "/(\\.".str_replace("%2C","|\\.",$ADMIN_CONF->get("noupload")).")$/i;";
     if(strlen($acceptfiletypes) > 0)
@@ -288,6 +288,24 @@ function get_Message($message) {
         return '<div id="dialog-auto" style="display:none;">'.$html.'</div>';
     else
         return "";
+}
+
+function getLanguageJsVar($key) {
+    global $LANGUAGE;
+    return str_replace(array("[","]","{","}","'",'"',"(",")"),
+                   array("\[","\]","\{","\}","\'",'\"',"\(","\)"),
+                    $LANGUAGE->getLanguageValue($key));
+}
+
+function makeJsLanguageObject($lang_array) {
+    $tmp = 'var mozilo_lang = new Object(); ';
+    foreach($lang_array as $key) {
+        if(is_array($key))
+            $tmp .= 'mozilo_lang["'.$key[0].'"] = "'.getLanguageJsVar($key[1]).'"; ';
+        else
+            $tmp .= 'mozilo_lang["'.$key.'"] = "'.getLanguageJsVar($key).'"; ';
+    }
+    return $tmp;
 }
 
 ?>
