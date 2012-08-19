@@ -2,13 +2,6 @@
 
 class SEARCH extends Plugin {
 
-# möglichkeiten für  in plugin_first:
-#   define("CAT_REQUEST",NULL); und define("PAGE_REQUEST",NULL); = es gibt kein activen menu punkt
-#   define("ACTION_REQUEST","search"); = default websittitel und detailmenu (mit den suchergebnissen)
-#           wenn die CAT_REQUEST und PAGE_REQUEST noch nicht definiert worden sind werden die durch
-#           ACTION_REQUEST=search gesetzt
-#   eigener {WEBSITE_TITLE} die einfach erseten
-#   eigenes {DETAILMENU} die einfach erseten
     var $tmpl_fild = array();
     var $tmpl_result = array();
     var $tmpl_complet = array();
@@ -71,8 +64,6 @@ class SEARCH extends Plugin {
                 $detailmenutext = str_replace("{SEARCH_WORDS}","{PARAM1}",$this->settings->get("detailmenutext"));
                 $language->LANG_CONF->set("message_searchresult_1",$detailmenutext);
             }
-#echo $_SERVER['REQUEST_URI']."<br />\n";
-#echo $CatPage->get_Href($dummy_cat,false)."<br />\n";
             # wir suchen was oder haben auf einen such link geklickt
             if(strstr($_SERVER['REQUEST_URI'],$CatPage->get_Href($dummy_cat,false))) {
                 global $pagecontent;
@@ -220,8 +211,7 @@ class SEARCH extends Plugin {
             "type" => "checkbox",
             "description" => "Möchtest du die Kategorie in der Ergebnisliste als Link haben wenn eine gefundene Inhaltseite so heist wie die Kategorie"
         );
-#$search->hidecatnamedpages = $this->settings->->get("hidecatnamedpages");
-#$search->showhiddenpagesinsearch = $this->settings->->get("showhiddenpagesinsearch");
+
         # virtuelle Kategorie
         $config['deDE']['dummycat']  = array(
             "type" => "text",

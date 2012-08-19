@@ -102,7 +102,7 @@ class LASTCHANGE extends Plugin {
             // Plugin-Name
             "<b>LastChange</b> \$Revision: 137 $",
             // CMS-Version
-            "1.12",
+            "2.0",
             // Kurzbeschreibung
             'Zeigt die letzte Änderung an.<br />
             <br />
@@ -118,7 +118,7 @@ class LASTCHANGE extends Plugin {
             // Name des Autors
             "mozilo",
             // Download-URL
-            "http://cms.mozilo.de",
+            "",
             array(
                 '{LASTCHANGE}' => 'Letzte Änderung mit Link und Datum',
                 '{LASTCHANGE|text}' => 'Text "Letzte Änderung:"',

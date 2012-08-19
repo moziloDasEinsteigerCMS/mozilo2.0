@@ -225,7 +225,7 @@ class CONTACT extends Plugin {
             // Name des Autors
             "mozilo",
             // Download-URL
-            "http://mozilo.de",
+            "",
             // Platzhalter für die Selectbox in der Editieransicht 
             // - ist das Array leer, erscheint das Plugin nicht in der Selectbox
             array(

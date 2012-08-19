@@ -382,36 +382,6 @@ class Galerie extends Plugin {
             "description" => $lang_gallery_admin->get("config_gallery_placeholders"),
             "template" => "{gallerytemplate_description}<br /><br />{gallerytemplate_textarea}",
         );
-# template_test
-#
-
-# {gallerytemplate_textarea}
-# {gallerytemplate_description}
-
-# {target_radio__self}
-# {target_radio__blank}
-# {target_description}
-# {target_descriptions__self}
-# {target_descriptions__blank}
-
-# {usethumbs_checkbox}
-# {usethumbs_description}
-
-# {picsperrow_text}
-# {picsperrow_description}
-/*
-$config['--template~~'] = '<div>
-{target_description} {target_radio__self} {target_descriptions__self} {target_radio__blank} {target_descriptions__blank}<br />
-<br />
-{usethumbs_description} {usethumbs_checkbox}<br />
-<br />
-{picsperrow_description} {picsperrow_text}<br />
-<br />
-{gallerytemplate_description}<br />
-{gallerytemplate_textarea}<br /><br />
-</div>';
-*/
-# $config['--template~~'] = 'template_test';
 
         // Nicht vergessen: Das gesamte Array zurückgeben
         return $config;
@@ -441,13 +411,13 @@ $config['--template~~'] = '<div>
             // Plugin-Name
             "<b>".$lang_gallery_admin->get("config_gallery_plugin_name")."</b> \$Revision: 141 $",
             // CMS-Version
-            "1.12",
+            "2.0",
             // Kurzbeschreibung
             $lang_gallery_admin->get("config_gallery_plugin_desc"),
             // Name des Autors
            "mozilo",
             // Download-URL
-            "http://cms.mozilo.de",
+            "",
             # Platzhalter => Kurzbeschreibung
             array('{Galerie|}' => $lang_gallery_admin->get("config_gallery_plugin_name"))
             );
