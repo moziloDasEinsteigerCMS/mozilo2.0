@@ -5,7 +5,7 @@ define("IS_ADMIN",false);
 $start_time = get_executTime(false);
 
 // Initial: Fehlerausgabe unterdruecken, um Path-Disclosure-Attacken ins Leere laufen zu lassen
-@ini_set("display_errors", 0);
+@ini_set("display_errors", 1);
 
 # ab php > 5.2.0 hat preg_* ein default pcre.backtrack_limit von 100000 zeichen
 # deshalb der versuch mit ini_set
