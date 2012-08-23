@@ -238,7 +238,7 @@ mimeType: this._mimeType,
                     img = "img.png";
                 } else if(ext == "doc" || ext == "odf" || ext == "") {
                     img = "doc.png";
-                } else if(ext == "mpg" || ext == "mov") {
+                } else if(ext == "mpg" || ext == "mov" || ext == "flv") {
                     img = "mov.png";
                 } else if(ext == "pdf") {
                     img = "pdf.png";
