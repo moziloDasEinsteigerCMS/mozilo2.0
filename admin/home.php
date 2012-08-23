@@ -24,7 +24,7 @@ function home() {
     $titel = "home_help";
     if(file_exists(BASE_DIR."docu/docu.php")) {
         $error[$titel][] = false;
-        $template[$titel][] = getLanguageValue("home_help_text_docu").'&nbsp;&nbsp;<a href="'.URL_BASE.'docu/docu.php" target="_blank" class="js-docu-link mo-butten-a-img"><img src="'.ADMIN_ICONS.'/docu.png" alt="help" hspace="0" vspace="0" border="0" /></a>';
+        $template[$titel][] = getLanguageValue("home_help_text_docu").'&nbsp;&nbsp;<a href="'.URL_BASE.'docu/docu.php" target="_blank" class="mo-butten-a-img"><img src="'.ADMIN_ICONS.'/docu.png" alt="help" hspace="0" vspace="0" border="0" /></a>';
         $error[$titel][] = false;
         $template[$titel][] = getLanguageValue("home_help_text_info").'&nbsp;&nbsp;<a href="'.URL_BASE.'docu/docu.php?menu=false&amp;artikel=start" target="_blank" class="js-docu-link mo-butten-a-img"><img src="'.ADMIN_ICONS.'/help.png" alt="help" hspace="0" vspace="0" border="0" /></a>';
     } else {
