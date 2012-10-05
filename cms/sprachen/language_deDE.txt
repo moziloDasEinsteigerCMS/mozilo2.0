@@ -44,6 +44,7 @@ passwordform_send_0                             = Absenden
 plugin_error_1                                  = Allgemeiner Fehler im Plugin {PARAM1}. Bitte kontaktiere den Plugin-Autor.
 plugin_error_missing_pluginconf_1               = Fehler im Plugin {PARAM1}: plugin.conf fehlt. Bitte kontaktiere den Plugin-Autor.
 plugin_error_missing_method_2                   = Fehler im Plugin {PARAM1}: Methode {PARAM2} fehlt. Bitte kontaktiere den Plugin-Autor.
+plugin_error_value_1                            = Fehler im Plugin {PARAM1}: Fehlerhafte Parameter Übergabe siehe Plugin Hilfe
 thirsty_programmer                              = Hallo, ich hätte bitte gern ein Bier! :)
 tooltip_anchor_error_1                          = Absatz "{PARAM1}" nicht vorhanden
 tooltip_anchor_goto_1                           = Zu Absatz "{PARAM1}" springen
