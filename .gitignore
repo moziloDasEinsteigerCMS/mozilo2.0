@@ -1,0 +1,59 @@
+# mozilo
+*.*
+!.gitignore
+!install.php
+!lgpl.txt
+!gpl.txt
+!liesmich.txt
+!README.md
+!index.php
+!readme.txt
+!update.php
+
+*/
+!docu/
+!admin/
+!cms/
+admin/conf/*
+cms/conf/*
+.htaccess
+admin/.htaccess
+cms/SortCatPage.php
+
+# kategorieen
+kategorien/*
+!kategorien/Willkommen/
+
+# gallery
+galerien/*
+!galerien/moziloCMS
+
+# plugins
+plugins/*
+!plugins/CONTACT/
+!plugins/Galerie/
+!plugins/LASTCHANGE/
+!plugins/SEARCH/
+
+# layouts
+layouts/*
+!layouts/Bittersweet/
+!layouts/Blue%20Leaves/
+!layouts/Flamingo/
+!layouts/flowers/
+!layouts/Grundger%C3%BCst%201/
+!layouts/Grundger%C3%BCst%202/
+!layouts/moziloCMS/
+!layouts/moziloCMS%20Table/
+!layouts/Simple%20Beauty/
+!layouts/Under%20the%20bridge/
+
+# algemein
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
