@@ -281,12 +281,8 @@ class CatPageClass {
     #       01_link-_blank-http://www.test.de
     # $change_chars = true, es werden sonderzeichen und htmltities nach %?? gewandelt
     # Achtung $change_chars nur benutzen wenn nötig wegen geschwindigkeit
-#    # Achtung wenn $change_chars = false wird auch false zurückgegeben
-    # damit auf z.B. $page !== false geprüft werden kann
     function get_AsKeyName($name, $change_chars = false) {
         $ext = array(EXT_PAGE, EXT_HIDDEN, EXT_LINK, EXT_DRAFT);
-        if(substr($name,0,2) == FILE_START and substr($name,-2) == FILE_END)
-            $name = substr($name,2,-2);
         if(strpos($name,"-_self-") > 1)
             $name = substr($name,0,strpos($name,"-_self-"));
         if(strpos($name,"-_blank-") > 1)
@@ -349,14 +345,16 @@ class CatPageClass {
         return false;
     }
 
-    # gibt anhand eines Syntaxelement cat:page string ein array($cat,$page) zurück
+    # gibt anhand eines Syntaxelement cat:page (cat:page muss nicht rawurlencodet sein)
+    # ein array($cat,$page) zurück
     # der Inhalt von array($cat,$page) ist filesystem konform formatiert
     # $syntax_catpage kann sein "nur page" oder "cat:page" wobei page auch eine datei
     # sein kann dann muss $file true sein
     # $file = optinal und muss true sein wenn page eine datei ist
     # bei nur page/file wird wenn vorhanden CAT_REQUEST genommen
     function split_CatPage_fromSyntax($syntax_catpage, $file = false) {
-        $syntax_catpage = $this->get_AsKeyName($syntax_catpage, true);
+        $syntax_catpage = replaceFileMarker($syntax_catpage);
+        $syntax_catpage = str_replace(":","%3A",$syntax_catpage);
         $valuearray = explode("%3A", $syntax_catpage);
         # wenn cat:page/file oder in cat : enthalten ist
         if(count($valuearray) > 0) {
