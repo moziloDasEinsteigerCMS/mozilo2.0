@@ -237,4 +237,22 @@ function findPlugins() {
     return array($activ_plugins,$deactiv_plugins,$plugin_first);
 }
 
+function replaceFileMarker($file,$filesystem = true) {
+    if(strpos($file,FILE_START) !== false and strpos($file,FILE_END) !== false) {
+        if($filesystem) {
+            preg_match_all('/'.FILE_START.'(.*)'.FILE_END.'/U',$file,$match);
+            array_walk($match[1], 'helpFuncReplaceFileMarker');
+            $file = str_replace($match[0],$match[1],$file);
+            unset($match);
+        } else
+            $file = str_replace(array(FILE_START,FILE_END),"",$file);
+    }
+    return $file;
+}
+
+function helpFuncReplaceFileMarker(&$value, $key) {
+    global $specialchars;
+    $value = $specialchars->replaceSpecialChars($value,false);
+}
+
 ?>
