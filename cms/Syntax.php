@@ -596,7 +596,6 @@ class Syntax {
         if (preg_match($this->LINK_REGEX, $value)) {
             $imgsrc = $value;
         }
-
         // Ansonsten: Nach ":" aufsplitten
         else {
             global $CatPage;
