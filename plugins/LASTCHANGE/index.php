@@ -155,7 +155,7 @@ class LASTCHANGE extends Plugin {
         }
         $lastchangedpage = $CatPage->get_HrefText($latestchanged['cat'],$latestchanged['page']);
         $url = $CatPage->get_Href($latestchanged['cat'],$latestchanged['page']);
-        $titel = $language->getLanguageValue("tooltip_link_page_2", $lastchangedpage, $CatPage->get_HrefText($latestchanged['cat'],false));
+        $titel = $language->getLanguageHTML("tooltip_link_page_2", $lastchangedpage, $CatPage->get_HrefText($latestchanged['cat'],false));
         $linktolastchangedpage = $CatPage->create_LinkTag($url,$lastchangedpage,false,$titel,false,"lastchangelink");
         $lastchangedate = @strftime($this->dateformat, date($latestchanged['time']));
 
