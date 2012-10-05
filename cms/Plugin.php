@@ -83,9 +83,7 @@ class Plugin {
     function getPluginContent($param) {
         // erst prüfen, ob bei der Initialisierung ein Fehler aufgetreten ist
         if ($this->error == null) {
-            if(strstr($param,FILE_START) and strstr($param,FILE_END))
-                $param = str_replace(array(FILE_START,FILE_END),"",$param);
-            return $this->getContent($param);
+            return $this->getContent(replaceFileMarker($param));
         }
         // Bei Fehler: Inhalt der Fehlervariablen zurückgeben
         else {
@@ -115,14 +113,26 @@ class Plugin {
     # 1. $value wird erst mit $separation zerlegt
     # 2. die zerlegten teile werden mit $separation_key_value zerlegt
     # Beispiel wir gehen von den Default $separation und $separation_key_value aus:
-    # $value = eins^,zwei^,key1^=value1^,drei
+    # $value = eins,zwei,key1=value1,drei
     # ergebnis = array( eins, zwei, key1 => value1, drei )
     # bei userparamarray = array( def1, def2, key1 => def, def3, def4 )
     # ergebnis = array( eins, zwei, key1 => value1, drei, def4 )
     # bei userparamarray = array( def1, def2, key1 => def )
     # ergebnis = array( eins, zwei, key1 => value1 )
-    function makeUserParaArray($value,$userparamarray = false,$separation = "^,",$separation_key_value = "^=") {
+    function makeUserParaArray($value,$userparamarray = false,$separation = ",",$separation_key_value = "=") {
         global $specialchars;
+        $separation_protect = $specialchars->encodeProtectedChr('^'.$separation);
+        $separation_key_value_protect = $specialchars->encodeProtectedChr('^'.$separation_key_value);
+        # das ist aus http://php.net/manual/de/function.preg-match-all.php
+        # hab nichts einfacheres gefunden um HTML Tags zu finden
+        preg_match_all('@\<\s*?(\w+)((?:\b(?:\'[^\']*\'|"[^"]*"|[^\>])*)?)\>((?:(?>[^\<]*)|(?R))*)\<\/\s*?\\1(?:\b[^\>]*)?\>|\<\s*(\w+)(\b(?:\'[^\']*\'|"[^"]*"|[^\>])*)?\/?\>@uxis', $value, $match, PREG_SET_ORDER);
+        foreach($match as $find) {
+            $search = $find[0];
+            # in allen HTML Tags die $separation und $separation_key_value schützen
+            $replace = str_replace(array($separation,$separation_key_value),array($separation_protect,$separation_key_value_protect),$find[0]);
+            $value = str_replace($search,$replace,$value);
+        }
+
         # wenn im Trenn zeichen ein ^ ist müssen wir das decoden da die Syntax.php das encodet hat
         # siehe preparePageContent()
         $separation = $specialchars->encodeProtectedChr($separation);
