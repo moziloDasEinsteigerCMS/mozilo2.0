@@ -63,6 +63,24 @@ class GalleryClass {
         return true;
     }
 
+    # wenn mit initial_Galleries() keine Description erzeugt wurde kann man das hier nachholen
+    # macht sin wenn man alle Galerien braucht aber nur eine mit Description
+    function initial_GallerieDescription($gallery = false) {
+        if($gallery === false)
+            $gallery = $this->currentGallery;
+        if(file_exists(BASE_DIR.GALLERIES_DIR_NAME."/".$gallery."/"."texte.conf.php")) {
+            $tmp_description = new Properties(BASE_DIR.GALLERIES_DIR_NAME."/".$gallery."/"."texte.conf.php");
+            $description = $tmp_description->toArray();
+            unset($tmp_description);
+        }
+        foreach($this->GalleryArray[$gallery] as $image => $tmp) {
+            $this->GalleryArray[$gallery][$image]['description'] = false;
+            # Bildbeschreibung soll benutzt werden wenn vorhanden ins array
+            if(isset($description[$image]))
+                $this->GalleryArray[$gallery][$image]['description'] = $description[$image];
+        }
+    }
+
     # Wenn man ein Menu braucht muss es vorher initaliesiert werden
     # $gallery = eine Galerie
     # $cols = Anzahl der Spalten
@@ -214,7 +232,7 @@ class GalleryClass {
         return $return_array;
     }
 
-    # $coded_as = html, url ,false = wie in texte.txt
+    # $coded_as = html, url ,false = wie in texte.conf.php
     function get_ImageDescription($gallery = false,$image,$coded_as = false) {
         if($gallery === false)
             $gallery = $this->currentGallery;
@@ -751,7 +769,6 @@ $description = $specialchars->rebuildSpecialChars($description,false,true);
 #!!!!!!!!! hier muss noch nee prüfung rein das wenn galerie keine bilder hat sie erst garnich erscheint
 
         $GALERIE_DIR = BASE_DIR.GALLERIES_DIR_NAME."/";
-#echo "$GALERIE_DIR<br>\n";
         $return_array = array();
         if($Galleries !== false and is_array($Galleries)) {
             $galleries_array = $Galleries;
@@ -759,27 +776,17 @@ $description = $specialchars->rebuildSpecialChars($description,false,true);
             $galleries_array = getDirAsArray($GALERIE_DIR,"dir");
 
         foreach($galleries_array as $gallery) {
-
-#echo $GALERIE_DIR.$gallery."<br>\n";
             $description = array();
             $gallery_images = getDirAsArray($GALERIE_DIR.$gallery,$this->allowed_pics);
             # Galerie hat keine Bilder also nicht erstellen
             if(count($gallery_images) < 1)
                 continue;
-            # Bildbeschreibung soll benutzt werden und texte.txt gibts also erzeugen
+            # Bildbeschreibung soll benutzt werden und texte.conf.php gibts also erzeugen
             if($with_description === true
                     and count($gallery_images) > 0
-                    and file_exists($GALERIE_DIR.$gallery."/"."texte.txt")) {
-                if(false !== ($tmp_description = file($GALERIE_DIR.$gallery."/"."texte.txt"))) {
-                    foreach($tmp_description as $zeile) {
-                        if(strpos($zeile," = ") < 3)
-                            continue;
-                        $zeile = trim($zeile);
-                        $image = substr($zeile,0,strpos($zeile," = "));
-                        $descript = substr($zeile,(strpos($zeile," = ") + 3));
-                        $description[$image] = $descript;
-                    }
-                }
+                    and file_exists($GALERIE_DIR.$gallery."/"."texte.conf.php")) {
+                $tmp_description = new Properties($GALERIE_DIR.$gallery."/"."texte.conf.php");
+                $description = $tmp_description->toArray();
                 unset($tmp_description);
             }
             foreach($gallery_images as $image) {
