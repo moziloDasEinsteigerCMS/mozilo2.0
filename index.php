@@ -117,7 +117,7 @@ if(!array_key_exists("cat",$_GET)) {
     $url_get = str_replace('/',':',$url_get);
     if(substr($url_get,-5) == ".html")
         $url_get = substr($url_get,0,-5);
-    $tmp = $CatPage->split_CatPage_fromSyntax(rawurldecode($url_get));
+    $tmp = $CatPage->split_CatPage_fromSyntax($url_get);
     $_GET['cat'] = cleanValue($tmp[0]);
     $_GET['page'] = cleanValue($tmp[1]);
     unset($tmp,$QUERY_STRING,$url_get);
