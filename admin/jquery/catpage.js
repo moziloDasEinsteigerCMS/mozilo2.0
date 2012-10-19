@@ -193,13 +193,13 @@ var option_page_sortable = {
         set_auto_new_name(ui.item,free_name)
 
         send_data(make_send_para_sort_array(),ui.item);
-    },
+    }
 }
 
 var option_page_droppable = {
     accept: ".js-li-page:not(.ui-sortable-helper)",
     addClasses: false,
-    drop: for_page_droppable_drop,
+    drop: for_page_droppable_drop
 }
 
 var option_page_draggable = {
@@ -211,7 +211,7 @@ var option_page_draggable = {
     start: function(event, ui) {
         if($(this).find(".ui-state-disabled").length > 0)
             return false;
-    },
+    }
 }
 
 var edit_handler = function() {
@@ -265,7 +265,7 @@ $(function() {
         connectToSortable: ".js-ul-cats",
         addClasses: false,
         helper: "clone",
-        appendTo: "body",
+        appendTo: "body"
     });
 
     $(".js-ul-cats").droppable({
@@ -330,7 +330,7 @@ $(function() {
                 send_item_status = false;
             // hier erst das senden da erst hier die reinfolge da ist
             send_data(make_send_para_sort_array(),ui.item);
-        },
+        }
     });
     $(".js-ul-cats, .js-new-ul").disableSelection();
 });
