@@ -240,8 +240,8 @@ function updateFileNameInAll($old_name,$new_name) {
     } elseif(strstr($old_name,"/".GALLERIES_DIR_NAME."/")) {
         $old_name = str_replace(GALLERIES_DIR_REL,"",$old_name);
         $new_name = str_replace(GALLERIES_DIR_REL,"",$new_name);
-        $old_name_p = array(FILE_START.$tmp_oldname.FILE_END);
-        $new_name_p = array(FILE_START.$tmp_newname.FILE_END);
+        $old_name_p = array(FILE_START.$old_name.FILE_END);
+        $new_name_p = array(FILE_START.$new_name.FILE_END);
         $old_name = FILE_START.rawurldecode($old_name).FILE_END;
         $new_name = FILE_START.rawurldecode($new_name).FILE_END;
     } else
@@ -273,6 +273,10 @@ function updateFileNameInAll($old_name,$new_name) {
                 foreach($tmp_conf_array as $key => $value) {
                     if($test == $value) {
                         $tmp_conf->set($key,$new_name_p[$pos]);
+                        continue;
+                    }
+                    if(str_replace(array(EXT_PAGE.FILE_END,EXT_HIDDEN.FILE_END,EXT_DRAFT.FILE_END,EXT_LINK.FILE_END),FILE_END,$test) == $value) {
+                        $tmp_conf->set($key,str_replace(array(EXT_PAGE.FILE_END,EXT_HIDDEN.FILE_END,EXT_DRAFT.FILE_END,EXT_LINK.FILE_END),FILE_END,$new_name_p[$pos]));
                     }
                 }
             }
@@ -282,6 +286,8 @@ function updateFileNameInAll($old_name,$new_name) {
 }
 
 function updateFileName($file,$old_name,$new_name) {
+    $old_name = str_replace(array(EXT_PAGE.FILE_END,EXT_HIDDEN.FILE_END,EXT_DRAFT.FILE_END,EXT_LINK.FILE_END),FILE_END,$old_name);
+    $new_name = str_replace(array(EXT_PAGE.FILE_END,EXT_HIDDEN.FILE_END,EXT_DRAFT.FILE_END,EXT_LINK.FILE_END),FILE_END,$new_name);
     $content = file_get_contents($file);
     $content_new = str_replace($old_name,$new_name,$content);
     # nur wenn sich was geändert hat inhalt schreiben
