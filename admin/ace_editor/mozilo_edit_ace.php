@@ -15,8 +15,10 @@ if(isset($deactiv_plugins) and count($deactiv_plugins) > 0) {
 $moziloPlace = makePlatzhalter(true);
 foreach($moziloPlace as $key => $value) {
     $value = substr($value,1,-1);
-    if(in_array($value,$activ_plugins))
+    if(in_array($value,$activ_plugins)) {
+        unset($moziloPlace[$key]);
         continue;
+    }
     $moziloPlace[$key] = $value;
 }
 rsort($moziloPlace);
