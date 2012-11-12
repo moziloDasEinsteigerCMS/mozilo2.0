@@ -69,8 +69,6 @@ $LAYOUT_DIR     = LAYOUT_DIR_NAME."/".$CMS_CONF->get("cmslayout");
 $TEMPLATE_FILE  = $LAYOUT_DIR."/template.html";
 
 $LAYOUT_DIR_URL = $specialchars->replaceSpecialChars(URL_BASE.$LAYOUT_DIR,true);
-$CSS_FILE       = $LAYOUT_DIR_URL."/css/style.css";
-$FAVICON_FILE   = $LAYOUT_DIR_URL."/favicon.ico";
 
 $WEBSITE_NAME = $specialchars->rebuildSpecialChars($CMS_CONF->get("websitetitle"),false,true);
 if ($WEBSITE_NAME == "")
