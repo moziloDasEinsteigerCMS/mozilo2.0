@@ -79,9 +79,7 @@ function makePlatzhalter($all = false) {
     );
     # Die Restlichen Platzhalter
     $platzhalter_rest = array(
-                        '{CSS_FILE}',
                         '{CHARSET}',
-                        '{FAVICON_FILE}',
                         '{LAYOUT_DIR}',
                         '{WEBSITE_TITLE}',
                         '{WEBSITE_KEYWORDS}',
