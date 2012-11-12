@@ -50,9 +50,14 @@ init_ace_editor(); //pagecontent
                     $(dialog_editor).data("diffcontent",pagecontent);
                 }
 
-                if(savepage)
+                if(savepage) {
 //editor_session.getValue();
                     $(dialog_editor).data("diffcontent",editor_session.getValue());
+if($(dialog_editor).data("close_after_save") === true) {
+    $(dialog_editor).dialog("close");
+    return;
+}
+                }
                 // beim config wird nee select mit geschickt die müssen wir mit dem original ersetzen
                 if(replace_item !== false) {
                     repalce_tags(replace_item);
@@ -95,6 +100,7 @@ function dialog_editor_save_beforclose() {
     $(dialog_multi).dialog( "option", "buttons", [{
         text: mozilo_lang["button_save"],
         click: function() {
+$(dialog_editor).data("close_after_save",true);
             send_editor_data(editor_file+"&content="+rawurlencode_js(editor_session.getValue()),true);
             $(this).dialog("close");
         }
@@ -385,6 +391,7 @@ $(function() {
             editor_session.setValue("dummy");
             editor.destroy();
             $(this).data("diffcontent",false);
+            $(this).data("close_after_save",false);
             $('#js-ace-color-img').css('display','none');
             if(!$(".box-farbtastic").hasClass("fb-box-close")) {
                 $(".box-farbtastic").addClass("fb-box-close");
