@@ -83,7 +83,7 @@ class Properties {
 
     # gibts den key?
     public function keyExists($key) {
-        if(isset($this->properties[$key])) {
+        if(array_key_exists($key,$this->properties)) {
             return true;
         }
         return false;
@@ -126,7 +126,7 @@ class Properties {
     public function delete($deletekey) {
         if(defined('IS_ADMIN') and IS_ADMIN and $this->isConf === true) {
             $tmp = $this->properties;
-            if(isset($this->properties[$deletekey])) {
+            if(array_key_exists($deletekey,$this->properties)) {
                 unset($this->properties[$deletekey]);
                 if(true === ($this->saveProperties()))
                     return true;
