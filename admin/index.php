@@ -14,6 +14,9 @@ if(is_file("sessionClass.php")) {
 }
 session_start();
 
+#!!!!!!!!! prüfen
+@date_default_timezone_set('UTC');
+
 if(strtolower(substr("PHP_OS",0,3)) == "win")
     define("USE_CHMOD", false);
 else
