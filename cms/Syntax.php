@@ -613,7 +613,7 @@ class Syntax {
 
         // Nun aber das Bild ersetzen!
         if ($imgsrc) {
-            $alt = $specialchars->rebuildSpecialChars($value,true,true);
+            $alt = $specialchars->rebuildSpecialChars(replaceFileMarker($value,false),true,true);
             $cssclass = "";
             if ($syntax == "bild") {
                 $cssclass = "contentimage";
@@ -624,6 +624,13 @@ class Syntax {
             elseif ($syntax == "bildrechts") {
                 $cssclass = "rightcontentimage";
             }
+#!!!!!!!!!!!! mal schauen ob das schlau ist?
+/*
+$subtitle_tag = "";
+if($subtitle != "")
+    $subtitle_tag = '<br /><span class="imagesubtitle">'.$subtitle.'</span>';
+return '<span class="'.$cssclass.'"><img src="'.$imgsrc.'" alt="'.$language->getLanguageHtml("alttext_image_1", $alt).'" class="'.$cssclass.'" />'.$subtitle_tag.'</span>';
+*/
             // ohne Untertitel
             if ($subtitle == "") {
                 // normales Bild: ohne <span> rundrum
@@ -676,12 +683,6 @@ class Syntax {
         return '<i class="contentitalic">'.$value.'</i>';
     }
 
-    function syntax_fettkursiv($desciption,$value) {
-        // Text fettkursiv 
-        // (VERALTET seit Version 1.7 - nur aus Gründen der Abwärtskompatibilität noch mitgeführt)
-        return '<b class="contentbold"><i class="contentitalic">'.$value.'</i></b>';
-    }
-
     function syntax_unter($desciption,$value) {
         // Text unterstrichen
         return '<u class="contentunderlined">'.$value.'</u>';
@@ -724,24 +725,6 @@ class Syntax {
     function syntax_numliste($desciption,$value) {
         // numerierter Listenpunkt orderedlist
         return '<ol class="orderedlist"><li class="listitem">'.$value.'</li></ol>';
-    }
-
-    function syntax_liste1($desciption,$value) {
-        // Liste, einfache Einrückung
-        // (VERALTET seit Version 1.10 - nur aus Gründen der Abwärtskompatibilität noch mitgeführt)
-        return '<ul><li>'.$value.'</li></ul>';
-    }
-
-    function syntax_liste2($desciption,$value) {
-        // Liste, doppelte Einrückung
-        // (VERALTET seit Version 1.10 - nur aus Gründen der Abwärtskompatibilität noch mitgeführt)
-        return '<ul><ul><li>'.$value.'</li></ul></ul>';
-    }
-
-    function syntax_liste3($desciption,$value) {
-        // Liste, dreifache Einrückung
-        // (VERALTET seit Version 1.10 - nur aus Gründen der Abwärtskompatibilität noch mitgeführt)
-        return '<ul><ul><ul><li>'.$value.'</li></ul></ul></ul>';
     }
 
     function syntax_html($desciption,$value) {
@@ -905,16 +888,8 @@ class Syntax {
 
     function placeholder_replace($function,$placeholder) {
         switch ($placeholder) {
-            case '{CSS_FILE}':
-                global $CSS_FILE;
-                $replace = $CSS_FILE;
-                break;
             case '{CHARSET}':
                 $replace = CHARSET;
-                break;
-            case '{FAVICON_FILE}':
-                global $FAVICON_FILE;
-                $replace = $FAVICON_FILE;
                 break;
             case '{LAYOUT_DIR}':
                 global $LAYOUT_DIR_URL;
@@ -956,7 +931,7 @@ class Syntax {
                 break;
             case '{CMSINFO}':
                 global $language;
-                $replace = "<a href=\"http://cms.mozilo.de/\" target=\"_blank\" id=\"cmsinfolink\"".$this->getTitleAttribute($language->getLanguageHtml("tooltip_link_extern_1", "http://cms.mozilo.de")).">moziloCMS ".CMSVERSION."</a>";
+                $replace = '<a href="http://cms.mozilo.de/" target="_blank" id="cmsinfolink"'.$this->getTitleAttribute($language->getLanguageHtml("tooltip_link_extern_1", "http://cms.mozilo.de")).">moziloCMS ".CMSVERSION."</a>";
                 break;
             case '{TABLEOFCONTENTS}':
                 # Da es den Inhalt erst am schluss gibt setzen wir einen Verstägten Platzhalter
