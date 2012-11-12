@@ -174,12 +174,13 @@ function copyFile($org,$new) {
 
 // ------------------------------------------------------------------------------
 // Beim Ändert von cat, page, file und gallery namen wird in allen Inhalteseiten
-// und template.html diese geändert
+// und gallery/template.html und Pluginsconfs diese geändert
 // ------------------------------------------------------------------------------
 # wird nur von moveFileDir() aufgerufen
 # in den plugin.conf.php's muss der cat, page/file, gallery name urlcodiert sein nur die
 # trennung : nicht und es mus FILE_START und FILE_END benutzt werden
 function updateFileNameInAll($old_name,$new_name) {
+    global $CMS_CONF;
     # nur diese pfade werden unterstüzt
     # dir/kategorie/CAT
     # dir/kategorie/CAT/PAGE
@@ -210,6 +211,8 @@ function updateFileNameInAll($old_name,$new_name) {
                 $new_name = FILE_START.rawurldecode($new_name).FILE_END;
             # es wurde die Kategorie geändert
             } else {
+                if($CMS_CONF->get("defaultcat") == $old_name)
+                    $CMS_CONF->set("defaultcat",$new_name);
                 $tmp_oldname = rawurldecode($old_name);
                 $tmp_newname = rawurldecode($new_name);
                 $tmp_oldname_p = $old_name;
