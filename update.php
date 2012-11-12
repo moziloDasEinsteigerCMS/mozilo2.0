@@ -628,15 +628,15 @@ function updateTemplateCSS($dir) {
         $content = file_get_contents($dir.'css/'.$file);
         $tmp_content = $content;
         foreach($tmp_css_new as $key => $value) {
-            if(strpos($content,$key) > 0)
+            if(strpos($content,$key) !== false)
                 unset($tmp_css_new[$key]);
             elseif(count($css_files) == 1) {
-                $tmp_content += $tmp_css_new[$key];
+                $tmp_content .= $tmp_css_new[$key];
                 unset($tmp_css_new[$key]);
             }
         }
         foreach($css_replace as $key => $value) {
-            $tmp_content = str_replace($key,$value,$content);
+            $tmp_content = str_replace($key,$value,$tmp_content);
         }
         if($tmp_content != $content)
             file_put_contents($dir.'css/'.$file,$tmp_content,LOCK_EX);
@@ -648,7 +648,7 @@ function updateTemplateCSS($dir) {
             $file = $css_files[0];
         $content = file_get_contents($dir.'css/'.$file);
         foreach($tmp_css_new as $key => $value) {
-            $content += $tmp_css_new[$key];
+            $content .= $tmp_css_new[$key];
         }
         file_put_contents($dir.'css/'.$file,$content,LOCK_EX);
     }
