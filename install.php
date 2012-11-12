@@ -27,21 +27,18 @@ todo:
 - erzeugen conf funktionen, mit echo vorerst mal einbinden
 
 */
-if(isset($_POST['go_to_admin'])) {
-    $URL_BASE = $_SERVER['SERVER_NAME'].substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], "install.php"))."admin/";
-#    unlink('install.php');
-#    if(is_file('update.php'))
-#!!!!!! der update ordner muss auch gelöscht werden
-#        unlink('update.php');
-    header("Location: http://$URL_BASE");
-    exit();
-}
-
+define('TEST',true);
 define('IS_CMS',true);
 define('IS_ADMIN',true);
 define('IS_INSTALL',true);
+#!!!!!!!! prüfen ob vorhanden gegebenfals ermiteln????????
 define("ADMIN_DIR_NAME","admin");
 define('CMS_DIR_NAME','cms');
+
+if(strtolower(substr("PHP_OS",0,3)) == "win")
+    define("USE_CHMOD", false);
+else
+    define("USE_CHMOD", true);
 
 // falls da bei winsystemen \\ drin sind in \ wandeln
 $base_dir = str_replace("\\\\", "\\", __FILE__);
@@ -49,6 +46,13 @@ $base_dir = str_replace("\\\\", "\\", __FILE__);
 $base_dir = substr($base_dir, 0, -(strlen("install.php")));
 define("BASE_DIR", $base_dir);
 unset($base_dir); // verwendung im script verhindern
+
+if(isset($_POST['go_to_admin'])) {
+    $URL_BASE = $_SERVER['SERVER_NAME'].substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], "install.php")).ADMIN_DIR_NAME."/";
+    cleanUpUpdate();
+    header("Location: http://$URL_BASE");
+    exit();
+}
 
 /*
 define("CHARSET","UTF-8");
@@ -70,33 +74,39 @@ $LANG_INSTALL['daDK'] = 'Dansk';
 $LANG_INSTALL['ptBR'] = 'Português';
 testInstall();
 
+define("BASE_DIR_ADMIN", BASE_DIR.ADMIN_DIR_NAME."/");
+
 $LANG_TMP = "deDE";
 if(isset($_POST['language']) and $_POST['language'] != "false")
     $LANG_TMP = $_POST['language'];
 
 #!!!!!! wenn es schon confs gibt nur password und fertig einblenden
-$BASIC = false;
-$MAIN = false;
+$ADMIN_CONF = false;
+$CMS_CONF = false;
 # eigene session
-require_once("admin/sessionClass.php");
+require_once(BASE_DIR_ADMIN."sessionClass.php");
 # Default conf
-require_once("cms/DefaultConfCMS.php");
+require_once(BASE_DIR.CMS_DIR_NAME."/DefaultConfCMS.php");
 # wenn die sachen kein die() oder fatal error ergeben ist es gut
-require_once("cms/DefaultFunc.php");
+require_once(BASE_DIR_CMS."DefaultFunc.php");
 // Properties Class
-require_once("cms/Properties.php");
+require_once(BASE_DIR_CMS."Properties.php");
 // Language Class
-require_once("cms/Language.php");
+require_once(BASE_DIR_CMS."Language.php");
 
-if(is_file('cms/conf/main.conf.php') and isFileRW('cms/conf/main.conf.php'))
-    $MAIN = new Properties('cms/conf/main.conf.php');
-if(is_file('admin/conf/basic.conf.php') and isFileRW('admin/conf/basic.conf.php'))
-    $BASIC = new Properties('admin/conf/basic.conf.php');
-if(($BASIC !== false)
+require_once(BASE_DIR_ADMIN."filesystem.php");
+require_once(BASE_DIR_CMS."SpecialChars.php");
+$specialchars = new SpecialChars();
+
+if(is_file(BASE_DIR_CMS.CONF_DIR_NAME.'/main.conf.php') and isFileRW(BASE_DIR_CMS.CONF_DIR_NAME.'/main.conf.php'))
+    $CMS_CONF = new Properties(BASE_DIR_CMS.CONF_DIR_NAME.'/main.conf.php');
+if(is_file(BASE_DIR_ADMIN.CONF_DIR_NAME.'/basic.conf.php') and isFileRW(BASE_DIR_ADMIN.CONF_DIR_NAME.'/basic.conf.php'))
+    $ADMIN_CONF = new Properties(BASE_DIR_ADMIN.CONF_DIR_NAME.'/basic.conf.php');
+if(($ADMIN_CONF !== false)
         and (!isset($_POST['language']) or $_POST['language'] == "false")
-        and (is_file("admin/sprachen/language_".$BASIC->get('language').".txt")))
-    $LANG_TMP = $BASIC->get('language');
-$LANG = new Language("admin/sprachen/language_".$LANG_TMP.".txt");
+        and (is_file(BASE_DIR_ADMIN.LANGUAGE_DIR_NAME."/language_".$ADMIN_CONF->get('language').".txt")))
+    $LANG_TMP = $ADMIN_CONF->get('language');
+$LANG = new Language(BASE_DIR_ADMIN.LANGUAGE_DIR_NAME."/language_".$LANG_TMP.".txt");
 
 session_start();
 /*
@@ -124,7 +134,7 @@ $steps = array("language","chmod_test","environment","rewrite","password","finis
 $html_check_update = '';
 if(is_file("update.php")) {
     require_once("update.php");
-    if(!isset($_POST['check_update']) and checkUpdate()) {
+    if(!isset($_POST['check_update']) and function_exists("testUpdate") and testUpdate(true)) {
         $steps = array("language","chmod_test","environment","rewrite","password","update","finish");
         $html_check_update = '<input type="hidden" name="check_update" value="true" />';
     }
@@ -163,7 +173,7 @@ if($test) {
     echo "</pre><br />";
 }
 echo $html_step;
-$test = true;
+#$test = true;
 if($test)
     echo '<input type="submit" name="reset" value="Reset" />';
 echo '</div>';
@@ -175,10 +185,10 @@ echo getHtml("end");
 // -----------------------------------------------------------------------------
 
 function testInstall() {
-    if(!is_file("cms/Language.php") and !is_file("admin/sessionClass.php"))
+    if(!is_file(BASE_DIR.CMS_DIR_NAME."/Language.php") and !is_file(BASE_DIR.ADMIN_DIR_NAME."/sessionClass.php"))
         exit("Du must das CMS schonn mit FTP hochladen");
 
-    if(!is_readable('admin') and !is_readable('cms') and !is_readable("cms/Language.php") and !is_readable("admin/sessionClass.php"))
+    if(!is_readable('admin') and !is_readable('cms') and !is_readable(BASE_DIR.CMS_DIR_NAME."/Language.php") and !is_readable(BASE_DIR.ADMIN_DIR_NAME."/sessionClass.php"))
         exit("Die rechte Vergabe von deinem Provider ist echt beschissen");
 }
 
@@ -192,6 +202,7 @@ function language() {
 }
 
 function chmod_test() {
+#return array(true,"");
     $status = false;
     $no_chmod = getLanguageValue("install_chmod_no_chmod");
     $help = contend_template(installHelp("install_chmod_help"),"");
@@ -222,6 +233,7 @@ function chmod_test() {
             $chmod = "false";
             # das ist jetzt der chmod wert den wir benutzen müssen
             if(isset($_POST['chmod_testfile']) and $_POST['chmod_testfile'] == getLanguageValue("yes")) {
+#!!!!!! chmode hier anwenden auf alle relewanten dateien??????????
                 clearstatcache();
                 $chmod = substr(decoct(fileperms($file_test)),-3);
                 if(is_file($file_test))
@@ -248,10 +260,19 @@ function environment() {
     $html_ret = "";
     $status = true;
 
+    // conf dateien anlegen
+    $conf = makeConfFiles();
+    if(true === $conf) {
+        $html = array(getLanguageValue("install_environment_conf"),getLanguageValue("yes"));
+        $html_ret .= contend_template($html,true);
+    } else {
+        $html = array(getLanguageValue("install_environment_conf"),getLanguageValue("no"));
+        $html_ret .= contend_template($html,false);
+        $status = false;
+    }
+
     // Zeile "PHP-Version"
-    $php_version = false;
     if(version_compare(PHP_VERSION, '5.1.2') >= 0) {
-        $php_version = true;
         $html = array(getLanguageValue("home_phpversion_text"),phpversion());
         $html_ret .= contend_template($html,true);
     } else {
@@ -292,18 +313,6 @@ function environment() {
         $status = false;
     }
 
-    if($php_version) {
-        $conf = makeConfFiles();
-        if(true === $conf) {
-            $html = array(getLanguageValue("install_environment_conf"),getLanguageValue("yes"));
-            $html_ret .= contend_template($html,true);
-        } else {
-            $html = array(getLanguageValue("install_environment_conf"),getLanguageValue("no"));
-            $html_ret .= contend_template($html,false);
-            $status = false;
-        }
-    }
-
     # MULTI_USER
     if(defined('MULTI_USER') and MULTI_USER) {
         $html = array("Multiuser mode Verfügbar",MULTI_USER_TIME." sec.");
@@ -329,7 +338,7 @@ function environment() {
 }
 
 function rewrite() {
-    global $MAIN;
+    global $CMS_CONF;
     # rewrite anfrage von install.js
     if(isset($_POST['fromajax']) and $_POST['fromajax'] == "true") {
         if(isset($_POST['modconf'])) {
@@ -360,7 +369,7 @@ function rewrite() {
             file_put_contents(BASE_DIR.'install/test.php', $test_datei);
         }
 
-        $html = '<img style="margin-right:2em;" src="'.URL_BASE.'cms/jquery/ajax-loader.gif" />'
+        $html = '<img style="margin-right:2em;" src="'.URL_BASE.CMS_DIR_NAME.'/jquery/ajax-loader.gif" />'
         .'test <span id="step-mod-conf">0</span> von '.writeHtaccess("test",0,true)
         .'<script language="Javascript" type="text/javascript">/*<![CDATA[*/'
         .'var finish_test = false;'
@@ -378,14 +387,14 @@ function rewrite() {
             $html = getLanguageValue("install_rewrite_no");
             $text_status = false;
             unlink(BASE_DIR.'.htaccess');
-            unlink(BASE_DIR.'admin/.htaccess');
-            $MAIN->set("modrewrite","false");
+            unlink(BASE_DIR_ADMIN.'.htaccess');
+            $CMS_CONF->set("modrewrite","false");
         } else {
             $html = getLanguageValue("install_rewrite_yes");
             $text_status = true;
             writeHtaccess("cms",$rewrite_step);
             writeHtaccess("admin",$rewrite_step);
-            $MAIN->set("modrewrite","true");
+            $CMS_CONF->set("modrewrite","true");
         }
         $input = '<input type="hidden" name="rewrite" value="'.$rewrite_step.'" />';
     }
@@ -468,6 +477,7 @@ function password() {
         $form_errmsg = '<input type="hidden" name="password" value="true" />';
     }
     $help = contend_template(installHelp("install_password_help"),"");
+#$status = true;
     return array($status,$help.$form_errmsg.$html_ret);
 }
 
@@ -530,26 +540,35 @@ function menu_tabs($steps,$current_step,$status) {
 function makeConfFiles() {
     if(isset($_POST['environment']) and $_POST['environment'] == "true")
         return true;
-    global $page_protect;
-    global $BASIC;
-    global $MAIN;
+    if(version_compare(PHP_VERSION, '5.1.2') < 0)
+        return false;
 
-    require_once(BASE_DIR.ADMIN_DIR_NAME."/default_conf.php");
+    if(!is_dir(BASE_DIR_ADMIN.CONF_DIR_NAME))
+        mkdir(BASE_DIR_ADMIN.CONF_DIR_NAME);
+    if(!is_dir(BASE_DIR_CMS.CONF_DIR_NAME))
+        mkdir(BASE_DIR_CMS.CONF_DIR_NAME);
+
+    global $page_protect;
+    global $ADMIN_CONF;
+    global $CMS_CONF;
+
+    require_once(BASE_DIR_ADMIN."default_conf.php");
 
     $confs = array(
-            "basic" => BASE_DIR.ADMIN_DIR_NAME."/".CONF_DIR_NAME."/basic.conf.php",
-            "logindata" => BASE_DIR.ADMIN_DIR_NAME."/".CONF_DIR_NAME."/logindata.conf.php",
-            "loginpass" => BASE_DIR.ADMIN_DIR_NAME."/".CONF_DIR_NAME."/loginpass.conf.php",
-            "gallery" => BASE_DIR.CMS_DIR_NAME."/".CONF_DIR_NAME."/gallery.conf.php",
-            "main" => BASE_DIR.CMS_DIR_NAME."/".CONF_DIR_NAME."/main.conf.php",
-            "syntax" => BASE_DIR.CMS_DIR_NAME."/".CONF_DIR_NAME."/syntax.conf.php",
+            "basic" => BASE_DIR_ADMIN.CONF_DIR_NAME."/basic.conf.php",
+            "logindata" => BASE_DIR_ADMIN.CONF_DIR_NAME."/logindata.conf.php",
+            "loginpass" => BASE_DIR_ADMIN.CONF_DIR_NAME."/loginpass.conf.php",
+            "gallery" => BASE_DIR_CMS.CONF_DIR_NAME."/gallery.conf.php",
+            "main" => BASE_DIR_CMS.CONF_DIR_NAME."/main.conf.php",
+            "syntax" => BASE_DIR_CMS.CONF_DIR_NAME."/syntax.conf.php",
             );
+
     foreach($confs as $name => $dir) {
         $conf = array();
-        if($name == "basic" and $BASIC !== false)
-            $conf = $BASIC->toArray();
-        elseif($name == "main" and $MAIN !== false)
-            $conf = $MAIN->toArray();
+        if($name == "basic" and $ADMIN_CONF !== false)
+            $conf = $ADMIN_CONF->toArray();
+        elseif($name == "main" and $CMS_CONF !== false)
+            $conf = $CMS_CONF->toArray();
         elseif(is_file($dir))
             continue;
         else
@@ -576,7 +595,7 @@ function makeConfFiles() {
 }
 
 function installHelp($index) {
-    return '<span class="mo-message-erfolg" style="background-image:url('.URL_BASE.'admin/gfx/icons/24x24/information.png);padding-left:34px;">'.getLanguageValue($index).'</span>';
+    return '<span class="mo-message-erfolg" style="background-image:url('.URL_BASE.ADMIN_DIR_NAME.'/gfx/icons/24x24/information.png);padding-left:34px;">'.getLanguageValue($index).'</span>';
 }
 
 function getLanguageValue($index,$param1 = '',$param2 = '') {
@@ -586,23 +605,27 @@ function getLanguageValue($index,$param1 = '',$param2 = '') {
 
 function writeHtaccess($art,$step,$getcount = false) {
 
-    $rewrite_base_pfad     = BASE_DIR.'install/';
+    $base_url = substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], "install.php"));
+    if(strlen($base_url) < 1)
+        $base_url = "/";
+    $rewrite_base_url     = $base_url.'install/';
     if($art == "admin")
-        $rewrite_base_pfad = BASE_DIR.'admin/';
+        $rewrite_base_url = $base_url.ADMIN_DIR_NAME.'/';
     if($art == "cms")
-        $rewrite_base_pfad = BASE_DIR;
-
+        $rewrite_base_url = $base_url;
+#?????????????? siehe http://www.mozilo.de/forum/viewtopic.php?f=8&t=2907&start=30
+# php_value max_input_vars 3000
     $indexes            = 'Options -Indexes'."\n";
     $if_module_start_c  = '<IfModule rewrite_module.c>'."\n";
     $if_module_start    = '<IfModule rewrite_module>'."\n";
     $rewrite_on         = 'RewriteEngine On'."\n";
-    $rewrite_base       = 'RewriteBase '.$rewrite_base_pfad."\n";
+    $rewrite_base       = 'RewriteBase '.$rewrite_base_url."\n";
     $if_module_end      = '</IfModule>'."\n";
 
     $rewrite_rule_test  = 'RewriteRule test\.php$ test\.php?rewritetest=true [QSA,L]'."\n";
-    $rewrite_rule_admin = 'RewriteRule index.php$ index.php?link=rewrite [QSA,L]'."\n";
-    $rewrite_rule_cms   = 'RewriteRule admin/index\.php$ admin/index\.php [QSA,L]'."\n"
-                         .'RewriteRule \.html$ index.php [QSA,L]'."\n";
+    $rewrite_rule_admin = 'RewriteRule index\.php$ index\.php?link=rewrite [QSA,L]'."\n";
+    $rewrite_rule_cms   = 'RewriteRule '.ADMIN_DIR_NAME.'/index\.php$ '.ADMIN_DIR_NAME.'/index\.php [QSA,L]'."\n"
+                         .'RewriteRule \.html$ index\.php [QSA,L]'."\n";
 
 
     // die verschiedenen test-configs die wir probieren
@@ -635,10 +658,16 @@ function writeHtaccess($art,$step,$getcount = false) {
         return count($arr_modrewrite_conf) - 1;
 
     if(isset($arr_modrewrite_conf[$step])) {
-        if(($art == "admin" or $art == "cms") and !is_file($rewrite_base_pfad.'.htaccess')) {
-            file_put_contents($rewrite_base_pfad.'.htaccess', $arr_modrewrite_conf[$step]);
-        } else
-            @file_put_contents($rewrite_base_pfad.'.htaccess', $arr_modrewrite_conf[$step]);
+        $base_pfad     = BASE_DIR.'install/';
+        if($art == "admin")
+            $base_pfad = BASE_DIR_ADMIN;
+        if($art == "cms")
+            $base_pfad = BASE_DIR;
+        if(($art == "admin" or $art == "cms") and is_file($base_pfad.'.htaccess')) {
+            rename($base_pfad.'.htaccess',$base_pfad.'htaccess_'.time());
+#            file_put_contents($base_pfad.'.htaccess', $arr_modrewrite_conf[$step]);
+        }
+        file_put_contents($base_pfad.'.htaccess', $arr_modrewrite_conf[$step]);
     }
 }
 
@@ -678,6 +707,25 @@ function isFileRW($file) {
     return (is_readable($file) && is_writeable($file));
 }
 
+function cleanUpUpdate() {
+    if(defined('TEST') and TEST === true) return;
+    unlink('install.php');
+    if(is_file('update.php'))
+        unlink('update.php');
+    if(is_dir(BASE_DIR.'update') and false !== ($currentdir = opendir(BASE_DIR.'update'))) {
+        while(false !== ($file = readdir($currentdir))) {
+            if($file == "." or $file == "..") continue;
+            unlink(BASE_DIR.'update/'.$file);
+        }
+        closedir($currentdir);
+        rmdir(BASE_DIR.'update');
+    }
+}
+
+function mo_unlink($dir) {
+    if(defined('TEST') and TEST === true) return;
+    unlink($dir);
+}
 
 // -----------------------------------------------------------------------------
 // Zeile "SPRACHAUSWAHL"
@@ -685,10 +733,9 @@ function isFileRW($file) {
 function getLanguageSelect() {
     global $LANG_INSTALL;
     global $LANG_TMP;
-    $dir = BASE_DIR."admin/sprachen/";
     $admin_inhalt = '<select id="select-lang" name="language" class="mo-select">';
     foreach ($LANG_INSTALL as $key => $element) {
-        if(is_file($dir."language_".$key.".txt")) {
+        if(is_file(BASE_DIR_ADMIN.LANGUAGE_DIR_NAME."/language_".$key.".txt")) {
             $selected = "";
             if($key == $LANG_TMP)
                 $selected = 'selected="selected" ';
@@ -750,7 +797,7 @@ $install_js = 'function test_modrewrite(url,para,step) {
         },
         complete: function() {
             if(send_to_test === true) {
-                test_modrewrite("install/test.php","",step);
+                test_modrewrite("install/xy/test.php","",step);
             } else if(finish_test === false && step < max_step) {
                 step++;
                 $("#step-mod-conf").text(step);
@@ -803,12 +850,10 @@ $html_start ='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "ht
     .'<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="de">'
     .'<head>'
         .'<meta http-equiv="Content-Type" content="text/html; charset='.CHARSET.'" />'
-        .'<link type="image/x-icon" rel="SHORTCUT ICON" href="'.URL_BASE.'admin/favicon.ico" />'
-        .'<link type="text/css" rel="stylesheet" href="'.URL_BASE.'admin/css/mozilo/jquery-ui-1.8.21.custom.css" />'
-        .'<link type="text/css" rel="stylesheet" href="'.URL_BASE.'admin/admin.css" />'
-        .'<script type="text/javascript" src="'.URL_BASE.'cms/jquery/jquery-1.7.2.min.js"></script>'
-#        .'<script type="text/javascript" src="'.URL_BASE.'install.js"></script>'
-
+        .'<link type="image/x-icon" rel="SHORTCUT ICON" href="'.URL_BASE.ADMIN_DIR_NAME.'/favicon.ico" />'
+        .'<link type="text/css" rel="stylesheet" href="'.URL_BASE.ADMIN_DIR_NAME.'/css/mozilo/jquery-ui-1.8.21.custom.css" />'
+        .'<link type="text/css" rel="stylesheet" href="'.URL_BASE.ADMIN_DIR_NAME.'/admin.css" />'
+        .'<script type="text/javascript" src="'.URL_BASE.CMS_DIR_NAME.'/jquery/jquery-1.7.2.min.js"></script>'
         .'<script language="Javascript" type="text/javascript">/*<![CDATA[*/'
         .$install_js
         .'/*]]>*/</script>'
@@ -817,7 +862,7 @@ $html_start ='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "ht
     .'</head>'
     .'<body>'
     .'<body class="ui-widget" style="font-size:12px;">'
-    .'<table summary="" width="100%" cellspacing="0" border="0" cellpadding="0">'
+    .'<table summary="" width="100%" cellspacing="0" border="0" cellpadding="0" style="margin-top:1.5em;">'
     .'<tr><td>&nbsp;</td>'
     .'<td class="mo-td-content-width" style="vertical-align:top;">'
     .'<noscript><div class="mo-noscript mo-td-content-width ui-state-error ui-corner-all"><div>'.getLanguageValue("error_no_javascript").'</div></div></noscript>'
