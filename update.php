@@ -413,7 +413,8 @@ function changeMoziloOldSpecialChars($text,$urlcodet = true) {
 function toUtf($string) {
     if(!check_utf8($string)) {
         if(function_exists("iconv")) {
-            $string = iconv('ISO-8859-1', CHARSET.'//IGNORE',$string);
+            $string = iconv('cp1252', CHARSET.'//IGNORE',$string);
+#            $string = iconv('ISO-8859-1', CHARSET.'//IGNORE',$string);
         } elseif(function_exists("mb_convert_encoding")) {
             $string = mb_convert_encoding($string, CHARSET);
         } elseif(function_exists("utf8_encode")) {
