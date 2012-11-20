@@ -69,11 +69,11 @@ $(function() {
     });
 
     // alle plugin activ checkbox die nicht activ sind suchen
-    $('.js-plugin-active input[type="checkbox"]:not(:checked)').each(function(i,tag) {
-        var upper_tag = $(this).closest(".js-plugin");
-        // die anzeige einstelungen hiden
-        $(upper_tag).find(".js-config").css("display","none");
-    })
+     $('.js-plugin-active input[type="checkbox"]:not(:checked)').each(function(i,tag) {
+         var upper_tag = $(this).closest(".js-plugin");
+         // die anzeige einstelungen hiden
+         $(upper_tag).find(".js-config").css("display","none");
+     })
 
     /* weil der in einem hide() drin ist muss display:none benutzt werden */
     $(".js-plugin-help-content").css("display","none");

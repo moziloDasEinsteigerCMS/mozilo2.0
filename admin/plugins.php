@@ -65,11 +65,16 @@ function plugins() {
 
     $dircontent = getDirAsArray(PLUGIN_DIR_REL,"dir","natcasesort");
     foreach ($dircontent as $currentelement) {
+        $new_plugin_conf = false;
         if(!ROOT and !in_array($currentelement,$show))
             continue;
         if (file_exists(PLUGIN_DIR_REL.$currentelement."/index.php")) {
-            if(!is_file(PLUGIN_DIR_REL.$currentelement."/plugin.conf.php") and false === (newConf(PLUGIN_DIR_REL.$currentelement."/plugin.conf.php")))
-                die();
+            if(!is_file(PLUGIN_DIR_REL.$currentelement."/plugin.conf.php")) {
+                if(false === (newConf(PLUGIN_DIR_REL.$currentelement."/plugin.conf.php")))
+                    die();
+                else
+                    $new_plugin_conf = true;
+            }
             require_once(PLUGIN_DIR_REL.$currentelement."/index.php");
             # Enthält der Code eine Klasse mit dem Namen des Plugins und ist es auch der Dirname?
             if(class_exists($currentelement) and in_array($currentelement, get_declared_classes()))
@@ -78,6 +83,11 @@ function plugins() {
                 # Plugin Dirname stimt nicht mit Plugin Classnamen überein
                 continue;
             $conf_plugin = new Properties(PLUGIN_DIR_REL.$currentelement."/plugin.conf.php");
+            # plugin.conf.php wurde neu erstelt.
+            # Wenn es die getDefaultSettings() gibt fühle die plugin.conf.php damit
+            if($new_plugin_conf and method_exists($plugin,'getDefaultSettings')) {
+                $conf_plugin->setFromArray($plugin->getDefaultSettings());
+            }
             $plugin_css_li_error = NULL;
             $plugin_error = false;
             $plugin_info = $plugin->getInfo();
