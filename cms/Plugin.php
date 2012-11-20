@@ -96,7 +96,7 @@ class Plugin {
     */
     function checkForMethod($method) {
         // wenn die Methode nicht existiert, wird die Fehlervariable gefüllt
-        if (!method_exists($this, $method)) {
+        if (class_exists("Syntax") and !method_exists($this, $method)) {
             $syntax = new Syntax();
             $language = new Language();
             $this->error = $syntax->createDeadlink("{".get_class($this)."}", $language->getLanguageValue("plugin_error_missing_method_2", get_class($this), $method));
