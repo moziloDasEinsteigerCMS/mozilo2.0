@@ -275,6 +275,7 @@ plugins_info                         = Information
 template_button                      = Template
 template_title_grafiken              = Grafiken
 template_title_html_css              = HTML und CSS Dateien
+template_title_plugins               = Plugins CSS Dateien
 
 install_help                         = <b>Willkommen im moziloCMS Installationsdialog</b><br /><br />In den nächsten Schritten wird getestet ob Dein Webserver bzw. Webhosting-Paket die für moziloCMS nötigen Voraussetzungen erfüllt.<br />Zudem werden grundlegende Voreinstellungen getroffen. All diese Einstellungen können später im Admin jederzeit wieder geändert werden.<br /><br /><b>Update?!</b> Solltest Du ein Update von einer früheren moziloCMS-Version anstreben, ließ und befolge zuerst die install.txt!<br /><br /><b>ACHTUNG!</b> Die "install.php" und wenn vorhanden die "update.php" sowie der Ordner "update" müssen nach dem Installationsdialog gelöscht werden da sie ein großes Sicherheitsrisiko sind.
 install_lang_select                  = Wähle Deine Sprache:
