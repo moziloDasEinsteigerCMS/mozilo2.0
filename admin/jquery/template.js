@@ -31,9 +31,10 @@ var edit_handler = function(event) {
     $(dialog_editor).dialog("option", "width", $(".mo-td-content-width").eq(0).width());
     $(dialog_editor).dialog("option", "height", (parseInt($(window).height()) - dialogMaxheightOffset));
 
-var file = $(this).closest(".js-tools-show-hide").find(".js-filename").text();
+    var file_title = $(this).closest(".js-tools-show-hide").find(".js-filename").text();
+    var file = $(this).next('.js-edit-file-pfad').text();
 
-    $(dialog_editor).dialog("option", "title", "Berabeiten "+file);
+    $(dialog_editor).dialog("option", "title", "Berabeiten "+file_title);
     $(dialog_editor).data("send_object",false);
 
 //    $(dialog_editor).dialog("open");
