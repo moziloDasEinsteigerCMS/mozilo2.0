@@ -20,6 +20,7 @@ class CatPageClass {
     var $SyntaxIncludeRemember = array();
     # bei cat page als link müssen diese zeichen wiederhergestelt werden
     # wird im ["_link-"] benutzt
+#!!!!!!!!!!gibts das noch?
     var $link_search = array("%3A","%2F","%3F","%26","%3D","%23");
     var $link_replace = array(":","/","?","&amp;","=","#");
 
@@ -543,18 +544,28 @@ class CatPageClass {
         $cat = $this->get_AsKeyName($cat);
         # wenn cat ein link ist
         if($this->get_Type($cat,false) == EXT_LINK) {
-            return $this->CatPageArray[$cat]['_link-'];
+            if(strlen($this->CatPageArray[$cat]['_link-']) > 3 and strpos($this->CatPageArray[$cat]['_link-'],"://") < 1)
+                return "http://".$this->CatPageArray[$cat]['_link-'];
+            else
+                return $this->CatPageArray[$cat]['_link-'];
         }
         # wenn page ein link ist
         if($this->get_Type($cat,$page) == EXT_LINK) {
-            return $this->CatPageArray[$cat]['_pages-'][$page]['_link-'];
+            if(strlen($this->CatPageArray[$cat]['_pages-'][$page]['_link-']) > 3 and strpos($this->CatPageArray[$cat]['_pages-'][$page]['_link-'],"://") < 1)
+                return "http://".$this->CatPageArray[$cat]['_pages-'][$page]['_link-'];
+            else
+                return $this->CatPageArray[$cat]['_pages-'][$page]['_link-'];
         }
         $pageurl = NULL;
         $url = URL_BASE;
         if($CMS_CONF->get("modrewrite") == "true") {
             if($page !== false)
-                $pageurl = "/".str_replace('%2F','%252F',$page);
-            $url .= str_replace('%2F','%252F',$cat).$pageurl.".html".$requesturl;
+                $pageurl = "/".str_replace('%2F','/',$page);
+#                $pageurl = "/".$page;
+#                $pageurl = "/".str_replace('%2F','%252F',$page);
+            $url .= str_replace('%2F','/',$cat).$pageurl.".html".$requesturl;
+#            $url .= $cat.$pageurl.".html".$requesturl;
+#            $url .= str_replace('%2F','%252F',$cat).$pageurl.".html".$requesturl;
         } else {
             if($request)
                 $requesturl = "&amp;".$request;
@@ -832,8 +843,8 @@ class CatPageClass {
                 $page_a[$tmp[0]]["_type-"] = EXT_LINK;
                 $url = str_replace($this->link_search,$this->link_replace,substr($tmp[1],0,strlen($tmp[1])-(EXT_LENGTH)));
                 $href = "";
-                if(strpos($url,"://") < 1)
-                    $href = "http://";
+#                if(strpos($url,"://") < 1)
+#                    $href = "http://";
                 $page_a[$tmp[0]]["_link-"] = $href.$url;
                 $page_a[$tmp[0]]["_target-"] = str_replace("-","",$target);
             } else {
@@ -863,8 +874,9 @@ class CatPageClass {
                 $cat_a[$tmp[0]]["_type-"] = EXT_LINK;
                 $url = str_replace($this->link_search,$this->link_replace,substr($tmp[1],0,strlen($tmp[1])-(EXT_LENGTH)));
                 $href = "";
-                if(strpos($url,"://") < 1)
-                    $href = "http://";
+#echo $url."<br />\n";
+#                if(strpos($url,"://") < 1)
+#                    $href = "http://";
                 $cat_a[$tmp[0]]["_link-"] = $href.$url;
                 $cat_a[$tmp[0]]["_target-"] = str_replace("-","",$target);
             } else {

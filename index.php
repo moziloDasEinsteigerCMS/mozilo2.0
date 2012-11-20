@@ -112,16 +112,44 @@ if(!array_key_exists("cat",$_GET)) {
     $url_get = str_replace("?".$QUERY_STRING,"",$url_get);
     $url_get = str_replace('%252F','%2F',$url_get);
     # / nach : damit es wie eine cat:page syntax aussieht
-    $url_get = str_replace('/',':',$url_get);
+#    $url_get = str_replace('/',':',$url_get);
     if(substr($url_get,-5) == ".html")
         $url_get = substr($url_get,0,-5);
-    $tmp = $CatPage->split_CatPage_fromSyntax($url_get);
+    $tmp = makeGET($url_get);
+#    $tmp = $CatPage->split_CatPage_fromSyntax($url_get);
+/*
+echo "<pre>";
+print_r($tmp);
+echo "</pre><br />\n";
+*/
+#echo "GET=".$tmp[0]." -> ".$tmp[1]."<br />\n";
     $_GET['cat'] = cleanValue($tmp[0]);
     $_GET['page'] = cleanValue($tmp[1]);
     unset($tmp,$QUERY_STRING,$url_get);
 }
-
-
+function makeGET($syntax_catpage) {
+    global $CatPage;
+    $valuearray = explode("/", $syntax_catpage);
+/*echo "<pre>";
+print_r($valuearray);
+echo "</pre><br />\n";*/
+    # wenn cat:page/file oder in cat : enthalten ist
+#echo count($valuearray)."<br />\n";
+    if(count($valuearray) > 0) {
+        for($i = 1;$i < (count($valuearray) + 1);$i++) {
+#        for($i = (count($valuearray) - 0);$i > 0;$i--) {
+#echo $i."<br />\n";
+            $cat = implode("%2F",array_slice($valuearray, 0,$i));
+            $page = implode("%2F",array_slice($valuearray, $i));
+#echo "get=".$cat." -> ".$page."<br />\n";
+                if($CatPage->exists_CatPage($cat,$page))
+                    return array($cat,$page);
+                elseif(strlen($page) == 0 and $CatPage->exists_CatPage($cat,false)) {
+                    return array($cat,false);
+                }
+        }
+    }
+}
 $pagecontent = false;
 
 foreach($plugin_first as $plugin) {
@@ -206,6 +234,7 @@ function set_CatPageRequest() {
 
 #!!!!!!!!!!! file upload
 #exists_File( $cat, $file )
+#echo $CAT_REQUEST_URL." -> ".$PAGE_REQUEST_URL."<br />\n";
     # übergebene cat und page gibts
     if($CatPage->exists_CatPage($CAT_REQUEST_URL,$PAGE_REQUEST_URL)
         ) {
@@ -376,6 +405,9 @@ function getTemplate($TEMPLATE_FILE) {
     if(false === ($template = file_get_contents($TEMPLATE_FILE)))
         die($language->getLanguageValue("message_template_error_1", $TEMPLATE_FILE));
     # usesubmenu aus der template.html auslesen und setzten
+    # 0 = ein menue mit submenue alles ausgeklapt
+    # 1 = ein menue mit submenue nur active ausgeklapt
+    # 2 = ein menue nur mit cats und eins nur mit pages
     $dummy = 1;
     if(strpos($template,"usesubmenu") > 1 and strpos($template,"usesubmenu") < 10) {
         $tmp = substr($template,0,strpos($template,"<!DOCTYPE"));

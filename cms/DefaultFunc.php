@@ -253,6 +253,7 @@ function replaceFileMarker($file,$filesystem = true) {
 function helpFuncReplaceFileMarker(&$value, $key) {
     global $specialchars;
     $value = $specialchars->replaceSpecialChars($value,false);
+    $value = str_replace("/","%2F",$value);
 }
 
 ?>

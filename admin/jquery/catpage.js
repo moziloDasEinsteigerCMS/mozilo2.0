@@ -230,7 +230,8 @@ var edit_handler = function() {
     } else {
         var link_href = URL_BASE + "index.php?cat=" + get_cat(cat_page) + "&page=" + get_page(cat_page);
     }
-    var title = "<a href=\"" + link_href.replace(/%2F/g,"%252F") + "\" target=\"_blank\">" + link_text + "</a>"
+//    var title = "<a href=\"" + link_href.replace(/%2F/g,"%252F") + "\" target=\"_blank\">" + link_text + "</a>"
+    var title = "<a href=\"" + link_href.replace(/%2F/g,"/") + "\" target=\"_blank\">" + link_text + "</a>"
     $(dialog_editor).dialog("option", "title", mozilo_lang["page_edit"] + " → " + title);
     $(dialog_editor).data("send_object",false);
     editor_file = "editpage="+page;
