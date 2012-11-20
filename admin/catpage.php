@@ -201,7 +201,7 @@ function li_table($name,$in_cat_page,$status,$type,$cat_files,$cat_page_link = f
 function cat_page_move($name) {
     if(false === ($error = moveFileDir(CONTENT_DIR_REL.$name["org"],CONTENT_DIR_REL.$name["new"])))
         return ajax_return("error",false,$error,true,"js-dialog-reload");
-    return write_sort_list();
+    return write_sort_list($name);
 }
 
 # hier werden die rechte neu gesetzt
@@ -239,11 +239,19 @@ function cat_page_new($name) {
 }
 
 # schreibt die sortliste neu Achtung es muss success oder error zurück kommen
-function write_sort_list() {
+function write_sort_list($movecat = false) {
     if(false === getRequestValue('sort_array','post'))
         return ajax_return("success",false);
     global $cat_page_sort_array;
     $post = getRequestValue('sort_array','post');
+    # da im frontend die cat erst umbenant wird wenn vom server ein succsses zurück kamm
+    # müssen wir hier das sort_array aktualiesieren
+    if(is_array($movecat)) {
+        if($movecat['type'] == "cat" and isset($post[$movecat['new']]) and isset($post[$movecat['org']])) {
+            $post[$movecat['new']] = $post[$movecat['org']];
+            unset($post[$movecat['org']]);
+        }
+    }
     $cat_page_sort_array = array();
     foreach($post as $cat => $tmp) {
         if(substr($cat,-(EXT_LENGTH)) == EXT_LINK) {
