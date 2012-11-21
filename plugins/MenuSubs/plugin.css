@@ -1,0 +1,73 @@
+/*
+ul cat-menusubs
+    li cat-menusubs
+        a cat-menusubs-link menusubs-link/active
+        ul page-menusubs
+            li page-menusubs
+                a page-menusubs-link menusubs-link/active
+
+            li subcat-menusubs
+                a subcat-menusubs-link menusubs-link/active
+                ul subcat-menusubs
+                    li page-menusubs
+                        a page-menusubs-link menusubs-link/active
+
+id für Plugin 2tes Menu = #menusubs_2
+*/
+
+ul.cat-menusubs, ul.subcat-menusubs, ul.page-menusubs {
+    margin:0;
+    padding:0;
+    list-style-type:none;
+}
+
+ul.subcat-menusubs {
+    padding-left:20px;
+}
+
+ul.page-menusubs {
+    padding-left:20px;
+}
+
+/*1=oben, 2=rechts, 3=unten, 4=links*/
+/* Links */
+/* alle Links */
+.menusubs-link, .menusubs-linkactive {
+    display:block;
+    text-decoration:none;
+    padding:0 .3em 0 .3em;
+    font-weight:bold;
+    color: #0B1C47;
+    /*border:1px solid #f00;*/
+}
+
+.menusubs-link:hover {
+    color: #AE6427;
+}
+
+.menusubs-linkactive {
+    color: #AE6427;
+}
+
+/* Kategorie Links */
+.cat-menusubs-link {
+}
+
+/* Inhaltseiten Links */
+.page-menusubs-link {
+    font-weight:normal;
+}
+
+/* Sub Kategorie Links */
+.subcat-menusubs-link {
+}
+
+/* Sidemap */
+#menusubs-sidemap-title {
+}
+#menusubs-sidemap {
+}
+#menusubs-sidemap-menu2 {
+}
+
+

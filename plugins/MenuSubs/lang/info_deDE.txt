@@ -1,0 +1,54 @@
+Erzeugt ein Menu mit fast unbegrenster Submenu Verschachtelungen<br />
+<b>Achtung</b> Kategorien die ein "/" enthalten werden nicht mehr Angezeigt da wir den "/" für das Submenu verwenden.<br />
+Auserdem ist damit kein eigenes Deteilmenu möglich.<br />
+<br />
+<b>Beschreibung:</b>
+<ul>
+<li>Sobald eine verstägte Inhaltseite die ein "/" im Namen hat gefunden wird wird sie mit der Kategorie die den gleichen Namen hat als Submenu ersetzt.</li>
+<li><b>Wichtig</b> der Name wird als Pfad angesehen.</li>
+<li>Um bei SubKategorien eine Inhaltseite zu Benutzen die sich wie "Lege fest, ob Inhaltsseiten, die genau wie die Kategorie heißen, im Detailmenü versteckt werden sollen:" muss der Name wie der Letzte teil SubKategorien lauten z.B SubKategorien=Kategorie/Submenu_1 Inhaltseite=Submenu_1 und muss die erste Inhaltseite sein.</li>
+</ul>
+<br />
+<b>Beispiel:</b><br />
+<ul><li style="list-style-type:none;"><b>Kategorie</b>
+<ul>
+    <li>Inhaltseite_1</li>
+    <li>Kategorie / Submenu_1 <b>verstägt</b></li>
+    <li>Inhaltseite_2</li>
+</ul>
+<b>Kategorie / Submenu_1</b>
+<ul>
+    <li>Inhaltseite_3</li>
+    <li>Kategorie / Submenu_1 / Submenu_2 <b>verstägt</b></li>
+</ul>
+<b>Kategorie / Submenu_1 / Submenu_2</b>
+<ul>
+    <li>Inhaltseite_4</li>
+    <li>Inhaltseite_5</li>
+</ul>
+</li></ul>
+<br />
+<b>Ergebnis:</b><br />
+<ul><li style="list-style-type:none;"><b>Kategorie</b>
+<ul>
+    <li>Inhaltseite_1</li>
+    <li><b>Submenu_1</b>
+    <ul>
+        <li>Inhaltseite_3</li>
+        <li><b>Submenu_2</b>
+        <ul>
+            <li>Inhaltseite_4</li>
+            <li>Inhaltseite_5</li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li>Inhaltseite_2</li>
+</ul>
+</li></ul>
+<br />
+Ein 2tes Menu kann mit <b>{MenuSubs|menusubs_2}</b> erstelt werden.<br />
+Für z.B Impressum und Kontagt im Fussbereich der Seite.<br />
+Einfach in der Plugin Konfiguration eine Kategorie Auswählen und im Template <b>{MenuSubs|menusubs_2}</b> <br />an die gewünschten stelle Eintragen.<br />
+Es sind nur Kategorien Ausgewählbar die kein "/" im Namen haben.<br />
+Da sind natürlich auch SubKategorien mit möglich.

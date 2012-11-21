@@ -30,6 +30,7 @@ galerien/*
 
 # plugins
 plugins/*
+!plugins/
 !plugins/CONTACT/
 !plugins/Galerie/
 !plugins/LASTCHANGE/
