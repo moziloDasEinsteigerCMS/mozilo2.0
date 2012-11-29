@@ -82,35 +82,42 @@ function template() {
                     .'</tbody>'
                     .'</table>';
     }
-
+    global $ADMIN_CONF;
+    $show = $ADMIN_CONF->get("plugins");
+    if(!is_array($show))
+        $show = array();
     global $activ_plugins;
     $template_plugins = array();
-    foreach($activ_plugins as $file) {
-#!!!!!!! nur wens auch im admin freigegeben ist?
-        if(!is_file(BASE_DIR.PLUGIN_DIR_NAME."/".$file."/plugin.css")) continue;
+    foreach($activ_plugins as $plugin) {
+        if(!ROOT and !in_array($plugin,$show))
+            continue;
+        if(!is_file(BASE_DIR.PLUGIN_DIR_NAME."/".$plugin."/plugin.css")) continue;
         $template_plugins["template_title_plugins"][] = '<table class="js-tools-show-hide mo-tag-height-from-icon" width="100%" cellspacing="0" border="0" cellpadding="0">'
                     .'<tbody>'
                     .'<tr>'
                         .'<td class="mo-nowrap" width="99%">'
-                            .'<span class="js-filename mo-padding-left"><span class="mo-bold mo-padding-right">'.$file.'</span>/plugin.css</span>'
+                            .'<span class="js-filename mo-padding-left"><span class="mo-bold mo-padding-right">'.$plugin.'</span>/plugin.css</span>'
                         .'</td>'
                         .'<td class="mo-nowrap">'
                             .'<img class="js-tools-icon-show-hide js-edit-template js-css mo-tool-icon" src="'.ADMIN_ICONS.'page-edit.png" alt="page-edit" hspace="0" vspace="0" />'
-                            .'<span class="js-edit-file-pfad" style="display:none;">'.$specialchars->replaceSpecialChars(BASE_DIR.PLUGIN_DIR_NAME."/".$file."/plugin.css",true).'</span>'
+                            .'<span class="js-edit-file-pfad" style="display:none;">'.$specialchars->replaceSpecialChars(BASE_DIR.PLUGIN_DIR_NAME."/".$plugin."/plugin.css",true).'</span>'
                         .'</td>'
                     .'</tr>'
                     .'</tbody>'
                     .'</table>';
     }
-    if(count($template_plugins["template_title_plugins"]) > 0)
+    $html_plugins = "";
+    if(count($template_plugins["template_title_plugins"]) > 0) {
         $template_plugins["template_title_plugins"]["toggle"] = true;
+        $html_plugins = contend_template($template_plugins);
+    }
     require_once(BASE_DIR_ADMIN."jquery/File-Upload/fileupload.php");
     $pagecontent = getFileUpload($CMS_CONF->get("cmslayout").'/grafiken');
 
     $tmpl = get_template_truss('<li class="mo-li ui-corner-all">'.$pagecontent.'</li>',"template_title_grafiken",true);
 
 
-    return contend_template($template).$tmpl.contend_template($template_plugins).pageedit_dialog();
+    return contend_template($template).$tmpl.$html_plugins.pageedit_dialog();
 }
 
 ?>
