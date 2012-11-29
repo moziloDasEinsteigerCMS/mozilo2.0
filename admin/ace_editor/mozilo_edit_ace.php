@@ -1,17 +1,18 @@
 <?php if(!defined('IS_ADMIN') or !IS_ADMIN) die();
 global $activ_plugins,$deactiv_plugins;
 
-#list($activ_plugins,$deactiv_plugins) = meditor_findPlugins();
-$var_PluginsActiv = 'var moziloPluginsActiv = "0E0M0P0T0Y0";';
+$var_PluginsActiv = '';
 if(isset($activ_plugins) and count($activ_plugins) > 0) {
     rsort($activ_plugins);
     $var_PluginsActiv = 'var moziloPluginsActiv = "'.implode('|',$activ_plugins).'";';
 }
-$var_PluginsDeactiv = 'var moziloPluginsDeactiv = "0E0M0P0T0Y0";';
+
+$var_PluginsDeactiv = '';
 if(isset($deactiv_plugins) and count($deactiv_plugins) > 0) {
     rsort($deactiv_plugins);
     $var_PluginsDeactiv = 'var moziloPluginsDeactiv = "'.implode('|',$deactiv_plugins).'";';
 }
+
 $moziloPlace = makePlatzhalter(true);
 foreach($moziloPlace as $key => $value) {
     $value = substr($value,1,-1);
@@ -21,10 +22,13 @@ foreach($moziloPlace as $key => $value) {
     }
     $moziloPlace[$key] = $value;
 }
-rsort($moziloPlace);
-$var_Place = 'var moziloPlace = "'.implode('|',$moziloPlace).'|VALUE|DESCRIPTION";';
+if(count($moziloPlace) > 0) {
+    rsort($moziloPlace);
+    $var_Place = 'var moziloPlace = "'.implode('|',$moziloPlace).'|VALUE|DESCRIPTION";';
+} else
+    $var_Place = 'var moziloPlace = "VALUE|DESCRIPTION";';
 
-$var_UserSyntax = 'var moziloUserSyntax = "0E0M0P0T0Y0";';
+$var_UserSyntax = '';
 global $USER_SYNTAX;
 $moziloUserSyntax  = $USER_SYNTAX->toArray();
 if(count($moziloUserSyntax) > 0) {
@@ -35,30 +39,39 @@ if(count($moziloUserSyntax) > 0) {
 
 $smileys = new Properties(BASE_DIR_CMS."smileys/smileys.txt");
 $moziloSmileys = $smileys->toArray();
-$var_Smileys = 'var moziloSmileys = "0E0M0P0T0Y0";';
+$var_Smileys = '';
 if(count($moziloSmileys) > 0) {
     $moziloSmileys = array_keys($moziloSmileys);
     rsort($moziloSmileys);
     $var_Smileys = 'var moziloSmileys = "'.implode('|',$moziloSmileys).'";';
 }
 
-$moziloSyntax = 'var moziloSyntax = "link|mail|kategorie|seite|absatz|datei|galerie|bildlinks|bildrechts|bild|----|links|zentriert|block|rechts|fett|kursiv|fettkursiv|unter|durch|ueber1|ueber2|ueber3|liste|numliste|liste1|liste2|liste3|html|tabelle|include|farbe|fontsize";';
-
+$moziloSyntax = 'var moziloSyntax = "';
+require_once(BASE_DIR_CMS."Syntax.php");
+$syntax_elemente = get_class_methods('Syntax');
+rsort($syntax_elemente);
+foreach($syntax_elemente as $element) {
+    if($element == "syntax_hr") continue;
+    if(substr($element,0,strlen("syntax_")) == "syntax_")
+        $moziloSyntax .= substr($element,strlen("syntax_"))."|";
+}
+$moziloSyntax .= '----";';
 
 $editor_area_html = '<link type="text/css" rel="stylesheet" href="editsite.css" />'.
 '<link type="text/css" rel="stylesheet" href="jquery/farbtastic/farbtastic.css" />'.
 '<script type="text/javascript" src="jquery/farbtastic/farbtastic.js"></script>';
+
+#$moziloSyntax = '';
 # -uncompressed
-$editor_area_html .= '<script src="ace_editor/ace.js" type="text/javascript" charset="utf-8"></script>'
-.'<script language="Javascript" type="text/javascript">/*<![CDATA[*/
+$editor_area_html .= '<script language="Javascript" type="text/javascript">/*<![CDATA[*/
 var meditorID = "pagecontent";
-var ace_editor = "";
 '.$var_PluginsActiv.'
 '.$var_PluginsDeactiv.'
 '.$var_Place.'
 '.$var_UserSyntax.'
 '.$var_Smileys.'
-'.$moziloSyntax.'
-/*]]>*/</script>';
+'.$moziloSyntax.
+'/*]]>*/</script>'
+.'<script src="ace_editor/src-min/ace.js" type="text/javascript" charset="utf-8"></script>';
 
 ?>

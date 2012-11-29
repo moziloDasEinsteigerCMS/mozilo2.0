@@ -265,14 +265,16 @@ $(function() {
 
     get_editor_settings();
     editor = ace.edit(meditorID);
+    editor_session = editor.getSession();
     editor.setTheme("ace/theme/mozilo");
     editor.setFontSize($('#select-fontsize').val());
     editor.setSelectionStyle("line"); // "line" "text"
+editor_session.setFoldStyle("markbegin");
     editor.setShowFoldWidgets(true);
-    editor_session = editor.getSession();
     editor_session.setMode("ace/mode/"+$('#select-mode').val());
     editor_session.setUseWrapMode(true);
-    editor_session.setWrapLimitRange(80, 80);
+// Actung nicht setzen da sond der Foldmode nicht richtig geht auser setUseWrapMode(false) ist gesetzt
+//    editor_session.setWrapLimitRange(80, 80);
     editor_session.setTabSize(4);
 
     editor.renderer.setShowPrintMargin(false);
@@ -286,7 +288,7 @@ $(function() {
     // der opera hat probleme mit den bold sachen im ace editor
     // älterer firefox auch
 //     if(navigator.appName.toLowerCase() == "opera") {
-        $('.ace_editor').css('font-family','monospace');
+       // $('.ace_editor').css('font-family','monospace');
 //     }
 
     $('#show_gutter').bind('click', function() {
@@ -316,7 +318,14 @@ $(function() {
     });
 
     $('#toggle_fold').bind('click', function() {
-        editor_session.toggleFold();
+//        editor_session.toggleFold();
+        if($(this).hasClass('foldet')) {
+            editor_session.unfold();
+            $(this).removeClass('foldet')
+        } else {
+            editor_session.foldAll();
+            $(this).addClass('foldet')
+        }
         editor.focus();
     });
 
@@ -408,7 +417,6 @@ $(function() {
             $('select[name="select-fontsize"]').closest('div').width($('select[name="select-fontsize"]').outerWidth())
             // das ist wichtig da erst dann die button breite bekant ist
             $('.overviewselect, .usersyntaxselectbox, .js-ace-select').multiselect("refresh");
-
         },//Stop
         resize: function(event, ui) {
             init_ace_editor();

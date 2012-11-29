@@ -262,6 +262,21 @@ function clean_data(data) {
         replace_item = data.find("#replace-item");
         data.find("#replace-item").remove();
     }
+    // vom Server kamm ein tag mit der id moziloUserSyntax
+    if(data.find("#moziloUserSyntax").length > 0) {
+        // die userSyntax hat sich geändert
+        if(typeof editor != "undefined") {
+            // moziloUserSyntax mit neuen value versehen
+            moziloUserSyntax = data.find("#moziloUserSyntax").text();
+            if(moziloUserSyntax.length > 1) {
+                // den mozilo Mode holen
+                var MoziloMode = require('ace/mode/mozilo').Mode;
+                // und die Mode neu einlessen
+                editor_session.setMode(new MoziloMode());
+            }
+        }
+        data.find("#moziloUserSyntax").remove();
+    }
     // vom Server kamm ein tag mit der id page-content
     if(data.find("#page-content").length > 0) {
         pagecontent = data.find("#page-content").text();

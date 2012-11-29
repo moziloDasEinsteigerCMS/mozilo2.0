@@ -17,7 +17,18 @@ function config() {
             $syntax = '<div class="mo-nowrap">'.$syntax."</div>";
             require_once(BASE_DIR_ADMIN.'editsite.php');
             $selctbox = '<span id="replace-item">'.returnUserSyntaxSelectbox().'</span>';
-            echo ajax_return("success",false,returnMessage(true,$syntax),getLanguageValue("config_titel_usersyntax_test"),true);
+            $var_UserSyntax = '0E0M0P0T0Y0';
+            # die userSxntax hat sich geändert deshalb schiecken wir dem editor userSyntax die neuen
+            global $USER_SYNTAX;
+            $moziloUserSyntax = $USER_SYNTAX->toArray();
+            if(count($moziloUserSyntax) > 0) {
+                $moziloUserSyntax = array_keys($moziloUserSyntax);
+                rsort($moziloUserSyntax);
+                $var_UserSyntax = implode('|',$moziloUserSyntax);
+            }
+            $var_UserSyntax = '<span id="moziloUserSyntax">'.$var_UserSyntax.'</span>';
+
+            echo ajax_return("success",false,returnMessage(true,$syntax),getLanguageValue("config_titel_usersyntax_test"),true).$selctbox.$var_UserSyntax;
         } elseif($CMS_CONF->get('usecmssyntax') == "true") {
             require_once(BASE_DIR_ADMIN.'editsite.php');
             $selctbox = '<span id="replace-item">'.returnUserSyntaxSelectbox().'</span>';
