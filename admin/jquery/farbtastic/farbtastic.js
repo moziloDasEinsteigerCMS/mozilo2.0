@@ -350,7 +350,7 @@ $._farbtastic = function (container, callback) {
             else if($(this).hasClass("fb-blue"))
                 blue = ui.value;
             fb.setColor(fb.hexFromRGB(red, green, blue))
-        },
+        }
     });
 };
 

@@ -59,11 +59,9 @@ $moziloSyntax .= '----";';
 
 $editor_area_html = '<link type="text/css" rel="stylesheet" href="editsite.css" />'.
 '<link type="text/css" rel="stylesheet" href="jquery/farbtastic/farbtastic.css" />'.
-'<script type="text/javascript" src="jquery/farbtastic/farbtastic.js"></script>';
+'<script type="text/javascript" charset="utf-8" src="jquery/farbtastic/farbtastic.js"></script>';
 
-#$moziloSyntax = '';
-# -uncompressed
-$editor_area_html .= '<script language="Javascript" type="text/javascript">/*<![CDATA[*/
+$editor_area_html .= '<script language="Javascript" type="text/javascript" charset="utf-8">/*<![CDATA[*/
 var meditorID = "pagecontent";
 '.$var_PluginsActiv.'
 '.$var_PluginsDeactiv.'
@@ -71,7 +69,7 @@ var meditorID = "pagecontent";
 '.$var_UserSyntax.'
 '.$var_Smileys.'
 '.$moziloSyntax.
-'/*]]>*/</script>'
-.'<script src="ace_editor/src-min/ace.js" type="text/javascript" charset="utf-8"></script>';
+'/*]]>*/</script>';
+$editor_area_html .= '<script src="ace_editor/src-min/ace.js" type="text/javascript" charset="utf-8"></script>';
 
 ?>
