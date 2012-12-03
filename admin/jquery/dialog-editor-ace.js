@@ -95,8 +95,7 @@ function dialog_editor_send_cancel() {
 
 function dialog_editor_save_beforclose() {
     $(dialog_multi).dialog( "option", "title", mozilo_lang["dialog_title_save_beforeclose"]);
-    var inhalt = "<p><span class=\"ui-icon ui-icon-alert\" style=\"float:left; margin:0 7px 20px 0;\">&nbsp;</span>Soll sie jetzt gespeichert werden?</p>";
-    $(dialog_multi).html(inhalt);
+    $(dialog_multi).html(returnMessage(false, mozilo_lang["error_save_beforeclose"]));
     $(dialog_multi).dialog( "option", "buttons", [{
         text: mozilo_lang["button_save"],
         click: function() {
@@ -426,7 +425,7 @@ editor_session.setFoldStyle("markbegin");
     //farbtastic
     if($(".box-farbtastic").length > 0) {
         var picker = $.farbtastic(".box-farbtastic",".fb-color-change");
-            picker.setColor("FF0000");
+            picker.setColor($("#farbcode").val());
         $(".box-farbtastic").addClass("fb-box-close");
         $(".box-farbtastic").css('display','none');
         $(".colorimage").bind({

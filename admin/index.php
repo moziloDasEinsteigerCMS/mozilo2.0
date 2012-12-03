@@ -28,12 +28,6 @@ if(!isset($_SESSION['MOZILOID'])) {
     session_regenerate_id(true);
     $_SESSION['MOZILOID'] = true;
 }
-/*
-if(!isset($_SESSION['PHPSESSID'])) {
-    session_regenerate_id(true);
-    $_SESSION['PHPSESSID'] = true;
-#    $_SESSION['PHPSESSID'] = "on";
-}*/
 
 # -1 für debug
 error_reporting(-1);
@@ -80,8 +74,6 @@ $test_dir = array(
 );
 
 foreach($test_dir as $dir => $name) {
-#echo $dir."<br>\n";
-#    clearstatcache();
     if(!is_dir($dir)) {
         die("Fatal Error Directory doesn't exist: ".$name);
     }
@@ -209,11 +201,10 @@ if(LOGIN) { #-------------------------------
                 $hidden_action = substr($hidden_action,1);
             exit($hidden_action);
         }
-
         # es gab ein redirect
         if(false !== ($tmp = strstr($USERS->get($id),"#"))) {
             $tmp = substr($tmp,1);
-            $message .= returnMessage(false,'Sory ein anderer Benuzer Arbeitet schonn in <b>'.getLanguageValue($tmp."_button").'</b> Probieren sie es Später noch mal. Die MULTI_USER_TIME='.MULTI_USER_TIME.' Sekunden');
+            $message .= returnMessage(false,getLanguageValue("error_multi_user_tab",false,getLanguageValue($tmp."_button"),MULTI_USER_TIME));
             $USERS->set($id,$tmp);
         # nur reingehen bei click auf eins der tabs
         } elseif(getRequestValue('multi','get') and $tmp_action != "home" and in_array($tmp_action,$array_tabs)) {
@@ -239,7 +230,7 @@ if(LOGIN) { #-------------------------------
             exit();
         # hier gehts um die anfragen die von ajax kommen
         } elseif(!getRequestValue('multi','get') and in_array(getRequestValue('action'),$users_array)) {
-            ajax_return("error",true,returnMessage(false,'Sory ein anderer Benuzer Arbeitet schonn in <b>'.getLanguageValue(getRequestValue('action')."_button").'</b> Probieren sie es Später noch mal. Die MULTI_USER_TIME='.MULTI_USER_TIME.' Sekunden'),true,true);
+            ajax_return("error",true,returnMessage(false,getLanguageValue("error_multi_user_tab",false,getLanguageValue(getRequestValue('action')."_button"),MULTI_USER_TIME)),true,true);
         }
         unset($id);
    }

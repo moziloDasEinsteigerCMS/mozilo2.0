@@ -105,7 +105,7 @@ if(defined('PLUGINADMIN'))
     $html .= 'var modrewrite = "'.$CMS_CONF->get("modrewrite").'";';
     $html .= 'var defaultcolors = "'.$specialchars->rebuildSpecialChars($CMS_CONF->get("defaultcolors"),false,false).'";';
 
-    $dialog_jslang = array("close","yes","no","button_cancel","button_save","page_reload","page_edit_discard","page_cancel_reload","dialog_title_send","dialog_title_error","dialog_title_messages","dialog_title_save_beforeclose","dialog_title_delete","dialog_title_lastbackup","dialog_title_docu","login_titel_dialog","error_name_no_freename");
+    $dialog_jslang = array("close","yes","no","button_cancel","button_save","page_reload","page_edit_discard","page_cancel_reload","dialog_title_send","dialog_title_error","dialog_title_messages","dialog_title_save_beforeclose","dialog_title_delete","dialog_title_lastbackup","dialog_title_docu","login_titel_dialog","error_name_no_freename","error_save_beforeclose");
 
     $home_jslang = array("home_error_test_mail");
 
