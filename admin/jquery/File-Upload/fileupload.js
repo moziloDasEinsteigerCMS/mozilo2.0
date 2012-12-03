@@ -20,6 +20,7 @@ function file_rename(change_item) {
 }
 
 function is_filename_allowed(name) {
+// /[^a-zA-Z0-9._-]/g.test(name);
     if(name.search(/[^a-zA-Z0-9._-]/) != -1) {
 //$("#out").html($("#out").html()+"<br />nicht erlaubt="+name);
         return false;
@@ -34,10 +35,15 @@ $(function () {
     $('input[type="file"]').prop('multiple','multiple');
 
     $('.fileupload').each(function () {
+        if($(this).parents('#menu-fix').length > 0) {
+            // wie continue
+            return true;
+        }
         var that = this;
         $(this).fileupload({
             dropZone: $(this)
         });
+//$("#out").html($("#out").html()+"<br />get="+URL_BASE+ADMIN_DIR_NAME+"/index.php?"+$(this).serialize());
         $.get(URL_BASE+ADMIN_DIR_NAME+"/index.php?"+$(this).serialize(), function (result) {
             var tmpdata = $("<span>"+result+"</span>");
 //$("#out").html($("#out").html()+"<br />tmpdata="+tmpdata.find("#json-data").text());
