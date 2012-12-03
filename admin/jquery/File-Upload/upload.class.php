@@ -19,23 +19,26 @@ class UploadHandler
     function __construct($options=null) {
         global $ALOWED_IMG_ARRAY;
         $this->alowed_img_array = $ALOWED_IMG_ARRAY;
-        $curent_dir = str_replace("%2F","/",getRequestValue('curent_dir'));
-        if(!strstr($curent_dir,"%"))
-            $curent_dir = str_replace("%2F","/",mo_rawurlencode($curent_dir));
+
+#file_put_contents(BASE_DIR."out_UploadHandler.txt","request=".$_REQUEST['curent_dir']."\n",FILE_APPEND);
+
+        $curent_dir = getRequestValue('curent_dir',false,false);
+        global $specialchars;
+        $curent_dir_url = $specialchars->replaceSpecialChars($curent_dir,true);
         $dir = BASE_DIR.CONTENT_DIR_NAME.'/'.$curent_dir.'/'.CONTENT_FILES_DIR_NAME.'/';
-        $url_dir = URL_BASE.CONTENT_DIR_NAME.'/'.str_replace("%2F","/",mo_rawurlencode($curent_dir)).'/'.CONTENT_FILES_DIR_NAME.'/';
+        $url_dir = URL_BASE.CONTENT_DIR_NAME.'/'.$curent_dir_url.'/'.CONTENT_FILES_DIR_NAME.'/';
 
         if(ACTION == "gallery") {
 #            list($thumbnail_max_width,$thumbnail_max_height) = $this->get_width_height('thumbnail_max_width','thumbnail_max_height');
             $dir = BASE_DIR.GALLERIES_DIR_NAME.'/'.$curent_dir.'/';
-            $url_dir = URL_BASE.GALLERIES_DIR_NAME.'/'.str_replace("%2F","/",mo_rawurlencode($curent_dir)).'/';
+            $url_dir = URL_BASE.GALLERIES_DIR_NAME.'/'.$curent_dir_url.'/';
             if(is_file(GALLERIES_DIR_REL.$curent_dir."/texte.conf.php"))
                 $this->subtitle = new Properties(GALLERIES_DIR_REL.$curent_dir."/texte.conf.php");
 #            $this->subtitle = new Properties(GALLERIES_DIR_REL.$curent_dir."/texte.txt");
         }
         if(ACTION == "template") {
             $dir = BASE_DIR.LAYOUT_DIR_NAME.'/'.$curent_dir.'/';
-            $url_dir = URL_BASE.LAYOUT_DIR_NAME.'/'.str_replace("%2F","/",mo_rawurlencode($curent_dir)).'/';
+            $url_dir = URL_BASE.LAYOUT_DIR_NAME.'/'.$curent_dir_url.'/';
         }
 
  #       $prev_img = false;
@@ -139,14 +142,12 @@ class UploadHandler
     }
     
     protected function set_file_delete_url($file) {
-#        $file->delete_url = $this->options['script_url']
-#            .'?file='.mo_rawurlencode($file->name);
-
+        global $specialchars;
         $file->delete_url = $this->options['script_url']
-            .'index.php?file='.rawurlencode($file->name)
-            .'&curent_dir='.getRequestValue('curent_dir')
+            .'index.php?file='.$specialchars->replaceSpecialChars(($file->name),true)
+            .'&curent_dir='.$specialchars->replaceSpecialChars($this->options['curent_dir'],true)
             .'&chancefiles='.getRequestValue('chancefiles')
-            .'&action='.getRequestValue('action');
+            .'&action='.ACTION;
         $file->delete_type = $this->options['delete_type'];
         if ($file->delete_type !== 'DELETE') {
             $file->delete_url .= '&_method=DELETE';
@@ -162,12 +163,13 @@ class UploadHandler
     }
 
     protected function get_file_object($file_name) {
+        global $specialchars;
         $file_path = $this->options['upload_dir'].$file_name;
         if (is_file($file_path) && $file_name[0] !== '.') {
             $file = new stdClass();
             $file->name = $file_name;
             $file->size = filesize($file_path);
-            $file->url = $this->options['upload_url'].rawurlencode($file->name);
+            $file->url = $this->options['upload_url'].$specialchars->replaceSpecialChars($file->name);
             if(ACTION == "gallery") {
                 $file->pixel_w = "";
                 $file->pixel_h = "";
@@ -180,7 +182,7 @@ class UploadHandler
             foreach($this->options['image_versions'] as $version => $options) {
                 if (is_file($options['upload_dir'].$file_name)) {
                     $file->{$version.'_url'} = $options['upload_url']
-                        .rawurlencode($file->name);
+                        .$specialchars->replaceSpecialChars($file->name);
                 }
             }
             $this->set_file_delete_url($file);
@@ -192,7 +194,6 @@ class UploadHandler
     protected function get_file_objects() {
         if(ACTION == "gallery" or ACTION == "template") {
 #!!!!!!!!!!! das global machen
-#            $file_array = scandir($this->options['upload_dir']);
             $file_array = getDirAsArray($this->options['upload_dir'],$this->alowed_img_array);
         } else {
             global $CatPage;
@@ -202,7 +203,6 @@ class UploadHandler
         return array_values(array_filter(array_map(
             array($this, 'get_file_object'),
             $file_array
-#            scandir($this->options['upload_dir'])
         )));
     }
 
@@ -422,15 +422,16 @@ if(!is_dir($this->options['upload_dir'])
             }
             $file_size = filesize($file_path);
             if ($file_size === $file->size) {
+                global $specialchars;
             	if ($this->options['orient_image']) {
             		$this->orient_image($file_path);
             	}
-                $file->url = $this->options['upload_url'].rawurlencode($file->name);
+                $file->url = $this->options['upload_url'].$specialchars->replaceSpecialChars($file->name);
                 foreach($this->options['image_versions'] as $version => $options) {
                     if ($this->create_scaled_image($file->name, $options)) {
                         if ($this->options['upload_dir'] !== $options['upload_dir']) {
                             $file->{$version.'_url'} = $options['upload_url']
-                                .rawurlencode($file->name);
+                                .$specialchars->replaceSpecialChars($file->name);
                         } else {
                             clearstatcache();
                             $file_size = filesize($file_path);
@@ -510,11 +511,8 @@ if(!is_dir($this->options['upload_dir'])
         } else {
             $info = $this->get_file_objects();
         }
-#        header('Content-type: application/json');
-#        echo json_encode($info);
-header('content-type: text/html');
-#echo '<div id="json-data">'.json_encode($info).'</div>';
-echo '<div id="json-data">'.$this->my_json_encode($info).'</div>';
+        header('content-type: text/html');
+        echo '<div id="json-data">'.$this->my_json_encode($info).'</div>';
     }
     
     public function post() {
@@ -557,8 +555,7 @@ echo '<div id="json-data">'.$this->my_json_encode($info).'</div>';
             );
         }
         header('Vary: Accept');
-#        $json = json_encode($info);
-$json = $this->my_json_encode($info);
+        $json = $this->my_json_encode($info);
         $redirect = getRequestValue('redirect',false,false) ?
             getRequestValue('redirect') : null;
         if ($redirect) {
@@ -571,9 +568,8 @@ $json = $this->my_json_encode($info);
         } else {
             header('Content-type: text/plain');
         }
-#        echo $json;
-header('content-type: text/html');
-echo '<div id="json-data">'.$json.'</div>';
+        header('content-type: text/html');
+        echo '<div id="json-data">'.$json.'</div>';
     }
     
     public function delete() {
