@@ -418,7 +418,7 @@ function send_data(para,change_item) {
             }
             dialog_open("error_messages","status= " + textStatus + "\nerror:\n" + errorThrown);
             send_item_status = false;
-        },
+        }
     });
 }
 
@@ -463,6 +463,6 @@ $(function() {
                 $(this).parents(".ui-dialog").find(".ui-dialog-titlebar-close").hide(0);
             else
                 $(this).parents(".ui-dialog").find(".ui-dialog-titlebar-close").show(0);
-        },
+        }
     });
 });

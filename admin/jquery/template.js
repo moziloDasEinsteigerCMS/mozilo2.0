@@ -4,24 +4,26 @@ var edit_handler = function(event) {
     if($(this).hasClass("ui-state-disabled"))
         return false;
 
-    $('#js-ace-color-img').css('display','none');
-    $("#js-editor-toolbar").css("display","block");
+    $('#js-editor-toolbar').css("display","block");
     if($(this).hasClass("js-css")) {
-        $('#colordiv-editor').append($('.colordiv'));
-        $('#js-ace-color-img').css('display','inline');
+        $('#colordiv-editor').append($('#js-color-menu'));
         if($('#select-mode').val() != "text") {
             $('#select-mode option:selected').attr('selected',false)
             $('#select-mode option[value="css"]').attr('selected',true)
         }
-        $("#js-editor-toolbar").css("display","none");
+        $('#js-editor-toolbar').css("display","none");
     }
     if($(this).hasClass("js-html")) {
-        $('#colordiv-mozilo').append($('.colordiv'));
+        $('#colordiv-mozilo').append($('#js-color-menu'));
         if($('#select-mode').val() != "text") {
             $('#select-mode option:selected').attr('selected',false)
             $('#select-mode option[value="html"]').attr('selected',true)
         }
     }
+    $('#colordiv-editor #js-ace-color-img').css('display','inline');
+    $('#colordiv-editor #js-editor-color-img').css('display','none');
+    $('#colordiv-mozilo #js-ace-color-img').css('display','none');
+    $('#colordiv-mozilo #js-editor-color-img').css('display','inline');
 
     editor_session.setMode("ace/mode/"+$('#select-mode').val());
 

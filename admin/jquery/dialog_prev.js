@@ -76,7 +76,7 @@ $(function () {
                 $("#js-imgload").unbind('mousemove');
                 $("body").unbind('mouseup');
             });
-        },
+        }
     });
 
     $("#prev-dialog").dialog({

@@ -75,7 +75,7 @@ if($(dialog_editor).data("close_after_save") === true) {
             if(!$(dialog_editor).data("send_abort")) {
                 dialog_open("error_messages","status= " + textStatus + "\nerror:\n" + errorThrown);
             }
-        },
+        }
     });
 }
 
@@ -193,8 +193,9 @@ function init_ace_editor() { // pagecontent
     // ace.js ca. zeile 15461 this.$gutter.style.height = (offset + this.$size.scrollerHeight) + "px";
     editor.focus();
 }
-
+//!!!! testen
 function set_ace_WrapLimitRange() {
+return
     ace_width_test_string.css('font-size',$('#select-fontsize').val());
     var character_max = (ace_width_test_string.width() / 10);
     character_max = Math.round($("#"+meditorID+" .ace_scroller").width() / character_max) - 3;
@@ -270,6 +271,10 @@ $(function() {
     editor.setSelectionStyle("line"); // "line" "text"
 editor_session.setFoldStyle("markbegin");
     editor.setShowFoldWidgets(true);
+    if(usecmssyntax != "true") {
+        $('#select-mode option:selected').attr('selected',false);
+        $('#select-mode option[value="html"]').attr('selected',true)
+    }
     editor_session.setMode("ace/mode/"+$('#select-mode').val());
     editor_session.setUseWrapMode(true);
 // Actung nicht setzen da sond der Foldmode nicht richtig geht auser setUseWrapMode(false) ist gesetzt
@@ -371,7 +376,11 @@ editor_session.setFoldStyle("markbegin");
             $(this).data("send_object",false);
 
             dialog_editor = this;
-            $('#js-ace-color-img').css('display','none');
+//            $('#js-ace-color-img').css('display','none');
+            $('#colordiv-editor #js-ace-color-img').css('display','inline');
+            $('#colordiv-editor #js-editor-color-img').css('display','none');
+            $('#colordiv-mozilo #js-ace-color-img').css('display','none');
+            $('#colordiv-mozilo #js-editor-color-img').css('display','inline');
             $(this).parents('.ui-dialog').find('.ui-dialog-titlebar').prepend($(this).find('.js-docu-link'));
 
             window.setTimeout('set_dialog_max_width("#pageedit-box")', 100);
@@ -400,15 +409,16 @@ editor_session.setFoldStyle("markbegin");
             editor.destroy();
             $(this).data("diffcontent",false);
             $(this).data("close_after_save",false);
-            $('#js-ace-color-img').css('display','none');
-            if(!$(".box-farbtastic").hasClass("fb-box-close")) {
-                $(".box-farbtastic").addClass("fb-box-close");
-                $(".box-farbtastic").css('display','none');
-                $(".colorimage").addClass("ui-state-default").removeClass("ui-state-active");
+            if($('.js-coloreditor-button').length > 0) {
+                $('#js-ace-color-img').css('display','none');
+                $('#js-editor-color-img').css('display','inline');
+                $('#ce-colorchange').dialog("close");
             }
         },
         open: function(event, ui) {
 //$("#out").html($("#out").html()+"<br />dialogopen");
+            if($('.js-coloreditor-button').length > 0)
+                $('#ce-colorchange').dialog("close");
             $("#menu-fix").hide(0).attr("id","menu-fix-close-editor");
             $('.overviewselect, .usersyntaxselectbox').multiselect( "option", "maxHeight", $("#"+meditorID).closest('td').outerHeight() + $(this).next('.ui-dialog-buttonpane').height());
             // ein hack das die select grösse stimt
@@ -422,34 +432,6 @@ editor_session.setFoldStyle("markbegin");
         }
     });
 
-    //farbtastic
-    if($(".box-farbtastic").length > 0) {
-        var picker = $.farbtastic(".box-farbtastic",".fb-color-change");
-            picker.setColor($("#farbcode").val());
-        $(".box-farbtastic").addClass("fb-box-close");
-        $(".box-farbtastic").css('display','none');
-        $(".colorimage").bind({
-            click: function () {
-                if($(".box-farbtastic").hasClass("fb-box-close")) {
-                    $(".fb-color-curent").css("background-color", "#"+$("#farbcode").val())
-                    $(".box-farbtastic").removeClass("fb-box-close");
-                    $(".box-farbtastic").show(anim_speed);
-                    $(this).addClass("ui-state-active").removeClass("ui-state-default");
-                } else {
-                    $(".box-farbtastic").addClass("fb-box-close");
-                    $(".box-farbtastic").hide(anim_speed);
-                    $(this).addClass("ui-state-default").removeClass("ui-state-active");
-                }
-            },
-            mouseenter: function() {
-                $(this).addClass("ui-state-hover").removeClass("ui-state-default");
-            },
-            mouseleave: function () {
-                $(this).removeClass("ui-state-hover").addClass("ui-state-default");
-            }
-        });
-    }
-
     $('.overviewselect, .usersyntaxselectbox').multiselect({
         multiple: false,
         showClose: false,
@@ -460,19 +442,19 @@ editor_session.setFoldStyle("markbegin");
         selectedText: function(numChecked, numTotal, checkedItems) {
             $(this.labels).removeClass("ui-state-highlight ui-state-hover");
             return $(this.element).attr("title");
-        },
+        }
     }).multiselectfilter();
 
     $('select[name="template_css"], select[name="platzhalter"]').multiselect({
         click: function(event, ui){
             insert_ace(ui.value,false,false);
-        },
+        }
     });
 
     $('select[name="files"], select[name="gals"]').multiselect({
         click: function(event, ui){
             insert_ace(FILE_START+ui.value+FILE_END,false,false);
-        },
+        }
     });
 
     $('select[name="pages"]').multiselect({
@@ -482,7 +464,7 @@ editor_session.setFoldStyle("markbegin");
         },
         optgrouptoggle: function(event, ui){
             insert_ace(FILE_START+ui.label+FILE_END,false,false);
-        },
+        }
     });
 
     $('select[name="usersyntax"]').multiselect({
@@ -499,7 +481,7 @@ editor_session.setFoldStyle("markbegin");
             else {
                 insert_ace(ui.value,false,false);
             }
-       },
+       }
     });
 
     $('select[name="plugins"]').multiselect({
@@ -516,8 +498,7 @@ editor_session.setFoldStyle("markbegin");
             else {
                 insert_ace(ui.value,false,false);
             }
-       },
-
+       }
     });
 
     $('.js-ace-select').multiselect({
@@ -526,7 +507,7 @@ editor_session.setFoldStyle("markbegin");
         showSelectAll:false,
         noneSelectedText: false,
         minWidth: 20,
-        selectedList: 1,
+        selectedList: 1
     });
 
     $('#pageedit-box').on({
@@ -539,6 +520,4 @@ editor_session.setFoldStyle("markbegin");
     },".ed-syntax-hover");//ui-state-hover ed-syntax-icon
 
 //$(".ui-dialog").show(0);
-//$(".box-farbtastic").css('display','block');
-//$(".box-farbtastic").hide(0);
 });

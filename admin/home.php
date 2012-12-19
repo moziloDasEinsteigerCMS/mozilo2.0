@@ -139,6 +139,7 @@ function home() {
         $error[$titel][] = true;
         $template[$titel][] = getLanguageValue("home_messages_no_mail");
     }
+
     return contend_template($template,$error);
 }
 

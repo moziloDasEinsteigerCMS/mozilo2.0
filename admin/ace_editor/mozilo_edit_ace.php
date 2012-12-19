@@ -57,9 +57,7 @@ foreach($syntax_elemente as $element) {
 }
 $moziloSyntax .= '----";';
 
-$editor_area_html = '<link type="text/css" rel="stylesheet" href="editsite.css" />'.
-'<link type="text/css" rel="stylesheet" href="jquery/farbtastic/farbtastic.css" />'.
-'<script type="text/javascript" charset="utf-8" src="jquery/farbtastic/farbtastic.js"></script>';
+$editor_area_html = '<link type="text/css" rel="stylesheet" href="editsite.css" />';
 
 $editor_area_html .= '<script language="Javascript" type="text/javascript" charset="utf-8">/*<![CDATA[*/
 var meditorID = "pagecontent";

@@ -399,6 +399,6 @@ if(template.hasClass('name-twice')) {
                     this._resizeImgHandler
                 );
             this._initButtonBarEventHandlers();
-        },
+        }
 
 });

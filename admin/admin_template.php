@@ -102,6 +102,7 @@ if(defined('PLUGINADMIN'))
     $html .= 'var ADMIN_DIR_NAME = "'.ADMIN_DIR_NAME.'";';
     $html .= 'var ICON_SIZE = "'.ICON_SIZE.'";';
     $html .= 'var ADMIN_ICONS = "'.ADMIN_ICONS.'";';
+    $html .= 'var usecmssyntax = "'.$CMS_CONF->get("usecmssyntax").'";';
     $html .= 'var modrewrite = "'.$CMS_CONF->get("modrewrite").'";';
     $html .= 'var defaultcolors = "'.$specialchars->rebuildSpecialChars($CMS_CONF->get("defaultcolors"),false,false).'";';
 
@@ -153,6 +154,10 @@ if(defined('PLUGINADMIN'))
     if(file_exists(BASE_DIR_ADMIN."jquery/".ACTION.'_func.js'))
         $html .= '<script type="text/javascript" src="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/'.ACTION.'_func.js"></script>';
 
+    if((ACTION == "catpage" and (ROOT or in_array("editusersyntax",$ADMIN_CONF->get("config")))) or ACTION == "config" or ACTION == "template") {
+        $html .= '<link type="text/css" rel="stylesheet" href="jquery/coloredit/coloredit.min.css" />';
+        $html .= '<script type="text/javascript" charset="utf-8" src="jquery/coloredit/coloredit.min.js"></script>';
+    }
 
     if((ACTION == "config" and (ROOT or in_array("editusersyntax",$ADMIN_CONF->get("config")))) or ACTION == "catpage" or ACTION == "template") {
         $html .= '<script type="text/javascript" src="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/dialog-editor-ace.js"></script>';

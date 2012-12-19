@@ -634,4 +634,20 @@ div#dialog-multi .mo-login_message_fehler {
     background-repeat: no-repeat;
 }
 
+#js-menu-config-default-color * {
+    vertical-align:middle;
+}
+
+.mo-ul .mo-in-hex {
+    margin:2px 0 0 0;
+}
+
+/*1=oben, 2=rechts, 3=unten, 4=links*/
+#js-config-default-color-box {
+    margin:1px 0 2px 6em;
+}
+
+#js-del-config-default-color, .js-save-default-color{
+    float:left;
+}
 

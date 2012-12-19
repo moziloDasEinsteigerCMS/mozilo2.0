@@ -15,33 +15,14 @@ img.ed-syntax-icon {
     padding: 2px;
     margin:0 2px 0 2px;
     vertical-align:middle;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -khtml-border-radius: 4px;
+    border-radius: 4px;
 }
 
-.ui-state-active.fb-color-change {
+.ui-state-active.ed-syntax-color {
     background-image: none;
-}
-/*1=oben, 2=rechts, 3=unten, 4=links*/
-div.colordiv, #farbcode {
-    position:relative;
-	width:70px;
-	height: 20px;
-    margin:0 2px 0 2px;
-}
-
-#farbcode {
-	font-size:12px;
-	border:0px;
-	padding:0px;
-    margin:0px;
-    vertical-align:middle;
-}
-.colorimage {
-    position:absolute;
-    height:18px;
-    top:0px;
-    left:52px;
-    font-size:1px;
-	margin:0px;
 }
 
 .mo-menue-row-bottom {
@@ -65,21 +46,11 @@ div.ace_scroller {
     width:20px;
 }
 
-/* 1=oben, 2=rechts, 3=unten, 4=links */
-/*
-.mo-ace-in-select {
-    margin:0 .4em;
-    padding:.1em .2em;
-    vertical-align:middle;
-}*/
-/**/
 .mo-ace-td-select {
     padding:0 .4em;
-   /* width:auto;*/
 }
 .mo-ace-td-select select {
-    /*padding:0 .4em;*/
-   /**/ width:auto;
+    width:auto;
 }
 
 .mo-ace-in-text {

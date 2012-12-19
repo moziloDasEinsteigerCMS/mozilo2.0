@@ -6,8 +6,11 @@ function showEditPageForm()    {
 
     // Anzeige der Formatsymbolleiste, wenn die CMS-Syntax aktiviert ist
     $toolbar = NULL;
-    if ($CMS_CONF->get("usecmssyntax") == "true") {
-        $toolbar = '<div id="js-editor-toolbar" style="padding-top:1px;padding-bottom:1px;">'.returnFormatToolbar().'</div>';
+    if ($CMS_CONF->get("usecmssyntax") == "true" or ACTION == "config") {
+        $display = "";
+        if ($CMS_CONF->get("usecmssyntax") != "true")
+            $display = "display:none;";
+        $toolbar = '<div id="js-editor-toolbar" style="padding-top:1px;padding-bottom:1px;'.$display.'">'.returnFormatToolbar().'</div>';
     }
 # style="padding-top:1px;padding-bottom:1px;" ui-widget-content ui-state-active
     $content = '<div id="pageedit-box-inhalt" style="height:100%;width:100%;">'
@@ -46,12 +49,10 @@ function showEditPageForm()    {
 
             .'<img id="toggle_fold" class="mo-tool-icon mo-ace-icon" src="'.URL_BASE.ADMIN_DIR_NAME.'/gfx/ace/expand.png" alt="expand" hspace="0" vspace="0" />'
     .'</td>'
-    .'<td width="1%" class="mo-nowrap">'
-        .'<img id="js-ace-color-img" class="mo-tool-icon mo-ace-icon fb-color-change" alt="Farbe" title="#RRGGBB" src="gfx/jsToolbar/farbe.png" onclick="insert_ace(\'#\' + document.getElementById(\'farbcode\').value , \'\',true)" />'
-    .'</td>'
-    .'<td id="colordiv-editor" class="mo-nowrap">'
-    .'</td>'
-
+    .'<td width="1%" id="colordiv-editor" class="mo-nowrap">';
+    if ($CMS_CONF->get("usecmssyntax") != "true" and ACTION != "config")
+        $content .= returnToolbarColoredit();
+    $content .= '</td>'
     .'<td width="1%" class="mo-nowrap">'
 #        .'</div>'
 #        .'<div style="float:right;white-space:nowrap;">'
@@ -136,15 +137,8 @@ function returnFormatToolbar() {
     .returnFormatToolbarIcon("fontsize=0.8em")
     ."</td>"
     // Farben
-    .'<td width="1%" class="mo-nowrap">'
-        .'<img class="ed-syntax-icon ui-state-active fb-color-change" alt="Farbe" title="[farbe=RRGGBB| ... ] - '.getLanguageValue("toolbar_desc_farbe",true).'" src="gfx/jsToolbar/farbe.png" onclick="insert_ace(\'[farbe=\' + document.getElementById(\'farbcode\').value + \'|\', \']\',true)" />'
-    ."</td>"
-    .'<td id="colordiv-mozilo" width="8%" class="mo-nowrap">'
-        .'<div class="colordiv ui-state-active">'
-            .'<input type="text" maxlength="6" value="DD0000" class="fb-color-change" id="farbcode" size="6" />'
-            .'<span class="colorimage ui-state-default"><span class="ui-icon ui-icon-triangle-2-n-s">&nbsp;</span></span>'
-            .'<div class="box-farbtastic mo-shadow"></div>'
-        .'</div>'
+    .'<td width="9%" id="colordiv-mozilo" class="mo-nowrap">'
+        .returnToolbarColoredit()
     ."</td>"
     ."</tr>"
     ."</table>";
@@ -193,6 +187,16 @@ function returnFormatToolbar() {
      // Benutzerdefinierte Syntaxelemente
     .'<td width="34%">'.returnUserSyntaxSelectbox().'</td>'
     .'</tr></table>';
+    return $content;
+}
+
+function returnToolbarColoredit() {
+    $content = '<div id="js-color-menu" class="mo-nowrap">'
+            .'<img id="js-ace-color-img" class="ed-syntax-icon ed-syntax-hover ui-state-active ed-syntax-color ce-bg-color-change" alt="Farbe" title="#RRGGBB" src="gfx/jsToolbar/farbe.png" onclick="insert_ace(\'#\' + document.getElementById(\'farbcode\').value , \'\',true)" style="display:none;" />'
+            .'<img id="js-editor-color-img" class="ed-syntax-icon ed-syntax-hover ui-state-active ed-syntax-color ce-bg-color-change" alt="Farbe" title="[farbe=RRGGBB| ... ] - '.getLanguageValue("toolbar_desc_farbe",true).'" src="gfx/jsToolbar/farbe.png" onclick="insert_ace(\'[farbe=\' + document.getElementById(\'farbcode\').value + \'|\', \']\',true)" />'
+            .'<input type="text" maxlength="6" value="DD0000" class="ce-bg-color-change ce-in-hex" id="farbcode" size="6" />'
+            .'<img class="js-coloreditor-button ed-syntax-icon ui-state-active ed-syntax-hover" alt="Farbe Bearbeiten" title="Farbe Bearbeiten" src="gfx/jsToolbar/farbeedit.png"  />'
+        .'</div>';
     return $content;
 }
 
