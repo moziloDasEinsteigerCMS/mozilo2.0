@@ -79,7 +79,11 @@ function get_HtmlHead() {
     $html .= '<meta http-equiv="Content-Type" content="text/html; charset='.CHARSET.'" />';
     $html .= '<title>'.getLanguageValue("cms_admin_titel",true).' - '.getLanguageValue(ACTION."_button").'</title>';
     $html .= '<link type="image/x-icon" rel="SHORTCUT ICON" href="'.URL_BASE.ADMIN_DIR_NAME.'/favicon.ico" />';
+
     $html .= '<link type="text/css" rel="stylesheet" href="'.URL_BASE.ADMIN_DIR_NAME.'/css/mozilo/jquery-ui-1.8.21.custom.css" />';
+
+# new jquery test
+#    $html .= '<link type="text/css" rel="stylesheet" href="'.URL_BASE.ADMIN_DIR_NAME.'/css/test192/jquery-ui-1.9.2.custom.css" />';
     $html .= '<link type="text/css" rel="stylesheet" href="admin.css" />';
 #    if(!LOGIN)
 #        $html .= '<link type="text/css" rel="stylesheet" href="login.css" />';
@@ -106,7 +110,7 @@ if(defined('PLUGINADMIN'))
     $html .= 'var modrewrite = "'.$CMS_CONF->get("modrewrite").'";';
     $html .= 'var defaultcolors = "'.$specialchars->rebuildSpecialChars($CMS_CONF->get("defaultcolors"),false,false).'";';
 
-    $dialog_jslang = array("close","yes","no","button_cancel","button_save","page_reload","page_edit_discard","page_cancel_reload","dialog_title_send","dialog_title_error","dialog_title_messages","dialog_title_save_beforeclose","dialog_title_delete","dialog_title_lastbackup","dialog_title_docu","login_titel_dialog","error_name_no_freename","error_save_beforeclose");
+    $dialog_jslang = array("close","yes","no","button_cancel","button_save","page_reload","page_edit_discard","page_cancel_reload","dialog_title_send","dialog_title_error","dialog_title_messages","dialog_title_save_beforeclose","dialog_title_delete","dialog_title_lastbackup","dialog_title_docu","login_titel_dialog","error_name_no_freename","error_save_beforeclose","dialog_title_coloredit");
 
     $home_jslang = array("home_error_test_mail");
 
@@ -134,6 +138,10 @@ if(defined('PLUGINADMIN'))
     $html .= '/*]]>*/</script>';
     $html .= '<script type="text/javascript" src="'.URL_BASE.CMS_DIR_NAME.'/jquery/jquery-1.7.2.min.js"></script>';
     $html .= '<script type="text/javascript" src="'.URL_BASE.CMS_DIR_NAME.'/jquery/jquery-ui-1.8.22.custom.min.js"></script>';
+
+# new jquery test
+#    $html .= '<script type="text/javascript" src="'.URL_BASE.CMS_DIR_NAME.'/jquery/jquery-1.8.3.min.js"></script>';
+#    $html .= '<script type="text/javascript" src="'.URL_BASE.CMS_DIR_NAME.'/jquery/jquery-ui-1.9.2.custom.min.js"></script>';
  
     if(LOGIN and defined('MULTI_USER') and MULTI_USER) {
         $html .= '<script type="text/javascript" src="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/multi_user.js"></script>';
