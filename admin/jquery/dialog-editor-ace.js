@@ -2,7 +2,7 @@ var editor_file = ""; // das muss gesetzt werden beim öfnen des editors
 var dialog_editor = false;
 var editor;
 var editor_session;
-var ace_width_test_string = '<pre id="ace_width_test_string" class="ace_editor">WWWWWWWWWW</pre>';
+//var ace_width_test_string = '<pre id="ace_width_test_string" class="ace_editor">WWWWWWWWWW</pre>';
 
 function send_editor_data(para,savepage) {
     if(para.substring(0, 1) != "&")
@@ -120,7 +120,19 @@ function insert_ace(aTag, eTag, select) {
     var test_range = editor_session.selection.rangeList,
         range_ace = [],
         tmp_start = 0,
-        tmp_end = 0;
+        tmp_end = 0,
+        // das ist für die farbe
+        tmp_aTag,
+        tmp_eTag,
+        syntax_color = "[farbe=";
+    // im css mode gibts nur #hex
+    if($('#select-mode').val() == "css") {
+        aTag = "#"+aTag.substr(syntax_color.length,6);
+        eTag = false;
+    }
+    tmp_aTag = aTag;
+    tmp_eTag = eTag;
+//$('#out').html($('#out').html()+"getMode="+$('#select-mode').val()+"<br>")
     if(test_range.ranges.length == 0) {
         range_ace[0] = editor.getSelectionRange();
     } else {
@@ -128,17 +140,36 @@ function insert_ace(aTag, eTag, select) {
             range_ace[i] = test_range.ranges[i];
         }
     }
+
     editor.exitMultiSelectMode();
     var row_column_offset = 0;
     for(var i = 0; i < range_ace.length; i++) {
-        tmp_start = range_ace[i].start.column;
-        tmp_end = range_ace[i].end.column;
+        // wenn in der farbe nur der hex ersetzt wurde a/eTag wider herstellen
+        aTag = tmp_aTag;
+        eTag = tmp_eTag;
         // wenn was selectet ist überschreiben wir select
         if(range_ace[i].start.column < range_ace[i].end.column)
             select = true;
         var selectet = editor_session.doc.getTextRange(range_ace[i]);
+
+        // ist aTag das farbe syntaxelement
+        if(aTag.substr(0, syntax_color.length) == syntax_color && range_ace[i].start.column >= syntax_color.length) {
+            range_ace[i].start.column -= syntax_color.length;
+            range_ace[i].end.column -= selectet.length;
+            // sind wir in der farb syntax dann ersetzen wir nur den hex wert
+            if(editor_session.doc.getTextRange(range_ace[i]) == syntax_color) {
+                aTag = aTag.substr(syntax_color.length,6);
+                eTag = false;
+            }
+            range_ace[i].start.column += syntax_color.length;
+            range_ace[i].end.column += selectet.length;
+        }
+
+        tmp_start = range_ace[i].start.column;
+        tmp_end = range_ace[i].end.column;
+
         if(eTag) {
-            editor_session.doc.replace(range_ace[i], aTag+selectet+eTag)
+            editor_session.doc.replace(range_ace[i], aTag+selectet+eTag);
             var end_column = aTag.length;
             if(range_ace[i].start.row < range_ace[i].end.row)
                 end_column = 0;
@@ -152,8 +183,8 @@ function insert_ace(aTag, eTag, select) {
         if(select) {
             if(i == 0)
                 // das selectierte wieder selectioeren, setzt auch den cursor ins element
-                editor_session.selection.setSelectionRange(range_ace[i],false)
-            editor_session.selection.addRange(range_ace[i], false)
+                editor_session.selection.setSelectionRange(range_ace[i],false);
+            editor_session.selection.addRange(range_ace[i], false);
             // offset der nächsten selection setzen
             if(typeof range_ace[(i + 1)] != "undefined") {
                 var e_tag = 0;
@@ -166,7 +197,7 @@ function insert_ace(aTag, eTag, select) {
                     range_ace[(i + 1)].start.column = range_ace[(i + 1)].start.column + row_column_offset;
                     range_ace[(i + 1)].end.column = range_ace[(i + 1)].end.column + row_column_offset;
                 } else
-                    row_column_offset = 0
+                    row_column_offset = 0;
             }
         }
     }
@@ -188,19 +219,20 @@ function init_ace_editor() { // pagecontent
     $('#'+meditorID).height(new_height);
     $('#'+meditorID).width((new_width - 2));
     editor.resize();
-    window.setTimeout("set_ace_WrapLimitRange()", 50);
+//    window.setTimeout("set_ace_WrapLimitRange()", 50);
     // !!!!!!!!! damit die zeilen nummern bis unten sichtbar sind
     // ace.js ca. zeile 15461 this.$gutter.style.height = (offset + this.$size.scrollerHeight) + "px";
     editor.focus();
 }
 //!!!! testen
+/*
 function set_ace_WrapLimitRange() {
 return
     ace_width_test_string.css('font-size',$('#select-fontsize').val());
     var character_max = (ace_width_test_string.width() / 10);
     character_max = Math.round($("#"+meditorID+" .ace_scroller").width() / character_max) - 3;
     editor_session.setWrapLimitRange(character_max, character_max);
-}
+}*/
 
 function set_editor_settings() {
     if(navigator.cookieEnabled == true) {
@@ -222,8 +254,8 @@ function set_editor_settings() {
 
 function get_editor_settings() {
     // set default
-    $('#select-mode option[value="mozilo"]').attr('selected',true)
-    $('#select-fontsize option[value="12px"]').attr('selected',true)
+    $('#select-mode option[value="mozilo"]').attr('selected',true);
+    $('#select-fontsize option[value="12px"]').attr('selected',true);
     $('#show_gutter').addClass('ui-state-active');
     if(navigator.cookieEnabled == true) {
         if(document.cookie && document.cookie.match(/mozilo_editor_settings=[^;]+/i)) {
@@ -231,9 +263,9 @@ function get_editor_settings() {
 //$("#out").html($("#out").html()+"<br>get_cookie = "+settings[0]+","+settings[1]+","+settings[2]+","+settings[3]+",");
 
             if(settings[0] == "true")
-                $('#show_gutter').addClass('ui-state-active')
+                $('#show_gutter').addClass('ui-state-active');
             if(settings[1] == "true")
-                $('#show_hidden').addClass('ui-state-active')
+                $('#show_hidden').addClass('ui-state-active');
             if(settings[2] == "text") {
                 $('#select-mode option:selected').attr('selected',false);
                 $('#select-mode option[value="'+settings[2]+'"]').attr('selected',true);
@@ -260,8 +292,8 @@ function set_icon_checked(item,setcss) {
 
 $(function() {
 
-    ace_width_test_string = $(ace_width_test_string).css({'margin':0,'padding':0,'position':'relative','float':'left'});
-    $('#dialog-test-w').parent().prepend(ace_width_test_string);
+//    ace_width_test_string = $(ace_width_test_string).css({'margin':0,'padding':0,'position':'relative','float':'left'});
+//    $('#dialog-test-w').parent().prepend(ace_width_test_string);
 
     get_editor_settings();
     editor = ace.edit(meditorID);
@@ -298,7 +330,7 @@ editor_session.setFoldStyle("markbegin");
     $('#show_gutter').bind('click', function() {
         editor.renderer.setShowGutter(set_icon_checked($(this),true));
         editor.focus();
-        set_ace_WrapLimitRange();
+//        set_ace_WrapLimitRange();
         set_editor_settings();
     });
 
@@ -316,7 +348,7 @@ editor_session.setFoldStyle("markbegin");
 
     $('#select-fontsize').bind('change', function() {
         editor.setFontSize($(this).val());
-        set_ace_WrapLimitRange();
+//        set_ace_WrapLimitRange();
         editor.focus();
         set_editor_settings();
     });
@@ -371,16 +403,12 @@ editor_session.setFoldStyle("markbegin");
         modal: true,
         position: "center",
         resizable: true,
-//        dialogClass: "mo-td-content-width",
+        dialogClass: "mo-shadow",
+//        dialogClass: "mo-td-content-width",js-dialog-ace
         create: function(event, ui) {
             $(this).data("send_object",false);
 
             dialog_editor = this;
-//            $('#js-ace-color-img').css('display','none');
-            $('#colordiv-editor #js-ace-color-img').css('display','inline');
-            $('#colordiv-editor #js-editor-color-img').css('display','none');
-            $('#colordiv-mozilo #js-ace-color-img').css('display','none');
-            $('#colordiv-mozilo #js-editor-color-img').css('display','inline');
             $(this).parents('.ui-dialog').find('.ui-dialog-titlebar').prepend($(this).find('.js-docu-link'));
 
             window.setTimeout('set_dialog_max_width("#pageedit-box")', 100);
@@ -410,8 +438,6 @@ editor_session.setFoldStyle("markbegin");
             $(this).data("diffcontent",false);
             $(this).data("close_after_save",false);
             if($('.js-coloreditor-button').length > 0) {
-                $('#js-ace-color-img').css('display','none');
-                $('#js-editor-color-img').css('display','inline');
                 $('#ce-colorchange').dialog("close");
             }
         },
@@ -422,8 +448,8 @@ editor_session.setFoldStyle("markbegin");
             $("#menu-fix").hide(0).attr("id","menu-fix-close-editor");
             $('.overviewselect, .usersyntaxselectbox').multiselect( "option", "maxHeight", $("#"+meditorID).closest('td').outerHeight() + $(this).next('.ui-dialog-buttonpane').height());
             // ein hack das die select grösse stimt
-            $('select[name="select-mode"]').closest('div').width($('select[name="select-mode"]').outerWidth())
-            $('select[name="select-fontsize"]').closest('div').width($('select[name="select-fontsize"]').outerWidth())
+            $('select[name="select-mode"]').closest('div').width($('select[name="select-mode"]').outerWidth());
+            $('select[name="select-fontsize"]').closest('div').width($('select[name="select-fontsize"]').outerWidth());
             // das ist wichtig da erst dann die button breite bekant ist
             $('.overviewselect, .usersyntaxselectbox, .js-ace-select').multiselect("refresh");
         },//Stop
