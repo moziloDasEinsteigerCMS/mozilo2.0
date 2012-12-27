@@ -1,64 +1,170 @@
-var ce_img_hsv_width = 194;
-var ce_tri_width = 126;
-var ce_radius_outer = 93;
-var ce_ring_width = 20;
-
-var ce_tri_height = Math.round(ce_tri_width * Math.sin(Math.PI / 3));
-var ce_radius_inner = ce_radius_outer - ce_ring_width;
-var ce_tri_offset_left = (ce_img_hsv_width - ce_tri_width) / 2;
-var ce_tri_offset_top = ((ce_img_hsv_width - (ce_radius_outer * 2)) / 2) + ce_ring_width;
-var ce_img_url = URL_BASE+ADMIN_DIR_NAME+'/jquery/coloredit/';
+// 194 = img hsv breite höhe
+// 126 = dreieck breite
+// 109 = dreieck höhe
+// 34 = dreieck abstand links
+// 24 = dreieck abstand top
+// 93 = aüserer ring durchmesser
+// 73 = innerer ring durchmesser
+// 20 = ring breite
 
 var ColorEditor = {
-    container:'<table id="ce-colorchange" cellspacing="0" border="0" cellpadding="0">'
-        +'<tbody>'
-            +'<tr>'
-                +'<td rowspan="6" class="ce-td-hsv">'
-                    +'<div id="ce-color-hsv" class="d_ui-widget-content d_ui-corner-all">'
-                        +'<div id="ce-color"></div>'
-                        +'<div id="ce-hsv" class="d_ui-corner-all"></div>'
-                        +'<img id="ce-h-marker" class="ce-marker" src="'+ce_img_url+'marker.png" />'
-                        +'<img id="ce-sv-marker" class="ce-marker" src="'+ce_img_url+'marker.png" />'
-                    +'</div>'
-                +'</td>'
-                +'<td colspan="2" class="ce-td-prev">'
-                    +'<input class="ce-in-hex" type="text" value="" size="6" maxlength="6">'
-                    +'<div>'
-                        +'<div id="ce-color-curent" class="ui-widget-content ui-corner-right"></div>'
-                        +'<div id="ce-color-prev" class="ce-bg-color-change ui-widget-content ui-corner-left"></div>'
-                    +'</div>'
-                +'</td>'
-            +'</tr>'
-            +'<tr>'
-                +'<td class="ce-td-slider"><div class="ce-red"></div></td>'
-                +'<td class="ce-td-value"><input class="ce-in-red ce-in-value" type="text" value="255" size="3" maxlength="3"></td>'
-            +'</tr>'
-            +'<tr>'
-                +'<td class="ce-td-slider"><div class="ce-green"></div></td>'
-                +'<td class="ce-td-value"><input class="ce-in-green ce-in-value" type="text" value="255" size="3" maxlength="3"></td>'
-            +'</tr>'
-            +'<tr>'
-                +'<td class="ce-td-slider"><div class="ce-blue"></div></td>'
-                +'<td class="ce-td-value"><input class="ce-in-blue ce-in-value" type="text" value="255" size="3" maxlength="3"></td>'
-            +'</tr>'
-            +'<tr>'
-                +'<td class="ce-td-slider"><div class="ce-saturation"></div></td>'
-                +'<td class="ce-td-value"><input class="ce-in-saturation ce-in-value" type="text" value="100" size="3" maxlength="3"></td>'
-            +'</tr>'
-            +'<tr>'
-                +'<td class="ce-td-slider ce-tr-last"><div class="ce-brightness"></div></td>'
-                +'<td class="ce-td-value ce-tr-last"><input class="ce-in-brightness ce-in-value" type="text" value="100" size="3" maxlength="3"></td>'
-            +'</tr>'
-            +'<tr>'
-                +'<td colspan="3" class="ce-td-default-color"><div class="ce-default-color-box ui-widget-content ui-corner-all">&nbsp;</div>'
-            +'</td></tr>'
-        +'</tbody>'
-    +'</table>',
-    options: {
-        dragMode : false
+    _create: function() {
+        if($('.js-coloreditor-button').length < 1)
+            return false;
+        if($('#ce-colorchange').length > 0)
+            return false;
+
+        this.hsv = [0,0,0];
+        this.dragMode = false;
+
+        var that = this,
+            img_url = URL_BASE+ADMIN_DIR_NAME+'/jquery/coloredit/';
+
+        $('.ce-in-hex').removeClass('js-in-hex');
+        $('.js-coloreditor-button').show();
+
+        this.color_box = $('<div id="ce-colorchange" />').addClass("ce-pos-rel").appendTo("body");
+
+        var hsv_box = $('<div />').addClass("ce-pos-rel ce-color-hsv-dim")
+            .bind({
+            mousedown: function(event) {
+                if(event.which != 1) return true;
+                event.preventDefault();
+                $('input, a').trigger("blur");
+                that.dragMode = that._ifInColorRange(event);
+                if(false === that.dragMode)
+                    return true;
+                $(this).css("cursor", "crosshair");
+                $(document).on({
+                    "mouseup.colorchange": function(event) {
+                        that.dragMode = false;
+                        $(this).css("cursor", "default");
+                        $(document).off('.colorchange');
+                    }
+                });
+                that._moveCursor(event);
+            },
+            mousemove: function(event) {
+                if(that.dragMode) {
+                    that._moveCursor(event);
+                    return true;
+                }
+                if(that._ifInColorRange(event))
+                    $(this).css("cursor", "crosshair");
+                else
+                    $(this).css("cursor", "default");
+            }}).appendTo(this.color_box);
+
+        this.color_sv = $('<div />').addClass("ce-pos-abs ce-tri-dim").appendTo(hsv_box);
+
+        this.color_hsv = $('<div />').addClass("ce-pos-abs ce-color-hsv ce-color-hsv-dim").appendTo(hsv_box);
+
+        this.marker_h = $('<div />').addClass("ce-pos-abs ce-marker").appendTo(hsv_box);
+//        this.marker_h = $('<img />').addClass("ce-pos-abs ce-marker").appendTo(hsv_box).attr("src",img_url+"marker.png").css({
+//            "background-image":"none",
+//            display:"block"
+//        });
+
+        this.marker_sv = this.marker_h.clone().appendTo(hsv_box);
+
+        var default_colors = $('<div class="ce-default-color-box ui-widget-content ui-corner-all" />').on("click", "img", function(event){that._updateTagBG(event)}).appendTo(this.color_box);
+
+        this._makeDefaultColors();
+
+        var prev_box = $('<div />').addClass("ce-pos-abs ce-prev-box").appendTo(this.color_box);
+
+        $('<input type="text" value="" size="6" maxlength="6" />').addClass('ce-pos-abs ce-in-hex').appendTo(prev_box);
+
+        this.color_curent = $('<div />').addClass("ce-pos-abs ce-color-curent ui-widget-content ui-corner-right").click( function(event) {that._updateTagBG(event)}).appendTo(prev_box);
+
+        $('<div />').addClass("ce-pos-abs ce-bg-color-change ui-widget-content ui-corner-left").appendTo(prev_box);
+
+        var slider_ul = $('<ul />').addClass("ce-pos-abs").appendTo(this.color_box);
+
+        this.a_rgb = new Array("red","lime","blue");
+        this.a_sv = new Array("saturation","brightness");
+
+        var n = this.a_rgb.concat(this.a_sv);
+        var max_value = 255;
+        for(i = 0; i < n.length; i++) {
+            if(n[i] == "saturation" || n[i] == "brightness")
+                max_value = 100;
+            this["s_"+n[i]] = $('<div />').addClass("ce-slide").slider({
+                    range:"min",min:0,max:max_value,value:0,
+                    slide: function(event, ui) {
+                        switch ($(this).data("art")) {
+                            case "red":
+                                that.hsv = that._RGBtoHSV([ui.value,that.s_lime.slider('value'),that.s_blue.slider('value')]);
+                                break;
+                            case "lime":
+                                that.hsv = that._RGBtoHSV([that.s_red.slider('value'),ui.value,that.s_blue.slider('value')]);
+                                break;
+                            case "blue":
+                                that.hsv = that._RGBtoHSV([that.s_red.slider('value'),that.s_lime.slider('value'),ui.value]);
+                                break;
+                            case "saturation":
+                                that.hsv = [that.hsv[0],(ui.value / 100),that.hsv[2]];
+                                break;
+                            case "brightness":
+                                that.hsv = [that.hsv[0],that.hsv[1],(ui.value / 100)];
+                                break;
+                        }
+                        that._updateDisplay();
+                    }
+                }).data("art",n[i]);
+            if(n[i] == "saturation" || n[i] == "brightness") {
+                this["s_"+n[i]].css("background-image","url("+img_url+n[i]+".png)").find('.ui-slider-range').css("background","transparent");
+                if(n[i] == "saturation")
+                    this["s_"+n[i]].prepend('<img src="'+img_url+'black.png" style="position:absolute;width:100px" class="ui-corner-all ui-slider-horizontal" />');
+            } else {
+                this["s_"+n[i]].find('.ui-slider-range').css("background",n[i]);
+                this["s_"+n[i]].find('.ui-slider-handle').css("border-color",n[i]);
+            }
+            this["i_"+n[i]] = $('<input type="text" value="0" size="3" maxlength="3" />')
+                .addClass("ce-value").data("max_value",max_value)
+                .bind({
+                    keyup: function(event) {that._checkDezValue(event);},
+                    focusout: function() {$(this).val(that._getInputDez($(this)));}
+                });
+            $('<li />').append(this["s_"+n[i]]).append(this["i_"+n[i]]).appendTo(slider_ul);
+            if($().spinner)
+                this["i_"+n[i]].spinner({max:max_value,min:0,value:0,
+                    spin: function(event,ui) { that._checkDezValue(event); }
+                });
+        }
+
+        if($().spinner)
+            var hsv_box_right = this.s_red.outerWidth(true) + this.i_red.parent().outerWidth(true);
+        else
+            var hsv_box_right = this.s_red.outerWidth(true) + this.i_red.outerWidth(true);
+
+        prev_box.width(hsv_box_right);
+        slider_ul.width(hsv_box_right);
+        hsv_box.css({"margin-right":hsv_box_right+"px"});
+
+        $('.ce-default-color-box').width((194 + hsv_box_right) - (default_colors.outerWidth() - default_colors.width()));
+        var color_box_width = this.color_box.outerWidth(true);
+
+        this.color_box.width(color_box_width).css("float","none");
+
+        this.color_box.dialog({
+            autoOpen: false,
+            width: color_box_width,
+            modal: false,
+            resizable: false,
+            show: anim_speed,
+            title:mozilo_lang["dialog_title_coloredit"],
+            dialogClass: "mo-shadow"
+        });
+
+        this.hsv = this._HEXtoHSV(this._getInputHex(this.element.siblings('input')));
+        this.color_curent.css('background-color', "#"+this._HSVtoHEX(this.hsv));
+        this.color_curent.attr('title',this._HSVtoHEX(this.hsv));
+        this._updateDisplay();
+        this._bindEvents();
     },
-    _hsv : [0,0,0],
-    _makeDefaultColors: function () {
+
+    _makeDefaultColors: function() {
         var html = "";
         if(defaultcolors.length > 1) {
             defaultcolors_a = defaultcolors.split(",");
@@ -70,196 +176,58 @@ var ColorEditor = {
             $('#ce-colorchange .ce-default-color-box').hide();
     },
 
-    _create: function() {
-
-        if($('.js-coloreditor-button').length < 1)
-            return false;
-        if($('#ce-colorchange').length > 0)
-            return false;
-
-        var that = this;
-
-        $("body").append(this.container);
-//        this._makeDefaultColors();
-
-        $('.ce-td-hsv, #ce-color-hsv, #ce-hsv').css({
-            width:ce_img_hsv_width + 'px',
-            height:ce_img_hsv_width + 'px'
-        });
-        $('#ce-color').css({
-            width:ce_tri_width + 'px',
-            height:ce_tri_height + 'px',
-            top:ce_tri_offset_top,
-            left:ce_tri_offset_left
-        });
-        $('#ce-color-curent').css('backgroundColor',"#ffffff");
-        $('#ce-color-curent').attr('title',"ffffff");
-
-        if($().spinner) {
-            $('.ce-in-saturation, .ce-in-brightness').spinner({
-                max:100,
-                min:0,
-                value:50,
-                spin: function( event, ui ) { that._updateSVValue(event) }
-            });
-            $('.ce-in-red, .ce-in-green, .ce-in-blue').spinner({
-                max:255,
-                min:0,
-                value:50,
-                spin: function( event, ui ) { that._updateRGBValue(event) }
-            });
-        }
-
-        $('.ce-red, .ce-green, .ce-blue').slider({
-//            orientation: "vertical",
-            range: "min",
-            min: 0,
-            max: 255,
-            value: 127,
-            slide: function(event, ui) {
-                var red = $('.ce-red').slider('value'),
-                    green = $('.ce-green').slider('value'),
-                    blue = $('.ce-blue').slider('value');
-                if($(this).is('.ce-red'))
-                    red = ui.value;
-                else if($(this).is('.ce-green'))
-                    green = ui.value;
-                else if($(this).is('.ce-blue'))
-                    blue = ui.value;
-                that._hsv = that._RGBToHSV([red,green,blue]);
-                that._updateDisplay();
-            }
-        });
-
-        $('.ce-saturation, .ce-brightness').slider({
-//            orientation: "vertical",
-            range: "min",
-            min: 0,
-            max: 100,
-            value: 127,
-            slide: function(event, ui) {
-                var satur = $('.ce-saturation').slider('value'),
-                    lumi = $('.ce-brightness').slider('value');
-                if($(this).is('.ce-saturation'))
-                    satur = ui.value;
-                else if($(this).is('.ce-brightness'))
-                    lumi = ui.value;
-                that._hsv = [that._hsv[0],(satur / 100),(lumi / 100)],
-                that._updateDisplay();
-            }
-        });
-        $('.ce-default-color-box').width($('.ce-td-default-color').width() - ($('#ce-colorchange .ce-default-color-box').outerWidth() - $('#ce-colorchange .ce-default-color-box').width()));
-        this._makeDefaultColors();
-
-        $('#ce-colorchange').dialog({
-            autoOpen: false,
-            height: "auto",
-            width: "auto",
-            modal: false,
-            resizable: false,
-            show: anim_speed,
-            title:"Farb Wähler"
-        });
-
-        $('.ce-saturation').prepend('<img src="'+ce_img_url+'black.png" style="position: absolute;" class="ui-corner-all ui-slider-horizontal" />');
-
-        this._hsv = this._HexToHSV(this._getInputHex(this.element.siblings('input')));
-        this._updateDisplay();
-        this._bindEvents();
-    },
-
-    _bindEvents : function () {
+    _bindEvents : function() {
         var that = this;
         $('.js-coloreditor-button').on({
             click: function(event) {
-                if($('#ce-colorchange').dialog("isOpen")) {
-                    $('#ce-colorchange').dialog("close");
+                if(that.color_box.dialog("isOpen")) {
+                    that.color_box.dialog("close");
                 } else {
-                    $('#ce-colorchange').dialog({position: { my: "right top", at: "left bottom", of: this }});
-                    $('#ce-color-curent').css('background-color', "#"+that._hexFromRGB(that._HSVToRGB(that._hsv)));
-                    $('#ce-color-curent').attr('title',that._hexFromRGB(that._HSVToRGB(that._hsv)));
-                    $('#ce-colorchange').dialog("open");
+                    that.color_curent.css('background-color', "#"+that._HSVtoHEX(that.hsv)).attr('title',that._HSVtoHEX(that.hsv));
+                    that.color_box.dialog({position:{my:"right top",at:"left bottom",of:this}});
+                    that.color_box.dialog("open");
                 }
             }
         });
-        $('#ce-colorchange').on({
-            mousedown: function(event) {
-                $('#ce-colorchange input, .ce-in-hex').blur();
-                that.options.dragMode = that._ifInColorRange(event);
-                if(false === that.options.dragMode)
-                    return false;
-                $(this).css("cursor", "crosshair");
-                $(document).on({
-                    "mouseup.colorchange": function (event) {
-                        that.options.dragMode = false;
-                        $(this).css("cursor", "default");
-                        $(document).off('.colorchange');
-                    }
-                });
-                that._moveCursor(event);
-                return false;
-            },
-            mousemove: function (event) {
-                if(that.options.dragMode) {
-                    that._moveCursor(event);
-                    return true;
-                }
-                $(this).css("cursor", "default");
-                if(that._ifInColorRange(event))
-                    $(this).css("cursor", "crosshair");
-            }
-        },'#ce-color-hsv').on({
-            keyup: function(event) {that._updateRGBValue(event)},
-            focusout: function(){
-                $(this).val(that._getInputRGB($(this)));
-            }
-        },'.ce-in-red, .ce-in-green, .ce-in-blue').on({
-            keyup: function(event) {that._updateSVValue(event)},
-            focusout: function(){
-                $(this).val(that._getInputSV($(this)));
-            }
-        },'.ce-in-saturation, .ce-in-brightness').on({
-            click: function(event) {that._updateTagBG(event)}
-        },'.ce-td-default-color img, #ce-color-curent');
         $('.ce-in-hex').on({
-            keyup: function(event) {that._updateHexValue(event)},
+            keyup: function(event) {that._checkHexValue(event)},
             focusout: function(){
                 $(this).val(that._getInputHex($(this)));
             }
         });
     },
-    _ifInColorRange : function (event) {
-        var offset = $('#ce-hsv').offset();
-        var var_top = event.pageY - offset.top - ce_tri_offset_top;
-        var pos = this._getRingCenter(event);
-        var angle = Math.atan2(pos.x, -pos.y);
+    _ifInColorRange : function(event) {
+        var offset = this.color_hsv.offset(),
+            var_top = event.pageY - offset.top - 24,
+            pos = this._getRingCenter(event),
+            angle = Math.atan2(pos.x, -pos.y);
         pos.x = Math.abs(pos.x);
         pos.y = Math.abs(pos.y);
 
-        if(pos.x <= (ce_tri_width / 2) && var_top >= 0 && var_top <= ce_tri_height && pos.x < (var_top * 0.5779)) {
+        if(pos.x <= (126 / 2) && var_top >= 0 && var_top <= 109 && pos.x < (var_top * 0.5779)) {
             return "triangle";
         }
-        if(Math.abs(Math.sin(angle) * ce_radius_outer) > pos.x && Math.abs(Math.sin(angle) * ce_radius_inner) < pos.x && Math.abs(Math.cos(angle) * ce_radius_outer) > pos.y && Math.abs(Math.cos(angle) * ce_radius_inner) < pos.y) {
+        if(Math.abs(Math.sin(angle) * 93) > pos.x && Math.abs(Math.sin(angle) * 73) < pos.x && Math.abs(Math.cos(angle) * 93) > pos.y && Math.abs(Math.cos(angle) * 73) < pos.y) {
             return "ring";
         }
         return false;
     },
-    _moveCursor : function (event) {
-        if (this.options.dragMode == "ring") {
-            var pos = this._getRingCenter(event);
-            var H = Math.atan2(pos.x, -pos.y) / 6.28;
+    _moveCursor : function(event) {
+        if (this.dragMode == "ring") {
+            var pos = this._getRingCenter(event),
+                H = Math.atan2(pos.x, -pos.y) / 6.28;
             if (H < 0) H += 1;
-            this._hsv[0] = H;
-        } else if(this.options.dragMode == "triangle") {
-            var offset = $('#ce-hsv').offset();
-            var var_top = ce_tri_height - (event.pageY - offset.top - ce_tri_offset_top);
-            var var_left = event.pageX - offset.left - ce_tri_offset_left;
+            this.hsv[0] = H;
+        } else if(this.dragMode == "triangle") {
+            var offset = this.color_hsv.offset(),
+                var_top = 109 - (event.pageY - offset.top - 24),
+                var_left = event.pageX - offset.left - 34;
             this._XYtoSV(Math.round(var_left), Math.round(var_top));
         } else
             return;
         this._updateDisplay();
     },
-    _XYtoSV : function (left,top) {
+    _XYtoSV : function(left,top) {
         var S = 0;
         if(top > 0)
             S = top / 0.8660;
@@ -268,230 +236,133 @@ var ColorEditor = {
             S = S / tri_len;
         if(S > 1)
             tri_len = top / 0.8660;
-        var V = tri_len / ce_tri_width;
-        this._hsv[1] = Math.max(0, Math.min(1, S));
-        this._hsv[2] = Math.max(0, Math.min(1, V));
+        var V = tri_len / 126;
+        this.hsv[1] = Math.max(0, Math.min(1, S));
+        this.hsv[2] = Math.max(0, Math.min(1, V));
     },
-    _SVtoXY : function () {
-        var top =  ( (ce_tri_width * this._hsv[2]) * this._hsv[1] ) * 0.8660;
-        var left =   (ce_tri_width * this._hsv[2]) -  (( (ce_tri_width * this._hsv[2]) * this._hsv[1] ) * 0.5);
-        return [top,left]
+    _SVtoXY : function() {
+        return [(((126 * this.hsv[2]) * this.hsv[1]) * 0.8660),((126 * this.hsv[2]) - (((126 * this.hsv[2]) * this.hsv[1]) * 0.5))];
     },
 
-    _updateDisplay : function () {
-        // Markers
-        var angle = this._hsv[0] * 6.28;
-        $('#ce-h-marker').css({
-            left: Math.round(Math.sin(angle) * (ce_radius_outer - (ce_ring_width / 2)) + ce_img_hsv_width / 2) + 'px',
-            top: Math.round(-Math.cos(angle) * (ce_radius_outer - (ce_ring_width / 2)) + ce_img_hsv_width / 2) + 'px'
+    _updateDisplay : function() {
+        var angle = this.hsv[0] * 6.28,
+            top_left = this._SVtoXY(),
+            rgb = this._HSVtoRGB(this.hsv),
+            hex = this._RGBtoHEX(rgb);
+        this.marker_h.css({
+            left: Math.round(Math.sin(angle) * (93 - (20 / 2)) + 194 / 2) + 'px',
+            top: Math.round(-Math.cos(angle) * (93 - (20 / 2)) + 194 / 2) + 'px'
         });
-        var top_left = this._SVtoXY();
-        $('#ce-sv-marker').css({
-            top : ((ce_tri_height - top_left[0]) + ce_tri_offset_top) + 'px',
-            left : (top_left[1] + ce_tri_offset_left) + 'px'
+        this.marker_sv.css({
+            top : ((109 - top_left[0]) + 24) + 'px',
+            left : (top_left[1] + 34) + 'px'
         });
-        // Saturation/Luminance gradient
-        $('#ce-color').css('backgroundColor', "#"+this._hexFromRGB(this._HSVToRGB([this._hsv[0], 1, 1])));
-        var rgb = this._HSVToRGB(this._hsv);
-        var hex = this._hexFromRGB(rgb);
+        this.color_sv.css("backgroundColor", "#"+this._HSVtoHEX([this.hsv[0], 1, 1]));
 
-        if($('.ce-red a:not(.ui-state-active)').length > 0)
-            $('.ce-red').slider("value", rgb[0]);
-        if($('.ce-green a:not(.ui-state-active)').length > 0)
-            $('.ce-green').slider("value", rgb[1]);
-        if($('.ce-blue a:not(.ui-state-active)').length > 0)
-            $('.ce-blue').slider("value", rgb[2]);
-        $('.ce-in-red:not(:focus)').val(rgb[0]);
-        $('.ce-in-green:not(:focus)').val(rgb[1]);
-        $('.ce-in-blue:not(:focus)').val(rgb[2]);
+        for(i = 0; i < this.a_rgb.length; i++) {
+            if($('a:not(.ui-state-active)',this["s_"+this.a_rgb[i]]).length > 0)
+                this["s_"+this.a_rgb[i]].slider("value", rgb[i]);
+            this["i_"+this.a_rgb[i]].not(':focus').val(rgb[i]);
+        }
+        for(i = 0; i < this.a_sv.length; i++) {
+            if($('a:not(.ui-state-active)',this["s_"+this.a_sv[i]]).length > 0)
+                this["s_"+this.a_sv[i]].slider("value", this.hsv[i + 1] * 100);
+            this["i_"+this.a_sv[i]].not(':focus').val(Math.round(this.hsv[i + 1] * 100));
+        }
+        this.s_brightness.css("backgroundColor", "#"+this._HSVtoHEX([this.hsv[0], this.hsv[1], 1]));
+        this.s_saturation.css("backgroundColor", "#"+this._HSVtoHEX([this.hsv[0], 1, this.hsv[2]]))
+        .find('img').css("opacity", (1 - this.hsv[2]));
+
         $('.ce-in-hex:not(:focus)').val(hex);
-        if($('.ce-saturation a:not(.ui-state-active)').length > 0)
-            $('.ce-saturation').slider("value", this._hsv[1] * 100);
-        if($('.ce-brightness a:not(.ui-state-active)').length > 0)
-            $('.ce-brightness').slider("value", this._hsv[2] * 100);
-        $('.ce-in-saturation:not(:focus)').val(Math.round(this._hsv[1] * 100));
-        $('.ce-in-brightness:not(:focus)').val(Math.round(this._hsv[2] * 100));
-        $('.ce-brightness').css({
-            backgroundColor: "#"+this._hexFromRGB(this._HSVToRGB([this._hsv[0], this._hsv[1], 1]))
-        });
-        $('.ce-saturation').css({
-            backgroundColor: "#"+this._hexFromRGB(this._HSVToRGB([this._hsv[0], 1, this._hsv[2]]))
-        });
-        $('.ce-saturation img').css({
-            opacity: (1 - this._hsv[2])
-        });
-
         $('.ce-bg-color-change').css({
             backgroundColor: "#"+hex,
-            color: this._hsv[2] > 0.5 ? '#000' : '#fff'
+            color: this.hsv[2] > 0.5 ? '#000' : '#fff'
         }).not(':focus').val(hex);
     },
-
-    _getCaretPos : function (item) {
-        var pos = 0;
-        item.focus();
-        if(document.selection) {
-            var sel = document.selection.createRange().duplicate();
-            sel.moveStart('character',-item.value.length);
-            pos = sel.text.length;
-        } else if(item.selectionStart)
-            pos = item.selectionStart;
-        return pos;
-    },
-
-    _setCaretPos : function (item,pos) {
-        item.focus();
-        if(document.selection) {
-            var range = item.createTextRange(); 
-            range.move("character", pos); 
-            range.select(); 
-        } else if(item.selectionStart) {
-            item.selectionStart = pos;
-            item.selectionEnd = pos;
-        }
-    },
-
-    _updateHexValue : function (event) {
-        var ele = $(event.target);
-        // aktuelle cursor position merken
-        var caret_pos = this._getCaretPos(event.target);
-        // alles gross schreiben
-        var new_value = ele.val().toUpperCase();
-        // wenn es nicht hex konform ist
-        if(new_value.search(/[^A-F0-9]/) != -1) {
-            // neue cursorposition ist das unerlaubte zeichen
-            caret_pos = new_value.search(/[^A-F0-9]/);
-            // unerlaubte zeichen entfernen
-            new_value = new_value.replace(/[^A-F0-9]/g,"");
-        }
-        // input mit neuen inhalt fühlen und cursor setzen
-        ele.val(new_value);
-        this._setCaretPos(event.target,caret_pos);
-        this._hsv = this._HexToHSV(this._getInputHex(ele));
+    _checkHexValue : function(event) {
+        checkHexValue(event);
+        this.hsv = this._HEXtoHSV(this._getInputHex($(event.target)));
         this._updateDisplay();
     },
-
-    _updateSVValue : function (event) {
-        var ele = $(event.target);
-        // aktuelle cursor position merken
-        var caret_pos = this._getCaretPos(event.target);
-        // alles gross schreiben
-        var new_value = ele.val();
-        // wenn es nicht hex konform ist
-        if(new_value.search(/[^0-9]/) != -1) {
-            // neue cursorposition ist das unerlaubte zeichen
-            caret_pos = new_value.search(/[^0-9]/);
-            // unerlaubte zeichen entfernen
-            new_value = new_value.replace(/[^0-9]/g,"");
-        }
-        // input mit neuen inhalt fühlen und cursor setzen
-        ele.val(new_value);
-        this._setCaretPos(event.target,caret_pos);
-        this._hsv = [this._hsv[0],(this._getInputSV($('.ce-in-saturation')) / 100),(this._getInputSV($('.ce-in-brightness')) / 100)];
+    _checkDezValue : function(event) {
+        checkDezValue(event);
+        if($(event.target).data("max_value") == 100)
+            this.hsv = [this.hsv[0],(this._getInputDez(this.i_saturation) / 100),(this._getInputDez(this.i_brightness) / 100)];
+        else
+            this.hsv = this._RGBtoHSV([(this._getInputDez(this.i_red)),(this._getInputDez(this.i_lime)),(this._getInputDez(this.i_blue))]);
         this._updateDisplay();
     },
-
-    _updateRGBValue : function (event) {
-        var ele = $(event.target);
-        // aktuelle cursor position merken
-        var caret_pos = this._getCaretPos(event.target);
-        // alles gross schreiben
-        var new_value = ele.val();
-        // wenn es nicht hex konform ist
-        if(new_value.search(/[^0-9]/) != -1) {
-            // neue cursorposition ist das unerlaubte zeichen
-            caret_pos = new_value.search(/[^0-9]/);
-            // unerlaubte zeichen entfernen
-            new_value = new_value.replace(/[^0-9]/g,"");
-        }
-        // input mit neuen inhalt fühlen und cursor setzen
-        ele.val(new_value);
-        this._setCaretPos(event.target,caret_pos);
-        this._hsv = this._RGBToHSV([(this._getInputRGB($('.ce-in-red'))),(this._getInputRGB($('.ce-in-green'))),(this._getInputRGB($('.ce-in-blue')))]);
-        this._updateDisplay();
-    },
-    _updateTagBG : function (event) {
+    _updateTagBG : function(event) {
         var new_color = $(event.target).css('background-color');
         if($(event.target).attr('title'))
             new_color = $(event.target).attr('title');
         if(new_color.substr(0, 3) == "rgb") {
             new_color = new_color.replace(/rgb\(/, "").replace(/rgba\(/, "").replace(/\)/, "").replace(/\ /g, "");
             new_color = new_color.split(",");
-            this._hsv = this._RGBToHSV([new_color[0],new_color[1],new_color[2]]);
+            this.hsv = this._RGBtoHSV([new_color[0],new_color[1],new_color[2]]);
         } else
-            this._hsv = this._HexToHSV(new_color);
+            this.hsv = this._HEXtoHSV(new_color);
         this._updateDisplay();
     },
 
-    // Retrieve the coordinates of the given event relative to the center of the widget.
-    _getRingCenter : function (event) {
-        var offset = $('#ce-hsv').offset();
-        return { x: (event.pageX - offset.left) - ce_img_hsv_width / 2, y: (event.pageY - offset.top) - ce_img_hsv_width / 2 };
+    _getRingCenter : function(event) {
+        var offset = this.color_hsv.offset();
+        return { x: (event.pageX - offset.left) - 194 / 2, y: (event.pageY - offset.top) - 194 / 2 };
     },
-    _getInputRGB : function (el) {
+    _getInputDez : function(el) {
         var v = el.val();
-        return (v == "" ? 0 : Math.min(Math.max(v ,0), 255));
+        return (v == "" ? 0 : Math.min(Math.max(v ,0), Number(el.data("max_value"))));
     },
-    _getInputSV : function (el) {
-        var v = el.val();
-        return (v == "" ? 0 : Math.min(Math.max(v ,0), 100));
-    },
-    _getInputHex : function (el) {
+    _getInputHex : function(el) {
         var v = el.val().toUpperCase().replace(/[^A-F0-9]/g,"");
         return v+("000000".substr((Math.min(v.length,6))));
     },
 
-    _HexToRGB : function (hex) {
+    _HEXtoRGB : function(hex) {
         return [parseInt('0x' + hex.substring(0, 2)),
                 parseInt('0x' + hex.substring(2, 4)),
                 parseInt('0x' + hex.substring(4, 6))];
     },
 
-    _HexToHSV : function (hex) {
-        return this._RGBToHSV(this._HexToRGB(hex));
+    _HEXtoHSV : function(hex) {
+        return this._RGBtoHSV(this._HEXtoRGB(hex));
     },
 
-    _RGBToHSV : function (rgb) {
-        var r = ( rgb[0] / 255 );
-        var g = ( rgb[1] / 255 );
-        var b = ( rgb[2] / 255 );
-
-        var min = Math.min( r, g, b );
-        var max = Math.max( r, g, b );
-        var delta = max - min;
-
-        var H = 0;
-        var S = 0;
-        var V = max;
+    _RGBtoHSV : function(rgb) {
+        var r = ( rgb[0] / 255 ),
+            g = ( rgb[1] / 255 ),
+            b = ( rgb[2] / 255 ),
+            max = Math.max( r, g, b ),
+            delta = max - Math.min( r, g, b ),
+            H = 0,
+            S = 0,
+            V = max;
         if ( delta != 0 ) {
             S = delta / max;
-
-            var del_R = ( ( ( max - r ) / 6 ) + ( delta / 2 ) ) / delta;
-            var del_G = ( ( ( max - g ) / 6 ) + ( delta / 2 ) ) / delta;
-            var del_B = ( ( ( max - b ) / 6 ) + ( delta / 2 ) ) / delta;
-
+            var del_R = ( ( ( max - r ) / 6 ) + ( delta / 2 ) ) / delta,
+                del_G = ( ( ( max - g ) / 6 ) + ( delta / 2 ) ) / delta,
+                del_B = ( ( ( max - b ) / 6 ) + ( delta / 2 ) ) / delta;
             if      ( r == max ) H = del_B - del_G;
             else if ( g == max ) H = ( 1 / 3 ) + del_R - del_B;
             else if ( b == max ) H = ( 2 / 3 ) + del_G - del_R;
-
             if ( H < 0 ) H += 1;
             if ( H > 1 ) H -= 1;
         }
         return [H, S, V];
     },
-    _HSVToRGB : function (hsv) {
-        var H = hsv[0], S = hsv[1], V = hsv[2];
-            var R = V * 255;
-            var G = V * 255;
-            var B = V * 255;
+    _HSVtoRGB : function(hsv) {
+        var H = hsv[0], S = hsv[1], V = hsv[2],
+            R = V * 255,
+            G = V * 255,
+            B = V * 255;
         if ( S > 0 ) {
-            var var_r, var_g, var_b;
-            var var_h = H * 6;
+            var var_r, var_g, var_b,
+                var_h = H * 6;
             if ( var_h == 6 ) var_h = 0;
-            var var_i = Math.floor( var_h );
-            var var_1 = V * ( 1 - S );
-            var var_2 = V * ( 1 - S * ( var_h - var_i ) );
-            var var_3 = V * ( 1 - S * ( 1 - ( var_h - var_i ) ) );
+            var var_i = Math.floor( var_h ),
+                var_1 = V * ( 1 - S ),
+                var_2 = V * ( 1 - S * ( var_h - var_i ) ),
+                var_3 = V * ( 1 - S * ( 1 - ( var_h - var_i ) ) );
 
             if      ( var_i == 0 ) { var_r = V;      var_g = var_3;  var_b = var_1; }
             else if ( var_i == 1 ) { var_r = var_2;  var_g = V;      var_b = var_1; }
@@ -506,15 +377,12 @@ var ColorEditor = {
         }
         return [Math.round(R),Math.round(G),Math.round(B)];
     },
-    _hexFromRGB : function (rgb) {
-        var hex = [rgb[0].toString(16),rgb[1].toString(16),rgb[2].toString(16)];
-        for(var i = 0;i < hex.length;i++) {
-            if (hex[i].length === 1) {
-                hex[i] = "0" + hex[i];
-            }
-        }
-        return hex.join("").toUpperCase();
+    _HSVtoHEX : function(hsv) {
+        return this._RGBtoHEX(this._HSVtoRGB(hsv));
+    },
+    _RGBtoHEX : function(rgb) {
+        return (("0"+rgb[0].toString(16)).slice(-2) + ("0"+rgb[1].toString(16)).slice(-2) + ("0"+rgb[2].toString(16)).slice(-2)).toUpperCase();
     }
 };
-$.widget ('ui.coloreditor', ColorEditor);
+$.widget('ui.coloreditor', ColorEditor);
 

@@ -19,8 +19,6 @@ function showEditPageForm()    {
 
     .'<table class="" width="100%" cellspacing="0" border="0" cellpadding="0"><tr>'
     .'<td width="1%" class="mo-nowrap">'
-
-#        .'<div style="float:left;white-space:nowrap;">'
             .'<img id="show_gutter" class="mo-tool-icon mo-ace-icon ui-state-default ui-corner-all" src="'.URL_BASE.ADMIN_DIR_NAME.'/gfx/ace/number.png" alt="number" hspace="0" vspace="0" />'
             .'<img id="show_hidden" class="mo-tool-icon mo-ace-icon ui-state-default ui-corner-all" src="'.URL_BASE.ADMIN_DIR_NAME.'/gfx/ace/noprint.png" alt="noprint" hspace="0" vspace="0" />'
     .'</td>'
@@ -54,22 +52,18 @@ function showEditPageForm()    {
         $content .= returnToolbarColoredit();
     $content .= '</td>'
     .'<td width="1%" class="mo-nowrap">'
-#        .'</div>'
-#        .'<div style="float:right;white-space:nowrap;">'
             .'<input class="mo-ace-in-text" id="search-text" type="text" name="search-text" value="" />'
             .'<img id="search" class="mo-ace-icon mo-tool-icon" src="'.URL_BASE.ADMIN_DIR_NAME.'/gfx/ace/find.png" alt="find" hspace="0" vspace="0" />'
             .'<input class="mo-ace-in-check" type="checkbox" id="search-all" />'
             .'<label class="mo-ace-in-check-label" for="search-all">Alle</label>'
             .'<input class="mo-ace-in-text" id="replace-text" type="text" name="search" value="" />'
             .'<img id="replace" class="mo-ace-icon mo-tool-icon" src="'.URL_BASE.ADMIN_DIR_NAME.'/gfx/ace/replace.png" alt="replace" hspace="0" vspace="0" />'
-#        .'</div>'
-#       .'<div class="mo-clear"></div>'
     .'</td>'
     ."</tr>"
     ."</table>"
     .'</div>'
     .'<div id="pagecontent-border" style="position:relative;overflow:hidden;" class="ui-widget-content">'
-        .'<pre id="pagecontent"></pre>'
+        .'<div id="pagecontent"></div>'
     .'</div>'
 .'</div>';
 
@@ -88,20 +82,6 @@ function returnFormatToolbar() {
     global $USER_SYNTAX;
 
     $content = '<table class="mo-menue-row-bottom mo-menue-row-top" width="100%" cellspacing="0" border="0" cellpadding="0">'
-/*    ."<tr>"
-    // Überschrift Syntaxelemente
-    .'<td width="58%" class="mo-nowrap">'
-    .getLanguageValue("toolbar_syntaxelements")
-    ."</td>"
-    // Überschrift Textformatierung
-    .'<td width="31%" class="mo-nowrap">'
-    .getLanguageValue("toolbar_textformatting")
-    ."</td>"
-    // Überschrift Farben
-    .'<td width="11%" class="mo-nowrap">'
-    .getLanguageValue("toolbar_textcoloring")
-    ."</td>"
-    ."</tr>"*/
     ."<tr>"
     // Syntaxelemente
     .'<td width="50%" class="mo-nowrap">'
@@ -150,22 +130,8 @@ function returnFormatToolbar() {
     }
 
 
-    $content .= '<table class="mo-menue-row-bottom" width="100%" cellspacing="0" border="0" cellpadding="0">'# style="width:100%"
-/*    ."<tr>";
-
-    // Überschrift Inhalte
-    $content .=    '<td colspan="3">'
-    .getLanguageValue("toolbar_contents")
-    ."</td>";
-    // Überschrift Benutzerdefinierte Syntaxelemente
-    $content .= '<td>';
-    $content .= getLanguageValue("toolbar_usersyntax");
-    $content .= "</td>";
-    $content .= "</tr>"*/
+    $content .= '<table class="mo-menue-row-bottom" width="100%" cellspacing="0" border="0" cellpadding="0">'
     ."<tr>";
-    // Inhalte
-//.'<ul>'
-
     # Template
     $template_title = NULL;
     $template_selectbox = "&nbsp;";
@@ -192,10 +158,9 @@ function returnFormatToolbar() {
 
 function returnToolbarColoredit() {
     $content = '<div id="js-color-menu" class="mo-nowrap">'
-            .'<img id="js-ace-color-img" class="ed-syntax-icon ed-syntax-hover ui-state-active ed-syntax-color ce-bg-color-change" alt="Farbe" title="#RRGGBB" src="gfx/jsToolbar/farbe.png" onclick="insert_ace(\'#\' + document.getElementById(\'farbcode\').value , \'\',true)" style="display:none;" />'
-            .'<img id="js-editor-color-img" class="ed-syntax-icon ed-syntax-hover ui-state-active ed-syntax-color ce-bg-color-change" alt="Farbe" title="[farbe=RRGGBB| ... ] - '.getLanguageValue("toolbar_desc_farbe",true).'" src="gfx/jsToolbar/farbe.png" onclick="insert_ace(\'[farbe=\' + document.getElementById(\'farbcode\').value + \'|\', \']\',true)" />'
-            .'<input type="text" maxlength="6" value="DD0000" class="ce-bg-color-change ce-in-hex" id="farbcode" size="6" />'
-            .'<img class="js-coloreditor-button ed-syntax-icon ui-state-active ed-syntax-hover" alt="Farbe Bearbeiten" title="Farbe Bearbeiten" src="gfx/jsToolbar/farbeedit.png"  />'
+            .'<img class="ed-syntax-icon ed-syntax-hover ui-state-active ed-syntax-color ce-bg-color-change" alt="Farbe" title="[farbe=RRGGBB| ... ]" src="gfx/jsToolbar/farbe.png" onclick="insert_ace(\'[farbe=\' + document.getElementById(\'farbcode\').value + \'|\', \']\',true)" />'
+            .'<input type="text" maxlength="6" value="DD0000" class="ce-bg-color-change js-in-hex ce-in-hex" id="farbcode" size="6" />'
+            .'<img class="js-coloreditor-button ed-syntax-icon ui-state-active ed-syntax-hover" alt="'.getLanguageValue("dialog_title_coloredit").'" title="'.getLanguageValue("dialog_title_coloredit").'" src="gfx/jsToolbar/farbeedit.png" style="display:none;" />'
         .'</div>';
     return $content;
 }
@@ -208,7 +173,7 @@ function returnFormatToolbarIcon($tag) {
     } elseif($tag == "tabelle")
         return '<img class="ed-syntax-icon ed-syntax-hover ui-state-active" alt="'.$tag.'" src="gfx/jsToolbar/'.$tag.'.png" title="['.$tag.'|...]" onclick="insert_ace(\'['.$tag.'|\\n&lt;&lt; \', \' |  &gt;&gt;\\n&lt;  |  &gt;\\n]\',true)" />';
     elseif($tag == "linie")
-        return '<img class="ed-syntax-icon ed-syntax-hover ui-state-active" alt="'.$tag.'" src="gfx/jsToolbar/'.$tag.'.png" title="[----]" onclick="insert_ace(\'[----]\', \'\',false)" />';
+        return '<img class="ed-syntax-icon ed-syntax-hover ui-state-active" alt="'.$tag.'" src="gfx/jsToolbar/'.$tag.'.png" title="[----]" onclick="insert_ace(\'[----]\', false,false)" />';
     else
         return '<img class="ed-syntax-icon ed-syntax-hover ui-state-active" alt="'.$tag.'" src="gfx/jsToolbar/'.$tag.'.png" title="['.$tag.'|...]" onclick="insert_ace(\'['.$tag.'|\', \']\',true)" />';
 }

@@ -2,20 +2,107 @@ var anim_speed = '200';
 var dialogMaxheightOffset = 40;
 var max_menu_tab = false;
 
+var dialog_button_height,
+    dialog_diff_content_height,
+    dialog_diff_content_width;
+
 function sleep(milliSeconds) {
     var startTime = new Date().getTime();
     while (new Date().getTime() < startTime + milliSeconds);
 }
 
+function getCaretPos(item) {
+    var pos = 0;
+    item.focus();
+    if(document.selection) {
+        var sel = document.selection.createRange().duplicate();
+        sel.moveStart('character',-item.value.length);
+        pos = sel.text.length;
+    } else if(item.selectionStart)
+        pos = item.selectionStart;
+    return pos;
+}
+
+function setCaretPos(item,pos) {
+    item.focus();
+    if(document.selection) {
+        var range = item.createTextRange();
+        range.move("character", pos);
+        range.select();
+    } else if(item.selectionStart) {
+        item.selectionStart = pos;
+        item.selectionEnd = pos;
+    }
+}
+
+function checkHexValue(event) {
+    if(event.which == 8) // del left
+        return;
+    var ele = $(event.target),
+        caret_pos = getCaretPos(event.target),
+        new_value = ele.val().toUpperCase();
+    if(new_value.search(/[^A-F0-9]/g) != -1) {
+        caret_pos = new_value.search(/[^A-F0-9]/g);
+        new_value = new_value.replace(/[^A-F0-9]/g,"");
+    }
+    ele.val(new_value);
+    setCaretPos(event.target,caret_pos);
+}
+
+function checkDezValue(event) {
+    if(event.which == 8) // del left
+        return;
+    var ele = $(event.target),
+        caret_pos = getCaretPos(event.target),
+        new_value = ele.val();
+    if(new_value.search(/[^0-9]/g) != -1) {
+        caret_pos = new_value.search(/[^0-9]/g);
+        new_value = new_value.replace(/[^0-9]/g,"");
+        ele.val(new_value);
+        setCaretPos(event.target,caret_pos);
+    }
+}
+
+function checkChmodValue(event) {
+    if(event.which == 8) // del left
+        return;
+    var ele = $(event.target),
+        caret_pos = getCaretPos(event.target),
+        new_value = ele.val();
+    if(new_value.search(/[^0-7]/g) != -1) {
+        caret_pos = new_value.search(/[^0-7]/g);
+        new_value = new_value.replace(/[^0-7]/g,"");
+        ele.val(new_value);
+        setCaretPos(event.target,caret_pos);
+    }
+}
+
+function checkDezAutoValue(event) {
+    if(event.which == 8) // del left
+        return;
+    var ele = $(event.target),
+        caret_pos = getCaretPos(event.target),
+        new_value = ele.val();
+    if(new_value.search(/[auto]/g) != -1) {
+        ele.val("auto");
+        setCaretPos(event.target,caret_pos);
+    } else if(new_value.search(/[^0-9auto]/g) != -1) {
+        caret_pos = new_value.search(/[^0-9auto]/g);
+        new_value = new_value.replace(/[^0-9auto]/g,"");
+        ele.val(new_value);
+        setCaretPos(event.target,caret_pos);
+    }
+}
+
 function rawurlencode_js(str) {
     return encodeURIComponent(str).replace(/!/g, '%21').replace(/'/g, '%27').replace(/\(/g, '%28').
     replace(/\)/g, '%29').replace(/\*/g, '%2A').replace(/\~/g, '%7E').replace(/#/g,'%23');
-}
-
+}  
+   
 function rawurldecode_js(str) {
     return decodeURIComponent(str).replace(/%21/g, '!').replace(/%27/g, "'").replace(/%28/g, '(').
     replace(/%29/g, ')').replace(/%2A/g, '*').replace(/%7E/g, '~').replace(/%23/g,'#');
-}
+}  
 
 // das ist die gleiche function wie in der index.php
 function returnMessage(success, message) {
@@ -35,7 +122,33 @@ function set_dialog_max_width(timeItem) {
         window.setTimeout("set_dialog_max_width(\""+timeItem+"\")", 100);
 }
 
+function set_dialog_dims() {
+    $("body").append('<div id="tmp-dialog-content"></div>');
+    $('#tmp-dialog-content').dialog({
+        autoOpen: false,
+        height: 100,
+        width: 300,
+        modal: false,
+        resizable: false,
+        title:"TEST",
+        dialogClass: "tmp-dialog",
+        buttons: [ { text: "Ok", click: function() { $( this ).dialog( "close" ); }} ]
+    });
+    $('#dialog-test-w').append($('.tmp-dialog'));
+    $('.tmp-dialog').css({display:"block",position: "relative"})
+
+    dialog_diff_content_height = ($('.tmp-dialog .ui-dialog-titlebar').outerHeight(true) + ($('.tmp-dialog .ui-dialog-content').outerHeight(true) - $('.tmp-dialog .ui-dialog-content').height())) + 1;
+
+    dialog_diff_content_width = $('.tmp-dialog .ui-dialog-content').outerWidth(true) - $('.tmp-dialog .ui-dialog-content').width()
+
+    dialog_button_height = $('.tmp-dialog .ui-dialog-buttonpane').outerHeight(true);
+
+    $('.tmp-dialog').remove();
+//$('#out').html($('#out').html()+" dialog_diff_content_height_cont="+dialog_diff_content_height_cont+" dialog_diff_content_width_cont="+dialog_diff_content_width_cont+" dialog_button_height="+dialog_button_height+"<br>")
+}
+
 $(function() {
+    set_dialog_dims();
 
     $("body").on("click",".js-no-click", function(event) { event.preventDefault() });
 
@@ -44,25 +157,26 @@ $(function() {
 
     /* bei allen input's mit dieser class nur zahlen zulassen */
     $("body").on("keyup",".js-in-digit", function(event) {
-        if($(this).val().search( /[^0-9]/g) != -1)
-            $(this).val($(this).val().replace( /[^0-9]/g, "" ));
+        checkDezValue(event);
     });
+
+    /* bei allen input's mit dieser class nur zahlen zulassen */
+    $("body").on({
+        keyup: function(event) {checkHexValue(event);},
+        focusout: function() {
+            var v = $(event.target).val().toUpperCase().replace(/[^A-F0-9]/g,"");
+            $(event.target).val(v+("000000".substr((Math.min(v.length,6)))));
+        }
+    },".js-in-hex");
 
     /* bei allen input's mit dieser class nur zahlen und auto zulassen */
     $("body").on("keyup",".js-in-digit-auto", function(event) {
-        if(event.which == 8) // del left
-            return;
-        if($(this).val().search( /[^0-9auto]/g) != -1)
-            $(this).val($(this).val().replace( /[^0-9auto]/g, "" ));
-
-        if($(this).val().search( /[auto]/g) != -1)
-            $(this).val("auto");
+        checkDezAutoValue(event);
     });
 
     /* bei allen input's mit dieser class nur zahlen 0-7 zulassen */
     $("body").on("keyup", ".js-in-chmod",function(event) {
-        if($(this).val().search( /[^0-7]/g) != -1)
-            $(this).val($(this).val().replace( /[^0-7]/g, "" ));
+        checkChmodValue(event);
     });
 
     /* toggle für die tools icons */
@@ -143,7 +257,24 @@ $(function() {
     }
 
     // color edit
-    if($('.js-coloreditor-button').length > 0)
+    if(typeof ColorEditor != "undefined" && $('.js-coloreditor-button').length > 0)
         $('.js-coloreditor-button').coloreditor();
+    else if($('#js-menu-config-default-color').length > 0) {
+        $('#js-menu-config-default-color').parents('li').eq(0).hide();
+        var hex = $('.ce-in-hex').val().toUpperCase().replace(/[^A-F0-9]/g,"");
+        hex += "000000".substr((Math.min(hex.length,6)));
+        $('.ce-bg-color-change').css({
+            backgroundColor: "#"+hex,
+            color: hex > '7F7F7F' ? '#000000' : '#FFFFFF'
+        });
+        $('.ce-in-hex').bind("keyup",function(event) {
+            var hex = $(this).val().toUpperCase().replace(/[^A-F0-9]/g,"");
+            hex += "000000".substr((Math.min(hex.length,6)));
+            $('.ce-bg-color-change').css({
+                backgroundColor: "#"+hex,
+                color: hex > '7F7F7F' ? '#000000' : '#FFFFFF'
+            });
+        });
+    }
 //$('#ce-colorchange').dialog("open");
 });

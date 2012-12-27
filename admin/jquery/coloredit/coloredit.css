@@ -1,77 +1,102 @@
-/*
-#ce-colorchange input {
-    font-size:12px;
-}*/
-#ce-colorchange td {
+#ce-colorchange {
+    float:left;
     padding:0;
-    margin:0;
+    margin:10px;
 }
 
-.ce-td-hsv {
-    text-align:left;
-    vertical-align:top;
+#ce-colorchange .ce-color-hsv-dim {
+    width:194px;
+    height:194px;
 }
 
-#ce-color-hsv {
+#ce-colorchange .ce-tri-dim {
+    width:126px;
+    height:109px;
+    top:24px;
+    left:34px;
+}
+
+#ce-colorchange .ce-pos-rel {
     position:relative;
 }
 
-#ce-color-hsv * {
+#ce-colorchange .ce-pos-abs {
     position:absolute;
 }
 
-#ce-hsv {
-    background:url(hsv.png) no-repeat;
-}
-
-#ce-color-hsv .ce-marker {
-    display:block;
+#ce-colorchange .ce-marker {
     width:16px;
     height:16px;
     margin:-8px 0 0 -8px;
     background:url(marker.png) no-repeat;
 }
 
-.ce-td-prev {
-    text-align:left;
-    vertical-align:bottom;
+#ce-colorchange .ce-color-hsv {
+    background:url(hsv.png) no-repeat;
+}
+
+#ce-colorchange .ce-prev-box {
+    left:194px;
+    top:0;
     height:54px;
 }
 
-.ce-td-prev div {
-    position:relative;
+#ce-colorchange .ce-prev-box .ce-in-hex {
+    left:10px;
+    bottom:12px;
 }
 
-.ce-td-slider {
+#ce-colorchange .ce-prev-box .ce-color-curent {
+    top:0;
+    right:0;
+    cursor:pointer;
+    width:40px;
+    height:40px;
+    border-left-width:0;
+    background-image:none;
+    background-color:#ffffff;
+}
+
+#ce-colorchange .ce-prev-box .ce-bg-color-change {
+    top:0;
+    right:40px;
+    width:40px;
+    height:40px;
+    background-image:none;
+}
+
+#ce-colorchange ul {
+    list-style-type:none;
+    padding:0;
+    margin:0;
+    top:54px;
+    left:194px;
+}
+
+#ce-colorchange ul li {
+    text-align:right;
+    white-space:nowrap;
+    padding:0;
+    margin:0;
     height:26px;
-    width:11em;
-    text-align:left;
     vertical-align:middle;
 }
 
-#ce-colorchange .ce-tr-last {
-    padding-bottom:10px;
-}
-
-.ce-td-value {
-    text-align:right;
+#ce-colorchange .ce-value {
+    width:24px;
     vertical-align:middle;
 }
 
-.ce-td-value {
-    text-align:right;
+#ce-colorchange .ce-slide {
+    display:inline-block;
+    width:100px;
+    margin:0 15px 0 15px;
     vertical-align:middle;
-}
-
-#ce-colorchange td.ce-td-default-color {
-    /*padding-top:5px;*/
 }
 
 .ce-default-color-box {
-    /*width:194px;*/
     line-height:1px;
     white-space:normal;
-   /* margin:5px 0 0 0;*/
     padding:0 0 2px 2px;
     min-height:19px;
 }
@@ -87,76 +112,11 @@
     background-image:none;
 }
 
-.ce-in-hex, .mo-ul .ce-in-hex {
+#ce-colorchange .ce-in-hex, #js-color-menu .ce-in-hex, #js-menu-config-default-color .ce-in-hex {
     width:50px;
     height: 16px;
     font-size:12px;
-    /*border:0px;*/
     padding:0 2px 0 2px;
     margin:2px 0 0 0;
     vertical-align:middle;
 }
-
-#ce-colorchange .ce-in-hex {
-    margin-left:.8em;
-    margin-bottom:1em;
-}
-
-.ce-in-value {
-    /*height: 12px;*/
-    width:24px;
-}
-
-/* 1=oben, 2=rechts, 3=unten, 4=links */
-.ce-td-slider .ui-slider {
-    width:8.3em;
-    margin-left:1.2em;
-}
-
-.ce-saturation img {
-    width:8.3em;
-}
-
-.ce-red .ui-slider-range { background:#ff0000; }
-.ce-red .ui-slider-handle { border-color:#ff0000; }
-.ce-green .ui-slider-range { background:#00ff00; }
-.ce-green .ui-slider-handle { border-color:#00ff00; }
-.ce-blue .ui-slider-range { background:#0000ff; }
-.ce-blue .ui-slider-handle { border-color:#0000ff; }
-
-.ce-saturation .ui-slider-range, .ce-brightness .ui-slider-range { background:transparent; }
-
-#ce-colorchange .ce-saturation {
-    background-image:url(saturation.png);
-}
-
-#ce-colorchange .ce-brightness {
-    background-image:url(brightness.png);
-}
-
-#ce-color-prev {
-    position:absolute;
-    top:-54px;
-    right:40px;
-    width:40px;
-    height:40px;
-    background-image:none;
-}
-
-#ce-color-curent {
-    position:absolute;
-    top:0;
-    top:-54px;
-    right:0;
-    cursor:pointer;
-    width:40px;
-    height:40px;
-    border-left-width:0;
-    background-image:none;
-}
-
-/*1=oben, 2=rechts, 3=unten, 4=links*/
-#ce-default-color {
-    width:194px;
-}
-

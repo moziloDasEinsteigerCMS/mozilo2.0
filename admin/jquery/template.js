@@ -20,14 +20,10 @@ var edit_handler = function(event) {
             $('#select-mode option[value="html"]').attr('selected',true)
         }
     }
-    $('#colordiv-editor #js-ace-color-img').css('display','inline');
-    $('#colordiv-editor #js-editor-color-img').css('display','none');
-    $('#colordiv-mozilo #js-ace-color-img').css('display','none');
-    $('#colordiv-mozilo #js-editor-color-img').css('display','inline');
 
     editor_session.setMode("ace/mode/"+$('#select-mode').val());
 
-    // wenn sich im FileUpload was geändert hat deshalb hollen wir immer dei selectbox template
+    // wenn sich im FileUpload was geändert hat deshalb hollen wir immer die selectbox template
     send_data("templateselectbox=true",$('select[name="template_css"]'));
 
     $(dialog_editor).dialog("option", "width", $(".mo-td-content-width").eq(0).width());

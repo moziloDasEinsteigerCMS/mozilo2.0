@@ -195,7 +195,7 @@ function config() {
             $colors_div .= '</div>';
             $colors_div .= '<div id="js-menu-config-default-color" class="mo-in-li-r">'
                 .'<img class="js-new-config-default-color ce-bg-color-change ce-default-color-img ui-widget-content ui-corner-all" alt="" title="" src="'.URL_BASE.ADMIN_DIR_NAME.'/gfx/clear.gif" />'
-                .'<input type="text" maxlength="6" value="DD0000" class="ce-bg-color-change ce-in-hex" id="js-new-default-color-value" size="6" />'
+                .'<input type="text" maxlength="6" value="DD0000" class="ce-bg-color-change js-in-hex ce-in-hex" id="js-new-default-color-value" size="6" />'
                 .'<img class="js-coloreditor-button ed-syntax-icon ui-state-active" alt="Farbe Bearbeiten" title="Farbe Bearbeiten" src="gfx/jsToolbar/farbeedit.png"  />'
             .'</div>';
             $template[$titel][] = '<div class="mo-margin-bottom">'.getLanguageValue("config_text_defaultcolors").'</div>'.$colors_div.'<input type="hidden" name="defaultcolors" value="'.$specialchars->rebuildSpecialChars($CMS_CONF->get("defaultcolors"),false,false).'" />';
