@@ -122,8 +122,25 @@ function home() {
 
     # MULTI_USER
     if(defined('MULTI_USER') and MULTI_USER) {
+        $mu_string = "";
+        $rest_time = MULTI_USER_TIME;
+        if($rest_time >= 86400) {
+            $mu_string .= floor(MULTI_USER_TIME / 86400)." ".((floor(MULTI_USER_TIME / 86400) > 1) ? getLanguageValue("days") : getLanguageValue("day"))." ";
+            $rest_time = $rest_time - (floor(MULTI_USER_TIME / 86400) * 86400);
+        }
+        if($rest_time >= 3600) {
+            $mu_string .= floor($rest_time / 3600)." ".((floor($rest_time / 3600) > 1) ? getLanguageValue("hours") : getLanguageValue("hour"))." ";
+            $rest_time = $rest_time - (floor($rest_time / 3600) * 3600);
+        }
+        if($rest_time >= 60) {
+            $mu_string .= floor($rest_time / 60)." ".((floor($rest_time / 60) > 1) ? getLanguageValue("minutes") : getLanguageValue("minute"))." ";
+            $rest_time = $rest_time - (floor($rest_time / 60) * 60);
+        }
+        if($rest_time > 0)
+            $mu_string .= $rest_time." ".(($rest_time > 1) ? getLanguageValue("seconds") : getLanguageValue("second"));
+
         $error[$titel][] = "ok";
-        $template[$titel][] = array("Multiuser mode Verfügbar",MULTI_USER_TIME." sec.");
+        $template[$titel][] = array("Multiuser mode Verfügbar",$mu_string);
     } else {
         $error[$titel][] = true;
         $template[$titel][] = array("Multiuser mode Verfügbar",getLanguageValue("no"));
