@@ -5,7 +5,8 @@ if(!is_dir(BASE_DIR.$TMP_DIR)) {
     @chmod(BASE_DIR.$TMP_DIR,0700);
 } else
     @chmod(BASE_DIR.$TMP_DIR,0700);
-@session_name('MOZILOID');
+
+@session_name(SESSION_MO);
 @session_save_path(BASE_DIR.$TMP_DIR);
 
 # hat session_save_path functioniert? ansonsten server eigene session verwenden

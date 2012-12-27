@@ -9,9 +9,16 @@ $BASE_DIR = str_replace("\\\\", "\\",__FILE__);
 $BASE_DIR = substr($BASE_DIR,0,-(strlen(ADMIN_DIR_NAME."/index.php")));
 define("BASE_DIR",$BASE_DIR);
 unset($BASE_DIR);
+
+$name_id = 'MOZILOID_'.md5($_SERVER['SERVER_ADDR'].substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], ADMIN_DIR_NAME."/index.php")));
+define("SESSION_MO",$name_id);
+unset($name_id);
+
 if(is_file("sessionClass.php")) {
    require_once("sessionClass.php");
-}
+} else
+    @session_name(SESSION_MO);
+
 session_start();
 
 #!!!!!!!!! prüfen
@@ -23,10 +30,11 @@ else
     define("USE_CHMOD", true);
 
 define("DRAFT", true);
+
 // Session Fixation durch Vergabe einer neuen Session-ID beim ersten Login verhindern
-if(!isset($_SESSION['MOZILOID'])) {
+if(!isset($_SESSION[SESSION_MO])) {
     session_regenerate_id(true);
-    $_SESSION['MOZILOID'] = true;
+    $_SESSION[SESSION_MO] = true;
 }
 
 # -1 für debug
