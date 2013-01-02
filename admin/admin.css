@@ -3,10 +3,7 @@ html, body {
     font-size:12px;/* !important*/
     padding:0;
     margin:0;
-margin: 0;
-padding: 0;
-height: 100%;
-
+    height: 100%;
 }
 
 #mo-admin-td {
@@ -46,12 +43,8 @@ form {
 .mo-icon-text-right {
     margin-right:.4em;
 }
-/*
-.mo-butten-a-img {
-}
-*/
+
 .mo-butten-a-img img {
-    width: 2em;
     border:0;
     padding:0;
     margin:.4em .8em .4em 0;
@@ -60,35 +53,21 @@ form {
 }
 
 .mo-tool-icon {
-    width: 2em;
+    width: 24px;
+    height:24px;
     cursor: pointer;
     border:0;
     padding:0;
-    /*margin:0 0 0 .8em;*/
-   /**/ margin:0 .4em 0 .4em;
+    margin:0 .4em 0 .4em;
     /*das ist nötig damits nicht son rand unten im a tag gibt*/
     vertical-align:middle;
 }
 
-.js-menu-icon {
-    width: 1.5em;
-}
-
 .mo-icon-link {
     cursor:pointer;
-    width: 1.4em;
+    width: 18px;
     vertical-align:middle;
 }
-
-/*
-#slider-zoom {
-width: 200px;
-font-size:12px;
-position:fixed;
-top:0;
-left:0;
-z-index:99999;
-}*/
 
 .mo-icon-blank {
     cursor: default;
@@ -96,12 +75,10 @@ z-index:99999;
 
 .mo-ui-tabs {
     border-width: 0;
-    /*padding:0;*/
 }
 
 /*1=oben, 2=rechts, 3=unten, 4=links*/
 .mo-ui-tabs-panel {
-    /*padding: .8em .4em 0 .4em;*/
     padding: 1px .4em .4em .4em;
     min-height:3em;
 }
@@ -120,15 +97,12 @@ z-index:99999;
 }
 
 .mo-li {
-     list-style-type: none;
-   /*padding: .4em;*/
+    list-style-type: none;
     margin-top: .8em;
 }
 /* das ist der cat head*/
 .mo-li-head-tag {
-    /*padding: .4em;*/
     padding: .4em .4em 0 .4em;
-    /*margin-top: .8em;*/
 }
 
 /* das wird wens danach keine ul gibt dem head hinzugefügt
@@ -139,14 +113,12 @@ weil ansonsten unter dem head die ul hinzu kommt (mo-in-ul-ul) */
 
 .mo-li .mo-li-head-tag {
     border-width:0;
-    /*padding: .4em;*/
-   /* margin-top: .8em;*/
 }
 
 /* für alle tags wo die tools icon enthaten sind damit beim hover die höhe nicht wackelt
 richtet sich nach der icon grösse = 2 * body font-size */
 .mo-tag-height-from-icon {
-    height:2em;
+    height:24px;
 }
 /*1=oben, 2=rechts, 3=unten, 4=links*/
 .mo-in-ul-ul {
@@ -174,12 +146,10 @@ richtet sich nach der icon grösse = 2 * body font-size */
 
 .mo-input-text {
     width:96%;
-    /*padding-right:.8em;*/
 }
 
 .mo-input-digit {
     width:4em;
-    /*padding-right:.8em;*/
 }
 
 .mo-select-div {
@@ -192,17 +162,10 @@ richtet sich nach der icon grösse = 2 * body font-size */
 
 .mo-checkbox {
     margin-right: .4em;
-    /*padding-right:.8em;*/
 }
 
 .mo-radio {
     margin-right: .4em;
-    /*padding-right:.8em;*/
-}
-
-.mo-submit {
-    /*margin-right: .4em;*/
-    /*padding-right:.8em;*/
 }
 
 .mo-plugin-input {
@@ -256,7 +219,7 @@ richtet sich nach der icon grösse = 2 * body font-size */
 }
 
 .mo-img-trans {
-    background-image:url('gfx/trans_background.gif');
+    background-image:url(gfx/trans_background.gif);
     background-repeat:repeat;
 }
 
@@ -270,7 +233,7 @@ richtet sich nach der icon grösse = 2 * body font-size */
     min-width:20px;
     /* sichtbare menu breite */
     max-width:200px;
-    background-image:url('gfx/menu.png');
+    background-image:url(gfx/menu.png);
     background-position: 5px center;
     background-repeat:no-repeat;
     border-left-width:0;
@@ -313,7 +276,6 @@ li.ui-draggable-dragging {
 
 /* der hilfe button im editor title  */
 .ui-dialog-titlebar .js-docu-link {
-/*border:1px solid #f00;*/
     float:left;
     display:block;
     height:22px;
@@ -323,7 +285,6 @@ li.ui-draggable-dragging {
 
 /* 1=oben, 2=rechts, 3=unten, 4=links */
 .ui-dialog-titlebar .js-docu-link img {
-/*border:1px solid #00f;*/
     width: 22px;
     padding:0;
     margin:0;
@@ -340,14 +301,10 @@ li.ui-draggable-dragging {
 }
 
 .js-in-link, .js-in-name {
-    width:18em;
+    width:17em;
     margin-right: 1em;
 }
-/*1=oben, 2=rechts, 3=unten, 4=links*/
-/*.mo-icon {
-    margin:.4em .8em .4em 0;
-}
-*/
+
 .mo-td-middle {
     vertical-align:middle;
 }
@@ -364,11 +321,6 @@ li.ui-draggable-dragging {
 .mo-margin-top {
     margin-top:.8em;
 }
-/*
-.mo-div-lr {
-    float:left;
-    width:50%;
-}*/
 
 .mo-in-li-l {
     width:65%;
@@ -386,35 +338,17 @@ div.mo-in-li-r  {
     float:right;
 }
 
-.js-file-dir {
-/*position: relative;*/
-    /*margin-bottom:10px;*/
-    /*padding-bottom:10px;*/
-}
-
 .mo-no-border-top {
-  border-top-width: 0;
-    /*border-top:0;*/
+    border-top-width: 0;
 }
 
 .mo-no-border-bottom {
-  border-bottom-width: 0;
-    /*border-bottom:0;*/
+    border-bottom-width: 0;
 }
 
 .file-cat-content {
     border-top:0;
 }
-/*
-.mo-file-dir-helper {
-    border-bottom:0;
-}
-*/
-/*
-.file-cat-header {
-    margin:5px 0px;
-}
-*/
 
 input.mo-input-margin-top  {
     margin-top:.4em;
@@ -437,37 +371,25 @@ input.mo-input-margin-top  {
 }
 
 .mo-help-box {
-    /*margin:.4em 0 0 .8em;*/
     padding:.4em .8em .4em .4em;
 }
 
 /*1=oben, 2=rechts, 3=unten, 4=links*/
 .align-right {
-  /*padding-right:10px;*/
   text-align: right;
 }
 
 .align-left {
-  /*padding: 0 0 0 10px;*/
   text-align: left;
 }
 
 .mo-align-center {
-  /*padding: 0 0 0 10px;*/
   text-align: center;
-}
-
-.js-file-dir-header {
-    /*padding:5px 0px;*/
 }
 
 .js-file-dir-header td {
     vertical-align:middle;
 }
-/*
-.js-file-dir-header table {
-    height:38px;
-}*/
 
 .mo-hidden {
     display:none;
@@ -517,32 +439,21 @@ input.mo-input-margin-top  {
 .mo-overlay {
     /* must be initially hidden */
     display:none;
-    
     /* place overlay on top of other elements */
     z-index:10000;
-    
     /* styling */
     background-color:#fff;
-    
-    width:300px;    
+    width:300px;
     min-height:200px;
     border:1px solid #666;
-    
     /* CSS3 styling for latest browsers */
     -moz-box-shadow:0 0 90px 5px #000;
     -webkit-box-shadow: 0 0 90px #000;  
 }
 
-
-
-
-
-
-
 .mo-message-erfolg {
     display: block;
     padding: .8em 0;
-    /*font-weight: bolder;*/
     background-position: .4em .4em;
     background-repeat: no-repeat;
 }
@@ -550,7 +461,6 @@ input.mo-input-margin-top  {
 .mo-message-fehler {
     display: block;
     padding: .8em 0;
-    /*font-weight: bolder;*/
     background-position: .4em .4em;
     background-repeat: no-repeat;
 }
@@ -651,3 +561,43 @@ div#dialog-multi .mo-login_message_fehler {
     float:left;
 }
 
+.mo-tabs-icon {
+    background-image: url(gfx/tabs_icons.png);
+    background-repeat:no-repeat;
+}
+
+.mo-tab-home        {background-position: 0 0;}
+.mo-tab-catpage     {background-position: -18px 0;}
+.mo-tab-files       {background-position: -36px 0;}
+.mo-tab-gallery     {background-position: -54px 0;}
+.mo-tab-config      {background-position: -72px 0;}
+.mo-tab-admin       {background-position: -90px 0;}
+.mo-tab-plugins     {background-position: -108px 0;}
+.mo-tab-template    {background-position: -126px 0;}
+
+.mo-icons-icon {
+    background-image: url(gfx/mo_icons.png);
+    background-repeat:no-repeat;
+}
+/* ICON_URL.'icons_img.gif mo-icons-icon mo-icons- */
+.mo-icons-add-file      {background-position: 0 0;}
+.mo-icons-copy          {background-position: -24px 0;}
+.mo-icons-delete        {background-position: -48px 0;}
+.mo-icons-docu          {background-position: -72px 0;}
+.mo-icons-edit          {background-position: -96px 0;}
+.mo-icons-error         {background-position: 0 -24px;}
+.mo-icons-help          {background-position: -24px -24px;}
+.mo-icons-img-scale     {background-position: -48px -24px;}
+.mo-icons-info          {background-position: -72px -24px;}
+.mo-icons-information   {background-position: -96px -24px;}
+.mo-icons-logout        {background-position: 0 -48px;}
+.mo-icons-move          {background-position: -24px -48px;}
+.mo-icons-page-edit     {background-position: -48px -48px;}
+.mo-icons-pw            {background-position: -72px -48px;}
+.mo-icons-save          {background-position: -96px -48px;}
+.mo-icons-stop          {background-position: 0 -72px;}
+.mo-icons-warning       {background-position: -24px -72px;}
+.mo-icons-website       {background-position: -48px -72px;}
+.mo-icons-website-small {background-position: -75px -75px;}
+.mo-icons-work          {background-position: -96px -72px;}
+.mo-icons-blank         {background-position: 0 -96px; cursor: default;}

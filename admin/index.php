@@ -100,9 +100,12 @@ if(isset($_FILE)) $_FILE = cleanREQUEST($_FILE);
 
 $message = NULL;
 
-define("ICON_SIZE","24x24"); # 16x16 22x22 24x24 32x32 48x48
-define("ADMIN_ICONS", URL_BASE.ADMIN_DIR_NAME."/gfx/icons/".ICON_SIZE."/");
-define("ADMIN_ICONS_TABS",URL_BASE.ADMIN_DIR_NAME."/gfx/icons/22x22/");
+#define("ICON_SIZE","24x24"); # 16x16 22x22 24x24 32x32 48x48
+#define("ADMIN_ICONS", URL_BASE.ADMIN_DIR_NAME."/gfx/icons/".ICON_SIZE."/");
+#define("ADMIN_ICONS_TABS",URL_BASE.ADMIN_DIR_NAME."/gfx/icons/22x22/");
+
+define("ICON_URL",URL_BASE.ADMIN_DIR_NAME.'/gfx/');
+define("ICON_URL_SLICE",URL_BASE.ADMIN_DIR_NAME.'/gfx/clear.gif');
 
 require_once(BASE_DIR_ADMIN."default_conf.php");
 
@@ -267,7 +270,6 @@ if(LOGIN) { #-------------------------------
     die("Fatal Error");
 
 require_once(BASE_DIR_ADMIN.'admin_template.php');
-#header('content-type: text/html; charset='.CHARSET.'');
 // Ausgabe der kompletten Seite 
 echo admin_Template($pagecontent,$message);
 
@@ -303,9 +305,9 @@ function pageedit_dialog() {
 // Gib Erfolgs- oder Fehlermeldung zurück
 function returnMessage($success, $message) {
     if ($success === true) {
-        return '<span class="mo-message-erfolg" style="background-image:url('.ADMIN_ICONS.'information.png);padding-left:'.(substr(ICON_SIZE,0,2) + 10).'px;">'.$message.'</span>';
+        return '<span class="mo-message-erfolg"><img class="mo-message-icon mo-icons-icon mo-icons-information" src="'.ICON_URL_SLICE.'" alt="information" />'.$message.'</span>';
     } else {
-        return '<span class="mo-message-fehler" style="background-image:url('.ADMIN_ICONS.'error.png);padding-left:'.(substr(ICON_SIZE,0,2) + 10).'px;">'.$message.'</span>';
+        return '<span class="mo-message-fehler"><img class="mo-message-icon mo-icons-icon mo-icons-error" src="'.ICON_URL_SLICE.'" alt="error" />'.$message.'</span>';
     }
 }
 
@@ -406,7 +408,7 @@ function get_template_truss($content,$titel,$toggle = false) {
                             .'<span class="mo-bold mo-padding-left">'.getLanguageValue($titel).'</span>'
                         .'</td>'
                         .'<td class="mo-nowrap">'
-                            .'<img class="js-toggle js-tools-icon-show-hide mo-tool-icon mo-icon" src="'.ADMIN_ICONS.'edit.png" alt="edit" />'
+                            .'<img class="js-toggle js-tools-icon-show-hide mo-tool-icon mo-icon mo-icons-icon mo-icons-edit" src="'.ICON_URL_SLICE.'" alt="edit" />'
                         .'</td>'
                     .'</tr>'
                     .'</tbody>'
@@ -441,7 +443,7 @@ function getHelpIcon($artikel = false,$subartikel = false) {
     if($subartikel !== false)
         $subartikel = "&amp;subartikel=".$subartikel;
     if(file_exists(BASE_DIR."docu/docu.php"))
-        return '<a href="'.URL_BASE.'docu/docu.php?menu=false&amp;artikel='.$artikel.$subartikel.'" target="_blank" class="js-docu-link mo-butten-a-img"><img src="'.ADMIN_ICONS.'/help.png" alt="help" hspace="0" vspace="0" border="0" /></a>';
+        return '<a href="'.URL_BASE.'docu/docu.php?menu=false&amp;artikel='.$artikel.$subartikel.'" target="_blank" class="js-docu-link mo-butten-a-img"><img class="mo-icons-icon mo-icons-help" src="'.ICON_URL_SLICE.'" alt="help" hspace="0" vspace="0" border="0" /></a>';
     else return NULL;
 }
 

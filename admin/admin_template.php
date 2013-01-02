@@ -46,7 +46,7 @@ $menu_fix = '<div id="menu-fix" class="ui-widget ui-widget-content ui-corner-rig
         $html .= '<div class="mo-td-content-width" id="out"></div>';
         if(LOGIN)
             $html .= get_Message($message);
-        $html .= '<img class="mo-td-content-width" src="gfx/clear.gif" alt=" " height="1" hspace="0" vspace="0" align="left" border="0" />';
+        $html .= '<img class="mo-td-content-width" src="'.ICON_URL_SLICE.'" alt=" " height="1" hspace="0" vspace="0" align="left" border="0" />';
 #-------------------------------------
         $html .= '</td><td>&nbsp;</td></tr></table>';
 #$html .= '<div style="width:800px;height:300px;position:relative;"><div id="pagecontent"></div></div>';
@@ -101,11 +101,13 @@ if(defined('PLUGINADMIN'))
     $html .= 'var EXT_LINK = "'.EXT_LINK.'"; ';
     $html .= 'var EXT_LENGTH = '.EXT_LENGTH.'; ';
     $html .= 'var action_activ = "'.ACTION.'"; ';
-    $html .= 'var icons_src = "'.ADMIN_ICONS.'";';
+#    $html .= 'var icons_src = "'.ADMIN_ICONS.'";';
     $html .= 'var URL_BASE = "'.URL_BASE.'";';
     $html .= 'var ADMIN_DIR_NAME = "'.ADMIN_DIR_NAME.'";';
-    $html .= 'var ICON_SIZE = "'.ICON_SIZE.'";';
-    $html .= 'var ADMIN_ICONS = "'.ADMIN_ICONS.'";';
+#    $html .= 'var ICON_SIZE = "'.ICON_SIZE.'";';
+    $html .= 'var ICON_URL = "'.ICON_URL.'";';
+    $html .= 'var ICON_URL_SLICE = "'.ICON_URL_SLICE.'";';
+#    $html .= 'var ADMIN_ICONS = "'.ADMIN_ICONS.'";';
     $html .= 'var usecmssyntax = "'.$CMS_CONF->get("usecmssyntax").'";';
     $html .= 'var modrewrite = "'.$CMS_CONF->get("modrewrite").'";';
     $html .= 'var defaultcolors = "'.$specialchars->rebuildSpecialChars($CMS_CONF->get("defaultcolors"),false,false).'";';
@@ -164,7 +166,7 @@ if(defined('PLUGINADMIN'))
 
     if((ACTION == "catpage" and (ROOT or in_array("editusersyntax",$ADMIN_CONF->get("config")))) or ACTION == "config" or ACTION == "template") {
         $html .= '<link type="text/css" rel="stylesheet" href="jquery/coloredit/coloredit.min.css" />';
-        $html .= '<script type="text/javascript" charset="utf-8" src="jquery/coloredit/coloredit.min.js"></script>';
+        $html .= '<script type="text/javascript" charset="utf-8" src="jquery/coloredit/coloredit.js"></script>';
     }
 
     if((ACTION == "config" and (ROOT or in_array("editusersyntax",$ADMIN_CONF->get("config")))) or ACTION == "catpage" or ACTION == "template") {
@@ -210,7 +212,7 @@ function get_Head() {
     $html .= '<td width="1%" nowrap="nowrap" class="align-left">';
     $html .= '<div class="mo-padding-left">';
     $html .= getHelpIcon();
-    $html .= '<a href="../index.php?draft=true" title="'.getLanguageValue("help_website_button",true).'" target="_blank" class="mo-butten-a-img"><img src="'.ADMIN_ICONS.'website.png" alt="" /></a>';
+    $html .= '<a href="../index.php?draft=true" title="'.getLanguageValue("help_website_button",true).'" target="_blank" class="mo-butten-a-img"><img class="mo-icons-icon mo-icons-website" src="'.ICON_URL_SLICE.'" alt="" /></a>';
     $html .= '</div>';
     $html .= '</td>';
     $html .= '<td class="mo-td-middle">';
@@ -218,8 +220,7 @@ function get_Head() {
     $html .= '</td>';
 
     $html .= '<td nowrap="nowrap" class="align-right">';
-#    $html .= '<a href="../index.php" title="'.getLanguageValue("help_website_button",true).'" target="_blank" class="mo-butten-a-img"><img src="'.ADMIN_ICONS.'website.png" alt="" /></a>';
-    $html .= '<a href="index.php?logout=true" title="'.getLanguageValue("logout_button",true).'" target="_self" class="mo-butten-a-img"><img src="'.ADMIN_ICONS.'logout.png" alt="" /></a>';
+    $html .= '<a href="index.php?logout=true" title="'.getLanguageValue("logout_button",true).'" target="_self" class="mo-butten-a-img"><img class="mo-icons-icon mo-icons-logout" src="'.ICON_URL_SLICE.'" alt="" /></a>';
     $html .= '</td></tr>';
     $html .= '</table>';
     $html .= "</div>";
@@ -247,7 +248,7 @@ function get_Tabs() {
             $deact_user = " ui-state-disabled js-no-click";
 
         $html .= '<li class="js-multi-user ui-state-default ui-corner-top'.$activ.$deact_user.'">';
-        $html .= '<a href="index.php?action='.$language.$multi_user.'" title="'.getLanguageValue($language."_button",true).'" name="'.$language.'"><img class="js-menu-icon mo-icon-text-right" src="'.ADMIN_ICONS_TABS.$language.'.png" alt=" " hspace="0" vspace="0" border="0" /><span class="mo-bold">'.getLanguageValue($language."_button").'</span></a>';
+        $html .= '<a href="index.php?action='.$language.$multi_user.'" title="'.getLanguageValue($language."_button",true).'" name="'.$language.'"><img class="js-menu-icon mo-icon-text-right mo-tabs-icon mo-tab-'.$language.'" src="'.ICON_URL_SLICE.'" alt=" " hspace="0" vspace="0" border="0" /><span class="mo-bold">'.getLanguageValue($language."_button").'</span></a>';
         $html .= '</li>';
     }
     $html .= '</ul>';

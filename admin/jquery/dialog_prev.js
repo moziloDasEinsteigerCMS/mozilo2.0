@@ -30,7 +30,7 @@ function dialog_img_preview(file_href) {
 function dialog_img_preview_wait(file_title) {
     $(dialog_prev).dialog( "option", "title", "Warte auf Bild: "+file_title);
     $(dialog_prev).dialog("option", "width", 300);
-    $(dialog_prev).css("background", "url(" + icons_src + "ajax-loader.gif) center center no-repeat");
+    $(dialog_prev).css("background", "url(" + ICON_URL + "ajax-loader.gif) center center no-repeat");
     $(dialog_prev).dialog( "option", "buttons", [{
         text: mozilo_lang["button_cancel"],
         click: function() {

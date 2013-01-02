@@ -153,7 +153,7 @@ function li_table($name,$in_cat_page,$status,$type,$cat_files,$cat_page_link = f
             .'<tr>';
                 if($type == "cat") {
                     $table .= '<td class="js-move-cat">'
-                        .'<img src="'.ADMIN_ICONS.'move.png" alt="move" hspace="0" vspace="0" align="left" border="0" class="js-move-me-cat mo-tool-icon" />'
+                        .'<img src="'.ICON_URL_SLICE.'" alt="move" hspace="0" vspace="0" align="left" border="0" class="js-move-me-cat mo-tool-icon mo-icons-icon mo-icons-move" />'
                     .'</td>';
                 }
                 $table .= '<td class="mo-nowrap'.$move_page.'" width="99%">';
@@ -163,7 +163,7 @@ function li_table($name,$in_cat_page,$status,$type,$cat_files,$cat_page_link = f
                         $cat_page_link = "#";
                         $target = "_self";
                     }
-                    $table .= '<a href="'.$cat_page_link.'" class="js-link-href" target="'.$target.'"><img class="mo-icon-link" src="'.ADMIN_ICONS_TABS.'website.png" alt=" " hspace="0" vspace="0" border="0" /></a>';
+                    $table .= '<a href="'.$cat_page_link.'" class="js-link-href" target="'.$target.'"><img class="mo-icon-link mo-icons-icon mo-icons-website-small" src="'.ICON_URL_SLICE.'" alt=" " hspace="0" vspace="0" border="0" /></a>';
                 }
                     $table .= '<span class="js-'.$class.'-name mo-padding-left js-normal-in-name js-rename-mode-hide">'.$name.'</span>'
                     .'<input type="hidden" name="sort_array'.$in_cat_page.'" value="'.$in_cat_page.'" class="js-in-'.$class.' js-in-cat-page" />'
@@ -181,14 +181,14 @@ function li_table($name,$in_cat_page,$status,$type,$cat_files,$cat_page_link = f
                 .'<td class="mo-nowrap">'
                     .'<div class="js-tools mo-tag-height-from-icon">';#
                         if($type != "cat" and $type != EXT_LINK) {
-                            $table .= '<img class="js-tools-icon-show-hide js-copy-me-page mo-tool-icon" src="'.ADMIN_ICONS.'copy.png" alt="new_page" hspace="0" vspace="0" />';
-                            $table .= '<img class="js-tools-icon-show-hide js-edit-page mo-tool-icon" src="'.ADMIN_ICONS.'page-edit.png" alt="page-edit" hspace="0" vspace="0" />';
+                            $table .= '<img class="js-tools-icon-show-hide js-copy-me-page mo-tool-icon mo-icons-icon mo-icons-copy" src="'.ICON_URL_SLICE.'" alt="new_page" hspace="0" vspace="0" />';
+                            $table .= '<img class="js-tools-icon-show-hide js-edit-page mo-tool-icon mo-icons-icon mo-icons-page-edit" src="'.ICON_URL_SLICE.'" alt="page-edit" hspace="0" vspace="0" />';
                         } elseif($type == EXT_LINK) {
-                            $table .= '<img class="js-tools-icon-show-hide mo-tool-icon mo-icon-blank" src="'.ADMIN_ICONS.'blank.png" alt="new_page" hspace="0" vspace="0" />';
-                            $table .= '<img class="js-tools-icon-show-hide mo-tool-icon mo-icon-blank" src="'.ADMIN_ICONS.'blank.png" alt="page-edit" hspace="0" vspace="0" />';
+                            $table .= '<img class="js-tools-icon-show-hide mo-tool-icon mo-icon-blank" src="'.ICON_URL_SLICE.'" alt=" " hspace="0" vspace="0" />';
+                            $table .= '<img class="js-tools-icon-show-hide mo-tool-icon mo-icon-blank" src="'.ICON_URL_SLICE.'" alt=" " hspace="0" vspace="0" />';
                         }
-                        $table .= '<img class="js-tools-icon-show-hide js-edit-rename mo-tool-icon" src="'.ADMIN_ICONS.'work.png" alt="work" hspace="0" vspace="0" />'
-                        .'<img class="js-tools-icon-show-hide js-edit-delete mo-tool-icon" src="'.ADMIN_ICONS.'delete.png" alt="delete" hspace="0" vspace="0" />'
+                        $table .= '<img class="js-tools-icon-show-hide js-edit-rename mo-tool-icon mo-icons-icon mo-icons-work" src="'.ICON_URL_SLICE.'" alt="work" hspace="0" vspace="0" />'
+                        .'<img class="js-tools-icon-show-hide js-edit-delete mo-tool-icon mo-icons-icon mo-icons-delete" src="'.ICON_URL_SLICE.'" alt="delete" hspace="0" vspace="0" />'
                     .'</div>'
                 .'</td>'
             .'</tr>'

@@ -177,7 +177,7 @@ function config() {
 
         if(ROOT or in_array("editusersyntax",$show)) {
             $error[$titel][] = false;
-            $template[$titel][] = array(getLanguageValue("config_text_usersyntax"),'<div class="js-usecmssyntax">'.'<img class="js-editsyntax mo-tool-icon" src="'.ADMIN_ICONS.'page-edit.png" alt="page-edit" hspace="0" vspace="0" />'.'</div>');
+            $template[$titel][] = array(getLanguageValue("config_text_usersyntax"),'<div class="js-usecmssyntax">'.'<img class="js-editsyntax mo-tool-icon mo-icons-icon mo-icons-page-edit" src="'.ICON_URL_SLICE.'" alt="page-edit" hspace="0" vspace="0" />'.'</div>');
         }
 
         // Zeile "ERSETZE EMOTICONS"
@@ -188,15 +188,15 @@ function config() {
         if(ROOT or in_array("defaultcolors",$show)) {
             $error[$titel][] = false;
             $colors_div = '<div class="mo-in-li-l">';
-            $colors_div .= '<img class="js-save-default-color mo-tool-icon" src="'.URL_BASE.ADMIN_DIR_NAME.'/gfx/icons/24x24/save.png" alt="work" />';
-            $colors_div .= '<img id="js-del-config-default-color" class="mo-tool-icon ui-corner-all" src="'.URL_BASE.ADMIN_DIR_NAME.'/gfx/icons/24x24/delete.png" alt="delete" hspace="0" vspace="0" />';
+            $colors_div .= '<img class="js-save-default-color mo-tool-icon mo-icons-icon mo-icons-save" src="'.ICON_URL_SLICE.'" alt="save" />';
+            $colors_div .= '<img id="js-del-config-default-color" class="mo-tool-icon ui-corner-all mo-icons-icon mo-icons-delete" src="'.ICON_URL_SLICE.'" alt="delete" hspace="0" vspace="0" />';
             $colors_div .= '<div id="js-config-default-color-box" class="ce-default-color-box ui-widget-content ui-corner-all">&nbsp;';
             $colors_div .= '</div>';
             $colors_div .= '</div>';
             $colors_div .= '<div id="js-menu-config-default-color" class="mo-in-li-r">'
-                .'<img class="js-new-config-default-color ce-bg-color-change ce-default-color-img ui-widget-content ui-corner-all" alt="" title="" src="'.URL_BASE.ADMIN_DIR_NAME.'/gfx/clear.gif" />'
+                .'<img class="js-new-config-default-color ce-bg-color-change ce-default-color-img ui-widget-content ui-corner-all" alt="" title="" src="'.ICON_URL_SLICE.'" />'
                 .'<input type="text" maxlength="6" value="DD0000" class="ce-bg-color-change js-in-hex ce-in-hex" id="js-new-default-color-value" size="6" />'
-                .'<img class="js-coloreditor-button ed-syntax-icon ui-state-active" alt="Farbe Bearbeiten" title="Farbe Bearbeiten" src="gfx/jsToolbar/farbeedit.png"  />'
+                .'<img class="js-coloreditor-button ed-icon-border ed-syntax-icon ed-farbeedit" alt="'.getLanguageValue("dialog_title_coloredit").'" title="'.getLanguageValue("dialog_title_coloredit").'" src="'.ICON_URL_SLICE.'" style="display:none;" />'
             .'</div>';
             $template[$titel][] = '<div class="mo-margin-bottom">'.getLanguageValue("config_text_defaultcolors").'</div>'.$colors_div.'<input type="hidden" name="defaultcolors" value="'.$specialchars->rebuildSpecialChars($CMS_CONF->get("defaultcolors"),false,false).'" />';
         }

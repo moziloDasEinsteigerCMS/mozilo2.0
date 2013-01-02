@@ -135,7 +135,7 @@ function dialog_from_php() {
 }
 
 function dialog_send_cancel() {
-    $(dialog_multi).css("background", "url(" + icons_src + "ajax-loader.gif) center center no-repeat");
+    $(dialog_multi).css("background", "url(" + ICON_URL + "ajax-loader.gif) center center no-repeat");
     $(dialog_multi).dialog( "option", "title", mozilo_lang["dialog_title_send"]);
     $(dialog_multi).dialog( "option", "buttons", [{
         text: mozilo_lang["page_cancel_reload"],

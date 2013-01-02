@@ -106,11 +106,10 @@ function rawurldecode_js(str) {
 
 // das ist die gleiche function wie in der index.php
 function returnMessage(success, message) {
-    var padding_left = parseInt(ICON_SIZE.substring(0,2)) +10;
     if (success === true) {
-        return "<span class=\"mo-message-erfolg\" style=\"background-image:url("+ADMIN_ICONS+"information.png);padding-left:"+padding_left+"px;\">"+message+"</span>";
+        return "<span class=\"mo-message-erfolg\"><img class=\"mo-message-icon mo-icons-icon mo-icons-information\" src=\""+ICON_URL_SLICE+"\" alt=\"information\" />"+message+"</span>";
     } else {
-        return "<span class=\"mo-message-fehler\" style=\"background-image:url("+ADMIN_ICONS+"error.png);padding-left:"+padding_left+"px;\">"+message+"</span>";
+        return "<span class=\"mo-message-fehler\"><img class=\"mo-message-icon mo-icons-icon mo-icons-error\" src=\""+ICON_URL_SLICE+"\" alt=\"error\" />"+message+"</span>";
     }
 }
 

@@ -169,7 +169,7 @@ class UploadHandler
             $file = new stdClass();
             $file->name = $file_name;
             $file->size = filesize($file_path);
-            $file->url = $this->options['upload_url'].$specialchars->replaceSpecialChars($file->name);
+            $file->url = $this->options['upload_url'].$specialchars->replaceSpecialChars($file->name,false);
             if(ACTION == "gallery") {
                 $file->pixel_w = "";
                 $file->pixel_h = "";
@@ -182,7 +182,7 @@ class UploadHandler
             foreach($this->options['image_versions'] as $version => $options) {
                 if (is_file($options['upload_dir'].$file_name)) {
                     $file->{$version.'_url'} = $options['upload_url']
-                        .$specialchars->replaceSpecialChars($file->name);
+                        .$specialchars->replaceSpecialChars($file->name,false);
                 }
             }
             $this->set_file_delete_url($file);
@@ -426,12 +426,12 @@ if(!is_dir($this->options['upload_dir'])
             	if ($this->options['orient_image']) {
             		$this->orient_image($file_path);
             	}
-                $file->url = $this->options['upload_url'].$specialchars->replaceSpecialChars($file->name);
+                $file->url = $this->options['upload_url'].$specialchars->replaceSpecialChars($file->name,false);
                 foreach($this->options['image_versions'] as $version => $options) {
                     if ($this->create_scaled_image($file->name, $options)) {
                         if ($this->options['upload_dir'] !== $options['upload_dir']) {
                             $file->{$version.'_url'} = $options['upload_url']
-                                .$specialchars->replaceSpecialChars($file->name);
+                                .$specialchars->replaceSpecialChars($file->name,false);
                         } else {
                             clearstatcache();
                             $file_size = filesize($file_path);

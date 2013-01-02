@@ -16,10 +16,10 @@ function getFileUpload($curent_dir,$dir = false,$count_text = false,$newcss = ""
                         .$count_text.' )</span>'
                 .'</td>'
                 .'<td class="td_icons mo-nowrap">'
-                    .'<img class="js-tools-icon-show-hide js-toggle mo-tool-icon'.$newcss.'" src="'.ADMIN_ICONS.'edit.png" alt="edit" />';
+                    .'<img class="js-tools-icon-show-hide js-toggle mo-tool-icon'.$newcss.' mo-icons-icon mo-icons-edit" src="'.ICON_URL_SLICE.'" alt="edit" />';
                     if(ACTION == "gallery") {
-                        $head .= '<img class="js-tools-icon-show-hide js-rename-file mo-tool-icon mo-icon'.$newcss.'" src="'.ADMIN_ICONS.'work.png" alt="work" />'
-                        .'<img class="js-tools-icon-show-hide js-edit-delete mo-tool-icon mo-icon'.$newcss.'" src="'.ADMIN_ICONS.'delete.png" alt="delete" hspace="0" vspace="0" />';
+                        $head .= '<img class="js-tools-icon-show-hide js-rename-file mo-tool-icon mo-icon'.$newcss.' mo-icons-icon mo-icons-work" src="'.ICON_URL_SLICE.'" alt="work" />'
+                        .'<img class="js-tools-icon-show-hide js-edit-delete mo-tool-icon mo-icon'.$newcss.' mo-icons-icon mo-icons-delete" src="'.ICON_URL_SLICE.'" alt="delete" hspace="0" vspace="0" />';
                     }
                 $head .= '</td>'
             .'</tr>'
@@ -41,15 +41,15 @@ function getFileUpload($curent_dir,$dir = false,$count_text = false,$newcss = ""
             .'<div class="fileupload-buttonbar mo-li-head-tag mo-li-head-tag-no-ul ui-widget-header ui-corner-top">'
 #                .'<div class="mo-tag-height-from-icon mo-nowrap">'
                     .'<span class="fileinput-button">'
-                        .'<img src="'.ADMIN_ICONS.'add-file.png" alt="add-file" />'
+                        .'<img class="mo-icons-icon mo-icons-add-file" src="'.ICON_URL_SLICE.'" alt="add-file" />'
                         .'<input type="file" name="files[]" />'
                     .'</span>'
-                    .'<button type="submit" class="fu-img-button start" style="background-image:url('.ADMIN_ICONS.'save.png);">&nbsp;</button>'
-                    .'<button type="reset" class="fu-img-button cancel" style="background-image:url('.ADMIN_ICONS.'stop.png);">&nbsp;</button>'
-                    .'<img style="width:2em;height:1px;" src="'.ADMIN_ICONS.'clear.gif" alt=" " />'
-                    .'<button type="button" class="fu-img-button delete" style="background-image:url('.ADMIN_ICONS.'delete.png);">&nbsp;</button>';
+                    .'<button type="submit" class="fu-img-button start mo-icons-icon mo-icons-save">&nbsp;</button>'
+                    .'<button type="reset" class="fu-img-button cancel mo-icons-icon mo-icons-stop">&nbsp;</button>'
+                    .'<img style="width:2em;height:1px;" src="'.ICON_URL_SLICE.'" alt=" " />'
+                    .'<button type="button" class="fu-img-button delete mo-icons-icon mo-icons-delete">&nbsp;</button>';
                     if(ACTION == "gallery") {
-                        $fileupload .= '<button type="button" class="fu-img-button resize" style="background-image:url('.ADMIN_ICONS.'img-scale.png);">&nbsp;</button>';
+                        $fileupload .= '<button type="button" class="fu-img-button resize mo-icons-icon mo-icons-img-scale">&nbsp;</button>';
                     }
                     $fileupload .= '<input type="checkbox" class="toggle" />';
                     if(ACTION == "gallery") {
@@ -61,9 +61,9 @@ function getFileUpload($curent_dir,$dir = false,$count_text = false,$newcss = ""
                         if($GALLERY_CONF->get('maxheight') != "auto" and $GALLERY_CONF->get('maxheight') > 0)
                             $tmp_h = $GALLERY_CONF->get('maxheight');
                         $fileupload .= ''
-                        .'<img style="width:2em;height:1px;" src="'.ADMIN_ICONS.'clear.gif" alt=" " />'
+                        .'<img style="width:2em;height:1px;" src="'.ICON_URL_SLICE.'" alt=" " />'
                         .'Bildgröße <input type="text" name="new_width" value="'.$tmp_w.'" size="4" maxlength="4" class="mo-input-digit js-in-digit" /> x <input type="text" name="new_height" value="'.$tmp_h.'" size="4" maxlength="4" class="mo-input-digit js-in-digit" />'
-                        .'<img style="width:2em;height:1px;" src="'.ADMIN_ICONS.'clear.gif" alt=" " />'
+                        .'<img style="width:2em;height:1px;" src="'.ICON_URL_SLICE.'" alt=" " />'
                         .'Vorschaugröße <input type="text" name="thumbnail_max_width" value="'.$GALLERY_CONF->get('maxthumbwidth').'" size="4" maxlength="4" class="mo-input-digit js-in-digit" /> x <input type="text" name="thumbnail_max_height" value="'.$GALLERY_CONF->get('maxthumbheight').'" size="4" maxlength="4" class="mo-input-digit js-in-digit" />'
                         .'';
                     }

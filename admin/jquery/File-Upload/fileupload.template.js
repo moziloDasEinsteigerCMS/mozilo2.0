@@ -20,16 +20,15 @@ $('.fileupload').fileupload({
                  '<div class="progress progress-success progress-striped active"><div class="bar" style="width:0%;"></div></div>'+
                '</td>'+
                 '<td class="start" width="1%">'+
-                    '<button class="fu-img-button" style="background-image:url('+ADMIN_ICONS+'save.png);">&nbsp;</button>'+
+                    '<button class="fu-img-button mo-icons-icon mo-icons-save">&nbsp;</button>'+
                 '</td>'+
                 '<td class="cancel" width="1%">'+
-                    '<button class="fu-img-button" style="background-image:url('+ADMIN_ICONS+'stop.png);">&nbsp;</button>'+
+                    '<button class="fu-img-button mo-icons-icon mo-icons-stop">&nbsp;</button>'+
                 '</td>'+
                 '</tr></tbody></table>'+
                 '</li>');
                 if(!o.options.prev_img) {
-                    row.find('.preview').append('<a><img></a>')
-                        .find('img').prop('src', o.mimeType(file));
+                    row.find('.preview').append('<a><img class="fu-ext-imgs fu-ext-'+o.mimeType(file)+'" src="'+ICON_URL_SLICE+'"></a>')
                     row.find('a').prop('title', file.name);
                 }
             row.find('.name').text(file.name);
@@ -56,7 +55,7 @@ $('.fileupload').fileupload({
                     '<td class="name mo-pading-l-r"><span class="fu-rename-file"></span></td>'+
                     '<td class="size mo-pading-l-r mo-nowrap" width="1%"></td>'+
                 '<td class="delete" width="1%">'+
-                    '<button class="fu-img-button" style="background-image:url('+ADMIN_ICONS+'delete.png);">&nbsp;</button>'+
+                    '<button class="fu-img-button mo-icons-icon mo-icons-delete">&nbsp;</button>'+
                 '<input type="checkbox" name="delete" value="1" /></td>'+
                 '</tr></tbody></table>'+
                 '</li>');
@@ -69,8 +68,7 @@ $('.fileupload').fileupload({
                 row.find('.name span').text(file.name);
 
                 if(!o.options.prev_img) {
-                    row.find('.preview').append('<a><img></a>')
-                        .find('img').prop('src', o.mimeType(file));
+                    row.find('.preview').append('<a><img class="fu-ext-imgs fu-ext-'+o.mimeType(file)+'" src="'+ICON_URL_SLICE+'"></a>')
                     row.find('a').prop('title', file.name);
                 }
                 row.find('a').prop('href', file.url);

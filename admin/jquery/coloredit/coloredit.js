@@ -169,7 +169,7 @@ var ColorEditor = {
         if(defaultcolors.length > 1) {
             defaultcolors_a = defaultcolors.split(",");
             for (var i = 0; i < defaultcolors_a.length; ++i) {
-                html += '<img title="'+defaultcolors_a[i]+'" class="ce-default-color-img ui-widget-content ui-corner-all" style="background-color:#'+defaultcolors_a[i]+';" src="'+URL_BASE+ADMIN_DIR_NAME+'/gfx/clear.gif" />';
+                html += '<img title="'+defaultcolors_a[i]+'" class="ce-default-color-img ui-widget-content ui-corner-all" style="background-color:#'+defaultcolors_a[i]+';" src="'+ICON_URL_SLICE+'" />';
             }
             $('.ce-default-color-box').html(html);
         } else
@@ -258,13 +258,14 @@ var ColorEditor = {
             left : (top_left[1] + 34) + 'px'
         });
         this.color_sv.css("backgroundColor", "#"+this._HSVtoHEX([this.hsv[0], 1, 1]));
-
-        for(i = 0; i < this.a_rgb.length; i++) {
+        var i, f_length = this.a_rgb.length
+        for(i = 0; i < f_length; i++) {
             if($('a:not(.ui-state-active)',this["s_"+this.a_rgb[i]]).length > 0)
                 this["s_"+this.a_rgb[i]].slider("value", rgb[i]);
             this["i_"+this.a_rgb[i]].not(':focus').val(rgb[i]);
         }
-        for(i = 0; i < this.a_sv.length; i++) {
+        f_length = this.a_sv.length
+        for(i = 0; i < f_length; i++) {
             if($('a:not(.ui-state-active)',this["s_"+this.a_sv[i]]).length > 0)
                 this["s_"+this.a_sv[i]].slider("value", this.hsv[i + 1] * 100);
             this["i_"+this.a_sv[i]].not(':focus').val(Math.round(this.hsv[i + 1] * 100));

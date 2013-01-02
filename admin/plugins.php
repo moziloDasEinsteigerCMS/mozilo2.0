@@ -99,7 +99,7 @@ function plugins() {
                 $plugin_name = htmlentities($plugin_name,ENT_COMPAT,CHARSET);
                 $plugin_name = str_replace(array("&lt;","&gt;","$"),array("<",">",""),$plugin_name);
             } else {
-                $plugin_error = '<img class="mo-tool-icon" src="'.ADMIN_ICONS.'error.png" alt="work" />'.getLanguageValue('plugins_error').' <b>'.$currentelement.'</b>';
+                $plugin_error = '<img class="mo-tool-icon mo-icons-icon mo-icons-error" src="'.ICON_URL_SLICE.'" alt="error" />'.getLanguageValue('plugins_error').' <b>'.$currentelement.'</b>';
                 $plugin_css_li_error = ' ui-state-error';
             }
             $pagecontent .= '<li class="js-plugin mo-li ui-widget-content ui-corner-all'.$plugin_css_li_error.'">'
@@ -114,7 +114,7 @@ function plugins() {
                 .'<div class="js-plugin-active mo-staus">'.buildCheckBox($currentelement.'[active]', ($conf_plugin->get("active") == "true"),getLanguageValue("plugins_input_active")).'</div>'
                 .'</td>'
                 .'<td class="d_td_icons mo-nowrap">'
-                    .'<img class="js-tools-icon-show-hide js-toggle mo-tool-icon" src="'.ADMIN_ICONS.'edit.png" alt="work" />'
+                    .'<img class="js-tools-icon-show-hide js-toggle mo-tool-icon mo-icons-icon mo-icons-edit" src="'.ICON_URL_SLICE.'" alt="edit" />'
                 .'</td>'
                 .'</tr>'
                 .'</table>'
@@ -200,7 +200,7 @@ function get_plugin_info($plugin_info) {
 
     if(isset($plugin_info[2]) and strlen($plugin_info[2]) > 1)
         $template["plugins_info"][] = '<table width="100%" cellspacing="0" border="0" cellpadding="0" class="ui-corner-all"><tr><td align="left" valign="top" width="1%">'
-            .'<img class="js-help-plugin mo-tool-icon" src="'.ADMIN_ICONS.'info.png" alt="help" />'
+            .'<img class="js-help-plugin mo-tool-icon mo-icons-icon mo-icons-info" src="'.ICON_URL_SLICE.'" alt="info" />'
             .'</td><td align="left" valign="top">'
             .'<div class="mo-help-box js-plugin-help-content d_ui-widget-content ui-corner-all"><div class="js-width-show-helper">'.$plugin_info[2].'</div></div>'
             .'</td></tr></table>';
@@ -364,7 +364,7 @@ function get_plugin_config($conf_plugin,$config,$currentelement) {
                    .'<span class="mo-bold mo-padding-left">'.getLanguageValue("config_button").'</span>'
                .'</td>'
                .'<td class="mo-nowrap">'
-                   .'<img class="d_js-tools-icon-show-hide js-save-plugin mo-tool-icon" src="'.ADMIN_ICONS.'save.png" alt="work" />'
+                   .'<img class="d_js-tools-icon-show-hide js-save-plugin mo-tool-icon mo-icons-icon mo-icons-save" src="'.ICON_URL_SLICE.'" alt="save" />'
                .'</td>'
            .'</tr>'
            .'</tbody>'

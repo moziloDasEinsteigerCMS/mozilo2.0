@@ -12,15 +12,14 @@ function showEditPageForm()    {
             $display = "display:none;";
         $toolbar = '<div id="js-editor-toolbar" style="padding-top:1px;padding-bottom:1px;'.$display.'">'.returnFormatToolbar().'</div>';
     }
-# style="padding-top:1px;padding-bottom:1px;" ui-widget-content ui-state-active
     $content = '<div id="pageedit-box-inhalt" style="height:100%;width:100%;">'
                 .$toolbar
     .'<div id="ace-menu-box" class="ui-widget-header ui-corner-top" style="border-bottom-width:0;">'
 
     .'<table class="" width="100%" cellspacing="0" border="0" cellpadding="0"><tr>'
     .'<td width="1%" class="mo-nowrap">'
-            .'<img id="show_gutter" class="mo-tool-icon mo-ace-icon ui-state-default ui-corner-all" src="'.URL_BASE.ADMIN_DIR_NAME.'/gfx/ace/number.png" alt="number" hspace="0" vspace="0" />'
-            .'<img id="show_hidden" class="mo-tool-icon mo-ace-icon ui-state-default ui-corner-all" src="'.URL_BASE.ADMIN_DIR_NAME.'/gfx/ace/noprint.png" alt="noprint" hspace="0" vspace="0" />'
+            .'<img id="show_gutter" class="ed-ace-icon ed-icon-border ed-syntax-icon ed-number" src="'.ICON_URL_SLICE.'" alt="number" hspace="0" vspace="0" />'
+            .'<img id="show_hidden" class="ed-ace-icon ed-icon-border ed-syntax-icon ed-noprint" src="'.ICON_URL_SLICE.'" alt="noprint" hspace="0" vspace="0" />'
     .'</td>'
     .'<td width="1%" class="mo-ace-td-select">'
             .'<div><select name="select-mode" id="select-mode" class="mo-ace-in-select js-ace-select">'
@@ -42,10 +41,10 @@ function showEditPageForm()    {
             ."</select></div>"
     .'</td>'
     .'<td width="1%" class="mo-nowrap">'
-            .'<img id="undo" class="mo-ace-icon mo-tool-icon" src="'.URL_BASE.ADMIN_DIR_NAME.'/gfx/ace/undo.png" alt="undo" hspace="0" vspace="0" />'
-            .'<img id="redo" class="mo-ace-icon mo-tool-icon" src="'.URL_BASE.ADMIN_DIR_NAME.'/gfx/ace/redo.png" alt="redo" hspace="0" vspace="0" />'
+            .'<img id="undo" class="ed-ace-icon ed-syntax-icon ed-undo" src="'.ICON_URL_SLICE.'" alt="undo" hspace="0" vspace="0" />'
+            .'<img id="redo" class="ed-ace-icon ed-syntax-icon ed-redo" src="'.ICON_URL_SLICE.'" alt="redo" hspace="0" vspace="0" />'
 
-            .'<img id="toggle_fold" class="mo-tool-icon mo-ace-icon" src="'.URL_BASE.ADMIN_DIR_NAME.'/gfx/ace/expand.png" alt="expand" hspace="0" vspace="0" />'
+            .'<img id="toggle_fold" class="ed-ace-icon ed-syntax-icon ed-expand" src="'.ICON_URL_SLICE.'" alt="expand" hspace="0" vspace="0" />'
     .'</td>'
     .'<td width="1%" id="colordiv-editor" class="mo-nowrap">';
     if ($CMS_CONF->get("usecmssyntax") != "true" and ACTION != "config")
@@ -53,11 +52,11 @@ function showEditPageForm()    {
     $content .= '</td>'
     .'<td width="1%" class="mo-nowrap">'
             .'<input class="mo-ace-in-text" id="search-text" type="text" name="search-text" value="" />'
-            .'<img id="search" class="mo-ace-icon mo-tool-icon" src="'.URL_BASE.ADMIN_DIR_NAME.'/gfx/ace/find.png" alt="find" hspace="0" vspace="0" />'
+            .'<img id="search" class="ed-ace-icon ed-syntax-icon ed-find" src="'.ICON_URL_SLICE.'" alt="find" hspace="0" vspace="0" />'
             .'<input class="mo-ace-in-check" type="checkbox" id="search-all" />'
             .'<label class="mo-ace-in-check-label" for="search-all">Alle</label>'
             .'<input class="mo-ace-in-text" id="replace-text" type="text" name="search" value="" />'
-            .'<img id="replace" class="mo-ace-icon mo-tool-icon" src="'.URL_BASE.ADMIN_DIR_NAME.'/gfx/ace/replace.png" alt="replace" hspace="0" vspace="0" />'
+            .'<img id="replace" class="ed-ace-icon ed-syntax-icon ed-replace" src="'.ICON_URL_SLICE.'" alt="replace" hspace="0" vspace="0" />'
     .'</td>'
     ."</tr>"
     ."</table>"
@@ -158,9 +157,9 @@ function returnFormatToolbar() {
 
 function returnToolbarColoredit() {
     $content = '<div id="js-color-menu" class="mo-nowrap">'
-            .'<img class="ed-syntax-icon ed-syntax-hover ui-state-active ed-syntax-color ce-bg-color-change" alt="Farbe" title="[farbe=RRGGBB| ... ]" src="gfx/jsToolbar/farbe.png" onclick="insert_ace(\'[farbe=\' + document.getElementById(\'farbcode\').value + \'|\', \']\',true)" />'
+            .'<img class="ed-syntax-icon ed-icon-border ed-syntax-color ce-bg-color-change ed-farbe" alt="Farbe" title="[farbe=RRGGBB| ... ]" src="'.ICON_URL_SLICE.'" onclick="insert_ace(\'[farbe=\' + document.getElementById(\'farbcode\').value + \'|\', \']\',true)" />'
             .'<input type="text" maxlength="6" value="DD0000" class="ce-bg-color-change js-in-hex ce-in-hex" id="farbcode" size="6" />'
-            .'<img class="js-coloreditor-button ed-syntax-icon ui-state-active ed-syntax-hover" alt="'.getLanguageValue("dialog_title_coloredit").'" title="'.getLanguageValue("dialog_title_coloredit").'" src="gfx/jsToolbar/farbeedit.png" style="display:none;" />'
+            .'<img class="js-coloreditor-button ed-icon-border ed-syntax-icon ed-farbeedit" alt="'.getLanguageValue("dialog_title_coloredit").'" title="'.getLanguageValue("dialog_title_coloredit").'" src="'.ICON_URL_SLICE.'" style="display:none;" />'
         .'</div>';
     return $content;
 }
@@ -169,13 +168,13 @@ function returnToolbarColoredit() {
 function returnFormatToolbarIcon($tag) {
     if(strpos($tag,"=") > 0) {
         $tag = substr($tag,0,strpos($tag,"="));
-        return '<img class="ed-syntax-icon ed-syntax-hover ui-state-active" alt="'.$tag.'" src="gfx/jsToolbar/'.$tag.'.png" title="['.$tag.'=|...]" onclick="insert_ace(\'['.$tag.'=|\', \']\',true)" />';
+        return '<img class="ed-syntax-icon ed-icon-border ed-'.$tag.'" alt="'.$tag.'" src="'.ICON_URL_SLICE.'" title="['.$tag.'=|...]" onclick="insert_ace(\'['.$tag.'=|\', \']\',true)" />';
     } elseif($tag == "tabelle")
-        return '<img class="ed-syntax-icon ed-syntax-hover ui-state-active" alt="'.$tag.'" src="gfx/jsToolbar/'.$tag.'.png" title="['.$tag.'|...]" onclick="insert_ace(\'['.$tag.'|\\n&lt;&lt; \', \' |  &gt;&gt;\\n&lt;  |  &gt;\\n]\',true)" />';
+        return '<img class="ed-syntax-icon ed-icon-border ed-'.$tag.'" alt="'.$tag.'" src="'.ICON_URL_SLICE.'" title="['.$tag.'|...]" onclick="insert_ace(\'['.$tag.'|\\n&lt;&lt; \', \' |  &gt;&gt;\\n&lt;  |  &gt;\\n]\',true)" />';
     elseif($tag == "linie")
-        return '<img class="ed-syntax-icon ed-syntax-hover ui-state-active" alt="'.$tag.'" src="gfx/jsToolbar/'.$tag.'.png" title="[----]" onclick="insert_ace(\'[----]\', false,false)" />';
+        return '<img class="ed-syntax-icon ed-icon-border ed-'.$tag.'" alt="'.$tag.'" src="'.ICON_URL_SLICE.'" title="[----]" onclick="insert_ace(\'[----]\', false,false)" />';
     else
-        return '<img class="ed-syntax-icon ed-syntax-hover ui-state-active" alt="'.$tag.'" src="gfx/jsToolbar/'.$tag.'.png" title="['.$tag.'|...]" onclick="insert_ace(\'['.$tag.'|\', \']\',true)" />';
+        return '<img class="ed-syntax-icon ed-icon-border ed-'.$tag.'" alt="'.$tag.'" src="'.ICON_URL_SLICE.'" title="['.$tag.'|...]" onclick="insert_ace(\'['.$tag.'|\', \']\',true)" />';
 }
 
 
@@ -254,7 +253,7 @@ function returnSmileyBar() {
     $content = "";
     foreach($smileys->getSmileysArray() as $icon => $emoticon) {
         $icon = trim($icon);
-        $content .= '<img class="ed-syntax-icon ed-syntax-hover ui-state-active" alt=":'.$icon.':" title=":'.$icon.':" src="'.URL_BASE.CMS_DIR_NAME.'/smileys/'.$icon.'.gif" onclick="insert_ace(\' :'.$icon.': \', \'\',false)" />';
+        $content .= '<img class="ed-smileys-icon ed-icon-border" alt=":'.$icon.':" title=":'.$icon.':" src="'.URL_BASE.CMS_DIR_NAME.'/smileys/'.$icon.'.gif" onclick="insert_ace(\' :'.$icon.': \', \'\',false)" />';
     }
     return $content;
 }

@@ -232,27 +232,27 @@ mimeType: this._mimeType,
             var ext = "none";
             if(file.name)
                 ext = file.name.substring(file.name.lastIndexOf(".")+1).toLowerCase();
-            var img = "none.png";
+            var img = "none";
             if(typeof ext == "string") {
                 if(ext == "png" || ext == "gif" || ext == "jpg" || ext == "jpeg") {
-                    img = "img.png";
+                    img = "img";
                 } else if(ext == "doc" || ext == "odf" || ext == "") {
-                    img = "doc.png";
+                    img = "doc";
                 } else if(ext == "mpg" || ext == "mov" || ext == "flv") {
-                    img = "mov.png";
+                    img = "mov";
                 } else if(ext == "pdf") {
-                    img = "pdf.png";
+                    img = "pdf";
                 } else if(ext == "txt") {
-                    img = "txt.png";
+                    img = "txt";
                 } else if(ext == "mp3" || ext == "mp4" || ext == "wav") {
-                    img = "wav.png";
+                    img = "wav";
                 } else if(ext == "zip" || ext == "gzip" || ext == "gz") {
-                    img = "zip.png";
+                    img = "zip";
                 } else if(ext == "iso") {
-                    img = "iso.png";
+                    img = "iso";
                 }
             }
-            return URL_BASE+'admin/jquery/File-Upload/ext_icons/'+img;
+            return img;
         },
 
         _changeFilesCount: function () {

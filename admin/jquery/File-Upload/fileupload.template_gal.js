@@ -29,10 +29,10 @@ $.widget('blueimpUI.fileupload', $.blueimpUI.fileupload, {
                         '</td>' +
                         '<td rowspan="2" width="1%" class="mo-nowrap">' +
                             '<span class="start">'+
-                                '<button class="fu-img-button" style="background-image:url('+ADMIN_ICONS+'save.png);">&nbsp;</button>'+
+                                '<button class="fu-img-button mo-icons-icon mo-icons-save">&nbsp;</button>'+
                             '</span>'+
                             '<span class="cancel">'+
-                                '<button class="fu-img-button" style="background-image:url('+ADMIN_ICONS+'stop.png);">&nbsp;</button>'+
+                                '<button class="fu-img-button mo-icons-icon mo-icons-stop">&nbsp;</button>'+
                             '</span>'+
                         '</td>' +
                     '</tr>' +
@@ -73,8 +73,8 @@ $.widget('blueimpUI.fileupload', $.blueimpUI.fileupload, {
                         '<td class="size mo-pading-l-r" width="1%"></td>' +
                         '<td class="pixelsize mo-pading-l-r"><span></span> Pixel</td>' +
                         '<td rowspan="3" class="delete" width="1%">' +
-                        '<button class="fu-img-button" style="background-image:url('+ADMIN_ICONS+'delete.png);">&nbsp;</button>'+
-                       '<img class="fu-img-button resize" src="'+ADMIN_ICONS+'img-scale.png" alt="img-scale" />'+
+                        '<button class="fu-img-button mo-icons-icon mo-icons-delete">&nbsp;</button>'+
+                       '<img class="fu-img-button resize mo-icons-icon mo-icons-img-scale" src="'+ICON_URL_SLICE+'" alt="img-scale" />'+
                         '<input type="checkbox" name="delete" value="1" /></td>'+
                     '</tr>' +
                     '<tr>' +

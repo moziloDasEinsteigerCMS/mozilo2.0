@@ -10,17 +10,6 @@
     padding: 0;
 }
 
-/*1=oben, 2=rechts, 3=unten, 4=links*/
-img.ed-syntax-icon {
-    padding: 2px;
-    margin:0 2px 0 2px;
-    vertical-align:middle;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -khtml-border-radius: 4px;
-    border-radius: 4px;
-}
-
 .ui-state-active.ed-syntax-color {
     background-image: none;
 }
@@ -40,10 +29,6 @@ div.ace_scroller {
 #ace-menu-box {
     padding:.2em .4em;
     vertical-align:middle;
-}
-
-.mo-ace-icon {
-    width:20px;
 }
 
 .mo-ace-td-select {
@@ -72,4 +57,95 @@ div.ace_scroller {
     vertical-align:middle;
 }
 
+.ed-smileys-icon {
+    cursor: pointer;
+    padding: 2px;
+    margin:0 2px 0 2px;
+    vertical-align:middle;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -khtml-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.ed-smileys-icon:hover {
+    background-color: #a9b7cb;
+}
+
+/*1=oben, 2=rechts, 3=unten, 4=links no-repeat*/
+.ed-syntax-icon {
+    width:16px;
+    height:16px;
+    cursor: pointer;
+    background-image: url(gfx/editor_icons.png);
+    background-repeat:no-repeat;
+    background-color: #f8f8f8;
+    padding: 2px;
+    margin:0 2px 0 2px;
+    vertical-align:middle;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -khtml-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.ed-icon-border {
+    border: 1px solid #c0c0c0;
+}
+
+.ed-ace-icon {
+    width:20px;
+    height:20px;
+    background-color:transparent;
+    padding: 0;
+}
+
+.ed-ace-icon-active {
+    background-color: #f8f8f8;
+}
+
+.ed-syntax-icon:hover {
+    background-color: #a9b7cb;
+}
+
+/* left top*/
+.ed-link        {background-position: 0 0;}
+.ed-mail        {background-position: -20px 0;}
+.ed-seite       {background-position: -40px 0;}
+.ed-kategorie   {background-position: -60px 0;}
+.ed-datei       {background-position: -80px 0;}
+.ed-bild        {background-position: -100px 0;}
+.ed-bildlinks   {background-position: 0 -20px;}
+.ed-bildrechts  {background-position: -20px -20px;}
+.ed-absatz      {background-position: -40px -20px;}
+.ed-liste       {background-position: -60px -20px;}
+.ed-numliste    {background-position: -80px -20px;}
+.ed-tabelle     {background-position: -100px -20px;}
+.ed-linie       {background-position: 0 -40px;}
+.ed-html        {background-position: -20px -40px;}
+.ed-include     {background-position: -40px -40px;}
+
+.ed-ueber1      {background-position: -60px -40px;}
+.ed-ueber2      {background-position: -80px -40px;}
+.ed-ueber3      {background-position: -100px -40px;}
+.ed-links       {background-position: 0 -60px;}
+.ed-zentriert   {background-position: -20px -60px;}
+.ed-block       {background-position: -40px -60px;}
+.ed-rechts      {background-position: -60px -60px;}
+.ed-fett        {background-position: -80px -60px;}
+.ed-kursiv      {background-position: -100px -60px;}
+.ed-unter       {background-position: 0 -80px;}
+.ed-durch       {background-position: -20px -80px;}
+.ed-fontsize    {background-position: -40px -80px;}
+
+.ed-farbe       {background-position: -60px -80px;}
+.ed-farbeedit   {background-position: -80px -80px;}
+
+.ed-number      {background-position: -100px -80px;}
+.ed-noprint     {background-position: 0 -100px;}
+.ed-undo        {background-position: -20px -100px;}
+.ed-redo        {background-position: -40px -100px;}
+.ed-expand      {background-position: -60px -100px;}
+.ed-find        {background-position: -80px -100px;}
+.ed-replace     {background-position: -100px -100px;}
 

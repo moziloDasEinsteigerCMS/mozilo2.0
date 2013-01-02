@@ -81,7 +81,7 @@ if($(dialog_editor).data("close_after_save") === true) {
 
 
 function dialog_editor_send_cancel() {
-    $(dialog_multi).css("background", "url(" + icons_src + "ajax-loader.gif) center center no-repeat");
+    $(dialog_multi).css("background", "url(" + ICON_URL + "ajax-loader.gif) center center no-repeat");
     $(dialog_multi).dialog( "option", "title", mozilo_lang["dialog_title_send"]);
     $(dialog_multi).dialog( "option", "buttons", [{
         text: mozilo_lang["button_cancel"],
@@ -256,16 +256,16 @@ function get_editor_settings() {
     // set default
     $('#select-mode option[value="mozilo"]').attr('selected',true);
     $('#select-fontsize option[value="12px"]').attr('selected',true);
-    $('#show_gutter').addClass('ui-state-active');
+    $('#show_gutter').addClass('ed-ace-icon-active');
     if(navigator.cookieEnabled == true) {
         if(document.cookie && document.cookie.match(/mozilo_editor_settings=[^;]+/i)) {
             var settings = document.cookie.match(/mozilo_editor_settings=[^;]+/i)[0].split("=")[1].split(",");
 //$("#out").html($("#out").html()+"<br>get_cookie = "+settings[0]+","+settings[1]+","+settings[2]+","+settings[3]+",");
 
             if(settings[0] == "true")
-                $('#show_gutter').addClass('ui-state-active');
+                $('#show_gutter').addClass('ed-ace-icon-active');
             if(settings[1] == "true")
-                $('#show_hidden').addClass('ui-state-active');
+                $('#show_hidden').addClass('ed-ace-icon-active');
             if(settings[2] == "text") {
                 $('#select-mode option:selected').attr('selected',false);
                 $('#select-mode option[value="'+settings[2]+'"]').attr('selected',true);
@@ -279,13 +279,13 @@ function get_editor_settings() {
 };
 
 function set_icon_checked(item,setcss) {
-    if(setcss && !item.hasClass('ui-state-active'))
-        item.addClass('ui-state-active');
-    else if(setcss && item.hasClass('ui-state-active'))
-        item.removeClass('ui-state-active');
+    if(setcss && !item.hasClass('ed-ace-icon-active'))
+        item.addClass('ed-ace-icon-active');
+    else if(setcss && item.hasClass('ed-ace-icon-active'))
+        item.removeClass('ed-ace-icon-active');
 
     var return_set = false;
-    if(item.hasClass('ui-state-active'))
+    if(item.hasClass('ed-ace-icon-active'))
         return_set = true
     return return_set;
 }
@@ -535,7 +535,7 @@ editor_session.setFoldStyle("markbegin");
         minWidth: 20,
         selectedList: 1
     });
-
+/*
     $('#pageedit-box').on({
         mouseenter: function() { 
             $(this).addClass("ui-state-hover").removeClass("ui-state-active");
@@ -544,6 +544,6 @@ editor_session.setFoldStyle("markbegin");
             $(this).removeClass("ui-state-hover").addClass("ui-state-active");
         }
     },".ed-syntax-hover");//ui-state-hover ed-syntax-icon
-
+*/
 //$(".ui-dialog").show(0);
 });
