@@ -16,9 +16,6 @@ function dialog_open(func,content) {
    dialog_set_offset();
    if(typeof content == "object") {
         $(dialog_multi).append(content);
-        // damit die höhe des login dialogs geht
-        if(content.find('.mo-login').length > 0)
-            content.find('.mo-login').addClass('mo-login-dialog');
         if($(dialog_multi).find("iframe").length > 0) {
             $(dialog_multi).dialog("option", "width", $(".mo-td-content-width").eq(0).width());
             $(dialog_multi).dialog("option", "height", (parseInt($(window).height()) - dialogMaxheightOffset));
@@ -87,6 +84,7 @@ function dialog_set_offset() {
 }
 
 function dialog_set_max_from_test(dialog) {
+//$('#out').html("width="+$("#dialog-test-w").width()+" height="+$("#dialog-test-w").height())
     if($("#dialog-test-w").height() > (parseInt($(window).height()) - dialogMaxheightOffset - offset_height))
         $(dialog).dialog("option", "height", (parseInt($(window).height()) - dialogMaxheightOffset));
     // wenn wir im iframe sind gibts kein mo-td-content-width
@@ -366,7 +364,6 @@ function send_data(para,change_item) {
                 send_object = false;
                 $(dialog_multi).dialog("close");
             }
-
             // Achtung vom server muss immer ein tag zurückkommen
             getdata = clean_data(getdata);
             if(retError !== false) {

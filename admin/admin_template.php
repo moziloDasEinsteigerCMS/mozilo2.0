@@ -2,11 +2,8 @@
 
 function admin_Template($pagecontent,$message) {
     $html = get_HtmlHead();
-    $js_loginfocus = '';
-    if(!LOGIN)
-        $js_loginfocus = ' onLoad="document.loginform.username.focus();document.loginform.username.select()"';
 
-    $html .= '<body class="ui-widget" style="font-size:12px;"'.$js_loginfocus.'>';
+    $html .= '<body class="ui-widget" style="font-size:12px;">';
 
     if(!defined('PLUGINADMIN')) {
 

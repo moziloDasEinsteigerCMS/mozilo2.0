@@ -93,8 +93,8 @@ return false;
 
 // Aufbau des Login-Formulars
 function login_formular($enabled,$error_lang = false) {
-    # das wir gebraucht damit bei einer ajax anfrage der login erscheint
-    $form = '<div class="error js-dialog-content js-dialog-reload">';
+    # das "error" wird gebraucht damit bei einer ajax anfrage der login erscheint
+    $form = '<div class="error mo-login-box js-dialog-content js-dialog-reload">';
     $enabled_css = "ui-state-highlight";
     $enabled_input = "";
     if(!$enabled) {
@@ -102,39 +102,38 @@ function login_formular($enabled,$error_lang = false) {
         $enabled_input = ' readonly="readonly"';
     }
     if($error_lang !== false)
-        $form .= '<div class="mo-login_message_fehler ui-widget-content ui-state-error ui-corner-all ui-helper-clearfix"><div class="mo-error" style="background-image:url('.ADMIN_ICONS.'error.png);padding-left:'.(substr(ICON_SIZE,0,2) + 10).'px;">'.getLanguageValue($error_lang)."</div></div>";
- 
+        $form .= '<div class="mo-login_message_fehler ui-widget-content ui-state-error ui-corner-all ui-helper-clearfix">'.returnMessage(false, getLanguageValue($error_lang))."</div>";
+
    $form .= '<div class="mo-login '.$enabled_css.' ui-corner-all">';
 
     if ($enabled)
         $form .= '<form accept-charset="'.CHARSET.'" name="loginform" action="'.URL_BASE.ADMIN_DIR_NAME."/index.php".'" method="post">';
     $form .= '<table width="100%" cellspacing="10" border="0" cellpadding="0">'
-      ."<tr>"
-      .'<td width="1%" rowspan="2" align="center" valign="middle">'
-      .'<img src="'.URL_BASE.ADMIN_DIR_NAME.'/gfx/login.png" alt="Login" />'
-      ."</td>"
-      .'<td width="1%" class="mo-nowrap">'
-      .getLanguageValue("username").":"
-      ."</td>"
-      ."<td>";
-
-    $form .= '<input class="mo-login_input" type="text" size="15" name="username" autocomplete="off"'.$enabled_input.' />';
-  $form .= "</td>"
-      ."</tr>"
-      ."<tr>"
-      .'<td class="mo-nowrap">'
-      .getLanguageValue("password").":"
-      ."</td>"
-      ."<td>";
-    $form .= '<input class="mo-login_input" type="password" size="15" name="password" autocomplete="off"'.$enabled_input.' />';
-  $form .= "</td>"
-      ."</tr>"
-      ."<tr>"
-      .'<td colspan="3" class="mo-align-center">';
-      $form .= '<input name="login" value="Login" class="mo-login_submit" type="submit"'.$enabled_input.' />';
-  $form .= "</td>"
-      ."</tr>"
-      ."</table>";
+        ."<tr>"
+        .'<td width="1%" rowspan="2" align="center" valign="middle">'
+        .'<img src="'.ICON_URL.'login.png" alt="Login" />'
+        ."</td>"
+        .'<td width="1%" class="mo-nowrap">'
+        .getLanguageValue("username").":"
+        ."</td>"
+        ."<td>"
+        .'<input class="mo-login_input" type="text" size="15" name="username" autocomplete="off"'.$enabled_input.' />'
+        ."</td>"
+        ."</tr>"
+        ."<tr>"
+        .'<td class="mo-nowrap">'
+        .getLanguageValue("password").":"
+        ."</td>"
+        ."<td>"
+        .'<input class="mo-login_input" type="password" size="15" name="password" autocomplete="off"'.$enabled_input.' />'
+        ."</td>"
+        ."</tr>"
+        ."<tr>"
+        .'<td colspan="3" class="mo-align-center">'
+        .'<input name="login" value="Login" class="mo-login_submit" type="submit"'.$enabled_input.' />'
+        ."</td>"
+        ."</tr>"
+        ."</table>";
   if ($enabled)
       $form .= "</form>";
     $form .= '</div></div>';

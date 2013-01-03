@@ -275,5 +275,7 @@ $(function() {
             });
         });
     }
+
+    $('input[name="username"]').focus();
 //$('#ce-colorchange').dialog("open");
 });

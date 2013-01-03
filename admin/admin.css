@@ -4,6 +4,7 @@ html, body {
     padding:0;
     margin:0;
     height: 100%;
+    min-width:75em;
 }
 
 #mo-admin-td {
@@ -453,42 +454,21 @@ input.mo-input-margin-top  {
 
 .mo-message-erfolg {
     display: block;
-    padding: .8em 0;
-    background-position: .4em .4em;
-    background-repeat: no-repeat;
+    padding: .8em 0 .8em 34px;
 }
 
 .mo-message-fehler {
     display: block;
-    padding: .8em 0;
-    background-position: .4em .4em;
-    background-repeat: no-repeat;
+    padding: .8em 0 .8em 34px;
 }
 
-.message_ask {
-    margin: 10px;
-    color: #aa0000;
-    border: 1px solid #aa0000;
-    padding: 8px;
-    font-weight: bolder;
-    background-color: #FFDDDD;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -khtml-border-radius: 3px;
-    border-radius: 3px;
-}
-
-div.message_fehler {
-    top: 100px;
-    border: 1px solid red;
-    width: 350px;
-    margin-left: -175px;
-    padding: 10px;
-    padding-left: 35px;
-    left: 50%;
-    position: absolute;
-    background-color: #FFECEC;
-    text-align: center;
+.mo-message-icon {
+    width: 24px;
+    height:24px;
+    border:0;
+    padding:0;
+    margin:-.4em 10px 0 -34px;
+    float:left;
 }
 
 /* login sachen */
@@ -509,39 +489,33 @@ div.message_fehler {
     border-radius: 2px;
 }
 
-.mo-login {
-    width: 25em;
+.mo-login-box {
+    width: 33em;
+    padding: 0;
     margin:0;
-    margin-left: 24em;
+    margin-left: 20em;
     margin-top: 10em;
     margin-bottom: 10em;
+    text-align:center;
+}
+
+/*1=oben, 2=rechts, 3=unten, 4=links*/
+.mo-login {
+    text-align:left;
+    width: 25em;
+    margin:0 auto;
     padding: 0;
 }
 
-div.mo-login-dialog {
-    margin:0;
-    /* mo-login_message_fehler width - mo-login width / 2 */
-    margin-left: 4em;
-    margin-right: 4em;
-}
-
 .mo-login_message_fehler {
-    float:left;
-    width: 33em;
-    margin:0;
-    margin-left: 20em;
-    margin-top:3em;
+    font-weight: bold;
+    padding:.4em;
+    text-align:center;
+    margin-bottom:1em;
 }
 
-div#dialog-multi .mo-login_message_fehler {
+div#dialog-multi .mo-login-box, div#dialog-test-w .mo-login-box {
     margin:0;
-}
-
-.mo-login_message_fehler div {
-    margin:.4em;
-    text-align: center;
-    background-position: 5px 5px;
-    background-repeat: no-repeat;
 }
 
 #js-menu-config-default-color * {
@@ -562,6 +536,8 @@ div#dialog-multi .mo-login_message_fehler {
 }
 
 .mo-tabs-icon {
+    width:18px;
+    height:18px;
     background-image: url(gfx/tabs_icons.png);
     background-repeat:no-repeat;
 }
@@ -576,6 +552,8 @@ div#dialog-multi .mo-login_message_fehler {
 .mo-tab-template    {background-position: -126px 0;}
 
 .mo-icons-icon {
+    width:24px;
+    height:24px;
     background-image: url(gfx/mo_icons.png);
     background-repeat:no-repeat;
 }
