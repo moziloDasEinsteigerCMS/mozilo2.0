@@ -1,32 +1,32 @@
 var user_para = "chanceplugin=true";
+var dialog_plugin = false;
 
 var activ_handler = function() {
-    var upper_tag = $(this).closest(".js-plugin");
-    var plugin_name = "&plugin_name="+$(this).attr("name").replace(/\[active\]/,"");
-    var activ = "=true";
-    if($(this).prop("checked")) {
+    var that = $(this),
+        upper_tag = that.closest(".js-plugin"),
+        plugin_name = "&plugin_name="+that.attr("name").replace(/\[active\]/,""),
+        activ = "=true";
+    if(that.prop("checked")) {
         // die anzeige einstelungen zeigen
-        $(upper_tag).find(".js-config").show(anim_speed);
+        upper_tag.find(".js-config").show(anim_speed);
     } else {
         // die anzeige einstelungen hiden
         // wenn js-toggle-content hiden ist müssen wir mit display none arbeiten da hide das nicht macht
-        if($(upper_tag).find(".js-toggle-content").is(":visible")) {
-            $(upper_tag).find(".js-config").hide(anim_speed);
+        if(upper_tag.find(".js-toggle-content").is(":visible")) {
+            upper_tag.find(".js-config").hide(anim_speed);
         } else {
-            $(upper_tag).find(".js-config").css("display","none")
+            upper_tag.find(".js-config").css("display","none")
         }
         activ = "=false";
     }
-    send_data(user_para+plugin_name+"&"+$(this).attr("name")+activ);
+    send_data(user_para+plugin_name+"&"+that.attr("name")+activ);
 }
 
 var save_handler = function() {
-    var plugin = $(this).closest(".js-plugin");
-    var plugin_name = $(plugin).find(".js-plugin-active input").attr("name").replace(/\[active\]/,"");
-
-
-    plugin_name_search = new RegExp(plugin_name+"%5B",'g');
-    var para = $(plugin).find(".js-config [name]").serialize();
+    var plugin = $(this).closest(".js-plugin"),
+        plugin_name = plugin.find(".js-plugin-active input").attr("name").replace(/\[active\]/,""),
+        plugin_name_search = new RegExp(plugin_name+"%5B",'g'),
+        para = plugin.find(".js-config [name]").serialize();
     para = para.replace(plugin_name_search, plugin_name+"[");
     para = para.replace(/%5D=/g, "]=");
 
@@ -39,8 +39,6 @@ var save_handler = function() {
 
 $(function() {
 
-
-
     $('body').append('<div id="dialog-plugin-admin"><iframe frameborder="0" width="100%" height="100%" align="left" style="overflow:visible;" /></div>');
     $('#dialog-plugin-admin').dialog({
         autoOpen: false,
@@ -50,17 +48,20 @@ $(function() {
         modal: true,
         title: "admin Plugin",
         buttons: [],
+        create: function(event, ui) {
+            dialog_plugin = $(this);
+        },
     });
 
     $('body').on("click",".js-config-adminlogin", function(event){
         event.preventDefault();
-        var plugin_name = $(this).attr("name").replace(/\[pluginadmin\]/,"");
-        para = URL_BASE+ADMIN_DIR_NAME+"/index.php?pluginadmin="+plugin_name+"&action="+action_activ;
+        var plugin_name = $(this).attr("name").replace(/\[pluginadmin\]/,""),
+            para = URL_BASE+ADMIN_DIR_NAME+"/index.php?pluginadmin="+plugin_name+"&action="+action_activ;
         $('#dialog-plugin-admin iframe').attr("src",para);
-        $('#dialog-plugin-admin').dialog("option", "width", $(".mo-td-content-width").eq(0).width());
-        $('#dialog-plugin-admin').dialog("option", "height", (parseInt($(window).height()) - dialogMaxheightOffset));
-        $('#dialog-plugin-admin').dialog( "option", "title", "admin Plugin "+plugin_name);
-        $('#dialog-plugin-admin').dialog("open");
+        dialog_plugin.dialog({
+            width: $(".mo-td-content-width").eq(0).width(),
+            height: (parseInt($(window).height()) - dialogMaxheightOffset),
+            title: "admin Plugin "+plugin_name}).dialog("open");
 //        dialog_open("messages",iframe);
 
 //!!!!!!!!!!! das neu login geht hier noch nicht
@@ -72,7 +73,7 @@ $(function() {
      $('.js-plugin-active input[type="checkbox"]:not(:checked)').each(function(i,tag) {
          var upper_tag = $(this).closest(".js-plugin");
          // die anzeige einstelungen hiden
-         $(upper_tag).find(".js-config").css("display","none");
+         upper_tag.find(".js-config").css("display","none");
      })
 
     /* weil der in einem hide() drin ist muss display:none benutzt werden */

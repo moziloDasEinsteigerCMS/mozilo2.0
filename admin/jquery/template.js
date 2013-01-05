@@ -1,11 +1,12 @@
 
 var edit_handler = function(event) {
     event.preventDefault();
-    if($(this).hasClass("ui-state-disabled"))
+    var that = $(this);
+    if(that.hasClass("ui-state-disabled"))
         return false;
 
     $('#js-editor-toolbar').css("display","block");
-    if($(this).hasClass("js-css")) {
+    if(that.hasClass("js-css")) {
         $('#colordiv-editor').append($('#js-color-menu'));
         if($('#select-mode').val() != "text") {
             $('#select-mode option:selected').attr('selected',false)
@@ -13,7 +14,7 @@ var edit_handler = function(event) {
         }
         $('#js-editor-toolbar').css("display","none");
     }
-    if($(this).hasClass("js-html")) {
+    if(that.hasClass("js-html")) {
         $('#colordiv-mozilo').append($('#js-color-menu'));
         if($('#select-mode').val() != "text") {
             $('#select-mode option:selected').attr('selected',false)
@@ -26,21 +27,15 @@ var edit_handler = function(event) {
     // wenn sich im FileUpload was geändert hat deshalb hollen wir immer die selectbox template
     send_data("templateselectbox=true",$('select[name="template_css"]'));
 
-    $(dialog_editor).dialog("option", "width", $(".mo-td-content-width").eq(0).width());
-    $(dialog_editor).dialog("option", "height", (parseInt($(window).height()) - dialogMaxheightOffset));
+    dialog_editor.data("send_object",false)
+        .dialog({
+            title: "Berabeiten "+that.closest(".js-tools-show-hide").find(".js-filename").text(),
+            width: $(".mo-td-content-width").eq(0).width(),
+            height: (parseInt($(window).height()) - dialogMaxheightOffset)});
 
-    var file_title = $(this).closest(".js-tools-show-hide").find(".js-filename").text();
-    var file = $(this).next('.js-edit-file-pfad').text();
-
-    $(dialog_editor).dialog("option", "title", "Berabeiten "+file_title);
-    $(dialog_editor).data("send_object",false);
-
-//    $(dialog_editor).dialog("open");
-// $("#out").html($("#out").html()+"<br>para = "+user_para+"&templatefile="+$(this).attr("name"));
-    editor_file = "configtemplate=true&templatefile="+file;
-
+    editor_file = "configtemplate=true&templatefile="+that.next('.js-edit-file-pfad').text();
     send_editor_data(editor_file,false);
 }
 $(function() {
-    $('.js-edit-template').bind("click", edit_handler);
+    $("body").on("click",".js-edit-template", edit_handler);
 });

@@ -9,7 +9,7 @@ var send_item_status = false;
 
 function is_name_twice(in_cat_page,name) {
     var name_test = false;
-    $(in_cat_page).each(function(index) {
+    in_cat_page.each(function(index) {
         if(name == get_name($(this).attr("name"))) {
             name_test = true;
         }
@@ -63,10 +63,10 @@ function get_next_free_name(in_cat_page,name) {
 }
 
 function change_status_pages(this_li) {
-    var item_li_cat = $(this_li).parents(".js-li-cat");
-    var item_status = $(item_li_cat).find("table").eq(0).find(".js-status");
+    var item_li_cat = this_li.parents(".js-li-cat")
+        item_status = item_li_cat.find("table").eq(0).find(".js-status");
     if(item_li_cat.length == 1) {
-        $(item_status).text($(item_li_cat).find(".js-li-page").filter(":visible").length);
+        item_status.text(item_li_cat.find(".js-li-page").filter(":visible").length);
     }
 };
 
@@ -205,8 +205,8 @@ function make_input_ext(cat_page) {
     var curent_ext = get_ext(cat_page);
     if(!curent_ext || curent_ext == EXT_LINK)
         return "";
-    var inputs = mozilo_lang["page_status"] + ": <form>";
-    var for_id = new Date();
+    var inputs = mozilo_lang["page_status"] + ": <form>",
+        for_id = new Date();
     for_id = for_id.getTime();
     for(var i = 0; i < ext_array.length - 1; i++) {
         inputs += "<label for=\"status" + for_id + i + "\">" + mozilo_lang[ext_array[i]] + "</label>" + "<input id=\"status" + for_id + i + "\" name=\"radio\" type=\"radio\" value=\""+ext_array[i]+"\" class=\"js-in-radio js-make-input\""
@@ -220,13 +220,13 @@ function make_input_ext(cat_page) {
 
 // die änderungen bei new, copy und move machen aber nur den name send macht dann den rest
 function set_auto_new_name(curent_item,new_name) {
-    var in_cat_page = $(curent_item).find(".js-in-cat-page").attr("name");
-    var cat_page_new = new_name;
+    var in_cat_page = $(curent_item).find(".js-in-cat-page").attr("name"),
+        cat_page_new = new_name;
     if(is_page(in_cat_page)) {
 //ACHTUNG hier müssen wir die cat ermiteln in der wir sind oder übergeben
 //    var cat_name = $(ui.draggable).parents(".js-li-cat").find(".in-cat").attr("name");
 
-        cat_page_new = get_cat($(curent_item).parents(".js-li-cat").find(".js-in-cat").attr("name")) + "][" + cat_page_new;
+        cat_page_new = get_cat(curent_item.parents(".js-li-cat").find(".js-in-cat").attr("name")) + "][" + cat_page_new;
         if(get_target(in_cat_page)) {
             cat_page_new += get_target(in_cat_page)
             cat_page_new += get_link(in_cat_page)
@@ -239,70 +239,71 @@ function set_auto_new_name(curent_item,new_name) {
             cat_page_new += get_ext(in_cat_page)
         }
     }
-    $(curent_item).find(".js-in-cat-page").attr("name", "sort_array[" + cat_page_new + "]");
-    $(curent_item).find(".js-normal-in-name").text(rawurldecode_js(new_name));
+    curent_item.find(".js-in-cat-page").attr("name", "sort_array[" + cat_page_new + "]");
+    curent_item.find(".js-normal-in-name").text(rawurldecode_js(new_name));
 }
 
 function set_send_success_changes(change_item) {
-    var new_val = "[" + make_clean_cat_page_name($(change_item).find(".js-in-cat-page").attr("name")) + "]";
-    $(change_item).find(".js-in-cat-page").val(new_val);
-    $(change_item).find(".js-normal-in-name").text(rawurldecode_js(get_name(new_val)));
+    var new_val = "[" + make_clean_cat_page_name(change_item.find(".js-in-cat-page").attr("name")) + "]";
+    change_item.find(".js-in-cat-page").val(new_val);
+    change_item.find(".js-normal-in-name").text(rawurldecode_js(get_name(new_val)));
     if(get_target(new_val)) {
-        $(change_item).find(".js-status").text(mozilo_lang[get_target(new_val).replace(/-|_/g, "")]);
+        change_item.find(".js-status").text(mozilo_lang[get_target(new_val).replace(/-|_/g, "")]);
     } else if(get_ext(new_val)) {
-        $(change_item).find(".js-status").text(mozilo_lang[get_ext(new_val)]);
+        change_item.find(".js-status").text(mozilo_lang[get_ext(new_val)]);
     }
     // es wurde eine cat umbenant dann müssen wir die enthaltenen pages auch ändern
     if(!is_page(new_val)) {
         var new_cat = get_cat(new_val);
-        $(change_item).parents(".js-li-cat").find(".js-in-page").each(function(index) {
-            var in_value = $(this).val().split("][");
-            $(this).val("["+new_cat+"]["+in_value[1]);
-            $(this).attr("name","sort_array["+new_cat+"]["+in_value[1]);
+        change_item.parents(".js-li-cat").find(".js-in-page").each(function(index) {
+            var that = $(this),
+                in_value = that.val().split("][");
+            that.val("["+new_cat+"]["+in_value[1]);
+            that.attr("name","sort_array["+new_cat+"]["+in_value[1]);
         });
     }
 }
 
 function change_to_rename_mode(this_table) {
-    var cat_page = $(this_table).find(".js-in-cat-page").val();
-    var inhalt = "";
+    var cat_page = this_table.find(".js-in-cat-page").val(),
+        inhalt = "";
     inhalt += make_input_link(cat_page);
     inhalt += make_input_target(cat_page);
     inhalt += make_input_ext(cat_page);
 
-    $(this_table).find(".js-edit-box").append(inhalt);
-    $(this_table).find(".js-edit-in-name").append(make_input_name(cat_page));
+    this_table.find(".js-edit-box").append(inhalt);
+    this_table.find(".js-edit-in-name").append(make_input_name(cat_page));
 
-    $(this_table).find(".js-rename-mode-hide").hide(0);
-    $(this_table).find(".js-rename-mode-show").show(0);
+    this_table.find(".js-rename-mode-hide").hide(0);
+    this_table.find(".js-rename-mode-show").show(0);
 
-    $(this_table).find(".js-tools img:not(.js-edit-rename)").addClass("ui-state-disabled");
+    this_table.find(".js-tools img:not(.js-edit-rename)").addClass("ui-state-disabled");
 
-    $(this_table).find(".js-link-href").hide(0);
+    this_table.find(".js-link-href").hide(0);
 
-    $(this_table).find(".js-in-name").focus();
+    this_table.find(".js-in-name").focus();
     // Achtung für firefox damit input editierbar ist
     // ist bei $( ).disableSelection(); nötig
 //    $(this_table).find(".js-in-name").mousedown(function(event){ event.stopPropagation(); });
-    $(this_table).find(".js-make-input").mousedown(function(event){ event.stopPropagation(); });
+    this_table.find(".js-make-input").mousedown(function(event){ event.stopPropagation(); });
 }
 
 function change_to_normal_mode(this_table) {
 
-    var link = $(this_table).find(".js-in-link").val();
+    var link = this_table.find(".js-in-link").val();
     if(typeof link != "undefined")
     if(link.length < 1) {
         link = "#"
-        $(this_table).find(".js-link-href").attr({ href: link, target:"_self" });
+        this_table.find(".js-link-href").attr({ href: link, target:"_self" });
     } else {
-        $(this_table).find(".js-link-href").attr({href: link, target:"_blank"});
+        this_table.find(".js-link-href").attr({href: link, target:"_blank"});
     }
-    $(this_table).find(".js-link-href").show(0);
-    $(this_table).find(".js-edit-in-name").html("");
-    $(this_table).find(".js-edit-box").html("");
-    $(this_table).find(".js-rename-mode-hide").show(0);
-    $(this_table).find(".js-rename-mode-show").hide(0);
-    $(this_table).find(".js-tools img:not(.js-edit-rename)").removeClass("ui-state-disabled");
+    this_table.find(".js-link-href").show(0);
+    this_table.find(".js-edit-in-name").html("");
+    this_table.find(".js-edit-box").html("");
+    this_table.find(".js-rename-mode-hide").show(0);
+    this_table.find(".js-rename-mode-show").hide(0);
+    this_table.find(".js-tools img:not(.js-edit-rename)").removeClass("ui-state-disabled");
 }
 
 function make_send_para_sort_array() {
@@ -322,11 +323,11 @@ function make_send_para_change(change_item) {
 }
 
 function find_li_cat_page(item) {
-    if($(item).parents(".js-li-page").length == 1) {
-        return $(item).parents(".js-li-page");
+    if(item.parents(".js-li-page").length == 1) {
+        return item.parents(".js-li-page");
     }
-    if($(item).parents(".js-li-cat").length == 1) {
-        return $(item).parents(".js-li-cat");
+    if(item.parents(".js-li-cat").length == 1) {
+        return item.parents(".js-li-cat");
     }
     return false;
 }

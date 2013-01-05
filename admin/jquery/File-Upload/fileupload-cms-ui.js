@@ -274,7 +274,7 @@ mimeType: this._mimeType,
                 });
             } else {
 //$("#out").html($("#out").html()+"<br />dilaog öffnen");
-                $(dialog_multi).data("del_object",$(this));
+                dialog_multi.data("del_object",$(this));
                 dialog_open("delete_file","<b>"+$(this).closest('.template-download').find('.name').text()+"</b>");
             }
         },
@@ -338,7 +338,7 @@ if(template.hasClass('name-twice')) {
                     e.preventDefault();
 //$("#out").html($("#out").html()+"<br />delete="+e.which);
                     var dialog = false;
-                    $(dialog_multi).data("del_object",[filesList,fileUploadButtonBar]);
+                    dialog_multi.data("del_object",[filesList,fileUploadButtonBar]);
                     var dialog_text = "<div id=\"dialog-del\"><ul>";
                     filesList.find('.delete input:checked').each(function() {//.del.delete ete 
 //$("#out").html($("#out").html()+"<br />file="+$(this).closest('.template-download').find('.name').text());

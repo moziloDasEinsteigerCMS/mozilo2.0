@@ -2,10 +2,6 @@ var anim_speed = '200';
 var dialogMaxheightOffset = 40;
 var max_menu_tab = false;
 
-var dialog_button_height,
-    dialog_diff_content_height,
-    dialog_diff_content_width;
-
 function sleep(milliSeconds) {
     var startTime = new Date().getTime();
     while (new Date().getTime() < startTime + milliSeconds);
@@ -113,41 +109,7 @@ function returnMessage(success, message) {
     }
 }
 
-function set_dialog_max_width(timeItem) {
-    if($(timeItem).length > 0) {
-        $(timeItem).dialog("option", "width", $(".mo-td-content-width").eq(0).width());
-        $(timeItem).dialog("option", "height", (parseInt($(window).height()) - dialogMaxheightOffset));
-    } else
-        window.setTimeout("set_dialog_max_width(\""+timeItem+"\")", 100);
-}
-
-function set_dialog_dims() {
-    $("body").append('<div id="tmp-dialog-content"></div>');
-    $('#tmp-dialog-content').dialog({
-        autoOpen: false,
-        height: 100,
-        width: 300,
-        modal: false,
-        resizable: false,
-        title:"TEST",
-        dialogClass: "tmp-dialog",
-        buttons: [ { text: "Ok", click: function() { $( this ).dialog( "close" ); }} ]
-    });
-    $('#dialog-test-w').append($('.tmp-dialog'));
-    $('.tmp-dialog').css({display:"block",position: "relative"})
-
-    dialog_diff_content_height = ($('.tmp-dialog .ui-dialog-titlebar').outerHeight(true) + ($('.tmp-dialog .ui-dialog-content').outerHeight(true) - $('.tmp-dialog .ui-dialog-content').height())) + 1;
-
-    dialog_diff_content_width = $('.tmp-dialog .ui-dialog-content').outerWidth(true) - $('.tmp-dialog .ui-dialog-content').width()
-
-    dialog_button_height = $('.tmp-dialog .ui-dialog-buttonpane').outerHeight(true);
-
-    $('.tmp-dialog').remove();
-//$('#out').html($('#out').html()+" dialog_diff_content_height_cont="+dialog_diff_content_height_cont+" dialog_diff_content_width_cont="+dialog_diff_content_width_cont+" dialog_button_height="+dialog_button_height+"<br>")
-}
-
 $(function() {
-    set_dialog_dims();
 
     $("body").on("click",".js-no-click", function(event) { event.preventDefault() });
 

@@ -20,14 +20,14 @@ function send_editor_data(para,savepage) {
         // timeout geht nur bei async: true und ist in error und complete verfügbar
         timeout:20000,
         beforeSend: function(jqXHR) {
-            $(dialog_editor).data("send_object",jqXHR);
+            dialog_editor.data("send_object",jqXHR);
             // das dient dazu das der error dialog nich aufgeht
-            $(dialog_editor).data("send_abort",false);
+            dialog_editor.data("send_abort",false);
             dialog_open("editor_send_cancel");
         },
         success: function(getdata, textStatus, jqXHR){
-            if($(dialog_multi).dialog("isOpen")) {
-                $(dialog_multi).dialog("close");
+            if(dialog_multi.dialog("isOpen")) {
+                dialog_multi.dialog("close");
             }
 //$("#out").html($("#out").html()+"<br />success");
             // Achtung vom server muss immer ein tag zurückkommen
@@ -44,35 +44,35 @@ function send_editor_data(para,savepage) {
                 if(!savepage && pagecontent !== false) {
 //$("#out").html($("#out").html()+"<br />open");
 //                    $("#" + meditorID).text(pagecontent);
-                    $(dialog_editor).dialog("open");
+                    dialog_editor.dialog("open");
 editor_session.setValue(pagecontent);
 init_ace_editor(); //pagecontent
-                    $(dialog_editor).data("diffcontent",pagecontent);
+                    dialog_editor.data("diffcontent",pagecontent);
                 }
 
                 if(savepage) {
 //editor_session.getValue();
-                    $(dialog_editor).data("diffcontent",editor_session.getValue());
-if($(dialog_editor).data("close_after_save") === true) {
-    $(dialog_editor).dialog("close");
+                    dialog_editor.data("diffcontent",editor_session.getValue());
+if(dialog_editor.data("close_after_save") === true) {
+    dialog_editor.dialog("close");
     return;
 }
                 }
                 // beim config wird nee select mit geschickt die müssen wir mit dem original ersetzen
                 if(replace_item !== false) {
-                    repalce_tags(replace_item);
+                    replace_tags(replace_item);
                 }
             } else {
                dialog_open("error","unbekanter fehler");
             }
-            $(dialog_editor).data("send_object",false);
+            dialog_editor.data("send_object",false);
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            if($(dialog_multi).dialog("isOpen")) {
-                $(dialog_multi).dialog("close");
+            if(dialog_multi.dialog("isOpen")) {
+                dialog_multi.dialog("close");
             }
-            $(dialog_editor).data("send_object",false);
-            if(!$(dialog_editor).data("send_abort")) {
+            dialog_editor.data("send_object",false);
+            if(!dialog_editor.data("send_abort")) {
                 dialog_open("error_messages","status= " + textStatus + "\nerror:\n" + errorThrown);
             }
         }
@@ -81,39 +81,40 @@ if($(dialog_editor).data("close_after_save") === true) {
 
 
 function dialog_editor_send_cancel() {
-    $(dialog_multi).css("background", "url(" + ICON_URL + "ajax-loader.gif) center center no-repeat");
-    $(dialog_multi).dialog( "option", "title", mozilo_lang["dialog_title_send"]);
-    $(dialog_multi).dialog( "option", "buttons", [{
-        text: mozilo_lang["button_cancel"],
-        click: function() {
-            $(dialog_editor).data("send_abort",true);
-            $(dialog_editor).data("send_object").abort();
-            $(this).dialog("close");
-        }
-    }]);
+    dialog_multi.css("background", "url(" + ICON_URL + "ajax-loader.gif) center center no-repeat")
+        .dialog({
+            title: mozilo_lang["dialog_title_send"],
+            buttons: [{
+                text: mozilo_lang["button_cancel"],
+                click: function() {
+                    dialog_editor.data("send_abort",true);
+                    dialog_editor.data("send_object").abort();
+                    dialog_multi.dialog("close");
+                }
+        }]});
 }
 
 function dialog_editor_save_beforclose() {
-    $(dialog_multi).dialog( "option", "title", mozilo_lang["dialog_title_save_beforeclose"]);
-    $(dialog_multi).html(returnMessage(false, mozilo_lang["error_save_beforeclose"]));
-    $(dialog_multi).dialog( "option", "buttons", [{
-        text: mozilo_lang["button_save"],
-        click: function() {
-$(dialog_editor).data("close_after_save",true);
-            send_editor_data(editor_file+"&content="+rawurlencode_js(editor_session.getValue()),true);
-            $(this).dialog("close");
+    dialog_multi.dialog({
+        title: mozilo_lang["dialog_title_save_beforeclose"],
+        buttons: [{
+            text: mozilo_lang["button_save"],
+            click: function() {
+                dialog_editor.data("close_after_save",true);
+                send_editor_data(editor_file+"&content="+rawurlencode_js(editor_session.getValue()),true);
+                dialog_multi.dialog("close");
+            }
+        },{
+            text: mozilo_lang["button_cancel"],
+            click: function() { dialog_multi.dialog("close"); }
+        },{
+            text: mozilo_lang["page_edit_discard"],
+            click: function() {
+                dialog_editor.data("diffcontent",false);
+                dialog_editor.dialog("close");
+                dialog_multi.dialog("close");
         }
-    },{
-        text: mozilo_lang["button_cancel"],
-        click: function() { $(this).dialog("close"); }
-    },{
-        text: mozilo_lang["page_edit_discard"],
-        click: function() {
-            $(dialog_editor).data("diffcontent",false);
-            $(dialog_editor).dialog("close");
-            $(this).dialog("close");
-        }
-    }]);
+    }]}).html(returnMessage(false, mozilo_lang["error_save_beforeclose"]));
 }
 
 function insert_ace(aTag, eTag, select) {
@@ -216,29 +217,16 @@ function init_ace_editor() { // pagecontent
 
     $('#pagecontent-border').height(new_height);
 
-    $('#'+meditorID).height(new_height);
-    $('#'+meditorID).width((new_width - 2));
+    $('#'+meditorID).height(new_height).width((new_width - 2));
     editor.resize();
-//    window.setTimeout("set_ace_WrapLimitRange()", 50);
-    // !!!!!!!!! damit die zeilen nummern bis unten sichtbar sind
-    // ace.js ca. zeile 15461 this.$gutter.style.height = (offset + this.$size.scrollerHeight) + "px";
     editor.focus();
 }
-//!!!! testen
-/*
-function set_ace_WrapLimitRange() {
-return
-    ace_width_test_string.css('font-size',$('#select-fontsize').val());
-    var character_max = (ace_width_test_string.width() / 10);
-    character_max = Math.round($("#"+meditorID+" .ace_scroller").width() / character_max) - 3;
-    editor_session.setWrapLimitRange(character_max, character_max);
-}*/
 
 function set_editor_settings() {
     if(navigator.cookieEnabled == true) {
-        var cookieablauftage = 50;
-        var ablauf = new Date();
-        var cookielifetime = ablauf.getTime() + (cookieablauftage * 24 * 60 * 60 * 1000);
+        var cookieablauftage = 50,
+            ablauf = new Date(),
+            cookielifetime = ablauf.getTime() + (cookieablauftage * 24 * 60 * 60 * 1000);
         ablauf.setTime(cookielifetime);
 
         var settings = set_icon_checked($('#show_gutter'),false)+",";
@@ -292,16 +280,13 @@ function set_icon_checked(item,setcss) {
 
 $(function() {
 
-//    ace_width_test_string = $(ace_width_test_string).css({'margin':0,'padding':0,'position':'relative','float':'left'});
-//    $('#dialog-test-w').parent().prepend(ace_width_test_string);
-
     get_editor_settings();
     editor = ace.edit(meditorID);
     editor_session = editor.getSession();
     editor.setTheme("ace/theme/mozilo");
     editor.setFontSize($('#select-fontsize').val());
     editor.setSelectionStyle("line"); // "line" "text"
-editor_session.setFoldStyle("markbegin");
+    editor_session.setFoldStyle("markbegin");
     editor.setShowFoldWidgets(true);
     if(usecmssyntax != "true") {
         $('#select-mode option:selected').attr('selected',false);
@@ -330,7 +315,6 @@ editor_session.setFoldStyle("markbegin");
     $('#show_gutter').bind('click', function() {
         editor.renderer.setShowGutter(set_icon_checked($(this),true));
         editor.focus();
-//        set_ace_WrapLimitRange();
         set_editor_settings();
     });
 
@@ -348,13 +332,11 @@ editor_session.setFoldStyle("markbegin");
 
     $('#select-fontsize').bind('change', function() {
         editor.setFontSize($(this).val());
-//        set_ace_WrapLimitRange();
         editor.focus();
         set_editor_settings();
     });
 
     $('#toggle_fold').bind('click', function() {
-//        editor_session.toggleFold();
         if($(this).hasClass('foldet')) {
             editor_session.unfold();
             $(this).removeClass('foldet')
@@ -404,18 +386,15 @@ editor_session.setFoldStyle("markbegin");
         position: "center",
         resizable: true,
         dialogClass: "mo-shadow",
-//        dialogClass: "mo-td-content-width",js-dialog-ace
         create: function(event, ui) {
-            $(this).data("send_object",false);
+            dialog_editor = $(this);
+            dialog_editor.data("send_object",false);
 
-            dialog_editor = this;
-            $(this).parents('.ui-dialog').find('.ui-dialog-titlebar').prepend($(this).find('.js-docu-link'));
-
-            window.setTimeout('set_dialog_max_width("#pageedit-box")', 100);
+            dialog_editor.parents('.ui-dialog').find('.ui-dialog-titlebar').prepend(dialog_editor.find('.js-docu-link'));
         },
         beforeClose: function(event, ui) {
             // hat sich die Inhaltseite geändert
-            if($(this).data("diffcontent") !== false && $(this).data("diffcontent") != editor_session.getValue()) {
+            if(dialog_editor.data("diffcontent") !== false && dialog_editor.data("diffcontent") != editor_session.getValue()) {
                 dialog_open("editor_save_beforclose");
                     event.preventDefault();
             }
@@ -429,14 +408,14 @@ editor_session.setFoldStyle("markbegin");
         }],
         close: function(event, ui) {
             $("#menu-fix-close-editor").show(0).attr("id","menu-fix");
-            if($(this).data("send_object"))
-                $(this).data("send_object").abort();
-            $(this).data("send_object",false);
+            if(dialog_editor.data("send_object"))
+                dialog_editor.data("send_object").abort();
+            dialog_editor.data("send_object",false);
             editor_file = "";
             editor_session.setValue("dummy");
             editor.destroy();
-            $(this).data("diffcontent",false);
-            $(this).data("close_after_save",false);
+            dialog_editor.data("diffcontent",false);
+            dialog_editor.data("close_after_save",false);
             if($('.js-coloreditor-button').length > 0) {
                 $('#ce-colorchange').dialog("close");
             }
@@ -446,7 +425,7 @@ editor_session.setFoldStyle("markbegin");
             if($('.js-coloreditor-button').length > 0)
                 $('#ce-colorchange').dialog("close");
             $("#menu-fix").hide(0).attr("id","menu-fix-close-editor");
-            $('.overviewselect, .usersyntaxselectbox').multiselect( "option", "maxHeight", $("#"+meditorID).closest('td').outerHeight() + $(this).next('.ui-dialog-buttonpane').height());
+            $('.overviewselect, .usersyntaxselectbox').multiselect( "option", "maxHeight", $("#"+meditorID).closest('td').outerHeight() + dialog_editor.next('.ui-dialog-buttonpane').height());
             // ein hack das die select grösse stimt
             $('select[name="select-mode"]').closest('div').width($('select[name="select-mode"]').outerWidth());
             $('select[name="select-fontsize"]').closest('div').width($('select[name="select-fontsize"]').outerWidth());

@@ -13,21 +13,20 @@ var offset_width = false;
 var offset_height = false;
 
 function dialog_open(func,content) {
-   dialog_set_offset();
    if(typeof content == "object") {
-        $(dialog_multi).append(content);
-        if($(dialog_multi).find("iframe").length > 0) {
-            $(dialog_multi).dialog("option", "width", $(".mo-td-content-width").eq(0).width());
-            $(dialog_multi).dialog("option", "height", (parseInt($(window).height()) - dialogMaxheightOffset));
-            $(dialog_multi).dialog("option", "resizable", false);
-        } else if($(dialog_multi).children().length > 0) {
+        dialog_multi.append(content);
+        if(dialog_multi.find("iframe").length > 0) {
+            dialog_multi.dialog("option", "width", $(".mo-td-content-width").eq(0).width());
+            dialog_multi.dialog("option", "height", (parseInt($(window).height()) - dialogMaxheightOffset));
+            dialog_multi.dialog("option", "resizable", false);
+        } else if(dialog_multi.children().length > 0) {
             // um die breite zu ermitel setzen wir es testhalber mal ein
             $("#dialog-test-w").append(content);
             dialog_set_max_from_test(dialog_multi);
-            $(dialog_multi).append(content);
+            dialog_multi.append(content);
         }
     } else if(typeof content != "undefined") {
-        $(dialog_multi).append(content);
+        dialog_multi.append(content);
     }
 
     var dialogopen = false;
@@ -68,41 +67,41 @@ function dialog_open(func,content) {
         }
     }
     if(dialogopen) {
-        $(dialog_multi).dialog("open");
+        dialog_multi.dialog("open");
     }
 }
 
 function dialog_set_offset() {
     if(offset_width !== false && offset_height !== false)
         return;
-    $(dialog_multi).dialog("option", "width", 100);
-    $(dialog_multi).dialog("option", "height", 100);
-    $(dialog_multi).dialog("open");
-    offset_width = $(dialog_multi).closest(".ui-dialog").outerWidth() - $(dialog_multi).width();
-    offset_height = $(dialog_multi).closest(".ui-dialog").outerHeight() - $(dialog_multi).height();
-    $(dialog_multi).dialog("close");
+    dialog_multi.dialog("option", "width", 100);
+    dialog_multi.dialog("option", "height", 100);
+    dialog_multi.dialog("open");
+    offset_width = dialog_multi.closest(".ui-dialog").outerWidth() - dialog_multi.width();
+    offset_height = dialog_multi.closest(".ui-dialog").outerHeight() - dialog_multi.height();
+    dialog_multi.dialog("close");
 }
 
 function dialog_set_max_from_test(dialog) {
 //$('#out').html("width="+$("#dialog-test-w").width()+" height="+$("#dialog-test-w").height())
     if($("#dialog-test-w").height() > (parseInt($(window).height()) - dialogMaxheightOffset - offset_height))
-        $(dialog).dialog("option", "height", (parseInt($(window).height()) - dialogMaxheightOffset));
+        dialog.dialog("option", "height", (parseInt($(window).height()) - dialogMaxheightOffset));
     // wenn wir im iframe sind gibts kein mo-td-content-width
     var win_width = $(".mo-td-content-width").eq(0).width();
     if($(".mo-td-content-width").length == 0)
         win_width = (parseInt($(window).width()));
     if($("#dialog-test-w").width() > (win_width - offset_width))
-        $(dialog).dialog("option", "width", win_width);
+        dialog.dialog("option", "width", win_width);
 }
 
 function dialog_from_php() {
-    var settings = $(dialog_multi).find('.js-dialog-content');
+    var settings = dialog_multi.find('.js-dialog-content');
     var buttons = new Array();
     if(typeof settings.attr('title') != "undefined") {
-        $(dialog_multi).dialog( "option", "title", settings.attr('title'));
+        dialog_multi.dialog( "option", "title", settings.attr('title'));
         settings.removeAttr('title');
     } else
-        $(dialog_multi).dialog( "option", "title", mozilo_lang["dialog_title_messages"]);
+        dialog_multi.dialog( "option", "title", mozilo_lang["dialog_title_messages"]);
     if(settings.hasClass('js-dialog-close')) {
         var button_close = {text: mozilo_lang["close"],
                     click: function() { $(this).dialog("close"); }};
@@ -118,14 +117,14 @@ function dialog_from_php() {
                 }};
         buttons.push(button_reload);
     }
-    $(dialog_multi).dialog( "option", "buttons", buttons);
+    dialog_multi.dialog( "option", "buttons", buttons);
     // user login mit ajax
     if(settings.find('form[name="loginform"]').length > 0) {
-        $(dialog_multi).dialog( "option", "title", mozilo_lang["login_titel_dialog"]);
+        dialog_multi.dialog( "option", "title", mozilo_lang["login_titel_dialog"]);
         $('form[name="loginform"]').bind('submit',function(event) {
             event.preventDefault();
             para = $(this).serialize()+"&login=Login&ajaxlogin=true";
-            $(dialog_multi).dialog("close");
+            dialog_multi.dialog("close");
             $('form[name="loginform"]').unbind();
             send_data(para);
         });
@@ -133,120 +132,127 @@ function dialog_from_php() {
 }
 
 function dialog_send_cancel() {
-    $(dialog_multi).css("background", "url(" + ICON_URL + "ajax-loader.gif) center center no-repeat");
-    $(dialog_multi).dialog( "option", "title", mozilo_lang["dialog_title_send"]);
-    $(dialog_multi).dialog( "option", "buttons", [{
-        text: mozilo_lang["page_cancel_reload"],
-        click: function() {
-            send_object.abort();
-            send_object = false;
-            var actives_tab = "";
-            if(window.location.search != "")
-                actives_tab = window.location.search;
-            window.location.href = "index.php"+actives_tab;
-        }
-    }]);
+    dialog_multi.css("background", "url(" + ICON_URL + "ajax-loader.gif) center center no-repeat")
+        .dialog({
+            title: mozilo_lang["dialog_title_send"],
+            buttons: [{
+                text: mozilo_lang["page_cancel_reload"],
+                click: function() {
+                    send_object.abort();
+                    send_object = false;
+                    var actives_tab = "";
+                    if(window.location.search != "")
+                        actives_tab = window.location.search;
+                    window.location.href = "index.php"+actives_tab;
+                }
+        }]});
 }
 
 function dialog_error_messages() {
-    $(dialog_multi).dialog( "option", "title", mozilo_lang["dialog_title_error"]);
-    $(dialog_multi).dialog( "option", "buttons", [{
-        text: mozilo_lang["close"],
-        click: function() { $(this).dialog("close"); }
-    }]);
+    dialog_multi.dialog({
+        title: mozilo_lang["dialog_title_error"],
+        buttons: [{
+            text: mozilo_lang["close"],
+            click: function() { dialog_multi.dialog("close"); }
+    }]});
 }
 
 function dialog_messages() {
-    $(dialog_multi).dialog( "option", "title", mozilo_lang["dialog_title_messages"]);
-    $(dialog_multi).dialog( "option", "buttons", [{
-        text: mozilo_lang["close"],
-        click: function() { $(this).dialog("close"); }
-    }]);
+    dialog_multi.dialog({
+        title: mozilo_lang["dialog_title_messages"],
+        buttons: [{
+            text: mozilo_lang["close"],
+            click: function() { dialog_multi.dialog("close"); }
+    }]});
 }
 
 function dialog_error() {
-    $(dialog_multi).dialog( "option", "title", mozilo_lang["dialog_title_error"]);
-    $(dialog_multi).dialog( "option", "buttons", [{
-        text: mozilo_lang["page_reload"],
-        click: function() {
-            var actives_tab = "";
-            if(window.location.search != "")
-                actives_tab = window.location.search;
-            window.location.href = "index.php" + actives_tab;
-        }
-    }]);
+    dialog_multi.dialog({
+        title: mozilo_lang["dialog_title_error"],
+        buttons: [{
+            text: mozilo_lang["page_reload"],
+            click: function() {
+                var actives_tab = "";
+                if(window.location.search != "")
+                    actives_tab = window.location.search;
+                window.location.href = "index.php" + actives_tab;
+            }
+    }]});
 }
 
 function dialog_messages_lastbackup() {
-    $(dialog_multi).dialog( "option", "title", mozilo_lang["dialog_title_lastbackup"]);
-    $(dialog_multi).dialog( "option", "buttons", [{
-        text: mozilo_lang["yes"],
-        click: function() { send_data($("#lastbackup_yes").text()); }
-    }]);
+    dialog_multi.dialog({
+        title: mozilo_lang["dialog_title_lastbackup"],
+        buttons: [{
+            text: mozilo_lang["yes"],
+            click: function() { send_data($("#lastbackup_yes").text()); }
+    }]});
 }
 
 function dialog_docu() {
-    $(dialog_multi).dialog( "option", "title", mozilo_lang["dialog_title_docu"]);
-    $(dialog_multi).dialog( "option", "buttons", []);
+    dialog_multi.dialog({
+        title: mozilo_lang["dialog_title_docu"],
+        buttons: []
+    });
 }
 
 function dialog_delete() {
-    $(dialog_multi).dialog( "option", "title", mozilo_lang["dialog_title_delete"]);
-    $(dialog_multi).dialog( "option", "buttons", [{
-        text: mozilo_lang["yes"],
-        click: function() { send_data(make_send_para_sort_array(),$(this).data("del_object")); }
-    },{
-        text: mozilo_lang["no"],
-        click: function() { $(this).dialog("close"); }
-    }]);
-    // Achtung nicht alle data entfernen sonst geht der dialog nicht mehr auf
-    $(this).removeData("del_object");
+    var del_item = dialog_multi.data("del_object");
+    dialog_multi.dialog({
+        title: mozilo_lang["dialog_title_delete"],
+        buttons: [{
+            text: mozilo_lang["yes"],
+            click: function() { send_data(make_send_para_sort_array(),del_item); }
+        },{
+            text: mozilo_lang["no"],
+            click: function() { dialog_multi.dialog("close"); }
+    }]}).removeData("del_object");
 }
 
 function dialog_delete_files() {
-    $(dialog_multi).dialog( "option", "title", mozilo_lang["dialog_title_delete"]);
-    $(dialog_multi).dialog( "option", "buttons", [{
-        text: mozilo_lang["yes"],
-        click: function() {
-            $(this).data("del_object")[0].find('.delete input:checked').siblings('button').addClass('js-nodialog').click();
-            $(this).data("del_object")[1].find('.toggle').prop('checked', false);
-            $(this).dialog("close");
-        }
-    },{
-        text: mozilo_lang["no"],
-        click: function() { $(this).dialog("close"); }
-    }]);
-    // Achtung nicht alle data entfernen sonst geht der dialog nicht mehr auf
-    $(this).removeData("del_object");
+    var del_item = dialog_multi.data("del_object");
+    dialog_multi.dialog({
+        title: mozilo_lang["dialog_title_delete"],
+        buttons: [{
+            text: mozilo_lang["yes"],
+            click: function() {
+                del_item[0].find('.delete input:checked').siblings('button').addClass('js-nodialog').click();
+                del_item[1].find('.toggle').prop('checked', false);
+                dialog_multi.dialog("close");
+            }
+        },{
+            text: mozilo_lang["no"],
+            click: function() { dialog_multi.dialog("close"); }
+    }]}).removeData("del_object");
 }
 
 function dialog_delete_file() {
-    $(dialog_multi).dialog( "option", "title", mozilo_lang["dialog_title_delete"]);
-    $(dialog_multi).dialog( "option", "buttons", [{
-        text: mozilo_lang["yes"],
-        click: function() {
-            $(this).data("del_object").addClass('js-nodialog').click();
-            $(this).dialog("close");
-        }
-    },{
-        text: mozilo_lang["no"],
-        click: function() { $(this).dialog("close"); }
-    }]);
-    // Achtung nicht alle data entfernen sonst geht der dialog nicht mehr auf
-    $(this).removeData("del_object");
+    var del_item = dialog_multi.data("del_object");
+    dialog_multi.dialog({
+        title: mozilo_lang["dialog_title_delete"],
+        buttons: [{
+            text: mozilo_lang["yes"],
+            click: function() {
+                del_item.addClass('js-nodialog').click();
+                dialog_multi.dialog("close");
+            }
+        },{
+            text: mozilo_lang["no"],
+            click: function() { dialog_multi.dialog("close"); }
+    }]}).removeData("del_object");
 }
 
 function dialog_gallery_delete() {
-    $(dialog_multi).dialog( "option", "title", mozilo_lang["dialog_title_delete"]);
-    $(dialog_multi).dialog( "option", "buttons", [{
-        text: mozilo_lang["yes"],
-        click: function() { send_data(user_para,$(this).data("del_object")); }
-    },{
-        text: mozilo_lang["no"],
-        click: function() { $(this).dialog("close"); }
-    }]);
-    // Achtung nicht alle data entfernen sonst geht der dialog nicht mehr auf
-    $(this).removeData("del_object");
+    var del_item = dialog_multi.data("del_object");
+    dialog_multi.dialog({
+        title: mozilo_lang["dialog_title_delete"],
+        buttons: [{
+            text: mozilo_lang["yes"],
+            click: function() { send_data(user_para,del_item); }
+        },{
+            text: mozilo_lang["no"],
+            click: function() { dialog_multi.dialog("close"); }
+    }]}).removeData("del_object");
 }
 
 function clean_data(data) {
@@ -300,17 +306,18 @@ function clean_data(data) {
     return data;
 }
 
-function repalce_tags(replace_item) {
-    $(replace_item).children().each(function(i,tag) {
+function replace_tags(replace_item) {
+    replace_item.children().each(function(i,tag) {
+        var tag_item = $(tag);
         if(tag.tagName == "SELECT") {
-            var search_tag = $("[name="+$(tag).attr("name")+"]");
+            var search_tag = $("[name="+tag_item.attr("name")+"]");
             search_tag.contents().remove();
-            search_tag.append($(tag).contents());
+            search_tag.append(tag_item.contents());
             search_tag.multiselect('refresh');
-        } else if(typeof $(tag).attr("id") != "undefined") {
-            $("#"+$(tag).attr("id")).replaceWith($(tag));
-        } else if(typeof $(tag).attr("class") != "undefined") {
-            $("."+$(tag).attr("class")).replaceWith($(tag));
+        } else if(typeof tag_item.attr("id") != "undefined") {
+            $("#"+tag_item.attr("id")).replaceWith(tag_item);
+        } else if(typeof tag_item.attr("class") != "undefined") {
+            $("."+tag_item.attr("class")).replaceWith(tag_item);
         }
     });
 }
@@ -320,21 +327,23 @@ function send_data(para,change_item) {
     if(para.substring(0, 1) != "&")
         para = "&"+para;
     para = "action="+action_activ+para;
+//$('#out').html($('#out').html()+"<br>para="+para)
     // catpage und gallery sachen
     if(typeof change_item != "undefined") {
         if(send_item_status) {
             para += "&changeart=" + send_item_status;
             if(send_item_status == "gallery_new" || send_item_status == "gallery_del") {
-                para += "&galleryname="+rawurlencode_js($(change_item).find('.js-gallery-name').text());
+                para += "&galleryname="+rawurlencode_js(change_item.find('.js-gallery-name').text());
             } else if(send_item_status == "gallery_rename") {
-                para += "&galleryname="+rawurlencode_js($(change_item).find('.js-gallery-name').text());
-                para += "&gallerynewname="+rawurlencode_js($(change_item).find('.in-gallery-new-name').val());
+                para += "&galleryname="+rawurlencode_js(change_item.find('.js-gallery-name').text());
+                para += "&gallerynewname="+rawurlencode_js(change_item.find('.in-gallery-new-name').val());
             } else if(send_item_status == "gallery_size") {
-                para += "&"+$(change_item).serialize();
+                para += "&"+change_item.serialize();
             } else if(send_item_status == "gallery_subtitle") {
                 para += "";
             } else if(send_item_status == "cat_page_del") {
-                para += make_send_para_change($(change_item).find("table").eq(0));
+//$('#out').html("cat_page_del="+make_send_para_change($(change_item).find("table").eq(0)))
+                para += make_send_para_change(change_item.find("table").eq(0));
             } else if(send_item_status == "file_rename") {
                 para += "";
             } else
@@ -353,16 +362,16 @@ function send_data(para,change_item) {
         timeout:20000,
         data: para,
         beforeSend: function(jqXHR) {
-            if($(dialog_multi).dialog("isOpen")) {
-                $(dialog_multi).dialog("close");
+            if(dialog_multi.dialog("isOpen")) {
+                dialog_multi.dialog("close");
             }
             send_object = jqXHR;
             dialog_open("send_cancel");
         },
         success: function(getdata, textStatus, jqXHR){
-            if($(dialog_multi).dialog("isOpen")) {
+            if(dialog_multi.dialog("isOpen")) {
                 send_object = false;
-                $(dialog_multi).dialog("close");
+                dialog_multi.dialog("close");
             }
             // Achtung vom server muss immer ein tag zurückkommen
             getdata = clean_data(getdata);
@@ -377,11 +386,11 @@ function send_data(para,change_item) {
                 // catpage und gallery sachen
                 if(typeof change_item != "undefined") {
                     if(send_item_status == "gallery_del") {
-                        $(change_item).remove();
+                        change_item.remove();
                     } else if(send_item_status == "gallery_rename") {
                         make_rename_changes(change_item);
                     } else if(send_item_status == "gallery_new") {
-                        var new_fileupload = $(change_item).find('.fileupload');
+                        var new_fileupload = change_item.find('.fileupload');
                         new_fileupload.fileupload({
                             dropZone: new_fileupload
                         });
@@ -393,8 +402,8 @@ function send_data(para,change_item) {
                     } else if(send_item_status == "file_rename") {
                         file_rename(change_item);
                     } else if(send_item_status == "cat_page_del") {
-                        var item_status = $(change_item).parents(".js-li-cat").find("table").eq(0);
-                        $(change_item).remove();
+                        var item_status = change_item.parents(".js-li-cat").find("table").eq(0);
+                        change_item.remove();
                         change_status_pages(item_status);
                     // nur wenns auch ein status gibt beim move cat gibts keinen
                     } else if(send_item_status)
@@ -402,16 +411,16 @@ function send_data(para,change_item) {
                 }
                 // beim catpage wird nee select mit geschickt die müssen wir mit dem original ersetzen
                 if(replace_item !== false) {
-                    repalce_tags(replace_item);
+                    replace_tags(replace_item);
                 }
             } else {
                 dialog_open("error","unbekanter fehler");
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            if($(dialog_multi).dialog("isOpen")) {
+            if(dialog_multi.dialog("isOpen")) {
                 send_object = false;
-                $(dialog_multi).dialog("close");
+                dialog_multi.dialog("close");
             }
             dialog_open("error_messages","status= " + textStatus + "\nerror:\n" + errorThrown);
             send_item_status = false;
@@ -431,35 +440,35 @@ $(function() {
         title: "Fehler Meldungen",
         buttons: [],
         create: function(event, ui) {
-            $(this).data("focus",false)
-            $(this).data("is_open",false)
-            dialog_multi = this;
+            dialog_multi = $(this);
+            dialog_multi.data("focus",false).data("is_open",false);
         },
         close: function(event, ui) {
             $("#menu-fix-close-dialog").show(0).attr("id","menu-fix");
-            $(this).dialog( "option", "buttons", []);
-            // bei den Plugins adminplugins einstelungen wird die width und height geändert
-            $(this).dialog("option", "width", "auto");
-            $(this).dialog("option", "height", "auto");
-            $(this).dialog("option", "resizable", false);
-            $(this).data("is_open",false)
-            $(this).html("");
-            $(this).css("background","transparent");
-            if($(this).data("focus")) {
-                $(this).data("focus").focus();
-                $(this).data("focus",false)
+            dialog_multi.css("background","transparent").html("")
+                .data("is_open",false)
+                .dialog({
+                    buttons: [],
+                    width: "auto",
+                    height: "auto",
+                    resizable: false
+            });
+            if(dialog_multi.data("focus")) {
+                dialog_multi.data("focus").focus();
+                dialog_multi.data("focus",false)
             }
         },
         open: function(event, ui) {
             $("#menu-fix").hide(0).attr("id","menu-fix-close-dialog");
-            if($(this).data("is_open")) {
+            if(dialog_multi.data("is_open")) {
                 return false;
             }
-            $(this).data("is_open",true)
-            if($(this).dialog( "option", "buttons").length > 0)
-                $(this).parents(".ui-dialog").find(".ui-dialog-titlebar-close").hide(0);
+            dialog_multi.data("is_open",true)
+            if(dialog_multi.dialog( "option", "buttons").length > 0)
+                dialog_multi.parents(".ui-dialog").find(".ui-dialog-titlebar-close").hide(0);
             else
-                $(this).parents(".ui-dialog").find(".ui-dialog-titlebar-close").show(0);
+                dialog_multi.parents(".ui-dialog").find(".ui-dialog-titlebar-close").show(0);
         }
     });
+dialog_set_offset();
 });

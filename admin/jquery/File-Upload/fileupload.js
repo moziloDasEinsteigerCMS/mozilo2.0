@@ -82,7 +82,7 @@ $(function () {
                     name_twice = true;
             });
             if(name_twice) {
-                dialog_open("error_messages","<b>Namen gibts schonn</b>");
+                dialog_open("error_messages",returnMessage(false,mozilo_lang["error_exists_file_dir"]));
             } else {
                 if(new_name == $(this).siblings('.fu-rename-file').text()) {
                     $(this).siblings('.fu-rename-file').removeClass('fu-nosearch').show(0);
@@ -91,7 +91,7 @@ $(function () {
                     return false;
                 }
                 if(!is_filename_allowed(new_name)) {
-                    dialog_open("error_messages","<b>Namen hat unerlaubte Sonderzeichen</b>");
+                    dialog_open("error_messages",returnMessage(false,mozilo_lang["error_datei_file_name"]));
                     return false;
                 }
 //$("#out").html($("#out").html()+"<br />erlaubt="+new_name);

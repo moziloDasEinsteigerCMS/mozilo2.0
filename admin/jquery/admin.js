@@ -1,10 +1,39 @@
+function make_para(item,user_para) {
+    var para = item.serialize();
+    if(item.is('[multiple]') && para.length < 1) {
+        para = item.attr("name").replace(/\[/g, '%5B').replace(/\]/g, '%5D')+"=null";
+    }
+    if(item.attr("type") == "checkbox" && para.length < 1) {
+        para = item.attr("name")+"=false";
+    }
+    send_data(user_para+para);
+}
+
+function test_newname(name) {
+    if(name.length >= 5)
+        return true;
+    else
+        return false;
+}
+
+function test_newpw(pw) {
+    if(pw.length >= 6) {
+        var nr_search = /\d/;
+        // das password hat keine zahl und kein grossen buchstaben
+        if(!nr_search.test(pw) || pw.toLowerCase() == pw || pw.toUpperCase() == pw) {
+            return false;
+        } else
+            return true;
+    } else
+        return false;
+}
 
 var in_enter_handler = function(event) {
     if(event.which == 13) { // enter
         if($(this).hasClass("maximage"))
             make_para($(".maximage"),"chanceadmin=true&");
         else
-            make_para(this,"chanceadmin=true&");
+            make_para($(this),"chanceadmin=true&");
         return false;
     }
 }
@@ -26,24 +55,25 @@ var in_pw_handler = function(event) {
         $('.'+in_class).css("background-color","transparent");
         var valide = true;
         $('.'+in_class).each(function(i){
-            /* ist der neue name valide */
-            if($(this).attr("name") == in_name) {
-                if(!test_newname($(this).val())) {
-                    $(this).css("background-color","#00f");
+            var that = $(this);
+            // ist der neue name valide
+            if(that.attr("name") == in_name) {
+                if(!test_newname(that.val())) {
+                    that.css("background-color","#00f");
                     valide = false;
                     return false;
                 }
             }
-            /* ist ein feld nicht ausgefühlt setze den focus darauf */
-            if($(this).val().length < 1) {
-                $(this).focus();
+            // ist ein feld nicht ausgefühlt setze den focus darauf
+            if(that.val().length < 1) {
+                that.focus();
                 valide = false;
                 return false;
             }
-            /* ist das neue password oder die password wiederholung valide */
-            if($(this).attr("name") == in_pw || $(this).attr("name") == in_pwre) {
-                if(!test_newpw($(this).val())) {
-                    $(this).css("background-color","#00f");
+            // ist das neue password oder die password wiederholung valide
+            if(that.attr("name") == in_pw || that.attr("name") == in_pwre) {
+                if(!test_newpw(that.val())) {
+                    that.css("background-color","#00f");
                     valide = false;
                     return false;
                 }
@@ -52,14 +82,14 @@ var in_pw_handler = function(event) {
         if(!valide) {
             return false;
         }
-        /* ist das password und die password wiederholung sind nicht gleich */
+        // ist das password und die password wiederholung sind nicht gleich
         if($("input[name=\""+in_pw+"\"]").val() != $("input[name=\""+in_pwre+"\"]").val()) {
             $("input[name=\""+in_pwre+"\"]").css("background-color","#0f0");
             $("input[name=\""+in_pwre+"\"]").val("");
             $("input[name=\""+in_pwre+"\"]").focus();
             return false;
         }
-        /* wir sind biss hier gekommen dann schein alles gut zu sein */
+        // wir sind biss hier gekommen dann schein alles gut zu sein
         make_para($('.'+in_class),"");
         $("input[name=\""+in_pw+"\"], input[name=\""+in_pwre+"\"]").val("");
         return false;
@@ -67,7 +97,7 @@ var in_pw_handler = function(event) {
 }
 
 var in_change_handler = function(event) {
-    make_para(this,"chanceadmin=true&");
+    make_para($(this),"chanceadmin=true&");
 }
 
 var in_chmod_handler = function(event) {
@@ -76,7 +106,7 @@ var in_chmod_handler = function(event) {
         var para = "chmodnewfilesatts="+chmod+"&chmodupdate=true";
         send_data(para);
     } else {
-        $(dialog_multi).data("focus",$('input[name="chmodnewfilesatts"]'))
+        dialog_multi.data("focus",$('input[name="chmodnewfilesatts"]'))
         dialog_open("error_messages","Es sind keine datei rechte angegeben worden oder Fehlerhaft")
     }
 }
@@ -84,8 +114,6 @@ var in_chmod_handler = function(event) {
 $(function() {
 
     $('input[type="text"]:not(.js-in-pwroot, .js-in-pwuser)').bind("keydown", in_enter_handler);
-
-//    $('.js-checkbox').bind("change", in_change_handler);
 
     $('.js-in-pwroot , .js-in-pwuser' ).bind("keydown", in_pw_handler);
 
@@ -117,12 +145,12 @@ $(function() {
         checkAll: function(){
             if($(this).hasClass('js-noroot-tabs'))
                 $('.js-noroot-config, .js-noroot-admin').multiselect('enable');
-            make_para(this,"chanceadmin=true&");
+            make_para($(this),"chanceadmin=true&");
         },
         uncheckAll: function(){
             if($(this).hasClass('js-noroot-tabs'))
                 $('.js-noroot-config, .js-noroot-admin').multiselect('disable');
-            make_para(this,"chanceadmin=true&");
+            make_para($(this),"chanceadmin=true&");
         },
         click: function(event, ui){
             if($(this).hasClass('js-noroot-tabs') && (ui.value == "config" || ui.value == "admin" || ui.value == "plugins")) {
@@ -131,12 +159,7 @@ $(function() {
         },
 
     }).multiselectfilter();
-/*
-!!!!!!!!!!!! nur wens keine option in select gibt deactivieren
-    $('.js-noroot-tabs option:not(:selected)').each(function(i,el) {
-        if($(this).val() == "config" || $(this).val() == "admin" || $(this).val() == "plugins")
-            $('.js-noroot-'+$(this).val()).multiselect('disable');
-    })*/
+
     if($('.js-noroot-plugins option').length < 1)
         $('.js-noroot-plugins').multiselect('disable');
 

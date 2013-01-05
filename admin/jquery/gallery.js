@@ -3,12 +3,13 @@ var send_true = true;
 var user_para = "&chancegallery=true";
 
 var delete_handler = function (event) {
-    if($(this).hasClass("ui-state-disabled"))
+    var that = $(this);
+    if(that.hasClass("ui-state-disabled"))
         return false;
-    var this_li = $(this).parents(".js-file-dir");
+    var this_li = that.parents(".js-file-dir");
 
-    var dialog_text = "<div id=\"dialog-del\"><ul><li><b>" + $(this_li).find(".js-gallery-name").text() + "</b><br />";
-    var del_images = $(this_li).find(".files .name");
+    var dialog_text = "<div id=\"dialog-del\"><ul><li><b>" + this_li.find(".js-gallery-name").text() + "</b><br />";
+    var del_images = this_li.find(".files .name");
     if(del_images.length > 0) {
         dialog_text += "<br /><b>" + mozilo_lang["images"] + ":</b><br /><ul>";
         $(del_images).each(function(index) {
@@ -19,7 +20,7 @@ var delete_handler = function (event) {
     dialog_text += "</li></ul></div>";
 
     send_item_status = "gallery_del";
-    $(dialog_multi).data("del_object",this_li);
+    dialog_multi.data("del_object",this_li);
     dialog_open("gallery_delete",dialog_text);
 }
 
@@ -27,9 +28,9 @@ var rename_handler = function (event) {
     if($(this).hasClass("ui-state-disabled"))
         return false;
     var tmpl = $(this).closest('.fileupload');
-    if($(tmpl).find('.in-gallery-new-name').length > 0) {
+    if(tmpl.find('.in-gallery-new-name').length > 0) {
         var e = jQuery.Event("keydown", { which: 13 });
-        $($(tmpl).find('.in-gallery-new-name')).trigger(e);
+        $(tmpl.find('.in-gallery-new-name')).trigger(e);
     } else
         change_to_rename_mode(tmpl);
 }
@@ -43,28 +44,29 @@ var in_size_enter_handler = function(event) {
 }
 
 var in_name_enter_handler = function(event) {
+    var that = $(this);
     if(event.which == 13) { // enter
         event.preventDefault();
         // name hat sich nicht geändert
-        if($(this).val() == $(this).siblings('.js-gallery-name').text()) {
-            var name_item = $(this).siblings('.js-gallery-name');
-            $(this).siblings('.js-gallery-name').show(0)
-            $(this).closest('.fileupload').find('.js-toggle, .js-edit-delete').removeClass('ui-state-disabled');
-            $(this).remove();
+        if(that.val() == that.siblings('.js-gallery-name').text()) {
+            var name_item = that.siblings('.js-gallery-name');
+            that.siblings('.js-gallery-name').show(0)
+            that.closest('.fileupload').find('.js-toggle, .js-edit-delete').removeClass('ui-state-disabled');
+            that.remove();
             return;
         }
-        if(is_name_twice($('.js-gallery .js-gallery-name:visible'),rawurlencode_js($(this).val()))) {
-            $(dialog_multi).data("focus",$(this));
+        if(is_name_twice($('.js-gallery .js-gallery-name:visible'),rawurlencode_js(that.val()))) {
+            dialog_multi.data("focus",that);
             dialog_open("error_messages",returnMessage(false,mozilo_lang["error_exists_file_dir"]));
         } else {
             send_item_status = "gallery_rename";
-            send_data(user_para,$(this).closest('.fileupload'));
+            send_data(user_para,that.closest('.fileupload'));
         }
     } else if(event.which == 27) { // esc
         event.preventDefault();
-        $(this).closest('.fileupload').find('.js-toggle, .js-edit-delete').removeClass('ui-state-disabled');
-        $(this).siblings('.js-gallery-name').show(0);
-        $(this).remove();
+        that.closest('.fileupload').find('.js-toggle, .js-edit-delete').removeClass('ui-state-disabled');
+        that.siblings('.js-gallery-name').show(0);
+        that.remove();
     }
 }
 
@@ -96,20 +98,20 @@ $(function () {
             }
             send_true = true;
             only_one_drop_cat = true;
-            $(ui.draggable).find(".mo-hidden").removeClass("mo-hidden");
+            ui.draggable.find(".mo-hidden").removeClass("mo-hidden");
             // no-free-name hinzufügen damit wir das beim doppelten namen suchen übergehen können
-            $(ui.draggable).find('.js-gallery-name').addClass("no-free-name");
-            var free_name = $(ui.draggable).find('.js-gallery-name').text();
+            ui.draggable.find('.js-gallery-name').addClass("no-free-name");
+            var free_name = ui.draggable.find('.js-gallery-name').text();
             // Achtung wir übergeben alle .js-gallery auser dem mit curent_item
             free_name = get_next_free_name($(".js-gallery").find('.js-gallery-name:not(.no-free-name)'),rawurlencode_js(free_name));
             if(!free_name) {
                 send_true = false;
-                $(ui.draggable).remove();
+                ui.draggable.remove();
                 dialog_open("error",returnMessage(false,mozilo_lang["error_no_freename"]));
                 return;
             }
-            $(ui.draggable).find(".no-free-name").text(rawurldecode_js(free_name)).removeClass("no-free-name");
-            $(ui.draggable).find('input[name="curent_dir"]').val(free_name);
+            ui.draggable.find(".no-free-name").text(rawurldecode_js(free_name)).removeClass("no-free-name");
+            ui.draggable.find('input[name="curent_dir"]').val(free_name);
         },
     }).sortable({
         scrollSensitivity: 40,
