@@ -131,7 +131,7 @@ $(function() {
         showClose: false,
         showSelectAll:false,
         noneSelectedText: false,
-        selectedList: 1,
+        selectedList: 1
    }).multiselectfilter();
 
     $('.js-noroot-tabs, .js-noroot-config, .js-noroot-admin, .js-noroot-plugins').multiselect({
@@ -156,7 +156,7 @@ $(function() {
             if($(this).hasClass('js-noroot-tabs') && (ui.value == "config" || ui.value == "admin" || ui.value == "plugins")) {
                 $('.js-noroot-'+ui.value).multiselect((ui.checked ? 'enable' : 'disable'));
             }
-        },
+        }
 
     }).multiselectfilter();
 

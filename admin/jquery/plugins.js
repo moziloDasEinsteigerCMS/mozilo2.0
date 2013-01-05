@@ -50,7 +50,7 @@ $(function() {
         buttons: [],
         create: function(event, ui) {
             dialog_plugin = $(this);
-        },
+        }
     });
 
     $('body').on("click",".js-config-adminlogin", function(event){
@@ -100,7 +100,7 @@ $(function() {
         showClose: false,
         showSelectAll:false,
         noneSelectedText: false,
-        selectedList: 1,
+        selectedList: 1
     }).multiselectfilter();
 
     $(".js-select.js-multi").multiselect({
@@ -108,7 +108,7 @@ $(function() {
         showClose: false,
         showSelectAll:false,
         noneSelectedText: false,
-        selectedList: 1,
+        selectedList: 1
     }).multiselectfilter();
 
 });

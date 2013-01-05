@@ -309,7 +309,7 @@ $(function() {
             }
 
             ui.draggable.find(".js-edit-rename").data("rename-mode","false");
-        },
+        }
     }).sortable({
         scrollSensitivity: 40,
         scrollSpeed: 10,

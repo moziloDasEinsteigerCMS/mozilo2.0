@@ -85,7 +85,7 @@ $(function () {
         connectToSortable: ".js-gallery",
         addClasses: false,
         helper: "clone",
-        appendTo: "body",
+        appendTo: "body"
     });
 
     $(".js-gallery").droppable({
@@ -112,7 +112,7 @@ $(function () {
             }
             ui.draggable.find(".no-free-name").text(rawurldecode_js(free_name)).removeClass("no-free-name");
             ui.draggable.find('input[name="curent_dir"]').val(free_name);
-        },
+        }
     }).sortable({
         scrollSensitivity: 40,
         scrollSpeed: 10,
@@ -130,7 +130,7 @@ $(function () {
             send_item_status = "gallery_new";
             // hier erst das senden da erst hier die reinfolge da ist
             send_data(user_para,ui.item);
-        },
+        }
     });
 });
 
