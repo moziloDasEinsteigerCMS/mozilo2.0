@@ -425,7 +425,7 @@ class Syntax {
             # alles url encodeten
             $link = $specialchars->replaceSpecialChars($link,false);
             # alle :,?,&,;,= zurück wandeln
-            $link = str_replace(array('%3A','%3F','%26','%3B','%3D','%40'),array(':','?','&amp;',';','=','@'),$link);
+            $link = str_replace(array('%3A','%3F','%26','%3B','%3D','%40','%2C','%23','%7E'),array(':','?','&amp;',';','=','@',',','#','~'),$link);
             // Externe Links in neuem Fenster öffnen?
             $target = "";
             global $CMS_CONF;
@@ -473,8 +473,7 @@ class Syntax {
         global $CatPage;
         global $specialchars;
 
-        $cat = $CatPage->get_AsKeyName($value, true);
-
+        list($cat,$page) = $CatPage->split_CatPage_fromSyntax($value);
         $link_text = $desciption;
         if(empty($desciption)) {
             $link_text = $CatPage->get_HrefText($cat,false);
@@ -498,6 +497,7 @@ class Syntax {
         global $specialchars;
         global $language;
         global $CatPage;
+
         list($cat,$page) = $CatPage->split_CatPage_fromSyntax($value);
 
         if(!$CatPage->exists_CatPage($cat,$page)) {
