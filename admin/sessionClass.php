@@ -9,8 +9,15 @@ if(!is_dir(BASE_DIR.$TMP_DIR)) {
 @session_name(SESSION_MO);
 @session_save_path(BASE_DIR.$TMP_DIR);
 
+$use_session = false;
+# hat session_save_path functioniert?
+if(strstr(@session_save_path(),BASE_DIR.$TMP_DIR))
+    $use_session = true;
+# können wir denn session_save_path benutzen
+elseif(strlen(@session_save_path()) > 2 and @is_writable(@session_save_path()))
+    $use_session = true;
 # hat session_save_path functioniert? ansonsten server eigene session verwenden
-if(strstr(@session_save_path(),BASE_DIR.$TMP_DIR)) {
+if($use_session) {
 #session_set_cookie_params(0,$BASE_DIR,$_SERVER['SERVER_NAME']); 
     define("MULTI_USER", true);
     $lifetime = 1440;
@@ -21,7 +28,7 @@ if(strstr(@session_save_path(),BASE_DIR.$TMP_DIR)) {
     new SessionSaveHandler();
 } else
     define("MULTI_USER", false);
-unset($TMP_DIR);
+unset($TMP_DIR,$use_session);
 
 class SessionSaveHandler {
     protected $savePath;
@@ -40,7 +47,7 @@ class SessionSaveHandler {
     }
 
     public function open($savePath, $sessionName) {
-        $this->savePath = $savePath;
+        $this->savePath = $savePath.((substr($savePath,-1) != "/") ? "/" : "");
         $this->sessionName = $sessionName;
         if(!is_file($this->savePath."users.conf.php")) {
             @file_put_contents($this->savePath."users.conf.php","<?php die(); ?>\n".serialize(array()),LOCK_EX);
@@ -96,7 +103,7 @@ class SessionSaveHandler {
     }
 
     protected function getSessionArray() {
-        if(false !== ($conf = file_get_contents($this->savePath."session.conf.php"))) {
+        if(false !== ($conf = @file_get_contents($this->savePath."session.conf.php"))) {
             $conf = str_replace("<?php die(); ?>","",$conf);
             $conf = trim($conf);
             $conf = unserialize($conf);
@@ -124,7 +131,7 @@ class SessionSaveHandler {
             @file_put_contents($this->savePath."users.conf.php","<?php die(); ?>\n".serialize($new_array),LOCK_EX);
         }
         $conf = "<?php die(); ?>".serialize($conf);
-        if(false === (file_put_contents($this->savePath."session.conf.php",$conf,LOCK_EX)))
+        if(false === (@file_put_contents($this->savePath."session.conf.php",$conf,LOCK_EX)))
             return false;
         return true;
     }

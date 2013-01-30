@@ -196,7 +196,7 @@ if(LOGIN) { #-------------------------------
     $users_array = array();
     $tmp_action = getRequestValue('action');
     if(defined('MULTI_USER') and MULTI_USER) {
-        $USERS = new Properties(BASE_DIR."tmp/users.conf.php");
+        $USERS = new Properties(session_save_path().((substr(session_save_path(),-1) != "/") ? "/" : "")."users.conf.php");
         $id = md5(session_id());
         $users_array = $USERS->toArray();
         unset($users_array[$id]);
