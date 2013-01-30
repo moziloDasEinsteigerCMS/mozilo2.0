@@ -11,15 +11,78 @@ class MenuSubs extends Plugin {
             $pagecontent = "{MenuSubs|sitemap_content}";
             return;
         }
-
         if($value === false)
             return $this->getMenuCat();
         if($value === "menusubs_2" and $CatPage->exists_CatPage($this->settings->get("menusubs_2"),false))
             return $this->getMenuPage($this->settings->get("menusubs_2"),false,true);
         if($value === "sitemap_content")
             return $this->getSidemapCat();
+        if($value === "breadcrumb")
+            return $this->getBreadcrumb();
         return NULL;
     } // function getContent
+
+    function getBreadcrumb() {
+        global $CatPage, $CMS_CONF;
+        $css = "";
+        $ul = '<ul>';
+        $ul .= '<li><a href="{BASE_URL}" class="" title="Home">Home</a></li>';
+
+        foreach($CatPage->get_CatArray() as $cat) {
+            if($CatPage->get_Type($cat,false) == "cat" and $CatPage->is_Activ($cat,false)) {
+                if(strpos($cat,"%2F") > 1) {
+                    $cats = explode("%2F",$cat);
+                    $linkcat = "";
+                    foreach($cats as $ca) {
+                        $linkcat .= "%2F".$ca;
+                        $ul .= '<li> »&nbsp;&nbsp;'.$this->create_BreadcrumbLinkTag($linkcat,$ca,"").'</li>';
+                    }
+                } else {
+                        $ul .= '<li> »&nbsp;&nbsp;'.$CatPage->create_AutoLinkTag($cat,false,"").'</li>';
+                }
+                $ul .= $this->getBreadcrumbPage($cat);
+            }
+        }
+        return $ul.'</ul>';
+    }
+
+    function getBreadcrumbPage($cat,$subcat = false,$menu_2 = false) {
+        global $CatPage, $CMS_CONF;
+        $ul = '';
+        foreach($CatPage->get_PageArray($cat,array(EXT_PAGE,EXT_HIDDEN)) as $page) {
+            if(strpos($cat,"%2F") > 1
+                    and $CMS_CONF->get("hidecatnamedpages") == "true"
+                    and substr($cat,(strrpos($cat,"%2F") + 3)) == $page)
+                continue;
+#echo CAT_REQUEST." = ".$cat." -> ".$page." 1<br />\n";
+            if(strpos($page,"%2F") > 1
+                    and $CatPage->get_Type($cat,$page) == EXT_HIDDEN
+                    and $CatPage->get_Type($page,false) == "cat") {
+                if($CatPage->is_Activ($cat,$page))
+                    $ul .= '<li> »&nbsp;&nbsp;'.$this->create_CatSubLinkTag($cat,$page,"").'</li>';
+                if(strstr(CAT_REQUEST,$page))
+#                if($CatPage->is_Activ($cat,$page))
+                    $ul .= $this->getBreadcrumbPage($page,true);
+            } elseif($CatPage->get_Type($cat,$page) != EXT_HIDDEN and $CatPage->is_Activ($cat,$page)) {
+#echo $cat." -> ".$page." 2<br />\n";
+                if($CMS_CONF->get("hidecatnamedpages") == "true" and $cat == $page)
+                    continue;
+                $ul .= '<li> »&nbsp;&nbsp;'.$CatPage->create_AutoLinkTag($cat,$page,"").'</li>';
+            }
+        }
+        return $ul.'';
+    }
+
+    function create_BreadcrumbLinkTag($cat,$page,$css) {
+        global $specialchars, $CatPage, $language;
+        $cssactiv = "";
+        $cat = substr($cat,3);
+        return $CatPage->create_LinkTag(
+                $CatPage->get_Href($cat,false),
+                $specialchars->rebuildSpecialChars($page,true,true),
+                $css.$cssactiv,
+                $language->getLanguageHtml("tooltip_link_category_1", $page));
+    }
 
     function getMenuCat() {
         global $CatPage, $CMS_CONF;
@@ -37,10 +100,14 @@ class MenuSubs extends Plugin {
                 if(!$CatPage->is_Activ($cat,false) and strstr(CAT_REQUEST,$cat."%2F")) {
                     $activ = true;
                     $cssactiv = "active";
+                } elseif($CatPage->is_Activ($cat,false)) {
+#                    $cssactiv = "active";
+                    $activ = true;
                 }
                 $ul .= '<li class="cat-menusubs">'.$CatPage->create_AutoLinkTag($cat,false,$css.$cssactiv);
-                if($activ or $CMS_CONF->get("usesubmenu") == 0 or $CatPage->is_Activ($cat,false))
+                if($activ or $CMS_CONF->get("usesubmenu") == 0) {# or $CatPage->is_Activ($cat,false)
                     $ul .= $this->getMenuPage($cat);
+                }
                 $ul .= '</li>';
             }
         }
@@ -59,11 +126,15 @@ class MenuSubs extends Plugin {
                     and $CMS_CONF->get("hidecatnamedpages") == "true"
                     and substr($cat,(strrpos($cat,"%2F") + 3)) == $page)
                 continue;
+            if($CatPage->get_Type($cat,$page) == EXT_LINK) {
+                $ul .= '<li class="page-menusubs">'.$CatPage->create_AutoLinkTag($cat,$page,"page-menusubs-link menusubs-link").'</li>';
+                continue;
+            }
             if(strpos($page,"%2F") > 1
                     and $CatPage->get_Type($cat,$page) == EXT_HIDDEN
                     and $CatPage->get_Type($page,false) == "cat") {
                 $ul .= '<li class="subcat-menusubs">'.$this->create_CatSubLinkTag($cat,$page,"subcat-menusubs-link menusubs-link");
-                if(strstr(CAT_REQUEST,$cat."%2F") or $CMS_CONF->get("usesubmenu") == 0)
+                if(strstr(CAT_REQUEST,$page) or $CMS_CONF->get("usesubmenu") == 0)
                     $ul .= $this->getMenuPage($page,true);
                 $ul .= '</li>'."\n";
             } elseif($CatPage->get_Type($cat,$page) != EXT_HIDDEN) {
@@ -78,8 +149,12 @@ class MenuSubs extends Plugin {
     function create_CatSubLinkTag($cat,$page,$css) {
         global $specialchars, $CatPage, $language;
         $cssactiv = "";
-        if(strstr(CAT_REQUEST,$cat."%2F"))
+#echo CAT_REQUEST."<br />\n";
+        if(strstr(CAT_REQUEST,$page)) {
+#        if(strstr(CAT_REQUEST,$cat."%2F")) {
             $cssactiv = "active";
+#echo CAT_REQUEST." = ".$page."<br />\n";
+        }
         return $CatPage->create_LinkTag(
                 $CatPage->get_Href($page,false),
                 $specialchars->rebuildSpecialChars(substr($page,(strrpos($page,"%2F") + 3)),true,true),
