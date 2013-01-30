@@ -571,8 +571,10 @@ function updatePages($update_page_files) {
             $newcontent = str_replace($org_saved,$tmp_saved,$newcontent);
             # um diese Attribute geht es
             $allowed_attributes = array("galerie","kategorie","seite","datei","bild","bildlinks","bildrechts","include");
-
-            while(preg_match("/\[(".implode('|',$allowed_attributes).")/",$newcontent)) {
+#!!!!!!!!! hier gibts nee entlos
+$max = 0;
+            while(preg_match("/\[(".implode('|',$allowed_attributes).")/",$newcontent) and $max < 3) {
+$max++;
                 preg_match_all("/\[(".implode('|',$allowed_attributes).")\|(.*)\]/Umis",$newcontent,$matche);
                 $newcontent = changeFileContent($newcontent,$matche,$cat,$update_page_files);
                 preg_match_all("/\[(".implode('|',$allowed_attributes).")\=.*\|(.*)\]/Umis",$newcontent,$matche);
