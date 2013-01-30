@@ -9,16 +9,16 @@ var edit_handler = function(event) {
     if(that.hasClass("js-css")) {
         $('#colordiv-editor').append($('#js-color-menu'));
         if($('#select-mode').val() != "text") {
-            $('#select-mode option:selected').attr('selected',false)
-            $('#select-mode option[value="css"]').attr('selected',true)
+            $('#select-mode option:selected').attr('selected',false);
+            $('#select-mode option[value="css"]').attr('selected',true);
         }
         $('#js-editor-toolbar').css("display","none");
     }
     if(that.hasClass("js-html")) {
         $('#colordiv-mozilo').append($('#js-color-menu'));
         if($('#select-mode').val() != "text") {
-            $('#select-mode option:selected').attr('selected',false)
-            $('#select-mode option[value="html"]').attr('selected',true)
+            $('#select-mode option:selected').attr('selected',false);
+            $('#select-mode option[value="html"]').attr('selected',true);
         }
     }
 
@@ -35,7 +35,7 @@ var edit_handler = function(event) {
 
     editor_file = "configtemplate=true&templatefile="+that.next('.js-edit-file-pfad').text();
     send_editor_data(editor_file,false);
-}
+};
 $(function() {
     $("body").on("click",".js-edit-template", edit_handler);
 });

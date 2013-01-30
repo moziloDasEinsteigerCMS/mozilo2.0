@@ -22,7 +22,7 @@ var delete_handler = function (event) {
     send_item_status = "gallery_del";
     dialog_multi.data("del_object",this_li);
     dialog_open("gallery_delete",dialog_text);
-}
+};
 
 var rename_handler = function (event) {
     if($(this).hasClass("ui-state-disabled"))
@@ -33,7 +33,7 @@ var rename_handler = function (event) {
         $(tmpl.find('.in-gallery-new-name')).trigger(e);
     } else
         change_to_rename_mode(tmpl);
-}
+};
 
 var in_size_enter_handler = function(event) {
     if(event.which == 13) { // enter
@@ -41,7 +41,7 @@ var in_size_enter_handler = function(event) {
         send_item_status = "gallery_size";
         send_data(user_para,$(this).closest('li').find('input'));
     }
-}
+};
 
 var in_name_enter_handler = function(event) {
     var that = $(this);
@@ -50,7 +50,7 @@ var in_name_enter_handler = function(event) {
         // name hat sich nicht geändert
         if(that.val() == that.siblings('.js-gallery-name').text()) {
             var name_item = that.siblings('.js-gallery-name');
-            that.siblings('.js-gallery-name').show(0)
+            that.siblings('.js-gallery-name').show(0);
             that.closest('.fileupload').find('.js-toggle, .js-edit-delete').removeClass('ui-state-disabled');
             that.remove();
             return;
@@ -68,7 +68,7 @@ var in_name_enter_handler = function(event) {
         that.siblings('.js-gallery-name').show(0);
         that.remove();
     }
-}
+};
 
 
 $(function () {

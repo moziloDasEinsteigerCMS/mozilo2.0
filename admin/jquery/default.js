@@ -91,14 +91,12 @@ function checkDezAutoValue(event) {
 }
 
 function rawurlencode_js(str) {
-    return encodeURIComponent(str).replace(/!/g, '%21').replace(/'/g, '%27').replace(/\(/g, '%28').
-    replace(/\)/g, '%29').replace(/\*/g, '%2A').replace(/\~/g, '%7E').replace(/#/g,'%23');
-}  
-   
+    return encodeURIComponent(str).replace(/!/g, '%21').replace(/'/g, '%27').replace(/\(/g, '%28').replace(/\)/g, '%29').replace(/\*/g, '%2A').replace(/\~/g, '%7E').replace(/#/g,'%23');
+}
+
 function rawurldecode_js(str) {
-    return decodeURIComponent(str).replace(/%21/g, '!').replace(/%27/g, "'").replace(/%28/g, '(').
-    replace(/%29/g, ')').replace(/%2A/g, '*').replace(/%7E/g, '~').replace(/%23/g,'#');
-}  
+    return decodeURIComponent(str).replace(/%21/g, '!').replace(/%27/g, "'").replace(/%28/g, '(').replace(/%29/g, ')').replace(/%2A/g, '*').replace(/%7E/g, '~').replace(/%23/g,'#');
+}
 
 // das ist die gleiche function wie in der index.php
 function returnMessage(success, message) {
@@ -191,12 +189,12 @@ $(function() {
         if($(this).hasClass('ui-state-disabled')) return;
         var mo_li = $(this).closest(".mo-li");
         if(mo_li.find(".js-toggle-content").is(":visible")) {
-            $(this).siblings('.js-rename-file, .js-edit-delete').removeClass("ui-state-disabled")
+            $(this).siblings('.js-rename-file, .js-edit-delete').removeClass("ui-state-disabled");
             mo_li.find(".mo-li-head-tag").removeClass("ui-corner-top").addClass("ui-corner-all");
             mo_li.find(".js-toggle-content").hide(anim_speed);
             return;
         } else if(!mo_li.find(".js-toggle-content").is(":visible")) {
-            $(this).siblings('.js-rename-file, .js-edit-delete').addClass("ui-state-disabled")
+            $(this).siblings('.js-rename-file, .js-edit-delete').addClass("ui-state-disabled");
             mo_li.find(".mo-li-head-tag").removeClass("ui-corner-all").addClass("ui-corner-top");
             mo_li.find(".js-toggle-content").show(anim_speed);
             return;

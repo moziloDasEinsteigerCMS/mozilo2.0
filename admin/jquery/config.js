@@ -11,28 +11,28 @@ var in_enter_handler = function(event) {
         make_para($(this));
         return false;
     }
-}
+};
 
 var in_change_handler = function(event) {
     make_para($(this));
-}
+};
 
 var in_change_usecmssyntax_handler = function(event) {
 // $("#out").html($("#out").html()+"<br>expert = "+$(this).prop("checked"));
     if($(this).prop("checked")) {
         $('#js-editor-toolbar').css("display","block");
         $('#select-mode option:selected').attr('selected',false);
-        $('#select-mode option[value="mozilo"]').attr('selected',true)
+        $('#select-mode option[value="mozilo"]').attr('selected',true);
         $('.js-usecmssyntax').parents('.mo-in-ul-li').show(anim_speed);
     } else {
         $('#js-editor-toolbar').css("display","none");
         $('#select-mode option:selected').attr('selected',false);
-        $('#select-mode option[value="html"]').attr('selected',true)
+        $('#select-mode option[value="html"]').attr('selected',true);
         $('.js-usecmssyntax').parents('.mo-in-ul-li').hide(anim_speed);
     }
     editor_session.setMode("ace/mode/"+$('#select-mode').val());
     make_para($(this));
-}
+};
 
 var in_chmod_handler = function(event) {
     var chmod = $('input[name="chmodnewfilesatts"]').val();
@@ -40,10 +40,10 @@ var in_chmod_handler = function(event) {
         var para = "chmodnewfilesatts="+chmod+"&chmodupdate=true";
         send_data(para);
     } else {
-        dialog_multi.data("focus",$('input[name="chmodnewfilesatts"]'))
+        dialog_multi.data("focus",$('input[name="chmodnewfilesatts"]'));
         dialog_open("error_messages","Es sind keine datei rechte angegeben worden oder Fehlerhaft");
     }
-}
+};
 
 var edit_handler = function() {
     if($(this).hasClass("ui-state-disabled"))
@@ -57,7 +57,7 @@ var edit_handler = function() {
     dialog_editor.dialog("open");
     editor_file = "savesyntax=true";
     send_editor_data(editor_file,false);
-}
+};
 
 
 $(function() {

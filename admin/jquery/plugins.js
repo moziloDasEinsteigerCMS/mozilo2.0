@@ -15,12 +15,12 @@ var activ_handler = function() {
         if(upper_tag.find(".js-toggle-content").is(":visible")) {
             upper_tag.find(".js-config").hide(anim_speed);
         } else {
-            upper_tag.find(".js-config").css("display","none")
+            upper_tag.find(".js-config").css("display","none");
         }
         activ = "=false";
     }
     send_data(user_para+plugin_name+"&"+that.attr("name")+activ);
-}
+};
 
 var save_handler = function() {
     var plugin = $(this).closest(".js-plugin"),
@@ -34,7 +34,7 @@ var save_handler = function() {
         para = "&"+para;
 
     send_data(user_para+"&plugin_name="+plugin_name+para);
-}
+};
 
 
 $(function() {
@@ -74,12 +74,12 @@ $(function() {
          var upper_tag = $(this).closest(".js-plugin");
          // die anzeige einstelungen hiden
          upper_tag.find(".js-config").css("display","none");
-     })
+     });
 
-    /* weil der in einem hide() drin ist muss display:none benutzt werden */
+    // weil der in einem hide() drin ist muss display:none benutzt werden
     $(".js-plugin-help-content").css("display","none");
 
-    /* toggle für die hilfe */
+    // toggle für die hilfe
     $('body').on("click",".js-help-plugin", function(event) {
         var upper_tag = $(this).closest("table");
         if(upper_tag.find(".js-plugin-help-content").is(":visible")) {

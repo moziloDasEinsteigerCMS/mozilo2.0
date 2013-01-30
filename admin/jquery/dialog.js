@@ -45,7 +45,7 @@ function dialog_open(func,content) {
         else if(func == "gallery_delete")
             dialog_gallery_delete();
         else if(func == "editor_send_cancel")
-            dialog_editor_send_cancel()
+            dialog_editor_send_cancel();
         else if(func == "docu")
             dialog_docu();
         else if(func == "editor_save_beforclose")
@@ -463,7 +463,7 @@ $(function() {
             if(dialog_multi.data("is_open")) {
                 return false;
             }
-            dialog_multi.data("is_open",true)
+            dialog_multi.data("is_open",true);
             if(dialog_multi.dialog( "option", "buttons").length > 0)
                 dialog_multi.parents(".ui-dialog").find(".ui-dialog-titlebar-close").hide(0);
             else

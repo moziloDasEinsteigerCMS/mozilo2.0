@@ -6,7 +6,7 @@ function dialog_img_preview(file_href) {
     $("#dialog-test-w").append(prev_img);
     dialog_img_preview_wait(file_title);
     $("#dialog-test-w img").load(function() {
-        dialog_prev.dialog("close").css("background","transparent")
+        dialog_prev.dialog("close").css("background","transparent");
         dialog_set_max_from_test(dialog_prev);
         dialog_prev.append(prev_img)
             .dialog({

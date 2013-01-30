@@ -36,7 +36,7 @@ var in_enter_handler = function(event) {
             make_para($(this),"chanceadmin=true&");
         return false;
     }
-}
+};
 
 // js-in-pwroot js-in-pwuser
 var in_pw_handler = function(event) {
@@ -94,11 +94,11 @@ var in_pw_handler = function(event) {
         $("input[name=\""+in_pw+"\"], input[name=\""+in_pwre+"\"]").val("");
         return false;
     }
-}
+};
 
 var in_change_handler = function(event) {
     make_para($(this),"chanceadmin=true&");
-}
+};
 
 var in_chmod_handler = function(event) {
     var chmod = $('input[name="chmodnewfilesatts"]').val();
@@ -106,10 +106,10 @@ var in_chmod_handler = function(event) {
         var para = "chmodnewfilesatts="+chmod+"&chmodupdate=true";
         send_data(para);
     } else {
-        dialog_multi.data("focus",$('input[name="chmodnewfilesatts"]'))
-        dialog_open("error_messages","Es sind keine datei rechte angegeben worden oder Fehlerhaft")
+        dialog_multi.data("focus",$('input[name="chmodnewfilesatts"]'));
+        dialog_open("error_messages","Es sind keine datei rechte angegeben worden oder Fehlerhaft");
     }
-}
+};
 
 $(function() {
 

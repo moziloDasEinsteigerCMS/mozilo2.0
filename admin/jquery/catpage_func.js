@@ -63,7 +63,7 @@ function get_next_free_name(in_cat_page,name) {
 }
 
 function change_status_pages(this_li) {
-    var item_li_cat = this_li.parents(".js-li-cat")
+    var item_li_cat = this_li.parents(".js-li-cat"),
         item_status = item_li_cat.find("table").eq(0).find(".js-status");
     if(item_li_cat.length == 1) {
         item_status.text(item_li_cat.find(".js-li-page").filter(":visible").length);
@@ -209,11 +209,11 @@ function make_input_ext(cat_page) {
         for_id = new Date();
     for_id = for_id.getTime();
     for(var i = 0; i < ext_array.length - 1; i++) {
-        inputs += "<label for=\"status" + for_id + i + "\">" + mozilo_lang[ext_array[i]] + "</label>" + "<input id=\"status" + for_id + i + "\" name=\"radio\" type=\"radio\" value=\""+ext_array[i]+"\" class=\"js-in-radio js-make-input\""
+        inputs += "<label for=\"status" + for_id + i + "\">" + mozilo_lang[ext_array[i]] + "</label>" + "<input id=\"status" + for_id + i + "\" name=\"radio\" type=\"radio\" value=\""+ext_array[i]+"\" class=\"js-in-radio js-make-input\"";
         if(ext_array[i] == curent_ext) {
             inputs += " checked=\"checked\"";
         }
-        inputs += " />"
+        inputs += " />";
     }
     return inputs + "</form>";
 }
@@ -228,15 +228,15 @@ function set_auto_new_name(curent_item,new_name) {
 
         cat_page_new = get_cat(curent_item.parents(".js-li-cat").find(".js-in-cat").attr("name")) + "][" + cat_page_new;
         if(get_target(in_cat_page)) {
-            cat_page_new += get_target(in_cat_page)
-            cat_page_new += get_link(in_cat_page)
+            cat_page_new += get_target(in_cat_page);
+            cat_page_new += get_link(in_cat_page);
         }
-        cat_page_new += get_ext(in_cat_page)
+        cat_page_new += get_ext(in_cat_page);
     } else {
         if(get_target(in_cat_page)) {
-            cat_page_new += get_target(in_cat_page)
-            cat_page_new += get_link(in_cat_page)
-            cat_page_new += get_ext(in_cat_page)
+            cat_page_new += get_target(in_cat_page);
+            cat_page_new += get_link(in_cat_page);
+            cat_page_new += get_ext(in_cat_page);
         }
     }
     curent_item.find(".js-in-cat-page").attr("name", "sort_array[" + cat_page_new + "]");
@@ -292,12 +292,12 @@ function change_to_normal_mode(this_table) {
 
     var link = this_table.find(".js-in-link").val();
     if(typeof link != "undefined")
-    if(link.length < 1) {
-        link = "#"
-        this_table.find(".js-link-href").attr({ href: link, target:"_self" });
-    } else {
-        this_table.find(".js-link-href").attr({href: link, target:"_blank"});
-    }
+        if(link.length < 1) {
+            link = "#";
+            this_table.find(".js-link-href").attr({ href: link, target:"_self" });
+        } else {
+            this_table.find(".js-link-href").attr({href: link, target:"_blank"});
+        }
     this_table.find(".js-link-href").show(0);
     this_table.find(".js-edit-in-name").html("");
     this_table.find(".js-edit-box").html("");

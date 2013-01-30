@@ -7,7 +7,7 @@ var in_enter_handler = function(event) {
         }
         return false;
     }
-}
+};
 
 $(function() {
     $('input[name="test_mail_adresse"]').bind("keydown", in_enter_handler);

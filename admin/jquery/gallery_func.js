@@ -66,17 +66,16 @@ function get_next_free_name(in_cat_page,name) {
 
 function make_rename_changes(change_item) {
     var new_name_item = change_item.find('.in-gallery-new-name'),
-        name_item = change_item.find('.js-gallery-name')
+        name_item = change_item.find('.js-gallery-name'),
         curent_name = new RegExp('curent_dir='+rawurlencode_js(rawurlencode_js(name_item.text()))),
         curent_newname = 'curent_dir='+rawurlencode_js(rawurlencode_js(new_name_item.val())),
-
         curent_name_srv = new RegExp('/galerien/'+rawurlencode_js(rawurlencode_js(name_item.text()))+'/'),
         curent_newname_srv = '/galerien/'+rawurlencode_js(rawurlencode_js(new_name_item.val()))+'/';
 
     name_item.text($(new_name_item).val());
     change_item.find('input[name="curent_dir"]').val(rawurlencode_js(new_name_item.val()));
 
-    new_name_item.remove()
+    new_name_item.remove();
     change_item.find('.js-toggle, .js-edit-delete').removeClass('ui-state-disabled');
     name_item.show(0);
 

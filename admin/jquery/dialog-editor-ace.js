@@ -177,7 +177,7 @@ function insert_ace(aTag, eTag, select) {
             range_ace[i].start.column += aTag.length;
             range_ace[i].end.column += end_column;
         } else {
-            editor_session.doc.replace(range_ace[i], aTag)
+            editor_session.doc.replace(range_ace[i], aTag);
             range_ace[i].end.column = range_ace[i].start.column + aTag.length;
             range_ace[i].end.row = range_ace[i].start.row;
         }
@@ -274,7 +274,7 @@ function set_icon_checked(item,setcss) {
 
     var return_set = false;
     if(item.hasClass('ed-ace-icon-active'))
-        return_set = true
+        return_set = true;
     return return_set;
 }
 

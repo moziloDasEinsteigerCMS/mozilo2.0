@@ -32,7 +32,7 @@ var delete_handler = function (event) {
 
     dialog_multi.data("del_object",li_cat_page);
     dialog_open("delete",dialog_text);
-}
+};
 
 var in_name_enter_handler = function(event) {
     var that = $(this);
@@ -50,7 +50,7 @@ var in_name_enter_handler = function(event) {
         }
         return false;
     }
-}
+};
 
 var rename_handler = function (event) {
     var that = $(this),
@@ -60,7 +60,7 @@ var rename_handler = function (event) {
     var this_table = li_cat_page.find("table").eq(0);
     // zu Rename mode wechseln
     if(that.data("rename-mode") == "false") {
-        that.data("rename-mode","true")
+        that.data("rename-mode","true");
         change_to_rename_mode(this_table);
     // zu Normal mode wechseln
     } else if(that.data("rename-mode") == "true") {
@@ -91,7 +91,7 @@ var rename_handler = function (event) {
             new_name += this_table.find(".js-in-radio:checked").val();
         }
         if(new_name == make_clean_cat_page_name(this_table.find(".js-in-cat-page").val())) {
-            that.data("rename-mode","false")
+            that.data("rename-mode","false");
             change_to_normal_mode(this_table);
             return false;
         }
@@ -110,18 +110,18 @@ var rename_handler = function (event) {
 
         this_table.find(".js-in-cat-page").attr("name", "sort_array[" + new_name + "]");
 
-        that.data("rename-mode","false")
+        that.data("rename-mode","false");
         change_to_normal_mode(this_table);
-        send_item_status = "cat_page_move"
+        send_item_status = "cat_page_move";
         send_data(make_send_para_sort_array(),this_table);
     }
-}
+};
 
 var dblclick_rename_handler = function(event) {
     var li_cat_page = find_li_cat_page($(this));
     if(li_cat_page)
         li_cat_page.find("table").eq(0).find(".js-edit-rename").trigger("click");
-}
+};
 
 var for_page_droppable_drop = function( event, ui ) {
 
@@ -142,7 +142,7 @@ var for_page_droppable_drop = function( event, ui ) {
         send_item_status = "cat_page_new";
     }
     ui.draggable.removeClass("new-page");
-}
+};
 
 var for_page_sortable_receive = function( event, ui ) {
     if(only_one_receive_page ) {
@@ -160,7 +160,7 @@ var for_page_sortable_receive = function( event, ui ) {
 
         change_status_pages(ui.item);
     }
-}
+};
 
 
 var option_page_sortable = {
@@ -192,17 +192,17 @@ var option_page_sortable = {
         }
         ui.item.find(".js-in-page").removeClass("no-free-name");
 
-        set_auto_new_name(ui.item,free_name)
+        set_auto_new_name(ui.item,free_name);
 
         send_data(make_send_para_sort_array(),ui.item);
     }
-}
+};
 
 var option_page_droppable = {
     accept: ".js-li-page:not(.ui-sortable-helper)",
     addClasses: false,
     drop: for_page_droppable_drop
-}
+};
 
 var option_page_draggable = {
     connectToSortable: ".js-ul-pages",
@@ -214,7 +214,7 @@ var option_page_draggable = {
         if($(this).find(".ui-state-disabled").length > 0)
             return false;
     }
-}
+};
 
 var edit_handler = function() {
     if($(this).hasClass("ui-state-disabled"))
@@ -235,7 +235,7 @@ var edit_handler = function() {
             height: (parseInt($(window).height()) - dialogMaxheightOffset)});
     editor_file = "editpage="+make_clean_cat_page_name(cat_page).replace(/\]\[/, ":");
     send_editor_data(editor_file,false);
-}
+};
 
 $(function() {
 
@@ -295,7 +295,7 @@ $(function() {
             send_item_status = "cat_page_new";
             ui.draggable.find(".no-free-name").removeClass("no-free-name");
 
-            set_auto_new_name(ui.draggable,free_name)
+            set_auto_new_name(ui.draggable,free_name);
 
             ui.draggable.find(".js-tools, .js-rename-mode-hide, .js-move-cat").show(0);
             // nur wenn es kein Link ist
