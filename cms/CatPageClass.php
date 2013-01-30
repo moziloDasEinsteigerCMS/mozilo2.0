@@ -354,6 +354,7 @@ class CatPageClass {
     # $file = optinal und muss true sein wenn page eine datei ist
     # bei nur page/file wird wenn vorhanden CAT_REQUEST genommen
     function split_CatPage_fromSyntax($syntax_catpage, $file = false) {
+        $syntax_catpage = str_replace('-html_amp~','&',$syntax_catpage);
         $syntax_catpage = replaceFileMarker($syntax_catpage,false);
         $syntax_catpage = $this->get_AsKeyName($syntax_catpage, true);
         $syntax_catpage = str_replace(":","%3A",$syntax_catpage);
