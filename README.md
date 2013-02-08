@@ -7,7 +7,7 @@ Installation von moziloCMS2.0
 
 Nach dem entpacken von moziloCMS2.0 must du die install.php aufrufen:
 -> http://www.deineSeite/install.php
--> oder: http://www.deineSeite/moziloCMS/install.php
+-> oder: http ://www.deineSeite/moziloCMS/install.php
 
 !!"Wichtig"!!: nachdem die Installation abgeschlossen ist "lösche" auf jeden Fall:
 -> die install.php
