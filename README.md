@@ -7,7 +7,7 @@ Installation von moziloCMS2.0
 
 Nach dem entpacken von moziloCMS2.0 must du die install.php aufrufen:
 -> http://www.deineSeite/install.php
--> oder: http ://www.deineSeite/moziloCMS/install.php
+-> oder: http://www.deineSeite/moziloCMS/install.php
 
 !!"Wichtig"!!: nachdem die Installation abgeschlossen ist "lösche" auf jeden Fall:
 -> die install.php
@@ -26,9 +26,9 @@ Nach dem entpacken von moziloCMS2.0:
 -> in diesen Ordner "update", alle ".conf" dateien aus ".../admin/conf" und ".../cms/conf" und wenn vorhanden ".../formular/formular.conf" kopieren
 
 ------------------------------------------------
--> wenn bisher genutzte Plugins auch in moziloCMS2.0 vorhanden sind, können die Einstellungen von moziloCMS1.2-Plugins ebenfalls upgedatet werden:
+-> wenn bisher genutzte Plugins auch in moziloCMS2.0 vorhanden sind, können die Einstellungen von moziloCMS1.12-Plugins ebenfalls upgedatet werden:
 -> dazu müssen die Plugins natürlich schon im Plugin-Ordner "moziloCMS/plugins" vorhanden sein.
--> die plugin.conf.php in dem jeweiligen 2.0-Plugin durch die plugin.conf der 1.2-Version ersetzen (bitte kein .php dahinter setzen)
+-> die plugin.conf.php in dem jeweiligen 2.0-Plugin durch die plugin.conf der 1.12-Version ersetzen (bitte kein .php dahinter setzen)
 ------------------------------------------------
 
 Jetzt musst du die install.php aufrufen
