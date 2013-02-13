@@ -2,7 +2,7 @@
 
 function template() {
     global $CMS_CONF;
-    $LAYOUT_DIR     = BASE_DIR.LAYOUT_DIR_NAME."/".$CMS_CONF->get("cmslayout").'/';
+    $LAYOUT_DIR     = LAYOUT_DIR_NAME."/".$CMS_CONF->get("cmslayout").'/';
 
     if(getRequestValue('chancefiles') == "true") {
         require_once(BASE_DIR_ADMIN."jquery/File-Upload/upload.class.php");
@@ -26,7 +26,7 @@ function template() {
     }
 
     if(getRequestValue('configtemplate','post') == "true") {
-        if(false !== ($templatefile = getRequestValue('templatefile','post',false))
+        if(false !== ($templatefile = BASE_DIR.getRequestValue('templatefile','post',false))
                 and !file_exists($templatefile)) {
             ajax_return("error",true,returnMessage(false,getLanguageValue("error_no_file_dir")." ".$templatefile),true,true);
         }
@@ -48,7 +48,7 @@ function template() {
     $template = array();
     global $specialchars;
 
-    $dircontent = getDirAsArray($LAYOUT_DIR,array(".html"),"natcasesort");
+    $dircontent = getDirAsArray(BASE_DIR.$LAYOUT_DIR,array(".html"),"natcasesort");
     foreach($dircontent as $file) {
         $template["template_title_html_css"][] = '<table class="js-tools-show-hide mo-tag-height-from-icon" width="100%" cellspacing="0" border="0" cellpadding="0">'
                     .'<tbody>'
@@ -66,7 +66,7 @@ function template() {
 
     }
 
-    $dircontent = getDirAsArray($LAYOUT_DIR.'css',array(".css"),"natcasesort");
+    $dircontent = getDirAsArray(BASE_DIR.$LAYOUT_DIR.'css',array(".css"),"natcasesort");
     foreach($dircontent as $file) {
         $template["template_title_html_css"][] = '<table class="js-tools-show-hide mo-tag-height-from-icon" width="100%" cellspacing="0" border="0" cellpadding="0">'
                     .'<tbody>'
@@ -100,7 +100,7 @@ function template() {
                         .'</td>'
                         .'<td class="mo-nowrap">'
                             .'<img class="js-tools-icon-show-hide js-edit-template js-css mo-tool-icon mo-icons-icon mo-icons-page-edit" src="'.ICON_URL_SLICE.'" alt="page-edit" hspace="0" vspace="0" />'
-                            .'<span class="js-edit-file-pfad" style="display:none;">'.$specialchars->replaceSpecialChars(BASE_DIR.PLUGIN_DIR_NAME."/".$plugin."/plugin.css",true).'</span>'
+                            .'<span class="js-edit-file-pfad" style="display:none;">'.$specialchars->replaceSpecialChars(PLUGIN_DIR_NAME."/".$plugin."/plugin.css",true).'</span>'
                         .'</td>'
                     .'</tr>'
                     .'</tbody>'
