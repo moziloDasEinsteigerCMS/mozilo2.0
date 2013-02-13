@@ -107,7 +107,8 @@ class SessionSaveHandler {
             $conf = str_replace("<?php die(); ?>","",$conf);
             $conf = trim($conf);
             $conf = unserialize($conf);
-            return $conf;
+            if(is_array($conf))
+                return $conf;
         }
         return array();
     }
