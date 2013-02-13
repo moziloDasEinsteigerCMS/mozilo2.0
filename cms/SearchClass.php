@@ -237,7 +237,7 @@ function findInPage($cat,$page) {
             # die such worte hervorheben
 #!!!!!! wir brauchen eine regex die nicht in script style tags text hervorhebt
 # dann kann auch das find_script_style() wieder raus
-            $content = preg_replace("/((<[^>]*)|$phrase)/ie", '"\2"=="\1"? "\1":"<span class=\"highlight\">\1</span>"', $content); 
+            $content = preg_replace("/((<[^>]*)|$phrase)/iue", '"\2"=="\1"? "\1":"<span class=\"highlight\">\1</span>"', $content); 
         }
         return $content;
     }
