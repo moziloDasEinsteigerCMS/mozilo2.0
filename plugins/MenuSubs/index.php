@@ -25,7 +25,7 @@ class MenuSubs extends Plugin {
     function getBreadcrumb() {
         global $CatPage, $CMS_CONF;
         $css = "";
-        $ul = '<ul>';
+        $ul = '<ul class="menusubs-breadcrumb">';
         $ul .= '<li><a href="{BASE_URL}" class="" title="Home">Home</a></li>';
 
         foreach($CatPage->get_CatArray() as $cat) {
@@ -86,6 +86,7 @@ class MenuSubs extends Plugin {
 
     function getMenuCat() {
         global $CatPage, $CMS_CONF;
+        $return = false;
         $css = "cat-menusubs-link menusubs-link";
         $ul = '<ul class="cat-menusubs">';
         foreach($CatPage->get_CatArray() as $cat) {
@@ -94,6 +95,7 @@ class MenuSubs extends Plugin {
                 continue;
             if($CatPage->get_Type($cat,false) == EXT_LINK) {
                 $ul .= '<li class="cat-menusubs">'.$CatPage->create_AutoLinkTag($cat,false,$css).'</li>';
+                $return = true;
             } elseif($CatPage->get_Type($cat,false) == "cat") {
                 $cssactiv = "";
                 $activ = false;
@@ -109,13 +111,17 @@ class MenuSubs extends Plugin {
                     $ul .= $this->getMenuPage($cat);
                 }
                 $ul .= '</li>';
+                $return = true;
             }
         }
-        return $ul.'</ul>';
+        if($return)
+            return $ul.'</ul>';
+        return null;
     }
 
     function getMenuPage($cat,$subcat = false,$menu_2 = false) {
         global $CatPage, $CMS_CONF;
+        $return = false;
         $ul = '<ul class="page-menusubs">';
         if($subcat)
             $ul = '<ul class="subcat-menusubs">';
@@ -128,6 +134,7 @@ class MenuSubs extends Plugin {
                 continue;
             if($CatPage->get_Type($cat,$page) == EXT_LINK) {
                 $ul .= '<li class="page-menusubs">'.$CatPage->create_AutoLinkTag($cat,$page,"page-menusubs-link menusubs-link").'</li>';
+                $return = true;
                 continue;
             }
             if(strpos($page,"%2F") > 1
@@ -137,13 +144,17 @@ class MenuSubs extends Plugin {
                 if(strstr(CAT_REQUEST,$page) or $CMS_CONF->get("usesubmenu") == 0)
                     $ul .= $this->getMenuPage($page,true);
                 $ul .= '</li>'."\n";
+                $return = true;
             } elseif($CatPage->get_Type($cat,$page) != EXT_HIDDEN) {
                 if($CatPage->get_Type($cat,$page) == EXT_LINK)
                     continue;
                 $ul .= '<li class="page-menusubs">'.$CatPage->create_AutoLinkTag($cat,$page,"page-menusubs-link menusubs-link").'</li>';
+                $return = true;
             }
         }
-        return $ul.'</ul>';
+        if($return)
+            return $ul.'</ul>';
+        return null;
     }
 
     function create_CatSubLinkTag($cat,$page,$css) {
@@ -164,6 +175,7 @@ class MenuSubs extends Plugin {
 
     function getSidemapCat() {
         global $CatPage, $CMS_CONF, $language;
+        $return = false;
         $menu_2 = "";
         $include_pages = array(EXT_PAGE);
         if($CMS_CONF->get("showhiddenpagesinsitemap") == "true") {
@@ -177,19 +189,24 @@ class MenuSubs extends Plugin {
                 if($this->settings->get("sidemap_show_menu2") == "true") {
                     $menu_2 = '<h2>'.$CatPage->get_HrefText($cat,false).'</h2>';
                     $menu_2 .= $this->getSidemapPage($cat,true);
+                    $return = true;
                 }
                 continue;
             }
             if($CatPage->get_Type($cat,false) == "cat") {
                 $sitemap .= '<h2>'.$CatPage->create_AutoLinkTag($cat,false,"").'</h2>';
                 $sitemap .= $this->getSidemapPage($cat);
+                $return = true;
             }
         }
-        return $sitemap.$menu_2.'</div>';
+        if($return)
+            return $sitemap.$menu_2.'</div>';
+        return null;
     }
 
     function getSidemapPage($cat,$menu2 = false) {
         global $CatPage, $CMS_CONF;
+        $return = false;
         $sitemap = '<ul>';
         if($menu2)
             $sitemap = '<ul id="menusubs-sidemap-menu2">';
@@ -201,14 +218,18 @@ class MenuSubs extends Plugin {
             if(strpos($page,"%2F") > 1
                     and $CatPage->get_Type($cat,$page) == EXT_HIDDEN
                     and $CatPage->get_Type($page,false) == "cat") {
+                $return = true;
                 $sitemap .= '<li><h3>'.$this->create_CatSubLinkTag($cat,$page,"").'</h3>';
                 $sitemap .= $this->getSidemapPage($page);
                 $sitemap .= '</li>'."\n";
             } elseif($CatPage->get_Type($cat,$page) != EXT_HIDDEN) {
                 $sitemap .= '<li>'.$CatPage->create_AutoLinkTag($cat,$page,"").'</li>';
+                $return = true;
             }
         }
-        return $sitemap.'</ul>';
+        if($return)
+            return $sitemap.'</ul>';
+        return null;
     }
 
     function getConfig() {
@@ -260,7 +281,7 @@ class MenuSubs extends Plugin {
             "stefanbe",
             // Download-URL
             "",
-            array()
+            array("{MenuSubs}" => "MenuSubs")
             );
         return $info;
     } // function getInfo
