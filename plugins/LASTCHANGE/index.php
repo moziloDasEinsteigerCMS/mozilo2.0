@@ -168,7 +168,7 @@ class LASTCHANGE extends Plugin {
         global $CatPage;
 
         $latestchanged = array("page" => "pagename", "time" => 0);
-        $currentdir = $CatPage->get_PageArray($cat,$this->include_pages);
+        $currentdir = $CatPage->get_PageArray($cat,$this->include_pages,true);
         foreach($currentdir as $page) {
             if ($CatPage->get_Time($cat,$page) > $latestchanged['time']) {
                 $latestchanged['page'] = $page;
