@@ -13,6 +13,15 @@ class MenuSubs extends Plugin {
         }
         if($value === false)
             return $this->getMenuCat();
+        if($value === "main")
+            return $this->getMenuCat(true);
+        if($value === "detail") {
+            if(strpos(CAT_REQUEST,"%2F") > 1) {
+                $tmp_cat = explode("%2F",CAT_REQUEST);
+                return $this->getMenuPage($tmp_cat[0]);
+            } else
+                return $this->getMenuPage(CAT_REQUEST);
+        }
         if($value === "menusubs_2" and $CatPage->exists_CatPage($this->settings->get("menusubs_2"),false))
             return $this->getMenuPage($this->settings->get("menusubs_2"),false,true);
         if($value === "sitemap_content")
@@ -84,7 +93,7 @@ class MenuSubs extends Plugin {
                 $language->getLanguageHtml("tooltip_link_category_1", $page));
     }
 
-    function getMenuCat() {
+    function getMenuCat($only_main = false) {
         global $CatPage, $CMS_CONF;
         $return = false;
         $css = "cat-menusubs-link menusubs-link";
@@ -107,7 +116,7 @@ class MenuSubs extends Plugin {
                     $activ = true;
                 }
                 $ul .= '<li class="cat-menusubs">'.$CatPage->create_AutoLinkTag($cat,false,$css.$cssactiv);
-                if($activ or $CMS_CONF->get("usesubmenu") == 0) {# or $CatPage->is_Activ($cat,false)
+                if(!$only_main and ($activ or $CMS_CONF->get("usesubmenu") == 0)) {# or $CatPage->is_Activ($cat,false)
                     $ul .= $this->getMenuPage($cat);
                 }
                 $ul .= '</li>';

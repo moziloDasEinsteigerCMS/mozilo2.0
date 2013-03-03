@@ -1,6 +1,9 @@
 Erzeugt ein Menu mit fast unbegrenster Submenu Verschachtelungen<br />
 <b>Achtung</b> Kategorien die ein "/" enthalten werden nicht mehr Angezeigt da wir den "/" für das Submenu verwenden.<br />
-Auserdem ist damit kein eigenes Deteilmenu möglich.<br />
+<br />
+Um ein detailmenu zu verwenden must du {MenuSubs|main} und {MenuSubs|detail} benutzen
+ansonsten nur {MenuSubs}<br />
+Achtung der Schalter usesubmenu = 3 wird hier nicht benutzt und usesubmenu = 0 wirkt sich nur aufs Deteilmenu aus.<br />
 <br />
 <b>Beschreibung:</b>
 <ul>
