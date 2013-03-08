@@ -59,6 +59,7 @@ tooltip_include_recursion_error_0               = Inhaltsseite kann sich nicht s
 tooltip_link_category_1                         = Zur Kategorie "{PARAM1}" wechseln
 tooltip_link_category_error_1                   = Kategorie "{PARAM1}" nicht vorhanden
 tooltip_link_extern_1                           = Externe Adresse "{PARAM1}" aufrufen
+tooltip_link_cmsinfo                            = Webseite Erstelt mit moziloCMS
 tooltip_link_extern_error_1                     = Fehlerhafte Link-Adresse "{PARAM1}"
 tooltip_link_file_1                             = Datei "{PARAM1}" herunterladen
 tooltip_link_file_2                             = Datei "{PARAM1}" der Kategorie "{PARAM2}" herunterladen

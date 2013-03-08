@@ -931,7 +931,7 @@ return '<span class="'.$cssclass.'"><img src="'.$imgsrc.'" alt="'.$language->get
                 break;
             case '{CMSINFO}':
                 global $language;
-                $replace = '<a href="http://cms.mozilo.de/" target="_blank" id="cmsinfolink"'.$this->getTitleAttribute($language->getLanguageHtml("tooltip_link_extern_1", "http://cms.mozilo.de")).">moziloCMS ".CMSVERSION."</a>";
+                $replace = '<a href="http://www.mozilo.de/" target="_blank" id="cmsinfolink"'.$this->getTitleAttribute($language->getLanguageHtml("tooltip_link_cmsinfo")).">moziloCMS ".CMSVERSION."</a>";
                 break;
             case '{TABLEOFCONTENTS}':
                 # Da es den Inhalt erst am schluss gibt setzen wir einen Verstägten Platzhalter
