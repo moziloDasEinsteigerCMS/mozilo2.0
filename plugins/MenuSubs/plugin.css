@@ -71,3 +71,25 @@ ul.page-menusubs {
 }
 
 
+.menusubs-breadcrumb {
+    margin:0;
+    padding:0;
+    list-style-type:none;
+}
+
+.menusubs-breadcrumb li {
+    list-style-position:inside;
+    display:inline;
+    padding-left:.6em;
+}
+
+.menusubs-breadcrumb li a {
+    margin-left:.6em;
+}
+li.menusubs-breadcrumb-home {
+    padding-left:0;
+}
+li.menusubs-breadcrumb-home a {
+    margin-left:0;
+}
+

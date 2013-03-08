@@ -1,7 +1,7 @@
 <?php if(!defined('IS_CMS')) die();
 
 class MenuSubs extends Plugin {
-
+    var $breadcrumb_delimiter = "";
     function getContent($value) {
         global $CatPage;
 
@@ -26,8 +26,11 @@ class MenuSubs extends Plugin {
             return $this->getMenuPage($this->settings->get("menusubs_2"),false,true);
         if($value === "sitemap_content")
             return $this->getSidemapCat();
-        if($value === "breadcrumb")
+        if($value === "breadcrumb") {
+            if($this->settings->get("breadcrumb_delimiter"))
+                $this->breadcrumb_delimiter = $this->settings->get("breadcrumb_delimiter");
             return $this->getBreadcrumb();
+        }
         return NULL;
     } // function getContent
 
@@ -35,7 +38,7 @@ class MenuSubs extends Plugin {
         global $CatPage, $CMS_CONF;
         $css = "";
         $ul = '<ul class="menusubs-breadcrumb">';
-        $ul .= '<li><a href="{BASE_URL}" class="" title="Home">Home</a></li>';
+        $ul .= '<li class="menusubs-breadcrumb-home"><a href="{BASE_URL}" title="Home">Home</a></li>';
 
         foreach($CatPage->get_CatArray() as $cat) {
             if($CatPage->get_Type($cat,false) == "cat" and $CatPage->is_Activ($cat,false)) {
@@ -44,10 +47,10 @@ class MenuSubs extends Plugin {
                     $linkcat = "";
                     foreach($cats as $ca) {
                         $linkcat .= "%2F".$ca;
-                        $ul .= '<li> »&nbsp;&nbsp;'.$this->create_BreadcrumbLinkTag($linkcat,$ca,"").'</li>';
+                        $ul .= '<li>'.$this->breadcrumb_delimiter.$this->create_BreadcrumbLinkTag($linkcat,$ca,"").'</li>';
                     }
                 } else {
-                        $ul .= '<li> »&nbsp;&nbsp;'.$CatPage->create_AutoLinkTag($cat,false,"").'</li>';
+                        $ul .= '<li>'.$this->breadcrumb_delimiter.$CatPage->create_AutoLinkTag($cat,false,"").'</li>';
                 }
                 $ul .= $this->getBreadcrumbPage($cat);
             }
@@ -68,7 +71,7 @@ class MenuSubs extends Plugin {
                     and $CatPage->get_Type($cat,$page) == EXT_HIDDEN
                     and $CatPage->get_Type($page,false) == "cat") {
                 if($CatPage->is_Activ($cat,$page))
-                    $ul .= '<li> »&nbsp;&nbsp;'.$this->create_CatSubLinkTag($cat,$page,"").'</li>';
+                    $ul .= '<li>'.$this->breadcrumb_delimiter.$this->create_CatSubLinkTag($cat,$page,"").'</li>';
                 if(strstr(CAT_REQUEST,$page))
 #                if($CatPage->is_Activ($cat,$page))
                     $ul .= $this->getBreadcrumbPage($page,true);
@@ -76,7 +79,7 @@ class MenuSubs extends Plugin {
 #echo $cat." -> ".$page." 2<br />\n";
                 if($CMS_CONF->get("hidecatnamedpages") == "true" and $cat == $page)
                     continue;
-                $ul .= '<li> »&nbsp;&nbsp;'.$CatPage->create_AutoLinkTag($cat,$page,"").'</li>';
+                $ul .= '<li>'.$this->breadcrumb_delimiter.$CatPage->create_AutoLinkTag($cat,$page,"").'</li>';
             }
         }
         return $ul.'';
@@ -269,6 +272,12 @@ class MenuSubs extends Plugin {
         $config['sidemap_show_menu2'] = array(
             "type" => "checkbox",
             "description" => $conf_txt->get("sidemap_show_menu2"),
+        );
+        $config['breadcrumb_delimiter'] = array(
+            "type" => "text",
+            "maxlength" => "10",
+            "size" => "10",
+            "description" => "Trennzeichen der Brotkrümel Einträge"
         );
         return $config;
     } // function getConfig    
