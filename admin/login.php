@@ -36,15 +36,6 @@ if(getRequestValue('login','post',false)
 // Anmeldung erfolgreich
 if(isset($_SESSION['login_okay']) and $_SESSION['login_okay'] === true
         and isset($_SESSION['login_tmp']) and $_SESSION['login_tmp'] === getClientDaten()) {
-    # notfall MULTI_USER reset &userssreset=j
-    if(MULTI_USER and isset($_GET['userssreset']) and $_GET['userssreset'] == "j") {
-        $tmp = @session_save_path().((substr(session_save_path(),-1) != "/") ? "/" : "");
-        unlink($tmp."users.conf.php");
-        unlink($tmp."session.conf.php");
-        header("Location: http://".$_SERVER['SERVER_NAME'].URL_BASE.ADMIN_DIR_NAME."/");
-        header("Connection: close"); 
-        exit();
-    }
     define("LOGIN",true);
     # draft modus setzen
     $CMS_CONF->set("draft", true);

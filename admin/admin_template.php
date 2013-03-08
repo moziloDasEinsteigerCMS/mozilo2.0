@@ -130,11 +130,10 @@ if(defined('PLUGINADMIN'))
     else
         # alle erlauben
         $html .= 'var mo_acceptFileTypes = /#$/i;';
-    if(LOGIN and defined('MULTI_USER') and MULTI_USER) {
+/*    if(LOGIN and defined('MULTI_USER') and MULTI_USER) {
        $html .= 'var multi_user_time = '.((MULTI_USER_TIME - 10) * 1000).';'; # Sekunde * 1000 = Millisekunden
-#       $html .= 'var multi_user_time = 5000;'; # Sekunde * 1000 = Millisekunden
     }
-
+*/
     $html .= '/*]]>*/</script>';
     $html .= '<script type="text/javascript" src="'.URL_BASE.CMS_DIR_NAME.'/jquery/jquery-1.7.2.min.js"></script>';
     $html .= '<script type="text/javascript" src="'.URL_BASE.CMS_DIR_NAME.'/jquery/jquery-ui-1.8.22.custom.min.js"></script>';
@@ -142,11 +141,21 @@ if(defined('PLUGINADMIN'))
 # new jquery test
 #    $html .= '<script type="text/javascript" src="'.URL_BASE.CMS_DIR_NAME.'/jquery/jquery-1.8.3.min.js"></script>';
 #    $html .= '<script type="text/javascript" src="'.URL_BASE.CMS_DIR_NAME.'/jquery/jquery-ui-1.9.2.custom.min.js"></script>';
- 
+ /*
     if(LOGIN and defined('MULTI_USER') and MULTI_USER) {
+if(is_file(BASE_DIR.ADMIN_DIR_NAME.'/jquery/multi_user.min.js'))
+        $html .= '<script type="text/javascript" src="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/multi_user.min.js"></script>';
+else
         $html .= '<script type="text/javascript" src="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/multi_user.js"></script>';
     }
+*/
+if(is_file(BASE_DIR.ADMIN_DIR_NAME.'/jquery/dialog.min.js'))
+    $html .= '<script type="text/javascript" src="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/dialog.min.js"></script>';
+else
     $html .= '<script type="text/javascript" src="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/dialog.js"></script>';
+if(is_file(BASE_DIR.ADMIN_DIR_NAME.'/jquery/default.min.js'))
+    $html .= '<script type="text/javascript" src="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/default.min.js"></script>';
+else
     $html .= '<script type="text/javascript" src="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/default.js"></script>';
 #    if(file_exists(BASE_DIR_ADMIN."docu/docu.js"))
 #        $html .= '<script type="text/javascript" src="docu/docu.js"></script>';
@@ -158,16 +167,22 @@ if(defined('PLUGINADMIN'))
 
 
     if(file_exists(BASE_DIR_ADMIN."jquery/".ACTION.'.js'))
+if(is_file(BASE_DIR.ADMIN_DIR_NAME.'/jquery/'.ACTION.'.min.js'))
+        $html .= '<script type="text/javascript" src="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/'.ACTION.'.min.js"></script>';
+else {
         $html .= '<script type="text/javascript" src="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/'.ACTION.'.js"></script>';
     if(file_exists(BASE_DIR_ADMIN."jquery/".ACTION.'_func.js'))
         $html .= '<script type="text/javascript" src="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/'.ACTION.'_func.js"></script>';
-
+}
     if((ACTION == "catpage" and (ROOT or in_array("editusersyntax",$ADMIN_CONF->get("config")))) or ACTION == "config" or ACTION == "template") {
         $html .= '<link type="text/css" rel="stylesheet" href="jquery/coloredit/coloredit.min.css" />';
         $html .= '<script type="text/javascript" charset="utf-8" src="jquery/coloredit/coloredit.js"></script>';
     }
 
     if((ACTION == "config" and (ROOT or in_array("editusersyntax",$ADMIN_CONF->get("config")))) or ACTION == "catpage" or ACTION == "template") {
+if(is_file(BASE_DIR.ADMIN_DIR_NAME.'/jquery/dialog-editor-ace.min.js'))
+        $html .= '<script type="text/javascript" src="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/dialog-editor-ace.min.js"></script>';
+else
         $html .= '<script type="text/javascript" src="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/dialog-editor-ace.js"></script>';
         require_once(BASE_DIR_ADMIN."ace_editor/mozilo_edit_ace.php");
         $html .= $editor_area_html;
@@ -181,6 +196,9 @@ $html .= '<!-- Bootstrap CSS Toolkit styles -->
 
 $html .= '<script type="text/javascript" src="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/File-Upload/load-image.min.js"></script>';
 
+if(is_file(BASE_DIR.ADMIN_DIR_NAME.'/jquery/dialog_prev.min.js'))
+        $html .= '<script type="text/javascript" src="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/dialog_prev.min.js"></script>';
+else
         $html .= '<script type="text/javascript" src="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/dialog_prev.js"></script>';
 
         $html .= '<script type="text/javascript" src="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/File-Upload/jquery.iframe-transport.js"></script>';
@@ -193,9 +211,9 @@ $html .= '<script type="text/javascript" src="'.URL_BASE.ADMIN_DIR_NAME.'/jquery
 $html .= '<script type="text/javascript" src="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/File-Upload/fileupload-cms-ui.js"></script>';
 
 if(ACTION != "gallery")
-$html .= '<script type="text/javascript" src="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/File-Upload/fileupload.template.js"></script>';
+    $html .= '<script type="text/javascript" src="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/File-Upload/fileupload.template.js"></script>';
 else
-$html .= '<script type="text/javascript" src="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/File-Upload/fileupload.template_gal.js"></script>';
+    $html .= '<script type="text/javascript" src="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/File-Upload/fileupload.template_gal.js"></script>';
 $html .= '<script type="text/javascript" src="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/File-Upload/fileupload.js"></script>';
 
     }
@@ -246,7 +264,7 @@ function get_Tabs() {
             $deact_user = " ui-state-disabled js-no-click";
 
         $html .= '<li class="js-multi-user ui-state-default ui-corner-top'.$activ.$deact_user.'">';
-        $html .= '<a href="index.php?action='.$language.$multi_user.'" title="'.getLanguageValue($language."_button",true).'" name="'.$language.'"><img class="js-menu-icon mo-icon-text-right mo-tabs-icon mo-tab-'.$language.'" src="'.ICON_URL_SLICE.'" alt=" " hspace="0" vspace="0" border="0" /><span class="mo-bold">'.getLanguageValue($language."_button").'</span></a>';
+        $html .= '<a href="index.php?nojs=true&amp;action='.$language.$multi_user.'" title="'.getLanguageValue($language."_button",true).'" name="'.$language.'"><img class="js-menu-icon mo-icon-text-right mo-tabs-icon mo-tab-'.$language.'" src="'.ICON_URL_SLICE.'" alt=" " hspace="0" vspace="0" border="0" /><span class="mo-bold">'.getLanguageValue($language."_button").'</span></a>';
         $html .= '</li>';
     }
     $html .= '</ul>';

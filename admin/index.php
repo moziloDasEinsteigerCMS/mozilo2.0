@@ -32,17 +32,17 @@ else
 define("DRAFT", true);
 
 // Session Fixation durch Vergabe einer neuen Session-ID beim ersten Login verhindern
-if(!isset($_SESSION[SESSION_MO])) {
+/*if(!isset($_SESSION[SESSION_MO])) {
     session_regenerate_id(true);
     $_SESSION[SESSION_MO] = true;
 }
-
+*/
 # -1 für debug
 error_reporting(-1);
 // Initial: Fehlerausgabe unterdrücken, um Path-Disclosure-Attacken ins Leere laufen zu lassen
 ini_set("display_errors", 1);
- // ISO 8859-1 erzwingen - experimentell!
- // @ini_set("default_charset", CHARSET);
+// UTF-8 erzwingen - experimentell!
+@ini_set("default_charset", CHARSET);
 # ab php > 5.2.0 hat preg_* ein default pcre.backtrack_limit von 100000 zeichen
 # deshalb der versuch mit ini_set
 @ini_set('pcre.backtrack_limit', 1000000);
@@ -134,6 +134,17 @@ if(!defined('LOGIN'))
 
 if(LOGIN) { #-------------------------------
 
+    if(defined('MULTI_USER') and MULTI_USER and getRequestValue('logout_other_users','post') == "true") {
+        define('LOGOUT_OTHER_USERS',true);
+        # der trick ist hier das true da damit die eigene function destroy aufgerufen wird
+        session_regenerate_id(true);
+    }
+    # Achtung nojs darf nur von nicht ajax anfragen benutzt werden
+    if(getRequestValue('nojs','get')) {
+#$gg = var_export($_REQUEST,true);
+#file_put_contents("../out_UploadHandler.txt","ID=".$gg."\n",FILE_APPEND);
+        session_regenerate_id(true);
+    }
     # wird für den Editor gebraucht
     list($activ_plugins,$deactiv_plugins,$plugin_first) = findPlugins();
 
@@ -201,7 +212,8 @@ if(LOGIN) { #-------------------------------
         $users_array = $USERS->toArray();
         unset($users_array[$id]);
         # die refresh ajax anfrage
-        if(getRequestValue('refresh_session') == "true") {
+#!!!!!!!!!!!!!! kann gelöscht werden wenn ich das mit dem neuen multi mode fertig habe
+/*        if(getRequestValue('refresh_session') == "true") {
             $hidden_action = "";
             foreach($users_array as $action) {
                 if($action == "home" or $action == "login") continue;
@@ -211,7 +223,7 @@ if(LOGIN) { #-------------------------------
             if(strlen($hidden_action) > 1)
                 $hidden_action = substr($hidden_action,1);
             exit($hidden_action);
-        }
+        }*/
         # es gab ein redirect
         if(false !== ($tmp = strstr($USERS->get($id),"#"))) {
             $tmp = substr($tmp,1);
@@ -221,7 +233,7 @@ if(LOGIN) { #-------------------------------
         } elseif(getRequestValue('multi','get') and $tmp_action != "home" and in_array($tmp_action,$array_tabs)) {
             if("freetab" == ($tmp = $USERS->get($id)))
                 $tmp = "home";
-            $url = $_SERVER['HTTP_HOST'].URL_BASE.ADMIN_DIR_NAME.'/index.php?action='.$tmp.'&multi=true';
+            $url = $_SERVER['HTTP_HOST'].URL_BASE.ADMIN_DIR_NAME.'/index.php?nojs=true&amp;action='.$tmp.'&multi=true';
             $USERS->set($id,$tmp_action);
             # seite besetzt
             if(in_array($tmp_action,$users_array)) {
@@ -235,7 +247,7 @@ if(LOGIN) { #-------------------------------
         }
         # im FileUpload wird der tab besetzt mit window.location.href behandelt
         if(getRequestValue('fileupload','get')) {
-            $url = $_SERVER['HTTP_HOST'].URL_BASE.ADMIN_DIR_NAME.'/index.php?action=home&multi=true';
+            $url = $_SERVER['HTTP_HOST'].URL_BASE.ADMIN_DIR_NAME.'/index.php?nojs=true&amp;action=home&multi=true';
             $USERS->set($id,"busy#".getRequestValue('fileupload','get'));
             header("Location: http://$url");
             exit();

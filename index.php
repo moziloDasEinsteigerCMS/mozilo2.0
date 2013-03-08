@@ -10,6 +10,8 @@ $start_time = get_executTime(false);
 # ab php > 5.2.0 hat preg_* ein default pcre.backtrack_limit von 100000 zeichen
 # deshalb der versuch mit ini_set
 @ini_set('pcre.backtrack_limit', 1000000);
+// UTF-8 erzwingen - experimentell!
+@ini_set("default_charset", CHARSET);
 
 # fals da bei winsystemen \\ drin sind in \ wandeln
 $BASE_DIR = str_replace("\\\\", "\\",__FILE__);

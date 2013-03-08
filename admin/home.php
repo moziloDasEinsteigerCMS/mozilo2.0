@@ -31,6 +31,16 @@ function home() {
         $error[$titel][] = true;
         $template[$titel][] = getLanguageValue("home_no_help");
     }
+    // Zeile "Multiuser Reset"
+    if(defined('MULTI_USER') and MULTI_USER and ROOT) {
+        $titel = "home_multiuser";
+        $error[$titel][] = false;
+        $template[$titel][] = array(getLanguageValue("home_multiuser_text"),
+            '<form action="index.php?action='.ACTION.'" method="post">'
+            .'<input type="hidden" name="logout_other_users" value="true" />'
+            .'<input type="submit" name="submitlogout_other_users" value="'.getLanguageValue("home_multiuser_button").'" />'
+            .'</form>');
+    }
 
     // CMS-INFOS
     $titel = "home_cmsinfo";

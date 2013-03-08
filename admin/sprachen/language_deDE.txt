@@ -104,6 +104,9 @@ toolbar_platzhalter_VALUE            =
 toolbar_platzhalter_DESCRIPTION      = 
 
 home_button                          = Info
+home_multiuser                       = Multiuser Reset
+home_multiuser_text                  = Bei Problemen mit dem Multiuser modus kanst du die Anderen User Abmelden. Das kommt vor wenn sich die Andern nicht Ausgelogt haben und damit ihre geöffnet Tabs gespert haben.
+home_multiuser_button                = Andere User Abmelden
 home_text                            = System-Informationen
 home_cmssize_text                    = Gesamtgröße des CMS auf dem Server
 home_cmsversion_text                 = Installierte moziloCMS-Version

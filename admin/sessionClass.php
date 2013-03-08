@@ -21,7 +21,7 @@ if($use_session) {
 #session_set_cookie_params(0,$BASE_DIR,$_SERVER['SERVER_NAME']); 
     define("MULTI_USER", true);
     $lifetime = 1440;
-    if(@ini_get("session.gc_maxlifetime") > 20); # wir ziehen in der admin_template.php 10 secunden ab
+    if(@ini_get("session.gc_maxlifetime") > 2); # wir ziehen in der admin_template.php 10 secunden ab
         $lifetime = @ini_get("session.gc_maxlifetime");
 #$lifetime = 1000000;
     define("MULTI_USER_TIME", $lifetime);
@@ -35,7 +35,6 @@ class SessionSaveHandler {
     protected $sessionName;
 
     public function __construct() {
-#session_module_name("user");
         session_set_save_handler(
             array($this, "open"),
             array($this, "close"),
@@ -57,8 +56,8 @@ class SessionSaveHandler {
         if(!is_file($this->savePath."session.conf.php")) {
             $ret = @file_put_contents($this->savePath."session.conf.php","<?php die(); ?>\n".serialize(array()),LOCK_EX);
         }
-        if(($lifetime = ini_get("session.gc_maxlifetime")) > 1);
-            $this->gc($lifetime);
+#        if(($lifetime = ini_get("session.gc_maxlifetime")) > 1);
+#            $this->gc($lifetime);
         @chmod($this->savePath."session.conf.php",0600);
         return $ret;
     }
@@ -84,6 +83,8 @@ class SessionSaveHandler {
     }
 
     public function destroy($id) {
+        if(defined('LOGIN') and LOGIN === true and defined('LOGOUT_OTHER_USERS') and LOGOUT_OTHER_USERS === true)
+            return $this->saveSessionArray();
         $id = md5($id);
         $conf = $this->getSessionArray();
         if(!array_key_exists($id, $conf))
