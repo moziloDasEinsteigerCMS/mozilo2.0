@@ -1,8 +1,8 @@
 <?php if(!defined('IS_CMS')) die();
 
-define("CMSVERSION","2.0.alpha");
+define("CMSVERSION","2.0.beta");
 define("CMSNAME","Amalia");
-define("CMSREVISION","1");
+define("CMSREVISION","2");
 
 define("CHARSET","UTF-8");
 define("CONTENT_DIR_NAME","kategorien");
