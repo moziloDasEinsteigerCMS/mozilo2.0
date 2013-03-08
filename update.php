@@ -569,16 +569,19 @@ function updatePages($update_page_files) {
             $newcontent = toUtf($content);
             $newcontent = $page_protect.str_replace($page_protect_search,"",$newcontent);
             $newcontent = str_replace($org_saved,$tmp_saved,$newcontent);
+            # [liste1 - 3
+            $newcontent = str_replace(array("[liste1|","[liste2|","[liste3|"),"[liste|",$newcontent);
             # um diese Attribute geht es
             $allowed_attributes = array("galerie","kategorie","seite","datei","bild","bildlinks","bildrechts","include");
-#!!!!!!!!! hier gibts nee entlos
-$max = 0;
-            while(preg_match("/\[(".implode('|',$allowed_attributes).")/",$newcontent) and $max < 3) {
-$max++;
+            $finisch = false;
+            while(!$finisch) {
+                $tmp_newcontent = $newcontent;
                 preg_match_all("/\[(".implode('|',$allowed_attributes).")\|(.*)\]/Umis",$newcontent,$matche);
                 $newcontent = changeFileContent($newcontent,$matche,$cat,$update_page_files);
                 preg_match_all("/\[(".implode('|',$allowed_attributes).")\=.*\|(.*)\]/Umis",$newcontent,$matche);
                 $newcontent = changeFileContent($newcontent,$matche,$cat,$update_page_files);
+                if($tmp_newcontent == $newcontent)
+                    $finisch = true;
             }
             $newcontent = str_replace($tmp_saved,$org_saved,$newcontent);
             $newcontent = str_replace($tmp_klammern,$org_klammern,$newcontent);
