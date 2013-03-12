@@ -12,7 +12,7 @@ function plugins() {
                 require_once(PLUGIN_DIR_REL.PLUGINADMIN."/index.php");
                 # Enthält der Code eine Klasse mit dem Namen des Plugins und ist es auch der Dirname?
                 if(class_exists(PLUGINADMIN) and in_array(PLUGINADMIN, get_declared_classes())) {
-                    define("PLUGINADMIN_GET_URL",URL_BASE.ADMIN_DIR_NAME."/index.php?pluginadmin=".PLUGINADMIN."&amp;action=".ACTION);
+                    define("PLUGINADMIN_GET_URL",URL_BASE.ADMIN_DIR_NAME."/index.php?pluginadmin=".PLUGINADMIN."&amp;nojs=true&amp;action=".ACTION);
                     $plugin = new $plugin_name();
                     $info = $plugin->getInfo();
                     $config = $plugin->getConfig();
