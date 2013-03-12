@@ -280,6 +280,18 @@ function updateFileNameInAll($old_name,$new_name) {
                     }
                     if(str_replace(array(EXT_PAGE.FILE_END,EXT_HIDDEN.FILE_END,EXT_DRAFT.FILE_END,EXT_LINK.FILE_END),FILE_END,$test) == $value) {
                         $tmp_conf->set($key,str_replace(array(EXT_PAGE.FILE_END,EXT_HIDDEN.FILE_END,EXT_DRAFT.FILE_END,EXT_LINK.FILE_END),FILE_END,$new_name_p[$pos]));
+                        continue;
+                    }
+                    if($test == $key) {
+                        $tmp_val = $tmp_conf->get($key);
+                        $tmp_conf->delete($key);
+                        $tmp_conf->set($new_name_p[$pos],$tmp_val);
+                        continue;
+                    }
+                    if(str_replace(array(EXT_PAGE.FILE_END,EXT_HIDDEN.FILE_END,EXT_DRAFT.FILE_END,EXT_LINK.FILE_END),FILE_END,$test) == $key) {
+                        $tmp_val = $tmp_conf->get($key);
+                        $tmp_conf->delete($key);
+                        $tmp_conf->set(str_replace(array(EXT_PAGE.FILE_END,EXT_HIDDEN.FILE_END,EXT_DRAFT.FILE_END,EXT_LINK.FILE_END),FILE_END,$new_name_p[$pos]),$tmp_val);
                     }
                 }
             }
