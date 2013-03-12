@@ -27,6 +27,7 @@ class MenuSubs extends Plugin {
         if($value === "sitemap_content")
             return $this->getSidemapCat();
         if($value === "breadcrumb") {
+            $this->breadcrumb_delimiter = "»";
             if($this->settings->get("breadcrumb_delimiter"))
                 $this->breadcrumb_delimiter = $this->settings->get("breadcrumb_delimiter");
             return $this->getBreadcrumb();
@@ -277,7 +278,7 @@ class MenuSubs extends Plugin {
             "type" => "text",
             "maxlength" => "10",
             "size" => "10",
-            "description" => "Trennzeichen der Brotkrümel Einträge"
+            "description" => 'Trennzeichen der Brotkrümel Einträge. Default ist "»"'
         );
         return $config;
     } // function getConfig    
