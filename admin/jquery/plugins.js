@@ -58,6 +58,9 @@ $(function() {
         var plugin_name = $(this).attr("name").replace(/\[pluginadmin\]/,""),
             para = URL_BASE+ADMIN_DIR_NAME+"/index.php?nojs=true&pluginadmin="+plugin_name+"&action="+action_activ;
         $('#dialog-plugin-admin iframe').attr("src",para);
+        $('#dialog-plugin-admin iframe').load(function(){
+            $(this).contents().find('html,body').css('min-width','auto');
+        });
         dialog_plugin.dialog({
             width: $(".mo-td-content-width").eq(0).width(),
             height: (parseInt($(window).height()) - dialogMaxheightOffset),
