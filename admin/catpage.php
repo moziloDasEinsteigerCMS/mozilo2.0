@@ -279,42 +279,6 @@ function write_sort_list($movecat = false) {
     # wir schiken die neu selectbox zurück
     return ajax_return("success",false).'<span id="replace-item">'.returnCatPagesSelectbox().'</span>';
 }
-# schreibt die sitemap.xml neu Achtung es muss success oder error zurück kommen
-function write_xmlsitmap() {
-    global $CMS_CONF;
-    if($CMS_CONF->get('usesitemap') != "true")
-        return true;
-    global $CatPage;
-    $changefreq = "monthly"; # always hourly daily weekly monthly yearly never
-    $priority = "0.5"; # 0.0 - 1.0
-    $xml = '<?xml version="1.0" encoding="UTF-8"?>'."\n";
-    $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">'."\n";
-
-#    $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'."\n";
-    foreach($CatPage->get_CatArray(false,false,array(EXT_PAGE)) as $cat) {
-        $xml .= '    <url>'."\n";
-        $xml .= '        <loc>http://'.$_SERVER['SERVER_NAME'].str_replace('?draft=true','',$CatPage->get_Href($cat,false)).'</loc>'."\n";
-        $xml .= '        <lastmod>'.date("Y-m-d",$CatPage->get_Time($cat,false)).'</lastmod>'."\n";
-        $xml .= '        <changefreq>'.$changefreq.'</changefreq>'."\n";
-        $xml .= '        <priority>'.$priority.'</priority>'."\n";
-        $xml .= '    </url>'."\n";
-        foreach($CatPage->get_PageArray($cat,array(EXT_PAGE)) as $page) {
-            $xml .= '    <url>'."\n";
-            $xml .= '        <loc>http://'.$_SERVER['SERVER_NAME'].str_replace('?draft=true','',$CatPage->get_Href($cat,$page)).'</loc>'."\n";
-            $xml .= '        <lastmod>'.date("Y-m-d",$CatPage->get_Time($cat,$page)).'</lastmod>'."\n";
-            $xml .= '        <changefreq>'.$changefreq.'</changefreq>'."\n";
-            $xml .= '        <priority>'.$priority.'</priority>'."\n";
-            $xml .= '    </url>'."\n";
-        }
-    }
-    $xml .= '</urlset>'."\n";
-    if(true != (mo_file_put_contents(BASE_DIR."sitemap.xml",$xml)))
-        return ajax_return("error",false,returnMessage(false,getLanguageValue("error_write_sitemap")),true,true);
-    return true;
-}
 
 function get_page($cat, $page) {
     global $CatPage;

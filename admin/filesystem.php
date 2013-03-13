@@ -410,4 +410,78 @@ function cleanUploadFile($file) {
     $file = preg_replace('/[^a-zA-Z0-9._-]/', "",$file);
     return $file;
 }
+
+# schreibt die sitemap.xml neu Achtung es muss success oder error zurück kommen
+function write_xmlsitmap($from_config = false) {
+    global $CMS_CONF;
+    if($CMS_CONF->get('usesitemap') != "true") {
+        if($from_config and is_file(BASE_DIR.'sitemap.xml'))
+            return deleteFile(BASE_DIR.'sitemap.xml');
+        return true;
+    }
+    global $CatPage;
+    $changefreq = "monthly"; # always hourly daily weekly monthly yearly never
+    $priority = "0.5"; # 0.0 - 1.0
+    $xml = '<?xml version="1.0" encoding="UTF-8"?>'."\n";
+    $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">'."\n";
+
+#    $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'."\n";
+    foreach($CatPage->get_CatArray(false,false,array(EXT_PAGE)) as $cat) {
+        $xml .= '    <url>'."\n";
+        $xml .= '        <loc>http://'.$_SERVER['SERVER_NAME'].str_replace('?draft=true','',$CatPage->get_Href($cat,false)).'</loc>'."\n";
+        $xml .= '        <lastmod>'.date("Y-m-d",$CatPage->get_Time($cat,false)).'</lastmod>'."\n";
+        $xml .= '        <changefreq>'.$changefreq.'</changefreq>'."\n";
+        $xml .= '        <priority>'.$priority.'</priority>'."\n";
+        $xml .= '    </url>'."\n";
+        foreach($CatPage->get_PageArray($cat,array(EXT_PAGE)) as $page) {
+            $xml .= '    <url>'."\n";
+            $xml .= '        <loc>http://'.$_SERVER['SERVER_NAME'].str_replace('?draft=true','',$CatPage->get_Href($cat,$page)).'</loc>'."\n";
+            $xml .= '        <lastmod>'.date("Y-m-d",$CatPage->get_Time($cat,$page)).'</lastmod>'."\n";
+            $xml .= '        <changefreq>'.$changefreq.'</changefreq>'."\n";
+            $xml .= '        <priority>'.$priority.'</priority>'."\n";
+            $xml .= '    </url>'."\n";
+        }
+    }
+    # wens eine sitemap_addon.xml gibt wird der inhalt mit hinzugefügt
+    if(file_exists(BASE_DIR.'sitemap_addon.xml') and (false !== ($addon = @file_get_contents(BASE_DIR.'sitemap_addon.xml')))) {
+        # kommentare entfernen
+        $addon = preg_replace('/<!--(.*)-->/Uis', '', $addon);
+        # nur wenn es <url> und </url> gibt
+        if(false !== stristr($addon,'<url>') and false !== stristr($addon,'</url>'))
+            $xml .= $addon;
+    }
+    $xml .= '</urlset>'."\n";
+    if(true != (mo_file_put_contents(BASE_DIR."sitemap.xml",$xml)))
+        return ajax_return("error",false,returnMessage(false,getLanguageValue("error_write_sitemap")),true,true);
+    return true;
+}
+
+
+function write_robots() {
+    global $CMS_CONF;
+    if(is_file(BASE_DIR.'robots.txt')) {
+        if(false === ($lines = file(BASE_DIR.'robots.txt')))
+            return ajax_return("error",false,returnMessage(false,getLanguageValue("error_read_robots")),true,true);
+    } else {
+        $lines = array('User-agent: *','Disallow: /'.ADMIN_DIR_NAME.'/','Disallow: /'.CMS_DIR_NAME.'/','Disallow: /kategorien/','Disallow: /galerien/','Disallow: /layouts/','Disallow: /plugins/');
+    }
+    foreach($lines as $pos => $value) {
+        if(strstr($value,'Sitemap:')) {
+            unset($lines[$pos]);
+            continue;
+        }
+        $lines[$pos] = trim($value);
+    }
+    $text = implode("\n",$lines)."\n";
+    if($CMS_CONF->get('usesitemap') == "true") {
+        $text = 'Sitemap: http://'.$_SERVER['SERVER_NAME'].'/sitemap.xml'."\n".$text;
+    }
+    if(true != (mo_file_put_contents(BASE_DIR."robots.txt",$text)))
+        return ajax_return("error",false,returnMessage(false,getLanguageValue("error_write_robots")),true,true);
+    return true;
+}
+
 ?>

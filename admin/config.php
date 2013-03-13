@@ -265,38 +265,17 @@ function set_config_para() {
                 if($syntax_name == "modrewrite" and !getRequestValue('link','get') and $syntax_value == "true") {
                     return ajax_return("error",false,returnMessage(false,getLanguageValue("config_error_modrewrite")),true,true);
                 }
-                if($syntax_name == "usesitemap") {
-                    if(true !== ($error = write_robots($syntax_value)))
-                        return $error;
-                }
                 # die checkbox hat immer einen anderen wert als der gespeicherte deshalb keine prüfung
                 $CMS_CONF->set($syntax_name, $syntax_value);
+                if($syntax_name == "usesitemap") {
+                    if(true !== ($error = write_robots()))
+                        return $error;
+                    if(true != ($error = write_xmlsitmap(true)))
+                        return $error;
+                }
             }
         }
     }
     return ajax_return("success",false);
-}
-
-function write_robots($syntax_value) {
-    if(is_file(BASE_DIR.'robots.txt')) {
-        if(false === ($lines = file(BASE_DIR.'robots.txt')))
-            return ajax_return("error",false,returnMessage(false,getLanguageValue("error_read_robots")),true,true);
-    } else {
-        $lines = array('User-agent: *','Disallow: /'.ADMIN_DIR_NAME.'/','Disallow: /'.CMS_DIR_NAME.'/','Disallow: /kategorien/','Disallow: /galerien/','Disallow: /layouts/','Disallow: /plugins/');
-    }
-    foreach($lines as $pos => $value) {
-        if(strstr($value,'Sitemap:')) {
-            unset($lines[$pos]);
-            continue;
-        }
-        $lines[$pos] = trim($value);
-    }
-    $text = implode("\n",$lines)."\n";
-    if($syntax_value == "true") {
-        $text = 'Sitemap: http://'.$_SERVER['SERVER_NAME'].'/sitemap.xml'."\n".$text;
-    }
-    if(true != (mo_file_put_contents(BASE_DIR."robots.txt",$text)))
-        return ajax_return("error",false,returnMessage(false,getLanguageValue("error_write_robots")),true,true);
-    return true;
 }
 ?>

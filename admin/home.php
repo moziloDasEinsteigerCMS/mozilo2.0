@@ -19,6 +19,18 @@ function home() {
         }
         exit();
     }
+    global $CMS_CONF;
+    if($CMS_CONF->get('usesitemap') == "true") {
+        global $message;
+        if(!is_file(BASE_DIR.'robots.txt')) {
+            if(true !== ($error_message = write_robots()))
+                    $message .= $error_message;
+        }
+        if(!is_file(BASE_DIR.'sitemap.xml')) {
+            if(true != ($error_message = write_xmlsitmap()))
+                $message .= $error_message;
+        }
+    }
 
     // CMS-Hilfe
     $titel = "home_help";
