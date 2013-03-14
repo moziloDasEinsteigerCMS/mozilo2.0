@@ -474,12 +474,13 @@ class Syntax {
         global $specialchars;
 
         list($cat,$page) = $CatPage->split_CatPage_fromSyntax($value);
+        # testen ob es keine html tag enthält
+        if(strip_tags($desciption) == $desciption)
+            $desciption = $specialchars->rebuildSpecialChars($desciption, true, true);
         $link_text = $desciption;
         if(empty($desciption)) {
             $link_text = $CatPage->get_HrefText($cat,false);
         }
-        if(strip_tags($link_text) == $link_text)
-            $link_text = $specialchars->rebuildSpecialChars($link_text, true, true);
         if($CatPage->exists_CatPage($cat,false)) {
             return $CatPage->create_LinkTag($CatPage->get_Href($cat,false)
                     ,$link_text
@@ -505,12 +506,13 @@ class Syntax {
             $page_text = $specialchars->rebuildSpecialChars($page,true,true);
             return $this->createDeadlink($page_text, $language->getLanguageValue("tooltip_link_page_error_2", $page_text, $cat_text));
         }
+        # testen ob es keine html tag enthält
+        if(strip_tags($desciption) == $desciption)
+            $desciption = $specialchars->rebuildSpecialChars($desciption, true, true);
         $link_text = $desciption;
         if(empty($desciption)) {
             $link_text = $CatPage->get_HrefText($cat,$page);
         }
-        if(strip_tags($link_text) == $link_text)
-            $link_text = $specialchars->rebuildSpecialChars($link_text, true, true);
         return $CatPage->create_LinkTag($CatPage->get_Href($cat,$page)
                     ,$link_text
                     ,"page"
@@ -552,12 +554,13 @@ class Syntax {
             $datei_text = $specialchars->rebuildSpecialChars($datei,true,true);
             return $this->createDeadlink($datei_text, $language->getLanguageValue("tooltip_link_file_error_2", $datei_text, $specialchars->rebuildSpecialChars($cat,true,true)));
         }
+        # testen ob es keine html tag enthält
+        if(strip_tags($desciption) == $desciption)
+            $desciption = $specialchars->rebuildSpecialChars($desciption, true, true);
         $link_text = $desciption;
         if(empty($desciption)) {
             $link_text = $CatPage->get_FileText($cat,$datei);
         }
-        if(strip_tags($link_text) == $link_text)
-            $link_text = $specialchars->rebuildSpecialChars($link_text, true, true);
         // Download-Links in neuem Fenster öffnen?
         $target = false;
         $force_download = true;
