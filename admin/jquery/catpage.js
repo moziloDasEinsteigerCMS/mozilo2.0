@@ -209,7 +209,8 @@ var option_page_draggable = {
     addClasses: false,
     helper: "clone",
     handle: ".js-copy-me-page",
-    appendTo: "body",
+    appendTo: ".catpage",
+//    appendTo: "body",
     start: function(event, ui) {
         if($(this).find(".ui-state-disabled").length > 0)
             return false;
@@ -256,8 +257,7 @@ $(function() {
     $(".js-ul-cats .js-ul-pages").droppable(option_page_droppable).sortable(option_page_sortable);
 
     // new page
-    $(".js-new-ul .js-li-page").draggable(option_page_draggable);
-    $(".js-new-ul .js-li-page").draggable( "option", "handle", "" );
+    $(".js-new-ul .js-li-page").draggable(option_page_draggable).draggable("option","handle","");
 
     // Kategorien
     $(".js-new-ul .js-tools, .js-new-ul div.js-rename-mode-hide, .js-new-ul .js-move-cat, .js-new-ul .js-edit-in-name").hide(0);
@@ -265,7 +265,8 @@ $(function() {
         connectToSortable: ".js-ul-cats",
         addClasses: false,
         helper: "clone",
-        appendTo: "body"
+        appendTo: ".catpage"
+//        appendTo: "body"
     });
 
     $(".js-ul-cats").droppable({
