@@ -141,8 +141,8 @@ function getDocuHead() {
     $html .= '<title>'."CMS Dokumentation".'</title>';
     $html .= '<link type="image/x-icon" rel="SHORTCUT ICON" href="'.URL_BASE.DOCU_DIR_NAME.'/favicon.ico" />';
 
-    $html .= '<link type="text/css" rel="stylesheet" href="'.URL_BASE.'admin/css/mozilo/jquery-ui-1.8.21.custom.css" />';
-    $html .= '<link type="text/css" rel="stylesheet" href="'.URL_BASE.DOCU_DIR_NAME.'/admin.css" />';
+    $html .= '<link type="text/css" rel="stylesheet" href="'.URL_BASE.'admin/css/mozilo/jquery-ui-1.9.2.custom.css" />';
+    $html .= '<link type="text/css" rel="stylesheet" href="'.URL_BASE.'admin/admin.css" />';
     $html .= '<link type="text/css" rel="stylesheet" href="'.URL_BASE.DOCU_DIR_NAME.'/editsite.css" />';
     $html .= '<link type="text/css" rel="stylesheet" href="'.URL_BASE.DOCU_DIR_NAME.'/docu.css" />';
 
@@ -251,7 +251,7 @@ function makeMenu($artikel,$subartikel) {
     $menu = "";
     if(is_array($array_menu[$artikel]) and is_file(BASE_DIR.DOCU_DIR_NAME.'/'.$artikel.'.html')) {
         $submenu = '<div class="ui-tabs ui-widget d_ui-widget-content">';
-        $submenu .= '<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-top">';
+        $submenu .= '<ul class="mo-menu-tabs ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-top">';
         $subnr = 0;
         $cssaktiv = " js-hover-default";
         if(is_file(BASE_DIR.DOCU_DIR_NAME.'/'.$artikel.'.html'))

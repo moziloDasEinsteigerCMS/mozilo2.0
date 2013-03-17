@@ -83,6 +83,10 @@ form {
     min-height:3em;
 }
 
+.mo-menu-tabs {
+    border-bottom-width:0;
+}
+
 .mo-ul {
     list-style-type: none;
     margin: 0;

@@ -77,7 +77,8 @@ function get_HtmlHead() {
     $html .= '<title>'.getLanguageValue("cms_admin_titel",true).' - '.getLanguageValue(ACTION."_button").'</title>';
     $html .= '<link type="image/x-icon" rel="SHORTCUT ICON" href="'.URL_BASE.ADMIN_DIR_NAME.'/favicon.ico" />';
 
-    $html .= '<link type="text/css" rel="stylesheet" href="'.URL_BASE.ADMIN_DIR_NAME.'/css/mozilo/jquery-ui-1.8.21.custom.css" />';
+#    $html .= '<link type="text/css" rel="stylesheet" href="'.URL_BASE.ADMIN_DIR_NAME.'/css/mozilo/jquery-ui-1.8.21.custom.css" />';
+    $html .= '<link type="text/css" rel="stylesheet" href="'.URL_BASE.ADMIN_DIR_NAME.'/css/mozilo/jquery-ui-1.9.2.custom.css" />';
 
 # new jquery test
 #    $html .= '<link type="text/css" rel="stylesheet" href="'.URL_BASE.ADMIN_DIR_NAME.'/css/test192/jquery-ui-1.9.2.custom.css" />';
@@ -252,7 +253,7 @@ function get_Tabs() {
     if(defined('MULTI_USER') and MULTI_USER)
         $multi_user = "&amp;multi=true";
 
-    $html = '<ul id="js-menu-tabs" class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-top">';
+    $html = '<ul id="js-menu-tabs" class="mo-menu-tabs ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-top">';
     foreach($array_tabs as $position => $language) {
         if(ACTION == $language)
             $activ = " ui-tabs-selected ui-state-active";# js-no-click
