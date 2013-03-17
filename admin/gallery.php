@@ -71,8 +71,8 @@ function gallery() {
             exit();
         } elseif($changeart == "gallery_ftp") {
             changeFromFtp();
-        }
-        exit();
+        } else
+            exit();
     }
 
     if(getRequestValue('chancefiles') == "true") {
@@ -216,6 +216,8 @@ function changeFromFtp() {
     }
     if($success)
         $message .= returnMessage(true,getLanguageValue("gallery_messages_from_ftp")."<br /><br />".$success);
+    else
+        $message .= returnMessage(true,getLanguageValue("gallery_messages_from_ftp_no")."");
 }
 
 ?>

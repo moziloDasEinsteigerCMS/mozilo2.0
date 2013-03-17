@@ -160,6 +160,7 @@ gallery_error_exists                 = Es existiert bereits eine Galerie mit die
 gallery_error_datei_conf             = Die Konfigurationsdatei konnte nicht angelegt werden (Dateirechte prüfen).
 gallery_error_subtitle_conf          = Die Untertitel Datei konte nicht angelegt werden
 gallery_messages_from_ftp            = Volgende Galerien wurden CMS Komfom gewandelt
+gallery_messages_from_ftp_no         = Alle Galerien sind CMS Komfom
 gallery_text_from_ftp                = Macht alle Galerien und Bilder die mit FTP Hochgeladen wurden
 gallery_text_from_ftp_button         = CMS Konform
 gallery_name_new                     = Neue Galerie
