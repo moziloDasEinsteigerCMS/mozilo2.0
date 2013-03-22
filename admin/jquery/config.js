@@ -124,14 +124,8 @@ $(function() {
             accept: "#js-config-default-color-box > img",
             hoverClass: "ui-state-default",
             tolerance: "touch",
-            out: function( event, ui ) {
-                $(this).attr('src',URL_BASE+ADMIN_DIR_NAME+'/gfx/icons/24x24/delete.png');
-            },
-            over: function( event, ui ) {
-                $(this).attr('src',URL_BASE+ADMIN_DIR_NAME+'/gfx/icons/24x24/delete_full.png');
-            },
             drop: function( event, ui ) {
-                $(this).attr('src',URL_BASE+ADMIN_DIR_NAME+'/gfx/icons/24x24/delete.png');
+                $(this).addClass("mo-icons-delete-full").removeClass("mo-icons-delete");
                 ui.draggable.remove();
             }
         });
@@ -139,6 +133,7 @@ $(function() {
 
         $('.js-save-default-color').bind("click", function(){
             make_para($('input[name="defaultcolors"]'));
+            $js_del_config_default_color.addClass("mo-icons-delete").removeClass("mo-icons-delete-full");
             if($default_color_drag.html().length > 10)
                 $('#ce-colorchange .ce-default-color-box').show();
             else

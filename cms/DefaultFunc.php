@@ -2,6 +2,7 @@
 
 function cleanREQUEST($post_return) {
     foreach($post_return as $key => $value) {
+#!!!!!! der key muss auch geprüft werden
         if(is_array($post_return[$key])) {
             $post_return[$key] = cleanREQUEST($post_return[$key]);
         } else {

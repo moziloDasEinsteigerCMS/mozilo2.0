@@ -188,15 +188,16 @@ function make_input_target(cat_page) {
     var curent_target = get_target(cat_page);
     if(!curent_target)
         return "";
-    var inputs = mozilo_lang["target"] + " <form>";
+    var inputs = "<b>" + mozilo_lang["target"] + "</b>" + " <form>";
     var for_id = new Date();
     for_id = for_id.getTime();
     for(var i = 0; i < target_array.length; i++) {
-        inputs += "<label for=\"target" + for_id + i + "\">" + mozilo_lang[target_array[i].replace(/-|_/g,"")] + "</label>" + "<input id=\"target" + for_id + i + "\" name=\"radio\" type=\"radio\" value=\""+target_array[i]+"\" class=\"js-in-radio js-make-input\"";
+        inputs += "<input id=\"target" + for_id + i + "\" name=\"radio\" type=\"radio\" value=\""+target_array[i]+"\" class=\"js-in-radio js-make-input\"";
         if(target_array[i] == curent_target) {
             inputs += " checked=\"checked\"";
         }
         inputs += " />";
+        inputs += "<label for=\"target" + for_id + i + "\">" + mozilo_lang[target_array[i].replace(/-|_/g,"")] + "</label>";
     }
     return inputs + "</form>";
 }
@@ -205,15 +206,16 @@ function make_input_ext(cat_page) {
     var curent_ext = get_ext(cat_page);
     if(!curent_ext || curent_ext == EXT_LINK)
         return "";
-    var inputs = mozilo_lang["page_status"] + ": <form>",
+    var inputs = "<b>" + mozilo_lang["page_status"] + "</b>" + ": <form>",
         for_id = new Date();
     for_id = for_id.getTime();
     for(var i = 0; i < ext_array.length - 1; i++) {
-        inputs += "<label for=\"status" + for_id + i + "\">" + mozilo_lang[ext_array[i]] + "</label>" + "<input id=\"status" + for_id + i + "\" name=\"radio\" type=\"radio\" value=\""+ext_array[i]+"\" class=\"js-in-radio js-make-input\"";
+        inputs += "<input id=\"status" + for_id + i + "\" name=\"radio\" type=\"radio\" value=\""+ext_array[i]+"\" class=\"js-in-radio js-make-input\"";
         if(ext_array[i] == curent_ext) {
             inputs += " checked=\"checked\"";
         }
         inputs += " />";
+        inputs += "<label for=\"status" + for_id + i + "\">" + mozilo_lang[ext_array[i]] + "</label>";
     }
     return inputs + "</form>";
 }
