@@ -59,7 +59,7 @@ self                                 = self
 blank                                = blank
 password                             = Passwort
 username                             = Username
-incorrect_login                      = Du hast dich nicht korrekt angemeldet. Bitte versuchen es noch einmal.
+incorrect_login                      = Du hast dich nicht korrekt angemeldet. Bitte versuche es noch einmal.
 install_login                        = Du must erst den Installer ausführen.<br />In der Anleitung erfährst du mehr dazu.
 images                               = Bilder
 function_exists_error                = Funktion gibt es nicht
@@ -273,7 +273,7 @@ login_titel_dialog                   = Anmeldung
 
 plugins_button                       = Plugins
 plugins_titel                        = Plugins
-plugins_error                        = Schwerer Fehler im Plugin, bitte informieren Sie den Plugin-Autor:
+plugins_error                        = Schwerer Fehler im Plugin, bitte informiere den Plugin-Autor:
 plugins_titel_version                = Benötigte moziloCMS-Version
 plugins_titel_author                 = Autor
 plugins_titel_web                    = Webseite
@@ -286,7 +286,7 @@ template_title_grafiken              = Grafiken
 template_title_html_css              = HTML und CSS Dateien
 template_title_plugins               = Plugins CSS Dateien
 
-install_help                         = <b>Willkommen im moziloCMS Installationsdialog</b><br /><br />In den nächsten Schritten wird getestet ob Dein Webserver bzw. Webhosting-Paket die für moziloCMS nötigen Voraussetzungen erfüllt.<br />Zudem werden grundlegende Voreinstellungen getroffen. All diese Einstellungen können später im Admin jederzeit wieder geändert werden.<br /><br /><b>Update?!</b> Solltest Du ein Update von einer früheren moziloCMS-Version anstreben, ließ und befolge zuerst die install.txt!<br /><br /><b>ACHTUNG!</b> Die "install.php" und wenn vorhanden die "update.php" sowie der Ordner "update" müssen nach dem Installationsdialog gelöscht werden da sie ein großes Sicherheitsrisiko sind.
+install_help                         = <b>Willkommen im moziloCMS Installationsdialog</b><br /><br />In den nächsten Schritten wird getestet ob Dein Webserver bzw. Webhosting-Paket die für moziloCMS nötigen Voraussetzungen erfüllt.<br />Zudem werden grundlegende Voreinstellungen getroffen. All diese Einstellungen können später im Admin jederzeit wieder geändert werden.<br /><br /><b>Update?!</b> Solltest Du ein Update von einer früheren moziloCMS-Version anstreben, ließ und befolge zuerst die install.txt!<br /><br /><b>ACHTUNG!</b> Die "install.php" und wenn vorhanden die "update.php" sowie der Ordner "update" müssen nach dem Installationsdialog gelöscht werden da diese ein großes Sicherheitsrisiko sind.
 install_lang_select                  = Wähle Deine Sprache:
 install_lang_help                    = <b>Sprache</b><br />Die Sprachwahl wird zunächst für die Webseite und den Admin übernommen.<br />Nach der Installation kannst Du im Admin, im Tab "Einstellungen" die Sprache der Webseite und im Tab "Admin" die der Administrationsoberfläche festlegen.
 install_next                         = Weiter
@@ -325,5 +325,5 @@ install_update_galerien_help         = Die Galerie Bilder werden umbenannt.
 install_update_plugins_help          = Die "plugin.conf" Dateien in den jeweiligen Plugins werden in das neue Format überführt. <b>Achtung</b> du kannst davon ausgehen das deine alten Plugins nicht mehr funktionieren, besorge dir die neuen Plugins und benutze die neu erstellte "plugin.conf.php" Datei.
 install_update_layouts_help          = In den Layouts wird die Datei "layoutsettings.conf" nicht mehr benötigt. Diese wird gelöscht und der "usesubmenu" eintrag in die erste Zeile der "template.html" eingetragen.
 
-install_update_error                 = <b>Achtung es gibt Probleme mit den Dateirechten in der entsprechenden Kategorie du must sie vorher mit deinem FTP Programm lösen</b>.<br />Du brauchst die Seite nicht zu machen wenn du Fertig mit FTP bist Klicke einfach nochmal auf den Update Tab.
+install_update_error                 = <b>Achtung es gibt Probleme mit den Dateirechten in der entsprechenden Kategorie du musst sie vorher mit deinem FTP Programm lösen</b>.<br />Du brauchst die Seite nicht zu machen wenn du Fertig mit FTP bist Klicke einfach nochmal auf den Update Tab.
 install_update_successful            = Das Update war erfolgreich. <b>Du musst auf jeden Fall deine Webseite überprüfen</b>.
