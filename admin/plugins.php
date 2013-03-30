@@ -82,7 +82,9 @@ function plugins() {
             else
                 # Plugin Dirname stimt nicht mit Plugin Classnamen überein
                 continue;
-            $conf_plugin = new Properties(PLUGIN_DIR_REL.$currentelement."/plugin.conf.php");
+#            $conf_plugin = new Properties(PLUGIN_DIR_REL.$currentelement."/plugin.conf.php");
+#!!!!!!!!! muss das an $conf_plugin übergeben werden
+            $conf_plugin = $plugin->settings;
             # plugin.conf.php wurde neu erstelt.
             # Wenn es die getDefaultSettings() gibt fühle die plugin.conf.php damit
             if($new_plugin_conf and method_exists($plugin,'getDefaultSettings')) {
@@ -190,14 +192,23 @@ function get_plugin_info($plugin_info) {
     $template = array();
 
     if(isset($plugin_info[1]) and strlen($plugin_info[1]) > 1)
-        $template["plugins_info"][] = array(getLanguageValue("plugins_titel_version"),'<span class="mo-staus">'.$plugin_info[1].'</span>');
+        $template["plugins_info"][] = array(getLanguageValue("plugins_titel_version"),$plugin_info[1]);
 
     if(isset($plugin_info[3]) and strlen($plugin_info[3]) > 1)
-        $template["plugins_info"][] = array(getLanguageValue("plugins_titel_author"),'<span class="mo-staus">'.$plugin_info[3].'</span>');
-
-    if(isset($plugin_info[4]) and strlen($plugin_info[4]) > 1 and stristr($plugin_info[4],"http://"))
-        $template["plugins_info"][] = array(getLanguageValue("plugins_titel_web"),'<a href="'.strip_tags($plugin_info[4]).'" target="_blank">'.strip_tags($plugin_info[4]).'</a>');
-
+        $template["plugins_info"][] = array(getLanguageValue("plugins_titel_author"),$plugin_info[3]);
+    if(isset($plugin_info[4]) and !empty($plugin_info[4])) {
+        $link = '';
+        $link_text = '';
+        if(is_array($plugin_info[4]) and count($plugin_info[4]) == 2) {
+            $link = strip_tags($plugin_info[4][0]);
+            $link_text = strip_tags($plugin_info[4][1]);
+        } else {
+            $link = strip_tags($plugin_info[4]);
+            $link_text = strip_tags($plugin_info[4]);
+        }
+        if(strlen($link_text) > 1 and stristr($link,"http://"))
+            $template["plugins_info"][] = array(getLanguageValue("plugins_titel_web"),'<a href="'.$link.'" target="_blank">'.$link_text.'</a>');
+    }
     if(isset($plugin_info[2]) and strlen($plugin_info[2]) > 1)
         $template["plugins_info"][] = '<table width="100%" cellspacing="0" border="0" cellpadding="0" class="ui-corner-all"><tr><td align="left" valign="top" width="1%">'
             .'<img class="js-help-plugin mo-tool-icon mo-icons-icon mo-icons-info" src="'.ICON_URL_SLICE.'" alt="info" />'
