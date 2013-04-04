@@ -495,6 +495,10 @@ $(function() {
             if (ui.value.search(/\|\}/) != -1) {
                 insert_ace(ui.value.substring(0, ui.value.length-1), '}',true);
             }
+            // {PLUGIN|...}
+            else if (ui.value.search(/\.\.\.\}/) != -1) {
+                insert_ace(ui.value.substring(0, ui.value.length-4), '}',true);
+            }
             // {PLUGIN|wert}
             else if (ui.value.search(/\|/) != -1) {
                 insert_ace(ui.value,false,true);
