@@ -146,9 +146,9 @@ function checkLoginData($user, $pass) {
     require_once(BASE_DIR_ADMIN.'PasswordHash.php');
     $t_hasher = new PasswordHash(8, FALSE);
 
-    if(($user == $loginpassword->get("name")) and ($pass == $t_hasher->CheckPassword($pass, $loginpassword->get("pw")))) {
+    if(($user == $loginpassword->get("name")) and (true === $t_hasher->CheckPassword($pass, $loginpassword->get("pw")))) {
         return true;
-    } elseif((strlen($loginpassword->get("username")) > 4) and ($user == $loginpassword->get("username")) and ($pass == $t_hasher->CheckPassword($pass, $loginpassword->get("userpw")))) {
+    } elseif((strlen($loginpassword->get("username")) > 4) and ($user == $loginpassword->get("username")) and (true === $t_hasher->CheckPassword($pass, $loginpassword->get("userpw")))) {
         return true;
     } else {
         return false;
