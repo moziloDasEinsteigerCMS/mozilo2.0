@@ -286,7 +286,7 @@ function get_page($cat, $page) {
     $page = $CatPage->get_FileSystemName($cat,$page);
     if($CatPage->get_Type($cat,$page) != EXT_LINK) {
         if(false !== ($pagecontent = get_contents_ace_edit(CONTENT_DIR_REL.$cat.'/'.$page)))
-            return ajax_return("success",false).'<textarea id="page-content">'.$pagecontent.'</textarea>';
+            return ajax_return("success",false).'<textarea id="page-content">'.str_replace(array('<textarea','</textarea>'),array('&lt;textarea','&lt;/textarea&gt;'),$pagecontent).'</textarea>';
     }
     return ajax_return("error",false,returnMessage(false,getLanguageValue("editor_content_error_open")),true,true);
 }
