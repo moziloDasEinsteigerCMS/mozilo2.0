@@ -978,6 +978,10 @@ return '<span class="'.$cssclass.'"><img src="'.$imgsrc.'" alt="'.$language->get
             case '{EXECUTETIME}':
                 $replace = '<!--&#94;&#123;EXECUTETIME&#94;&#125;-->';
                 break;
+            case '{JQUERY}':
+                $this->insert_jquery_in_head("jquery");
+                $replace = NULL;
+                break;
             default:
                 $replace = NULL;
         }
