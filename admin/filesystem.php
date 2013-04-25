@@ -385,7 +385,7 @@ function get_contents_ace_edit($file) {
         return false;
     global $page_protect_search;
     $content = str_replace($page_protect_search,"",$content);
-    $content = str_replace("&","&#38;",$content);
+    $content = str_replace(array("&","<",">"),array("&#38;","&lt","&gt;"),$content);
     return $content;
 }
 
