@@ -1,13 +1,11 @@
 <?php if(!defined('IS_CMS')) die();
 
 class Language {
-    
-    var $LANG_CONF;
 
-    
-// ------------------------------------------------------------------------------    
-// Konstruktor
-// ------------------------------------------------------------------------------
+    var $LANG_CONF;
+    // ------------------------------------------------------------------------------
+    // Konstruktor
+    // ------------------------------------------------------------------------------
     function Language($lang_dir = false) {
         global $CMS_CONF;
         if(!$lang_dir) {
@@ -22,10 +20,10 @@ class Language {
         }
     }
 
-// ------------------------------------------------------------------------------
-// Sprachelement mit keinem, einem oder zwei Parametern aus Sprachdatei holen
-// ------------------------------------------------------------------------------
-    function getLanguageValue($phrase, $param1 = '', $param2 = '') {
+    // ------------------------------------------------------------------------------
+    // Sprachelement mit keinem, einem oder zwei Parametern aus Sprachdatei holen
+    // ------------------------------------------------------------------------------
+    function getLanguageValue($phrase, $param1 = "", $param2 = "") {
         $text = $this->LANG_CONF->get($phrase);
         $text = str_replace(array("{PARAM1}","{PARAM2}"), array($param1, $param2), $text);
 ##
@@ -34,7 +32,10 @@ if ($text === "") $text = "Textvar: ". $phrase." gibts nicht!";
          return $text;
     }
 
-    function getLanguageHtml($phrase, $param1 = '', $param2 = '') {
+    // ------------------------------------------------------------------------------
+    // Sprachelement htmlkonform mit keinem, einem oder zwei Parametern aus Sprachdatei holen
+    // ------------------------------------------------------------------------------
+    function getLanguageHtml($phrase, $param1 = "", $param2 = "") {
         $text = $this->LANG_CONF->get($phrase);
         $text = str_replace(array("{PARAM1}","{PARAM2}"), array($param1, $param2), $text);
         $text = htmlentities($text, ENT_COMPAT, CHARSET);
@@ -43,7 +44,5 @@ if ($text === "") $text = "Textvar: ". $phrase." gibts nicht!";
 ##
          return $text;
     }
-
 }
-
 ?>
