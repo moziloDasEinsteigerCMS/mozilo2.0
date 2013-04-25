@@ -48,8 +48,7 @@ function template() {
     $template = array();
     global $specialchars;
 
-    $dircontent = getDirAsArray(BASE_DIR.$LAYOUT_DIR,array(".html"),"natcasesort");
-    foreach($dircontent as $file) {
+    foreach(getDirAsArray(BASE_DIR.$LAYOUT_DIR,array(".html"),"natcasesort") as $file) {
         $template["template_title_html_css"][] = '<table class="js-tools-show-hide mo-tag-height-from-icon" width="100%" cellspacing="0" border="0" cellpadding="0">'
                     .'<tbody>'
                     .'<tr>'
@@ -66,8 +65,7 @@ function template() {
 
     }
 
-    $dircontent = getDirAsArray(BASE_DIR.$LAYOUT_DIR.'css',array(".css"),"natcasesort");
-    foreach($dircontent as $file) {
+    foreach(getDirAsArray(BASE_DIR.$LAYOUT_DIR.'css',array(".css"),"natcasesort") as $file) {
         $template["template_title_html_css"][] = '<table class="js-tools-show-hide mo-tag-height-from-icon" width="100%" cellspacing="0" border="0" cellpadding="0">'
                     .'<tbody>'
                     .'<tr>'
@@ -82,6 +80,15 @@ function template() {
                     .'</tbody>'
                     .'</table>';
     }
+
+    require_once(BASE_DIR_ADMIN."jquery/File-Upload/fileupload.php");
+    $template_img = getFileUpload($CMS_CONF->get("cmslayout").'/grafiken');
+
+    $html_img = get_template_truss('<li class="mo-li ui-corner-all">'.$template_img.'</li>',"template_title_grafiken",true);
+
+    $html_template = get_template_truss('<li class="ui-corner-all">'.contend_template($template).$html_img.'</li>',"template_title_template",false);
+    $html_template = str_replace("{TemplateName}",$specialchars->rebuildSpecialChars($CMS_CONF->get("cmslayout"),false,true),$html_template);
+
     global $ADMIN_CONF;
     $show = $ADMIN_CONF->get("plugins");
     if(!is_array($show))
@@ -111,13 +118,8 @@ function template() {
         $template_plugins["template_title_plugins"]["toggle"] = true;
         $html_plugins = contend_template($template_plugins);
     }
-    require_once(BASE_DIR_ADMIN."jquery/File-Upload/fileupload.php");
-    $pagecontent = getFileUpload($CMS_CONF->get("cmslayout").'/grafiken');
 
-    $tmpl = get_template_truss('<li class="mo-li ui-corner-all">'.$pagecontent.'</li>',"template_title_grafiken",true);
-
-
-    return contend_template($template).$tmpl.$html_plugins.pageedit_dialog();
+    return $html_template.$html_plugins.pageedit_dialog();
 }
 
 ?>
