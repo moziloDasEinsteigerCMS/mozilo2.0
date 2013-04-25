@@ -1,4 +1,3 @@
-
 /* -------------------------------------------------------- */
 /* Suchformular */
 /* ------------ */
@@ -69,3 +68,13 @@ input.searchbutton {
     color:#ffffff;
 }
  
+/* -------------------------------------------------------- */
+/* {TABLEOFCONTENTS} */
+/* ----------------- */
+div.tableofcontents ul ul {
+    /*padding-left:15px;*/
+}
+div.tableofcontents li.blind {
+    list-style-type:none;
+    list-style-image:none;
+}

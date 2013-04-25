@@ -5,58 +5,71 @@
 /* -------------------------------------------------------- */
 
 /* -------------------------------------------------------- */
+/* {SITEMAPLINK} */
+/* ------------- */
+#sitemaplink {
+}
+
+.sitemap ul {
+    list-style-type:none;
+}
+/* -------------------------------------------------------- */
+/* {CMSINFO} */
+/* ------------- */
+#cmsinfolink {
+}
+/* -------------------------------------------------------- */
+/* {LASTCHANGE} */
+/* ------------- */
+#lastchangelink {
+}
+/* -------------------------------------------------------- */
 /* [link|...]      */
 /* --------------- */
 a.link {
 }
-
-
 /* -------------------------------------------------------- */
 /* [mail|...]      */
 /* --------------- */
 a.mail {
 }
-
-
 /* -------------------------------------------------------- */
 /* [seite|...]      */
 /* --------------- */
 a.page {
 }
-
-
 /* -------------------------------------------------------- */
 /* [kategorie|...]      */
 /* --------------- */
 a.category {
 }
-
-
 /* -------------------------------------------------------- */
 /* [datei|...]      */
 /* --------------- */
 a.file {
 }
 
+/* -------------------------------------------------------- */
+/* Globale Link einstelungen      */
+/* --------------- */
+#sitemaplink:hover, #cmsinfolink:hover, #lastchangelink:hover, .link:hover, .mail:hover, .page:hover, .category:hover, .file:hover {
+    color: #AE6427;
+}
+#sitemaplink:visited, #cmsinfolink:visited, #lastchangelink:visited, .link:visited, .mail:visited, .page:visited, .category:visited, .file:visited {
+}
 
 /* -------------------------------------------------------- */
 /* [bild|...] */
 /* ---------- */
-span.imagesubtitle {
-    margin:3px 3px;
-    text-align:justify;
-    font-size:87%;
-    border:none;
-    /*line-height:120%;*/
+span.contentimage {
+/*    border:1px solid #000;
+    padding:5px;
+    margin:1px;*/
+    /*display:inline-block;*/
 }
 
 img.contentimage {
     border:none;
-}
-
-span.contentimage {
-    border:none;
-    display:inline-block;
 }
 
 /*1=oben, 2=rechts, 3=unten, 4=links*/
@@ -79,6 +92,7 @@ img.leftcontentimage {
 /* [bildrechts|...] */
 /* ---------------- */
 span.rightcontentimage {
+    border:1px solid #000;
     margin:6px 0px 6px 20px;
     float:right;
 /*clear:both;*/
@@ -87,11 +101,21 @@ img.rightcontentimage {
     /*border:1px solid;*/
 }
 
+/* -------------------------------------------------------- */
+/* [bild|...] [bildlinks|...] [bildrechts|...] */
+/* ---------------- */
+span.imagesubtitle {
+    margin:3px 3px;
+    text-align:justify;
+    font-size:87%;
+    border:none;
+    /*line-height:120%;*/
+}
 
 /* -------------------------------------------------------- */
 /* [fett|...] */
 /* ---------- */
-b {
+b.contentbold {
 
 }
 
@@ -99,7 +123,7 @@ b {
 /* -------------------------------------------------------- */
 /* [kursiv|...] */
 /* ------------ */
-i {
+i.contentitalic {
 
 }
 
@@ -107,7 +131,7 @@ i {
 /* -------------------------------------------------------- */
 /* [unter|...] */
 /* ------------ */
-u {
+u.contentunderlined {
 
 }
 
@@ -115,10 +139,13 @@ u {
 /* -------------------------------------------------------- */
 /* [durch|...] */
 /* ------------ */
-s {
+s.contentstrikethrough {
 
 }
 
+/* -------------------------------------------------------- */
+/* [fontsize|...] */
+/* ------------ */
 .fontsize {
     line-height:1em;
 }
@@ -126,7 +153,7 @@ s {
 /* -------------------------------------------------------- */
 /* [ueber1|...] */
 /* ------------ */
-h1 {
+h1.heading1 {
     /*font-family: Arial, Helvetica, sans-serif;*/
     font-size: 20px;
     color: #0B1C47;
@@ -140,7 +167,7 @@ h1 {
 /* -------------------------------------------------------- */
 /* [ueber2|...] */
 /* ------------ */
-h2 {
+h2.heading2 {
     font-size: 115%;
     margin-top:10px;
     margin-bottom:5px;
@@ -150,7 +177,7 @@ h2 {
 /* -------------------------------------------------------- */
 /* [ueber3|...] */
 /* ------------ */
-h3 {
+h3.heading3 {
     font-size:100%;
     margin-top:10px;
     margin-bottom:4px;
@@ -187,12 +214,23 @@ h3 {
 
 /* -------------------------------------------------------- */
 /* [liste|...] */
-/* [numliste|...] */
 /* ------------ */
-.unorderedlist, .orderedlist {
+.unorderedlist {
     margin-top:0px;
     margin-bottom:0px;
 }
+
+/* -------------------------------------------------------- */
+/* [numliste|...] */
+/* ------------ */
+.orderedlist {
+    margin-top:0px;
+    margin-bottom:0px;
+}
+
+/* -------------------------------------------------------- */
+/* [liste|...] [numliste|...] LI element */
+/* ------------ */
 .listitem {
     margin-top:0px;
     margin-bottom:0px;
@@ -202,7 +240,7 @@ h3 {
 /* -------------------------------------------------------- */
 /* [----] */
 /* ------ */
-hr {
+hr.horizontalrule {
 }
 
 /* -------------------------------------------------------- */
@@ -242,4 +280,3 @@ td.contenttable2 {
     color:#ff4444;
     font-weight:bold;
 }
-
