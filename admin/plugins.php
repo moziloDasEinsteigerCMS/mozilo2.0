@@ -68,7 +68,7 @@ function plugins() {
         $new_plugin_conf = false;
         if(!ROOT and !in_array($currentelement,$show))
             continue;
-        if (file_exists(PLUGIN_DIR_REL.$currentelement."/index.php")) {
+        if(file_exists(PLUGIN_DIR_REL.$currentelement."/index.php")) {
             if(!is_file(PLUGIN_DIR_REL.$currentelement."/plugin.conf.php")) {
                 if(false === (newConf(PLUGIN_DIR_REL.$currentelement."/plugin.conf.php")))
                     die();
@@ -139,11 +139,13 @@ function plugins() {
 
 function save_plugin_settings($conf_plugin,$config,$currentelement) {
     $messages = NULL;
+
     if(count($config) < 1)
-        return false;
+        return ajax_return("success",false);
+
     foreach($config as $name => $inhalt) {
         if($name == "--admin~~" or $name == "--template~~") continue;
-        if(false != ($conf_inhalt = getRequestValue(array($currentelement,$name),'post',false))) {
+        if(false !== ($conf_inhalt = getRequestValue(array($currentelement,$name),'post',false))) {
             # ist array bei radio und select multi
             if(is_array($conf_inhalt)) {
                 $conf_inhalt = implode(",", $conf_inhalt);
@@ -164,7 +166,7 @@ function save_plugin_settings($conf_plugin,$config,$currentelement) {
                         $conf_inhalt = md5($conf_inhalt);
                     }
                     # nur in conf schreiben wenn sich der wert geändert hat
-                    if($conf_plugin->get("active") == "true" and $conf_plugin->get($name) != $conf_inhalt) {
+                    if($conf_plugin->get($name) != $conf_inhalt) {
                         $conf_plugin->set($name,$conf_inhalt);
                     }
                 } else {
@@ -172,15 +174,15 @@ function save_plugin_settings($conf_plugin,$config,$currentelement) {
                 }
             } else {
                 # nur in conf schreiben wenn sich der wert geändert hat und es kein password ist
-                if($conf_plugin->get("active") == "true" and $conf_plugin->get($name) != $conf_inhalt and $config[$name]['type'] != "password") {
+                if($conf_plugin->get($name) != $conf_inhalt and $config[$name]['type'] != "password") {
                     $conf_plugin->set($name,$conf_inhalt);
                 }
             }
-        # checkbox
-        } elseif($conf_plugin->get("active") == "true" and $config[$name]['type'] == "checkbox" and $conf_plugin->get($name) == "true") {
+        # checkbox request gibts nicht wenn kein hacken gesetzt ist
+        } elseif($config[$name]['type'] == "checkbox" and $conf_plugin->get($name) != "false") {
             $conf_plugin->set($name,"false");
         # variable gibts also schreiben mit lehren wert
-        } elseif($conf_plugin->get("active") == "true" and $conf_plugin->get($name)) {
+        } elseif($conf_plugin->get($name)) {
             $conf_plugin->set($name,"");
         }
     }
