@@ -452,3 +452,8 @@ div.tableofcontents li.blind {
     list-style-type:none;
     list-style-image:none;
 }
+fieldset#searchfieldset {
+   border:none;
+   margin:0px;
+   padding:0px;
+}
