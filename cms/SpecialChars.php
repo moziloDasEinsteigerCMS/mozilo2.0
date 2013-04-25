@@ -75,7 +75,7 @@ class SpecialChars {
                 $test = htmlentities(@iconv(CHARSET,CHARSET.'//IGNORE',$text),ENT_COMPAT,CHARSET);
             }
             $text = $test;
-            $text = str_replace('&amp;#','&#',$text);
+            $text = str_replace(array("&amp;#","&amp;lt;","&amp;gt;"),array("&#","&lt;","&gt;"),$text);
         }
         // Leerzeichen
         if ($rebuildnbsp and !$html)
