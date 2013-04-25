@@ -414,6 +414,25 @@ class CatPageClass {
         return false;
     }
 
+    function set_Protectet($cat,$page,$status = true) {
+        if($status !== false and $status !== true)
+            return false;
+        $cat = $this->get_AsKeyName($cat);
+        if($page !== false) {
+            $page = $this->get_AsKeyName($page);
+            if(isset($this->CatPageArray[$cat]['_pages-'][$page]['_protect-'])) {
+                $this->CatPageArray[$cat]['_pages-'][$page]['_protect-'] = $status;
+                return true;
+            }
+            return false;
+        }
+        if(isset($this->CatPageArray[$cat]['_protect-'])) {
+            $this->CatPageArray[$cat]['_protect-'] = $status;
+            return true;
+        }
+        return false;
+    }
+
     function exists_File($cat,$file) {
         $cat = $this->get_AsKeyName($cat);
         if(isset($this->CatPageArray[$cat]['_files-'])) {
