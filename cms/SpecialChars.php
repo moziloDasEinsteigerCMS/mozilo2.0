@@ -53,7 +53,7 @@ class SpecialChars {
     function replaceSpecialChars($text,$nochmal_erlauben) {
         # $nochmal_erlauben = für Tags mit src z.B. img dann muss das % auch gewandelt werden
         $text = str_replace('/','ssslashhh',$text);
-        if(preg_match('#\%([0-9a-f]{2})#ie',$text) < 1)
+        if(preg_match('#\%([0-9a-f]{2})#i',$text) < 1)
             $text = mo_rawurlencode(stripslashes($text));
         if($nochmal_erlauben)
             $text = mo_rawurlencode(stripslashes($text));

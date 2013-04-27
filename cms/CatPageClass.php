@@ -312,7 +312,7 @@ class CatPageClass {
     # wandelt $name von z.B. "Über uns" nach "%C3%9Cber%20uns"
     function get_UrlCoded($name,$protectUrlChr = false) {
         $name = html_entity_decode($name,ENT_QUOTES,CHARSET);
-        if(preg_match('#\%([0-9a-f]{2})#ie',$name) < 1) {
+        if(preg_match('#\%([0-9a-f]{2})#i',$name) < 1) {
             $name = mo_rawurlencode(stripslashes($name));
         }
 
