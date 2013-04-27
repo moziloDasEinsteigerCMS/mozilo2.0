@@ -117,29 +117,29 @@ class Galerie extends Plugin {
             $html = $template;
     
             if (count($picarray) == 0) {
-                $html = preg_replace('/{NUMBERMENU}/', $lang_gallery_cms->getLanguageValue("message_galleryempty_0"), $html);
+                $html = str_replace('{NUMBERMENU}', $lang_gallery_cms->getLanguageValue("message_galleryempty_0"), $html);
             }
             # Titel der Galerie
-            $html = preg_replace('/{CURRENTGALLERY}/', $specialchars->rebuildSpecialChars($gal_request,false,true), $html);
+            $html = str_replace('{CURRENTGALLERY}', $specialchars->rebuildSpecialChars($gal_request,false,true), $html);
             if ($usethumbs) {
-                $html = preg_replace('/{GALLERYMENU}/', "&nbsp;", $html);
-                $html = preg_replace('/{NUMBERMENU}/', $this->getThumbnails($picarray,$alldescriptions,$GALERIE_DIR,$GALERIE_DIR_SRC), $html);
-                $html = preg_replace('/{CURRENTPIC}/', "&nbsp;", $html);
-                $html = preg_replace('/{CURRENTDESCRIPTION}/', "&nbsp;", $html);
-                $html = preg_replace('/{XOUTOFY}/', "&nbsp;", $html);
+                $html = str_replace('{GALLERYMENU}', "&nbsp;", $html);
+                $html = str_replace('{NUMBERMENU}', $this->getThumbnails($picarray,$alldescriptions,$GALERIE_DIR,$GALERIE_DIR_SRC), $html);
+                $html = str_replace('{CURRENTPIC}', "&nbsp;", $html);
+                $html = str_replace('{CURRENTDESCRIPTION}', "&nbsp;", $html);
+                $html = str_replace('{XOUTOFY}', "&nbsp;", $html);
             } else {
-                $html = preg_replace('/{GALLERYMENU}/', $this->getGalleryMenu($picarray,$linkprefix,$gal_request,$index,$first,$previous,$next,$last), $html);
-                $html = preg_replace('/{NUMBERMENU}/', $this->getNumberMenu($picarray,$linkprefix,$index,$gal_request,$first,$last), $html);
-                $html = preg_replace('/{CURRENTPIC}/', $this->getCurrentPic($picarray,$index,$GALERIE_DIR_SRC), $html);
+                $html = str_replace('{GALLERYMENU}', $this->getGalleryMenu($picarray,$linkprefix,$gal_request,$index,$first,$previous,$next,$last), $html);
+                $html = str_replace('{NUMBERMENU}', $this->getNumberMenu($picarray,$linkprefix,$index,$gal_request,$first,$last), $html);
+                $html = str_replace('{CURRENTPIC}', $this->getCurrentPic($picarray,$index,$GALERIE_DIR_SRC), $html);
                 if (count($picarray) > 0) {
-                    $html = preg_replace('/{CURRENTDESCRIPTION}/', $this->getCurrentDescription($picarray[$index-1],$picarray,$alldescriptions), $html);
+                    $html = str_replace('{CURRENTDESCRIPTION}', $this->getCurrentDescription($picarray[$index-1],$picarray,$alldescriptions), $html);
                 } else {
-                    $html = preg_replace('/{CURRENTDESCRIPTION}/', "", $html);
+                    $html = str_replace('{CURRENTDESCRIPTION}', "", $html);
                 }
-                $html = preg_replace('/{XOUTOFY}/', $this->getXoutofY($picarray,$index,$last), $html);
-                $html = preg_replace('/{CURRENT_INDEX}/', $index, $html);
-                $html = preg_replace('/{PREVIOUS_INDEX}/', $previous, $html);
-                $html = preg_replace('/{NEXT_INDEX}/', $next, $html);
+                $html = str_replace('{XOUTOFY}', $this->getXoutofY($picarray,$index,$last), $html);
+                $html = str_replace('{CURRENT_INDEX}', $index, $html);
+                $html = str_replace('{PREVIOUS_INDEX}', $previous, $html);
+                $html = str_replace('{NEXT_INDEX}', $next, $html);
             }
             return $html;
         # Galerie Link erzeugen
