@@ -283,8 +283,7 @@ function environment() {
 
     // Zeile "Safe Mode"
     if(ini_get('safe_mode')) {
-        $status = false;
-        $html = array(getLanguageValue("home_text_safemode"),getLanguageValue("yes"));
+        $html = array(getLanguageValue("home_text_safemode")."<br /><b>".getLanguageValue("home_error_safe_mode")."</b>",getLanguageValue("yes"));
         $html_ret .= contend_template($html,false);
     } else {
         $html = array(getLanguageValue("home_text_safemode"),getLanguageValue("no"));
