@@ -65,8 +65,15 @@ class SearchClass {
         $searchstring = $this->lowercase(rawurldecode($phrase));
         $return_array = array();
         if(trim($searchstring) != "") {
-            # Lehrzeichen die in einer Umklammerung sind zu %20 wandeln
-            $string = preg_replace("/[\"|\'](.*)[\"|\']/Umsie", "str_replace(\" \",\"%20\",'\\1')", $searchstring);
+            # Leerzeichen die in einer Umklammerung sind zu %20 wandeln
+            # ALT: $string = preg_replace("/[\"|\'](.*)[\"|\']/Umsie", "str_replace(\" \",\"%20\",'\\1')", $searchstring);
+            $string = preg_replace_callback(
+                          "/[\"|\'](.*)[\"|\']/Umsi",
+                          function($arr) {
+                              return str_replace(" ","%20",$arr[1]);
+                          },
+                          $searchstring
+                      );
             $matches = explode(" ",$string);
             foreach($matches as $string) {
                 $string = str_replace("%20"," ",trim($string));

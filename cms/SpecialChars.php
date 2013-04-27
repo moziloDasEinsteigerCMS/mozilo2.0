@@ -128,7 +128,14 @@ class SpecialChars {
 // ------------------------------------------------------------------------------
     function encodeProtectedChr($text) {# protected
         # alle geschützten zeichen suchen und in html code wandeln auch das ^
-        $text = preg_replace("/\^(.)/Umsie", "'&#94;&#'.ord('\\1').';'", $text);
+        # ALT: $text = preg_replace("/\^(.)/Umsie", "'&#94;&#'.ord('\\1').';'", $text);
+        $text = preg_replace_callback(
+                    "/\^(.)/Umsi",
+                    function($arr) {
+                        return "&#94;&#".ord($arr[1]).";";
+                    },
+                    $text
+                );
         return $text;
     }
 
@@ -137,9 +144,17 @@ class SpecialChars {
 // ------------------------------------------------------------------------------
     function decodeProtectedChr($text) {
         # alle &#94;&#?????; suchen und als zeichen ohne &#94; (^) ersetzen
-        $text = preg_replace("/&#94;&#(\d{2,5});/e", "chr('\\1')", $text);
+        # ALT: $text = preg_replace("/&#94;&#(\d{2,5});/e", "chr('\\1')", $text);
+        $text = preg_replace_callback(
+                    "/&#94;&#(\d{2,5});/",
+                    function($arr) {
+                        return chr($arr[1]);
+                    },
+                    $text
+                );
         return $text;
     }
+    
 // ------------------------------------------------------------------------------
 // E-Mail-Adressen verschleiern
 // ------------------------------------------------------------------------------
