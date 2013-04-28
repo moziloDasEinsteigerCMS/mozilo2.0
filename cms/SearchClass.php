@@ -66,7 +66,6 @@ class SearchClass {
         $return_array = array();
         if(trim($searchstring) != "") {
             # Leerzeichen die in einer Umklammerung sind zu %20 wandeln
-            # ALT: $string = preg_replace("/[\"|\'](.*)[\"|\']/Umsie", "str_replace(\" \",\"%20\",'\\1')", $searchstring);
             $string = preg_replace_callback(
                           "/[\"|\'](.*)[\"|\']/Umsi",
                           function($arr) {
