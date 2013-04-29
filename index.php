@@ -113,45 +113,41 @@ if(!array_key_exists("cat",$_GET)) {
     $QUERY_STRING = str_replace("&amp;","&",$_SERVER['QUERY_STRING']);
     $url_get = str_replace("?".$QUERY_STRING,"",$url_get);
     $url_get = str_replace('%252F','%2F',$url_get);
-    # / nach : damit es wie eine cat:page syntax aussieht
-#    $url_get = str_replace('/',':',$url_get);
     if(substr($url_get,-5) == ".html")
         $url_get = substr($url_get,0,-5);
+    # wenn in der .htaccess das ErrorDocument 404 auf die index.php zeigt
+    if(substr($url_get,-1) == "/")
+        $url_get = substr($url_get,0,-1);
     $tmp = makeGET($url_get);
-#    $tmp = $CatPage->split_CatPage_fromSyntax($url_get);
-/*
-echo "<pre>";
-print_r($tmp);
-echo "</pre><br />\n";
-*/
-#echo "GET=".$tmp[0]." -> ".$tmp[1]."<br />\n";
-    $_GET['cat'] = cleanValue($tmp[0]);
-    $_GET['page'] = cleanValue($tmp[1]);
+    $_GET['cat'] = $tmp[0];
+    $_GET['page'] = $tmp[1];
     unset($tmp,$QUERY_STRING,$url_get);
 }
+
 function makeGET($syntax_catpage) {
     global $CatPage;
     $valuearray = explode("/", $syntax_catpage);
-/*echo "<pre>";
-print_r($valuearray);
-echo "</pre><br />\n";*/
-    # wenn cat:page/file oder in cat : enthalten ist
-#echo count($valuearray)."<br />\n";
+    # wenn page oder in cat / enthalten ist
     if(count($valuearray) > 0) {
         for($i = 1;$i < (count($valuearray) + 1);$i++) {
-#        for($i = (count($valuearray) - 0);$i > 0;$i--) {
-#echo $i."<br />\n";
             $cat = implode("%2F",array_slice($valuearray, 0,$i));
             $page = implode("%2F",array_slice($valuearray, $i));
-#echo "get=".$cat." -> ".$page."<br />\n";
-                if($CatPage->exists_CatPage($cat,$page))
-                    return array($cat,$page);
-                elseif(strlen($page) == 0 and $CatPage->exists_CatPage($cat,false)) {
-                    return array($cat,false);
-                }
+            if($CatPage->exists_CatPage($cat,$page))
+                return array($cat,$page);
+            elseif(strlen($page) == 0 and $CatPage->exists_CatPage($cat,false))
+                return array($cat,false);
+        }
+        # mal schauen ob wir wenigstens nee gültige cat haben
+        for($i = count($valuearray);$i > 0;$i--) {
+            $cat = implode("%2F",array_slice($valuearray, 0,$i));
+            $page = implode("%2F",array_slice($valuearray, $i));
+            if($CatPage->exists_CatPage($cat,false))
+                return array($cat,$page);
         }
     }
+    return array(implode("%2F",$valuearray),false);
 }
+
 $pagecontent = false;
 
 foreach($plugin_first as $plugin) {
