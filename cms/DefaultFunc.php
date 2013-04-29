@@ -89,6 +89,8 @@ function cleanValue($value) {
         foreach($value as $key => $val) {
             $value[$key] = cleanValue($val);
         }
+    } elseif(is_bool($value)) {
+        return $value;
     } else {
         // Nullbytes abfangen!
         if (strpos("tmp".$value, "\x00") > 0) {
