@@ -120,7 +120,7 @@ class MenuSubs extends Plugin {
                     $activ = true;
                 }
                 $ul .= '<li class="cat-menusubs">'.$CatPage->create_AutoLinkTag($cat,false,$css.$cssactiv);
-                if(!$only_main and ($activ or $CMS_CONF->get("usesubmenu") == 0)) {# or $CatPage->is_Activ($cat,false)
+                if(!$only_main and ($activ or $CMS_CONF->get("usesubmenu") == 2)) {# or $CatPage->is_Activ($cat,false)
                     $ul .= $this->getMenuPage($cat);
                 }
                 $ul .= '</li>';
@@ -154,7 +154,7 @@ class MenuSubs extends Plugin {
                     and $CatPage->get_Type($cat,$page) == EXT_HIDDEN
                     and $CatPage->get_Type($page,false) == "cat") {
                 $ul .= '<li class="subcat-menusubs">'.$this->create_CatSubLinkTag($cat,$page,"subcat-menusubs-link menusubs-link");
-                if(strstr(CAT_REQUEST,$page) or $CMS_CONF->get("usesubmenu") == 0)
+                if(strstr(CAT_REQUEST,$page) or $CMS_CONF->get("usesubmenu") == 2)
                     $ul .= $this->getMenuPage($page,true);
                 $ul .= '</li>'."\n";
                 $return = true;
