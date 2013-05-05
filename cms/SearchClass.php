@@ -25,7 +25,8 @@ class SearchClass {
         $this->showhiddenpagesinsearch = $CMS_CONF->get("showhiddenpagesinsearch");
 
         $this->nosearchwords = $language->getLanguageValue("message_searchhelp_0");
-        $this->searchnoresult = $language->getLanguageValue("message_searchnoresult_1", trim(rawurldecode($SEARCH_REQUEST)));
+        $query = str_replace(array('"',"'","[","]","{","}"),array("&quot;","&apos;","&#091;","&#093;","&#123;","&#125;"),trim(rawurldecode($SEARCH_REQUEST)));
+        $this->searchnoresult = $language->getLanguageValue("message_searchnoresult_1", $query);
     }
 
     function setLowerChars() {
@@ -253,7 +254,7 @@ function findInPage($cat,$page) {
         $draft = '';
         if(DRAFT)
             $draft = '<input type="hidden" name="draft" value="true" />';
-        $query = str_replace(array('"',"'"),array("&quot;","&apos;"),trim(rawurldecode($SEARCH_REQUEST)));
+        $query = str_replace(array('"',"'","[","]","{","}"),array("&quot;","&apos;","&#091;","&#093;","&#123;","&#125;"),trim(rawurldecode($SEARCH_REQUEST)));
         return '<form accept-charset="'.CHARSET.'" method="get" action="'.$CatPage->get_Href(false,false).'" class="searchform">'
                 .'<fieldset id="searchfieldset">'
                 .$draft
