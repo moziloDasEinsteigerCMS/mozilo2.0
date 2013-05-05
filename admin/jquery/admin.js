@@ -124,7 +124,7 @@ $(function() {
         $('input[name="newusername"]').val("");
     });
 
-    $('.js-language, .js-noroot-tabs, .js-noroot-config, .js-noroot-admin, .js-noroot-plugins').bind("change", in_change_handler);
+    $('.js-language, .js-noroot-tabs, .js-noroot-config, .js-noroot-admin, .js-noroot-plugins, .js-noroot-template').bind("change", in_change_handler);
 
     $('.js-language').multiselect({
         multiple: false,
@@ -134,7 +134,7 @@ $(function() {
         selectedList: 1
    }).multiselectfilter();
 
-    $('.js-noroot-tabs, .js-noroot-config, .js-noroot-admin, .js-noroot-plugins').multiselect({
+    $('.js-noroot-tabs, .js-noroot-config, .js-noroot-admin, .js-noroot-plugins, .js-noroot-template').multiselect({
         showSelectAll:true,
         showClose: false,
         multiple: true,
@@ -153,19 +153,19 @@ $(function() {
             make_para($(this),"chanceadmin=true&");
         },
         click: function(event, ui){
-            if($(this).hasClass('js-noroot-tabs') && (ui.value == "config" || ui.value == "admin" || ui.value == "plugins")) {
+            if($(this).hasClass('js-noroot-tabs') && (ui.value == "config" || ui.value == "admin" || ui.value == "plugins" || ui.value == "template")) {
                 $('.js-noroot-'+ui.value).multiselect((ui.checked ? 'enable' : 'disable'));
             }
         }
-
     }).multiselectfilter();
-
+/*
     if($('.js-noroot-plugins option').length < 1)
-        $('.js-noroot-plugins').multiselect('disable');
+        $('.js-noroot-plugins').multiselect('disable');*/
 
-    $('.js-noroot-tabs').multiselect( "option", "noneSelectedText", $('.js-noroot-tabs').attr('title'));
-    $('.js-noroot-config').multiselect( "option", "noneSelectedText", $('.js-noroot-config').attr('title'));
-    $('.js-noroot-admin').multiselect( "option", "noneSelectedText", $('.js-noroot-admin').attr('title'));
-    $('.js-noroot-plugins').multiselect( "option", "noneSelectedText", $('.js-noroot-plugins').attr('title'));
+    $('.js-noroot-tabs').multiselect("option","noneSelectedText",$('.js-noroot-tabs').attr('title'));
+    $('.js-noroot-config').multiselect("option","noneSelectedText",$('.js-noroot-config').attr('title'));
+    $('.js-noroot-admin').multiselect("option","noneSelectedText",$('.js-noroot-admin').attr('title'));
+    $('.js-noroot-plugins').multiselect("option","noneSelectedText",$('.js-noroot-plugins').attr('title'));
+    $('.js-noroot-template').multiselect("option","noneSelectedText",$('.js-noroot-template').attr('title'));
 
 });

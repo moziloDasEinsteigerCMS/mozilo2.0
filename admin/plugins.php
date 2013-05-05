@@ -1,7 +1,33 @@
 <?php if(!defined('IS_ADMIN') or !IS_ADMIN) die();
+
+$debug = "";
+
 function plugins() {
     global $ADMIN_CONF;
     global $CatPage;
+    global $message;
+
+
+global $debug;
+    $plugin_manage_open = false;
+    # plugins löschen
+    if(getRequestValue('plugin-all-del','post') and getRequestValue('plugin-del','post')) {
+        plugin_del();
+        $plugin_manage_open = true;
+    }
+    # hochgeladenes plugin installieren
+    if(isset($_FILES["plugin-install-file"]["error"]) and getRequestValue('plugin-install','post')) {
+$debug .= "install=".$_FILES["plugin-install-file"]["name"]."<br />\n";
+        if($_FILES["plugin-install-file"]["error"] == 0 and strtolower(substr($_FILES["plugin-install-file"]["name"],-4)) == ".zip") {
+            plugin_install();
+            $plugin_manage_open = true;
+        }
+    }
+
+$debug = false;
+if($debug)
+    $message .= returnMessage(false,$debug);
+
 
     require_once(BASE_DIR_CMS."Plugin.php");
 
@@ -55,13 +81,45 @@ function plugins() {
         die("Fatal Error");
     }
 
-
-
-    $pagecontent = '<ul class="js-plugins mo-ul">';
+    $pagecontent = '';
 
     $show = $ADMIN_CONF->get("plugins");
     if(!is_array($show))
         $show = array();
+
+
+#function_exists('gzopen')
+
+if(ROOT or in_array("plugin_-_manage",$show)) {
+    $multi_user = "";
+    if(defined('MULTI_USER') and MULTI_USER)
+        $multi_user = "&amp;multi=true";
+
+    $html_manage = "";
+    $plugin_manage = array();
+#$html_manage
+    $disabled = '';
+    if(!function_exists('gzopen'))
+        $disabled = ' disabled="disabled"';
+    $plugin_manage["plugins_title_manage"][] = '<form id="js-plugin-manage" action="index.php?nojs=true&amp;action=plugins'.$multi_user.'" method="post" enctype="multipart/form-data">'
+        .'<div class="mo-nowrap align-right">'
+            .'<span class="align-left" style="float:left"><span class="mo-bold">'.getLanguageValue("plugins_text_filebutton").'</span><br />'.getLanguageValue("plugins_text_fileinfo").'</span>'
+            .'<input type="file" id="js-plugin-install-file" name="plugin-install-file" class="mo-select-div"'.$disabled.' />'
+            .'<input type="submit" id="js-plugin-install-submit" name="plugin-install" value="'.getLanguageValue("plugins_button_install",true).'"'.$disabled.' /><br />'
+            .'<input type="submit" id="js-plugin-del-submit" value="'.getLanguageValue("plugins_button_delete",true).'" class="mo-margin-top js-send-del-stop" /><br class="mo-clear" />'
+        .'</div></form>';
+
+    $plugin_manage["plugins_title_manage"]["toggle"] = true;
+    $html_manage = contend_template($plugin_manage);
+#$html_manage = get_template_truss($html_manage,"plugins_title_manage",true);
+    $html_manage = str_replace("js-toggle","js-toggle-manage",$html_manage);
+    # es wurde in der template verwaltung was gemacht dann soll die aufgeklapt bleiben
+#$plugin_manage_open = true;
+    if($plugin_manage_open)
+        $html_manage = str_replace("display:none;","",$html_manage);
+    $pagecontent .= $html_manage;
+}
+    $pagecontent .= '<ul class="js-plugins mo-ul">';
 
     $dircontent = getDirAsArray(PLUGIN_DIR_REL,"dir","natcasesort");
     foreach ($dircontent as $currentelement) {
@@ -106,6 +164,9 @@ function plugins() {
             }
             $pagecontent .= '<li class="js-plugin mo-li ui-widget-content ui-corner-all'.$plugin_css_li_error.'">'
             .'<div class="js-tools-show-hide mo-li-head-tag mo-li-head-tag-no-ul ui-state-active ui-corner-all">';
+$check_show = ' style="display:none;"';
+if($plugin_manage_open)
+    $check_show = '';
             if($plugin_error === false) {
                 $pagecontent .= '<table width="100%" cellspacing="0" border="0" cellpadding="0" class="mo-tag-height-from-icon">'
                 .'<tr>'
@@ -117,11 +178,13 @@ function plugins() {
                 .'</td>'
                 .'<td class="d_td_icons mo-nowrap">'
                     .'<img class="js-tools-icon-show-hide js-toggle mo-tool-icon mo-icons-icon mo-icons-edit" src="'.ICON_URL_SLICE.'" alt="edit" />'
+.'<input type="checkbox" value="'.$currentelement.'" class="mo-checkbox js-plugin-del"'.$check_show.' />'
+#.buildCheckBox('plugin-del[]', false)
                 .'</td>'
                 .'</tr>'
                 .'</table>'
                 .'</div>'
-                .'<div class="js-toggle-content mo-in-ul-ul">'
+                .'<div class="js-toggle-content mo-in-ul-ul" style="display:none;">'
                 .get_plugin_info($plugin_info);
                 # geändert damit getConfig() nicht 2mal ausgeführt wird
                 $config = $plugin->getConfig();
@@ -214,8 +277,9 @@ function get_plugin_info($plugin_info) {
     if(isset($plugin_info[2]) and strlen($plugin_info[2]) > 1)
         $template["plugins_info"][] = '<table width="100%" cellspacing="0" border="0" cellpadding="0" class="ui-corner-all"><tr><td align="left" valign="top" width="1%">'
             .'<img class="js-help-plugin mo-tool-icon mo-icons-icon mo-icons-info" src="'.ICON_URL_SLICE.'" alt="info" />'
-            .'</td><td align="left" valign="top">'
-            .'<div class="mo-help-box js-plugin-help-content d_ui-widget-content ui-corner-all"><div class="js-width-show-helper">'.$plugin_info[2].'</div></div>'
+            .'</td><td align="left" valign="top" width="99%">'
+#            .'<div class="mo-help-box js-plugin-help-content ui-corner-all" style="display:none;"><div class="d_js-width-show-helper">'.$plugin_info[2].'</div></div>'
+            .'<div class="mo-help-box js-plugin-help-content ui-corner-all" style="display:none;">'.$plugin_info[2].'</div>'
             .'</td></tr></table>';
 
     return contend_template($template);
@@ -366,8 +430,10 @@ function get_plugin_config($conf_plugin,$config,$currentelement) {
     if($template == "template_test") {
         $ul_template["config_button"][] = array("Template Platzhalter",implode("<br />", $search));
     }
-
-    return '<div class="js-config"><ul class="mo-ul">'
+    $show = '';
+    if($conf_plugin->get("active") != "true")
+        $show = ' style="display:none;"';
+    return '<div class="js-config"'.$show.'><ul class="mo-ul">'
            .'<li class="mo-li ui-widget-content ui-corner-all">'
            .'<div class="js-tools-show-hide mo-li-head-tag mo-tag-height-from-icon mo-li-head-tag-no-ul mo-middle ui-state-default ui-corner-top">'
            .'<table class="mo-tag-height-from-icon" width="100%" cellspacing="0" border="0" cellpadding="0">'
@@ -389,4 +455,149 @@ function get_plugin_config($conf_plugin,$config,$currentelement) {
             .'</li>'
             .'</ul></div>';
 }
+
+
+function plugin_del() {
+    global $specialchars;
+    global $message;
+global $debug;
+
+    $plugin_del = getRequestValue('plugin-del','post');
+    if(is_array($plugin_del)) {
+        foreach($plugin_del as $plugin) {
+$debug .= "del=".$plugin."<br />\n";
+            if(true !== ($error = deleteDir(BASE_DIR.PLUGIN_DIR_NAME."/".$plugin)))
+                $message .= $error;/**/
+        }
+    } else {
+        $message .= returnMessage(false,getLanguageValue("error_post_parameter"));
+    }
+}
+
+function plugin_install() {
+    global $message;
+    if(!function_exists('gzopen'))
+        return;
+    global $specialchars;
+global $debug;
+
+    $dir = BASE_DIR.PLUGIN_DIR_NAME."/";
+    $zip_file = $dir.$specialchars->replaceSpecialChars($_FILES["plugin-install-file"]["name"],false);
+    $zip_name = substr($_FILES["plugin-install-file"]["name"],0,-4);
+
+    if(true === (move_uploaded_file($_FILES["plugin-install-file"]["tmp_name"], $zip_file))) {
+
+        require_once(BASE_DIR_ADMIN."pclzip.lib.php");
+        $archive = new PclZip($zip_file);
+#        $extract = false;
+
+        if(0 != ($list = $archive->listContent())) {
+/*$debug .= "<pre>";
+$debug .= var_export($list,true);
+$debug .= "</pre><br />";
+*/
+            $add_dir = false;
+            # der replace pfad ist erstmal der zip file name
+            $remove_dir = $zip_name;
+            $tmp_dir_merker = false;
+            $tmp_index = false;
+            foreach($list as $tmp) {
+                # fehler im zip keine ../ im pfad erlaubt
+                if(false !== strpos($tmp["filename"],"../")) {
+                    $tmp_index = false;
+                    break;
+                }
+                # wir suchen den ordner wo die index.php enthalten ist
+                if(substr($tmp["filename"],-4) == ".php" and false !== strpos($tmp["filename"],"index.php")) {
+                    $tmp_dir = substr($tmp["filename"],0,-(strlen("index.php")));
+                    # da scheint noch nee index.php in eine unterordner zu sein
+                    if($tmp_dir_merker !== false and strlen($tmp_dir) > strlen($tmp_dir_merker))
+                        continue;
+                    $tmp_dir_merker = $tmp_dir;
+                    $tmp_index = $tmp["index"];
+$debug .= "index_dir1=".$tmp_dir."<br />";
+                    if(!empty($tmp_dir) and $tmp_dir[(strlen($tmp_dir)-1)] == "/")
+                        $tmp_dir = substr($tmp_dir,0,-1);
+$debug .= "index_dir2=".$tmp_dir."<br />";
+                    # das template ist im zip in einen eigenen ordner
+                    if(strrpos($tmp_dir,"/") !== false) {
+                        # der replace pfad damit der eigene template ordner aus dem zip benutzt wird
+                        $remove_dir = $tmp_dir;
+                    }
+                }
+            }
+            # wenn wir die index nummer von der index.php gefunden haben
+            if($tmp_index !== false) {
+                # nur index.php auspacken
+                $archive->extractByIndex($tmp_index
+                    ,PCLZIP_OPT_PATH, $dir
+                    ,PCLZIP_OPT_REMOVE_ALL_PATH
+                    ,PCLZIP_OPT_REPLACE_NEWER);
+                # wurde die index.php entpackt
+                if(is_file($dir."index.php")) {
+                    # die index.php einlessen
+                    if(false !== ($tmp_index = @file($dir."index.php"))) {
+                        foreach($tmp_index as $rows) {
+                            # die zeile suchen wo der Pluginname steht
+                            if(strpos($rows,"class") !== false and strpos($rows,"extends") !== false and strpos($rows,"Plugin") !== false) {
+                                $rows = substr($rows,0,strpos($rows,"extends"));
+                                $rows = str_replace("class","",$rows);
+                                $add_dir = trim($rows);
+#$debug .= "#".$add_dir."#"."<br />";
+                                # ist das ein gültiger Pluginname
+                                if($specialchars->replaceSpecialChars($add_dir,true) != $add_dir)
+                                    $add_dir = false;
+                                break;
+                            }
+                        }
+                        unset($tmp_index);
+                    }
+                }
+                unlink($dir."index.php");
+            }
+
+            # wenn es den Pluginnamen gibt
+            if($add_dir !== false and getChmod() !== false) {
+                $list = $archive->extract(PCLZIP_OPT_PATH, $dir
+                    ,PCLZIP_OPT_ADD_PATH, $add_dir
+                    ,PCLZIP_OPT_REMOVE_PATH, $remove_dir
+                    ,PCLZIP_OPT_SET_CHMOD, getChmod()
+                    ,PCLZIP_CB_PRE_EXTRACT, "PclZip_PreExtractCallBack"
+                    ,PCLZIP_OPT_REPLACE_NEWER);
+                setChmod($dir.$add_dir);
+            } elseif($add_dir !== false) {
+                $list = $archive->extract(PCLZIP_OPT_PATH, $dir
+                    ,PCLZIP_OPT_ADD_PATH, $add_dir
+                    ,PCLZIP_OPT_REMOVE_PATH, $remove_dir
+                    ,PCLZIP_CB_PRE_EXTRACT, "PclZip_PreExtractCallBack"
+                    ,PCLZIP_OPT_REPLACE_NEWER);
+            } else {
+                # die file strucktur im zip stimt nicht
+                $message .= returnMessage(false,getLanguageValue("error_zip_structure"));
+            }
+        } else {
+            # scheint kein gühltiges zip zu sein
+            $message .= returnMessage(false,getLanguageValue("error_zip_nozip"));
+        }
+        unlink($zip_file);
+    } else {
+        # das zip konnte nicht hochgeladen werden
+        $message .= returnMessage(false,getLanguageValue("error_file_upload"));
+    }
+}
+
+
+function PclZip_PreExtractCallBack($p_event, &$p_header) {
+global $debug;
+    if(false !== strpos($p_header['filename'],"/plugin.conf.php") and is_file($p_header['filename'])) {
+$debug .= "nicht überschreiben=".$p_header['filename']."<br />";
+        return 0;
+}
+    if(!$p_header['folder'] and substr($p_header['filename'],-4) != ".php" and !isValidDirOrFile(basename($p_header['filename'])))
+        return 0;
+$debug .= $p_header['filename']."<br />";
+    return 1;
+}
+
+
 ?>

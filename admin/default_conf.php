@@ -13,10 +13,11 @@ function makeDefaultConf($conf_array,$for_new = false) {
                         'chmodnewfilesatts' => '',
                         'lastbackup' => time()),
                     'userexpert' => array(
+                        'tabs' => array(),
                         'config' => array(),
                         'admin' => array(),
-                        'tabs' => array(),
                         'plugins' => array(),
+                        'template' => array()
                     ),
                     # das sind die Expert Parameter von basic
                     'expert' => array(
@@ -60,7 +61,6 @@ function makeDefaultConf($conf_array,$for_new = false) {
                         'websitedescription',
                         'websitekeywords',
                         'cmslanguage',
-                        'cmslayout',
                         'defaultcat',
                         'usecmssyntax',
                         'editusersyntax',

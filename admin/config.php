@@ -112,7 +112,7 @@ function config() {
     }
 
         // Zeile "LAYOUTAUSWAHL"
-    if(ROOT or in_array("cmslayout",$show)) {
+/*    if(ROOT or in_array("cmslayout",$show)) {
         $tmp_array = getDirAsArray(BASE_DIR."layouts","dir","natcasesort");
         if(count($tmp_array) <= 0) {
             $error[$titel][] = getLanguageValue("config_error_layouts_emty");
@@ -134,7 +134,7 @@ function config() {
         $conf_inhalt .= "</select></div>";
         $template[$titel][] = array(getLanguageValue("config_text_cmslayout"),$conf_inhalt);
     }
-
+*/
     // Zeile "STANDARD-KATEGORIE"
     if(ROOT or in_array("defaultcat",$show)) {
         $tmp_array = getDirAsArray(CONTENT_DIR_REL,"dir","natcasesort");

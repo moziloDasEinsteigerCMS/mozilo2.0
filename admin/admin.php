@@ -70,7 +70,7 @@ if(!is_array($show))
 
    // Zeile "User Settings"
     if(ROOT) {
-        $template[$titel][] = array(getLanguageValue("admin_noroot_text"),userSettings("tabs").'<div style="font-size:.4em;">&nbsp;</div>'.userSettings("config").'<div style="font-size:.4em;">&nbsp;</div>'.userSettings("admin").'<div style="font-size:.4em;">&nbsp;</div>'.userSettings("plugins"));
+        $template[$titel][] = array(getLanguageValue("admin_noroot_text"),userSettings("tabs").'<div style="font-size:.4em;">&nbsp;</div>'.userSettings("config").'<div style="font-size:.4em;">&nbsp;</div>'.userSettings("admin").'<div style="font-size:.4em;">&nbsp;</div>'.userSettings("plugins").'<div style="font-size:.4em;">&nbsp;</div>'.userSettings("template"));
     }
 
     if(ROOT or in_array("language",$show)) {
@@ -302,7 +302,7 @@ function userSettings($name) {
     $test = $ADMIN_CONF->get($name);
     if(!is_array($test))
         $test = array();
-    if($name != "plugins") {
+    if($name != "plugins" and $name != "template") {
         $select = '<div class="mo-select-div"><select title="'.getLanguageValue("admin_noroot_".$name).'" name="'.$name.'[]" multiple="multiple" class="mo-select js-multi js-noroot-'.$name.'">';
         foreach($selectarray as $key) {
             $selected = "";
@@ -316,11 +316,33 @@ function userSettings($name) {
     if($name == "plugins") {
         $plugins = getDirAsArray(PLUGIN_DIR_REL,"dir","natcasesort");
         $select = '<div class="mo-select-div"><select title="'.getLanguageValue("admin_noroot_".$name).'" name="'.$name.'[]" multiple="multiple" class="mo-select js-multi js-noroot-'.$name.'">';
+
+        $selected = "";
+        # Achtung plugin_-_manage ist deshalb so damit die Gefahr das es ein Plugin mit diesen name gibt so klein wie möglich ist
+        if(in_array("plugin_-_manage",$test))
+            $selected = ' selected="selected"';
+        $select .= '<option value="plugin_-_manage"'.$selected.'>plugin_manage</option>';
+
+        $select_option = "";
         foreach($plugins as $plugin) {
             $selected = "";
             if(in_array($plugin,$test))
                 $selected = ' selected="selected"';
-            $select .= '<option value="'.$plugin.'"'.$selected.'>'.$plugin.'</option>';
+            $select_option .= '<option value="'.$plugin.'"'.$selected.'>'.$plugin.'</option>';
+        }
+        if(!empty($select_option))
+            $select .= '<optgroup label="Plugins">'.$select_option.'</optgroup>';
+        $select .= '</select></div>';
+    }
+
+    if($name == "template") {
+        $select = '<div class="mo-select-div"><select title="'.getLanguageValue("admin_noroot_".$name).'" name="'.$name.'[]" multiple="multiple" class="mo-select js-multi js-noroot-'.$name.'">';
+
+        foreach(array("template_manage","template_edit","template_plugin_css") as $option) {
+            $selected = "";
+            if(in_array($option,$test))
+                $selected = ' selected="selected"';
+            $select .= '<option value="'.$option.'"'.$selected.'>'.$option.'</option>';
         }
         $select .= '</select></div>';
     }

@@ -30,7 +30,7 @@ function getFileUpload($curent_dir,$dir = false,$count_text = false,$newcss = ""
     $css = "mo-ul";
     if(ACTION != "template")
         $css = "mo-in-ul-ul";
-    $fileupload = '<ul class="js-toggle-content '.$css.' ui-corner-bottom">'
+    $fileupload = '<ul class="js-toggle-content '.$css.' ui-corner-bottom" style="display:none;">'
         .'<li class="ui-widget-content ui-corner-all">'
             #  hier die zusätzlichen para meter setzen
             .'<input type="hidden" name="curent_dir" value="'.$curent_dir.'" />'

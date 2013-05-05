@@ -195,7 +195,7 @@ if(LOGIN) { #-------------------------------
         define("ROOT",true);
     }
     # Plugin-Tab nur anzeigen wenn plugin Ordner mit mind. einem plugin vorhanden ist
-    if (count(getDirAsArray(PLUGIN_DIR_REL, "dir")) < 1 ) {
+/*    if (count(getDirAsArray(PLUGIN_DIR_REL, "dir")) < 1 ) {
         foreach($array_tabs as $key => $value) {
             if($value == "plugins") {
                 unset($array_tabs[$key]);
@@ -203,7 +203,7 @@ if(LOGIN) { #-------------------------------
             }
         }
     }
-
+*/
     $users_array = array();
     $tmp_action = getRequestValue('action');
     if(defined('MULTI_USER') and MULTI_USER) {
@@ -420,13 +420,14 @@ function get_template_truss($content,$titel,$toggle = false) {
                             .'<span class="mo-bold mo-padding-left">'.getLanguageValue($titel).'</span>'
                         .'</td>'
                         .'<td class="mo-nowrap">'
-                            .'<img class="js-toggle js-tools-icon-show-hide mo-tool-icon mo-icon mo-icons-icon mo-icons-edit" src="'.ICON_URL_SLICE.'" alt="edit" />'
+# aus der img class das mal rausgenommen js-tools-icon-show-hide damit der hammer immer zu sehen ist
+                            .'<img class="js-toggle mo-tool-icon mo-icon mo-icons-icon mo-icons-edit" src="'.ICON_URL_SLICE.'" alt="edit" />'
                         .'</td>'
                     .'</tr>'
                     .'</tbody>'
                     .'</table>'
                     .'</div>'
-                    .'<ul class="mo-in-ul-ul js-toggle-content">';
+                    .'<ul class="mo-in-ul-ul js-toggle-content" style="display:none;">';
         } else
             $template = '<ul class="mo-ul">'
                     .'<li class="mo-li ui-widget-content ui-corner-all">'
@@ -440,9 +441,9 @@ function get_template_truss($content,$titel,$toggle = false) {
     return $template;
 }
 
-function getLanguageValue($confpara,$htnl = false,$param1 = '', $param2 = '') {
+function getLanguageValue($confpara,$html = false,$param1 = '', $param2 = '') {
     global $LANGUAGE;
-    if($htnl)
+    if($html)
         return $LANGUAGE->getLanguageHtml($confpara, $param1, $param2);
     else
         return $LANGUAGE->getLanguageValue($confpara, $param1, $param2);

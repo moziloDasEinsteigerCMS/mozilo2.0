@@ -70,14 +70,14 @@ $(function() {
     });
 
     // alle plugin activ checkbox die nicht activ sind suchen
-     $('.js-plugin-active input[type="checkbox"]:not(:checked)').each(function(i,tag) {
+/*     $('.js-plugin-active input[type="checkbox"]:not(:checked)').each(function(i,tag) {
          var upper_tag = $(this).closest(".js-plugin");
          // die anzeige einstelungen hiden
          upper_tag.find(".js-config").css("display","none");
      });
-
+*/
     // weil der in einem hide() drin ist muss display:none benutzt werden
-    $(".js-plugin-help-content").css("display","none");
+//    $(".js-plugin-help-content").css("display","none");
 
     // toggle für die hilfe
     $('body').on("click",".js-help-plugin", function(event) {
@@ -110,5 +110,68 @@ $(function() {
         noneSelectedText: false,
         selectedList: 1
     }).multiselectfilter();
+
+
+    /* toggle für die get_template_truss() php function */
+//    $(".js-toggle-manage-content").hide(0);
+//    $(".js-plugin-del").hide(0);
+    // wenn was in der plugin verwaltung gemacht wurde soll es aufgeklapt bleiben
+    // deshalb wurde die class js-toggle-content-deact erzeugt
+//    $(".js-toggle-manage-content-deact").removeClass("js-toggle-manage-content-deact").addClass("js-toggle-manage-content");
+    $("body").on("click",".js-toggle-manage", function(event) {
+        var mo_li = $(this).closest(".mo-li");
+        if(mo_li.find(".js-toggle-manage-content").is(":visible")) {
+            mo_li.find(".mo-li-head-tag").removeClass("ui-corner-top").addClass("ui-corner-all");
+            mo_li.find(".js-toggle-manage-content").hide(anim_speed);
+            $(".js-plugin-del:checked").prop("checked",false);
+            $(".js-plugin-del").css("display","none");
+            return;
+        } else if(!mo_li.find(".js-toggle-manage-content").is(":visible")) {
+            mo_li.find(".mo-li-head-tag").removeClass("ui-corner-all").addClass("ui-corner-top");
+            mo_li.find(".js-toggle-manage-content").show(anim_speed);
+            $(".js-plugin-del").css("display","inline");
+            return;
+        }
+    });
+
+    $("body").on("click","#js-plugin-del-submit", function(event) {
+        event.preventDefault();
+        if($(".js-plugin-del:checked").length > 0) {
+            $(".js-plugin-del:checked").each(function(){
+                $("<span class=\"mo-bold\">"+$(this).val()+"</span><br />").appendTo(dialog_multi);
+            });
+            dialog_multi.dialog({
+                title: mozilo_lang["dialog_title_delete"],
+                buttons: [{
+                    text: mozilo_lang["yes"],
+                    click: function() {
+                        var form_manage = $("#js-plugin-manage");
+                        $("<input type=\"hidden\" name=\"plugin-all-del\" value=\"true\" />").appendTo(form_manage);
+                        $(".js-plugin-del:checked").each(function(){
+                            $("<input type=\"hidden\" name=\"plugin-del[]\" value=\""+$(this).val()+"\" />").appendTo(form_manage);
+                        });
+                        form_manage.submit();
+                    }
+                },{
+                    text: mozilo_lang["no"],
+                    click: function() {
+                        dialog_multi.dialog("close");
+                    }
+                }]});
+            dialog_multi.dialog("open");
+        }
+    });
+
+    $("body").on("change","#js-plugin-install-file", function(event) {
+        if(!checkIsZipFile($("#js-plugin-install-file")))
+            dialog_open("error_messages",returnMessage(false, mozilo_lang["error_zip_nozip"]));
+    });
+
+    $("body").on("click","#js-plugin-install-submit", function(event) {
+        if(checkIsZipFile($("#js-plugin-install-file")))
+            return true;
+        event.preventDefault();
+        dialog_open("error_messages",returnMessage(false, mozilo_lang["error_zip_nozip"]));
+    });
 
 });

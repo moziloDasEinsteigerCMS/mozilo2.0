@@ -144,7 +144,7 @@ richtet sich nach der icon grösse = 2 * body font-size */
     margin-top: .4em;
 }
 
-.config .mo-in-ul-li, .admin .mo-in-ul-li, .plugins .mo-in-ul-li, .install .mo-in-ul-li {
+.config .mo-in-ul-li, .admin .mo-in-ul-li, .plugins .mo-in-ul-li, .install .mo-in-ul-li, .template .mo-in-ul-li {
     padding-right:.8em;
 }
 
@@ -322,7 +322,7 @@ li.ui-draggable-dragging {
     margin-bottom:.8em;
 }
 
-.mo-margin-top {
+.mo-margin-top, input.mo-margin-top {
     margin-top:.8em;
 }
 

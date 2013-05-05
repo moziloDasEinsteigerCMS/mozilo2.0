@@ -90,6 +90,15 @@ function checkDezAutoValue(event) {
     }
 }
 
+function checkIsZipFile(file_obj) {
+    var file = file_obj.val();
+    if(file.length > 5 && file.substring(file.lastIndexOf(".")).toLowerCase() == ".zip") {
+        return true;
+    }
+    file_obj.val("");
+    return false;
+}
+
 function rawurlencode_js(str) {
     return encodeURIComponent(str).replace(/!/g, '%21').replace(/'/g, '%27').replace(/\(/g, '%28').replace(/\)/g, '%29').replace(/\*/g, '%2A').replace(/\~/g, '%7E').replace(/#/g,'%23');
 }
@@ -112,7 +121,7 @@ $(function() {
     $("body").on("click",".js-no-click", function(event) { event.preventDefault() });
 
     /* damit der show sauber arbeitet setzen wir den width vor den hide() oder display:none */
-    $(".js-width-show-helper").width($(".js-width-show-helper").width());
+//    $(".js-width-show-helper").width($(".js-width-show-helper").width());
 
     /* bei allen input's mit dieser class nur zahlen zulassen */
     $("body").on("keyup",".js-in-digit", function(event) {
@@ -184,7 +193,7 @@ $(function() {
     });
 
     /* toggle für die get_template_truss() php function */
-    $(".js-toggle-content").hide(0);
+//    $(".js-toggle-content").hide(0);
     $("body").on("click",".js-toggle", function(event) {
         if($(this).hasClass('ui-state-disabled')) return;
         var mo_li = $(this).closest(".mo-li");
