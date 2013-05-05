@@ -73,8 +73,8 @@ class Galerie extends Plugin {
         if (($embedded == "_self") or (getRequestValue('gal', 'get', false))) {
     
             $alldescriptions = false;
-            if(is_file($GALERIE_DIR."texte.txt"))
-                $alldescriptions = new Properties($GALERIE_DIR."texte.txt");
+            if(is_file($GALERIE_DIR."texte.conf.php"))
+                $alldescriptions = new Properties($GALERIE_DIR."texte.conf.php");
             // Galerieverzeichnis einlesen
             $picarray = getDirAsArray($GALERIE_DIR,"img");
             $allindexes = array();
@@ -148,7 +148,7 @@ class Galerie extends Plugin {
             if(file_exists($GALERIE_DIR)) {
                 $handle = opendir($GALERIE_DIR);
                 while ($file = readdir($handle)) {
-                    if (is_file($GALERIE_DIR.$file) and ($file <> "texte.txt")) {
+                    if (is_file($GALERIE_DIR.$file) and ($file <> "texte.conf.php")) {
                         $j++;
                     }
                 }
