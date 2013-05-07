@@ -46,7 +46,7 @@ error_zip_nozip                      = Das ist keine ZIP Datei
 
 dialog_title_error                   = Fehlermeldungen
 dialog_title_messages                = Meldungen
-dialog_title_send                    = Daten werden gesendet
+dialog_title_send                    = Daten werden aktualisiert
 dialog_title_save_beforeclose        = Die Inhaltseite wurde geändert
 dialog_title_delete                  = Wirklich löschen?
 dialog_title_lastbackup              = Backup-Erinnerung
