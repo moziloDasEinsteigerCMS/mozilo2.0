@@ -384,7 +384,8 @@ function get_contents_ace_edit($file) {
     if(!file_exists($file) or false === ($content = file_get_contents($file)))
         return false;
     global $page_protect_search;
-    $content = str_replace($page_protect_search,"",$content);
+    # Achtung die ersetzung mit \n ist nötig da sonst nee lehrzeile am anfang verschluckt wird
+    $content = str_replace($page_protect_search,"\n",$content);
     $content = str_replace(array("&","<",">"),array("&#38;","&lt","&gt;"),$content);
     return $content;
 }
