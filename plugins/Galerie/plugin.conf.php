@@ -1,2 +1,0 @@
-<?php die(); ?>
-a:5:{s:6:"active";s:4:"true";s:6:"target";s:5:"_self";s:15:"gallerytemplate";s:100:"<h1>{CURRENTGALLERY}</h1><br />{GALLERYMENU}{NUMBERMENU}<br />{CURRENTPIC}<br />{CURRENTDESCRIPTION}";s:10:"picsperrow";s:1:"4";s:9:"usethumbs";s:4:"true";}
