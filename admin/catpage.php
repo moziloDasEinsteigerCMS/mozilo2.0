@@ -61,7 +61,7 @@ function new_cat_page($page_lang) {
     $new_catpage = '<ul class="js-new-ul">'
                         .'<li class="js-li-page mo-in-ul-li new-page ui-widget ui-state-default ui-corner-all">';
                             $status = '<span class="js-status">'.$page_lang[EXT_HIDDEN].'</span>';
-                            $new_catpage .= li_table("Inhaltseite","[Kategorie][Inhaltseite".EXT_HIDDEN."]",$status,EXT_HIDDEN,"")
+                            $new_catpage .= li_table("Inhaltsseite","[Kategorie][Inhaltsseite".EXT_HIDDEN."]",$status,EXT_HIDDEN,"")
                         .'</li>'
                         .'<li class="js-li-cat mo-li ui-widget-content ui-corner-all">';
                             $status = '<span class="js-status">0</span> '.$page_lang["pages"];
@@ -69,7 +69,7 @@ function new_cat_page($page_lang) {
                         .'</li>'
                         .'<li class="js-li-page mo-in-ul-li new-page js-link ui-widget ui-state-default ui-corner-all">';
                             $status = $page_lang["url"].' '.$page_lang["target"].' <span class="js-status">blank</span>';
-                            $new_catpage .= li_table("Link Inhaltseite","[Kategorie][Link%20Inhaltseite-_blank-".EXT_LINK."]",$status,EXT_LINK,"",true)
+                            $new_catpage .= li_table("Link Inhaltsseite","[Kategorie][Link%20Inhaltsseite-_blank-".EXT_LINK."]",$status,EXT_LINK,"",true)
                         .'</li>'
                         .'<li class="js-li-cat mo-li js-link ui-widget-content ui-corner-all">';
                             $status = $page_lang["url"].' '.$page_lang["target"].' <span class="js-status">blank</span>';
@@ -227,7 +227,7 @@ function cat_page_new($name) {
     if($name["type"] == "page") {
         $page_inhalt = "";
         if(substr($name["new"],-(EXT_LENGTH)) != EXT_LINK) {
-            $page_inhalt = "[ueber1|Das ist eine Inhaltseite]";
+            $page_inhalt = "[ueber1|Das ist eine Inhaltsseite]";
         }
         if(true !== ($error = saveContentToPage($page_inhalt,CONTENT_DIR_REL.$name["new"],true)))
             return ajax_return("error",false,$error,true,"js-dialog-reload");
