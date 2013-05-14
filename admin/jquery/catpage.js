@@ -225,9 +225,9 @@ var edit_handler = function() {
         link_text = rawurldecode_js(get_cat(cat_page)) + "/ " + rawurldecode_js(get_page(cat_page));
 
     if(modrewrite == "true")
-        var link_href = URL_BASE + get_cat(cat_page) + "/" + get_page(cat_page) + ".html";
+        var link_href = URL_BASE + get_cat(cat_page) + "/" + get_page(cat_page) + ".html?draft=true";
     else
-        var link_href = URL_BASE + "index.php?cat=" + get_cat(cat_page) + "&page=" + get_page(cat_page);
+        var link_href = URL_BASE + "index.php?cat=" + get_cat(cat_page) + "&page=" + get_page(cat_page) + "&draft=true";
 
     dialog_editor.data("send_object",false)
         .dialog({

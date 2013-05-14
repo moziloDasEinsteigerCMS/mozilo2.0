@@ -40,7 +40,8 @@ function makeDefaultConf($conf_array,$for_new = false) {
                         'cmslanguage' => 'deDE',
                         'cmslayout' => 'moziloCMS',
                         'defaultcat' => 'Willkommen',
-                        'defaultcolors' => ''),
+                        'defaultcolors' => '',
+                        'draftlayout' => 'false'),
                     'checkbox' => array(
                         'hidecatnamedpages' => 'false',
                         'modrewrite' => 'false',
@@ -52,7 +53,8 @@ function makeDefaultConf($conf_array,$for_new = false) {
                         'targetblank_download' => 'true',
                         'targetblank_link' => 'true',
                         'usesitemap' => 'true',
-                        'usecmssyntax' => 'true'),
+                        'usecmssyntax' => 'true',
+                        'draftcat' => 'false'),
                     # das sind die Expert Parameter von main
                     'expert' => array(
                         'websitetitle',

@@ -112,7 +112,8 @@ function config() {
     }
 
         // Zeile "LAYOUTAUSWAHL"
-/*    if(ROOT or in_array("cmslayout",$show)) {
+/*
+    if(ROOT or in_array("cmslayout",$show)) {
         $tmp_array = getDirAsArray(BASE_DIR."layouts","dir","natcasesort");
         if(count($tmp_array) <= 0) {
             $error[$titel][] = getLanguageValue("config_error_layouts_emty");
@@ -157,7 +158,29 @@ function config() {
         }
         $conf_inhalt .= "</select></div>";
         $template[$titel][] = array(getLanguageValue("config_text_defaultcat"),$conf_inhalt);
+
+$error[$titel][] = false;
+$conf_checkbox = buildCheckBox("draftcat", $CMS_CONF->get("draftcat"),getLanguageValue("config_input_draftcat"));
+$conf_select = "";
+        $tmp_array = getDirAsArray(BASE_DIR."layouts","dir","natcasesort");
+        if(count($tmp_array) <= 0)
+            $conf_select .= getLanguageValue("config_error_layouts_emty");
+        $conf_select .= '<div style="font-size:.4em;">&nbsp;</div><div class="mo-select-div"><select name="draftlayout" class="mo-select">';
+        $conf_select .= '<option value="false">'.getLanguageValue("config_input_draftlayout").'</option>';
+        foreach ($tmp_array as $file) {
+            $selected = NULL;
+            if ($file == $CMS_CONF->get("draftlayout")) {
+                $selected = " selected";
+            }
+            $conf_select .= '<option'.$selected.' value="'.$file.'">';
+            $conf_select .= $specialchars->rebuildSpecialChars($file, true, true);
+            $conf_select .= "</option>";
+        }
+        $conf_select .= "</select></div>";
+
+$template[$titel][] = array(getLanguageValue("config_text_draftcat"),$conf_checkbox.$conf_select);
     }
+
     # sitemap.xml
     if(ROOT or in_array("usesitemap",$show)) {
             $error[$titel][] = false;
@@ -194,7 +217,7 @@ function config() {
             $colors_div .= '</div>';
             $colors_div .= '</div>';
             $colors_div .= '<div id="js-menu-config-default-color" class="mo-in-li-r">'
-                .'<img class="js-new-config-default-color ce-bg-color-change ce-default-color-img ui-widget-content ui-corner-all" alt="" title="" src="'.ICON_URL_SLICE.'" />'
+                .'← <img class="js-new-config-default-color ce-bg-color-change ce-default-color-img ui-widget-content ui-corner-all" alt="" title="" src="'.ICON_URL_SLICE.'" />'
                 .'<input type="text" maxlength="6" value="DD0000" class="ce-bg-color-change js-in-hex ce-in-hex" id="js-new-default-color-value" size="6" />'
                 .'<img class="js-coloreditor-button ed-icon-border ed-syntax-icon ed-farbeedit" alt="'.getLanguageValue("dialog_title_coloredit").'" title="'.getLanguageValue("dialog_title_coloredit").'" src="'.ICON_URL_SLICE.'" style="display:none;" />'
             .'</div>';

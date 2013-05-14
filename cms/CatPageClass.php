@@ -45,8 +45,6 @@ class CatPageClass {
         if($CMS_CONF->get("showhiddenpagesasdefaultpage") == "true") {
             $pages = array(EXT_PAGE,EXT_HIDDEN);
         }
-        if(DRAFT)
-            $pages[] = EXT_DRAFT;
         $firstcat = $this->get_CatArray(false,false,$pages);
         reset($firstcat);
         $firstcat = current($firstcat);
@@ -66,8 +64,6 @@ class CatPageClass {
         if($CMS_CONF->get("showhiddenpagesasdefaultpage") == "true") {
             $pages = array(EXT_PAGE,EXT_HIDDEN);
         }
-        if(DRAFT)
-            $pages[] = EXT_DRAFT;
         $firstpage = $this->get_PageArray($cat,$pages,true);
         reset($firstpage);
         $firstpage = current($firstpage);
@@ -87,8 +83,6 @@ class CatPageClass {
         # Default $containspage array erzeugen
         if(!$containspage or !is_array($containspage)) {
             $containspage = array(EXT_PAGE, EXT_LINK);
-            if(DRAFT)
-                $containspage[] = EXT_DRAFT;
         }
         foreach($this->CatPageArray as $cat => $info) {
             # wenn cat ein Link ist und $showlink = true ist
@@ -127,8 +121,6 @@ class CatPageClass {
         # Default page arten erzeugen
         if(!$showext or !is_array($showext)) {
             $showext = array(EXT_PAGE, EXT_LINK);
-            if(DRAFT)
-                $showext[] = EXT_DRAFT;
         }
         if(isset($this->CatPageArray[$cat]['_pages-'])) {
             foreach($this->CatPageArray[$cat]['_pages-'] as $page => $info) {
@@ -880,10 +872,19 @@ class CatPageClass {
     }
 
     private function make_DirCatPageArray($dir) {
+        global $CMS_CONF;
+        $draft_modus = false;
+        $draft_cat = "";
+        if(!IS_ADMIN and getRequestValue('draft') != "true" and $CMS_CONF->get("draftcat") == "true") {
+            $draft_modus = true;
+            $draft_cat = $CMS_CONF->get("defaultcat");
+        }
         $cat_a = array();
         $cat_sort = array();
         $currentdir = getDirAsArray($dir,"dir","sort_cat_page");
         foreach($currentdir as $file) {
+            if($draft_modus and $draft_cat != $file)
+                continue;
             if(substr($file, -(EXT_LENGTH)) == EXT_LINK) {
                 $target = "-_blank-";
                 if(strpos($file,"-_self-") > 1)

@@ -16,8 +16,6 @@ if(getRequestValue('logout','get',false)) {
     // Session beenden und die Sessiondaten löschen
     session_destroy();
     unset($_SESSION);
-    # draft modus entfernen
-    $CMS_CONF->set("draft", false);
 }
 
 // Wurde das Anmeldeformular verschickt?
@@ -37,8 +35,6 @@ if(getRequestValue('login','post',false)
 if(isset($_SESSION['login_okay']) and $_SESSION['login_okay'] === true
         and isset($_SESSION['login_tmp']) and $_SESSION['login_tmp'] === getClientDaten()) {
     define("LOGIN",true);
-    # draft modus setzen
-    $CMS_CONF->set("draft", true);
     // Counter für falsche Logins innerhalb der Sperrzeit zurücksetzen
     $LOGINCONF->set("falselogincounttemp", 0);
     return true;

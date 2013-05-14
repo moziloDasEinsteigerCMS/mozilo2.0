@@ -192,7 +192,7 @@ config_text_websitekeywords          = Gebe hier für deine Website relevante Sc
 config_text_cmslanguage              = Wählen hier, welche Sprache deine Webseite haben soll.
 config_input_translator              = Übersetzer:
 config_text_cmslayout                = Wähle hier das Layout (Ausehen) deiner Website aus.
-config_text_defaultcat               = Gebe hier die Kategorie an die, die Besucher deiner Website, beim Seitenaufruf angezeigt bekommen sollen.
+config_text_defaultcat               = Gebe hier die Default Kategorie an die, die Besucher deiner Website, beim Seitenaufruf angezeigt bekommen sollen oder wenn es die Kategorie oder Inhaltsseite nicht gibt.
 config_text_usesyntax                = CMS-Syntax Elemente benutzen
 config_input_usesyntax               = CMS-Syntax nutzen
 config_text_replaceemoticons         = Emoticons Benutzen
@@ -217,6 +217,9 @@ config_titel_cmsglobal               = Allgemeine Einstellungen
 config_titel_cmssyntax               = Syntax-Einstellungen
 config_titel_expert                  = Erweiterte Einstellungen
 config_titel_usersyntax_test         = Syntax überprüfung
+config_input_draftcat                = Entwurf Modus
+config_text_draftcat                 = Entwurf Modus bedeutet das die Besucher deiner Website nur die Default Kategorie gezeigt bekommen auser sie hängen an die URL ein "draft=true" an.<br />Auserdem kanst du in der Selectbox Wählen welches Template der Entwurf Modus benutzen soll.
+config_input_draftlayout             = Standart Template
 
 admin_button                         = Admin
 admin_text                           = Hier kannst du Einstellungen vornehmen, die das Verhalten von moziloAdmin beeinflussen.
@@ -295,7 +298,7 @@ template_button                      = Template
 template_title_grafiken              = Grafiken
 template_title_html_css              = HTML und CSS Dateien
 template_title_plugins               = Plugins CSS Dateien
-template_title_template              = Bearbeite Template: {TemplateName}
+template_title_template              = Bearbeite Template → {TemplateName}
 template_title_manage                = Templates Verwalten
 template_text_filebutton             = Instalieren oder Überschreiben
 template_text_fileinfo               = alle Datein werden Überschrieben

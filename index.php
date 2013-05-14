@@ -67,7 +67,13 @@ $smileys        = new Smileys(BASE_DIR_CMS."smileys");
 
 require_once(BASE_DIR_CMS."Plugin.php");
 
-$LAYOUT_DIR     = LAYOUT_DIR_NAME."/".$CMS_CONF->get("cmslayout");
+$tmp_layout = $CMS_CONF->get("cmslayout");
+if($CMS_CONF->get("draftcat") == "true"
+        and $CMS_CONF->get("draftlayout") != "false"
+        and getRequestValue('draft') != "true")
+    $tmp_layout = $CMS_CONF->get("draftlayout");
+
+$LAYOUT_DIR     = LAYOUT_DIR_NAME."/".$tmp_layout;
 $TEMPLATE_FILE  = $LAYOUT_DIR."/template.html";
 
 $LAYOUT_DIR_URL = $specialchars->replaceSpecialChars(URL_BASE.$LAYOUT_DIR,true);
@@ -81,9 +87,7 @@ if ($CMS_CONF->get("usecmssyntax") == "false")
 else
     define("USE_CMS_SYNTAX",true);
 
-# Steuerungs element über die url
-# Draft modus geht nur wenn man im admin eingelogt ist
-if(getRequestValue('draft') == "true" and $CMS_CONF->get("draft"))
+if(getRequestValue('draft') == "true")
     define("DRAFT",true);
 else
     define("DRAFT",false);
@@ -291,16 +295,11 @@ function set_CatPageRequest() {
 // ------------------------------------------------------------------------------
 function readTemplate($template,$pagecontent) {
     global $HTML;
-    global $TEMPLATE_FILE;
     global $HIGHLIGHT_REQUEST;
     global $language;
     global $syntax;
     global $CMS_CONF;
     global $smileys;
-
-#    $template = getTemplate($TEMPLATE_FILE);
-
-#    $pagecontent = "";
 
     # ist nur true wenn Inhaltseite eingelesen wird
     $is_Page = false;
@@ -400,6 +399,7 @@ function getSiteMap() {
 function getTemplate($TEMPLATE_FILE) {
     global $CMS_CONF;
     global $language;
+
     if(false === ($template = file_get_contents($TEMPLATE_FILE)))
         die($language->getLanguageValue("message_template_error_1", $TEMPLATE_FILE));
     # usesubmenu aus der template.html auslesen und setzten
