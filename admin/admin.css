@@ -295,7 +295,7 @@ li.ui-draggable-dragging {
     vertical-align:top;
 }
 
-.js-move-me-page, .js-move-me-cat {
+.js-move-me-page, .js-move-me-cat, .mo-icons-copy {
     cursor:move;
 }
 
@@ -376,6 +376,10 @@ input.mo-input-margin-top  {
 
 .mo-help-box {
     padding:.4em .8em .4em .4em;
+}
+
+.mo-checkbox-del {
+    margin-left:2em;
 }
 
 /*1=oben, 2=rechts, 3=unten, 4=links*/
@@ -525,6 +529,10 @@ div#dialog-multi .mo-login-box, div#dialog-test-w .mo-login-box {
     vertical-align:middle;
 }
 
+#js-menu-config-default-color .ce-default-color-img {
+    cursor: move;
+    margin-right:2em;
+}
 .mo-ul .mo-in-hex {
     margin:2px 0 0 0;
 }
@@ -532,6 +540,10 @@ div#dialog-multi .mo-login-box, div#dialog-test-w .mo-login-box {
 /*1=oben, 2=rechts, 3=unten, 4=links*/
 #js-config-default-color-box {
     margin:1px 0 2px 6em;
+}
+
+#js-config-default-color-box img {
+    cursor: move;
 }
 
 #js-del-config-default-color, .js-save-default-color{
