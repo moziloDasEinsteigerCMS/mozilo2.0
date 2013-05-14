@@ -9,6 +9,7 @@ function template() {
 
 global $debug;
     $template_manage_open = false;
+    # templates löschen
     if(getRequestValue('template-all-del','post') and getRequestValue('template-del','post')) {
         template_del();
         $template_manage_open = true;
@@ -80,131 +81,131 @@ if($debug)
         $show = array();
 
     $html_manage = "";
-if(ROOT or in_array("template_manage",$show)) {
-    $template_manage = array();
-    $disabled = '';
-    if(!function_exists('gzopen'))
-        $disabled = ' disabled="disabled"';
-    $template_manage["template_title_manage"][] = '<div class="mo-nowrap align-right">'
-            .'<span class="align-left" style="float:left"><span class="mo-bold">'.getLanguageValue("template_text_filebutton").'</span><br />'.getLanguageValue("template_text_fileinfo").'</span>'
-            .'<input type="file" id="js-template-install-file" name="template-install-file" class="mo-select-div"'.$disabled.' />'
-            .'<input type="submit" id="js-template-install-submit" name="template-install" value="'.getLanguageValue("template_button_install",true).'"'.$disabled.' /><br />'
-            .'<input type="submit" id="js-template-del-submit" value="'.getLanguageValue("template_button_delete",true).'" class="mo-margin-top" /><br class="mo-clear" />'
-        .'</div>';
+    if(ROOT or in_array("template_manage",$show)) {
+        $template_manage = array();
+        $disabled = '';
+        if(!function_exists('gzopen'))
+            $disabled = ' disabled="disabled"';
+        $template_manage["template_title_manage"][] = '<div class="mo-nowrap align-right">'
+                .'<span class="align-left" style="float:left"><span class="mo-bold">'.getLanguageValue("template_text_filebutton").'</span><br />'.getLanguageValue("template_text_fileinfo").'</span>'
+                .'<input type="file" id="js-template-install-file" name="template-install-file" class="mo-select-div"'.$disabled.' />'
+                .'<input type="submit" id="js-template-install-submit" name="template-install" value="'.getLanguageValue("template_button_install",true).'"'.$disabled.' /><br />'
+                .'<input type="submit" id="js-template-del-submit" value="'.getLanguageValue("template_button_delete",true).'" class="mo-margin-top" /><br class="mo-clear" />'
+            .'</div>';
 
-    foreach(getDirAsArray(BASE_DIR.LAYOUT_DIR_NAME,"dir","natcasesort") as $pos => $file) {
-        $template_activ = '';
-        $checkbox_del = '<input type="checkbox" name="template-del[]" value="'.$file.'" class="mo-checkbox" />';
-        $radio_activ = '<input id="template-status'.$pos.'" name="template-active" type="radio" value="'.$file.'" class="mo-radio" /><label for="template-status'.$pos.'">'.getLanguageValue("template_input_set_active").'</label>';
-        if($ACTIV_TEMPLATE == $file) {
-            $checkbox_del = '&nbsp;';
-            $radio_activ = "";
-            $template_activ = ' mo-bold';
+        foreach(getDirAsArray(BASE_DIR.LAYOUT_DIR_NAME,"dir","natcasesort") as $pos => $file) {
+            $template_activ = '';
+            $checkbox_del = '<input type="checkbox" name="template-del[]" value="'.$file.'" class="mo-checkbox" />';
+            $radio_activ = '<input id="template-status'.$pos.'" name="template-active" type="radio" value="'.$file.'" class="mo-radio" /><label for="template-status'.$pos.'">'.getLanguageValue("template_input_set_active").'</label>';
+            if($ACTIV_TEMPLATE == $file) {
+                $checkbox_del = '&nbsp;';
+                $radio_activ = "";
+                $template_activ = ' mo-bold';
+            }
+            $template_manage["template_title_manage"][] = '<table class="js-tools-show-hide mo-tag-height-from-icon" width="100%" cellspacing="0" border="0" cellpadding="0">'
+                        .'<tbody>'
+                        .'<tr>'
+                            .'<td class="mo-nowrap mo-padding-left'.$template_activ.'">'
+                                .$specialchars->rebuildSpecialChars($file,false,true)
+                            .'</td>'
+                            .'<td class="mo-nowrap'.$template_activ.'" width="30%">'.$radio_activ.'</td>'
+                            .'<td class="mo-nowrap align-right" width="10%">'.$checkbox_del.'</td>'
+                        .'</tr>'
+                        .'</tbody>'
+                        .'</table>';
         }
-        $template_manage["template_title_manage"][] = '<table class="js-tools-show-hide mo-tag-height-from-icon" width="100%" cellspacing="0" border="0" cellpadding="0">'
-                    .'<tbody>'
-                    .'<tr>'
-                        .'<td class="mo-nowrap mo-padding-left'.$template_activ.'">'
-                            .$specialchars->rebuildSpecialChars($file,false,true)
-                        .'</td>'
-                        .'<td class="mo-nowrap'.$template_activ.'" width="30%">'.$radio_activ.'</td>'
-                        .'<td class="mo-nowrap align-right" width="10%">'.$checkbox_del.'</td>'
-                    .'</tr>'
-                    .'</tbody>'
-                    .'</table>';
+
+        $multi_user = "";
+        if(defined('MULTI_USER') and MULTI_USER)
+            $multi_user = "&amp;multi=true";
+        if(count($template_manage["template_title_manage"]) > 0) {
+            $template_manage["template_title_manage"]["toggle"] = true;
+            $html_manage = '<form id="js-template-manage" action="index.php?nojs=true&amp;action=template'.$multi_user.'" method="post" enctype="multipart/form-data">'.contend_template($template_manage).'</form>';
+            # es wurde in der template verwaltung was gemacht dann soll die aufgeklapt bleiben
+            if($template_manage_open)
+                $html_manage = str_replace("display:none;","",$html_manage);
+        }
     }
 
-    $multi_user = "";
-    if(defined('MULTI_USER') and MULTI_USER)
-        $multi_user = "&amp;multi=true";
-    if(count($template_manage["template_title_manage"]) > 0) {
-        $template_manage["template_title_manage"]["toggle"] = true;
-        $html_manage = '<form id="js-template-manage" action="index.php?nojs=true&amp;action=template'.$multi_user.'" method="post" enctype="multipart/form-data">'.contend_template($template_manage).'</form>';
-        # es wurde in der template verwaltung was gemacht dann soll die aufgeklapt bleiben
-        if($template_manage_open)
-            $html_manage = str_replace("display:none;","",$html_manage);
+    $html_template = "";
+    if(ROOT or in_array("template_edit",$show)) {
+        $template = array();
+        foreach(getDirAsArray(BASE_DIR.$LAYOUT_DIR,array(".html"),"natcasesort") as $file) {
+            $template["template_title_html_css"][] = '<table class="js-tools-show-hide mo-tag-height-from-icon" width="100%" cellspacing="0" border="0" cellpadding="0">'
+                        .'<tbody>'
+                        .'<tr>'
+                            .'<td class="mo-nowrap" width="99%">'
+                                .'<span class="js-filename mo-padding-left">'.$file.'</span>'
+                            .'</td>'
+                            .'<td class="mo-nowrap">'
+                                .'<img class="js-tools-icon-show-hide js-edit-template js-html mo-tool-icon mo-icons-icon mo-icons-page-edit" src="'.ICON_URL_SLICE.'" alt="page-edit" hspace="0" vspace="0" />'
+                                .'<span class="js-edit-file-pfad" style="display:none;">'.$specialchars->replaceSpecialChars($LAYOUT_DIR.$file,true).'</span>'
+                            .'</td>'
+                        .'</tr>'
+                        .'</tbody>'
+                        .'</table>';
+
+        }
+
+        foreach(getDirAsArray(BASE_DIR.$LAYOUT_DIR.'css',array(".css"),"natcasesort") as $file) {
+            $template["template_title_html_css"][] = '<table class="js-tools-show-hide mo-tag-height-from-icon" width="100%" cellspacing="0" border="0" cellpadding="0">'
+                        .'<tbody>'
+                        .'<tr>'
+                            .'<td class="mo-nowrap" width="99%">'
+                                .'<span class="js-filename mo-padding-left"><span class="mo-bold mo-padding-right">css/</span>'.$file.'</span>'
+                            .'</td>'
+                            .'<td class="mo-nowrap">'
+                                .'<img class="js-tools-icon-show-hide js-edit-template js-css mo-tool-icon mo-icons-icon mo-icons-page-edit" src="'.ICON_URL_SLICE.'" alt="page-edit" hspace="0" vspace="0" />'
+                                .'<span class="js-edit-file-pfad" style="display:none;">'.$specialchars->replaceSpecialChars($LAYOUT_DIR.'css/'.$file,true).'</span>'
+                            .'</td>'
+                        .'</tr>'
+                        .'</tbody>'
+                        .'</table>';
+        }
+
+        require_once(BASE_DIR_ADMIN."jquery/File-Upload/fileupload.php");
+        $template_img = getFileUpload($CMS_CONF->get("cmslayout").'/grafiken');
+
+        $html_img = get_template_truss('<li class="mo-li ui-corner-all">'.$template_img.'</li>',"template_title_grafiken",true);
+
+        $html_template = get_template_truss('<li class="ui-corner-all">'.contend_template($template).$html_img.'</li>',"template_title_template",false);
+        $html_template = str_replace("{TemplateName}",'<span style="font-weight:normal;">'.$specialchars->rebuildSpecialChars($CMS_CONF->get("cmslayout"),false,true).'</span>',$html_template);
     }
-}
-$html_template = "";
-if(ROOT or in_array("template_edit",$show)) {
-    $template = array();
-    foreach(getDirAsArray(BASE_DIR.$LAYOUT_DIR,array(".html"),"natcasesort") as $file) {
-        $template["template_title_html_css"][] = '<table class="js-tools-show-hide mo-tag-height-from-icon" width="100%" cellspacing="0" border="0" cellpadding="0">'
-                    .'<tbody>'
-                    .'<tr>'
-                        .'<td class="mo-nowrap" width="99%">'
-                            .'<span class="js-filename mo-padding-left">'.$file.'</span>'
-                        .'</td>'
-                        .'<td class="mo-nowrap">'
-                            .'<img class="js-tools-icon-show-hide js-edit-template js-html mo-tool-icon mo-icons-icon mo-icons-page-edit" src="'.ICON_URL_SLICE.'" alt="page-edit" hspace="0" vspace="0" />'
-                            .'<span class="js-edit-file-pfad" style="display:none;">'.$specialchars->replaceSpecialChars($LAYOUT_DIR.$file,true).'</span>'
-                        .'</td>'
-                    .'</tr>'
-                    .'</tbody>'
-                    .'</table>';
-
-    }
-
-    foreach(getDirAsArray(BASE_DIR.$LAYOUT_DIR.'css',array(".css"),"natcasesort") as $file) {
-        $template["template_title_html_css"][] = '<table class="js-tools-show-hide mo-tag-height-from-icon" width="100%" cellspacing="0" border="0" cellpadding="0">'
-                    .'<tbody>'
-                    .'<tr>'
-                        .'<td class="mo-nowrap" width="99%">'
-                            .'<span class="js-filename mo-padding-left"><span class="mo-bold mo-padding-right">css/</span>'.$file.'</span>'
-                        .'</td>'
-                        .'<td class="mo-nowrap">'
-                            .'<img class="js-tools-icon-show-hide js-edit-template js-css mo-tool-icon mo-icons-icon mo-icons-page-edit" src="'.ICON_URL_SLICE.'" alt="page-edit" hspace="0" vspace="0" />'
-                            .'<span class="js-edit-file-pfad" style="display:none;">'.$specialchars->replaceSpecialChars($LAYOUT_DIR.'css/'.$file,true).'</span>'
-                        .'</td>'
-                    .'</tr>'
-                    .'</tbody>'
-                    .'</table>';
-    }
-
-    require_once(BASE_DIR_ADMIN."jquery/File-Upload/fileupload.php");
-    $template_img = getFileUpload($CMS_CONF->get("cmslayout").'/grafiken');
-
-    $html_img = get_template_truss('<li class="mo-li ui-corner-all">'.$template_img.'</li>',"template_title_grafiken",true);
-
-    $html_template = get_template_truss('<li class="ui-corner-all">'.contend_template($template).$html_img.'</li>',"template_title_template",false);
-    $html_template = str_replace("{TemplateName}",'<span style="font-weight:normal;">'.$specialchars->rebuildSpecialChars($CMS_CONF->get("cmslayout"),false,true).'</span>',$html_template);
-}
-
 
     $html_plugins = "";
-if(ROOT or in_array("template_plugin_css",$show)) {
+    if(ROOT or in_array("template_plugin_css",$show)) {
 
-    $show = $ADMIN_CONF->get("plugins");
-    if(!is_array($show))
-        $show = array();
-    global $activ_plugins;
-    $template_plugins = array();
-    foreach($activ_plugins as $plugin) {
-        if(!ROOT and !in_array($plugin,$show))
-            continue;
-        if(!is_file(BASE_DIR.PLUGIN_DIR_NAME."/".$plugin."/plugin.css")) continue;
-        $template_plugins["template_title_plugins"][] = '<table class="js-tools-show-hide mo-tag-height-from-icon" width="100%" cellspacing="0" border="0" cellpadding="0">'
-                    .'<tbody>'
-                    .'<tr>'
-                        .'<td class="mo-nowrap" width="99%">'
-                            .'<span class="js-filename mo-padding-left"><span class="mo-bold mo-padding-right">'.$plugin.'</span>/plugin.css</span>'
-                        .'</td>'
-                        .'<td class="mo-nowrap">'
-                            .'<img class="js-tools-icon-show-hide js-edit-template js-css mo-tool-icon mo-icons-icon mo-icons-page-edit" src="'.ICON_URL_SLICE.'" alt="page-edit" hspace="0" vspace="0" />'
-                            .'<span class="js-edit-file-pfad" style="display:none;">'.$specialchars->replaceSpecialChars(PLUGIN_DIR_NAME."/".$plugin."/plugin.css",true).'</span>'
-                        .'</td>'
-                    .'</tr>'
-                    .'</tbody>'
-                    .'</table>';
+        $show = $ADMIN_CONF->get("plugins");
+        if(!is_array($show))
+            $show = array();
+        global $activ_plugins;
+        $template_plugins = array();
+        foreach($activ_plugins as $plugin) {
+            if(!ROOT and !in_array($plugin,$show))
+                continue;
+            if(!is_file(BASE_DIR.PLUGIN_DIR_NAME."/".$plugin."/plugin.css")) continue;
+            $template_plugins["template_title_plugins"][] = '<table class="js-tools-show-hide mo-tag-height-from-icon" width="100%" cellspacing="0" border="0" cellpadding="0">'
+                        .'<tbody>'
+                        .'<tr>'
+                            .'<td class="mo-nowrap" width="99%">'
+                                .'<span class="js-filename mo-padding-left"><span class="mo-bold mo-padding-right">'.$plugin.'</span>/plugin.css</span>'
+                            .'</td>'
+                            .'<td class="mo-nowrap">'
+                                .'<img class="js-tools-icon-show-hide js-edit-template js-css mo-tool-icon mo-icons-icon mo-icons-page-edit" src="'.ICON_URL_SLICE.'" alt="page-edit" hspace="0" vspace="0" />'
+                                .'<span class="js-edit-file-pfad" style="display:none;">'.$specialchars->replaceSpecialChars(PLUGIN_DIR_NAME."/".$plugin."/plugin.css",true).'</span>'
+                            .'</td>'
+                        .'</tr>'
+                        .'</tbody>'
+                        .'</table>';
+        }
+        if(count($template_plugins["template_title_plugins"]) > 0) {
+            $template_plugins["template_title_plugins"]["toggle"] = true;
+            $html_plugins = contend_template($template_plugins);
+        }
     }
-    if(count($template_plugins["template_title_plugins"]) > 0) {
-        $template_plugins["template_title_plugins"]["toggle"] = true;
-        $html_plugins = contend_template($template_plugins);
-    }
-}
-$html_editor = "";
-if(!empty($html_template) or !empty($html_plugins))
-    $html_editor = pageedit_dialog();
+    $html_editor = "";
+    if(!empty($html_template) or !empty($html_plugins))
+        $html_editor = pageedit_dialog();
     return $html_manage.$html_template.$html_plugins.$html_editor;
 }
 
@@ -244,18 +245,23 @@ $debug .= "</pre><br />";
             $add_dir = $zip_name;
             # der replace pfad ist erstmal der zip file name
             $remove_dir = $zip_name;
+            $tmp_dir_merker = false;
             foreach($list as $tmp) {
                 # fehler im zip keine ../ im pfad erlaubt
                 if(false !== strpos($tmp["filename"],"../")) {
                     $extract = false;
                     break;
                 }
-                if(strpos($tmp["filename"],"gallerytemplate.html") !== false)
-                    continue;
+#$debug .= "test_dir1=".$tmp["filename"]."<br />";
+#$debug .= "test_dir2=".basename($tmp["filename"])."<br />";
                 # wir suchen den ordner wo die template.html enthalten ist
-                if(false !== strpos($tmp["filename"],"template.html")) {
+                if(basename($tmp["filename"]) == "template.html") {
                     $tmp_dir = substr($tmp["filename"],0,-(strlen("template.html")));
 $debug .= "template_dir1=".$tmp_dir."<br />";
+                    # da scheint noch nee template.html in eine unterordner zu sein
+                    if($tmp_dir_merker !== false and strlen($tmp_dir) > strlen($tmp_dir_merker))
+                        continue;
+                    $tmp_dir_merker = $tmp_dir;
                     if(!empty($tmp_dir) and $tmp_dir[(strlen($tmp_dir)-1)] == "/")
                         $tmp_dir = substr($tmp_dir,0,-1);
 $debug .= "template_dir2=".$tmp_dir."<br />";
@@ -267,9 +273,10 @@ $debug .= "template_dir2=".$tmp_dir."<br />";
                         $remove_dir = $tmp_dir;
                     }
                     $extract = true;
-                    break;
                 }
             }
+$debug .= "install=".$add_dir."<br />";
+
             $add_dir = $specialchars->replaceSpecialChars($add_dir,false);
             if($extract and getChmod() !== false) {
                 $list = $archive->extract(PCLZIP_OPT_PATH, $dir

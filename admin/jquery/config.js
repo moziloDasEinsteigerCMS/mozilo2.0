@@ -114,7 +114,6 @@ $(function() {
             revert: "invalid",
             containment: "document",
             helper: "clone",
-            cursor: "move",
             start: function( event, ui ) {
                 $('#js-new-default-color-value:focus').blur();
             }

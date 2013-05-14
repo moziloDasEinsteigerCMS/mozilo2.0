@@ -120,9 +120,6 @@ $(function() {
 
     $("body").on("click",".js-no-click", function(event) { event.preventDefault() });
 
-    /* damit der show sauber arbeitet setzen wir den width vor den hide() oder display:none */
-//    $(".js-width-show-helper").width($(".js-width-show-helper").width());
-
     /* bei allen input's mit dieser class nur zahlen zulassen */
     $("body").on("keyup",".js-in-digit", function(event) {
         checkDezValue(event);
@@ -193,7 +190,6 @@ $(function() {
     });
 
     /* toggle für die get_template_truss() php function */
-//    $(".js-toggle-content").hide(0);
     $("body").on("click",".js-toggle", function(event) {
         if($(this).hasClass('ui-state-disabled')) return;
         var mo_li = $(this).closest(".mo-li");
@@ -246,5 +242,4 @@ $(function() {
     }
 
     $('input[name="username"]').focus();
-//$('#ce-colorchange').dialog("open");
 });

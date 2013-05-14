@@ -44,9 +44,6 @@ $(function() {
         $("#js-template-install-file").val("");
         $("#js-template-manage").submit();
     });
-    // wenn was in der template verwaltung gemacht wurde soll es aufgeklapt bleiben
-    // deshalb wurde die class js-toggle-content-deact erzeugt
-//    $(".js-toggle-content-deact").removeClass("js-toggle-content-deact").addClass("js-toggle-content");
 
     $("body").on("change","#js-template-install-file", function(event) {
         if(!checkIsZipFile($("#js-template-install-file")))

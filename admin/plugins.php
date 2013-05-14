@@ -87,38 +87,33 @@ if($debug)
     if(!is_array($show))
         $show = array();
 
+    if(ROOT or in_array("plugin_-_manage",$show)) {
+        $multi_user = "";
+        if(defined('MULTI_USER') and MULTI_USER)
+            $multi_user = "&amp;multi=true";
 
-#function_exists('gzopen')
+        $html_manage = "";
+        $plugin_manage = array();
+        $disabled = '';
+        if(!function_exists('gzopen'))
+            $disabled = ' disabled="disabled"';
+        $plugin_manage["plugins_title_manage"][] = '<form id="js-plugin-manage" action="index.php?nojs=true&amp;action=plugins'.$multi_user.'" method="post" enctype="multipart/form-data">'
+            .'<div class="mo-nowrap align-right">'
+                .'<span class="align-left" style="float:left"><span class="mo-bold">'.getLanguageValue("plugins_text_filebutton").'</span><br />'.getLanguageValue("plugins_text_fileinfo").'</span>'
+                .'<input type="file" id="js-plugin-install-file" name="plugin-install-file" class="mo-select-div"'.$disabled.' />'
+                .'<input type="submit" id="js-plugin-install-submit" name="plugin-install" value="'.getLanguageValue("plugins_button_install",true).'"'.$disabled.' /><br />'
+                .'<input type="submit" id="js-plugin-del-submit" value="'.getLanguageValue("plugins_button_delete",true).'" class="mo-margin-top js-send-del-stop" /><br class="mo-clear" />'
+            .'</div></form>';
 
-if(ROOT or in_array("plugin_-_manage",$show)) {
-    $multi_user = "";
-    if(defined('MULTI_USER') and MULTI_USER)
-        $multi_user = "&amp;multi=true";
+        $plugin_manage["plugins_title_manage"]["toggle"] = true;
+        $html_manage = contend_template($plugin_manage);
+        $html_manage = str_replace("js-toggle","js-toggle-manage",$html_manage);
+        # es wurde in der template verwaltung was gemacht dann soll die aufgeklapt bleiben
+        if($plugin_manage_open)
+            $html_manage = str_replace("display:none;","",$html_manage);
+        $pagecontent .= $html_manage;
+    }
 
-    $html_manage = "";
-    $plugin_manage = array();
-#$html_manage
-    $disabled = '';
-    if(!function_exists('gzopen'))
-        $disabled = ' disabled="disabled"';
-    $plugin_manage["plugins_title_manage"][] = '<form id="js-plugin-manage" action="index.php?nojs=true&amp;action=plugins'.$multi_user.'" method="post" enctype="multipart/form-data">'
-        .'<div class="mo-nowrap align-right">'
-            .'<span class="align-left" style="float:left"><span class="mo-bold">'.getLanguageValue("plugins_text_filebutton").'</span><br />'.getLanguageValue("plugins_text_fileinfo").'</span>'
-            .'<input type="file" id="js-plugin-install-file" name="plugin-install-file" class="mo-select-div"'.$disabled.' />'
-            .'<input type="submit" id="js-plugin-install-submit" name="plugin-install" value="'.getLanguageValue("plugins_button_install",true).'"'.$disabled.' /><br />'
-            .'<input type="submit" id="js-plugin-del-submit" value="'.getLanguageValue("plugins_button_delete",true).'" class="mo-margin-top js-send-del-stop" /><br class="mo-clear" />'
-        .'</div></form>';
-
-    $plugin_manage["plugins_title_manage"]["toggle"] = true;
-    $html_manage = contend_template($plugin_manage);
-#$html_manage = get_template_truss($html_manage,"plugins_title_manage",true);
-    $html_manage = str_replace("js-toggle","js-toggle-manage",$html_manage);
-    # es wurde in der template verwaltung was gemacht dann soll die aufgeklapt bleiben
-#$plugin_manage_open = true;
-    if($plugin_manage_open)
-        $html_manage = str_replace("display:none;","",$html_manage);
-    $pagecontent .= $html_manage;
-}
     $pagecontent .= '<ul class="js-plugins mo-ul">';
 
     $dircontent = getDirAsArray(PLUGIN_DIR_REL,"dir","natcasesort");
@@ -140,8 +135,7 @@ if(ROOT or in_array("plugin_-_manage",$show)) {
             else
                 # Plugin Dirname stimt nicht mit Plugin Classnamen überein
                 continue;
-#            $conf_plugin = new Properties(PLUGIN_DIR_REL.$currentelement."/plugin.conf.php");
-#!!!!!!!!! muss das an $conf_plugin übergeben werden
+
             $conf_plugin = $plugin->settings;
             # plugin.conf.php wurde neu erstelt.
             # Wenn es die getDefaultSettings() gibt fühle die plugin.conf.php damit
@@ -164,9 +158,9 @@ if(ROOT or in_array("plugin_-_manage",$show)) {
             }
             $pagecontent .= '<li class="js-plugin mo-li ui-widget-content ui-corner-all'.$plugin_css_li_error.'">'
             .'<div class="js-tools-show-hide mo-li-head-tag mo-li-head-tag-no-ul ui-state-active ui-corner-all">';
-$check_show = ' style="display:none;"';
-if($plugin_manage_open)
-    $check_show = '';
+            $check_show = ' style="display:none;"';
+            if($plugin_manage_open)
+                $check_show = '';
             if($plugin_error === false) {
                 $pagecontent .= '<table width="100%" cellspacing="0" border="0" cellpadding="0" class="mo-tag-height-from-icon">'
                 .'<tr>'
@@ -178,8 +172,7 @@ if($plugin_manage_open)
                 .'</td>'
                 .'<td class="d_td_icons mo-nowrap">'
                     .'<img class="js-tools-icon-show-hide js-toggle mo-tool-icon mo-icons-icon mo-icons-edit" src="'.ICON_URL_SLICE.'" alt="edit" />'
-.'<input type="checkbox" value="'.$currentelement.'" class="mo-checkbox js-plugin-del"'.$check_show.' />'
-#.buildCheckBox('plugin-del[]', false)
+                    .'<input type="checkbox" value="'.$currentelement.'" class="mo-checkbox mo-checkbox-del js-plugin-del"'.$check_show.' />'
                 .'</td>'
                 .'</tr>'
                 .'</table>'
@@ -278,7 +271,6 @@ function get_plugin_info($plugin_info) {
         $template["plugins_info"][] = '<table width="100%" cellspacing="0" border="0" cellpadding="0" class="ui-corner-all"><tr><td align="left" valign="top" width="1%">'
             .'<img class="js-help-plugin mo-tool-icon mo-icons-icon mo-icons-info" src="'.ICON_URL_SLICE.'" alt="info" />'
             .'</td><td align="left" valign="top" width="99%">'
-#            .'<div class="mo-help-box js-plugin-help-content ui-corner-all" style="display:none;"><div class="d_js-width-show-helper">'.$plugin_info[2].'</div></div>'
             .'<div class="mo-help-box js-plugin-help-content ui-corner-all" style="display:none;">'.$plugin_info[2].'</div>'
             .'</td></tr></table>';
 
@@ -489,7 +481,6 @@ global $debug;
 
         require_once(BASE_DIR_ADMIN."pclzip.lib.php");
         $archive = new PclZip($zip_file);
-#        $extract = false;
 
         if(0 != ($list = $archive->listContent())) {
 /*$debug .= "<pre>";
@@ -507,8 +498,10 @@ $debug .= "</pre><br />";
                     $tmp_index = false;
                     break;
                 }
+#$debug .= "test_dir1=".$tmp["filename"]."<br />";
+#$debug .= "test_dir2=".basename($tmp["filename"])."<br />";
                 # wir suchen den ordner wo die index.php enthalten ist
-                if(substr($tmp["filename"],-4) == ".php" and false !== strpos($tmp["filename"],"index.php")) {
+                if(basename($tmp["filename"]) == "index.php") {
                     $tmp_dir = substr($tmp["filename"],0,-(strlen("index.php")));
                     # da scheint noch nee index.php in eine unterordner zu sein
                     if($tmp_dir_merker !== false and strlen($tmp_dir) > strlen($tmp_dir_merker))
@@ -589,7 +582,7 @@ $debug .= "index_dir2=".$tmp_dir."<br />";
 
 function PclZip_PreExtractCallBack($p_event, &$p_header) {
 global $debug;
-    if(false !== strpos($p_header['filename'],"/plugin.conf.php") and is_file($p_header['filename'])) {
+    if(basename($p_header['filename']) == "plugin.conf.php" and is_file($p_header['filename'])) {
 $debug .= "nicht überschreiben=".$p_header['filename']."<br />";
         return 0;
 }
