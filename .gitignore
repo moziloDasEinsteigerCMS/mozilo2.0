@@ -35,7 +35,6 @@ plugins/*
 !plugins/CONTACT/
 !plugins/Galerie/
 !plugins/LASTCHANGE/
-!plugins/SEARCH/
 !plugins/MenuSubs/
 
 # layouts
