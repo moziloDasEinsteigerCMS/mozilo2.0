@@ -1,5 +1,8 @@
 <?php if(!defined('IS_CMS')) die();
 
+function callback_makePhraseArray($arr) {
+    return str_replace(" ","%20",$arr[1]);
+}
 
 class SearchClass {
     var $chars_to_lower;
@@ -68,11 +71,9 @@ class SearchClass {
         if(trim($searchstring) != "") {
             # Leerzeichen die in einer Umklammerung sind zu %20 wandeln
             $string = preg_replace_callback(
-                          "/[\"|\'](.*)[\"|\']/Umsi",
-                          function($arr) {
-                              return str_replace(" ","%20",$arr[1]);
-                          },
-                          $searchstring
+                        "/[\"|\'](.*)[\"|\']/Umsi",
+                        "callback_makePhraseArray",
+                        $searchstring
                       );
             $matches = explode(" ",$string);
             foreach($matches as $string) {

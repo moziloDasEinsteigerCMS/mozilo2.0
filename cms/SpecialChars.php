@@ -7,6 +7,13 @@
 * $Author: stefanbe $
 *
 */
+function callback_encodeProtectedChr($arr) {
+    return "&#94;&#".ord($arr[1]).";";
+}
+
+function callback_decodeProtectedChr($arr) {
+    return chr($arr[1]);
+}
 
 class SpecialChars {
     
@@ -130,9 +137,7 @@ class SpecialChars {
         # alle geschützten zeichen suchen und in html code wandeln auch das ^
         $text = preg_replace_callback(
                     "/\^(.)/Umsi",
-                    function($arr) {
-                        return "&#94;&#".ord($arr[1]).";";
-                    },
+                    "callback_encodeProtectedChr",
                     $text
                 );
         return $text;
@@ -145,9 +150,7 @@ class SpecialChars {
         # alle &#94;&#?????; suchen und als zeichen ohne &#94; (^) ersetzen
         $text = preg_replace_callback(
                     "/&#94;&#(\d{2,5});/",
-                    function($arr) {
-                        return chr($arr[1]);
-                    },
+                    "callback_decodeProtectedChr",
                     $text
                 );
         return $text;
