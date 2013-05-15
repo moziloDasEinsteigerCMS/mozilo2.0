@@ -180,6 +180,7 @@ if($debug)
             $show = array();
         global $activ_plugins;
         $template_plugins = array();
+        $template_plugins["template_title_plugins"] = array();
         foreach($activ_plugins as $plugin) {
             if(!ROOT and !in_array($plugin,$show))
                 continue;
