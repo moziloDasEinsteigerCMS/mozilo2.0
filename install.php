@@ -27,6 +27,9 @@ todo:
 - erzeugen conf funktionen, mit echo vorerst mal einbinden
 
 */
+$test = false;
+
+
 define('TEST',true);
 define('IS_CMS',true);
 define('IS_ADMIN',true);
@@ -131,6 +134,9 @@ header('content-type: text/html; charset='.strtolower(CHARSET));
 
 $steps = array("language","chmod_test","environment","rewrite","password","finish");
 
+if($test)
+    $_POST["finish_steps"] = "language,chmod_test,environment,rewrite,password,update";
+
 $html_check_update = '';
 if(is_file("update.php")) {
     require_once("update.php");
@@ -161,7 +167,6 @@ if(isset($_POST["reset"])) {
 if(function_exists($current_step))
     list($status,$html_step) = $current_step();
 
-$test = false;
 echo getHtml("start");
 echo menu_tabs($steps,$current_step,$status);
 echo $html_check_update;
