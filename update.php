@@ -282,6 +282,7 @@ function makeUpdate() {
         $cats = getDirAsArray(BASE_DIR.CONTENT_DIR_NAME,"dir","sort");
         $cats = sort_cat_page($cats,BASE_DIR.CONTENT_DIR_NAME,"dir");
         foreach($cats as $cat) {
+#echo $cat."<br />\n";
             if(false !== ($newname = isUpdateFileName($cat,"catpage",true))) {
                 updateRename($cat,$newname,BASE_DIR.CONTENT_DIR_NAME."/");
                 $cat = $newname;
@@ -357,6 +358,7 @@ function updateRename($old,$new,$dir) {
         $new = $nr."_".$new;
         $return = $nr."_".$new;
     }
+#echo "rename=".$dir.$old." -> ".$dir.$new."<br />\n";
     rename($dir.$old,$dir.$new);
     return $return;
 }
@@ -405,8 +407,10 @@ function changeMoziloOldSpecialChars($text,$urlcodet = true) {
     //$text = preg_replace("/&+(?!(.+);)/U", "&amp;", $text);
     $text = html_entity_decode($text,ENT_COMPAT,'ISO-8859-1');
     $text = toUtf($text);
-    if($urlcodet)
+    if($urlcodet) {
         $text = $specialchars->replaceSpecialChars($text,false);
+        $text = str_replace("/","%2F",$text);
+    }
     return $text;
 }
 
