@@ -38,6 +38,7 @@ if ($text === "") $text = "Textvar: ". $phrase." gibts nicht!";
     function getLanguageHtml($phrase, $param1 = "", $param2 = "") {
         $text = $this->LANG_CONF->get($phrase);
         $text = str_replace(array("{PARAM1}","{PARAM2}"), array($param1, $param2), $text);
+        $text = html_entity_decode($text,ENT_QUOTES,CHARSET);
         $text = htmlentities($text, ENT_COMPAT, CHARSET);
 ##
 if ($text === "") $text = "Textvar: ". $phrase." gibts nicht!";
