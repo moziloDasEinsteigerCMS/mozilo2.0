@@ -59,21 +59,21 @@ function catpage() {
 function new_cat_page($page_lang) {
     $cat_files = '<input type="hidden" value="false" class="js-cat-files" />';
     $new_catpage = '<ul class="js-new-ul">'
-                        .'<li class="js-li-page mo-in-ul-li new-page ui-widget ui-state-default ui-corner-all">';
-                            $status = '<span class="js-status">'.$page_lang[EXT_HIDDEN].'</span>';
-                            $new_catpage .= li_table("Inhaltsseite","[Kategorie][Inhaltsseite".EXT_HIDDEN."]",$status,EXT_HIDDEN,"")
-                        .'</li>'
                         .'<li class="js-li-cat mo-li ui-widget-content ui-corner-all">';
                             $status = '<span class="js-status">0</span> '.$page_lang["pages"];
                             $new_catpage .= li_table("Kategorie","[Kategorie]",$status,"cat",$cat_files)
                         .'</li>'
-                        .'<li class="js-li-page mo-in-ul-li new-page js-link ui-widget ui-state-default ui-corner-all">';
-                            $status = $page_lang["url"].' '.$page_lang["target"].' <span class="js-status">blank</span>';
-                            $new_catpage .= li_table("Link Inhaltsseite","[Kategorie][Link%20Inhaltsseite-_blank-".EXT_LINK."]",$status,EXT_LINK,"",true)
+                        .'<li class="js-li-page mo-in-ul-li new-page ui-widget ui-state-default ui-corner-all">';
+                            $status = '<span class="js-status">'.$page_lang[EXT_HIDDEN].'</span>';
+                            $new_catpage .= li_table("Inhaltsseite","[Kategorie][Inhaltsseite".EXT_HIDDEN."]",$status,EXT_HIDDEN,"")
                         .'</li>'
                         .'<li class="js-li-cat mo-li js-link ui-widget-content ui-corner-all">';
                             $status = $page_lang["url"].' '.$page_lang["target"].' <span class="js-status">blank</span>';
                             $new_catpage .= li_table("Link Kategorie","[Link%20Kategorie-_blank-".EXT_LINK."]",$status,"cat","",true)
+                        .'</li>'
+                        .'<li class="js-li-page mo-in-ul-li new-page js-link ui-widget ui-state-default ui-corner-all">';
+                            $status = $page_lang["url"].' '.$page_lang["target"].' <span class="js-status">blank</span>';
+                            $new_catpage .= li_table("Link Inhaltsseite","[Kategorie][Link%20Inhaltsseite-_blank-".EXT_LINK."]",$status,EXT_LINK,"",true)
                         .'</li>'
                     .'</ul>';
     return $new_catpage;
