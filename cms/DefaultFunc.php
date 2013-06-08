@@ -221,7 +221,7 @@ function findPlugins() {
         if(file_exists(PLUGIN_DIR_REL.$plugin."/plugin.conf.php")
             and file_exists(PLUGIN_DIR_REL.$plugin."/index.php")) {
             if(false === ($conf_plugin = file_get_contents(PLUGIN_DIR_REL.$plugin."/plugin.conf.php")))
-                die("Fatal Error Can't read file: ".basename(PLUGIN_DIR_REL.$plugin."/plugin.conf.php"));
+                die("Fatal Error Can't read file: ".$plugin."/plugin.conf.php");
             $conf_plugin = str_replace($page_protect_search,"",$conf_plugin);
             $conf_plugin = trim($conf_plugin);
             $conf_plugin = unserialize($conf_plugin);
