@@ -313,7 +313,7 @@ function makeUpdate() {
             }
         }
         $sort_array = var_export($sort_array,true);
-        file_put_contents(BASE_DIR_CMS."SortCatPage.php","<?php if(!defined('IS_CMS')) die();\n\$cat_page_sort_array = ".$sort_array.";\n?>",LOCK_EX);
+        file_put_contents(SORT_CAT_PAGE,"<?php if(!defined('IS_CMS')) die();\n\$cat_page_sort_array = ".$sort_array.";\n?>",LOCK_EX);
         if(isset($_POST['update_pages']) and $_POST['update_pages'] == "true")
             updatePages($update_page_files);
         }

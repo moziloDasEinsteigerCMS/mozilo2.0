@@ -29,6 +29,7 @@ define("BASE_DIR_CMS",BASE_DIR.CMS_DIR_NAME."/");
 define("CONTENT_DIR_REL",BASE_DIR.CONTENT_DIR_NAME."/");
 define("GALLERIES_DIR_REL",BASE_DIR.GALLERIES_DIR_NAME."/");
 define("PLUGIN_DIR_REL",BASE_DIR.PLUGIN_DIR_NAME."/");
+define("SORT_CAT_PAGE",BASE_DIR.CONTENT_DIR_NAME."/SortCatPage.php");
 
 global $ALOWED_IMG_ARRAY;
 $ALOWED_IMG_ARRAY = array(".png",".jpg",".jpeg",".gif");
@@ -55,8 +56,11 @@ unset($URL_BASE);
 $page_protect_search = array("<?php die(); ?>\r\n","<?php die(); ?>\r","<?php die(); ?>\n");
 $page_protect = "<?php die(); ?>\n";
 
-if(is_file(BASE_DIR_CMS."SortCatPage.php")) {
-    include_once(BASE_DIR_CMS."SortCatPage.php");
+# das ist nur wegen update drin fligt irgendwann raus
+if(is_file(BASE_DIR_CMS."SortCatPage.php") and !is_file(SORT_CAT_PAGE))
+    rename(BASE_DIR_CMS."SortCatPage.php",SORT_CAT_PAGE);
+if(is_file(SORT_CAT_PAGE)) {
+    include_once(SORT_CAT_PAGE);
     global $cat_page_sort_array;
 }
 

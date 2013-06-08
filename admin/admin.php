@@ -62,16 +62,11 @@ function admin() {
 
     $template = array();
     $error = array();
-$show = $ADMIN_CONF->get("admin");
-if(!is_array($show))
-    $show = array();
+    $show = $ADMIN_CONF->get("admin");
+    if(!is_array($show))
+        $show = array();
 
     $titel = "admin_button";
-
-   // Zeile "User Settings"
-    if(ROOT) {
-        $template[$titel][] = array(getLanguageValue("admin_noroot_text"),userSettings("tabs").'<div style="font-size:.4em;">&nbsp;</div>'.userSettings("config").'<div style="font-size:.4em;">&nbsp;</div>'.userSettings("admin").'<div style="font-size:.4em;">&nbsp;</div>'.userSettings("plugins").'<div style="font-size:.4em;">&nbsp;</div>'.userSettings("template"));
-    }
 
     if(ROOT or in_array("language",$show)) {
         $count = 0;
@@ -131,26 +126,26 @@ if(!is_array($show))
             $cms_size = dirsize(BASE_DIR_ADMIN) + dirsize(BASE_DIR_CMS);
             if(false !== ($tmp_size = dirsize(BASE_DIR."jquery/")))
                 $cms_size += $tmp_size;
-            $cms_input = buildCheckBox("backup_include_cms", "true",getLanguageValue("admin_button_include_cms")." (".convertFileSizeUnit($cms_size).")");
+            $cms_input = buildCheckBox("backup_include_cms", "true",getLanguageValue("admin_button_include_cms")." (".convertFileSizeUnit($cms_size).")").'<br />';
             $catpage_input = "";
             if(false !== ($tmp_size = dirsize(CONTENT_DIR_REL))) {
-                $catpage_input = buildCheckBox("backup_include_catpage", "false",getLanguageValue("admin_button_include_catpage")."  (".convertFileSizeUnit($tmp_size).")");
+                $catpage_input = buildCheckBox("backup_include_catpage", "false",getLanguageValue("admin_button_include_catpage")."  (".convertFileSizeUnit($tmp_size).")").'<br />';
             }
             $gallery_input = "";
             if(false !== ($tmp_size = dirsize(GALLERIES_DIR_REL))) {
-                $gallery_input = buildCheckBox("backup_include_gallery", "false",getLanguageValue("admin_button_include_gallery")."  (".convertFileSizeUnit($tmp_size).")");
+                $gallery_input = buildCheckBox("backup_include_gallery", "false",getLanguageValue("admin_button_include_gallery")."  (".convertFileSizeUnit($tmp_size).")").'<br />';
             }
             $layouts_input = "";
             if(false !== ($tmp_size = dirsize(BASE_DIR.LAYOUT_DIR_NAME))) {
-                $layouts_input = buildCheckBox("backup_include_layouts", "false",getLanguageValue("admin_button_include_layouts")."  (".convertFileSizeUnit($tmp_size).")");
+                $layouts_input = buildCheckBox("backup_include_layouts", "false",getLanguageValue("admin_button_include_layouts")."  (".convertFileSizeUnit($tmp_size).")").'<br />';
             }
             $plugins_input = "";
             if(false !== ($tmp_size = dirsize(BASE_DIR.PLUGIN_DIR_NAME))) {
-                $plugins_input = buildCheckBox("backup_include_plugins", "false",getLanguageValue("admin_button_include_plugins")."  (".convertFileSizeUnit($tmp_size).")");
+                $plugins_input = buildCheckBox("backup_include_plugins", "false",getLanguageValue("admin_button_include_plugins")."  (".convertFileSizeUnit($tmp_size).")").'<br />';
             }
             $docu_input = "";
             if(false !== ($tmp_size = dirsize(BASE_DIR."docu/"))) {
-                $docu_input = buildCheckBox("backup_include_docu", "false",getLanguageValue("admin_button_include_docu")."  (".convertFileSizeUnit($tmp_size).")");
+                $docu_input = buildCheckBox("backup_include_docu", "false",getLanguageValue("admin_button_include_docu")."  (".convertFileSizeUnit($tmp_size).")").'<br />';
             }
             $template[$titel][] = array(getLanguageValue("admin_text_get_backup"),
             '<form action="index.php?action='.ACTION.'" method="post">'
@@ -187,7 +182,7 @@ if(!is_array($show))
     if(ROOT or in_array("userpassword",$show)) {
         $deluser = NULL;
         if(ROOT)
-            $deluser = '<tr><td colspan="2">&nbsp;</td><td class="mo-in-li-r">'.'<input type="button" class="d_mo-input-text" name="deluser" value="'.getLanguageValue("admin_button_del_user").'" />'.'</td></tr>';
+            $deluser = '<tr><td colspan="2">&nbsp;</td><td class="mo-in-li-r">'.'<input type="button" class="d_mo-input-text" name="deluser" value="'.getLanguageValue("admin_button_del_user").'" />'.'<div style="font-size:.4em;">&nbsp;</div>'.'</td></tr>';
 
         $template[$titel][] = getLanguageValue("userpw_text_login").'<br /><br />'.getLanguageValue("pw_help")
         .'<table width="100%" cellspacing="0" border="0" cellpadding="0" class="">'
@@ -196,6 +191,11 @@ if(!is_array($show))
         .'<tr><td>&nbsp;</td><td>'.getLanguageValue("userpw_titel_newpw").'</td><td>'.'<input type="password" class="js-in-pwuser mo-input-text" value="'.NULL.'" name="newuserpw" />'.'</td></tr>'
         .'<tr><td>&nbsp;</td><td>'.getLanguageValue("userpw_titel_newpwrepeat").'</td><td>'.'<input type="password" class="js-in-pwuser mo-input-text" value="" name="newuserpwrepeat" />'.'</td></tr>'
         ."</table>";
+    }
+
+   // Zeile "User Settings"
+    if(ROOT) {
+        $template[$titel][] = array(getLanguageValue("admin_noroot_text"),userSettings("tabs").'<div style="font-size:.4em;">&nbsp;</div>'.userSettings("config").'<div style="font-size:.4em;">&nbsp;</div>'.userSettings("admin").'<div style="font-size:.4em;">&nbsp;</div>'.userSettings("plugins").'<div style="font-size:.4em;">&nbsp;</div>'.userSettings("template"));
     }
     $pagecontent .= contend_template($template,$error);
 

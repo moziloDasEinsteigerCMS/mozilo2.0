@@ -268,7 +268,7 @@ function write_sort_list($movecat = false) {
     }
     $sort_array = var_export($cat_page_sort_array,true);
     global $page_protect;
-    if(true != (mo_file_put_contents(BASE_DIR_CMS."SortCatPage.php","<?php if(!defined('IS_CMS')) die();\n\$cat_page_sort_array = ".$sort_array.";\n?>")))
+    if(true != (mo_file_put_contents(SORT_CAT_PAGE,"<?php if(!defined('IS_CMS')) die();\n\$cat_page_sort_array = ".$sort_array.";\n?>")))
         return ajax_return("error",false,returnMessage(false,getLanguageValue("error_write_sort_list")),true,"js-dialog-reload");
 
     global $CatPage;

@@ -41,10 +41,7 @@ function config() {
         exit();
     }
 
-
-
     $pagecontent = NULL;
-
 
     $show = $ADMIN_CONF->get("config");
     if(!is_array($show))
@@ -54,37 +51,37 @@ function config() {
     $error = array();
     // ALLGEMEINE EINSTELLUNGEN
     $titel = "config_titel_cmsglobal";
-        // Zeile "WEBSITE-TITEL"
+    // Zeile "WEBSITE-TITEL"
     if(ROOT or in_array("websitetitle",$show)) {
         $error[$titel][] = false;
         $template[$titel][] = array(getLanguageValue("config_text_websitetitle"),'<input type="text" class="mo-input-text" name="websitetitle" value="'.$specialchars->rebuildSpecialChars($CMS_CONF->get("websitetitle"),true,true).'" />');
     }
 
-        // Zeile "TITEL-TRENNER"
+    // Zeile "TITEL-TRENNER"
     if(ROOT or in_array("titlebarseparator",$show)) {
        $error[$titel][] = false;
         $template[$titel][] = array(getLanguageValue("config_text_websitetitleseparator"),'<input type="text" class="mo-input-text" name="titlebarseparator" value="'.$specialchars->rebuildSpecialChars($CMS_CONF->get("titlebarseparator"),true,true).'" />');
     }
 
-        // Zeile "WEBSITE-TITELLEISTE"
+    // Zeile "WEBSITE-TITELLEISTE"
     if(ROOT or in_array("titlebarformat",$show)) {
         $error[$titel][] = false;
         $template[$titel][] = getLanguageValue("config_text_websitetitlebar").'<br /><input type="text" class="mo-input-text mo-input-margin-top" name="titlebarformat" value="'.$specialchars->rebuildSpecialChars($CMS_CONF->get("titlebarformat"),true,true).'" />';
     }
 
-        // Zeile "WEBSITE-BESCHREIBUNG"
+    // Zeile "WEBSITE-BESCHREIBUNG"
     if(ROOT or in_array("websitedescription",$show)) {
         $error[$titel][] = false;
         $template[$titel][] = getLanguageValue("config_text_websitedescription").'<br /><input type="text" class="mo-input-text mo-input-margin-top" name="websitedescription" value="'.$specialchars->rebuildSpecialChars($CMS_CONF->get("websitedescription"),true,true).'" />';
     }
 
-        // Zeile "WEBSITE-KEYWORDS"
+    // Zeile "WEBSITE-KEYWORDS"
     if(ROOT or in_array("websitekeywords",$show)) {
         $error[$titel][] = false;
         $template[$titel][] = getLanguageValue("config_text_websitekeywords").'<br /><input type="text" class="mo-input-text mo-input-margin-top" name="websitekeywords" value="'.$specialchars->rebuildSpecialChars($CMS_CONF->get("websitekeywords"),true,true).'" />';
     }
 
-        // Zeile "SPRACHAUSWAHL"
+    // Zeile "SPRACHAUSWAHL"
     if(ROOT or in_array("cmslanguage",$show)) {
         $tmp_array = getDirAsArray(BASE_DIR_CMS.'sprachen',"file","natcasesort");
         if(count($tmp_array) <= 0) {
@@ -111,31 +108,6 @@ function config() {
         $template[$titel][] = array(getLanguageValue("config_text_cmslanguage"),$conf_inhalt);
     }
 
-        // Zeile "LAYOUTAUSWAHL"
-/*
-    if(ROOT or in_array("cmslayout",$show)) {
-        $tmp_array = getDirAsArray(BASE_DIR."layouts","dir","natcasesort");
-        if(count($tmp_array) <= 0) {
-            $error[$titel][] = getLanguageValue("config_error_layouts_emty");
-        } elseif(!in_array($CMS_CONF->get('cmslayout'),$tmp_array)) {
-            $error[$titel][] = getLanguageValue("config_error_layouts_existed")."<br />".$specialchars->rebuildSpecialChars($CMS_CONF->get('cmslayout'),true,true);
-        } else
-            $error[$titel][] = false;
-        $conf_inhalt = '<div class="mo-select-div"><select name="cmslayout" class="mo-select">';
-        foreach ($tmp_array as $file) {
-            $selected = NULL;
-            if ($file == $CMS_CONF->get("cmslayout")) {
-                $selected = " selected";
-            }
-            $conf_inhalt .= '<option'.$selected.' value="'.$file.'">';
-            // Übersetzer aus der aktuellen Sprachdatei holen
-            $conf_inhalt .= $specialchars->rebuildSpecialChars($file, true, true);
-            $conf_inhalt .= "</option>";
-        }
-        $conf_inhalt .= "</select></div>";
-        $template[$titel][] = array(getLanguageValue("config_text_cmslayout"),$conf_inhalt);
-    }
-*/
     // Zeile "STANDARD-KATEGORIE"
     if(ROOT or in_array("defaultcat",$show)) {
         $tmp_array = getDirAsArray(CONTENT_DIR_REL,"dir","natcasesort");
@@ -159,9 +131,9 @@ function config() {
         $conf_inhalt .= "</select></div>";
         $template[$titel][] = array(getLanguageValue("config_text_defaultcat"),$conf_inhalt);
 
-$error[$titel][] = false;
-$conf_checkbox = buildCheckBox("draftcat", $CMS_CONF->get("draftcat"),getLanguageValue("config_input_draftcat"));
-$conf_select = "";
+        $error[$titel][] = false;
+        $conf_checkbox = buildCheckBox("draftcat", $CMS_CONF->get("draftcat"),getLanguageValue("config_input_draftcat"));
+        $conf_select = "";
         $tmp_array = getDirAsArray(BASE_DIR."layouts","dir","natcasesort");
         if(count($tmp_array) <= 0)
             $conf_select .= getLanguageValue("config_error_layouts_emty");
@@ -178,7 +150,7 @@ $conf_select = "";
         }
         $conf_select .= "</select></div>";
 
-$template[$titel][] = array(getLanguageValue("config_text_draftcat"),$conf_checkbox.$conf_select);
+        $template[$titel][] = array(getLanguageValue("config_text_draftcat"),$conf_checkbox.$conf_select);
     }
 
     # sitemap.xml
@@ -188,8 +160,8 @@ $template[$titel][] = array(getLanguageValue("config_text_draftcat"),$conf_check
     }
 
     // Zeile "NUTZE CMS-SYNTAX"
-        // SYNTAX-EINSTELLUNGEN
-        $titel = "config_titel_cmssyntax";
+    // SYNTAX-EINSTELLUNGEN
+    $titel = "config_titel_cmssyntax";
     if(ROOT or in_array("usecmssyntax",$show)) {
             $error[$titel][] = false;
             $template[$titel][] = array(getLanguageValue("config_text_usesyntax"),buildCheckBox("usecmssyntax", $CMS_CONF->get("usecmssyntax"),getLanguageValue("config_input_usesyntax")));
@@ -226,38 +198,37 @@ $template[$titel][] = array(getLanguageValue("config_text_draftcat"),$conf_check
     }
 
     // Erweiterte Einstellungen
-        $titel = "config_titel_expert";
-            // Zeile "showhiddenpagesin"
+    // Zeile "showhiddenpagesin"
+    $titel = "config_titel_expert";
     if(ROOT or in_array("hiddenpages",$show)) {
             $error[$titel][] = false;
             $template[$titel][] = array(getLanguageValue("config_text_showhiddenpages"),
-                buildCheckBox("showhiddenpagesinsearch", ($CMS_CONF->get("showhiddenpagesinsearch") == "true"),getLanguageValue("config_input_search"))
-                .buildCheckBox("showhiddenpagesinsitemap", ($CMS_CONF->get("showhiddenpagesinsitemap") == "true"),getLanguageValue("config_input_sitemap"))
+                buildCheckBox("showhiddenpagesinsearch", ($CMS_CONF->get("showhiddenpagesinsearch") == "true"),getLanguageValue("config_input_search")).'<br />'
+                .buildCheckBox("showhiddenpagesinsitemap", ($CMS_CONF->get("showhiddenpagesinsitemap") == "true"),getLanguageValue("config_input_sitemap")).'<br />'
                 .buildCheckBox("showhiddenpagesasdefaultpage", ($CMS_CONF->get("showhiddenpagesasdefaultpage") == "true"),getLanguageValue("config_input_pagesasdefaultpage"))
                 );
     }
 
-            // Zeile "Links öffnen self blank"
+    // Zeile "Links öffnen self blank"
     if(ROOT or in_array("targetblank",$show)) {
            $error[$titel][] = false;
-            $template[$titel][] = array(getLanguageValue("config_text_target"),buildCheckBox("targetblank_download", ($CMS_CONF->get("targetblank_download") == "true"),getLanguageValue("config_input_download")).buildCheckBox("targetblank_link", ($CMS_CONF->get("targetblank_link") == "true"),getLanguageValue("config_input_link")));
+            $template[$titel][] = array(getLanguageValue("config_text_target"),buildCheckBox("targetblank_download", ($CMS_CONF->get("targetblank_download") == "true"),getLanguageValue("config_input_download")).'<br />'.buildCheckBox("targetblank_link", ($CMS_CONF->get("targetblank_link") == "true"),getLanguageValue("config_input_link")));
     }
-            // Zeile "wenn page == cat"
+    // Zeile "wenn page == cat"
     if(ROOT or in_array("hidecatnamedpages",$show)) {
             $error[$titel][] = false;
             $template[$titel][] = array(getLanguageValue("config_text_catnamedpages"),buildCheckBox("hidecatnamedpages", ($CMS_CONF->get("hidecatnamedpages") == "true"),getLanguageValue("config_input_catnamedpages")));
     }
-            // Zeile "mod_rewrite"
+    // Zeile "mod_rewrite"
     if(ROOT or in_array("modrewrite",$show)) {
             $error[$titel][] = false;
             $template[$titel][] = array(getLanguageValue("config_text_modrewrite"),buildCheckBox("modrewrite", ($CMS_CONF->get("modrewrite") == "true"),getLanguageValue("config_input_modrewrite")));
     }
-            // Zeile "showsyntaxtooltips"
+    // Zeile "showsyntaxtooltips"
     if(ROOT or in_array("showsyntaxtooltips",$show)) {
             $error[$titel][] = false;
             $template[$titel][] = array(getLanguageValue("config_text_showsyntaxtooltips"),buildCheckBox("showsyntaxtooltips", ($CMS_CONF->get("showsyntaxtooltips") == "true"),getLanguageValue("config_input_showsyntaxtooltips")));
     }
-#if(!isset($template))
 
     $pagecontent .= contend_template($template,$error);
 

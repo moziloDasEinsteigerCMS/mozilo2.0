@@ -159,10 +159,11 @@ if($debug)
             $pagecontent .= '<li class="js-plugin mo-li ui-widget-content ui-corner-all'.$plugin_css_li_error.'">'
             .'<div class="js-tools-show-hide mo-li-head-tag mo-li-head-tag-no-ul ui-state-active ui-corner-all">';
             $check_show = ' style="display:none;"';
+#            $check_show = 'display:none;';
             if($plugin_manage_open)
                 $check_show = '';
             if($plugin_error === false) {
-                $pagecontent .= '<table width="100%" cellspacing="0" border="0" cellpadding="0" class="mo-tag-height-from-icon">'
+/*                $pagecontent .= '<table width="100%" cellspacing="0" border="0" cellpadding="0" class="mo-tag-height-from-icon">'
                 .'<tr>'
                 .'<td width="99%" class="mo-nowrap">'
                 .'<span class="mo-padding-left">'.$plugin_name.'</span>'
@@ -176,6 +177,16 @@ if($debug)
                 .'</td>'
                 .'</tr>'
                 .'</table>'
+*/
+$pagecontent .= ''
+.'<span class="mo-padding-left mo-middle">'.$plugin_name.'</span>'
+.'<div style="float:right;" class="mo-tag-height-from-icon mo-middle mo-nowrap">'
+    .'<span class="js-plugin-active mo-staus">'.buildCheckBox($currentelement.'[active]', ($conf_plugin->get("active") == "true"),getLanguageValue("plugins_input_active")).'</span>'
+    .'<img class="js-tools-icon-show-hide js-toggle mo-tool-icon mo-icons-icon mo-icons-edit" src="'.ICON_URL_SLICE.'" alt="edit" />'
+    .'<input type="checkbox" value="'.$currentelement.'" class="mo-checkbox mo-checkbox-del js-plugin-del"'.$check_show.' />'
+.'</div>'
+.'<br class="mo-clear" />'
+
                 .'</div>'
                 .'<div class="js-toggle-content mo-in-ul-ul" style="display:none;">'
                 .get_plugin_info($plugin_info);
@@ -268,11 +279,18 @@ function get_plugin_info($plugin_info) {
             $template["plugins_info"][] = array(getLanguageValue("plugins_titel_web"),'<a href="'.$link.'" target="_blank">'.$link_text.'</a>');
     }
     if(isset($plugin_info[2]) and strlen($plugin_info[2]) > 1)
-        $template["plugins_info"][] = '<table width="100%" cellspacing="0" border="0" cellpadding="0" class="ui-corner-all"><tr><td align="left" valign="top" width="1%">'
-            .'<img class="js-help-plugin mo-tool-icon mo-icons-icon mo-icons-info" src="'.ICON_URL_SLICE.'" alt="info" />'
-            .'</td><td align="left" valign="top" width="99%">'
-            .'<div class="mo-help-box js-plugin-help-content ui-corner-all" style="display:none;">'.$plugin_info[2].'</div>'
-            .'</td></tr></table>';
+//         $template["plugins_info"][] = '<table width="100%" cellspacing="0" border="0" cellpadding="0" class="ui-corner-all"><tr><td align="left" valign="top" width="1%">'
+//             .'<img class="js-help-plugin mo-tool-icon mo-icons-icon mo-icons-info" src="'.ICON_URL_SLICE.'" alt="info" />'
+//             .'</td><td align="left" valign="top" width="99%">'
+//             .'<div class="mo-help-box js-plugin-help-content ui-corner-all" style="display:none;">'.$plugin_info[2].'</div>'
+//             .'</td></tr></table>';
+
+$template["plugins_info"][] = ''
+.'<img style="float:left;" class="js-help-plugin mo-tool-icon mo-icons-icon mo-icons-info" src="'.ICON_URL_SLICE.'" alt="info" />'
+.'<div style="margin-left:3em;">'
+.'<div style="display:none;" class="mo-help-box js-plugin-help-content ui-corner-all" style="display:none;margin-left:3em;">'.$plugin_info[2].'</div>'
+.'</div>'
+.'<br class="mo-clear" />';
 
     return contend_template($template);
 }
@@ -428,6 +446,8 @@ function get_plugin_config($conf_plugin,$config,$currentelement) {
     return '<div class="js-config"'.$show.'><ul class="mo-ul">'
            .'<li class="mo-li ui-widget-content ui-corner-all">'
            .'<div class="js-tools-show-hide mo-li-head-tag mo-tag-height-from-icon mo-li-head-tag-no-ul mo-middle ui-state-default ui-corner-top">'
+
+/*
            .'<table class="mo-tag-height-from-icon" width="100%" cellspacing="0" border="0" cellpadding="0">'
            .'<tbody>'
            .'<tr>'
@@ -439,7 +459,12 @@ function get_plugin_config($conf_plugin,$config,$currentelement) {
                .'</td>'
            .'</tr>'
            .'</tbody>'
-           .'</table>'
+           .'</table>'*/
+
+.'<span class="mo-bold mo-padding-left">'.getLanguageValue("config_button").'</span>'
+.'<img style="float:right;" class="js-save-plugin mo-tool-icon mo-icons-icon mo-icons-save" src="'.ICON_URL_SLICE.'" alt="save" />'
+.'<br class="mo-clear" />'
+
            .'</div>'
            .'<ul class="mo-in-ul-ul">'
             .contend_template($ul_template,false,true)

@@ -18,7 +18,9 @@
 admin/conf/*
 cms/conf/*
 .htaccess
+htaccess*
 admin/.htaccess
+admin/htaccess*
 cms/SortCatPage.php
 
 # kategorieen
