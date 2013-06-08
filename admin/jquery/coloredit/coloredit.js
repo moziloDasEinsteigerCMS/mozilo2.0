@@ -154,7 +154,10 @@ var ColorEditor = {
             resizable: false,
             show: anim_speed,
             title:mozilo_lang["dialog_title_coloredit"],
-            dialogClass: "mo-shadow"
+            dialogClass: "mo-shadow",
+            create: function(event, ui) {
+                $(this).parents('.ui-dialog').find('.ui-dialog-titlebar').prepend(mo_docu_coloredit);
+            }
         });
 
         this.hsv = this._HEXtoHSV(this._getInputHex(this.element.siblings('input')));
