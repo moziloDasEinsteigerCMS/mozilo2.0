@@ -28,6 +28,12 @@ if(is_file(BASE_DIR.CMS_DIR_NAME."/DefaultConfCMS.php")) {
     die("Fatal Error ".BASE_DIR.CMS_DIR_NAME."/DefaultConfCMS.php Datei existiert nicht");
 }
 
+if(!is_file(BASE_DIR.CMS_DIR_NAME."/conf/main.conf.php") and is_file(BASE_DIR."install.php")) {
+    $install = $_SERVER['HTTP_HOST'].URL_BASE."install.php";
+    header("Location: http://$install");
+    exit;
+}
+
 if(is_file(BASE_DIR_CMS."DefaultFunc.php")) {
     require_once(BASE_DIR_CMS."DefaultFunc.php");
 } else {
