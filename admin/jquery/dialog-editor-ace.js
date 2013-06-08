@@ -152,7 +152,9 @@ function insert_ace(aTag, eTag, select) {
         if(range_ace[i].start.column < range_ace[i].end.column)
             select = true;
         var selectet = editor_session.doc.getTextRange(range_ace[i]);
-
+        // anscheinend wurde der farbcode ohne die # selectiert
+        if(aTag.length == 7 && aTag.substr(0, 1) == "#" && selectet.substr(0, 1) != "#")
+            aTag = aTag.substr(1,6);
         // ist aTag das farbe syntaxelement
         if(aTag.substr(0, syntax_color.length) == syntax_color && range_ace[i].start.column >= syntax_color.length) {
             range_ace[i].start.column -= syntax_color.length;
