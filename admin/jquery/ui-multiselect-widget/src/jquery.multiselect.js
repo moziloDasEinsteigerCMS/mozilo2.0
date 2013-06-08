@@ -609,26 +609,9 @@ if(this.header.find('.ui-multiselect-filter').length > 0){
     this.header.show();
 }
 
-// das hier ist keine relastische berechnung die 24 z.B ist ein schätzwert vom header
-// braucht wegen dialogMaxheightOffset die default.js
-if(o.height == 'auto') {
-/*
-$("#out").html($("#out").html()+"<br />height=auto");
-$("#out").html($("#out").html()+"<br />menu.height="+menu.height());
-$("#out").html($("#out").html()+"<br />window="+parseInt($(window).height()));
-$("#out").html($("#out").html()+"<br />dialogMaxheightOffset="+dialogMaxheightOffset);
-$("#out").html($("#out").html()+"<br />pos.top="+pos.top);
-$("#out").html($("#out").html()+"<br />button.outerHeight="+button.outerHeight());
-$("#out").html($("#out").html()+"<br />window.scrollTop="+$(window).scrollTop());*/
-    if(menu.height() < parseInt($(window).height()) - dialogMaxheightOffset - ((pos.top - $(window).scrollTop()) + button.outerHeight()) - 24 ) {
-        $container.css('overflow-y','visible');
-    } else {
-        $container.css({"overflow-y": "scroll", height: parseInt($(window).height()) - dialogMaxheightOffset - ((pos.top - $(window).scrollTop()) + button.outerHeight()) - 24 });
-    }
-}
 //this._setMenuWidth();
 		// position and show menu
-		if( $.ui.position && !$.isEmptyObject(o.position) ){
+		if( $.ui.position && typeof o.position == "object" && !$.isEmptyObject(o.position) ){
 			o.position.of = o.position.of || button;
 			
 			menu
@@ -639,8 +622,23 @@ $("#out").html($("#out").html()+"<br />window.scrollTop="+$(window).scrollTop())
 		
 		// if position utility is not available...
 		} else {
+var set_top = false;
+if(((parseInt($(window).height()) - dialogMaxheightOffset) / 2) < (pos.top - $(window).scrollTop()))
+    set_top = true;
+if(o.height == 'auto') {
+    if(set_top && menu.height() > pos.top - $(window).scrollTop() - dialogMaxheightOffset -24)
+        $container.css({"overflow-y": "scroll", height: pos.top - $(window).scrollTop() - dialogMaxheightOffset -24});
+    else if(!set_top && menu.height() > parseInt($(window).height()) - dialogMaxheightOffset - ((pos.top - $(window).scrollTop()) + button.outerHeight()) - 24 )
+        $container.css({"overflow-y": "scroll", height: parseInt($(window).height()) - dialogMaxheightOffset - ((pos.top - $(window).scrollTop()) + button.outerHeight()) - 24 });
+    else
+        $container.css('overflow-y','visible');
+}
+var menu_css_top = pos.top + button.outerHeight();
+if(set_top)
+    menu_css_top = pos.top - menu.outerHeight();
+
 			menu.css({ 
-				top: pos.top + button.outerHeight(),
+				top: menu_css_top,
 				left: pos.left
 			}).show( effect, speed );
 		}
