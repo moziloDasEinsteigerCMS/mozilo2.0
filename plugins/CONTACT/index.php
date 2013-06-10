@@ -2,13 +2,33 @@
 
 class CONTACT extends Plugin {
 
-    /***************************************************************
-    * 
-    * Gibt den HTML-Code zurück, mit dem die Plugin-Variable ersetzt 
-    * wird. Der String-Parameter $value ist Pflicht, kann aber leer 
-    * sein.
-    * 
-    ***************************************************************/
+    function getDefaultSettings($only_formcalcs = false) {
+        $tmp = array(
+            "formularmail" => "",
+            "contactformwaittime" => "15",
+            "contactformusespamprotection" => "true",
+            "contactformcalcs" => "3 + 7 = 10<br />5 - 3 = 2<br />1 plus 1 = 2<br />17 minus 7 = 10<br />4 * 2 = 8<br />3x3 = 9<br />2 divided by 2 = 1<br />Abraham Lincols first Name = Abraham<br />James Bonds family name = Bond<br />bronze, silver, ... ? = gold",
+            "titel_name" => "",
+            "titel_name_show" => "true",
+            "titel_name_mandatory" => "false",
+            "titel_website" => "",
+            "titel_website_show" => "true",
+            "titel_website_mandatory" => "false",
+            "titel_mail" => "",
+            "titel_mail_show" => "true",
+            "titel_mail_mandatory" => "false",
+            "titel_message" => "",
+            "titel_message_show" => "true",
+            "titel_message_mandatory" => "false",
+            "titel_privacy" => "",
+            "titel_privacy_show" => "true",
+            "titel_privacy_mandatory" => "false"
+        );
+        if($only_formcalcs)
+            return $tmp["contactformcalcs"];
+        return $tmp;
+    }
+
     function getContent($value) {
         global $CMS_CONF;
         global $contactformcalcs;
@@ -19,29 +39,11 @@ class CONTACT extends Plugin {
 
         // existiert eine Mailadresse? Wenn nicht: Das Kontaktformular gar nicht anzeigen!
         if(strlen($this->settings->get("formularmail")) < 1) {
-            return '<span class="deadlink">'.$lang_contact->getLanguageValue("tooltip_no_mail_error_0")."</span>";
+            return '<span class="deadlink">'.$lang_contact->getLanguageValue("tooltip_no_mail_error")."</span>";
         }
 
-        $default_contactformcalcs = '3 + 7 = 10<br />'
-                                    .'5 - 3 = 2<br />'
-                                    .'1 plus 1 = 2<br />'
-                                    .'17 minus 7 = 10<br />'
-                                    .'4 * 2 = 8<br />'
-                                    .'3x3 = 9<br />'
-                                    .'2 divided by 2 = 1<br />'
-                                    .'Abraham Lincols first Name = Abraham<br />'
-                                    .'James Bonds family name = Bond<br />'
-                                    .'bronze, silver, ... ? = gold';
-
-        if($this->settings->get("contactformcalcs"))
-            $default_contactformcalcs = $this->settings->get("contactformcalcs");
-        $tmp = explode("<br />",$default_contactformcalcs);
-        $contactformcalcs = array();
-        foreach($tmp as $zeile) {
-            $tmp_z = explode(" = ",$zeile);
-            if(isset($tmp_z[0]) and isset($tmp_z[1]) and !empty($tmp_z[0]) and !empty($tmp_z[1]))
-                $contactformcalcs[$tmp_z[0]] = $tmp_z[1];
-        }
+        if(strlen($this->settings->get("contactformcalcs")) < 5)
+            $this->settings->set("contactformcalcs",$this->getDefaultSettings(true));
 
         require_once($dir."func_contact.php");
 
@@ -49,6 +51,7 @@ class CONTACT extends Plugin {
         return $return;
 
     } // function getContent
+
     /***************************************************************
     * 
     * Gibt die Konfigurationsoptionen als Array zurück.
@@ -136,13 +139,26 @@ class CONTACT extends Plugin {
             "type" => "text",
             "description" => $lang_contact_admin->get("config_input_contact_textarea"),
             "maxlength" => "100",
-#            "size" => "40"
         );
         $config['titel_message_show'] = array(
             "type" => "checkbox",
             "description" => $lang_contact_admin->get("config_titel_contact_show")
         );
         $config['titel_message_mandatory'] = array(
+            "type" => "checkbox",
+            "description" => $lang_contact_admin->get("config_titel_contact_mandatory")
+        );
+
+        $config['titel_privacy']  = array(
+            "type" => "text",
+            "description" => $lang_contact_admin->get("config_input_contact_privacy"),
+            "maxlength" => "100",
+        );
+        $config['titel_privacy_show'] = array(
+            "type" => "checkbox",
+            "description" => $lang_contact_admin->get("config_titel_contact_show")
+        );
+        $config['titel_privacy_mandatory'] = array(
             "type" => "checkbox",
             "description" => $lang_contact_admin->get("config_titel_contact_mandatory")
         );
@@ -193,6 +209,12 @@ class CONTACT extends Plugin {
                         .'<td class="mo-padding-top">{titel_message_text}</td>'
                         .'<td class="mo-align-center mo-padding-top">{titel_message_show_checkbox}</td>'
                         .'<td class="mo-align-center mo-padding-top">{titel_message_mandatory_checkbox}</td>'
+                    .'</tr><tr>'
+                        .'<td>&nbsp;</td>'
+                        .'<td class="mo-nowrap mo-padding-top">{titel_privacy_description}</td>'
+                        .'<td class="mo-padding-top">{titel_privacy_text}</td>'
+                        .'<td class="mo-align-center mo-padding-top">{titel_privacy_show_checkbox}</td>'
+                        .'<td class="mo-align-center mo-padding-top">{titel_privacy_mandatory_checkbox}</td>'
                     .'</tr></table>';
         return $config;
     } // function getConfig    
