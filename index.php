@@ -2,7 +2,6 @@
 session_start();
 define("IS_CMS",true);
 define("IS_ADMIN",false);
-$start_time = get_executTime(false);
 
 // Initial: Fehlerausgabe unterdruecken, um Path-Disclosure-Attacken ins Leere laufen zu lassen
 @ini_set("display_errors", 1);
@@ -27,6 +26,7 @@ if(is_file(BASE_DIR.CMS_DIR_NAME."/DefaultConfCMS.php")) {
 } else {
     die("Fatal Error ".BASE_DIR.CMS_DIR_NAME."/DefaultConfCMS.php Datei existiert nicht");
 }
+$start_time = get_executTime(false);
 
 if(!is_file(BASE_DIR.CMS_DIR_NAME."/conf/main.conf.php") and is_file(BASE_DIR."install.php")) {
     $install = $_SERVER['HTTP_HOST'].URL_BASE."install.php";
