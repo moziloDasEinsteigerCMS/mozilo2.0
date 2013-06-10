@@ -140,6 +140,7 @@ home_serverinfo                      = Server Informationen/Voraussetzungen
 home_titel_test_mail                 = Mailversand-Test
 home_text_backupsystem               = Backup und Install System ist verfügbar
 home_error_backupsystem              = Backup und Install System steht nicht zur vefühgung
+home_date_text                       = Aktuelles Jahr-Monat-Tag Stunde:Minute:Sekunden Zeitzone
 
 catpage_button                       = Inhalt
 category_button                      = Kategorien

@@ -96,6 +96,13 @@ function home() {
      // SERVER-INFOS
     $titel = "home_serverinfo";
 
+    // Aktueles Datum
+    $error[$titel][] = false;
+    $time_zone = date("T");
+    if(function_exists('date_default_timezone_get'))
+        $time_zone = @date_default_timezone_get();
+    $template[$titel][] = array(getLanguageValue("home_date_text"),date("Y-m-d H.i.s")." ".$time_zone);
+
     // Zeile "PHP-Version"
 #!!!!!!!! die version müssen wir noch checken
     if(version_compare(PHP_VERSION, '5.1.2') >= 0) {

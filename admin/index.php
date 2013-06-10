@@ -21,9 +21,6 @@ if(is_file("sessionClass.php")) {
 
 session_start();
 
-#!!!!!!!!! prüfen
-@date_default_timezone_set('UTC');
-
 if(strtolower(substr("PHP_OS",0,3)) == "win")
     define("USE_CHMOD", false);
 else
@@ -47,9 +44,6 @@ ini_set("display_errors", 1);
 # deshalb der versuch mit ini_set
 @ini_set('pcre.backtrack_limit', 1000000);
 
-#$start_time = get_executTime(false);
-define("START_TIME",get_executTime(false));
-
 
 define("BASE_DIR_ADMIN", BASE_DIR.ADMIN_DIR_NAME."/");
 
@@ -58,6 +52,9 @@ if (is_file(BASE_DIR.CMS_DIR_NAME."/DefaultConfCMS.php")) {
 } else {
     die("Fatal Error File doesn't exist: "."DefaultConfCMS.php");
 }
+
+#$start_time = get_executTime(false);
+define("START_TIME",get_executTime(false));
 
 # aus sicherheits gründen lehren wir immer den backup ordner
 if(function_exists('gzopen') and is_dir(BASE_DIR.BACKUP_DIR_NAME)) {
