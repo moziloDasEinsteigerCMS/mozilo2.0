@@ -421,6 +421,7 @@ input.mo-input-margin-top  {
 
 .mo-clear {
     font-size:0;
+    line-height:0;
     margin:0;
     padding:0;
     height:0;

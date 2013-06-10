@@ -290,7 +290,7 @@ $template["plugins_info"][] = ''
 .'<div style="margin-left:3em;">'
 .'<div style="display:none;" class="mo-help-box js-plugin-help-content ui-corner-all" style="display:none;margin-left:3em;">'.$plugin_info[2].'</div>'
 .'</div>'
-.'<br class="mo-clear" />';
+.'<div class="mo-clear"></div>';
 
     return contend_template($template);
 }
