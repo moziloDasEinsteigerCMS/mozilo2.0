@@ -183,7 +183,7 @@ function admin() {
         $deluser = NULL;
         $user_allowed_settings = NULL;
         if(ROOT) {
-            $deluser = '<tr><td colspan="2">&nbsp;</td><td class="mo-in-li-r">'.'<input type="button" class="d_mo-input-text" name="deluser" value="'.getLanguageValue("admin_button_del_user").'" />'.'<div style="font-size:.4em;">&nbsp;</div>'.'</td></tr>';
+            $deluser = '<tr><td colspan="2">&nbsp;</td><td class="mo-in-li-r">'.'<input type="button" name="deluser" value="'.getLanguageValue("admin_button_del_user").'" />'.'<div style="font-size:.4em;">&nbsp;</div>'.'</td></tr>';
             $user_allowed_settings = '<br />'
                     .'<div class="ui-helper-clearfix">'
                         .'<div class="mo-in-li-l">'.getLanguageValue("admin_noroot_text").'</div>'
