@@ -1,6 +1,7 @@
 <?php
 define("IS_CMS", true);
 define("IS_ADMIN", true);
+# wenn der Ordner admin geändert wurde reicht es in hier einzutragen
 define("ADMIN_DIR_NAME","admin");
 define("CMS_DIR_NAME","cms");
 # fals da bei winsystemen \\ drin sind in \ wandeln
