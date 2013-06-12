@@ -58,10 +58,7 @@ function makeDefaultConf($conf_array,$for_new = false) {
                     # das sind die Expert Parameter von main
                     'expert' => array(
                         'websitetitle',
-                        'titlebarseparator',
-                        'titlebarformat',
                         'websitedescription',
-                        'websitekeywords',
                         'cmslanguage',
                         'defaultcat',
                         'usecmssyntax',

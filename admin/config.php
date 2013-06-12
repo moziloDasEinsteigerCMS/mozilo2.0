@@ -53,32 +53,42 @@ function config() {
     $titel = "config_titel_cmsglobal";
     // Zeile "WEBSITE-TITEL"
     if(ROOT or in_array("websitetitle",$show)) {
+/*
         $error[$titel][] = false;
         $template[$titel][] = array(getLanguageValue("config_text_websitetitle"),'<input type="text" class="mo-input-text" name="websitetitle" value="'.$specialchars->rebuildSpecialChars($CMS_CONF->get("websitetitle"),true,true).'" />');
-    }
+#    }
 
     // Zeile "TITEL-TRENNER"
-    if(ROOT or in_array("titlebarseparator",$show)) {
+#    if(ROOT or in_array("titlebarseparator",$show)) {
        $error[$titel][] = false;
         $template[$titel][] = array(getLanguageValue("config_text_websitetitleseparator"),'<input type="text" class="mo-input-text" name="titlebarseparator" value="'.$specialchars->rebuildSpecialChars($CMS_CONF->get("titlebarseparator"),true,true).'" />');
-    }
+#    }
 
     // Zeile "WEBSITE-TITELLEISTE"
-    if(ROOT or in_array("titlebarformat",$show)) {
+#    if(ROOT or in_array("titlebarformat",$show)) {
         $error[$titel][] = false;
         $template[$titel][] = getLanguageValue("config_text_websitetitlebar").'<br /><input type="text" class="mo-input-text mo-input-margin-top" name="titlebarformat" value="'.$specialchars->rebuildSpecialChars($CMS_CONF->get("titlebarformat"),true,true).'" />';
+*/
+        $error[$titel][] = false;
+        $template[$titel][] = '<div class="ui-helper-clearfix">'
+                        .'<div class="mo-in-li-l">'.getLanguageValue("config_text_websitetitle").'</div>'
+                        .'<div class="mo-in-li-r">'.'<input type="text" class="mo-input-text" name="websitetitle" value="'.$specialchars->rebuildSpecialChars($CMS_CONF->get("websitetitle"),true,true).'" />'.'</div>'
+                    .'</div>'
+                    .'<div class="mo-padding-top ui-helper-clearfix">'
+                        .'<div class="mo-in-li-l">'.getLanguageValue("config_text_websitetitleseparator").'</div>'
+                        .'<div class="mo-in-li-r">'.'<input type="text" class="mo-input-text" name="titlebarseparator" value="'.$specialchars->rebuildSpecialChars($CMS_CONF->get("titlebarseparator"),true,true).'" />'.'</div>'
+                    .'</div>'
+                    .'<div class="mo-padding-top">'
+                        .getLanguageValue("config_text_websitetitlebar")
+                        .'<br /><input type="text" class="mo-input-text mo-input-margin-top" name="titlebarformat" value="'.$specialchars->rebuildSpecialChars($CMS_CONF->get("titlebarformat"),true,true).'" />'
+                    .'</div>';
+
     }
 
-    // Zeile "WEBSITE-BESCHREIBUNG"
+    // Zeile "WEBSITE-BESCHREIBUNG" und "WEBSITE-KEYWORDS"
     if(ROOT or in_array("websitedescription",$show)) {
         $error[$titel][] = false;
-        $template[$titel][] = getLanguageValue("config_text_websitedescription").'<br /><input type="text" class="mo-input-text mo-input-margin-top" name="websitedescription" value="'.$specialchars->rebuildSpecialChars($CMS_CONF->get("websitedescription"),true,true).'" />';
-    }
-
-    // Zeile "WEBSITE-KEYWORDS"
-    if(ROOT or in_array("websitekeywords",$show)) {
-        $error[$titel][] = false;
-        $template[$titel][] = getLanguageValue("config_text_websitekeywords").'<br /><input type="text" class="mo-input-text mo-input-margin-top" name="websitekeywords" value="'.$specialchars->rebuildSpecialChars($CMS_CONF->get("websitekeywords"),true,true).'" />';
+        $template[$titel][] = getLanguageValue("config_text_websitedescription").'<br /><input type="text" class="mo-input-text mo-input-margin-top" name="websitedescription" value="'.$specialchars->rebuildSpecialChars($CMS_CONF->get("websitedescription"),true,true).'" /><div class="mo-padding-top">'.getLanguageValue("config_text_websitekeywords").'</div><input type="text" class="mo-input-text mo-input-margin-top" name="websitekeywords" value="'.$specialchars->rebuildSpecialChars($CMS_CONF->get("websitekeywords"),true,true).'" />';
     }
 
     // Zeile "SPRACHAUSWAHL"
