@@ -181,22 +181,24 @@ function admin() {
 
     if(ROOT or in_array("userpassword",$show)) {
         $deluser = NULL;
-        if(ROOT)
+        $user_allowed_settings = NULL;
+        if(ROOT) {
             $deluser = '<tr><td colspan="2">&nbsp;</td><td class="mo-in-li-r">'.'<input type="button" class="d_mo-input-text" name="deluser" value="'.getLanguageValue("admin_button_del_user").'" />'.'<div style="font-size:.4em;">&nbsp;</div>'.'</td></tr>';
-
+            $user_allowed_settings = '<br />'
+                    .'<div class="ui-helper-clearfix">'
+                        .'<div class="mo-in-li-l">'.getLanguageValue("admin_noroot_text").'</div>'
+                        .'<div class="mo-in-li-r">'.userSettings("tabs").'<div style="font-size:.4em;">&nbsp;</div>'.userSettings("config").'<div style="font-size:.4em;">&nbsp;</div>'.userSettings("admin").'<div style="font-size:.4em;">&nbsp;</div>'.userSettings("plugins").'<div style="font-size:.4em;">&nbsp;</div>'.userSettings("template").'</div>'
+                    .'</div>';
+        }
         $template[$titel][] = getLanguageValue("userpw_text_login").'<br /><br />'.getLanguageValue("pw_help")
         .'<table width="100%" cellspacing="0" border="0" cellpadding="0" class="">'
         .$deluser
         .'<tr><td>&nbsp;</td><td class="mo-in-li-r">'.getLanguageValue("userpw_titel_newname").'</td><td class="mo-in-li-r">'.'<input type="text" class="js-in-pwuser mo-input-text" name="newusername" value="'.$loginpassword->get("username").'" />'.'</td></tr>'
         .'<tr><td>&nbsp;</td><td>'.getLanguageValue("userpw_titel_newpw").'</td><td>'.'<input type="password" class="js-in-pwuser mo-input-text" value="'.NULL.'" name="newuserpw" />'.'</td></tr>'
         .'<tr><td>&nbsp;</td><td>'.getLanguageValue("userpw_titel_newpwrepeat").'</td><td>'.'<input type="password" class="js-in-pwuser mo-input-text" value="" name="newuserpwrepeat" />'.'</td></tr>'
-        ."</table>";
+        ."</table>".$user_allowed_settings;
     }
 
-   // Zeile "User Settings"
-    if(ROOT) {
-        $template[$titel][] = array(getLanguageValue("admin_noroot_text"),userSettings("tabs").'<div style="font-size:.4em;">&nbsp;</div>'.userSettings("config").'<div style="font-size:.4em;">&nbsp;</div>'.userSettings("admin").'<div style="font-size:.4em;">&nbsp;</div>'.userSettings("plugins").'<div style="font-size:.4em;">&nbsp;</div>'.userSettings("template"));
-    }
     $pagecontent .= contend_template($template,$error);
 
     return $pagecontent;
