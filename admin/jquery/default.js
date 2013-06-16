@@ -155,15 +155,6 @@ $(function() {
         }
     },".js-tools-show-hide");
 
-    $("body").on({
-        mouseenter: function() { 
-            $(this).addClass("ui-state-hover").removeClass("ui-state-default");
-        },
-        mouseleave: function() {
-            $(this).removeClass("ui-state-hover").addClass("ui-state-default");
-        }
-    },".js-hover-default");
-
     var menu_fix_top = parseInt($("#menu-fix").css("top"));
     $("#menu-fix").css({"width":parseInt($("#menu-fix").css("min-width")),
                         "top":($(window).scrollTop() + menu_fix_top)

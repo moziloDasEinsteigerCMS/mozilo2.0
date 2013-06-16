@@ -68,7 +68,7 @@ class Properties {
                 return false;
             }
             return true;
-            unset($conf,$tmp);
+            unset($conf);
         }
         return false;
     }
@@ -101,6 +101,12 @@ class Properties {
             if(true === ($this->saveProperties()))
                 return true;
             $this->properties = $tmp;
+        #!!!!!!! virtuel setzen wird nicht gespeichert
+        } elseif(defined('IS_CMS')) {
+            foreach ($values as $key => $value) {
+                $this->properties[$key] = $value;
+            }
+            return true;
         }
         return false;
     }
@@ -113,12 +119,16 @@ class Properties {
             if(($key != "")) {
                 $this->properties[$key] = $value;
                 if(true === ($this->saveProperties()))
-                return true;
+                    return true;
             }
             $this->properties = $tmp;
         #!!!!!!! virtuel setzen wird nicht gespeichert siehe z.B usesubmenu
-        } elseif(defined('IS_CMS'))
-            $this->properties[$key] = $value;
+        } elseif(defined('IS_CMS')) {
+            if(($key != "")) {
+                $this->properties[$key] = $value;
+                return true;
+            }
+        }
         return false;
     }
 

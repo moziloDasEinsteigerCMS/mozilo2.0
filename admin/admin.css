@@ -5,7 +5,12 @@ html, body {
     margin:0;
     height: 100%;
 }
-
+/* das sind die css atriebute von ui-state-hover. werden für die tabs benutzt */
+/* damit das nicht mit js gemacht werden muss */
+.mo-ui-state-hover:hover {
+    background-color:#a9b7cb;
+    background-image:url(css/mozilo/images/ui-bg_highlight-soft_90_a9b7cb_1x100.png);
+}
 #mo-admin-td {
     padding: 1em 0 5em 0;
 }
@@ -44,11 +49,16 @@ form {
     margin-right:.4em;
 }
 
+/*1=oben, 2=rechts, 3=unten, 4=links*/
+.mo-butten-a-img {
+    margin:0 .4em 0 .4em;
+    display:inline-block;
+    vertical-align:middle;
+}
+
 .mo-butten-a-img img {
     border:0;
     padding:0;
-    margin:.4em .8em .4em 0;
-    /*das ist nötig damits nicht son rand unten im a tag gibt*/
     vertical-align:middle;
 }
 
@@ -165,6 +175,7 @@ richtet sich nach der icon grösse = 2 * body font-size */
 }
 
 .mo-checkbox {
+    vertical-align:middle;
     margin-right: .4em;
 }
 
@@ -260,6 +271,7 @@ richtet sich nach der icon grösse = 2 * body font-size */
 }
 
 #menu-fix-content li {
+    white-space:nowrap;
     cursor:move;
     overflow:hidden;
     margin: .8em 0 0 0;
@@ -315,7 +327,7 @@ li.ui-draggable-dragging {
 
 /* da wo wir keine td haben machens wir mit der line-height siehe mo-tag-height-from-icon */
 .mo-middle {
-    line-height:2em;
+    line-height:22px;
 }
 
 .mo-margin-bottom {
@@ -408,6 +420,8 @@ input.mo-input-margin-top  {
 }
 
 .mo-clear {
+    font-size:0;
+    line-height:0;
     margin:0;
     padding:0;
     height:0;

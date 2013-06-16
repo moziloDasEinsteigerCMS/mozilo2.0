@@ -4,26 +4,29 @@ function getFileUpload($curent_dir,$dir = false,$count_text = false,$newcss = ""
 
     $head = "";
     if(ACTION != "template") {
-        $head = '<div class="js-tools-show-hide mo-li-head-tag mo-li-head-tag-no-ul ui-state-active ui-corner-all">'
-        .'<table width="100%" cellspacing="0" border="0" cellpadding="0" class="mo-tag-height-from-icon">'
-            .'<tr>'
-                .'<td width="99%" class="mo-nowrap">'
+        $head = '<div class="js-tools-show-hide mo-li-head-tag mo-li-head-tag-no-ul ui-state-active ui-corner-all mo-middle">'
+#        .'<table width="100%" cellspacing="0" border="0" cellpadding="0" class="mo-tag-height-from-icon">'
+#            .'<tr>'
+#                .'<td width="99%" class="mo-nowrap">'
                     .'<span class="js-gallery-name mo-padding-left mo-bold">'.$dir.'</span>'
-                .'</td>'
-                .'<td class="mo-nowrap">'
+#                .'</td>'
+#                .'<td class="mo-nowrap">'
+.'<div style="float:right;" class="mo-nowrap">'
                     .'<span class="mo-staus mo-font-small'.$newcss.'">( '
                         .'<span class="files-count">0</span> '
                         .$count_text.' )</span>'
-                .'</td>'
-                .'<td class="td_icons mo-nowrap">'
+#                .'</td>'
+#                .'<td class="td_icons mo-nowrap">'
                     .'<img class="js-tools-icon-show-hide js-toggle mo-tool-icon'.$newcss.' mo-icons-icon mo-icons-edit" src="'.ICON_URL_SLICE.'" alt="edit" />';
                     if(ACTION == "gallery") {
                         $head .= '<img class="js-tools-icon-show-hide js-rename-file mo-tool-icon mo-icon'.$newcss.' mo-icons-icon mo-icons-work" src="'.ICON_URL_SLICE.'" alt="work" />'
                         .'<img class="js-tools-icon-show-hide js-edit-delete mo-tool-icon mo-icon'.$newcss.' mo-icons-icon mo-icons-delete" src="'.ICON_URL_SLICE.'" alt="delete" hspace="0" vspace="0" />';
                     }
-                $head .= '</td>'
-            .'</tr>'
-        .'</table>'
+#                $head .= '</td>'
+$head .= '</div>'
+.'<br class="mo-clear" />'
+#           .'</tr>'
+#        .'</table>'
     .'</div>';
     }
 

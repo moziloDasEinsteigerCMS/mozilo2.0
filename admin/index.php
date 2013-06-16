@@ -1,6 +1,7 @@
 <?php
 define("IS_CMS", true);
 define("IS_ADMIN", true);
+# wenn der Ordner admin geändert wurde reicht es in hier einzutragen
 define("ADMIN_DIR_NAME","admin");
 define("CMS_DIR_NAME","cms");
 # fals da bei winsystemen \\ drin sind in \ wandeln
@@ -20,9 +21,6 @@ if(is_file("sessionClass.php")) {
     @session_name(SESSION_MO);
 
 session_start();
-
-#!!!!!!!!! prüfen
-@date_default_timezone_set('UTC');
 
 if(strtolower(substr("PHP_OS",0,3)) == "win")
     define("USE_CHMOD", false);
@@ -47,9 +45,6 @@ ini_set("display_errors", 1);
 # deshalb der versuch mit ini_set
 @ini_set('pcre.backtrack_limit', 1000000);
 
-#$start_time = get_executTime(false);
-define("START_TIME",get_executTime(false));
-
 
 define("BASE_DIR_ADMIN", BASE_DIR.ADMIN_DIR_NAME."/");
 
@@ -58,6 +53,9 @@ if (is_file(BASE_DIR.CMS_DIR_NAME."/DefaultConfCMS.php")) {
 } else {
     die("Fatal Error File doesn't exist: "."DefaultConfCMS.php");
 }
+
+#$start_time = get_executTime(false);
+define("START_TIME",get_executTime(false));
 
 # aus sicherheits gründen lehren wir immer den backup ordner
 if(function_exists('gzopen') and is_dir(BASE_DIR.BACKUP_DIR_NAME)) {
@@ -156,7 +154,7 @@ if(LOGIN) { #-------------------------------
 
     require_once(BASE_DIR_ADMIN."filesystem.php");
 
-    if(!is_file(BASE_DIR_CMS."SortCatPage.php")) {
+    if(!is_file(SORT_CAT_PAGE)) {
         $cat_page_sort_array = array();
         $cats = getDirAsArray(CONTENT_DIR_REL,"dir");
         foreach($cats as $cat) {
@@ -171,7 +169,7 @@ if(LOGIN) { #-------------------------------
             }
         }
         $sort_array = var_export($cat_page_sort_array,true);
-        if(true != (mo_file_put_contents(BASE_DIR_CMS."SortCatPage.php","<?php if(!defined('IS_CMS')) die();\n\$cat_page_sort_array = ".$sort_array.";\n?>")))
+        if(true != (mo_file_put_contents(SORT_CAT_PAGE,"<?php if(!defined('IS_CMS')) die();\n\$cat_page_sort_array = ".$sort_array.";\n?>")))
             $message .= returnMessage(false,"Achtung kann SortCatPage nicht Schreiben");
     }
 
@@ -367,10 +365,10 @@ function buildCheckBox($name, $checked,$label = false) {
         $checkbox .= ' checked=checked';
     }
     $checkbox .= ' name="'.$name.'"'.$id.' />';
-    if($checkbox != NULL and $label_tag != NULL) {
-        return '<table cellspacing="0" border="0" cellpadding="0"><tr><td align="left" valign="top">'.$checkbox.'</td><td align="left" valign="middle">'.$label_tag.'</td></tr></table>';
+#    if($checkbox != NULL and $label_tag != NULL) {
+#        return '<table cellspacing="0" border="0" cellpadding="0"><tr><td align="left" valign="top">'.$checkbox.'</td><td align="left" valign="middle">'.$label_tag.'</td></tr></table>';
 
-    }
+#    }
     return $checkbox.$label_tag;
 }
 
@@ -413,25 +411,16 @@ function get_template_truss($content,$titel,$toggle = false) {
             $template = '<ul class="mo-ul">'
                     .'<li class="mo-li ui-widget-content ui-corner-all">'
                     .'<div class="js-tools-show-hide mo-li-head-tag mo-tag-height-from-icon mo-li-head-tag-no-ul mo-middle ui-state-default ui-corner-top">'
-                    .'<table class="mo-tag-height-from-icon" width="100%" cellspacing="0" border="0" cellpadding="0">'
-                    .'<tbody>'
-                    .'<tr>'
-                        .'<td class="mo-nowrap" width="99%">'
-                            .'<span class="mo-bold mo-padding-left">'.getLanguageValue($titel).'</span>'
-                        .'</td>'
-                        .'<td class="mo-nowrap">'
-# aus der img class das mal rausgenommen js-tools-icon-show-hide damit der hammer immer zu sehen ist
-                            .'<img class="js-toggle mo-tool-icon mo-icon mo-icons-icon mo-icons-edit" src="'.ICON_URL_SLICE.'" alt="edit" />'
-                        .'</td>'
-                    .'</tr>'
-                    .'</tbody>'
-                    .'</table>'
+                    .'<span class="mo-bold mo-padding-left">'.getLanguageValue($titel).'</span>'
+                    .'<img style="float:right;" class="js-toggle mo-tool-icon mo-icon mo-icons-icon mo-icons-edit" src="'.ICON_URL_SLICE.'" alt="edit" />'
+                    .'<br class="mo-clear" />'
                     .'</div>'
                     .'<ul class="mo-in-ul-ul js-toggle-content" style="display:none;">';
         } else
             $template = '<ul class="mo-ul">'
                     .'<li class="mo-li ui-widget-content ui-corner-all">'
-                    .'<div class="mo-li-head-tag mo-tag-height-from-icon mo-li-head-tag-no-ul mo-middle ui-state-default ui-corner-top"><span class="mo-bold mo-padding-left">'.getLanguageValue($titel).'</span></div>'
+                    .'<div class="mo-li-head-tag mo-tag-height-from-icon mo-li-head-tag-no-ul mo-middle ui-state-default ui-corner-top">'
+                    .'<span class="mo-bold mo-padding-left">'.getLanguageValue($titel).'</span></div>'
                     .'<ul class="mo-in-ul-ul">';
 
         $template .= $content;

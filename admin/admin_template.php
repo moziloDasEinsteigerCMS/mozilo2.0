@@ -99,13 +99,10 @@ if(defined('PLUGINADMIN'))
     $html .= 'var EXT_LINK = "'.EXT_LINK.'"; ';
     $html .= 'var EXT_LENGTH = '.EXT_LENGTH.'; ';
     $html .= 'var action_activ = "'.ACTION.'"; ';
-#    $html .= 'var icons_src = "'.ADMIN_ICONS.'";';
     $html .= 'var URL_BASE = "'.URL_BASE.'";';
     $html .= 'var ADMIN_DIR_NAME = "'.ADMIN_DIR_NAME.'";';
-#    $html .= 'var ICON_SIZE = "'.ICON_SIZE.'";';
     $html .= 'var ICON_URL = "'.ICON_URL.'";';
     $html .= 'var ICON_URL_SLICE = "'.ICON_URL_SLICE.'";';
-#    $html .= 'var ADMIN_ICONS = "'.ADMIN_ICONS.'";';
     $html .= 'var usecmssyntax = "'.$CMS_CONF->get("usecmssyntax").'";';
     $html .= 'var modrewrite = "'.$CMS_CONF->get("modrewrite").'";';
     $html .= 'var defaultcolors = "'.$specialchars->rebuildSpecialChars($CMS_CONF->get("defaultcolors"),false,false).'";';
@@ -177,7 +174,11 @@ else {
 }
     if((ACTION == "catpage" and (ROOT or in_array("editusersyntax",$ADMIN_CONF->get("config")))) or ACTION == "config" or ACTION == "template") {
         $html .= '<link type="text/css" rel="stylesheet" href="jquery/coloredit/coloredit.min.css" />';
+$html .= '<script language="Javascript" type="text/javascript">/*<![CDATA[*/';
+$html .= 'var mo_docu_coloredit = \''.getHelpIcon("editsite","color").'\';';
+$html .= '/*]]>*/</script>';
         $html .= '<script type="text/javascript" charset="utf-8" src="jquery/coloredit/coloredit.js"></script>';
+
     }
 
     if((ACTION == "config" and (ROOT or in_array("editusersyntax",$ADMIN_CONF->get("config")))) or ACTION == "catpage" or ACTION == "template") {
@@ -223,24 +224,17 @@ $html .= '<script type="text/javascript" src="'.URL_BASE.ADMIN_DIR_NAME.'/jquery
 }
 
 function get_Head() {
-    $html = '<div class="mo-td-content-width mo-margin-bottom">';
-    $html .= '<table width="100%" cellspacing="0" border="0" cellpadding="0" class="ui-widget ui-state-default ui-corner-all mo-tag-height-from-icon">';
-    $html .= '<tr>';
-    $html .= '<td width="1%" nowrap="nowrap" class="align-left">';
-    $html .= '<div class="mo-padding-left">';
-    $html .= getHelpIcon();
-    $html .= '<a href="../index.php?draft=true" title="'.getLanguageValue("help_website_button",true).'" target="_blank" class="mo-butten-a-img"><img class="mo-icons-icon mo-icons-website" src="'.ICON_URL_SLICE.'" alt="" /></a>';
-    $html .= '</div>';
-    $html .= '</td>';
-    $html .= '<td class="mo-td-middle">';
-    $html .= '<b>'.getLanguageValue("cms_admin_titel",true).' - <i>'.getLanguageValue(ACTION."_button").'</i> - <!--{EXECUTETIME}--> <!--{MEMORYUSAGE}--></b>';
-    $html .= '</td>';
-
-    $html .= '<td nowrap="nowrap" class="align-right">';
-    $html .= '<a href="index.php?logout=true" title="'.getLanguageValue("logout_button",true).'" target="_self" class="mo-butten-a-img"><img class="mo-icons-icon mo-icons-logout" src="'.ICON_URL_SLICE.'" alt="" /></a>';
-    $html .= '</td></tr>';
-    $html .= '</table>';
-    $html .= "</div>";
+    $html = '<div class="mo-td-content-width mo-margin-bottom">'
+        .'<div class="ui-widget ui-state-default ui-corner-all mo-li-head-tag-no-ul mo-li-head-tag mo-td-middle">'
+            .getHelpIcon()
+            .'<a href="../index.php?draft=true" title="'.getLanguageValue("help_website_button",true).'" target="_blank" class="mo-butten-a-img"><img class="mo-icons-icon mo-icons-website" src="'.ICON_URL_SLICE.'" alt="" /></a>'
+            .'<span class="mo-bold mo-td-middle mo-padding-left">'.getLanguageValue("cms_admin_titel",true).'</span>'
+# ist eigendlich nur zum entwikeln brauchbar
+.'<span class="mo-td-middle mo-padding-left"> - <!--{EXECUTETIME}--> <!--{MEMORYUSAGE}--></span>'
+            .'<a style="float:right;" href="index.php?logout=true" title="'.getLanguageValue("logout_button",true).'" target="_self" class="mo-butten-a-img"><img class="mo-icons-icon mo-icons-logout" src="'.ICON_URL_SLICE.'" alt="" /></a>'
+            .'<br class="mo-clear" />'
+        ."</div>"
+    ."</div>";
     return $html;
 }
 
@@ -258,7 +252,7 @@ function get_Tabs() {
         if(ACTION == $language)
             $activ = " ui-tabs-selected ui-state-active";# js-no-click
         else
-            $activ = " js-hover-default";
+            $activ = " js-hover-default mo-ui-state-hover";
 
         $deact_user = "";
         if($language != "home" and in_array($language,$users_array))

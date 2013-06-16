@@ -2,33 +2,27 @@
 // ------------------------------------------------------------------------------
 // Gibt das Kontaktformular zurueck
 // ------------------------------------------------------------------------------
-    function buildContactForm($contactformconfig) {
-#        global $contactformconfig;
+    function buildContactForm($settings) {
         global $lang_contact;
         global $CMS_CONF;
         global $WEBSITE_NAME;
         global $specialchars;
         global $lang_contact;
 
-#        require_once($BASE_DIR_CMS."Mail.php");
-        
-        // Sollen die Spamschutz-Aufgaben verwendet werden?
-        $usespamprotection = $contactformconfig->get("contactformusespamprotection") == "true";
-
-        foreach(array("name","website","mail","message") as $name) {
-            ${"config_".$name}[0] = $lang_contact->getLanguageValue("contactform_".$name."_0");
-            if($contactformconfig->get("titel_".$name))
-                ${"config_".$name}[0] = $specialchars->rebuildSpecialChars($contactformconfig->get("titel_".$name),false,true);
+        foreach(array("name","website","mail","message","privacy") as $name) {
+            ${"config_".$name}[0] = $lang_contact->getLanguageValue("contactform_".$name);
+            if($settings->get("titel_".$name))
+                ${"config_".$name}[0] = $specialchars->rebuildSpecialChars($settings->get("titel_".$name),false,false);
             ${"config_".$name}[1] = "false";
-            if($contactformconfig->get("titel_".$name."_show"))
-                ${"config_".$name}[1] = $contactformconfig->get("titel_".$name."_show");
+            if($settings->get("titel_".$name."_show"))
+                ${"config_".$name}[1] = $settings->get("titel_".$name."_show");
             ${"config_".$name}[2] = "false";
-            if($contactformconfig->get("titel_".$name."_mandatory"))
-                ${"config_".$name}[2] = $contactformconfig->get("titel_".$name."_mandatory");
+            if($settings->get("titel_".$name."_mandatory"))
+                ${"config_".$name}[2] = $settings->get("titel_".$name."_mandatory");
         }
 
         $mandatory = false;
-        if(($config_name[2] == "true") or ($config_mail[2] == "true") or ($config_website[2] == "true") or ($config_message[2] == "true"))
+        if(($config_name[2] == "true") or ($config_mail[2] == "true") or ($config_website[2] == "true") or ($config_message[2] == "true") or ($config_privacy[2] == "true"))
             $mandatory = true;
 
         $errormessage = "";
@@ -40,6 +34,7 @@
             $website    = getRequestValue($_SESSION['contactform_website'],'post', false);
             $message    = getRequestValue($_SESSION['contactform_message'],'post', false);
             $calcresult = getRequestValue($_SESSION['contactform_calculation'],'post', false);
+            $privacy = getRequestValue($_SESSION['contactform_privacy'],'post', false);
         }
         else {
             $name       = "";
@@ -47,38 +42,42 @@
             $website    = "";
             $message    = "";
             $calcresult = "";
+            $privacy = "";
         }
         // Das Formular wurde abgesendet
         if (getRequestValue('submit','post', false) <> "") { 
 
             // Bot-Schutz: Wurde das Formular innerhalb von x Sekunden abgeschickt?
-            $sendtime = $contactformconfig->get("contactformwaittime");
+            $sendtime = $settings->get("contactformwaittime");
             if (($sendtime == "") || !preg_match("/^[\d+]+$/", $sendtime)) {
                 $sendtime = 15;
             }
             if (time() - $_SESSION['contactform_loadtime'] < $sendtime) {
-                $errormessage = $lang_contact->getLanguageValue("contactform_senttoofast_1", $sendtime);
+                $errormessage = $lang_contact->getLanguageValue("contactform_senttoofast", $sendtime);
             }
-            if ($usespamprotection) {
+            if ($settings->get("contactformusespamprotection") == "true") {
                 // Nochmal Spamschutz: Ergebnis der Spamschutz-Aufgabe auswerten
                 if (strtolower($calcresult) != strtolower($_SESSION['calculation_result'])) {
-                    $errormessage = $lang_contact->getLanguageValue("contactform_wrongresult_0");
+                    $errormessage = $lang_contact->getLanguageValue("contactform_wrongresult");
                 }
             }
             // Es ist ein Fehler aufgetreten!
             if ($errormessage == "") {
                 // Eines der Pflichtfelder leer?
                 if (($config_name[2] == "true") && ($name == "")) {
-                    $errormessage = $lang_contact->getLanguageValue("contactform_fieldnotset_0")." ".$config_name[0];
+                    $errormessage = $lang_contact->getLanguageValue("contactform_fieldnotset")." ".$config_name[0];
                 }
                 else if (($config_mail[2] == "true") && ($mail == "")) {
-                    $errormessage = $lang_contact->getLanguageValue("contactform_fieldnotset_0")." ".$config_mail[0];
+                    $errormessage = $lang_contact->getLanguageValue("contactform_fieldnotset")." ".$config_mail[0];
                 }
                 else if (($config_website[2] == "true") && ($website == "")) {
-                    $errormessage = $lang_contact->getLanguageValue("contactform_fieldnotset_0")." ".$config_website[0];
+                    $errormessage = $lang_contact->getLanguageValue("contactform_fieldnotset")." ".$config_website[0];
                 }
                 else if (($config_message[2] == "true") && ($message == "")) {
-                    $errormessage = $lang_contact->getLanguageValue("contactform_fieldnotset_0")." ".$config_message[0];
+                    $errormessage = $lang_contact->getLanguageValue("contactform_fieldnotset")." ".$config_message[0];
+                }
+                else if (($config_privacy[2] == "true") && ($privacy == "")) {
+                    $errormessage = $lang_contact->getLanguageValue("contactform_fieldnotset_privacy");
                 }
             }
             // Es ist ein Fehler aufgetreten!
@@ -99,24 +98,34 @@
                 if ($config_message[1] == "true") {
                     $mailcontent .= "\r\n".$config_message[0].":\r\n".$message."\r\n";
                 }
-                $mailsubject = $lang_contact->getLanguageValue("contactform_mailsubject_1", $specialchars->getHtmlEntityDecode($WEBSITE_NAME));
-                $mailsubject_confirm = $lang_contact->getLanguageValue("contactform_mailsubject_confirm_1", $specialchars->getHtmlEntityDecode($WEBSITE_NAME));
+                if ($config_privacy[1] == "true") {
+                    $checket = "☐";
+                    if(!empty($privacy))
+                        $checket = "☒";
+                    $mailcontent .= $checket." ".$config_privacy[0]."\r\n";
+# ☐ &#x2610; ☒ &#x2612;
+                }
+                $mailsubject = $lang_contact->getLanguageValue("contactform_mailsubject", $specialchars->getHtmlEntityDecode($WEBSITE_NAME));
+                $mailsubject_confirm = $lang_contact->getLanguageValue("contactform_mailsubject_confirm", $specialchars->getHtmlEntityDecode($WEBSITE_NAME));
                 
                 require_once(BASE_DIR_CMS."Mail.php");
                 // Wenn Mail-Adresse im Formular gesetzt ist - versuchen Kopie dorthin zu senden
                 if ($mail <> "") {
-                    sendMail($mailsubject_confirm, $mailcontent, $contactformconfig->get("formularmail"), $mail, $contactformconfig->get("formularmail"));
+                    sendMail($mailsubject_confirm, $mailcontent, $settings->get("formularmail"), $mail, $settings->get("formularmail"));
                 }
                 // Mail an eingestellte Mail-Adresse (Mail-Absender muss auch diese Adresse sein,
                 // sonst gibts kein Mail wenn der keine oder ungültige Adresse eingibt..
-                sendMail($mailsubject, $mailcontent, $contactformconfig->get("formularmail"), $contactformconfig->get("formularmail"), $mail);
-                $form .= "<span id=\"contact_successmessage\">".$lang_contact->getLanguageValue("contactform_confirmation_0")."</span>";
+                sendMail($mailsubject, $mailcontent, $settings->get("formularmail"), $settings->get("formularmail"), $mail);
+                $form .= "<span id=\"contact_successmessage\">".$lang_contact->getLanguageValue("contactform_confirmation")."</span>";
                 
                 // Felder leeren
                 $name = "";
                 $mail = "";
                 $website = "";
                 $message = "";
+                $privacy = "";
+#$tt = var_export($_POST,true);
+#$form .= "###<br />".$tt.$mailsubject."<br />".$mailcontent."<br />".$mail."###<br />";
             }
         }
 
@@ -166,19 +175,28 @@
             }
             $form .= "</td><td><textarea rows=\"10\" cols=\"50\" id=\"contact_message\" name=\"".$_SESSION['contactform_message']."\">".$message."</textarea></td></tr>";
         }
-        if($usespamprotection) {
+
+        if($settings->get("contactformusespamprotection") == "true") {
             $mandatory = true;
             // Spamschutz-Aufgabe
-            $calculation_data = getRandomCalculationData();
+            $calculation_data = getRandomCalculationData($settings);
             $_SESSION['calculation_result'] = $calculation_data[1];
-            $form .= "<tr><td colspan=\"2\">".$lang_contact->getLanguageValue("contactform_spamprotection_text_0")."</td></tr>"
+            $form .= "<tr><td colspan=\"2\">".$lang_contact->getLanguageValue("contactform_spamprotection_text")."</td></tr>"
                 ."<tr><td style=\"padding-right:10px;\">".$calculation_data[0]."*</td>"
                 ."<td><input type=\"text\" id=\"contact_calculation\" name=\"".$_SESSION['contactform_calculation']."\" value=\"\" /></td></tr>";
             
         }
+
+        if ($config_privacy[1] == "true") {
+            $form .= "<tr><td colspan=\"2\" style=\"padding-right:10px;\"><input type=\"checkbox\" id=\"contact_privacy\" name=\"".$_SESSION['contactform_privacy']."\" value=\"".$_SESSION['contactform_privacy']."\" /><label for=\"contact_privacy\" style=\"padding-left:10px;\">".$config_privacy[0];
+            if ($config_privacy[2] == "true") {
+                $form .= "*";
+            }
+            $form .= "</label></td></tr>";
+        }
         if($mandatory)
-            $form .= "<tr><td style=\"padding-right:10px;\">&nbsp;</td><td>".$lang_contact->getLanguageValue("contactform_mandatory_fields_0")."</td></tr>";
-        $form .= "<tr><td style=\"padding-right:10px;\">&nbsp;</td><td><input type=\"submit\" class=\"submit\" id=\"contact_submit\" name=\"submit\" value=\"".$lang_contact->getLanguageValue("contactform_submit_0")."\" /></td></tr>";
+            $form .= "<tr><td style=\"padding-right:10px;\">&nbsp;</td><td>".$lang_contact->getLanguageValue("contactform_mandatory_fields")."</td></tr>";
+        $form .= "<tr><td style=\"padding-right:10px;\">&nbsp;</td><td><input type=\"submit\" class=\"submit\" id=\"contact_submit\" name=\"submit\" value=\"".$lang_contact->getLanguageValue("contactform_submit")."\" /></td></tr>";
         $form .= "</table>"
         ."</form>";
         
@@ -189,8 +207,13 @@
 // ------------------------------------------------------------------------------
 // Hilfsfunktion: Zufaellige Spamschutz-Rechenaufgabe und deren Ergebnis zurueckgeben
 // ------------------------------------------------------------------------------
-    function getRandomCalculationData() {
-        global $contactformcalcs;
+    function getRandomCalculationData($settings) {
+        $tmp_calcs = explode("<br />",$settings->get("contactformcalcs"));
+        foreach($tmp_calcs as $zeile) {
+            $tmp_z = explode(" = ",$zeile);
+            if(isset($tmp_z[0]) and isset($tmp_z[1]) and !empty($tmp_z[0]) and !empty($tmp_z[1]))
+                $contactformcalcs[$tmp_z[0]] = $tmp_z[1];
+        }
         $tmp = array_keys($contactformcalcs);
         $randnum = rand(0, count($contactformcalcs)-1);
         return array($tmp[$randnum],$contactformcalcs[$tmp[$randnum]]);
@@ -204,6 +227,7 @@
         $_SESSION['contactform_website'] = time()-rand(0, 10);
         $_SESSION['contactform_message'] = time()-rand(40, 50);
         $_SESSION['contactform_calculation'] = time()-rand(50, 60);
+        $_SESSION['contactform_privacy'] = time()-rand(60, 70);
     }
 
 

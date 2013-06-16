@@ -298,6 +298,8 @@ function change_to_normal_mode(this_table) {
             link = "#";
             this_table.find(".js-link-href").attr({ href: link, target:"_self" });
         } else {
+            if(link.search(/\:\/\//) < 1)
+                link = "http://"+link;
             this_table.find(".js-link-href").attr({href: link, target:"_blank"});
         }
     this_table.find(".js-link-href").show(0);

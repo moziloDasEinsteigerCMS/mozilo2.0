@@ -154,7 +154,10 @@ var ColorEditor = {
             resizable: false,
             show: anim_speed,
             title:mozilo_lang["dialog_title_coloredit"],
-            dialogClass: "mo-shadow"
+            dialogClass: "mo-shadow",
+            create: function(event, ui) {
+                $(this).parents('.ui-dialog').find('.ui-dialog-titlebar').prepend(mo_docu_coloredit);
+            }
         });
 
         this.hsv = this._HEXtoHSV(this._getInputHex(this.element.siblings('input')));
@@ -277,8 +280,18 @@ var ColorEditor = {
         $('.ce-in-hex:not(:focus)').val(hex);
         $('.ce-bg-color-change').css({
             backgroundColor: "#"+hex,
-            color: this.hsv[2] > 0.5 ? '#000' : '#fff'
+            color: this._TextColorInput()
         }).not(':focus').val(hex);
+    },
+    _TextColorInput : function(event) {
+        var t_c = '#000';
+        if((this.hsv[0] > 0.57 && this.hsv[0] <= 1) || (this.hsv[0] >= 0 && this.hsv[0] < 0.083))
+            t_c = '#fff';
+        if(this.hsv[2] < 0.7)
+            t_c = '#fff';
+        if(this.hsv[2] > 0.7 && this.hsv[1] < 0.45)
+            t_c = '#000';
+        return t_c;
     },
     _checkHexValue : function(event) {
         checkHexValue(event);

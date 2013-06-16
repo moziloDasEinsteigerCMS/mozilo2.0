@@ -71,7 +71,7 @@ $(function() {
 
     // toggle für die hilfe
     $('body').on("click",".js-help-plugin", function(event) {
-        var upper_tag = $(this).closest("table");
+        var upper_tag = $(this).closest("li");
         if(upper_tag.find(".js-plugin-help-content").is(":visible")) {
             upper_tag.find(".js-plugin-help-content").hide(anim_speed);
             return;
