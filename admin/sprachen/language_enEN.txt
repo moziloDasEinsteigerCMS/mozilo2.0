@@ -1,5 +1,5 @@
 ﻿_dateformat                          = %Y-%d-%m, %H:%M:%S
-_translator                          = termoyer, PaulR
+_translator                          = termoyer
 language_name                        = English
 cms_admin_titel                      = moziloCMS Admin 
 file                                 = File
