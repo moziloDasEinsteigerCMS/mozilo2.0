@@ -147,6 +147,12 @@ else
         $html .= '<script type="text/javascript" src="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/multi_user.js"></script>';
     }
 */
+
+
+if(ACTION == "catpage" or ACTION == "files" or ACTION == "plugins" or ACTION == "gallery")
+    $html .= '<script type="text/javascript" src="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/filter.js"></script>';
+
+
 if(is_file(BASE_DIR.ADMIN_DIR_NAME.'/jquery/dialog.min.js'))
     $html .= '<script type="text/javascript" src="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/dialog.min.js"></script>';
 else
@@ -231,7 +237,7 @@ function get_Head() {
             .'<span class="mo-bold mo-td-middle mo-padding-left">'.getLanguageValue("cms_admin_titel",true).'</span>'
 # ist eigendlich nur zum entwikeln brauchbar
 .'<span class="mo-td-middle mo-padding-left"> - <!--{EXECUTETIME}--> <!--{MEMORYUSAGE}--></span>'
-            .'<a style="float:right;" href="index.php?logout=true" title="'.getLanguageValue("logout_button",true).'" target="_self" class="mo-butten-a-img"><img class="mo-icons-icon mo-icons-logout" src="'.ICON_URL_SLICE.'" alt="" /></a>'
+            .'<a style="float:right;" href="index.php?logout=true" title="'.getLanguageValue("logout_button",true).'" class="mo-butten-a-img"><img class="mo-icons-icon mo-icons-logout" src="'.ICON_URL_SLICE.'" alt="" /></a>'
             .'<br class="mo-clear" />'
         ."</div>"
     ."</div>";
