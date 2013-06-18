@@ -107,13 +107,13 @@ if(defined('PLUGINADMIN'))
     $html .= 'var modrewrite = "'.$CMS_CONF->get("modrewrite").'";';
     $html .= 'var defaultcolors = "'.$specialchars->rebuildSpecialChars($CMS_CONF->get("defaultcolors"),false,false).'";';
 
-    $dialog_jslang = array("close","yes","no","button_cancel","button_save","page_reload","page_edit_discard","page_cancel_reload","dialog_title_send","dialog_title_error","dialog_title_messages","dialog_title_save_beforeclose","dialog_title_delete","dialog_title_lastbackup","dialog_title_docu","login_titel_dialog","error_name_no_freename","error_save_beforeclose","dialog_title_coloredit","error_exists_file_dir","error_datei_file_name","error_zip_nozip");
+    $dialog_jslang = array("close","yes","no","button_cancel","button_save","page_reload","page_edit_discard","page_cancel_reload","dialog_title_send","dialog_title_error","dialog_title_messages","dialog_title_save_beforeclose","dialog_title_delete","dialog_title_lastbackup","dialog_title_docu","login_titel_dialog","error_name_no_freename","error_save_beforeclose","dialog_title_coloredit","error_exists_file_dir","error_datei_file_name","error_zip_nozip","filter_button_all_hide","filter_button_all_show","filter_text","filter_text_gallery","filter_text_plugins","filter_text_files","filter_text_catpage");
 
     $home_jslang = array("home_error_test_mail");
 
     $gallery_jslang = array("files","url_adress","page_error_save","images");
 
-    $catpage_jslang = array("self","blank","target","page_status","files","pages","page_edit","url_adress","page_error_save","page_button_all_show","page_button_all_hide",array(EXT_PAGE,"page_saveasnormal"),array(EXT_HIDDEN,"page_saveashidden"),array(EXT_DRAFT,"page_saveasdraft"));
+    $catpage_jslang = array("self","blank","target","page_status","files","pages","page_edit","url_adress","page_error_save",array(EXT_PAGE,"page_saveasnormal"),array(EXT_HIDDEN,"page_saveashidden"),array(EXT_DRAFT,"page_saveasdraft"));
 
 
     if(isset(${ACTION."_jslang"}) and is_array(${ACTION."_jslang"})) {

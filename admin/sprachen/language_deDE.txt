@@ -107,6 +107,14 @@ toolbar_platzhalter_EXECUTETIME      =
 toolbar_platzhalter_VALUE            = 
 toolbar_platzhalter_DESCRIPTION      = 
 
+filter_button_all_hide               = Alle Inhaltsseiten Ausblenden
+filter_button_all_show               = Alle Inhaltsseiten Einblenden
+filter_text                          = Filter
+filter_text_gallery                  = Galerien
+filter_text_plugins                  = Plugins
+filter_text_files                    = Kategorien
+filter_text_catpage                  = Kategorien
+
 home_button                          = Info
 home_multiuser                       = Multiuser Reset
 home_multiuser_text                  = Bei Problemen mit dem Multiuser-Modus kannst du die anderen User abmelden. Das kommt vor wenn sich die anderen nicht ausgeloggt haben und damit ihre geöffnet Tabs gesperrt haben.
@@ -156,8 +164,6 @@ close                                = Schließen
 page_reload                          = Seite neu Laden
 page_cancel_reload                   = Abbrechen und Seite neu Laden
 page_error_no_page                   = Die Inhaltsseite gibt es nicht
-page_button_all_hide                 = Alle Inhaltsseiten Ausblenden
-page_button_all_show                 = Alle Inhaltsseiten Einblenden
 
 gallery_button                       = Galerien
 gallery_scale                        = Galeriebilder beim Hochladen auf maximale Größe skalieren

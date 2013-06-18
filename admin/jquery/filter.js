@@ -10,7 +10,7 @@ var moFilterPlugin = {
         this.rows = [];
         this.search_rows = [];
         if($(this.element).find(o.search_item).length > o.search_min) {
-            this.search_fild = $('<div class="mo-margin-top ui-state-default ui-corner-all mo-li-head-tag-no-ul mo-li-head-tag mo-td-middle"><span class="mo-padding-right mo-padding-left">Filter: </span><input class="mo-plugin-input" type="search" style="width:200px" /></div>');
+            this.search_fild = $('<div class="mo-margin-top ui-state-default ui-corner-all mo-li-head-tag-no-ul mo-li-head-tag mo-tag-height-from-icon mo-middle"><span class="mo-bold mo-padding-right mo-padding-left">'+mozilo_lang["filter_text"]+' '+mozilo_lang["filter_text_"+action_activ]+'</span><input class="mo-plugin-input" type="search" style="width:15em" /></div>');
 
             this.search_fild.insertBefore(this.element);
 
@@ -26,17 +26,17 @@ var moFilterPlugin = {
             });
 
             if(action_activ == "catpage") {
-                this.search_fild.append('<input type="button" class="js-filter-page-hide mo-checkbox-del mo-td-middle" value="'+mozilo_lang["page_button_all_hide"]+'" />');
+                this.search_fild.append('<input type="button" class="js-filter-page-hide mo-checkbox-del mo-td-middle" value="'+mozilo_lang["filter_button_all_hide"]+'" />');
                 this.search_fild.find('input[type="button"]')
                     .bind({
                         click: function( e ){
                             e.preventDefault();
                             if($(this).hasClass('js-filter-page-hide')) {
                                 $('.js-li-page').css("display","none");
-                                $(this).val(mozilo_lang["page_button_all_show"]).removeClass('js-filter-page-hide');
+                                $(this).val(mozilo_lang["filter_button_all_show"]).removeClass('js-filter-page-hide');
                             } else {
                                 $('.js-li-page').css("display","block");
-                                $(this).val(mozilo_lang["page_button_all_hide"]).addClass('js-filter-page-hide');
+                                $(this).val(mozilo_lang["filter_button_all_hide"]).addClass('js-filter-page-hide');
                             }
                         },
                     });
@@ -88,15 +88,15 @@ $.widget('custom.mofilterplugin', moFilterPlugin);
 
 $(function() {
     if(action_activ == "gallery")
-        $('.js-gallery').mofilterplugin({search_item: '.js-file-dir',search_name: '.js-gallery-name'});
+        $('.js-gallery').mofilterplugin({search_item:'.js-file-dir',search_name:'.js-gallery-name'});
 
     if(action_activ == "plugins")
-        $('.js-plugins').mofilterplugin({search_item: '.js-plugin',search_name: '.js-plugin-name'});
+        $('.js-plugins').mofilterplugin({search_item:'.js-plugin',search_name:'.js-plugin-name'});
 
     if(action_activ == "files")
-        $('.js-files').mofilterplugin({search_item: '.js-file-dir',search_name: '.js-gallery-name'});
+        $('.js-files').mofilterplugin({search_item:'.js-file-dir',search_name:'.js-gallery-name'});
 
     if(action_activ == "catpage")
-        $('.js-ul-cats').mofilterplugin({search_item: '.js-li-cat',search_name: '.js-cat-name'});
+        $('.js-ul-cats').mofilterplugin({search_item:'.js-li-cat',search_name:'.js-cat-name'});
 });
 
