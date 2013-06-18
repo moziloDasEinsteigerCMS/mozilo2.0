@@ -191,7 +191,7 @@ class CatPageClass {
         if($titel !== false)
             $linktitel = $syntax->getTitleAttribute($titel);
         $linktarget = NULL;
-        if($target !== false)
+        if($target !== false and $target == "_blank")
             $linktarget = ' target="'.$target.'"';
         $linkid = NULL;
         if($id !== false)
