@@ -58,11 +58,6 @@
 			// cache input values for searching
 			this.updateCache();
 
-            // hilfe nicht anzeigen bei zu wenig einträgen
-            if(this.inputs.length < opts.showFilterUp) {
-                self.destroy();
-            }
-			
 			// rewrite internal _toggleChecked fn so that when checkAll/uncheckAll is fired,
 			// only the currently filtered elements are checked
 			instance._toggleChecked = function(flag, group){
@@ -107,7 +102,7 @@
 			if(this.options.autoReset) {
 				doc.bind("multiselectclose", $.proxy(this._reset, this));
 			}
-            // hilfe nicht anzeigen bei zu wenig einträgen
+            // filter nicht anzeigen bei zu wenig einträgen
             if(this.inputs.length < opts.showFilterUp) {
                 self.destroy();
             }
@@ -115,6 +110,7 @@
 		
 		// thx for the logic here ben alman
 		_handler: function( e ){
+//console.log("_handler")
 			var term = $.trim( this.input[0].value.toLowerCase() ),
 			
 				// speed up lookups
@@ -128,6 +124,7 @@
 				var regex = new RegExp(term.replace(rEscape, "\\$&"), 'gi');
 				
 				this._trigger( "filter", e, $.map(cache, function(v, i){
+//console.log("v="+v)
 					if( v.search(regex) !== -1 ){
 						rows.eq(i).show();
 						return inputs.get(i);
@@ -136,11 +133,15 @@
 					return null;
 				}));
 			}
-
+var that = this;
 			// show/hide optgroups
 			this.instance.menu.find(".ui-multiselect-optgroup-label").each(function(){
 				var $this = $(this);
 				var isVisible = $this.nextUntil('.ui-multiselect-optgroup-label').filter(function(){
+// closeOptgrouptoggle=true in der optgroup wird auch gesucht
+if(that.instance.options.closeOptgrouptoggle && $this.text().toLowerCase().search(regex) !== -1 ) {
+    return 1;
+}
 				  return $.css(this, "display") !== 'none';
 				}).length;
 				

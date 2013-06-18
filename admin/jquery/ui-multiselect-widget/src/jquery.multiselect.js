@@ -1,7 +1,7 @@
 /* jshint forin:true, noarg:true, noempty:true, eqeqeq:true, boss:true, undef:true, curly:true, browser:true, jquery:true */
 /*
- * jQuery MultiSelect UI Widget 1.12
- * Copyright (c) 2011 Eric Hynds
+ * jQuery MultiSelect UI Widget 1.13
+ * Copyright (c) 2012 Eric Hynds
  *
  * http://www.erichynds.com/jquery/jquery-ui-multiselect-widget/
  *
@@ -98,30 +98,22 @@ showClose: true,
 	},
 	
 	_init: function(){
-//$("#out").html($("#out").html()+"<br />showSelectAll="+this.options.showSelectAll+" showClose="+this.options.showClose);
         // wir haben keinen inhalt im header dann brauchen wir in auch nicht
         if( !this.options.showSelectAll && !this.options.showClose ) {
             this.header.hide();
-        }// else {
-//            this.header.show();
-//        }
-//$("#out").html($("#out").html()+"<br />header="+this.header.html());
-//$("#out").html($("#out").html()+"<br />header="+this.header.find('.ui-multiselect-filter').length);
+        }
         // header trotzdem zeigen da der filter drin ist
         if(this.header.find('.ui-multiselect-filter').length > 0){
-//$("#out").html($("#out").html()+"<br />header.show");
             this.header.show();
         }
+
         if( !this.options.showClose ){
             this.headerLinkContainer.find('.ui-multiselect-close').hide();
-        }// else {
-//            this.headerLinkContainer.find('.ui-multiselect-close').show();
-//        }
+        }
+
         if( !this.options.showSelectAll ){
             this.headerLinkContainer.find('.ui-multiselect-all, .ui-multiselect-none').hide();
-        }// else {
-//            this.headerLinkContainer.find('.ui-multiselect-all, .ui-multiselect-none').show();
-//        }
+        }
 
 		if( this.options.autoOpen ){
 			this.open();
@@ -147,10 +139,11 @@ showClose: true,
 				title = this.innerHTML,
 				description = this.title,
 				value = this.value,
-				inputID = this.id || 'ui-multiselect-' + id + '-option-' + i,
+                inputID = 'ui-multiselect-' + (this.id || id + '-option-' + i),
 				isDisabled = this.disabled,
 				isSelected = this.selected,
 				labelClasses = [ 'ui-corner-all' ],
+                liClasses = (isDisabled ? 'ui-multiselect-disabled ' : ' ') + this.className,
 				optLabel,
 liClassInOpt = false;
 			
@@ -161,7 +154,7 @@ liClassInOpt = false;
 liClassInOpt = "ui-multiselect-li-in-opt";
 				// has this optgroup been added already?
 				if( $.inArray(optLabel, optgroups) === -1 ){
-					html += '<li class="ui-multiselect-optgroup-label"><a href="#" class="ui-state-active ui-corner-all">' + optLabel + '</a></li>';
+                    html += '<li class="ui-multiselect-optgroup-label ' + parent.className + '"><a href="#" class="ui-state-active ui-corner-all">' + optLabel + '</a></li>';
 					optgroups.push( optLabel );
 				}
 			}
@@ -176,7 +169,7 @@ liClassInOpt = "ui-multiselect-li-in-opt";
 				labelClasses.push( 'ui-state-highlight' );
 			}
 			
-html += '<li class="' + (liClassInOpt ? liClassInOpt : '') + (isDisabled ? 'ui-multiselect-disabled' : '') + '">';
+            html += '<li class="' + liClasses + (liClassInOpt ? liClassInOpt : '') + '">';
 			
 			// create the label
 			html += '<label for="' + inputID + '" title="' + description + '" class="' + labelClasses.join(' ') + '">';
@@ -222,7 +215,7 @@ html += '<li class="' + (liClassInOpt ? liClassInOpt : '') + (isDisabled ? 'ui-m
 	update: function(){
 		var o = this.options,
 			$inputs = this.inputs,
-			$checked = $inputs.filter('[checked]'),
+            $checked = $inputs.filter(':checked'),
 			numChecked = $checked.length,
 			value;
 		
@@ -336,12 +329,12 @@ if(self.options.closeOptgrouptoggle)
 .delegate('li.ui-multiselect-optgroup-label a', 'mouseenter.multiselect', function(){
 if(self.options.closeOptgrouptoggle) {
     self.labels.removeClass('ui-state-hover');
-    $(this).removeClass('ui-state-active').addClass('ui-state-hover');// ui-state-disabled
+    $(this).removeClass('ui-state-active').addClass('ui-state-hover');
 }
 })
 .delegate('li.ui-multiselect-optgroup-label a', 'mouseleave.multiselect', function(){
 if(self.options.closeOptgrouptoggle)
-    $(this).removeClass('ui-state-hover').addClass('ui-state-active');// ui-state-disabled ui-state-active
+    $(this).removeClass('ui-state-hover').addClass('ui-state-active');
 })
 			.delegate('label', 'mouseenter.multiselect', function(){
 				if( !$(this).hasClass('ui-state-disabled') ){
@@ -382,7 +375,6 @@ if(self.options.closeOptgrouptoggle)
 
 				// make sure the input has focus. otherwise, the esc key
 				// won't close the menu after clicking an item.
-//#!!!!!!!!!! macht probleme in der ediarea bei selectirten text stimt der hilight nich mehr
 //				$this.focus();
 				
 				// toggle aria state
@@ -449,8 +441,7 @@ if( /\d/.test(o.width))
 	*/
 	// set menu width
 	_setMenuWidth: function(){
-//$("#out").html($("#out").html()+"<br />_setMenuWidth");
-if(this.button.siblings('select').width() == 0) return;
+        if(this.button.siblings('select').width() == 0) return;
 		var m = this.menu,
             menuOffset = parseInt(m.css('padding-left'),10)+
                 parseInt(m.css('padding-right'),10)+
@@ -459,35 +450,20 @@ if(this.button.siblings('select').width() == 0) return;
 			width = this.button.outerWidth()-menuOffset,
             maxwidth = 0;
 				
-//            if($(".mo-td-content-width").eq(0).length > 0) {
-                maxwidth = $(".mo-td-content-width").eq(0).outerWidth()-
+        maxwidth = $(".mo-td-content-width").eq(0).outerWidth()-
                     (this.button.offset().left - $(".mo-td-content-width").eq(0).offset().left);
-//            }
-/*
-$("#out").html($("#out").html()+"<br />outerWidth="+$(".mo-td-content-width").eq(0).outerWidth());
-$("#out").html($("#out").html()+"<br />button="+this.button.offset().left);
-$("#out").html($("#out").html()+"<br />content="+$(".mo-td-content-width").eq(0).offset().left);*/
-//$("#out").html($("#out").html()+"<br />button name="+this.button.siblings('select').attr('name'));
-//$("#out").html($("#out").html()+"<br />width="+width+" s.width="+this.button.siblings('select').width());
 
         if(width < m.width() - menuOffset)
-            width = m.width();//m.outerWidth()
-//            width = m.width() - menuOffset;//m.outerWidth()
-/*
-        if(width <= m.width() - menuOffset)
-            width = m.width() - menuOffset;//m.outerWidth()*/
+            width = m.width();
 
         if(width > maxwidth)
             width = maxwidth;
 
         if(width > this.button.outerWidth() - menuOffset) {
-//$("#out").html($("#out").html()+"<br />width="+width);
             m.width(width);
         } else {
-//$("#out").html($("#out").html()+"<br />width out="+width);
             m.width(this.button.outerWidth() - menuOffset);
         }
-//$("#out").html($("#out").html()+"<br />width="+width+" button="+this.button.outerWidth() - menuOffset);
 //		m.width( width || this.button.outerWidth() );
 	},
 	
@@ -565,16 +541,29 @@ $("#out").html($("#out").html()+"<br />content="+$(".mo-td-content-width").eq(0)
 	},
 
 	_toggleDisabled: function( flag ){
-		this.button
-			.attr({ 'disabled':flag, 'aria-disabled':flag })[ flag ? 'addClass' : 'removeClass' ]('ui-state-disabled');
-		
-		this.menu
-			.find('input')
-			.attr({ 'disabled':flag, 'aria-disabled':flag })
-			.parent()[ flag ? 'addClass' : 'removeClass' ]('ui-state-disabled');
-		
-		this.element
-			.attr({ 'disabled':flag, 'aria-disabled':flag });
+        this.button
+            .attr({ 'disabled':flag, 'aria-disabled':flag })[ flag ? 'addClass' : 'removeClass' ]('ui-state-disabled');
+
+        var inputs = this.menu.find('input');
+        var key = "ech-multiselect-disabled";
+
+        if(flag) {
+            // remember which elements this widget disabled (not pre-disabled)
+            // elements, so that they can be restored if the widget is re-enabled.
+            inputs = inputs.filter(':enabled')
+                .data(key, true)
+        } else {
+            inputs = inputs.filter(function() {
+                return $.data(this, key) === true;
+            }).removeData(key);
+        }
+
+        inputs
+            .attr({ 'disabled':flag, 'arial-disabled':flag })
+            .parent()[ flag ? 'addClass' : 'removeClass' ]('ui-state-disabled');
+
+        this.element
+            .attr({ 'disabled':flag, 'aria-disabled':flag });
 	},
 	
 	// open the menu
@@ -583,7 +572,8 @@ $("#out").html($("#out").html()+"<br />content="+$(".mo-td-content-width").eq(0)
 			button = this.button,
 			menu = this.menu,
 			speed = this.speed,
-			o = this.options;
+			o = this.options,
+            args = [];
 		
 		// bail if the multiselectopen event returns false, this widget is disabled, or is already open 
 		if( this._trigger('beforeopen') === false || button.hasClass('ui-state-disabled') || this._isOpen ){
@@ -599,17 +589,30 @@ $("#out").html($("#out").html()+"<br />content="+$(".mo-td-content-width").eq(0)
 			effect = o.show[0];
 			speed = o.show[1] || self.speed;
 		}
+
+        // if there's an effect, assume jQuery UI is in use
+        // build the arguments to pass to show()
+        if( effect ) {
+            args = [ effect, speed ];
+        }
 		
 		// set the scroll of the checkbox container
 		$container.scrollTop(0).height(o.height);
 
+var header_height = 0;
 // hier nnoch mal da in zeile ca 110 noch nicht da warum auch immer
 if(this.header.find('.ui-multiselect-filter').length > 0){
-//$("#out").html($("#out").html()+"<br />header.show");
     this.header.show();
+    // die 16 ist die line-height
+    header_height += 16;
 }
+if(o.showSelectAll)
+    // die 16 ist die line-height
+    header_height += 16;
+if(header_height > 0)
+    // die 8 ist padding-top/bottom + margin-top/bottom
+    header_height += 8;
 
-//this._setMenuWidth();
 		// position and show menu
 		if( $.ui.position && typeof o.position == "object" && !$.isEmptyObject(o.position) ){
 			o.position.of = o.position.of || button;
@@ -617,33 +620,38 @@ if(this.header.find('.ui-multiselect-filter').length > 0){
 			menu
 				.show()
 				.position( o.position )
-				.hide()
-				.show( effect, speed );
+				.hide();
 		
 		// if position utility is not available...
 		} else {
-var set_top = false;
-if(((parseInt($(window).height()) - dialogMaxheightOffset) / 2) < (pos.top - $(window).scrollTop()))
-    set_top = true;
+
+var top_max = pos.top - $(window).scrollTop();
+var bottom_max = parseInt($(window).height()) - ((pos.top + button.outerHeight()) - $(window).scrollTop());
+
+var max_height = bottom_max;
+if(top_max > bottom_max)
+    max_height = top_max;
+
 if(o.height == 'auto') {
-    if(set_top && menu.height() > pos.top - $(window).scrollTop() - dialogMaxheightOffset -24)
-        $container.css({"overflow-y": "scroll", height: pos.top - $(window).scrollTop() - dialogMaxheightOffset -24});
-    else if(!set_top && menu.height() > parseInt($(window).height()) - dialogMaxheightOffset - ((pos.top - $(window).scrollTop()) + button.outerHeight()) - 24 )
-        $container.css({"overflow-y": "scroll", height: parseInt($(window).height()) - dialogMaxheightOffset - ((pos.top - $(window).scrollTop()) + button.outerHeight()) - 24 });
-    else
+    if(menu.height() > (max_height - dialogMaxheightOffset)) {
+        $container.css({"overflow-y": "auto", height: (max_height - dialogMaxheightOffset - header_height)});
+    } else {
         $container.css('overflow-y','visible');
+    }
 }
+
 var menu_css_top = pos.top + button.outerHeight();
-if(set_top)
+if(top_max > bottom_max)
     menu_css_top = pos.top - menu.outerHeight();
 
-			menu.css({ 
+			menu.css({
 				top: menu_css_top,
 				left: pos.left
-			}).show( effect, speed );
+			});
 		}
 		
-//this._setMenuWidth();
+        // show the menu, maybe with a speed/effect combo
+        $.fn.show.apply(menu, args);
 		// select the first option
 		// triggering both mouseover and mouseover because 1.4.2+ has a bug where triggering mouseover
 		// will actually trigger mouseenter.  the mouseenter trigger is there for when it's eventually fixed
@@ -652,7 +660,6 @@ if(set_top)
 		button.addClass('ui-state-active');
 		this._isOpen = true;
 		this._trigger('open');
-this._setMenuWidth();
 	},
 	
 	// close the menu
@@ -661,15 +668,22 @@ this._setMenuWidth();
 			return;
 		}
 	
-		var o = this.options, effect = o.hide, speed = this.speed;
+        var o = this.options,
+            effect = o.hide,
+            speed = this.speed,
+            args = [];
 		
 		// figure out opening effects/speeds
 		if( $.isArray(o.hide) ){
 			effect = o.hide[0];
 			speed = o.hide[1] || this.speed;
 		}
+        if( effect ) {
+            args = [ effect, speed ];
+        }
+
+        $.fn.hide.apply(this.menu, args);
 	
-		this.menu.hide(effect, speed);
 		this.button.removeClass('ui-state-active').trigger('blur').trigger('mouseleave');
 		this._isOpen = false;
 		this._trigger('close');
@@ -694,7 +708,7 @@ this._setMenuWidth();
 	},
 	
 	getChecked: function(){
-		return this.menu.find('input').filter('[checked]');
+        return this.menu.find('input').filter(':checked');
 	},
 	
 	destroy: function(){
@@ -751,6 +765,11 @@ this._setMenuWidth();
 			case 'classes':
 				menu.add(this.button).removeClass(this.options.classes).addClass(value);
 				break;
+            case 'multiple':
+                menu.toggleClass('ui-multiselect-single', !value);
+                this.options.multiple = value;
+                this.element[0].multiple = value;
+                this.refresh();
 		}
 		
 		$.Widget.prototype._setOption.apply( this, arguments );
