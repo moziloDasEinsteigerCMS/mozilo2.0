@@ -7,14 +7,12 @@ var moFilterPlugin = {
     _create: function() {
         var o = this.options;
         var that = this;
-//console.log("_create="+o.search_item)
         this.rows = [];
         this.search_rows = [];
         if($(this.element).find(o.search_item).length > o.search_min) {
             this.search_fild = $('<div class="mo-margin-top ui-state-default ui-corner-all mo-li-head-tag-no-ul mo-li-head-tag mo-td-middle"><span class="mo-padding-right mo-padding-left">Filter: </span><input class="mo-plugin-input" type="search" style="width:200px" /></div>');
 
             this.search_fild.insertBefore(this.element);
-
 
             this.search_fild.find('input[type="search"]')
                 .bind({
@@ -34,22 +32,17 @@ var moFilterPlugin = {
                         click: function( e ){
                             e.preventDefault();
                             if($(this).hasClass('js-filter-page-hide')) {
-                                $('.js-li-page').hide(0);
+                                $('.js-li-page').css("display","none");
                                 $(this).val(mozilo_lang["page_button_all_show"]).removeClass('js-filter-page-hide');
                             } else {
-                                $('.js-li-page').show(0);
+                                $('.js-li-page').css("display","block");
                                 $(this).val(mozilo_lang["page_button_all_hide"]).addClass('js-filter-page-hide');
                             }
                         },
                     });
             }
-//            this._makeRows();
         }
     },
-/*    upDate:  function() {
-console.log("upDate")
-        this._makeRows();
-    },*/
     _makeRows: function() {
         var o = this.options;
         var that = this;
@@ -59,7 +52,6 @@ console.log("upDate")
             });
     },
     _filter: function() {
-//console.log("_filter")
         var term = $.trim( this.search_fild.find('input[type="search"]').val().toLowerCase() );
         var rows = this.rows;
         var search_rows = this.search_rows;
@@ -67,15 +59,13 @@ console.log("upDate")
             rows.show();
             if(action_activ == "catpage") {
                 $('.js-move-me-cat').css({opacity:1,cursor:"move"}).removeClass('js-deact-filter');
-//                $('.js-new-ul .js-li-cat').css({visibility: "visible"});
-                $('.js-new-ul .js-li-cat').show(0);
+                $('.js-new-ul .js-li-cat').css("display","block");
             }
         } else {
             rows.hide();
             if(action_activ == "catpage") {
                 $('.js-move-me-cat').css({opacity:0.3,cursor:"default"}).addClass('js-deact-filter');
-//                $('.js-new-ul .js-li-cat').css({visibility: "hidden"});
-                $('.js-new-ul .js-li-cat').hide(0);
+                $('.js-new-ul .js-li-cat').css("display","none");
             }
             if(action_activ == "plugins") {
                 $(".js-plugin-del:checked").prop("checked",false);
@@ -84,7 +74,6 @@ console.log("upDate")
             var regex = new RegExp(term.replace(rEscape, "\\$&"), 'gi');
 
             $.map(search_rows, function(v, i){
-//console.log("v="+v)
                 if(v.search(regex) !== -1) {
                     rows.eq(i).show();
                     return true;
