@@ -187,6 +187,7 @@ config_error_layouts_existed         = Dieses Layout existiert nicht.
 config_error_modrewrite              = mod_rewrite ist nicht verfügbar.
 config_text_websitetitle             = Was ist der Titel der gesamten Website?
 config_text_websitetitlebar          = Stelle die Formate der Titelleiste des Browsers zusammen.
+#config_text_websitetitlebar          = Stelle die Formate der Titelleiste des Browsers zusammen.<br />Erlaubt ist Titel=<b>{WEBSITE}</b>, Trennzeichen=<b>{SEP}</b>, Kategorie=<b>{CATEGORY}</b>, Inhatsseite=<b>{PAGE}</b> und <b>Text</b>
 config_text_websitetitleseparator    = Was soll das Trennzeichen zwischen den einzelnen Elementen in der Titelleiste sein?
 config_text_websitedescription       = Beschreibe hier deine Website kurz und treffend.
 config_text_websitekeywords          = Gebe hier für deine Website relevante Schlüsselwörter an.
@@ -218,9 +219,9 @@ config_titel_cmsglobal               = Allgemeine Einstellungen
 config_titel_cmssyntax               = Syntax-Einstellungen
 config_titel_expert                  = Erweiterte Einstellungen
 config_titel_usersyntax_test         = Syntax überprüfung
-config_input_draftcat                = Entwurf Modus
-config_text_draftcat                 = Entwurf Modus bedeutet das die Besucher deiner Website nur die Default Kategorie gezeigt bekommen auser sie hängen an die URL ein "draft=true" an.<br />Auserdem kanst du in der Selectbox Wählen welches Template der Entwurf Modus benutzen soll.
-config_input_draftlayout             = Standart Template
+config_input_draftcat                = Baustellen Modus
+config_text_draftcat                 = Baustellen Modus bedeutet das die Besucher deiner Website nur die Default Kategorie gezeigt bekommen auser es wird an die URL ein "draft=true" anbehängt.<br />Auserdem kanst du in der Selectbox Wählen welches Template der Baustellen Modus benutzen soll.
+config_input_draftlayout             = kein Baustellen Template
 
 admin_button                         = Admin
 admin_text                           = Hier kannst du Einstellungen vornehmen, die das Verhalten von moziloAdmin beeinflussen.
