@@ -59,6 +59,9 @@ console.log("upDate")
 //                $('.js-new-ul .js-li-cat').css({visibility: "hidden"});
                 $('.js-new-ul .js-li-cat').hide(0);
             }
+            if(action_activ == "plugins") {
+                $(".js-plugin-del:checked").prop("checked",false);
+            }
             var rEscape = /[\-\[\]{}()*+?.,\\\^$|#\s]/g;
             var regex = new RegExp(term.replace(rEscape, "\\$&"), 'gi');
 
