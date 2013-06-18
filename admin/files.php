@@ -21,7 +21,7 @@ function files() {
 
     require_once(BASE_DIR_ADMIN."jquery/File-Upload/fileupload.php");
 
-    $pagecontent .= '<ul class="d_js-dirs mo-ul">';
+    $pagecontent .= '<ul class="js-files mo-ul">';
     $text_files = getLanguageValue("files");
     foreach ($CatPage->get_CatArray(true,false) as $pos => $cat) {
         $pagecontent .= '<li class="js-file-dir mo-li ui-widget-content ui-corner-all">';

@@ -316,7 +316,7 @@ $(function() {
         scrollSpeed: 10,
         distance: 30,
         connectWith: ".js-ul-cats",
-        handle: ".js-move-me-cat",
+        handle: ".js-move-me-cat:not(.js-deact-filter)",
         placeholder: "mo-placeholder mo-li mo-li-head-tag mo-li-head-tag-no-ul mo-tag-height-from-icon ui-corner-all ui-state-highlight",
         start: function(event, ui) {
             only_one_drop_cat = false;

@@ -162,7 +162,7 @@ if($debug)
             if($plugin_manage_open)
                 $check_show = '';
             if($plugin_error === false) {
-                $pagecontent .= '<span class="mo-padding-left mo-middle">'.$plugin_name.'</span>'
+                $pagecontent .= '<span class="js-plugin-name mo-padding-left mo-middle">'.$plugin_name.'</span>'
                     .'<div style="float:right;" class="mo-tag-height-from-icon mo-middle mo-nowrap">'
                     .'<span class="js-plugin-active mo-staus">'.buildCheckBox($currentelement.'[active]', ($conf_plugin->get("active") == "true"),getLanguageValue("plugins_input_active")).'</span>'
                     .'<img class="js-tools-icon-show-hide js-toggle mo-tool-icon mo-icons-icon mo-icons-edit" src="'.ICON_URL_SLICE.'" alt="edit" />'
