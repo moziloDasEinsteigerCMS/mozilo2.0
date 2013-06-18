@@ -156,6 +156,8 @@ close                                = Schließen
 page_reload                          = Seite neu Laden
 page_cancel_reload                   = Abbrechen und Seite neu Laden
 page_error_no_page                   = Die Inhaltsseite gibt es nicht
+page_button_all_hide                 = Alle Inhaltsseiten Ausblenden
+page_button_all_show                 = Alle Inhaltsseiten Einblenden
 
 gallery_button                       = Galerien
 gallery_scale                        = Galeriebilder beim Hochladen auf maximale Größe skalieren

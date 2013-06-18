@@ -11,20 +11,38 @@ var moFilterPlugin = {
         this.rows = [];
         this.search_rows = [];
         if($(this.element).find(o.search_item).length > o.search_min) {
-            this.search_fild = $('<div class="mo-margin-top ui-state-default ui-corner-all mo-li-head-tag-no-ul mo-li-head-tag mo-td-middle"><span class="mo-padding-right mo-padding-left">Filter: </span><input id="serach_in" class="mo-plugin-input" type="search" style="width:200px" /></div>');
+            this.search_fild = $('<div class="mo-margin-top ui-state-default ui-corner-all mo-li-head-tag-no-ul mo-li-head-tag mo-td-middle"><span class="mo-padding-right mo-padding-left">Filter: </span><input class="mo-plugin-input" type="search" style="width:200px" /></div>');
 
             this.search_fild.insertBefore(this.element);
 
-            this.search_fild.find('input')
+
+            this.search_fild.find('input[type="search"]')
                 .bind({
                 keydown: function( e ){
                     if( e.which === 13 )
                         e.preventDefault();
                 },
                 keyup: function( e ){that._filter();},
-                click: function( e ){that._filter();},
+                click: function( e ){e.preventDefault(); that._filter();},
                 focus: function( e ){that._makeRows();}
             });
+
+            if(action_activ == "catpage") {
+                this.search_fild.append('<input type="button" class="js-filter-page-hide mo-checkbox-del mo-td-middle" value="'+mozilo_lang["page_button_all_hide"]+'" />');
+                this.search_fild.find('input[type="button"]')
+                    .bind({
+                        click: function( e ){
+                            e.preventDefault();
+                            if($(this).hasClass('js-filter-page-hide')) {
+                                $('.js-li-page').hide(0);
+                                $(this).val(mozilo_lang["page_button_all_show"]).removeClass('js-filter-page-hide');
+                            } else {
+                                $('.js-li-page').show(0);
+                                $(this).val(mozilo_lang["page_button_all_hide"]).addClass('js-filter-page-hide');
+                            }
+                        },
+                    });
+            }
 //            this._makeRows();
         }
     },
@@ -42,7 +60,7 @@ console.log("upDate")
     },
     _filter: function() {
 //console.log("_filter")
-        var term = $.trim( this.search_fild.find('input').val().toLowerCase() );
+        var term = $.trim( this.search_fild.find('input[type="search"]').val().toLowerCase() );
         var rows = this.rows;
         var search_rows = this.search_rows;
         if( !term ){

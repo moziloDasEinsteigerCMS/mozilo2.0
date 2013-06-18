@@ -113,7 +113,7 @@ if(defined('PLUGINADMIN'))
 
     $gallery_jslang = array("files","url_adress","page_error_save","images");
 
-    $catpage_jslang = array("self","blank","target","page_status","files","pages","page_edit","url_adress","page_error_save",array(EXT_PAGE,"page_saveasnormal"),array(EXT_HIDDEN,"page_saveashidden"),array(EXT_DRAFT,"page_saveasdraft"));
+    $catpage_jslang = array("self","blank","target","page_status","files","pages","page_edit","url_adress","page_error_save","page_button_all_show","page_button_all_hide",array(EXT_PAGE,"page_saveasnormal"),array(EXT_HIDDEN,"page_saveashidden"),array(EXT_DRAFT,"page_saveasdraft"));
 
 
     if(isset(${ACTION."_jslang"}) and is_array(${ACTION."_jslang"})) {

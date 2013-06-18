@@ -248,6 +248,7 @@ richtet sich nach der icon grösse = 2 * body font-size */
     min-width:20px;
     /* sichtbare menu breite */
     max-width:200px;
+    min-height:3em;
     background-image:url(gfx/menu.png);
     background-position: 5px center;
     background-repeat:no-repeat;
