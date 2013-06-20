@@ -211,26 +211,5 @@ $(function() {
             dialog_open("from_php",$("#dialog-auto").contents());
     }
 
-    // color edit
-    if(typeof ColorEditor != "undefined" && $('.js-coloreditor-button').length > 0)
-        $('.js-coloreditor-button').coloreditor();
-    else if($('#js-menu-config-default-color').length > 0) {
-        $('#js-menu-config-default-color').parents('li').eq(0).hide();
-        var hex = $('.ce-in-hex').val().toUpperCase().replace(/[^A-F0-9]/g,"");
-        hex += "000000".substr((Math.min(hex.length,6)));
-        $('.ce-bg-color-change').css({
-            backgroundColor: "#"+hex,
-            color: hex > '7F7F7F' ? '#000000' : '#FFFFFF'
-        });
-        $('.ce-in-hex').bind("keyup",function(event) {
-            var hex = $(this).val().toUpperCase().replace(/[^A-F0-9]/g,"");
-            hex += "000000".substr((Math.min(hex.length,6)));
-            $('.ce-bg-color-change').css({
-                backgroundColor: "#"+hex,
-                color: hex > '7F7F7F' ? '#000000' : '#FFFFFF'
-            });
-        });
-    }
-
     $('input[name="username"]').focus();
 });
