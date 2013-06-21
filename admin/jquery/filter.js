@@ -10,7 +10,7 @@ $(function() {
             this.search_rows = [];
 
             this.search_fild = $('<div class="mo-margin-top ui-state-default ui-corner-all mo-li-head-tag-no-ul mo-li-head-tag mo-tag-height-from-icon mo-middle"></div>');
-            this.search_fild.append('<span class="mo-bold mo-padding-right mo-padding-left">'+mozilo_lang["filter_text"]+' '+mozilo_lang["filter_text_"+action_activ]+'</span>');
+            this.search_fild.append('<span class="mo-bold mo-padding-right mo-padding-left">'+mozilo_lang["filter_text_"+action_activ]+' '+mozilo_lang["filter_text"]+'</span>');
             this.search_fild.append('<input class="mo-plugin-input" value="" type="search" style="width:15em" />');
 
             this.search_fild.insertBefore(this.element);
