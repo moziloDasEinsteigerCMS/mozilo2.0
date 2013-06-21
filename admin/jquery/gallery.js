@@ -8,16 +8,7 @@ var delete_handler = function (event) {
         return false;
     var this_li = that.parents(".js-file-dir");
 
-    var dialog_text = "<div id=\"dialog-del\"><ul><li><b>" + this_li.find(".js-gallery-name").text() + "</b><br />";
-    var del_images = this_li.find(".files .name");
-    if(del_images.length > 0) {
-        dialog_text += "<br /><b>" + mozilo_lang["images"] + ":</b><br /><ul>";
-        $(del_images).each(function(index) {
-            dialog_text += "<li>" + $(this).text() + "</li>";
-        });
-        dialog_text += "</ul>";
-    }
-    dialog_text += "</li></ul></div>";
+    var dialog_text = "<b>" + this_li.find(".js-gallery-name").text() + "</b><br />" + mozilo_lang["gallery_delete_confirm"];
 
     send_item_status = "gallery_del";
     dialog_multi.data("del_object",this_li);

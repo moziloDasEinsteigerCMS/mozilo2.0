@@ -111,7 +111,7 @@ if(defined('PLUGINADMIN'))
 
     $home_jslang = array("home_error_test_mail");
 
-    $gallery_jslang = array("files","url_adress","page_error_save","images");
+    $gallery_jslang = array("files","url_adress","page_error_save","images","gallery_delete_confirm");
 
     $catpage_jslang = array("self","blank","target","page_status","files","pages","page_edit","url_adress","page_error_save",array(EXT_PAGE,"page_saveasnormal"),array(EXT_HIDDEN,"page_saveashidden"),array(EXT_DRAFT,"page_saveasdraft"));
 

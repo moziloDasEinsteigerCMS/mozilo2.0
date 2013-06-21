@@ -181,6 +181,7 @@ gallery_error_deleted                = Die Galerie konnte nicht gelöscht werden
 gallery_error_newname                = Die Galerie konnte nicht umbenannt werden (Dateirechte prüfen).
 gallery_help_conf                    = Skalierungseinstellungen vorbelegen.
 gallery_error_noexists               = Es existiert keine Galerie mit diesem Namen.
+gallery_delete_confirm               = Diese Galerie mit allen Bildern und Untertiteln Löschen?
 
 config_button                        = Einstellungen
 config_text                          = Hier kannst du Einstellungen vornehmen, die das Verhalten von moziloCMS beeinflussen.
