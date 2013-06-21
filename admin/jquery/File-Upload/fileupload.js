@@ -15,18 +15,29 @@ function file_rename(change_item) {
 
         template.find('.preview img').prop('src',template.find('.preview img').prop('src').replace(curent_name_srv,curent_newname_srv))
     }
-
     change_item.remove();
 }
 
 function is_filename_allowed(name) {
-// /[^a-zA-Z0-9._-]/g.test(name);
-    if(name.search(/[^a-zA-Z0-9._-]/) != -1) {
-//$("#out").html($("#out").html()+"<br />nicht erlaubt="+name);
+    if(name.search(/[^a-zA-Z0-9._-]/) != -1)
         return false;
-    }
     return true;
+}
 
+function load_files_datajson(that) {
+    that.fileupload({
+        dropZone: that
+    });
+    $.get(URL_BASE+ADMIN_DIR_NAME+"/index.php?"+that.serialize(), function (result) {
+        var tmpdata = $("<span>"+result+"</span>");
+        if(tmpdata.find("#json-data").length > 0) {
+            result = jQuery.parseJSON(tmpdata.find("#json-data").text());
+        } else
+            result = "";
+        if (result && result.length)
+            that.fileupload('option','done').call(that, null,{result: result});
+        tmpdata.remove();
+    });
 }
 
 $(function () {
@@ -34,29 +45,20 @@ $(function () {
 
     $('input[type="file"]').prop('multiple','multiple');
 
-    $('.fileupload').each(function () {
-        if($(this).parents('#menu-fix').length > 0) {
-            // wie continue
-            return true;
-        }
-        var that = this;
-        $(this).fileupload({
-            dropZone: $(this)
+    if(action_activ == "gallery") {
+        $('.js-gallery').on("click",'.js-toggle:not(.js-img-loadet)', function(event) {
+            $(this).addClass('js-img-loadet');
+            load_files_datajson($(this).parents('.fileupload'))
         });
-//$("#out").html($("#out").html()+"<br />get="+URL_BASE+ADMIN_DIR_NAME+"/index.php?"+$(this).serialize());
-        $.get(URL_BASE+ADMIN_DIR_NAME+"/index.php?"+$(this).serialize(), function (result) {
-            var tmpdata = $("<span>"+result+"</span>");
-//$("#out").html($("#out").html()+"<br />tmpdata="+tmpdata.find("#json-data").text());
-            if(tmpdata.find("#json-data").length > 0) {
-                result = jQuery.parseJSON(tmpdata.find("#json-data").text());
-            } else
-                result = "";
-            if (result && result.length) {
-                $(that).fileupload('option', 'done')
-                    .call(that, null, {result: result});
+    } else {
+        $('.fileupload').each(function () {
+            if($(this).parents('#menu-fix').length > 0) {
+                // wie continue
+                return true;
             }
+            load_files_datajson($(this));
         });
-    });
+    }
 
     $('.fileupload .preview a:not([target^=_blank])').live('click', function (e) {
         e.preventDefault();
@@ -87,18 +89,15 @@ $(function () {
                 if(new_name == $(this).siblings('.fu-rename-file').text()) {
                     $(this).siblings('.fu-rename-file').removeClass('fu-nosearch').show(0);
                     $(this).remove();
-//$("#out").html($("#out").html()+"<br />nichts geändert raus hier");
                     return false;
                 }
                 if(!is_filename_allowed(new_name)) {
                     dialog_open("error_messages",returnMessage(false,mozilo_lang["error_datei_file_name"]));
                     return false;
                 }
-//$("#out").html($("#out").html()+"<br />erlaubt="+new_name);
                 send_item_status = "file_rename";
                 var para = "newfile="+new_name+"&orgfile="+$(this).siblings('.fu-rename-file').text()+"&curent_dir="+rawurlencode_js($(this).closest('.fileupload').find('input[name="curent_dir"]').val());
                 send_data(para,$(this));
-//$("#out").html($("#out").html()+"<br />curent_dir="+$(this).closest('.fileupload').find('input[name="curent_dir"]').val());
             }
         } else if(e.which == 27) { // esc
             e.preventDefault();
@@ -117,7 +116,6 @@ $(function () {
         if(e.which == 13) { // enter
             e.preventDefault();
             send_item_status = "gallery_subtitle";
-//$("#out").html($("#out").html()+"<br>"+rawurlencode_js($(this).val()));
             var para = "subtitle="+$(this).val()+
                 "&curent_dir="+rawurlencode_js($(this).closest('.fileupload').find('input[name="curent_dir"]').val())+
                 "&file="+$(this).closest('.template-download').find('.fu-rename-file').text();

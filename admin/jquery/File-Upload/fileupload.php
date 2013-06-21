@@ -11,9 +11,13 @@ function getFileUpload($curent_dir,$dir = false,$count_text = false,$newcss = ""
                     .'<span class="js-gallery-name mo-padding-left mo-bold">'.$dir.'</span>'
 #                .'</td>'
 #                .'<td class="mo-nowrap">'
-.'<div style="float:right;" class="mo-nowrap">'
-                    .'<span class="mo-staus mo-font-small'.$newcss.'">( '
-                        .'<span class="files-count">0</span> '
+.'<div style="float:right;" class="mo-nowrap">';
+$count = "0";
+if(ACTION == "gallery")
+    $count = count(getDirAsArray(GALLERIES_DIR_REL.$curent_dir,"img"));
+
+                $head .= '<span class="mo-staus mo-font-small'.$newcss.'">( '
+                        .'<span class="files-count">'.$count.'</span> '
                         .$count_text.' )</span>'
 #                .'</td>'
 #                .'<td class="td_icons mo-nowrap">'
