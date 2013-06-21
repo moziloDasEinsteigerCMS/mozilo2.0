@@ -1,4 +1,4 @@
-<?php
+<?php if(!defined('IS_ADMIN') or !IS_ADMIN) die();
 /*
  * jQuery File Upload Plugin PHP Class 5.9.2
  * https://github.com/blueimp/jQuery-File-Upload
