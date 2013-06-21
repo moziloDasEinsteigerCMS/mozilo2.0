@@ -126,26 +126,26 @@ function admin() {
             $cms_size = dirsize(BASE_DIR_ADMIN) + dirsize(BASE_DIR_CMS);
             if(false !== ($tmp_size = dirsize(BASE_DIR."jquery/")))
                 $cms_size += $tmp_size;
-            $cms_input = buildCheckBox("backup_include_cms", "true",getLanguageValue("admin_button_include_cms")." (".convertFileSizeUnit($cms_size).")").'<br />';
+            $cms_input = buildCheckBox("backup_include_cms", "true",getLanguageValue("admin_button_include_cms")." (<span class=\"js-file-size\">".convertFileSizeUnit($cms_size)."</span>)").'<br />';
             $catpage_input = "";
             if(false !== ($tmp_size = dirsize(CONTENT_DIR_REL))) {
-                $catpage_input = buildCheckBox("backup_include_catpage", "false",getLanguageValue("admin_button_include_catpage")."  (".convertFileSizeUnit($tmp_size).")").'<br />';
+                $catpage_input = buildCheckBox("backup_include_catpage", "false",getLanguageValue("admin_button_include_catpage")."  (<span class=\"js-file-size\">".convertFileSizeUnit($tmp_size)."</span>)").'<br />';
             }
             $gallery_input = "";
             if(false !== ($tmp_size = dirsize(GALLERIES_DIR_REL))) {
-                $gallery_input = buildCheckBox("backup_include_gallery", "false",getLanguageValue("admin_button_include_gallery")."  (".convertFileSizeUnit($tmp_size).")").'<br />';
+                $gallery_input = buildCheckBox("backup_include_gallery", "false",getLanguageValue("admin_button_include_gallery")."  (<span class=\"js-file-size\">".convertFileSizeUnit($tmp_size)."</span>)").'<br />';
             }
             $layouts_input = "";
             if(false !== ($tmp_size = dirsize(BASE_DIR.LAYOUT_DIR_NAME))) {
-                $layouts_input = buildCheckBox("backup_include_layouts", "false",getLanguageValue("admin_button_include_layouts")."  (".convertFileSizeUnit($tmp_size).")").'<br />';
+                $layouts_input = buildCheckBox("backup_include_layouts", "false",getLanguageValue("admin_button_include_layouts")."  (<span class=\"js-file-size\">".convertFileSizeUnit($tmp_size)."</span>)").'<br />';
             }
             $plugins_input = "";
             if(false !== ($tmp_size = dirsize(BASE_DIR.PLUGIN_DIR_NAME))) {
-                $plugins_input = buildCheckBox("backup_include_plugins", "false",getLanguageValue("admin_button_include_plugins")."  (".convertFileSizeUnit($tmp_size).")").'<br />';
+                $plugins_input = buildCheckBox("backup_include_plugins", "false",getLanguageValue("admin_button_include_plugins")."  (<span class=\"js-file-size\">".convertFileSizeUnit($tmp_size)."</span>)").'<br />';
             }
             $docu_input = "";
             if(false !== ($tmp_size = dirsize(BASE_DIR."docu/"))) {
-                $docu_input = buildCheckBox("backup_include_docu", "false",getLanguageValue("admin_button_include_docu")."  (".convertFileSizeUnit($tmp_size).")").'<br />';
+                $docu_input = buildCheckBox("backup_include_docu", "false",getLanguageValue("admin_button_include_docu")."  (<span class=\"js-file-size\">".convertFileSizeUnit($tmp_size)."</span>)").'<br />';
             }
             $template[$titel][] = array(getLanguageValue("admin_text_get_backup"),
             '<form action="index.php?action='.ACTION.'" method="post">'
@@ -153,6 +153,7 @@ function admin() {
             .$cms_input.$catpage_input.$gallery_input.$layouts_input.$plugins_input.$docu_input
             .'<div style="font-size:.4em;">&nbsp;</div>'
             .'<input type="submit" name="admin_button_get_backup" value="'.getLanguageValue("admin_button_get_backup").'" />'
+            .'<span class="js-file-size-summe mo-padding-left">'.convertFileSizeUnit($cms_size).'</span>'
             .'</form>'
             );
         }

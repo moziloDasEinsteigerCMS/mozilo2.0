@@ -168,4 +168,26 @@ $(function() {
     $('.js-noroot-plugins').multiselect("option","noneSelectedText",$('.js-noroot-plugins').attr('title'));
     $('.js-noroot-template').multiselect("option","noneSelectedText",$('.js-noroot-template').attr('title'));
 
+    var backup_items = $('#backup_include_cms, #backup_include_catpage, #backup_include_gallery, #backup_include_layouts, #backup_include_plugins, #backup_include_docu');
+    backup_items.bind("change", function() {
+        var bytes = 0;
+        backup_items.filter(':checked').each(function () {
+            var tmp_label_bytes = $('label[for="'+this.id+'"] .js-file-size').text();
+            var tmp_bytes = parseFloat(tmp_label_bytes);
+            if(tmp_label_bytes.substr(-2) == "KB")
+                tmp_bytes = parseFloat(tmp_label_bytes) * 1000;
+            if(tmp_label_bytes.substr(-2) == "MB")
+                tmp_bytes = parseFloat(tmp_label_bytes) * 1000000;
+            bytes += tmp_bytes;
+        });
+        var bytes_string = bytes + " B";
+        if (bytes >= 1000000000)
+            bytes_string = (bytes / 1000000000).toFixed(2) + ' GB';
+        else if (bytes >= 1000000)
+            bytes_string = (bytes / 1000000).toFixed(2) + ' MB';
+        else if (bytes >= 1000)
+            bytes_string = (bytes / 1000).toFixed(2) + ' KB';
+        $('.js-file-size-summe').text(bytes_string);
+    });
+
 });
