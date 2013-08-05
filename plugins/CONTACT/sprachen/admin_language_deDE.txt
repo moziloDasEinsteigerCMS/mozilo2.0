@@ -14,4 +14,5 @@ config_input_contact_mail       = Einzeiliges Textfeld "E-Mail"
 config_input_contact_website    = Einzeiliges Textfeld "Website"
 config_input_contact_textarea   = Mehrzeiliges Textfeld "Nachricht"
 config_input_contact_privacy    = Checkbox Text "Datenschutz"
+config_input_contact_mail_send_copy = Kopie an diese Senden
 config_titel_spam_question      = Spam Aufgaben<br />in jeder Zeile eine Neue<br />Frage = Antwort<br />z.B. 3 + 7 = 10

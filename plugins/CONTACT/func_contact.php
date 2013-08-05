@@ -99,18 +99,18 @@
                     $mailcontent .= "\r\n".$config_message[0].":\r\n".$message."\r\n";
                 }
                 if ($config_privacy[1] == "true") {
+                    # ☐ &#x2610; ☒ &#x2612;
                     $checket = "☐";
                     if(!empty($privacy))
                         $checket = "☒";
                     $mailcontent .= $checket." ".$config_privacy[0]."\r\n";
-# ☐ &#x2610; ☒ &#x2612;
                 }
                 $mailsubject = $lang_contact->getLanguageValue("contactform_mailsubject", $specialchars->getHtmlEntityDecode($WEBSITE_NAME));
                 $mailsubject_confirm = $lang_contact->getLanguageValue("contactform_mailsubject_confirm", $specialchars->getHtmlEntityDecode($WEBSITE_NAME));
                 
                 require_once(BASE_DIR_CMS."Mail.php");
                 // Wenn Mail-Adresse im Formular gesetzt ist - versuchen Kopie dorthin zu senden
-                if ($mail <> "") {
+                if ($mail <> "" and $settings->get("titel_mail_send_copy") == "true") {
                     sendMail($mailsubject_confirm, $mailcontent, $settings->get("formularmail"), $mail, $settings->get("formularmail"));
                 }
                 // Mail an eingestellte Mail-Adresse (Mail-Absender muss auch diese Adresse sein,
@@ -124,8 +124,6 @@
                 $website = "";
                 $message = "";
                 $privacy = "";
-#$tt = var_export($_POST,true);
-#$form .= "###<br />".$tt.$mailsubject."<br />".$mailcontent."<br />".$mail."###<br />";
             }
         }
 

@@ -17,6 +17,7 @@ class CONTACT extends Plugin {
             "titel_mail" => "",
             "titel_mail_show" => "true",
             "titel_mail_mandatory" => "false",
+            "titel_mail_send_copy" => "false",
             "titel_message" => "",
             "titel_message_show" => "true",
             "titel_message_mandatory" => "false",
@@ -66,7 +67,6 @@ class CONTACT extends Plugin {
             "type" => "text",
             "description" => $lang_contact_admin->get("config_text_formularmail"),
             "maxlength" => "100",
-#            "size" => "40",
             "regex" => "/^[\w-]+(\.[\w-]+)*@([0-9a-z][0-9a-z-]*[0-9a-z]\.)+([a-z]{2,4})$/i",
             "regex_error" => $lang_contact_admin->get("config_error_formularmail")
         );
@@ -84,17 +84,14 @@ class CONTACT extends Plugin {
         );
         $config['contactformcalcs'] = array(
             "type" => "textarea",
-#            "cols" => "80",
             "rows" => "10",
             "description" => $lang_contact_admin->get("config_titel_spam_question"),
-#            "template" => '<div style="float:left;margin-right:2.4em;">{contactformcalcs_description}</div>{contactformcalcs_textarea}<div class="mo-clear"></div>'
         );
         # name
         $config['titel_name']  = array(
             "type" => "text",
             "description" => $lang_contact_admin->get("config_input_contact_name"),
             "maxlength" => "100",
-#            "size" => "40"
         );
         $config['titel_name_show'] = array(
             "type" => "checkbox",
@@ -109,7 +106,6 @@ class CONTACT extends Plugin {
             "type" => "text",
             "description" => $lang_contact_admin->get("config_input_contact_website"),
             "maxlength" => "100",
-#            "size" => "40"
         );
         $config['titel_website_show'] = array(
             "type" => "checkbox",
@@ -124,7 +120,10 @@ class CONTACT extends Plugin {
             "type" => "text",
             "description" => $lang_contact_admin->get("config_input_contact_mail"),
             "maxlength" => "100",
-#            "size" => "40"
+        );
+        $config['titel_mail_send_copy']  = array(
+            "type" => "checkbox",
+            "description" => $lang_contact_admin->get("config_input_contact_mail_send_copy"),
         );
         $config['titel_mail_show'] = array(
             "type" => "checkbox",
@@ -199,7 +198,9 @@ class CONTACT extends Plugin {
                         .'<td class="mo-align-center mo-padding-top">{titel_website_mandatory_checkbox}</td>'
                     .'</tr><tr>'
                         .'<td>&nbsp;</td>'
-                        .'<td class="mo-nowrap mo-padding-top">{titel_mail_description}</td>'
+                        .'<td class="mo-nowrap mo-padding-top">{titel_mail_description}'
+                        .'<span style="float:right;padding-right:1em;">{titel_mail_send_copy_description} {titel_mail_send_copy_checkbox}</span><br class="mo-clear" />'
+                        .'</td>'
                         .'<td class="mo-padding-top">{titel_mail_text}</td>'
                         .'<td class="mo-align-center mo-padding-top">{titel_mail_show_checkbox}</td>'
                         .'<td class="mo-align-center mo-padding-top">{titel_mail_mandatory_checkbox}</td>'
