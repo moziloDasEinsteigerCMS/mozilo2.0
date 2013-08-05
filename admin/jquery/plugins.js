@@ -56,7 +56,7 @@ $(function() {
     $('body').on("click",".js-config-adminlogin", function(event){
         event.preventDefault();
         var plugin_name = $(this).attr("name").replace(/\[pluginadmin\]/,""),
-            para = URL_BASE+ADMIN_DIR_NAME+"/index.php?nojs=true&pluginadmin="+plugin_name+"&action="+action_activ;
+            para = URL_BASE+ADMIN_DIR_NAME+"/index.php?nojs=true&pluginadmin="+plugin_name+"&action="+action_activ+"&multi="+MULTI_USER;
         $('#dialog-plugin-admin iframe').attr("src",para);
         dialog_plugin.dialog({
             width: $(".mo-td-content-width").eq(0).width(),

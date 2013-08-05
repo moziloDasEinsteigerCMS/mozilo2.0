@@ -94,7 +94,7 @@ function config() {
             }
             $conf_inhalt .= '<option'.$selected.' value="'.$currentlanguagecode.'">';
             // Übersetzer aus der aktuellen Sprachdatei holen
-            $languagefile = new Properties("../cms/sprachen/$file");
+            $languagefile = new Properties(BASE_DIR_CMS."sprachen/".$file);
             $conf_inhalt .= $currentlanguagecode." (".getLanguageValue("config_input_translator")." ".$languagefile->get("_translator_0").")";
             $conf_inhalt .= "</option>";
         }

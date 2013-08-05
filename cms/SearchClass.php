@@ -270,7 +270,7 @@ function findInPage($cat,$page) {
         global $SEARCH_REQUEST,$CMS_CONF,$CatPage;
         if(DRAFT)
             $inputs_array["draft"] = "true";
-        $inputs = "";
+        $inputs = '<input type="hidden" name="action" value="search" />';
         if($CMS_CONF->get("modrewrite") == "true") {
             if($cat !== false)
                 $inputs_array["cat"] = $cat;
@@ -278,6 +278,7 @@ function findInPage($cat,$page) {
                 $inputs_array["page"] = $page;
         }
         foreach($inputs_array as $name => $value) {
+            if($name == "action" and $value == "search") continue;
             $inputs .= '<input type="hidden" name="'.$name.'" value="'.$value.'" />';
         }
         $in_icon = '';

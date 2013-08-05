@@ -12,6 +12,8 @@ html, body {
     background-image:url(css/mozilo/images/ui-bg_highlight-soft_90_a9b7cb_1x100.png);
 }
 #mo-admin-td {
+    margin:0 auto;
+    text-align:left;
     padding: 1em 0 5em 0;
 }
 

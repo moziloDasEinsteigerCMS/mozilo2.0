@@ -9,7 +9,8 @@ function sleep(milliSeconds) {
 
 function getCaretPos(item) {
     var pos = 0;
-    item.focus();
+    if(!$(item).is(':focus'))
+        item.focus();
     if(document.selection) {
         var sel = document.selection.createRange().duplicate();
         sel.moveStart('character',-item.value.length);
@@ -20,7 +21,8 @@ function getCaretPos(item) {
 }
 
 function setCaretPos(item,pos) {
-    item.focus();
+    if(!$(item).is(':focus'))
+        item.focus();
     if(document.selection) {
         var range = item.createTextRange();
         range.move("character", pos);

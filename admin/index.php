@@ -231,7 +231,7 @@ if(LOGIN) { #-------------------------------
         } elseif(getRequestValue('multi','get') and $tmp_action != "home" and in_array($tmp_action,$array_tabs)) {
             if("freetab" == ($tmp = $USERS->get($id)))
                 $tmp = "home";
-            $url = $_SERVER['HTTP_HOST'].URL_BASE.ADMIN_DIR_NAME.'/index.php?nojs=true&amp;action='.$tmp.'&multi=true';
+            $url = $_SERVER['HTTP_HOST'].URL_BASE.ADMIN_DIR_NAME.'/index.php?nojs=true&amp;action='.$tmp.'&amp;multi=true';
             $USERS->set($id,$tmp_action);
             # seite besetzt
             if(in_array($tmp_action,$users_array)) {
@@ -245,7 +245,7 @@ if(LOGIN) { #-------------------------------
         }
         # im FileUpload wird der tab besetzt mit window.location.href behandelt
         if(getRequestValue('fileupload','get')) {
-            $url = $_SERVER['HTTP_HOST'].URL_BASE.ADMIN_DIR_NAME.'/index.php?nojs=true&amp;action=home&multi=true';
+            $url = $_SERVER['HTTP_HOST'].URL_BASE.ADMIN_DIR_NAME.'/index.php?nojs=true&amp;action=home&amp;multi=true';
             $USERS->set($id,"busy#".getRequestValue('fileupload','get'));
             header("Location: http://$url");
             exit();
@@ -365,10 +365,6 @@ function buildCheckBox($name, $checked,$label = false) {
         $checkbox .= ' checked=checked';
     }
     $checkbox .= ' name="'.$name.'"'.$id.' />';
-#    if($checkbox != NULL and $label_tag != NULL) {
-#        return '<table cellspacing="0" border="0" cellpadding="0"><tr><td align="left" valign="top">'.$checkbox.'</td><td align="left" valign="middle">'.$label_tag.'</td></tr></table>';
-
-#    }
     return $checkbox.$label_tag;
 }
 
@@ -410,10 +406,9 @@ function get_template_truss($content,$titel,$toggle = false) {
         if($toggle) {
             $template = '<ul class="mo-ul">'
                     .'<li class="mo-li ui-widget-content ui-corner-all">'
-                    .'<div class="js-tools-show-hide mo-li-head-tag mo-tag-height-from-icon mo-li-head-tag-no-ul mo-middle ui-state-default ui-corner-top">'
+                    .'<div class="js-tools-show-hide mo-li-head-tag mo-tag-height-from-icon mo-li-head-tag-no-ul mo-middle ui-state-default ui-corner-top ui-helper-clearfix">'
                     .'<span class="mo-bold mo-padding-left">'.getLanguageValue($titel).'</span>'
                     .'<img style="float:right;" class="js-toggle mo-tool-icon mo-icon mo-icons-icon mo-icons-edit" src="'.ICON_URL_SLICE.'" alt="edit" />'
-                    .'<br class="mo-clear" />'
                     .'</div>'
                     .'<ul class="mo-in-ul-ul js-toggle-content" style="display:none;">';
         } else

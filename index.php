@@ -44,6 +44,8 @@ $_GET = cleanREQUEST($_GET);
 $_REQUEST = cleanREQUEST($_REQUEST);
 $_POST = cleanREQUEST($_POST);
 #------------------------------
+# manche Provider sind auf iso eingestelt
+header('content-type: text/html; charset='.CHARSET.'');
 
 require_once(BASE_DIR_CMS."SpecialChars.php");
 require_once(BASE_DIR_CMS."Properties.php");
@@ -191,8 +193,6 @@ set_CatPageRequest();
 
 // Dann: HTML-Template einlesen und mit Inhalt fuellen
 readTemplate($template,$pagecontent);
-# manche Provider sind auf iso eingestelt
-header('content-type: text/html; charset='.CHARSET.'');
 
 if(strpos($HTML,"<!--{MEMORYUSAGE}-->") > 1)
     $HTML = str_replace("<!--{MEMORYUSAGE}-->",get_memory(),$HTML);

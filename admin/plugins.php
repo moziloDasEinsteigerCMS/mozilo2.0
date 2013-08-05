@@ -7,7 +7,6 @@ function plugins() {
     global $CatPage;
     global $message;
 
-
 global $debug;
     $plugin_manage_open = false;
     # plugins löschen
@@ -38,7 +37,13 @@ if($debug)
                 require_once(PLUGIN_DIR_REL.PLUGINADMIN."/index.php");
                 # Enthält der Code eine Klasse mit dem Namen des Plugins und ist es auch der Dirname?
                 if(class_exists(PLUGINADMIN) and in_array(PLUGINADMIN, get_declared_classes())) {
-                    define("PLUGINADMIN_GET_URL",URL_BASE.ADMIN_DIR_NAME."/index.php?pluginadmin=".PLUGINADMIN."&amp;nojs=true&amp;action=".ACTION);
+                    # $PLUGIN_ADMIN_ADD_HEAD gibts nur hier und ist für sachen die in den head sollen
+                    global $PLUGIN_ADMIN_ADD_HEAD;
+                    $PLUGIN_ADMIN_ADD_HEAD = array();
+                    $multi_user = "";
+                    if(defined('MULTI_USER') and MULTI_USER)
+                        $multi_user = "&amp;multi=true";
+                    define("PLUGINADMIN_GET_URL",URL_BASE.ADMIN_DIR_NAME."/index.php?pluginadmin=".PLUGINADMIN."&amp;nojs=true&amp;action=".ACTION.$multi_user);
                     $plugin = new $plugin_name();
                     $info = $plugin->getInfo();
                     $config = $plugin->getConfig();
@@ -98,11 +103,11 @@ if($debug)
         if(!function_exists('gzopen'))
             $disabled = ' disabled="disabled"';
         $plugin_manage["plugins_title_manage"][] = '<form id="js-plugin-manage" action="index.php?nojs=true&amp;action=plugins'.$multi_user.'" method="post" enctype="multipart/form-data">'
-            .'<div class="mo-nowrap align-right">'
+            .'<div class="mo-nowrap align-right ui-helper-clearfix">'
                 .'<span class="align-left" style="float:left"><span class="mo-bold">'.getLanguageValue("plugins_text_filebutton").'</span><br />'.getLanguageValue("plugins_text_fileinfo").'</span>'
                 .'<input type="file" id="js-plugin-install-file" name="plugin-install-file" class="mo-select-div"'.$disabled.' />'
                 .'<input type="submit" id="js-plugin-install-submit" name="plugin-install" value="'.getLanguageValue("plugins_button_install",true).'"'.$disabled.' /><br />'
-                .'<input type="submit" id="js-plugin-del-submit" value="'.getLanguageValue("plugins_button_delete",true).'" class="mo-margin-top js-send-del-stop" /><br class="mo-clear" />'
+                .'<input type="submit" id="js-plugin-del-submit" value="'.getLanguageValue("plugins_button_delete",true).'" class="mo-margin-top js-send-del-stop" />'
             .'</div></form>';
 
         $plugin_manage["plugins_title_manage"]["toggle"] = true;
@@ -136,11 +141,10 @@ if($debug)
                 # Plugin Dirname stimt nicht mit Plugin Classnamen überein
                 continue;
 
-            $conf_plugin = $plugin->settings;
             # plugin.conf.php wurde neu erstelt.
             # Wenn es die getDefaultSettings() gibt fühle die plugin.conf.php damit
             if($new_plugin_conf and method_exists($plugin,'getDefaultSettings')) {
-                $conf_plugin->setFromArray($plugin->getDefaultSettings());
+                $plugin->settings->setFromArray($plugin->getDefaultSettings());
             }
             $plugin_css_li_error = NULL;
             $plugin_error = false;
@@ -157,29 +161,29 @@ if($debug)
                 $plugin_css_li_error = ' ui-state-error';
             }
             $pagecontent .= '<li class="js-plugin mo-li ui-widget-content ui-corner-all'.$plugin_css_li_error.'">'
-            .'<div class="js-tools-show-hide mo-li-head-tag mo-li-head-tag-no-ul ui-state-active ui-corner-all">';
+            .'<div class="js-tools-show-hide mo-li-head-tag mo-li-head-tag-no-ul ui-state-active ui-corner-all ui-helper-clearfix">';
             $check_show = ' style="display:none;"';
             if($plugin_manage_open)
                 $check_show = '';
             if($plugin_error === false) {
                 $pagecontent .= '<span class="js-plugin-name mo-padding-left mo-middle">'.$plugin_name.'</span>'
                     .'<div style="float:right;" class="mo-tag-height-from-icon mo-middle mo-nowrap">'
-                    .'<span class="js-plugin-active mo-staus">'.buildCheckBox($currentelement.'[active]', ($conf_plugin->get("active") == "true"),getLanguageValue("plugins_input_active")).'</span>'
+                    .'<span class="js-plugin-active mo-staus">'.buildCheckBox($currentelement.'[active]', ($plugin->settings->get("active") == "true"),getLanguageValue("plugins_input_active")).'</span>'
                     .'<img class="js-tools-icon-show-hide js-toggle mo-tool-icon mo-icons-icon mo-icons-edit" src="'.ICON_URL_SLICE.'" alt="edit" />'
                     .'<input type="checkbox" value="'.$currentelement.'" class="mo-checkbox mo-checkbox-del js-plugin-del"'.$check_show.' />'
                     .'</div>'
-                    .'<br class="mo-clear" />'
                     .'</div>'
-                    .'<div class="js-toggle-content mo-in-ul-ul" style="display:none;">'
+                    .'<div class="js-toggle-content mo-in-ul-ul ui-helper-clearfix" style="display:none;">'
                     .get_plugin_info($plugin_info);
                 # geändert damit getConfig() nicht 2mal ausgeführt wird
                 $config = $plugin->getConfig();
                 # Beschreibung und inputs der Konfiguration Bauen und ausgeben
-                $pagecontent .= get_plugin_config($conf_plugin,$config,$currentelement);
+                $pagecontent .= get_plugin_config($plugin->settings,$config,$currentelement);
 
             } else
                 $pagecontent .= $plugin_error;
             $pagecontent .= '</div></li>';
+            unset($plugin);
         }
     }
     $pagecontent .= '</ul>';
@@ -263,10 +267,7 @@ function get_plugin_info($plugin_info) {
     if(isset($plugin_info[2]) and strlen($plugin_info[2]) > 1)
         $template["plugins_info"][] = ''
             .'<img style="float:left;" class="js-help-plugin mo-tool-icon mo-icons-icon mo-icons-info" src="'.ICON_URL_SLICE.'" alt="info" />'
-            .'<div style="margin-left:3em;">'
-            .'<div style="display:none;" class="mo-help-box js-plugin-help-content ui-corner-all" style="display:none;margin-left:3em;">'.$plugin_info[2].'</div>'
-            .'</div>'
-            .'<div class="mo-clear"></div>';
+            .'<div style="display:none;margin-left:3em;" class="mo-help-box js-plugin-help-content ui-corner-all">'.$plugin_info[2].'</div>';
 
     return contend_template($template);
 }
@@ -421,10 +422,9 @@ function get_plugin_config($conf_plugin,$config,$currentelement) {
         $show = ' style="display:none;"';
     return '<div class="js-config"'.$show.'><ul class="mo-ul">'
             .'<li class="mo-li ui-widget-content ui-corner-all">'
-            .'<div class="js-tools-show-hide mo-li-head-tag mo-tag-height-from-icon mo-li-head-tag-no-ul mo-middle ui-state-default ui-corner-top">'
+            .'<div class="js-tools-show-hide mo-li-head-tag mo-tag-height-from-icon mo-li-head-tag-no-ul mo-middle ui-state-default ui-corner-top ui-helper-clearfix">'
             .'<span class="mo-bold mo-padding-left">'.getLanguageValue("config_button").'</span>'
             .'<img style="float:right;" class="js-save-plugin mo-tool-icon mo-icons-icon mo-icons-save" src="'.ICON_URL_SLICE.'" alt="save" />'
-            .'<br class="mo-clear" />'
            .'</div>'
            .'<ul class="mo-in-ul-ul">'
             .contend_template($ul_template,false,true)

@@ -6,9 +6,7 @@ function admin_Template($pagecontent,$message) {
     $html .= '<body class="ui-widget" style="font-size:12px;">';
 
     if(!defined('PLUGINADMIN')) {
-
-        $html .= '<table summary="" width="100%" cellspacing="0" border="0" cellpadding="0">';
-        $html .= '<tr><td>&nbsp;</td><td id="mo-admin-td" class="mo-td-content-width">';
+        $html .= '<div id="mo-admin-td" class="mo-td-content-width">';
 
         $html .= '<noscript><div class="mo-noscript mo-td-content-width ui-state-error ui-corner-all"><div>'.getLanguageValue("error_no_javascript").'</div></div></noscript>';
 
@@ -45,8 +43,7 @@ $menu_fix = '<div id="menu-fix" class="ui-widget ui-widget-content ui-corner-rig
             $html .= get_Message($message);
         $html .= '<img class="mo-td-content-width" src="'.ICON_URL_SLICE.'" alt=" " height="1" hspace="0" vspace="0" align="left" border="0" />';
 #-------------------------------------
-        $html .= '</td><td>&nbsp;</td></tr></table>';
-#$html .= '<div style="width:800px;height:300px;position:relative;"><div id="pagecontent"></div></div>';
+        $html .= '</div>';
 
     } else {
         $html .= $pagecontent;
@@ -85,8 +82,6 @@ function get_HtmlHead() {
     $html .= '<link type="text/css" rel="stylesheet" href="admin.css" />';
 #    if(!LOGIN)
 #        $html .= '<link type="text/css" rel="stylesheet" href="login.css" />';
-if(defined('PLUGINADMIN'))
-    $html .= '<link type="text/css" rel="stylesheet" href="'.URL_BASE.PLUGIN_DIR_NAME.'/'.PLUGINADMIN.'/plugin.css" />';
 
     if(file_exists(BASE_DIR_ADMIN.ACTION.'.css'))
         $html .= '<link type="text/css" rel="stylesheet" href="'.ACTION.'.css" />';
@@ -106,6 +101,10 @@ if(defined('PLUGINADMIN'))
     $html .= 'var usecmssyntax = "'.$CMS_CONF->get("usecmssyntax").'";';
     $html .= 'var modrewrite = "'.$CMS_CONF->get("modrewrite").'";';
     $html .= 'var defaultcolors = "'.$specialchars->rebuildSpecialChars($CMS_CONF->get("defaultcolors"),false,false).'";';
+    $multi_user = "false";
+    if(defined('MULTI_USER') and MULTI_USER)
+        $multi_user = "true";
+    $html .= 'var MULTI_USER = "'.$multi_user.'";';
 
     $dialog_jslang = array("close","yes","no","button_cancel","button_save","page_reload","page_edit_discard","page_cancel_reload","dialog_title_send","dialog_title_error","dialog_title_messages","dialog_title_save_beforeclose","dialog_title_delete","dialog_title_lastbackup","dialog_title_docu","login_titel_dialog","error_name_no_freename","error_save_beforeclose","dialog_title_coloredit","error_exists_file_dir","error_datei_file_name","error_zip_nozip","filter_button_all_hide","filter_button_all_show","filter_text","filter_text_gallery","filter_text_plugins","filter_text_files","filter_text_catpage");
 
@@ -224,6 +223,15 @@ else
     $html .= '<script type="text/javascript" src="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/File-Upload/fileupload.template_gal.js"></script>';
 $html .= '<script type="text/javascript" src="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/File-Upload/fileupload.js"></script>';
 
+
+    }
+#!!!!!!!!!!! nee function insert_in_head und alle js und css über die einzelnen ACTION.php steuern
+    # der plugin eigne admin ist im dialog fenster
+    if(defined('PLUGINADMIN')) {
+        global $PLUGIN_ADMIN_ADD_HEAD;
+        $html .= '<link type="text/css" rel="stylesheet" href="'.URL_BASE.PLUGIN_DIR_NAME.'/'.PLUGINADMIN.'/plugin.css" />';
+        if(is_array($PLUGIN_ADMIN_ADD_HEAD))
+            $html .= implode("",$PLUGIN_ADMIN_ADD_HEAD);
     }
     $html .= "</head>";
     return $html;
@@ -231,14 +239,13 @@ $html .= '<script type="text/javascript" src="'.URL_BASE.ADMIN_DIR_NAME.'/jquery
 
 function get_Head() {
     $html = '<div class="mo-td-content-width mo-margin-bottom">'
-        .'<div class="ui-widget ui-state-default ui-corner-all mo-li-head-tag-no-ul mo-li-head-tag mo-td-middle">'
+        .'<div class="ui-widget ui-state-default ui-corner-all mo-li-head-tag-no-ul mo-li-head-tag mo-td-middle ui-helper-clearfix">'
             .getHelpIcon()
             .'<a href="../index.php?draft=true" title="'.getLanguageValue("help_website_button",true).'" target="_blank" class="mo-butten-a-img"><img class="mo-icons-icon mo-icons-website" src="'.ICON_URL_SLICE.'" alt="" /></a>'
             .'<span class="mo-bold mo-td-middle mo-padding-left">'.getLanguageValue("cms_admin_titel",true).'</span>'
 # ist eigendlich nur zum entwikeln brauchbar
 .'<span class="mo-td-middle mo-padding-left"> - <!--{EXECUTETIME}--> <!--{MEMORYUSAGE}--></span>'
             .'<a style="float:right;" href="index.php?logout=true" title="'.getLanguageValue("logout_button",true).'" class="mo-butten-a-img"><img class="mo-icons-icon mo-icons-logout" src="'.ICON_URL_SLICE.'" alt="" /></a>'
-            .'<br class="mo-clear" />'
         ."</div>"
     ."</div>";
     return $html;

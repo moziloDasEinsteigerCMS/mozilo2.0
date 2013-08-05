@@ -169,10 +169,10 @@ function home() {
             $mu_string .= $rest_time." ".(($rest_time > 1) ? getLanguageValue("seconds") : getLanguageValue("second"));
 
         $error[$titel][] = "ok";
-        $template[$titel][] = array("Multiuser mode Verfügbar",$mu_string);
+        $template[$titel][] = array(getLanguageValue("home_multiuser_mode_text"),$mu_string);
     } else {
         $error[$titel][] = true;
-        $template[$titel][] = array("Multiuser mode Verfügbar",getLanguageValue("no"));
+        $template[$titel][] = array(getLanguageValue("home_multiuser_mode_text"),getLanguageValue("no"));
     }
 
     // E-Mail test

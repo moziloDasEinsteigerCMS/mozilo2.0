@@ -86,11 +86,11 @@ if($debug)
         $disabled = '';
         if(!function_exists('gzopen'))
             $disabled = ' disabled="disabled"';
-        $template_manage["template_title_manage"][] = '<div class="mo-nowrap align-right">'
+        $template_manage["template_title_manage"][] = '<div class="mo-nowrap align-right ui-helper-clearfix">'
                 .'<span class="align-left" style="float:left"><span class="mo-bold">'.getLanguageValue("template_text_filebutton").'</span><br />'.getLanguageValue("template_text_fileinfo").'</span>'
                 .'<input type="file" id="js-template-install-file" name="template-install-file" class="mo-select-div"'.$disabled.' />'
                 .'<input type="submit" id="js-template-install-submit" name="template-install" value="'.getLanguageValue("template_button_install",true).'"'.$disabled.' /><br />'
-                .'<input type="submit" id="js-template-del-submit" value="'.getLanguageValue("template_button_delete",true).'" class="mo-margin-top" /><br class="mo-clear" />'
+                .'<input type="submit" id="js-template-del-submit" value="'.getLanguageValue("template_button_delete",true).'" class="mo-margin-top" />'
             .'</div>';
 
         foreach(getDirAsArray(BASE_DIR.LAYOUT_DIR_NAME,"dir","natcasesort") as $pos => $file) {
@@ -102,17 +102,11 @@ if($debug)
                 $radio_activ = "";
                 $template_activ = ' mo-bold';
             }
-            $template_manage["template_title_manage"][] = '<table class="js-tools-show-hide mo-tag-height-from-icon" width="100%" cellspacing="0" border="0" cellpadding="0">'
-                        .'<tbody>'
-                        .'<tr>'
-                            .'<td class="mo-nowrap mo-padding-left'.$template_activ.'">'
-                                .$specialchars->rebuildSpecialChars($file,false,true)
-                            .'</td>'
-                            .'<td class="mo-nowrap'.$template_activ.'" width="30%">'.$radio_activ.'</td>'
-                            .'<td class="mo-nowrap align-right" width="10%">'.$checkbox_del.'</td>'
-                        .'</tr>'
-                        .'</tbody>'
-                        .'</table>';
+            $template_manage["template_title_manage"][] = '<div class="mo-middle mo-tag-height-from-icon ui-helper-clearfix">'
+                .'<span class="mo-nowrap  mo-padding-left'.$template_activ.'">'.$specialchars->rebuildSpecialChars($file,false,true).'</span>'
+                .'<div style="float:right;">'.$checkbox_del.'</div>'
+                .'<div style="float:right;width:30%;">'.$radio_activ.'</div>'
+            .'</div>';
         }
 
         $multi_user = "";
@@ -131,36 +125,19 @@ if($debug)
     if(ROOT or in_array("template_edit",$show)) {
         $template = array();
         foreach(getDirAsArray(BASE_DIR.$LAYOUT_DIR,array(".html"),"natcasesort") as $file) {
-            $template["template_title_html_css"][] = '<table class="js-tools-show-hide mo-tag-height-from-icon" width="100%" cellspacing="0" border="0" cellpadding="0">'
-                        .'<tbody>'
-                        .'<tr>'
-                            .'<td class="mo-nowrap" width="99%">'
-                                .'<span class="js-filename mo-padding-left">'.$file.'</span>'
-                            .'</td>'
-                            .'<td class="mo-nowrap">'
-                                .'<img class="js-tools-icon-show-hide js-edit-template js-html mo-tool-icon mo-icons-icon mo-icons-page-edit" src="'.ICON_URL_SLICE.'" alt="page-edit" hspace="0" vspace="0" />'
-                                .'<span class="js-edit-file-pfad" style="display:none;">'.$specialchars->replaceSpecialChars($LAYOUT_DIR.$file,true).'</span>'
-                            .'</td>'
-                        .'</tr>'
-                        .'</tbody>'
-                        .'</table>';
-
+            $template["template_title_html_css"][] = '<div class="js-tools-show-hide mo-middle mo-tag-height-from-icon ui-helper-clearfix">'
+                .'<span class="js-filename mo-nowrap mo-padding-left">'.$file.'</span>'
+                .'<img style="float:right;" class="js-tools-icon-show-hide js-edit-template js-html mo-tool-icon mo-icons-icon mo-icons-page-edit" src="'.ICON_URL_SLICE.'" alt="page-edit" hspace="0" vspace="0" />'
+                .'<span class="js-edit-file-pfad" style="display:none;">'.$specialchars->replaceSpecialChars($LAYOUT_DIR.$file,true).'</span>'
+            .'</div>';
         }
 
         foreach(getDirAsArray(BASE_DIR.$LAYOUT_DIR.'css',array(".css"),"natcasesort") as $file) {
-            $template["template_title_html_css"][] = '<table class="js-tools-show-hide mo-tag-height-from-icon" width="100%" cellspacing="0" border="0" cellpadding="0">'
-                        .'<tbody>'
-                        .'<tr>'
-                            .'<td class="mo-nowrap" width="99%">'
-                                .'<span class="js-filename mo-padding-left"><span class="mo-bold mo-padding-right">css/</span>'.$file.'</span>'
-                            .'</td>'
-                            .'<td class="mo-nowrap">'
-                                .'<img class="js-tools-icon-show-hide js-edit-template js-css mo-tool-icon mo-icons-icon mo-icons-page-edit" src="'.ICON_URL_SLICE.'" alt="page-edit" hspace="0" vspace="0" />'
-                                .'<span class="js-edit-file-pfad" style="display:none;">'.$specialchars->replaceSpecialChars($LAYOUT_DIR.'css/'.$file,true).'</span>'
-                            .'</td>'
-                        .'</tr>'
-                        .'</tbody>'
-                        .'</table>';
+            $template["template_title_html_css"][] = '<div class="js-tools-show-hide mo-middle mo-tag-height-from-icon ui-helper-clearfix">'
+                .'<span class="js-filename mo-nowrap mo-padding-left"><span class="mo-bold mo-padding-right">css/</span>'.$file.'</span>'
+                .'<img style="float:right;" class="js-tools-icon-show-hide js-edit-template js-css mo-tool-icon mo-icons-icon mo-icons-page-edit" src="'.ICON_URL_SLICE.'" alt="page-edit" hspace="0" vspace="0" />'
+                .'<span class="js-edit-file-pfad" style="display:none;">'.$specialchars->replaceSpecialChars($LAYOUT_DIR.'css/'.$file,true).'</span>'
+            .'</div>';
         }
 
         require_once(BASE_DIR_ADMIN."jquery/File-Upload/fileupload.php");
@@ -185,19 +162,12 @@ if($debug)
             if(!ROOT and !in_array($plugin,$show))
                 continue;
             if(!is_file(BASE_DIR.PLUGIN_DIR_NAME."/".$plugin."/plugin.css")) continue;
-            $template_plugins["template_title_plugins"][] = '<table class="js-tools-show-hide mo-tag-height-from-icon" width="100%" cellspacing="0" border="0" cellpadding="0">'
-                        .'<tbody>'
-                        .'<tr>'
-                            .'<td class="mo-nowrap" width="99%">'
-                                .'<span class="js-filename mo-padding-left"><span class="mo-bold mo-padding-right">'.$plugin.'</span>/plugin.css</span>'
-                            .'</td>'
-                            .'<td class="mo-nowrap">'
-                                .'<img class="js-tools-icon-show-hide js-edit-template js-css mo-tool-icon mo-icons-icon mo-icons-page-edit" src="'.ICON_URL_SLICE.'" alt="page-edit" hspace="0" vspace="0" />'
-                                .'<span class="js-edit-file-pfad" style="display:none;">'.$specialchars->replaceSpecialChars(PLUGIN_DIR_NAME."/".$plugin."/plugin.css",true).'</span>'
-                            .'</td>'
-                        .'</tr>'
-                        .'</tbody>'
-                        .'</table>';
+            $template_plugins["template_title_plugins"][] = '<div class="js-tools-show-hide mo-middle mo-tag-height-from-icon ui-helper-clearfix">'
+                .'<span class="js-filename mo-nowrap mo-padding-left"><span class="mo-bold mo-padding-right">css/</span>'.$plugin.'</span>'
+                .'<img style="float:right;" class="js-tools-icon-show-hide js-edit-template js-css mo-tool-icon mo-icons-icon mo-icons-page-edit" src="'.ICON_URL_SLICE.'" alt="page-edit" hspace="0" vspace="0" />'
+                .'<span class="js-edit-file-pfad" style="display:none;">'.$specialchars->replaceSpecialChars(PLUGIN_DIR_NAME."/".$plugin."/plugin.css",true).'</span>'
+            .'</div>';
+
         }
         if(count($template_plugins["template_title_plugins"]) > 0) {
             $template_plugins["template_title_plugins"]["toggle"] = true;
