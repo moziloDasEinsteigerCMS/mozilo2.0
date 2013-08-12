@@ -208,8 +208,8 @@ class PasswordHash {
 	function HashPassword($password)
 	{
 		$random = '';
-
-		if (CRYPT_BLOWFISH == 1 && !$this->portable_hashes) {
+        # strato macht zicken bei PHP_VERSION < 5.3.0 mit dem $this->gensalt_blowfish($random)
+		if (CRYPT_BLOWFISH == 1 && !$this->portable_hashes && version_compare(PHP_VERSION, '5.3.0') >= 0) {
 			$random = $this->get_random_bytes(16);
 			$hash =
 			    crypt($password, $this->gensalt_blowfish($random));
