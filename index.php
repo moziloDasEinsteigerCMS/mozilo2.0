@@ -76,7 +76,7 @@ $smileys        = new Smileys(BASE_DIR_CMS."smileys");
 require_once(BASE_DIR_CMS."Plugin.php");
 
 $tmp_layout = $CMS_CONF->get("cmslayout");
-if($CMS_CONF->get("draftcat") == "true"
+if($CMS_CONF->get("draftmode") == "true"
         and $CMS_CONF->get("draftlayout") != "false"
         and getRequestValue('draft') != "true")
     $tmp_layout = $CMS_CONF->get("draftlayout");
@@ -86,6 +86,7 @@ $TEMPLATE_FILE  = $LAYOUT_DIR."/template.html";
 
 $LAYOUT_DIR_URL = $specialchars->replaceSpecialChars(URL_BASE.$LAYOUT_DIR,true);
 
+#!!!!!! wird der noch benutzt?
 $WEBSITE_NAME = $specialchars->rebuildSpecialChars($CMS_CONF->get("websitetitle"),false,true);
 if ($WEBSITE_NAME == "")
     $WEBSITE_NAME = "Titel der Website";
@@ -213,9 +214,11 @@ function get_executTime($start_time) {
 }
 
 function get_memory() {
-    $size = memory_get_usage();
+    $size = 0;
+    if(function_exists('memory_get_usage'))
+        $size = @memory_get_usage();
     if(function_exists('memory_get_peak_usage'))
-        $size = memory_get_peak_usage();
+        $size = @memory_get_peak_usage();
     $unit=array('B','KB','MB','GB','TB','PB');
     return @round($size/pow(1024,($i=floor(log($size,1024)))),2).' '.$unit[$i].' Memory Benutzt';
 }

@@ -20,7 +20,6 @@ R- kategorien, layouts, galerien, plugin/*.conf.php
 todo:
 ------------------------------------------
 
-- sprachen komplett auf admin umstellen (die fehlenden mit install_*)
 
 - test von install/ ordner mit einbeziehen
 - nach passwort absenden die conf schreiben und paswort setzen
@@ -28,7 +27,6 @@ todo:
 
 */
 $test = false;
-
 
 define('TEST',true);
 define('IS_CMS',true);
@@ -50,21 +48,6 @@ $base_dir = substr($base_dir, 0, -(strlen("install.php")));
 define("BASE_DIR", $base_dir);
 unset($base_dir); // verwendung im script verhindern
 
-if(isset($_POST['go_to_admin'])) {
-    $URL_BASE = $_SERVER['SERVER_NAME'].substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], "install.php")).ADMIN_DIR_NAME."/";
-    cleanUpUpdate();
-    header("Location: http://$URL_BASE");
-    exit();
-}
-
-/*
-define("CHARSET","UTF-8");
-define("EXT_PAGE",".txt.php");
-define("EXT_HIDDEN",".hid.php");
-define("EXT_DRAFT",".tmp.php");
-define("EXT_LINK",".lnk.php");
-define("EXT_LENGTH",strlen(EXT_PAGE));
-*/
 $LANG_INSTALL = array();
 $LANG_INSTALL['deDE'] = 'Deutsch';
 $LANG_INSTALL['enEN'] = 'English';
@@ -75,6 +58,7 @@ $LANG_INSTALL['nlNL'] = 'Nederlands';
 $LANG_INSTALL['plPL'] = 'Polski';
 $LANG_INSTALL['daDK'] = 'Dansk';
 $LANG_INSTALL['ptBR'] = 'Português';
+
 testInstall();
 
 define("BASE_DIR_ADMIN", BASE_DIR.ADMIN_DIR_NAME."/");
@@ -100,6 +84,11 @@ require_once(BASE_DIR_CMS."Language.php");
 require_once(BASE_DIR_ADMIN."filesystem.php");
 require_once(BASE_DIR_CMS."SpecialChars.php");
 $specialchars = new SpecialChars();
+
+foreach($LANG_INSTALL as $lang => $tmp) {
+    if(!is_file(BASE_DIR_ADMIN.LANGUAGE_DIR_NAME."/language_".$lang.".txt"))
+        unset($LANG_INSTALL[$lang]);
+}
 
 if(is_file(BASE_DIR_CMS.CONF_DIR_NAME.'/main.conf.php') and isFileRW(BASE_DIR_CMS.CONF_DIR_NAME.'/main.conf.php'))
     $CMS_CONF = new Properties(BASE_DIR_CMS.CONF_DIR_NAME.'/main.conf.php');
@@ -132,53 +121,70 @@ unset($URL_BASE);
 ini_set("default_charset", CHARSET);
 header('content-type: text/html; charset='.strtolower(CHARSET));
 
-$steps = array("language","chmod_test","environment","rewrite","password","finish");
-
-if($test)
-    $_POST["finish_steps"] = "language,chmod_test,environment,rewrite,password,update";
+$steps = array("help","language","environment","chmod_test","rewrite","password","finish");
 
 $html_check_update = '';
 if(is_file("update.php")) {
     require_once("update.php");
-    if(!isset($_POST['check_update']) and function_exists("testUpdate") and testUpdate(true)) {
-        $steps = array("language","chmod_test","environment","rewrite","password","update","finish");
-        $html_check_update = '<input type="hidden" name="check_update" value="true" />';
-    }
-    if(isset($_POST['check_update']) and $_POST['check_update'] == "true") {
-        $steps = array("language","chmod_test","environment","rewrite","password","update","finish");
-        $html_check_update = '<input type="hidden" name="check_update" value="'.$_POST['check_update'].'" />';
+    if(function_exists("testUpdate")) {
+        $steps = array("help","language","environment","chmod_test","rewrite","password","update","finish");
+        if(!isset($_POST['check_update']) and testUpdate(true))
+            $html_check_update = '<input type="hidden" name="check_update" value="true" />';
+        if(isset($_POST['check_update']) and $_POST['check_update'] == "true")
+            $html_check_update = '<input type="hidden" name="check_update" value="'.$_POST['check_update'].'" />';
     }
 }
-#    if(isset($_POST['check_update']))
-
-#$sort_array = var_export($_POST,true);
-#file_put_contents(BASE_DIR."install.txt",$sort_array."\n",FILE_APPEND);
 
 $current_step = $steps[0];
 if(isset($_POST["current_step"]) and in_array($_POST["current_step"],$steps))
     $current_step = $_POST["current_step"];
 
-
+if(isset($_POST["only"]) and $current_step == $steps[0]) {
+    unset($_POST["only"],$_POST["finish_steps"]);
+}
 #!!!!!! nur für die testphase
 if(isset($_POST["reset"])) {
     $current_step = $steps[0];
+    unset($_POST);
+}
+
+if(isset($_POST['getonlypassword'])) {
+    $_POST["only"] = "password";
+    $_POST["finish_steps"] = "help,password,finish";
+    if(isset($_POST['getonlypassword']))
+        $current_step = "password";
+}
+
+if(in_array("update",$steps) and isset($_POST['getonlyupdate'])) {
+    $_POST["only"] = "update";
+    $_POST["finish_steps"] = "help,update,finish";
+    if(isset($_POST['getonlyupdate']))
+        $current_step = "update";
 }
 
 if(function_exists($current_step))
     list($status,$html_step) = $current_step();
 
-echo getHtml("start");
+echo getHtml("start",$current_step);
 echo menu_tabs($steps,$current_step,$status);
 echo $html_check_update;
 echo '<div style="padding-top:1.2em;" class="install mo-ui-tabs-panel ui-widget-content ui-corner-bottom mo-no-border-top">';
-if($test) {
+
+
+if($current_step === "finish" and isset($_POST['clean_finish'])) {
+    echo cleanUpUpdate();
+}
+
+
+
+if($test and isset($_POST)) {
     echo $current_step."<br />";
     echo "<pre>";
     print_r($_POST);
     echo "</pre><br />";
 }
 echo $html_step;
-#$test = true;
+
 if($test)
     echo '<input type="submit" name="reset" value="Reset" />';
 echo '</div>';
@@ -193,16 +199,29 @@ function testInstall() {
     if(!is_file(BASE_DIR.CMS_DIR_NAME."/Language.php") and !is_file(BASE_DIR.ADMIN_DIR_NAME."/sessionClass.php"))
         exit("Du must das CMS schonn mit FTP hochladen");
 
-    if(!is_readable('admin') and !is_readable('cms') and !is_readable(BASE_DIR.CMS_DIR_NAME."/Language.php") and !is_readable(BASE_DIR.ADMIN_DIR_NAME."/sessionClass.php"))
+    if(!is_readable(ADMIN_DIR_NAME) and !is_readable(CMS_DIR_NAME) and !is_readable(BASE_DIR.CMS_DIR_NAME."/Language.php") and !is_readable(BASE_DIR.ADMIN_DIR_NAME."/sessionClass.php"))
         exit("Die rechte Vergabe von deinem Provider ist echt beschissen");
 }
 
+function help() {
+
+    if(is_file(BASE_DIR_CMS.CONF_DIR_NAME.'/main.conf.php') and is_file(BASE_DIR_ADMIN.CONF_DIR_NAME.'/basic.conf.php')) {
+        $only = contend_template(getLanguageValue("install_help_password").'<br /><input type="submit" name="getonlypassword" value="'.getLanguageValue("install_help_password_button").'" />',true);
+        if(is_file('update.php'))
+            $only .= contend_template(getLanguageValue("install_help_update").'<br /><input type="submit" name="getonlyupdate" value="'.getLanguageValue("install_help_update_button").'" />',true);
+    } else {
+        $only = contend_template(getLanguageValue("install_help_password").'<br /><br /><b>'.getLanguageValue("install_help_no_button").'</b>',false);
+        if(is_file('update.php'))
+            $only .= contend_template(getLanguageValue("install_help_update").'<br /><br /><b>'.getLanguageValue("install_help_no_button").'</b>',false);
+    }
+    return array(true,contend_template(getLanguageValue("install_help")).$only);
+}
+
+
 function language() {
-    $html = "";
     $html1 = getLanguageValue("install_lang_select")."<br />";
     $html2 = getLanguageSelect();
-    return array(true,contend_template(getLanguageValue("install_help"),"")
-                .contend_template(installHelp("install_lang_help"),"")
+    return array(true,contend_template(installHelp("install_lang_help"),"")
                 .contend_template(array($html1,$html2),""));
 }
 
@@ -215,7 +234,7 @@ function chmod_test() {
 
     if(!isset($_POST['chmod_test']) or $_POST['chmod_test'] == "false") {
         # die mit FTP Hochgeladen Daterechte Prüfen
-        if(!isFileRW(BASE_DIR) or !isFileRW(BASE_DIR."admin")) {
+        if(!isFileRW(BASE_DIR) or !isFileRW(BASE_DIR.ADMIN_DIR_NAME)) {
             $html = contend_template(getLanguageValue("install_chmod_change_ftp").'<br /><input type="submit" name="chmod_ftp_change" value="'.getLanguageValue("install_chmod_change_ftp_button").'" />',"");
             $chmod = "false";
         # wir ermitel die Dateirechte von PHP Angelegten Dateien
@@ -319,21 +338,44 @@ function environment() {
 
     # MULTI_USER
     if(defined('MULTI_USER') and MULTI_USER) {
-        $html = array("Multiuser mode Verfügbar",MULTI_USER_TIME." sec.");
+        $mu_string = "";
+        $rest_time = MULTI_USER_TIME;
+        if($rest_time >= 86400) {
+            $mu_string .= floor(MULTI_USER_TIME / 86400)." ".((floor(MULTI_USER_TIME / 86400) > 1) ? getLanguageValue("days") : getLanguageValue("day"))." ";
+            $rest_time = $rest_time - (floor(MULTI_USER_TIME / 86400) * 86400);
+        }
+        if($rest_time >= 3600) {
+            $mu_string .= floor($rest_time / 3600)." ".((floor($rest_time / 3600) > 1) ? getLanguageValue("hours") : getLanguageValue("hour"))." ";
+            $rest_time = $rest_time - (floor($rest_time / 3600) * 3600);
+        }
+        if($rest_time >= 60) {
+            $mu_string .= floor($rest_time / 60)." ".((floor($rest_time / 60) > 1) ? getLanguageValue("minutes") : getLanguageValue("minute"))." ";
+            $rest_time = $rest_time - (floor($rest_time / 60) * 60);
+        }
+        if($rest_time > 0)
+            $mu_string .= $rest_time." ".(($rest_time > 1) ? getLanguageValue("seconds") : getLanguageValue("second"));
+        $html = array(getLanguageValue("home_multiuser_mode_text"),$mu_string);
         $html_ret .= contend_template($html,"");
     } else {
-        $html = array("Multiuser mode Verfügbar",getLanguageValue("no"));
+        $html = array(getLanguageValue("home_multiuser_mode_text"),getLanguageValue("no"));
         $html_ret .= contend_template($html,"");
     }
 
     # backupsystem
     if(function_exists('gzopen')) {
-        $html = array("backup system test",getLanguageValue("yes"));
+        $html = array(getLanguageValue("home_text_backupsystem"),getLanguageValue("yes"));
         $html_ret .= contend_template($html,"");
     } else {
-        $html = array("backup system test",getLanguageValue("no"));
+        $html = array(getLanguageValue("home_error_backupsystem"),getLanguageValue("no"));
         $html_ret .= contend_template($html,"");
     }
+    // Aktueles Datum
+    $time_zone = date("T");
+    if(function_exists('date_default_timezone_get'))
+        $time_zone = @date_default_timezone_get();
+    $html = array(getLanguageValue("home_date_text"),date("Y-m-d H.i.s")." ".$time_zone);
+    $html_ret .= contend_template($html,"");
+
 
     if($status)
         $html_ret .= '<input type="hidden" name="environment" value="true" />';
@@ -343,6 +385,10 @@ function environment() {
 
 function rewrite() {
     global $CMS_CONF;
+#!!!!!!!!!! mod_rewrite erst nach botton start starten oder mit botton notest übergehen
+#!!!!!!!!!! textaera für provider specifisches einbauen
+#if(isset($_POST['start_rewrite']))
+#if(isset($_POST['nostart_rewrite']))
     # rewrite anfrage von install.js
     if(isset($_POST['fromajax']) and $_POST['fromajax'] == "true") {
         if(isset($_POST['modconf'])) {
@@ -390,14 +436,13 @@ function rewrite() {
         if($rewrite_step == "no_modrewrite") {
             $html = getLanguageValue("install_rewrite_no");
             $text_status = false;
-            unlink(BASE_DIR.'.htaccess');
-            unlink(BASE_DIR_ADMIN.'.htaccess');
+            rename(BASE_DIR.'.htaccess',BASE_DIR.'dot_htaccess');
+            rename(BASE_DIR_ADMIN.'.htaccess',BASE_DIR_ADMIN.'dot_htaccess');
             $CMS_CONF->set("modrewrite","false");
         } else {
             $html = getLanguageValue("install_rewrite_yes");
             $text_status = true;
             writeHtaccess("cms",$rewrite_step);
-            writeHtaccess("admin",$rewrite_step);
             $CMS_CONF->set("modrewrite","true");
         }
         $input = '<input type="hidden" name="rewrite" value="'.$rewrite_step.'" />';
@@ -486,23 +531,38 @@ function password() {
 }
 
 function finish() {
-    $button = '<br /><input type="submit" name="go_to_admin" value="'.getLanguageValue("install_finish_submit").'" />';
-    $html = contend_template(installHelp("install_finish_help").$button,"");
-    return array(true,$html,true);
+    $html = "";
+    $clean = "install_finish_clean";
+    # bei einer localen installation brauchen wir nicht aufräumen
+    if((isset($_SERVER['SERVER_ADDR']) and substr($_SERVER['SERVER_ADDR'],0,4) === "127")
+        or (isset($_SERVER['SERVER_NAME']) and ($_SERVER['SERVER_NAME'] == "localhost" or substr($_SERVER['SERVER_NAME'],0,3) === "127"))) {
+        $clean = "install_finish_local";
+    }
+    $html .= contend_template(getLanguageValue($clean).'<br /><input type="submit" name="clean_finish" value="'.getLanguageValue("install_finish_clean_button").'" />',false);
+
+    $html .= contend_template(installHelp("install_finish_help").'<br /><a href="'.ADMIN_DIR_NAME.'/index.php"><b>'.getLanguageValue("install_finish_submit").'</b></a>',"");
+
+    return array(true,$html);
 }
 
 function menu_tabs($steps,$current_step,$status) {
     $post_step_status = '';
     $finish_steps = array();
     # es wurden schonn tabs erledigt
-    if(isset($_POST['finish_steps']) and !isset($_POST['reset'])) {
+    if(isset($_POST['finish_steps'])) {
         # die holen wir uns
         $finish_steps = explode(",",$_POST['finish_steps']);
     }
-    $tabs = '<ul id="js-menu-tabs" class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-top">';
+
+    if(isset($_POST['only'])) {
+        $onlypassword = "true";
+        $status = false;
+        $post_step_status .= '<input type="hidden" name="only" value="'.$_POST['only'].'" />';
+    }
+
+    $tabs = '<ul id="js-menu-tabs" class="mo-menu-tabs ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-top">';
+
     foreach($steps as $pos => $step) {
-        if(isset($_POST[$step]) and isset($_POST['reset']))
-            unset($_POST[$step]);
         if(isset($_POST[$step]) and $_POST[$step] != "false")
             $post_step_status .= '<input type="hidden" name="'.$step.'" value="'.$_POST[$step].'" />';
         else
@@ -510,12 +570,11 @@ function menu_tabs($steps,$current_step,$status) {
 
         $activ = "";
         # ist nicht im finish array dann hidden
-        if(!in_array($step,$finish_steps))
+        if(!in_array($step,$finish_steps)) {
             $activ = " ui-state-disabled js-no-click";
-
+        }
         # der active tab activ setzen
         if($current_step == $step) {
-            $next_tab_pos = $pos + 1;
             if(!in_array($step,$finish_steps) and $status)
                 $finish_steps[] = $step;
             $activ = " ui-tabs-selected ui-state-active";
@@ -523,10 +582,10 @@ function menu_tabs($steps,$current_step,$status) {
         if($status and count($finish_steps) == $pos) {
             $activ = "";
         }
-
+        $lang_step = getLanguageValue("install_tab_".$step);
         $tabs .= '<li class="js-multi-user ui-state-default ui-corner-top'.$activ.'">';
-        $tabs .= '<a href="install.php" class="step_tabs" title="'.$step.'" name="'.$step.'">'
-            .'<span class="mo-bold">'.$step.'</span>'
+        $tabs .= '<a href="install.php" class="step_tabs" title="'.$lang_step.'" name="'.$step.'">'
+            .'<span class="mo-bold">'.$lang_step.'</span>'
             .'</a>';
 
         $tabs .= '</li>';
@@ -599,7 +658,7 @@ function makeConfFiles() {
 }
 
 function installHelp($index) {
-    return '<span class="mo-message-erfolg" style="background-image:url('.URL_BASE.ADMIN_DIR_NAME.'/gfx/icons/24x24/information.png);padding-left:34px;">'.getLanguageValue($index).'</span>';
+    return '<span class="mo-message-erfolg"><img class="mo-message-icon mo-icons-icon mo-icons-information" src="'.URL_BASE.ADMIN_DIR_NAME.'/gfx/clear.gif" alt="information" />'.getLanguageValue($index).'</span>';
 }
 
 function getLanguageValue($index,$param1 = '',$param2 = '') {
@@ -613,65 +672,103 @@ function writeHtaccess($art,$step,$getcount = false) {
     if(strlen($base_url) < 1)
         $base_url = "/";
     $rewrite_base_url     = $base_url.'install/';
-    if($art == "admin")
-        $rewrite_base_url = $base_url.ADMIN_DIR_NAME.'/';
     if($art == "cms")
         $rewrite_base_url = $base_url;
 #?????????????? siehe http://www.mozilo.de/forum/viewtopic.php?f=8&t=2907&start=30
-# php_value max_input_vars 3000
-    $indexes            = 'Options -Indexes'."\n";
-    $if_module_start_c  = '<IfModule rewrite_module.c>'."\n";
-    $if_module_start    = '<IfModule rewrite_module>'."\n";
-    $rewrite_on         = 'RewriteEngine On'."\n";
-    $rewrite_base       = 'RewriteBase '.$rewrite_base_url."\n";
-    $if_module_end      = '</IfModule>'."\n";
+# php_value session.gc_maxlifetime 100000000000   # nur im admin
+# ab PHP Version 5.3.9  php_value max_input_vars 3000
+# ab php > 5.2.0 php_value pcre.backtrack_limit 1000000
 
-    $rewrite_rule_test  = 'RewriteRule test\.php$ test\.php?rewritetest=true [QSA,L]'."\n";
-    $rewrite_rule_admin = 'RewriteRule index\.php$ index\.php?link=rewrite [QSA,L]'."\n";
-    $rewrite_rule_cms   = 'RewriteRule '.ADMIN_DIR_NAME.'/index\.php$ '.ADMIN_DIR_NAME.'/index\.php [QSA,L]'."\n"
-                         .'RewriteRule \.html$ index\.php [QSA,L]'."\n";
+    $indexes            = 'Options -Indexes';
+    $if_module_start_c  = '<IfModule rewrite_module.c>';
+    $if_module_start    = '<IfModule rewrite_module>';
+    $rewrite_on         = 'RewriteEngine On';
+    $rewrite_base       = 'RewriteBase '.$rewrite_base_url;
+    $if_module_end      = '</IfModule>';
+
+    $rewrite_rule_test  = 'RewriteRule test\.php$ test\.php?rewritetest=true [QSA,L]';
+
+    $rewrite_rule_cms   = 'RewriteRule ^(.*)/mod_rewrite_t_e_s_t.html$ $1/index.php?moderewrite=ok [L]'."\n";
+    $rewrite_rule_cms   .= 'RewriteRule \.html$ index.php [QSA,L]';
 
 
     // die verschiedenen test-configs die wir probieren
     // mit -Indexes und ohne <IfModule...>
-    $arr_modrewrite_conf[0] = $indexes.$rewrite_on.${"rewrite_rule_".$art};
+    $arr_modrewrite_conf[0] = array($indexes,$rewrite_on,${"rewrite_rule_".$art});
     // mit -Indexes und ohne ohne <IfModule...> aber mit RewriteBase
-    $arr_modrewrite_conf[1] = $indexes.$rewrite_on.$rewrite_base.${"rewrite_rule_".$art};
+    $arr_modrewrite_conf[1] = array($indexes,$rewrite_on,$rewrite_base,${"rewrite_rule_".$art});
     // mit -Indexes und ohne mit <IfModule...>
-    $arr_modrewrite_conf[2] = $indexes.$if_module_start.$rewrite_on.${"rewrite_rule_".$art}.$if_module_end;
+    $arr_modrewrite_conf[2] = array($indexes,$if_module_start,$rewrite_on,${"rewrite_rule_".$art},$if_module_end);
     // mit -Indexes und ohne mit <IfModule...c>
-    $arr_modrewrite_conf[3] = $indexes.$if_module_start_c.$rewrite_on.${"rewrite_rule_".$art}.$if_module_end;
+    $arr_modrewrite_conf[3] = array($indexes,$if_module_start_c,$rewrite_on,${"rewrite_rule_".$art},$if_module_end);
     // mit -Indexes und ohne mit <IfModule...> mit RewriteBase
-    $arr_modrewrite_conf[4] = $indexes.$if_module_start.$rewrite_on.$rewrite_base.${"rewrite_rule_".$art}.$if_module_end;
+    $arr_modrewrite_conf[4] = array($indexes,$if_module_start,$rewrite_on,$rewrite_base,${"rewrite_rule_".$art},$if_module_end);
     // mit -Indexes und ohne mit <IfModule...c> mit RewriteBase
-    $arr_modrewrite_conf[5] = $indexes.$if_module_start_c.$rewrite_on.$rewrite_base.${"rewrite_rule_".$art}.$if_module_end;
+    $arr_modrewrite_conf[5] = array($indexes,$if_module_start_c,$rewrite_on,$rewrite_base,${"rewrite_rule_".$art},$if_module_end);
     // ohne <IfModule...>
-    $arr_modrewrite_conf[6] = $rewrite_on.${"rewrite_rule_".$art};
+    $arr_modrewrite_conf[6] = array($rewrite_on,${"rewrite_rule_".$art});
     // ohne <IfModule...> aber mit RewriteBase
-    $arr_modrewrite_conf[7] = $rewrite_on.$rewrite_base.${"rewrite_rule_".$art};
+    $arr_modrewrite_conf[7] = array($rewrite_on,$rewrite_base,${"rewrite_rule_".$art});
     // mit <IfModule...>
-    $arr_modrewrite_conf[8] = $if_module_start.$rewrite_on.${"rewrite_rule_".$art}.$if_module_end;
+    $arr_modrewrite_conf[8] = array($if_module_start,$rewrite_on,${"rewrite_rule_".$art},$if_module_end);
     // mit <IfModule...c>
-    $arr_modrewrite_conf[9] = $if_module_start_c.$rewrite_on.${"rewrite_rule_".$art}.$if_module_end;
+    $arr_modrewrite_conf[9] = array($if_module_start_c,$rewrite_on,${"rewrite_rule_".$art},$if_module_end);
     // mit <IfModule...> mit RewriteBase
-    $arr_modrewrite_conf[10] = $if_module_start.$rewrite_on.$rewrite_base.${"rewrite_rule_".$art}.$if_module_end;
+    $arr_modrewrite_conf[10] = array($if_module_start,$rewrite_on,$rewrite_base,${"rewrite_rule_".$art},$if_module_end);
     // mit <IfModule...c> mit RewriteBase
-    $arr_modrewrite_conf[11] = $if_module_start_c.$rewrite_on.$rewrite_base.${"rewrite_rule_".$art}.$if_module_end;
+    $arr_modrewrite_conf[11] = array($if_module_start_c,$rewrite_on,$rewrite_base,${"rewrite_rule_".$art},$if_module_end);
 
     if($getcount)
         return count($arr_modrewrite_conf) - 1;
 
     if(isset($arr_modrewrite_conf[$step])) {
         $base_pfad     = BASE_DIR.'install/';
-        if($art == "admin")
-            $base_pfad = BASE_DIR_ADMIN;
-        if($art == "cms")
+        $org_htaccess = "";
+        $mozilo_start = "# mozilo generated not change from here to mozilo_end";
+        $mozilo_end = "# mozilo_end";
+        if($art == "cms") {
             $base_pfad = BASE_DIR;
-        if(($art == "admin" or $art == "cms") and is_file($base_pfad.'.htaccess')) {
-            rename($base_pfad.'.htaccess',$base_pfad.'htaccess_'.time());
-#            file_put_contents($base_pfad.'.htaccess', $arr_modrewrite_conf[$step]);
+            if(is_file(BASE_DIR.ADMIN_DIR_NAME.'/.htaccess'))
+                @unlink(BASE_DIR.ADMIN_DIR_NAME.'/.htaccess');
         }
-        file_put_contents($base_pfad.'.htaccess', $arr_modrewrite_conf[$step]);
+
+        if($art == "cms" and is_file($base_pfad.'.htaccess')) {
+            if(false !== ($org_htaccess = file($base_pfad.'.htaccess'))) {
+                $start_if = false;
+                $mozilo_lines = false;
+                foreach($org_htaccess as $line_num => $line) {
+                    $line = trim($line);
+                    $org_htaccess[$line_num] = $line;
+                    if($mozilo_lines and $line == $mozilo_end) {
+                        $mozilo_lines = false;
+                        unset($org_htaccess[$line_num]);
+                        continue;
+                    }
+                    if($mozilo_lines or $line == $mozilo_start) {
+                        $mozilo_lines = true;
+                        unset($org_htaccess[$line_num]);
+                        continue;
+                    }
+                    if(strpos($line,"#") !== false and strpos($line,"#") < 5)
+                        continue;
+                    if(strpos($line,"-Indexes") !== false)
+                        $org_htaccess[$line_num] = "#mozilo ".$line;
+                    if(!$start_if and strpos($line,"<IfModule") !== false and strpos($line,"rewrite_module") !== false) {
+                        $start_if = true;
+                        $org_htaccess[$line_num] = "#mozilo ".$line;
+                    }
+                    if($start_if and strpos($line,"</IfModule>") !== false) {
+                        $start_if = false;
+                        $org_htaccess[$line_num] = "#mozilo ".$line;
+                    }
+                    if(strpos($line,"Rewrite") !== false)
+                        $org_htaccess[$line_num] = "#mozilo ".$line;
+                }
+                $org_htaccess = implode("\n",$org_htaccess)."\n";
+            } else
+                $org_htaccess = "";
+        }
+        file_put_contents($base_pfad.'.htaccess', $org_htaccess.$mozilo_start."\n".implode("\n",$arr_modrewrite_conf[$step])."\n".$mozilo_end."\n");
     }
 }
 
@@ -712,18 +809,28 @@ function isFileRW($file) {
 }
 
 function cleanUpUpdate() {
-    if(defined('TEST') and TEST === true) return;
-    unlink('install.php');
-    if(is_file('update.php'))
-        unlink('update.php');
+    @unlink('install.php');
+    if(is_file('update.php')) {
+        @unlink('update.php');
+    }
     if(is_dir(BASE_DIR.'update') and false !== ($currentdir = opendir(BASE_DIR.'update'))) {
         while(false !== ($file = readdir($currentdir))) {
             if($file == "." or $file == "..") continue;
-            unlink(BASE_DIR.'update/'.$file);
+            @unlink(BASE_DIR.'update/'.$file);
         }
         closedir($currentdir);
-        rmdir(BASE_DIR.'update');
+        @rmdir(BASE_DIR.'update');
     }
+    $tmp = "";
+    if(is_file('install.php'))
+        $tmp .= 'install.php<br />';
+    if(is_file('update.php'))
+        $tmp .= 'update.php<br />';
+    if(is_dir(BASE_DIR.'update'))
+        $tmp .= 'update<br />';
+    if(strlen($tmp) > 1)
+        return contend_template(getLanguageValue("install_finish_delerror",$tmp),false);
+    return contend_template(getLanguageValue("install_finish_del"),true);
 }
 
 function mo_unlink($dir) {
@@ -752,35 +859,28 @@ function getLanguageSelect() {
 
 function contend_template($daten_array,$error = NULL) {
     $template = NULL;
-#    foreach($daten_array as $titel => $content) {
-        $template_content = NULL;
- #       if(!is_array($daten_array)) $daten_array = array($daten_array);
-#        foreach($daten_array as $value) {
-            if($error === true) {
-                $template_content .= '<div class="mo-in-ul-li ui-widget-content ui-state-highlight ui-corner-all ui-helper-clearfix">';
-            } elseif($error === false) {
-                $template_content .= '<div class="mo-in-ul-li ui-widget-content ui-state-error ui-corner-all ui-helper-clearfix">';
-            } else
-                $template_content .= '<div class="mo-in-ul-li ui-widget-content ui-corner-all ui-helper-clearfix">';
-            if(is_array($daten_array)) {
-#echo $key."=key<br />\n";
-                $template_content .= '<div class="mo-in-li-l">'.$daten_array[0].'</div>'
-                        .'<div class="mo-in-li-r">'.$daten_array[1].'</div>';
-            } else  {
-#echo $key."=key<br />\n";
-#                $template_content .= '<div class="mo-div">'.$value.'</div>';
-                $template_content .= '<div>'.$daten_array.'</div>';
-            }
-            $template_content .= '</div>';
-#        }
-#    }
-#    $template = '<ul class="mo-ul">';
+
+    $template_content = NULL;
+
+    if($error === true) {
+        $template_content .= '<div class="mo-in-ul-li ui-widget-content ui-state-highlight ui-corner-all ui-helper-clearfix">';
+    } elseif($error === false) {
+        $template_content .= '<div class="mo-in-ul-li ui-widget-content ui-state-error ui-corner-all ui-helper-clearfix">';
+    } else
+        $template_content .= '<div class="mo-in-ul-li ui-widget-content ui-corner-all ui-helper-clearfix">';
+    if(is_array($daten_array)) {
+        $template_content .= '<div class="mo-in-li-l">'.$daten_array[0].'</div>'
+                .'<div class="mo-in-li-r">'.$daten_array[1].'</div>';
+    } else  {
+        $template_content .= '<div>'.$daten_array.'</div>';
+    }
+    $template_content .= '</div>';
+
     $template .= $template_content;
-#    $template .= '</ul>';
     return $template;
 }
 
-function getHtml($art) {
+function getHtml($art,$current_step = false) {
 $install_js = 'function test_modrewrite(url,para,step) {
     var send_to_test = false;
     $.ajax({
@@ -850,14 +950,14 @@ $(function() {
     });
 });';
 
-$html_start ='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'
+$html_start = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'
     .'<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="de">'
     .'<head>'
         .'<meta http-equiv="Content-Type" content="text/html; charset='.CHARSET.'" />'
         .'<link type="image/x-icon" rel="SHORTCUT ICON" href="'.URL_BASE.ADMIN_DIR_NAME.'/favicon.ico" />'
-        .'<link type="text/css" rel="stylesheet" href="'.URL_BASE.ADMIN_DIR_NAME.'/css/mozilo/jquery-ui-1.8.21.custom.css" />'
+        .'<link type="text/css" rel="stylesheet" href="'.URL_BASE.ADMIN_DIR_NAME.'/css/mozilo/jquery-ui-1.9.2.custom.css" />'
         .'<link type="text/css" rel="stylesheet" href="'.URL_BASE.ADMIN_DIR_NAME.'/admin.css" />'
-        .'<script type="text/javascript" src="'.URL_BASE.CMS_DIR_NAME.'/jquery/jquery-1.7.2.min.js"></script>'
+        .'<script type="text/javascript" src="'.URL_BASE.CMS_DIR_NAME.'/jquery/jquery-1.8.3.min.js"></script>'
         .'<script language="Javascript" type="text/javascript">/*<![CDATA[*/'
         .$install_js
         .'/*]]>*/</script>'
@@ -869,16 +969,13 @@ $html_start ='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "ht
     .'<table summary="" width="100%" cellspacing="0" border="0" cellpadding="0" style="margin-top:1.5em;">'
     .'<tr><td>&nbsp;</td>'
     .'<td class="mo-td-content-width" style="vertical-align:top;">'
-    .'<noscript><div class="mo-noscript mo-td-content-width ui-state-error ui-corner-all"><div>'.getLanguageValue("error_no_javascript").'</div></div></noscript>'
-    .'<form action="install.php" method="post">'
+    .'<noscript><div class="mo-noscript mo-td-content-width ui-state-error ui-corner-all"><div>'.getLanguageValue("error_no_javascript").'</div></div></noscript>';
+#    if($current_step === "finish")
+#        $html_start .= '<form action="admin/index.php" method="post">';
+#    else
+        $html_start .= '<form action="install.php" method="post">';
+    $html_start .= '<div class="mo-td-content-width ui-tabs ui-widget ui-widget-content ui-corner-all mo-ui-tabs" style="position:relative;">';
 
-    .'<div class="mo-td-content-width ui-tabs ui-widget ui-widget-content ui-corner-all mo-ui-tabs" style="position:relative;">';
-/*
-$html .= get_Tabs();
-     .'<div class="mo-ui-tabs-panel ui-widget-content ui-corner-bottom mo-no-border-top">';
-content
-        .'</div>'
-*/
     $html_end = '</div></form>'
         .'<div id="out"></div>'
         .'</td><td>&nbsp;</td></tr></table></body></html>';

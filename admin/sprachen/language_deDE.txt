@@ -229,8 +229,8 @@ config_titel_cmsglobal               = Allgemeine Einstellungen
 config_titel_cmssyntax               = Syntax-Einstellungen
 config_titel_expert                  = Erweiterte Einstellungen
 config_titel_usersyntax_test         = Syntax überprüfung
-config_input_draftcat                = Baustellen Modus
-config_text_draftcat                 = Baustellen Modus bedeutet das die Besucher deiner Website nur die Default Kategorie gezeigt bekommen auser es wird an die URL ein "draft=true" anbehängt.<br />Auserdem kanst du in der Selectbox Wählen welches Template der Baustellen Modus benutzen soll.
+config_input_draftmode               = Baustellen Modus
+config_text_draftmode                = Baustellen Modus bedeutet das die Besucher deiner Website nur die Default Kategorie gezeigt bekommen auser es wird an die URL ein "draft=true" anbehängt.<br />Auserdem kanst du in der Selectbox Wählen welches Template der Baustellen Modus benutzen soll.
 config_input_draftlayout             = kein Baustellen Template
 
 admin_button                         = Admin
@@ -318,7 +318,24 @@ template_button_install              = Install
 template_button_delete               = Alle Ausgewählten Templates Löschen
 template_input_set_active            = Aktivieren
 
+
+install_tab_help                     = Hilfe
+install_tab_language                 = Sprache
+install_tab_chmod_test               = Dateirechte
+install_tab_environment              = Serverumgebung
+install_tab_rewrite                  = Schöne URLs
+install_tab_password                 = Password
+install_tab_update                   = Update
+install_tab_finish                   = Abschließen
+
 install_help                         = <b>Willkommen im moziloCMS Installationsdialog</b><br /><br />In den nächsten Schritten wird getestet ob Dein Webserver bzw. Webhosting-Paket die für moziloCMS nötigen Voraussetzungen erfüllt.<br />Zudem werden grundlegende Voreinstellungen getroffen. All diese Einstellungen können später im Admin jederzeit wieder geändert werden.<br /><br /><b>Update?!</b> Solltest Du ein Update von einer früheren moziloCMS-Version anstreben, ließ und befolge zuerst die install.txt!<br /><br /><b>ACHTUNG!</b> Die "install.php" und wenn vorhanden die "update.php" sowie der Ordner "update" müssen nach dem Installationsdialog gelöscht werden da diese ein großes Sicherheitsrisiko sind.
+
+install_help_password                = Ich habe nur mein Password Vergessen und möchte ein neues Vergeben
+install_help_password_button         = nur das Password Ändern
+install_help_update                  = Ich habe moziloCMS schonn Instaliert habe aber noch aus einer alten Version sachen die ich Updaten möchte
+install_help_update_button           = nur eine alte moziloCMS Version Updaten
+install_help_no_button               = Diese Function ist nur bei einer schonn Instalierten Version Verfügbar
+
 install_lang_select                  = Wähle Deine Sprache:
 install_lang_help                    = <b>Sprache</b><br />Die Sprachwahl wird zunächst für die Webseite und den Admin übernommen.<br />Nach der Installation kannst Du im Admin, im Tab "Einstellungen" die Sprache der Webseite und im Tab "Admin" die der Administrationsoberfläche festlegen.
 install_next                         = Weiter
@@ -344,8 +361,14 @@ install_rewrite_no                   = mod_rewrite ist nicht verfügbar und die 
 
 install_password_help                = <b>Passwort</b><br />Mit den hier festgelegten Zugangsdaten meldest Du dich nach der Installation als Superuser im Admin an. <br />Als Superuser steht Dir der Administrationsbereich in vollem Umfang zur Verfügung.
 
-install_finish_help                  = <b>abschließen</b><br />Du hast es fast geschafft.<br />Zum sauberen Abschließen der Installation <b>klicke auf den Button "fertig stellen"</b>.<br />Dies ist wichtig, da hierdurch die Datei "install.php", und wenn vorhanden die "update.php" sowie der Ordner "update", gelöscht wird. <br />Anschließend gelangst Du in den Admin Deines frisch installierten moziloCMS.<br /><br /><i>Viel Freude beim erstellen Deiner Website!</i><br />Das moziloCMS-Team<br /><br /><b>Wichtig! </b>Da die Dateien "install.php", "update.php“ und der Ordner "update" ungelöscht ein Sicherheitsrisiko für Deine Website darstellen, vergewissere Dich via FTP, dass der Löschbefehl ausgeführt wurde.<br />
-install_finish_submit                = fertig stellen
+install_finish_help                  = <b>abschließen</b><br />Du hast es geschafft.<br /><br /><i>Viel Freude beim erstellen Deiner Website!</i><br />Das moziloCMS-Team<br /><br /><b>Wichtig! </b>Da die Dateien "install.php", "update.php“ und der Ordner "update" ungelöscht ein Sicherheitsrisiko für Deine Website darstellen, vergewissere Dich via FTP, dass der Löschbefehl ausgeführt wurde.<br />
+
+install_finish_delerror              = <b>ACHTUNG</b> Es wurden nicht alle Dateien Gelöscht<br />Es muss mit einem FTP Programm von Hand die <br /><br /><b>{PARAM1}</b><br />Gelöscht werden
+install_finish_del                   = Es wurden Erfolgreich alle relevanten Dateien Gelöscht
+install_finish_local                 = <b>ACHTUNG</b> Es handelt sich um eine Locale Instalation.<br />Deshalb brauchen die Sicherheits relevanten Dateien nicht Gelöscht werden.
+install_finish_submit                = Hier geht es zum moziloCMS Login
+install_finish_clean_button          = Sicherheits relevanten Daten Löschen
+install_finish_clean                 = <b>ACHTUNG</b> aus Sicherheits gründen müssen die <b>"install.php"</b> und <b>"update.php"</b> Gelöscht werden sowie der Ordner <b>"update"</b> soweit er vorhanden ist.<br />
 
 install_update_help                  = <b>Achtung das Update sollte nur auf eine Kopie der Dateien angewendet werden.</b><br />Bei den Kategorien und Inhaltsseiten wird die Position entfernt. Bei allen Dateien und Bildern werden die Lehrzeichen zu "_" und die Umlaute zu z.B ae alle ander Sonderzeichen werden entfernt. Wenn dadurch in einem Ordner Dopelte Dateinamen entstehen wird eine Fortlaufende "Zahl_" vorangestelt.
 install_update_no_help               = <b>Es ist kein Update nötig.</b>
