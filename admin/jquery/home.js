@@ -11,4 +11,6 @@ var in_enter_handler = function(event) {
 
 $(function() {
     $('input[name="test_mail_adresse"]').bind("keydown", in_enter_handler);
+
+    test_modrewrite();
 });

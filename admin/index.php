@@ -29,12 +29,6 @@ else
 
 define("DRAFT", true);
 
-// Session Fixation durch Vergabe einer neuen Session-ID beim ersten Login verhindern
-/*if(!isset($_SESSION[SESSION_MO])) {
-    session_regenerate_id(true);
-    $_SESSION[SESSION_MO] = true;
-}
-*/
 # -1 für debug
 error_reporting(-1);
 // Initial: Fehlerausgabe unterdrücken, um Path-Disclosure-Attacken ins Leere laufen zu lassen
@@ -131,6 +125,7 @@ if(!defined('LOGIN'))
     define("LOGIN",false);
 
 if(LOGIN) { #-------------------------------
+    header('content-type: text/html; charset='.CHARSET.'');
 
     if(defined('MULTI_USER') and MULTI_USER and getRequestValue('logout_other_users','post') == "true") {
         define('LOGOUT_OTHER_USERS',true);
@@ -139,8 +134,6 @@ if(LOGIN) { #-------------------------------
     }
     # Achtung nojs darf nur von nicht ajax anfragen benutzt werden
     if(getRequestValue('nojs','get')) {
-#$gg = var_export($_REQUEST,true);
-#file_put_contents("../out_UploadHandler.txt","ID=".$gg."\n",FILE_APPEND);
         session_regenerate_id(true);
     }
     # wird für den Editor gebraucht
@@ -150,6 +143,11 @@ if(LOGIN) { #-------------------------------
     if(isset($_POST["lastbackup_yes"]) and $_POST["lastbackup_yes"] == "true") {
         $ADMIN_CONF->set("lastbackup",time());
         ajax_return("success",true);
+    }
+    # mod_rewrite test
+    if(getRequestValue('moderewrite','get') and getRequestValue('moderewrite','get') == "ok") {
+        echo contend_template(array("home_serverinfo" => array(array('<span id="mod-rewrite-true">'.getLanguageValue("home_mod_rewrite").'</span>',getLanguageValue("yes")))),array("home_serverinfo" => array("ok")));
+        exit();
     }
 
     require_once(BASE_DIR_ADMIN."filesystem.php");
@@ -268,7 +266,6 @@ if(LOGIN) { #-------------------------------
         die("Fatal Error File doesn't exist: ".ACTION.".php");
 
 
-    header('content-type: text/html; charset='.CHARSET.'');
     $func = ACTION;
     $pagecontent = $func();
     unset($func);
@@ -294,10 +291,12 @@ function get_executTime($start_time) {
 }
 
 function get_memory() {
-    $size = memory_get_usage();
+    $size = 0;
+    if(function_exists('memory_get_usage'))
+        $size = @memory_get_usage();
     if(function_exists('memory_get_peak_usage'))
-        $size = memory_get_peak_usage();
-    $unit=array('B','KB','MB','GB','TB','PB');
+        $size = @memory_get_peak_usage();
+    $unit = array('B','KB','MB','GB','TB','PB');
     return @round($size/pow(1024,($i=floor(log($size,1024)))),2).' '.$unit[$i].' '.getLanguageValue("get_memory");
 }
 

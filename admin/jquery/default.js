@@ -118,6 +118,53 @@ function returnMessage(success, message) {
     }
 }
 
+function test_modrewrite(that) {
+    $.ajax({
+        global: true,
+        cache: false,
+        type: "POST",
+        url: "mod_rewrite_t_e_s_t.html",
+        async: true,
+        dataType: "html",
+        timeout:20000,
+        beforeSend: function(jqXHR) {
+            if(dialog_multi.dialog("isOpen")) {
+                dialog_multi.dialog("close");
+            }
+            send_object = jqXHR;
+            dialog_open("send_cancel");
+        },
+        success: function(data, textStatus, jqXHR) {
+            send_object = false;
+            dialog_multi.dialog("close");
+            var tmp = $("<span>"+data+"</span>");
+            if(tmp.find("#mod-rewrite-true").length > 0) {
+                // in Info die li austauschen
+                if($("#mod-rewrite-false").length > 0)
+                    $("#mod-rewrite-false").parents(".mo-in-ul-li").replaceWith(tmp.find(".mo-in-ul-li"));
+                // in Einstellungen die checkbox activ setzen
+                if($("#modrewrite").length > 0) {
+                    $("#modrewrite").prop('checked', true);
+                    make_para($(that));
+                }
+            } else {
+                if($("#modrewrite").length > 0) {
+                    // in Einstellungen die checkbox nicht activ setzen
+                    $("#modrewrite").prop('checked', false);
+                    // und fehlermeldung ausgeben
+                    dialog_open("error_messages",returnMessage(false, mozilo_lang["config_error_modrewrite"]));
+                }
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            send_object = false;
+            dialog_multi.dialog("close");
+            dialog_open("error_messages","status= " + textStatus + "\nerror:\n" + errorThrown);
+            $("#modrewrite").prop('checked', false);
+        }
+    });
+};
+
 $(function() {
 
     $("body").on("click",".js-no-click", function(event) { event.preventDefault() });

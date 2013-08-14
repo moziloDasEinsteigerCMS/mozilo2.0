@@ -131,14 +131,9 @@ function home() {
         $template[$titel][] = array(getLanguageValue("home_text_gd"),getLanguageValue("yes"));
     }
 
-    # mod_rewrite
-    if("rewrite" == getRequestValue('link','get')) {
-        $error[$titel][] = "ok";
-        $template[$titel][] = array(getLanguageValue("home_mod_rewrite"),getLanguageValue("yes"));
-    } else {
-        $error[$titel][] = getLanguageValue("home_error_mod_rewrite");
-        $template[$titel][] = array(getLanguageValue("home_mod_rewrite"),getLanguageValue("no"));
-    }
+    # mod_rewrite wird mit javascript ermitelt und ausgetauscht
+    $error[$titel][] = getLanguageValue("home_error_mod_rewrite");
+    $template[$titel][] = array('<span id="mod-rewrite-false">'.getLanguageValue("home_mod_rewrite").'</span>',getLanguageValue("no"));
 
     # backupsystem
     if(function_exists('gzopen')) {

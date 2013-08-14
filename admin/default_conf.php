@@ -54,13 +54,14 @@ function makeDefaultConf($conf_array,$for_new = false) {
                         'targetblank_link' => 'true',
                         'usesitemap' => 'true',
                         'usecmssyntax' => 'true',
-                        'draftcat' => 'false'),
+                        'draftmode' => 'false'),
                     # das sind die Expert Parameter von main
                     'expert' => array(
                         'websitetitle',
                         'websitedescription',
                         'cmslanguage',
                         'defaultcat',
+                        'draftmode',
                         'usecmssyntax',
                         'editusersyntax',
                         'usesitemap',

@@ -124,13 +124,16 @@ function config() {
         }
         $conf_inhalt .= "</select></div>";
         $template[$titel][] = array(getLanguageValue("config_text_defaultcat"),$conf_inhalt);
+    }
 
-        $error[$titel][] = false;
-        $conf_checkbox = buildCheckBox("draftcat", $CMS_CONF->get("draftcat"),getLanguageValue("config_input_draftcat"));
+    if(ROOT or in_array("draftmode",$show)) {
+        $conf_checkbox = buildCheckBox("draftmode", $CMS_CONF->get("draftmode"),getLanguageValue("config_input_draftmode"));
         $conf_select = "";
         $tmp_array = getDirAsArray(BASE_DIR."layouts","dir","natcasesort");
-        if(count($tmp_array) <= 0)
-            $conf_select .= getLanguageValue("config_error_layouts_emty");
+        if(count($tmp_array) <= 0) {
+            $error[$titel][] = getLanguageValue("config_error_layouts_emty");
+        } else
+            $error[$titel][] = false;
         $conf_select .= '<div style="font-size:.4em;">&nbsp;</div><div class="mo-select-div"><select name="draftlayout" class="mo-select">';
         $conf_select .= '<option value="false">'.getLanguageValue("config_input_draftlayout").'</option>';
         foreach ($tmp_array as $file) {
@@ -144,7 +147,7 @@ function config() {
         }
         $conf_select .= "</select></div>";
 
-        $template[$titel][] = array(getLanguageValue("config_text_draftcat"),$conf_checkbox.$conf_select);
+        $template[$titel][] = array(getLanguageValue("config_text_draftmode"),$conf_checkbox.$conf_select);
     }
 
     # sitemap.xml
@@ -250,9 +253,6 @@ function set_config_para() {
             if($type == 'checkbox') {
                 if($syntax_value != "true" and $syntax_value != "false")
                     return ajax_return("error",false,returnMessage(false,getLanguageValue("properties_error_save")),true,true);
-                if($syntax_name == "modrewrite" and !getRequestValue('link','get') and $syntax_value == "true") {
-                    return ajax_return("error",false,returnMessage(false,getLanguageValue("config_error_modrewrite")),true,true);
-                }
                 # die checkbox hat immer einen anderen wert als der gespeicherte deshalb keine prüfung
                 $CMS_CONF->set($syntax_name, $syntax_value);
                 if($syntax_name == "usesitemap") {

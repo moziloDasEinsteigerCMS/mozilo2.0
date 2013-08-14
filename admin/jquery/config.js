@@ -68,7 +68,15 @@ $(function() {
 
     $('input[type="text"]').bind("keydown", in_enter_handler);
     $('input[type="radio"]').bind("change", in_change_handler);
-    $('input[type="checkbox"]:not(.js-ace-in)').bind("change", in_change_handler);
+    $('input[type="checkbox"]:not(.js-ace-in, #modrewrite)').bind("change", in_change_handler);
+
+    $('#modrewrite').bind("change", function(event){
+        event.preventDefault();
+        if($(this).prop('checked')) {
+            test_modrewrite(this);
+        } else
+            make_para($(this));
+    });
 
     $('input[name="usecmssyntax"]').bind("change", in_change_usecmssyntax_handler);
 
