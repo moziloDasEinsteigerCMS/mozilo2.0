@@ -358,7 +358,9 @@ install_environment_conf             = Konfigurationsdateien des moziloCMS wurde
 
 install_rewrite_help                 = <b>mod_rewrite / suchmaschinenfreundliche URLs</b><br /> moziloCMS versucht, sofern Dein Webserver bzw. Webhosting-Paket es unterstützt, das mod_rewrite-Modul mit Hilfe einer .htaccess-Datei zu nutzen. Hierdurch werden statisch wirkende, leserfreundliche URLs ermöglicht.<br />Ist mod_rewrite verfügbar, kann es im Admin im Tab "Einstellungen" de- bzw. aktiviert werden.
 install_rewrite_yes                  = mod_rewrite ist verfügbar und die .htaccess Dateien wurden erstellt.
-install_rewrite_no                   = mod_rewrite ist nicht verfügbar und die .htaccess Dateien wurden gelöscht.
+install_rewrite_no                   = mod_rewrite ist nicht verfügbar.
+install_rewrite_no_htaccess          = <b>ACHTUNG</b> Es gibt eine <b>.htaccess</b> Dateie wenn die nicht vom Provider ist kann sie Gelöscht werden.
+install_rewrite_test_text            = Teste Einstellung {PARAM1} von {PARAM2}
 
 install_password_help                = <b>Passwort</b><br />Mit den hier festgelegten Zugangsdaten meldest Du dich nach der Installation als Superuser im Admin an. <br />Als Superuser steht Dir der Administrationsbereich in vollem Umfang zur Verfügung.
 
