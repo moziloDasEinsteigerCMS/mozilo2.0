@@ -215,6 +215,8 @@ function testUpdate($test_art = false) {
             }
         }
     }
+    if($test_art === true)
+        return false;
     return $update_staus;
 }
 

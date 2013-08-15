@@ -26,7 +26,12 @@ todo:
 - erzeugen conf funktionen, mit echo vorerst mal einbinden
 
 */
-$test = false;
+
+$debug = false;
+if(isset($_POST['debug']) or isset($_GET['debug']))
+    $debug = true;
+if(isset($_GET['debug']) and $_GET['debug'] == "false")
+    $debug = false;
 
 define('TEST',true);
 define('IS_CMS',true);
@@ -101,34 +106,18 @@ if(($ADMIN_CONF !== false)
 $LANG = new Language(BASE_DIR_ADMIN.LANGUAGE_DIR_NAME."/language_".$LANG_TMP.".txt");
 
 session_start();
-/*
-$URL_BASE = substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], "install.php"));
-$URL_BASE = htmlentities($URL_BASE, ENT_COMPAT,CHARSET);
-define("URL_BASE", $URL_BASE);
-unset($URL_BASE);
-*/
-/* schritte
- 1. environment: phpversion, gdlib, safemode
- 2. chmod
- 3. session
- 4. sprache
- 5. mod_rewrite
- 6. password
-*/
-
-#$this->LANG_CONF = new Properties(BASE_DIR."admin/sprachen/language_".$lang.".txt");
 
 ini_set("default_charset", CHARSET);
 header('content-type: text/html; charset='.strtolower(CHARSET));
 
-$steps = array("help","language","environment","chmod_test","rewrite","password","finish");
+$steps = array("help","language","chmod_test","environment","rewrite","password","finish");
 
 $html_check_update = '';
 if(is_file("update.php")) {
     require_once("update.php");
-    if(function_exists("testUpdate")) {
-        $steps = array("help","language","environment","chmod_test","rewrite","password","update","finish");
-        if(!isset($_POST['check_update']) and testUpdate(true))
+    $steps = array("help","language","chmod_test","environment","rewrite","password","update","finish");
+    if(function_exists("testUpdate") and testUpdate(true)) {
+        if(!isset($_POST['check_update']))
             $html_check_update = '<input type="hidden" name="check_update" value="true" />';
         if(isset($_POST['check_update']) and $_POST['check_update'] == "true")
             $html_check_update = '<input type="hidden" name="check_update" value="'.$_POST['check_update'].'" />';
@@ -175,20 +164,29 @@ if($current_step === "finish" and isset($_POST['clean_finish'])) {
     echo cleanUpUpdate();
 }
 
-
-
-if($test and isset($_POST)) {
-    echo $current_step."<br />";
-    echo "<pre>";
-    print_r($_POST);
-    echo "</pre><br />";
-}
 echo $html_step;
 
-if($test)
+
+if($debug) {
     echo '<input type="submit" name="reset" value="Reset" />';
+    echo '<input type="hidden" name="debug" value="true" />';
+}
 echo '</div>';
-echo getHtml("end");
+
+
+if($debug) {
+    echo "current_step=".$current_step."<br />";
+    echo "<pre>";
+    echo "steps ";
+    print_r($steps);
+    if(isset($_POST)) {
+        echo "<br />POST ";
+        print_r($_POST);
+    }
+    echo "</pre>";
+}
+
+echo getHtml("end").'</body></html>';
 
 
 // -----------------------------------------------------------------------------
@@ -204,17 +202,26 @@ function testInstall() {
 }
 
 function help() {
-
-    if(is_file(BASE_DIR_CMS.CONF_DIR_NAME.'/main.conf.php') and is_file(BASE_DIR_ADMIN.CONF_DIR_NAME.'/basic.conf.php')) {
-        $only = contend_template(getLanguageValue("install_help_password").'<br /><input type="submit" name="getonlypassword" value="'.getLanguageValue("install_help_password_button").'" />',true);
-        if(is_file('update.php'))
-            $only .= contend_template(getLanguageValue("install_help_update").'<br /><input type="submit" name="getonlyupdate" value="'.getLanguageValue("install_help_update_button").'" />',true);
-    } else {
-        $only = contend_template(getLanguageValue("install_help_password").'<br /><br /><b>'.getLanguageValue("install_help_no_button").'</b>',false);
-        if(is_file('update.php'))
-            $only .= contend_template(getLanguageValue("install_help_update").'<br /><br /><b>'.getLanguageValue("install_help_no_button").'</b>',false);
+    $status = true;
+    $php_version = "";
+    $only = "";
+    // Zeile "PHP-Version"
+    if(version_compare(PHP_VERSION, MIN_PHP_VERSION) < 0) {
+        $status = false;
+        $php_version = contend_template(getLanguageValue("install_help_php_error",phpversion(),MIN_PHP_VERSION),false);
     }
-    return array(true,contend_template(getLanguageValue("install_help")).$only);
+    if($status) {
+        if(is_file(BASE_DIR_CMS.CONF_DIR_NAME.'/main.conf.php') and is_file(BASE_DIR_ADMIN.CONF_DIR_NAME.'/basic.conf.php')) {
+            $only = contend_template(getLanguageValue("install_help_password").'<br /><input type="submit" name="getonlypassword" value="'.getLanguageValue("install_help_password_button").'" />',true);
+            if(is_file('update.php'))
+                $only .= contend_template(getLanguageValue("install_help_update").'<br /><input type="submit" name="getonlyupdate" value="'.getLanguageValue("install_help_update_button").'" />',true);
+        } else {
+            $only = contend_template(getLanguageValue("install_help_password").'<br /><br /><b>'.getLanguageValue("install_help_no_button").'</b>',false);
+            if(is_file('update.php'))
+                $only .= contend_template(getLanguageValue("install_help_update").'<br /><br /><b>'.getLanguageValue("install_help_no_button").'</b>',false);
+        }
+    }
+    return array($status,$php_version.contend_template(getLanguageValue("install_help")).$only);
 }
 
 
@@ -978,7 +985,7 @@ $html_start = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "h
 
     $html_end = '</div></form>'
         .'<div id="out"></div>'
-        .'</td><td>&nbsp;</td></tr></table></body></html>';
+        .'</td><td>&nbsp;</td></tr></table>';
 
     if($art == "start")
         return $html_start;

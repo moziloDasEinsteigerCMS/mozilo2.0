@@ -325,16 +325,17 @@ install_tab_chmod_test               = Dateirechte
 install_tab_environment              = Serverumgebung
 install_tab_rewrite                  = Schöne URLs
 install_tab_password                 = Password
-install_tab_update                   = Update
+install_tab_update                   = Daten Konvertieren
 install_tab_finish                   = Abschließen
 
 install_help                         = <b>Willkommen im moziloCMS Installationsdialog</b><br /><br />In den nächsten Schritten wird getestet ob Dein Webserver bzw. Webhosting-Paket die für moziloCMS nötigen Voraussetzungen erfüllt.<br />Zudem werden grundlegende Voreinstellungen getroffen. All diese Einstellungen können später im Admin jederzeit wieder geändert werden.<br /><br /><b>Update?!</b> Solltest Du ein Update von einer früheren moziloCMS-Version anstreben, ließ und befolge zuerst die install.txt!<br /><br /><b>ACHTUNG!</b> Die "install.php" und wenn vorhanden die "update.php" sowie der Ordner "update" müssen nach dem Installationsdialog gelöscht werden da diese ein großes Sicherheitsrisiko sind.
 
 install_help_password                = Ich habe nur mein Password Vergessen und möchte ein neues Vergeben
 install_help_password_button         = nur das Password Ändern
-install_help_update                  = Ich habe moziloCMS schonn Instaliert habe aber noch aus einer alten Version sachen die ich Updaten möchte
+install_help_update                  = Ich habe moziloCMS schonn Instaliert habe aber noch aus einer alten Version Daten die ich Konvertieren möchte
 install_help_update_button           = nur eine alte moziloCMS Version Updaten
 install_help_no_button               = Diese Function ist nur bei einer schonn Instalierten Version Verfügbar
+install_help_php_error               = <b>ACHTUNG</b> Die PHP Version ist "<b>{PARAM1}</b>" muss aber Mindestens "<b>{PARAM2}</b>" sein.<br />Das kann nur beim Provider Geändert werden.
 
 install_lang_select                  = Wähle Deine Sprache:
 install_lang_help                    = <b>Sprache</b><br />Die Sprachwahl wird zunächst für die Webseite und den Admin übernommen.<br />Nach der Installation kannst Du im Admin, im Tab "Einstellungen" die Sprache der Webseite und im Tab "Admin" die der Administrationsoberfläche festlegen.
@@ -371,7 +372,7 @@ install_finish_clean_button          = Sicherheits relevanten Daten Löschen
 install_finish_clean                 = <b>ACHTUNG</b> aus Sicherheits gründen müssen die <b>"install.php"</b> und <b>"update.php"</b> Gelöscht werden sowie der Ordner <b>"update"</b> soweit er vorhanden ist.<br />
 
 install_update_help                  = <b>Achtung das Update sollte nur auf eine Kopie der Dateien angewendet werden.</b><br />Bei den Kategorien und Inhaltsseiten wird die Position entfernt. Bei allen Dateien und Bildern werden die Lehrzeichen zu "_" und die Umlaute zu z.B ae alle ander Sonderzeichen werden entfernt. Wenn dadurch in einem Ordner Dopelte Dateinamen entstehen wird eine Fortlaufende "Zahl_" vorangestelt.
-install_update_no_help               = <b>Es ist kein Update nötig.</b>
+install_update_no_help               = <b>Es ist kein Update nötig, alle Daten sind auf den neusten Stand.</b>
 install_update_buttom                = Update Starten
 install_update_files_in_pages        = In allen Inhaltsseiten die Neuen Dateinamen ersetzen.<br /><b>Achtung das ist nur eine einfache Ersetzung mit dem alten Dateinamen durch den neuen Dateinamen.</b>.
 install_update_conf_help             = Der Inhalt der Konfigurations Dateien aus dem "update" Ordner wird in die neuen Dateien übertragen
