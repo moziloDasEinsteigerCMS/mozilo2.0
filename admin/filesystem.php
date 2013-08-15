@@ -43,7 +43,7 @@ function getChmod($dir = false) {
         return false;
     global $ADMIN_CONF;
     $mode = $ADMIN_CONF->get("chmodnewfilesatts");
-    if(strlen($mode) > 0) {
+    if(is_numeric($mode) and strlen($mode) == 3) {
         if($dir === true) {
             // X-Bit setzen, um Verzeichniszugriff zu garantieren
             if(substr($mode,0,1) >= 2 and substr($mode,0,1) <= 6) $mode = $mode + 100;
