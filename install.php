@@ -279,7 +279,7 @@ function chmod_test() {
         $chmod = $_POST['chmod_test'];
         $chmod_text = $chmod;
         $status = true;
-        if($chmod == "")
+        if($chmod == "" or $chmod === "false")
             $chmod_text = $no_chmod;
         $html = contend_template(getLanguageValue("install_chmod_use",$chmod_text),true);
     }
@@ -427,7 +427,7 @@ function rewrite() {
         }
 
         $html = '<img style="margin-right:2em;" src="'.URL_BASE.CMS_DIR_NAME.'/jquery/ajax-loader.gif" />'
-        .'test <span id="step-mod-conf">0</span> von '.writeHtaccess("test",0,true)
+        .getLanguageValue("install_rewrite_test_text",'<span id="step-mod-conf">0</span>',writeHtaccess("test",0,true))
         .'<script language="Javascript" type="text/javascript">/*<![CDATA[*/'
         .'var finish_test = false;'
         .'var max_step = '.writeHtaccess("test",0,true).';'
@@ -443,8 +443,11 @@ function rewrite() {
         if($rewrite_step == "no_modrewrite") {
             $html = getLanguageValue("install_rewrite_no");
             $text_status = false;
-            rename(BASE_DIR.'.htaccess',BASE_DIR.'dot_htaccess');
-            rename(BASE_DIR_ADMIN.'.htaccess',BASE_DIR_ADMIN.'dot_htaccess');
+            if(is_file(BASE_DIR.'.htaccess'))
+                $html .= '<br />'.getLanguageValue("install_rewrite_no_htaccess");
+#                rename(BASE_DIR.'.htaccess',BASE_DIR.'dot_htaccess');
+            if(is_file(BASE_DIR_ADMIN.'.htaccess'))
+                unlink(BASE_DIR_ADMIN.'.htaccess');
             $CMS_CONF->set("modrewrite","false");
         } else {
             $html = getLanguageValue("install_rewrite_yes");
@@ -645,7 +648,10 @@ function makeConfFiles() {
             $conf = makeDefaultConf($name,true);
         if($name == "basic") {
             $conf['language'] = $_POST['language'];
-            $conf['chmodnewfilesatts'] = $_POST['chmod_test'];
+            $chmod_test = "";
+            if(is_numeric($_POST['chmod_test']) and strlen($_POST['chmod_test']) == 3)
+                $chmod_test = $_POST['chmod_test'];
+            $conf['chmodnewfilesatts'] = $chmod_test;
         }
         if($name == "main") {
             $conf['cmslanguage'] = $_POST['language'];
