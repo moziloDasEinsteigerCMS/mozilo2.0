@@ -8,6 +8,9 @@ define("CMSVERSION","2.0.beta");
 define("CMSNAME","Amalia");
 define("CMSREVISION","2");
 
+#!!!!!!!! die version müssen wir noch checken
+define("MIN_PHP_VERSION","5.1.2");
+
 define("CHARSET","UTF-8");
 define("CONTENT_DIR_NAME","kategorien");
 define("CONTENT_FILES_DIR_NAME","dateien");

@@ -104,8 +104,7 @@ function home() {
     $template[$titel][] = array(getLanguageValue("home_date_text"),date("Y-m-d H.i.s")." ".$time_zone);
 
     // Zeile "PHP-Version"
-#!!!!!!!! die version müssen wir noch checken
-    if(version_compare(PHP_VERSION, '5.1.2') >= 0) {
+    if(version_compare(PHP_VERSION, MIN_PHP_VERSION) >= 0) {
         $error[$titel][] = "ok";
         $template[$titel][] = array(getLanguageValue("home_phpversion_text"),phpversion());
     } else {
