@@ -225,7 +225,7 @@ function set_admin_para() {
                 }
                 if($syntax_name == "language") {
                     $LANGUAGE  = new Properties(BASE_DIR_ADMIN."sprachen/language_".$ADMIN_CONF->get("language").".txt");
-                    return ajax_return("error",false,returnMessage(false,'<input type="button" value="'.$LANGUAGE->get("admin_messages_change_language").'" onclick="window.location.href = \'index.php?action='.ACTION.'\'" />'),true,true);
+                    return ajax_return("error",false,returnMessage(true,'<input type="button" value="'.$LANGUAGE->get("admin_messages_change_language").'" onclick="window.location.href = \'index.php?action='.ACTION.'\'" />'),getLanguageValue("dialog_title_messages"),true);
                 }
 
             }
