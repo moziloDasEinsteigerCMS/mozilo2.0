@@ -308,10 +308,13 @@ function userSettings($name) {
     if($name != "plugins" and $name != "template") {
         $select = '<div class="mo-select-div"><select title="'.getLanguageValue("admin_noroot_".$name).'" name="'.$name.'[]" multiple="multiple" class="mo-select js-multi js-noroot-'.$name.'">';
         foreach($selectarray as $key) {
+            $select_text = getLanguageValue("admin_user_select_".$key);
+            if($name == "tabs")
+                $select_text = getLanguageValue($key."_button");
             $selected = "";
             if(in_array($key,$test))
                 $selected = ' selected="selected"';
-            $select .= '<option value="'.$key.'"'.$selected.'>'.$key.'</option>';
+            $select .= '<option value="'.$key.'"'.$selected.'>'.$select_text.'</option>';
         }
         $select .= '</select></div>';
     }
@@ -324,7 +327,7 @@ function userSettings($name) {
         # Achtung plugin_-_manage ist deshalb so damit die Gefahr das es ein Plugin mit diesen name gibt so klein wie möglich ist
         if(in_array("plugin_-_manage",$test))
             $selected = ' selected="selected"';
-        $select .= '<option value="plugin_-_manage"'.$selected.'>plugin_manage</option>';
+        $select .= '<option value="plugin_-_manage"'.$selected.'>'.getLanguageValue("plugins_title_manage").'</option>';
 
         $select_option = "";
         foreach($plugins as $plugin) {
@@ -341,11 +344,14 @@ function userSettings($name) {
     if($name == "template") {
         $select = '<div class="mo-select-div"><select title="'.getLanguageValue("admin_noroot_".$name).'" name="'.$name.'[]" multiple="multiple" class="mo-select js-multi js-noroot-'.$name.'">';
 
-        foreach(array("template_manage","template_edit","template_plugin_css") as $option) {
+        $tmp = array("template_manage" => getLanguageValue("template_title_manage"),
+            "template_edit" => str_replace("{TemplateName}","",getLanguageValue("template_title_template")),
+            "template_plugin_css" => getLanguageValue("template_title_plugins"));
+        foreach($tmp as $option => $text) {
             $selected = "";
             if(in_array($option,$test))
                 $selected = ' selected="selected"';
-            $select .= '<option value="'.$option.'"'.$selected.'>'.$option.'</option>';
+            $select .= '<option value="'.$option.'"'.$selected.'>'.$text.'</option>';
         }
         $select .= '</select></div>';
     }
