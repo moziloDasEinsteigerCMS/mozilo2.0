@@ -269,7 +269,7 @@ function setPassword($name = false,$pw = false,$pwrep = false,$type = false) {
         and preg_match("/[a-z]/", $pw)
         and preg_match("/[A-Z]/", $pw)
         ) {
-        require_once(BASE_DIR_ADMIN.'PasswordHash.php');
+        require_once(BASE_DIR_CMS.'PasswordHash.php');
         $t_hasher = new PasswordHash(8, FALSE);
         $pw = $t_hasher->HashPassword($pw);
 #!!!!!!! die fehlermeldung muss geändert werden

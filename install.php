@@ -507,7 +507,7 @@ function password() {
         // keine fehler, dann daten schreiben
         if(empty($form_errmsg)) {
             $status = true;
-            require_once(BASE_DIR.ADMIN_DIR_NAME.'/PasswordHash.php');
+            require_once(BASE_DIR.CMS_DIR_NAME.'/PasswordHash.php');
             $t_hasher = new PasswordHash(8, FALSE);
             $pw = $t_hasher->HashPassword($_POST['password1']);
             $loginpassword = new Properties(BASE_DIR.ADMIN_DIR_NAME.'/'.CONF_DIR_NAME."/loginpass.conf.php");

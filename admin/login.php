@@ -139,7 +139,7 @@ function login_formular($enabled,$error_lang = false) {
 // Logindaten überprüfen
 function checkLoginData($user, $pass) {
     global $loginpassword;
-    require_once(BASE_DIR_ADMIN.'PasswordHash.php');
+    require_once(BASE_DIR_CMS.'PasswordHash.php');
     $t_hasher = new PasswordHash(8, FALSE);
 
     if(($user == $loginpassword->get("name")) and (true === $t_hasher->CheckPassword($pass, $loginpassword->get("pw")))) {
