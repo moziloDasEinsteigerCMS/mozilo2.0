@@ -45,6 +45,7 @@ function cleanREQUEST($post_return) {
 # $art = post nur post auswerten
 # ACHTUNG zu erhöung der sicherheit immer die $art angeben und nur drauf verzichten wenn es beides sein kann
 function getRequestValue($key,$art = false,$clean = true) {
+#!!!!!!!!! ein array erzeugen mit den abgefragten, wenn dann ne anfrage mit einer schon abgefragten rückgabe aus dem array dann brauch der ganze ratenschwanz nicht nochmal ausgeführt werden
     $return_value = false;
     if(is_array($key)) {
         if(!$art and array_key_exists($key[0],$_GET))
@@ -234,7 +235,11 @@ function findPlugins() {
                 # array fuehlen mit deactivierte Plugin Platzhalter
                 $deactiv_plugins[] = $plugin;
             }
+        # plugin gibts aber es gibt noch keine plugin.conf.php
+        } elseif(file_exists(PLUGIN_DIR_REL.$plugin."/index.php")) {
+            $deactiv_plugins[] = $plugin;
         }
+
         unset($conf_plugin);
     }
     return array($activ_plugins,$deactiv_plugins,$plugin_first);
