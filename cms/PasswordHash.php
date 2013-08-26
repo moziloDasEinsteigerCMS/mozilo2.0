@@ -1,4 +1,4 @@
-<?php if(!defined('IS_ADMIN') or !IS_ADMIN) die();
+<?php if(!defined('IS_CMS')) die();
 #
 # Portable PHP password hashing framework.
 #
