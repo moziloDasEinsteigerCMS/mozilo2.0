@@ -310,8 +310,6 @@ function readTemplate($template,$pagecontent) {
     global $CMS_CONF;
     global $smileys;
 
-    # ist nur true wenn Inhaltseite eingelesen wird
-    $is_Page = false;
     if(ACTION_CONTENT == "sitemap") {
         $pagecontent = getSiteMap();
     } elseif(ACTION_CONTENT == "search") {
@@ -319,18 +317,12 @@ function readTemplate($template,$pagecontent) {
         $search = new SearchClass();
         $pagecontent = $search->searchInPages();
     } elseif($pagecontent === false) {
-        # Inhaltseite wird eingelesen und USE_CMS_SYNTAX wird benutzt
-        if(USE_CMS_SYNTAX)
-            $is_Page = true;
+        # Inhaltseite wird eingelesen
         $pagecontent = getContent();
     }
 
-    # wenn im Template keine Inhaltseite benutzt wird
-    if(!strstr($template,"{CONTENT}"))
-        $is_Page = false;
-
     $HTML = str_replace('{CONTENT}','---content~~~'.$pagecontent.'~~~content---',$template);
-    $HTML = $syntax->convertContent($HTML, $is_Page);
+    $HTML = $syntax->convertContent($HTML, USE_CMS_SYNTAX);
     unset($pagecontent);
 
     // Smileys ersetzen
