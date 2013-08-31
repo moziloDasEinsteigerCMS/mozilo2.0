@@ -60,7 +60,7 @@ class Syntax {
         rsort($syntax_array);
 
         $syntax_such = "/\[(".implode("=|",$syntax_array)."=|".implode("|",$syntax_array).")([^\[\]\{\}]*)\|([^\[\]\{\}]*)\]/Um";
-        $syntax_such_rest = "/\[(".implode("=|",$syntax_array)."=|".implode("|",$syntax_array).")([^\|]*)\|(.*)\]/m";
+        $syntax_such_rest = "/\[(".implode("=|",$syntax_array)."=|".implode("|",$syntax_array).")([^\|]*)\|(.*)\]/Ums";
 
         # Achtung es muss ---- für horizontale line angehängt werden
         $syntax_such_ohne = "/\[(".implode("|",$syntax_array)."|----)\]/Um";
@@ -87,8 +87,9 @@ class Syntax {
         unset($tmp_place);
 
         $plugin_such = "/\{(".implode("|",$plugin).")\|([^\[\]\{\}]*)\}/Um";
-        $plugin_such_rest = "/\{(".implode("|",$plugin).")\|(.*)\}/m";
+        $plugin_such_rest = "/\{(".implode("|",$plugin).")\|(.*)\}/Ums";
         $plugin_such_ohne = "/\{(".implode("|",$plugin).")\}/Um";
+
         $this->PLACE_SEARCH = "/\{(".implode("|",$this->placeholder).")\}/Um";
         $this->SYNTAX_SEARCH = $syntax_such;
         $this->SYNTAX_SEARCH_REST = $syntax_such_rest;
@@ -191,6 +192,7 @@ class Syntax {
         $plugins_rest[3] = $plugins_rest[2];
         $matches = $this->clean_syntax_plugins_array($plugins_rest,$matches);
         # wenn was gefunden wurde
+
         if(isset($matches[0]) and count($matches[0]) > 0) {
             return $matches;
         }
