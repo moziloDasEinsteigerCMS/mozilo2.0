@@ -338,6 +338,7 @@ template_title_html_css              = HTML und CSS Dateien
 template_title_plugins               = Plugins CSS Dateien
 template_title_template              = Folgendes Template bearbeiten: {TemplateName}
 template_title_manage                = Templates verwalten
+template_title_editor                = Bearbeiten der
 template_text_filebutton             = Installieren oder überschreiben
 template_text_fileinfo               = Alle Dateien werden überschrieben
 template_button_install              = Install

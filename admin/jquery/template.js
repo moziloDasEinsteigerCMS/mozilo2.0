@@ -29,7 +29,7 @@ var edit_handler = function(event) {
 
     dialog_editor.data("send_object",false)
         .dialog({
-            title: "Berabeiten "+that.closest(".js-tools-show-hide").find(".js-filename").text(),
+            title: mozilo_lang["template_title_editor"]+" "+that.closest(".js-tools-show-hide").find(".js-filename").text(),
             width: $(".mo-td-content-width").eq(0).width(),
             height: (parseInt($(window).height()) - dialogMaxheightOffset)});
 
