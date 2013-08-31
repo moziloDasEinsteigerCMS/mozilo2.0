@@ -292,14 +292,14 @@ class Syntax {
             // <br /> mit oder ohne Slash (das, was raus muß!)  <br \/? >
             $this->content = preg_replace('/<(\/?)(address|blockquote|div|dl|fieldset|form|h[123456]|hr|noframes|noscript|ol|p|pre|table|th|tr|td|ul|center|dir|isindex|menu)([^>]*)>(\r\n|\r|\n)?\-html_br\~/', "<$1$2$3>$4",$this->content); /* <br\s?\/?> \-html_br\~ */
 
-            # Syntax html zeichen nach html wandeln
-            $search = array("-html_br~","-html_nbsp~","-html_lt~","-html_gt~","-html_amp~");
-            $replace = array("<br />","&nbsp;","&lt;","&gt;","&amp;");
-            $this->content = str_replace($search,$replace,$this->content);
-
             global $specialchars;
             $this->content = $specialchars->decodeProtectedChr($this->content);
         }
+
+        # Syntax html zeichen nach html wandeln
+        $search = array("-html_br~","-html_nbsp~","-html_lt~","-html_gt~","-html_amp~");
+        $replace = array("<br />","&nbsp;","&lt;","&gt;","&amp;");
+        $this->content = str_replace($search,$replace,$this->content);
 
         if(USE_CMS_SYNTAX) {
             // direkt aufeinanderfolgende Listen zusammenführen
