@@ -159,7 +159,7 @@ function test_modrewrite(that) {
         error: function(jqXHR, textStatus, errorThrown) {
             send_object = false;
             dialog_multi.dialog("close");
-            dialog_open("error_messages","status= " + textStatus + "\nerror:\n" + errorThrown);
+            dialog_open("error_messages",returnMessage(false, mozilo_lang["config_error_modrewrite"]));
             $("#modrewrite").prop('checked', false);
         }
     });

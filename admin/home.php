@@ -130,10 +130,14 @@ function home() {
         $template[$titel][] = array(getLanguageValue("home_text_gd"),getLanguageValue("yes"));
     }
 
-    # mod_rewrite wird mit javascript ermitelt und ausgetauscht
-    $error[$titel][] = getLanguageValue("home_error_mod_rewrite");
-    $template[$titel][] = array('<span id="mod-rewrite-false">'.getLanguageValue("home_mod_rewrite").'</span>',getLanguageValue("no"));
-
+    if($CMS_CONF->get('modrewrite') == "true") {
+        # mod_rewrite wird mit javascript ermitelt und ausgetauscht
+        $error[$titel][] = getLanguageValue("home_error_mod_rewrite");
+        $template[$titel][] = array('<span id="mod-rewrite-false">'.getLanguageValue("home_mod_rewrite").'</span>',getLanguageValue("no"));
+    } else {
+        $error[$titel][] = false;
+        $template[$titel][] = array('<span id="mod-rewrite-false">'.getLanguageValue("home_mod_rewrite").'</span>',getLanguageValue("home_mod_rewrite_deact"));
+    }
     # backupsystem
     if(function_exists('gzopen')) {
         $error[$titel][] = "ok";

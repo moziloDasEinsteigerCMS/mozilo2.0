@@ -134,6 +134,7 @@ home_help_text_info                  = Kurzeinführung in die Bedienung von mozi
 home_no_help                         = Die Dokumentation ist nicht verfügbar.
 home_mod_rewrite                     = mod_rewrite verfügbar
 home_error_mod_rewrite               = Siehe Dokumentation für mehr Informationen LINK.
+home_mod_rewrite_deact               = nicht Aktiviert
 home_error_safe_mode                 = moziloCMS funktioniert unter Umständen nicht richtig mit aktivem Safe-Mode.
 home_text_safemode                   = Safe-Mode aktiv
 home_text_gd                         = Grafikbibliothek GDlib verfügbar
