@@ -1,32 +1,32 @@
-form#contact_form {
+#contact_form {
 }
 
-table#contact_table {
+#contact_table {
 }
 
-table#contact_table td {
+#contact_table td {
     vertical-align:top;
     padding:5px;
 }
 
-span#contact_errormessage{
+#contact_errormessage{
     color:#880000;
     font-weight:bold;
 }
 
-span#contact_successmessage{
+#contact_successmessage{
     color:#008800;
     font-weight:bold;
 }
 
-input#contact_name, input#contact_mail, input#contact_website {
+#contact_name, #contact_mail, #contact_website {
     width:200px;
 }
 
-textarea#contact_message {
+#contact_message {
     width:200px;
 }
 
-input#contact_submit {
+#contact_submit {
     width:200px;
 }
