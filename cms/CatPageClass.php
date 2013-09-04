@@ -854,10 +854,7 @@ class CatPageClass {
                 $page_a[$tmp[0]]["_orgname-"] = $page_a[$tmp[0]]["_name-"];
                 $page_a[$tmp[0]]["_type-"] = EXT_LINK;
                 $url = str_replace($this->link_search,$this->link_replace,substr($tmp[1],0,strlen($tmp[1])-(EXT_LENGTH)));
-                $href = "";
-#                if(strpos($url,"://") < 1)
-#                    $href = "http://";
-                $page_a[$tmp[0]]["_link-"] = $href.$url;
+                $page_a[$tmp[0]]["_link-"] = $url;
                 $page_a[$tmp[0]]["_target-"] = str_replace("-","",$target);
             } else {
                 $key = substr($file,0,strlen($file)-(EXT_LENGTH));
@@ -875,7 +872,7 @@ class CatPageClass {
         global $CMS_CONF;
         $draft_modus = false;
         $draft_cat = "";
-        if(!IS_ADMIN and getRequestValue('draft') != "true" and $CMS_CONF->get("draftcat") == "true") {
+        if(!IS_ADMIN and getRequestValue('draft') != "true" and $CMS_CONF->get("draftmode") == "true") {
             $draft_modus = true;
             $draft_cat = $CMS_CONF->get("defaultcat");
         }
@@ -894,11 +891,7 @@ class CatPageClass {
                 $cat_a[$tmp[0]]["_orgname-"] = $cat_a[$tmp[0]]["_name-"];
                 $cat_a[$tmp[0]]["_type-"] = EXT_LINK;
                 $url = str_replace($this->link_search,$this->link_replace,substr($tmp[1],0,strlen($tmp[1])-(EXT_LENGTH)));
-                $href = "";
-#echo $url."<br />\n";
-#                if(strpos($url,"://") < 1)
-#                    $href = "http://";
-                $cat_a[$tmp[0]]["_link-"] = $href.$url;
+                $cat_a[$tmp[0]]["_link-"] = $url;
                 $cat_a[$tmp[0]]["_target-"] = str_replace("-","",$target);
             } else {
                 $cat_a[$file]['_pages-'] = $this->make_DirPageArray($dir."/".$file);
