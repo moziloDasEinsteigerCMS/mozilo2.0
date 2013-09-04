@@ -230,10 +230,8 @@ config_titel_cmsglobal               = Allgemeine Einstellungen
 config_titel_cmssyntax               = Syntax-Einstellungen
 config_titel_expert                  = Erweiterte Einstellungen
 config_titel_usersyntax_test         = Syntax überprüfung
-config_input_draftcat                = Baustellen Modus
-config_text_draftcat                 = Website in den Baustellenmodus schalten: <br />In diesem Modus wird nur die Startkategorie angezeigt oder ein spezielles Baustellen-Template.
 config_input_draftmode                = Baustellen Modus
-config_text_draftmode                 = Website in den Baustellenmodus schalten: <br />In diesem Modus wird nur die Startkategorie angezeigt oder ein spezielles Baustellen-Template.
+config_text_draftmode                 = Website in den Baustellenmodus schalten: <br />In diesem Modus wird nur die Startkategorie angezeigt und ein spezielles Baustellen-Template.<br />Menü zur Auswahl eines Baustellen-Templates:
 config_input_draftlayout             = kein Baustellen Template
 
 admin_button                         = Admin
