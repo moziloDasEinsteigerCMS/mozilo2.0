@@ -25,7 +25,7 @@ class MenuSubs extends Plugin {
         if($value === "menusubs_2" and $CatPage->exists_CatPage($this->settings->get("menusubs_2"),false))
             return $this->getMenuPage($this->settings->get("menusubs_2"),false,true);
         if($value === "sitemap_content")
-            return $this->getSidemapCat();
+            return $this->getSitemapCat();
         if($value === "breadcrumb") {
             $this->breadcrumb_delimiter = "»";
             if($this->settings->get("breadcrumb_delimiter"))
@@ -186,7 +186,7 @@ class MenuSubs extends Plugin {
                 $language->getLanguageHtml("tooltip_link_category_1", $CatPage->get_HrefText($page,false)));
     }
 
-    function getSidemapCat() {
+    function getSitemapCat() {
         global $CatPage, $CMS_CONF, $language;
         $return = false;
         $menu_2 = "";
@@ -194,21 +194,21 @@ class MenuSubs extends Plugin {
         if($CMS_CONF->get("showhiddenpagesinsitemap") == "true") {
             $include_pages = array(EXT_PAGE,EXT_HIDDEN);
         }
-        $sitemap = '<h1 id="menusubs-sidemap-title">'.$language->getLanguageValue("message_sitemap_0")."</h1>"
-                    .'<div class="sitemap" id="menusubs-sidemap">';
+        $sitemap = '<h1 id="menusubs-sitemap-title">'.$language->getLanguageValue("message_sitemap_0")."</h1>"
+                    .'<div class="sitemap" id="menusubs-sitemap">';
         foreach($CatPage->get_CatArray(false, false, $include_pages) as $cat) {
             if(strpos($cat,"%2F") > 1) continue;
             if($this->settings->get("menusubs_2") == $cat) {
-                if($this->settings->get("sidemap_show_menu2") == "true") {
+                if($this->settings->get("sitemap_show_menu2") == "true") {
                     $menu_2 = '<h2>'.$CatPage->get_HrefText($cat,false).'</h2>';
-                    $menu_2 .= $this->getSidemapPage($cat,true);
+                    $menu_2 .= $this->getSitemapPage($cat,true);
                     $return = true;
                 }
                 continue;
             }
             if($CatPage->get_Type($cat,false) == "cat") {
                 $sitemap .= '<h2>'.$CatPage->create_AutoLinkTag($cat,false,"").'</h2>';
-                $sitemap .= $this->getSidemapPage($cat);
+                $sitemap .= $this->getSitemapPage($cat);
                 $return = true;
             }
         }
@@ -217,12 +217,12 @@ class MenuSubs extends Plugin {
         return null;
     }
 
-    function getSidemapPage($cat,$menu2 = false) {
+    function getSitemapPage($cat,$menu2 = false) {
         global $CatPage, $CMS_CONF;
         $return = false;
         $sitemap = '<ul>';
         if($menu2)
-            $sitemap = '<ul id="menusubs-sidemap-menu2">';
+            $sitemap = '<ul id="menusubs-sitemap-menu2">';
         foreach($CatPage->get_PageArray($cat,array(EXT_PAGE,EXT_HIDDEN)) as $page) {
             if(strpos($cat,"%2F") > 1
                     and $CMS_CONF->get("hidecatnamedpages") == "true"
@@ -233,7 +233,7 @@ class MenuSubs extends Plugin {
                     and $CatPage->get_Type($page,false) == "cat") {
                 $return = true;
                 $sitemap .= '<li><h3>'.$this->create_CatSubLinkTag($cat,$page,"").'</h3>';
-                $sitemap .= $this->getSidemapPage($page);
+                $sitemap .= $this->getSitemapPage($page);
                 $sitemap .= '</li>'."\n";
             } elseif($CatPage->get_Type($cat,$page) != EXT_HIDDEN) {
                 $sitemap .= '<li>'.$CatPage->create_AutoLinkTag($cat,$page,"").'</li>';
@@ -270,9 +270,9 @@ class MenuSubs extends Plugin {
             "descriptions" => $descriptions,
             "multiple" => "false"
             ); 
-        $config['sidemap_show_menu2'] = array(
+        $config['sitemap_show_menu2'] = array(
             "type" => "checkbox",
-            "description" => $conf_txt->get("sidemap_show_menu2"),
+            "description" => $conf_txt->get("sitemap_show_menu2"),
         );
         $config['breadcrumb_delimiter'] = array(
             "type" => "text",
