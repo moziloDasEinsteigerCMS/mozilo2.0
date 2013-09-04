@@ -69,7 +69,7 @@ function setChmod($file) {
     # rechte macht der server
     if($chmod === false)
         return true;
-    if(true === (chmod($file, $chmod)))
+    if(true === (@chmod($file, $chmod)))
         return true;
     return returnMessage(false, getLanguageValue("error_chmod"));
 }
