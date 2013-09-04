@@ -54,4 +54,6 @@ Ein zweites Menu kann mit <b>{MenuSubs|menusubs_2}</b> erstellt werden.<br />
 Zum Beispiel für Impressum und Kontakt im Fußbereich der Seite.<br />
 Einfach in der Plugin Konfiguration eine Kategorie auswählen und im Template <b>{MenuSubs|menusubs_2}</b> <br />an die gewünschten Stelle eintragen.<br />
 Es sind nur Kategorien auswählbar, die kein "/" im Namen haben.<br />
-Da sind natürlich auch SubKategorien mit möglich.
+Da sind natürlich auch SubKategorien mit möglich.<br />
+<br />
+Für eine Brotkrümelnavigation einfach <b>{MenuSubs|breadcrumb}</b> an die gewünschten Stelle eintragen.
