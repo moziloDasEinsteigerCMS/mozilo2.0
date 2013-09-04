@@ -33,7 +33,7 @@ class MenuSubs extends Plugin {
             return $this->getBreadcrumb();
         }
         return NULL;
-    } // function getContent
+    }
 
     function getBreadcrumb() {
         global $CatPage, $CMS_CONF;
@@ -281,7 +281,7 @@ class MenuSubs extends Plugin {
             "description" => 'Trennzeichen der Brotkrümel Einträge. Default ist "»"'
         );
         return $config;
-    } // function getConfig    
+    }
 
     function getInfo() {
         global $ADMIN_CONF;
@@ -291,7 +291,7 @@ class MenuSubs extends Plugin {
             $info_txt = file_get_contents(BASE_DIR.PLUGIN_DIR_NAME."/MenuSubs/lang/info_deDE.txt");
         $info = array(
             // Plugin-Name
-            "<b>MenuSubs</b> Revision: 1",
+            "<b>MenuSubs</b> Revision: 2",
             // Plugin-Version
             "2.0",
             // Kurzbeschreibung
@@ -299,11 +299,11 @@ class MenuSubs extends Plugin {
             // Name des Autors
             "stefanbe",
             // Download-URL
-            "",
-            array("{MenuSubs}" => "MenuSubs")
+            array("https://github.com/mozilo/mozilo2.0","moziloCMS 2.0"),
+            array("{MenuSubs|main/detail/menusubs_2/breadcrumb}" => "MenuSubs")
             );
         return $info;
-    } // function getInfo
+    }
 }
 
 ?>
