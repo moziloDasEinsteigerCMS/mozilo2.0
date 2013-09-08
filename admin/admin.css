@@ -187,21 +187,21 @@ richtet sich nach der icon grösse = 2 * body font-size */
 
 .mo-plugin-input {
     vertical-align: middle;
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     color: #000000;
     border: 1px solid #C0C0C0;
 }
 
 .mo-plugin-textarea {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     border: 1px solid #C0C0C0;
 }
 
 .mo-plugin-select {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     border: 1px solid #C0C0C0;
     /*width: 200px;*/
 }
@@ -454,8 +454,8 @@ input.mo-input-margin-top  {
 }
 
 .textarea_cms {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     height: 120px;
     border: 1px solid #C0C0C0;
     width: 99%;
