@@ -333,18 +333,25 @@ function get_plugin_config($conf_plugin,$config,$currentelement) {
                 }
                 $input = '<select name="'.$currentelement.'['.$name.']'.$plus_array.'"'.$size.$multiple.' class="mo-plugin-select js-select'.$css_multi.$css_add.'">';
                 if(is_array($config[$name]['descriptions'])) {
+                    $select_array = array();
+                    if($conf_plugin->get($name))
+                        $select_array = explode(",",$conf_plugin->get($name));
                     foreach($config[$name]['descriptions'] as $key => $descriptions) {
-                        $value = ' value="'.$key.'"';
-                        $selected = NULL;
-                        if($conf_plugin->get($name)) {
-                            $select_array = explode(",",$conf_plugin->get($name));
-                            foreach($select_array as $test) {
-                                if($test == $key) {
+                        if(is_array($descriptions)) {
+                            $input .= '<optgroup label="'.$key.'">';
+                            foreach($descriptions as $opt_key => $opt_descriptions) {
+                                $selected = NULL;
+                                if(in_array($opt_key,$select_array))
                                     $selected = ' selected="selected"';
-                                }
+                                $input .= '<option value="'.$opt_key.'"'.$selected.'>'.$opt_descriptions.'</option>';
                             }
+                            $input .= '</optgroup>';
+                        } else {
+                            $selected = NULL;
+                            if(in_array($key,$select_array))
+                                $selected = ' selected="selected"';
+                            $input .= '<option value="'.$key.'"'.$selected.'>'.$descriptions.'</option>';
                         }
-                        $input .= '<option'.$value.$selected.'>'.$descriptions.'</option>';
                     }
                 }
                 $input .= '</select>';
