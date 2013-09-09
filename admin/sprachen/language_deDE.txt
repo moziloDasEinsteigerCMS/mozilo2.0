@@ -106,6 +106,16 @@ toolbar_platzhalter_MEMORYUSAGE      =
 toolbar_platzhalter_EXECUTETIME      = 
 toolbar_platzhalter_VALUE            = 
 toolbar_platzhalter_DESCRIPTION      = 
+toolbar_editor_linenumber            = Zeilen Nummern Anzeigen/Ausblenden
+toolbar_editor_controlcharacter      = Steuerzeichen Anzeigen/Ausblenden
+toolbar_editor_highlighter           = Syntaxhervorhebe Modus
+toolbar_editor_fontsize              = Schrieft Größe
+toolbar_editor_undo                  = Letzte Änderung Rückgängig machen
+toolbar_editor_redo                  = Letzte Änderung wiederherstellen machen
+toolbar_editor_togglefold            = Alle Syntaxelemente die über mehrere Zeilen gehen Ein/Ausklappen
+toolbar_editor_search                = Ein Begriff Suchen
+toolbar_editor_searchall             = Alle gefunden Begriffe Finden
+toolbar_editor_replace               = gefundene Begriffe Ersetzen
 
 filter_button_all_hide               = Alle Inhaltsseiten ausblenden
 filter_button_all_show               = Alle Inhaltsseiten einblenden

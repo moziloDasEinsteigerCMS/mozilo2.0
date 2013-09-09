@@ -18,11 +18,11 @@ function showEditPageForm()    {
 
     .'<table class="" width="100%" cellspacing="0" border="0" cellpadding="0"><tr>'
     .'<td width="1%" class="mo-nowrap">'
-            .'<img id="show_gutter" class="ed-ace-icon ed-icon-border ed-syntax-icon ed-number" src="'.ICON_URL_SLICE.'" alt="number" hspace="0" vspace="0" />'
-            .'<img id="show_hidden" class="ed-ace-icon ed-icon-border ed-syntax-icon ed-noprint" src="'.ICON_URL_SLICE.'" alt="noprint" hspace="0" vspace="0" />'
+            .'<img id="show_gutter" class="ed-ace-icon ed-icon-border ed-syntax-icon ed-number" src="'.ICON_URL_SLICE.'" alt="number" title="'.getLanguageValue("toolbar_editor_linenumber",true).'" hspace="0" vspace="0" />'
+            .'<img id="show_hidden" class="ed-ace-icon ed-icon-border ed-syntax-icon ed-noprint" src="'.ICON_URL_SLICE.'" alt="noprint" title="'.getLanguageValue("toolbar_editor_controlcharacter",true).'" hspace="0" vspace="0" />'
     .'</td>'
     .'<td width="1%" class="mo-ace-td-select">'
-            .'<div><select name="select-mode" id="select-mode" class="mo-ace-in-select js-ace-select">'
+            .'<div><select name="select-mode" title="'.getLanguageValue("toolbar_editor_highlighter",true).'" id="select-mode" class="mo-ace-in-select js-ace-select">'
                 .'<option value="mozilo">'."Mozilo".'</option>'
                 .'<option value="text">'."Text".'</option>'
                 .'<option value="css">'."CSS".'</option>'
@@ -32,7 +32,7 @@ function showEditPageForm()    {
             ."</select></div>"
     .'</td>'
     .'<td width="1%" class="mo-ace-td-select">'
-            .'<div><select name="select-fontsize" id="select-fontsize" class="mo-ace-in-select js-ace-select">'
+            .'<div><select name="select-fontsize" title="'.getLanguageValue("toolbar_editor_fontsize",true).'" id="select-fontsize" class="mo-ace-in-select js-ace-select">'
                 .'<option value="10px">'."10px".'</option>'
                 .'<option value="12px">'."12px".'</option>'
                 .'<option value="14px">'."14px".'</option>'
@@ -41,10 +41,10 @@ function showEditPageForm()    {
             ."</select></div>"
     .'</td>'
     .'<td width="1%" class="mo-nowrap">'
-            .'<img id="undo" class="ed-ace-icon ed-syntax-icon ed-undo" src="'.ICON_URL_SLICE.'" alt="undo" hspace="0" vspace="0" />'
-            .'<img id="redo" class="ed-ace-icon ed-syntax-icon ed-redo" src="'.ICON_URL_SLICE.'" alt="redo" hspace="0" vspace="0" />'
+            .'<img id="undo" class="ed-ace-icon ed-syntax-icon ed-undo" src="'.ICON_URL_SLICE.'" alt="undo"  title="'.getLanguageValue("toolbar_editor_undo",true).'"hspace="0" vspace="0" />'
+            .'<img id="redo" class="ed-ace-icon ed-syntax-icon ed-redo" src="'.ICON_URL_SLICE.'" alt="redo"  title="'.getLanguageValue("toolbar_editor_redo",true).'"hspace="0" vspace="0" />'
 
-            .'<img id="toggle_fold" class="ed-ace-icon ed-syntax-icon ed-expand" src="'.ICON_URL_SLICE.'" alt="expand" hspace="0" vspace="0" />'
+            .'<img id="toggle_fold" class="ed-ace-icon ed-syntax-icon ed-expand" src="'.ICON_URL_SLICE.'" alt="expand" title="'.getLanguageValue("toolbar_editor_togglefold",true).'" hspace="0" vspace="0" />'
     .'</td>'
     .'<td width="1%" id="colordiv-editor" class="mo-nowrap">';
     if ($CMS_CONF->get("usecmssyntax") != "true" and ACTION != "config")
@@ -52,11 +52,11 @@ function showEditPageForm()    {
     $content .= '</td>'
     .'<td width="1%" class="mo-nowrap">'
             .'<input class="mo-ace-in-text" id="search-text" type="text" name="search-text" value="" />'
-            .'<img id="search" class="ed-ace-icon ed-syntax-icon ed-find" src="'.ICON_URL_SLICE.'" alt="find" hspace="0" vspace="0" />'
-            .'<input class="mo-ace-in-check" type="checkbox" id="search-all" />'
+            .'<img id="search" class="ed-ace-icon ed-syntax-icon ed-find" src="'.ICON_URL_SLICE.'" alt="find"  title="'.getLanguageValue("toolbar_editor_search",true).'"hspace="0" vspace="0" />'
+            .'<input class="mo-ace-in-check" type="checkbox" id="search-all" title="'.getLanguageValue("toolbar_editor_searchall",true).'" />'
             .'<label class="mo-ace-in-check-label" for="search-all">Alle</label>'
             .'<input class="mo-ace-in-text" id="replace-text" type="text" name="search" value="" />'
-            .'<img id="replace" class="ed-ace-icon ed-syntax-icon ed-replace" src="'.ICON_URL_SLICE.'" alt="replace" hspace="0" vspace="0" />'
+            .'<img id="replace" class="ed-ace-icon ed-syntax-icon ed-replace" src="'.ICON_URL_SLICE.'" alt="replace" title="'.getLanguageValue("toolbar_editor_replace",true).'" hspace="0" vspace="0" />'
     .'</td>'
     ."</tr>"
     ."</table>"
@@ -159,7 +159,7 @@ function returnToolbarColoredit() {
     $content = '<div id="js-color-menu" class="mo-nowrap">'
             .'<img class="ed-syntax-icon ed-icon-border ed-syntax-color ce-bg-color-change ed-farbe" alt="Farbe" title="[farbe=RRGGBB| ... ]" src="'.ICON_URL_SLICE.'" onclick="insert_ace(\'[farbe=\' + document.getElementById(\'farbcode\').value + \'|\', \']\',true)" />'
             .'<input type="text" maxlength="6" value="DD0000" class="ce-bg-color-change js-in-hex ce-in-hex" id="farbcode" size="6" />'
-            .'<img class="js-coloreditor-button ed-icon-border ed-syntax-icon ed-farbeedit" alt="'.getLanguageValue("dialog_title_coloredit").'" title="'.getLanguageValue("dialog_title_coloredit").'" src="'.ICON_URL_SLICE.'" style="display:none;" />'
+            .'<img class="js-coloreditor-button ed-icon-border ed-syntax-icon ed-farbeedit" alt="'.getLanguageValue("dialog_title_coloredit",true).'" title="'.getLanguageValue("dialog_title_coloredit",true).'" src="'.ICON_URL_SLICE.'" style="display:none;" />'
         .'</div>';
     return $content;
 }
@@ -182,7 +182,7 @@ function returnFormatToolbarIcon($tag) {
 function returnUserSyntaxSelectbox() {
     global $USER_SYNTAX;
 
-    $content = '<select name="usersyntax" class="usersyntaxselectbox" title="'.getLanguageValue("toolbar_usersyntax").'">';
+    $content = '<select name="usersyntax" class="usersyntaxselectbox" title="'.getLanguageValue("toolbar_usersyntax",true).'">';
     foreach($USER_SYNTAX->toArray() as $key => $value) {
         if(false !== strpos($value,"{DESCRIPTION}") and false === strpos($value,"{VALUE}")) {
             $inhalt = "[".$key."=...|]";
@@ -206,16 +206,16 @@ function returnPlatzhalterSelectbox() {
     $all = false;
     if(ACTION == "template" or ACTION == "config")
         $all = true;
-    $selectbox = '<select name="platzhalter" class="overviewselect" title="'.getLanguageValue("toolbar_platzhalter").'">';
+    $selectbox = '<select name="platzhalter" class="overviewselect" title="'.getLanguageValue("toolbar_platzhalter",true).'">';
     if(ACTION == "config") {
-        $selectbox .= '<option title="'.getLanguageValue("toolbar_platzhalter_VALUE").'" value="{VALUE}">{VALUE}</option>';
-        $selectbox .= '<option title="'.getLanguageValue("toolbar_platzhalter_DESCRIPTION").'" value="{DESCRIPTION}">{DESCRIPTION}</option>';
+        $selectbox .= '<option title="'.getLanguageValue("toolbar_platzhalter_VALUE",true).'" value="{VALUE}">{VALUE}</option>';
+        $selectbox .= '<option title="'.getLanguageValue("toolbar_platzhalter_DESCRIPTION",true).'" value="{DESCRIPTION}">{DESCRIPTION}</option>';
     }
     foreach(makePlatzhalter($all) as $value) {
         $language = str_replace(array('{','}'),'',$value);
         if(in_array($language,$activ_plugins))
             continue;
-        $selectbox .= '<option title="'.getLanguageValue("toolbar_platzhalter_".$language).'" value="'.$value.'">'.$value.'</option>';
+        $selectbox .= '<option title="'.getLanguageValue("toolbar_platzhalter_".$language,true).'" value="'.$value.'">'.$value.'</option>';
     }
     $selectbox .= '</select>';
     return $selectbox;
@@ -226,7 +226,7 @@ function returnPluginSelectbox() {
     global $specialchars;
     global $activ_plugins;
     require_once(BASE_DIR_CMS."Plugin.php");
-    $selectbox = '<select name="plugins" class="overviewselect" title="'.getLanguageValue("toolbar_plugins").'">';
+    $selectbox = '<select name="plugins" class="overviewselect" title="'.getLanguageValue("toolbar_plugins",true).'">';
     foreach($activ_plugins as $currentplugin) {
         if(file_exists(PLUGIN_DIR_REL.$currentplugin."/index.php") and file_exists(PLUGIN_DIR_REL.$currentplugin."/plugin.conf.php")) {
             require_once(PLUGIN_DIR_REL.$currentplugin."/index.php");
