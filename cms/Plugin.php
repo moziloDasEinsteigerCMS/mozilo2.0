@@ -123,15 +123,29 @@ class Plugin {
         global $specialchars;
         $separation_protect = $specialchars->encodeProtectedChr('^'.$separation);
         $separation_key_value_protect = $specialchars->encodeProtectedChr('^'.$separation_key_value);
-        # das ist aus http://php.net/manual/de/function.preg-match-all.php
-        # hab nichts einfacheres gefunden um HTML Tags zu finden
-        preg_match_all('@\<\s*?(\w+)((?:\b(?:\'[^\']*\'|"[^"]*"|[^\>])*)?)\>((?:(?>[^\<]*)|(?R))*)\<\/\s*?\\1(?:\b[^\>]*)?\>|\<\s*(\w+)(\b(?:\'[^\']*\'|"[^"]*"|[^\>])*)?\/?\>@uxis', $value, $match, PREG_SET_ORDER);
-        foreach($match as $find) {
-            $search = $find[0];
-            # in allen HTML Tags die $separation und $separation_key_value schützen
-            $replace = str_replace(array($separation,$separation_key_value),array($separation_protect,$separation_key_value_protect),$find[0]);
-            $value = str_replace($search,$replace,$value);
+
+        $protect_tag_search = array($separation,$separation_key_value,"<",">");
+        $protect_tag_replace = array($separation_protect,$separation_key_value_protect,$specialchars->encodeProtectedChr('^<'),$specialchars->encodeProtectedChr('^>'));
+        $protect_tags = false;
+        # erst alle Tags suchen die nicht geschlossen werden müssen
+        # area base basefont br col frame hr img input isindex link meta param
+        preg_match_all("/<(area|base|basefont|br|col|frame|hr|img|input|isindex|link|meta|param)[^>]*>/", $value, $tags);
+        if($tags[0]) {
+            $protect_tags = true;
+            $tags = array_unique($tags[0],SORT_STRING);
+            foreach($tags as $search)
+                $value = str_replace($search,str_replace($protect_tag_search,$protect_tag_replace,$search),$value);
         }
+        unset($tags);
+        # dann nur die äußeren Tags von Verschachtelten suchen
+        preg_match_all('@\<\s*?(\w+)(?:\b(?:[^\>])*)?\>((?:(?>[^\<]*)|(?R))*)\<\/\s*?\\1(?:\b[^\>]*)?\>@uxis', $value, $tags);
+        if($tags[0]) {
+            $protect_tags = true;
+            $tags = array_unique($tags[0],SORT_STRING);
+            foreach($tags as $search)
+                $value = str_replace($search,str_replace($protect_tag_search,$protect_tag_replace,$search),$value);
+        }
+        unset($tags);
 
         # wenn im Trenn zeichen ein ^ ist müssen wir das decoden da die Syntax.php das encodet hat
         # siehe preparePageContent()
@@ -150,8 +164,16 @@ class Plugin {
                 $tmp[0] = str_replace("-html_br~","",$tmp[0]);
                 # und ein trim wegen Zeilenumbruch und Lehrzeichen
                 $tmp[0] = trim($tmp[0]);
+                if($protect_tags) {
+                    $tmp[0] = str_replace($protect_tag_replace,$protect_tag_search,$tmp[0]);
+                    $tmp[1] = str_replace($protect_tag_replace,$protect_tag_search,$tmp[1]);
+                }
                 $para_array[$tmp[0]] = $tmp[1];
             } else {
+                if($protect_tags) {
+                    $pos = str_replace($protect_tag_replace,$protect_tag_search,$pos);
+                    $values = str_replace($protect_tag_replace,$protect_tag_search,$values);
+                }
                 $para_array[$pos] = $values;
             }
         }
