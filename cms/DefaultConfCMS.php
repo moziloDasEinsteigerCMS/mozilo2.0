@@ -39,7 +39,7 @@ define("PLUGIN_DIR_REL",BASE_DIR.PLUGIN_DIR_NAME."/");
 define("SORT_CAT_PAGE",BASE_DIR.CONTENT_DIR_NAME."/SortCatPage.php");
 
 global $ALOWED_IMG_ARRAY;
-$ALOWED_IMG_ARRAY = array(".png",".jpg",".jpeg",".gif");
+$ALOWED_IMG_ARRAY = array(".png",".jpg",".jpeg",".gif",".ico");
 
 # Um Cross-Site Scripting-Schwachstellen zu verhindern
 $_SERVER["SCRIPT_NAME"] = htmlspecialchars($_SERVER["SCRIPT_NAME"], ENT_QUOTES, CHARSET);

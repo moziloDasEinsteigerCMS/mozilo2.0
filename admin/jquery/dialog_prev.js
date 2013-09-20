@@ -47,7 +47,7 @@ function dialog_iframe_preview(file_href) {
 
 function is_img(file_href) {
     var ext = file_href.substring(file_href.lastIndexOf(".")+1).toLowerCase();
-    if(typeof ext == "string" && (ext == "png" || ext == "gif" || ext == "jpg" || ext == "jpeg"))
+    if(typeof ext == "string" && (ext == "png" || ext == "gif" || ext == "jpg" || ext == "jpeg" || ext == "ico"))
         return true;
     return false;
 }

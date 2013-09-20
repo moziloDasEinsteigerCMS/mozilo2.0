@@ -234,9 +234,9 @@ mimeType: this._mimeType,
                 ext = file.name.substring(file.name.lastIndexOf(".")+1).toLowerCase();
             var img = "none";
             if(typeof ext == "string") {
-                if(ext == "png" || ext == "gif" || ext == "jpg" || ext == "jpeg") {
+                if(ext == "png" || ext == "gif" || ext == "jpg" || ext == "jpeg" || ext == "ico") {
                     img = "img";
-                } else if(ext == "doc" || ext == "odf" || ext == "") {
+                } else if(ext == "doc" || ext == "odf") {
                     img = "doc";
                 } else if(ext == "mpg" || ext == "mov" || ext == "flv") {
                     img = "mov";
