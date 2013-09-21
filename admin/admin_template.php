@@ -177,7 +177,8 @@ else {
     if(file_exists(BASE_DIR_ADMIN."jquery/".ACTION.'_func.js'))
         $html .= '<script type="text/javascript" src="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/'.ACTION.'_func.js"></script>';
 }
-    if((ACTION == "catpage" and (ROOT or in_array("editusersyntax",$ADMIN_CONF->get("config")))) or ACTION == "config" or ACTION == "template") {
+
+    if(ACTION == "catpage" or ACTION == "config" or ACTION == "template") {
         $html .= '<link type="text/css" rel="stylesheet" href="jquery/coloredit/coloredit.min.css" />';
 $html .= '<script language="Javascript" type="text/javascript">/*<![CDATA[*/';
 $html .= 'var mo_docu_coloredit = \''.getHelpIcon("editsite","color").'\';';
