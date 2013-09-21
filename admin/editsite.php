@@ -236,6 +236,7 @@ function returnPluginSelectbox() {
             $plugin_conf = new Properties(PLUGIN_DIR_REL.$currentplugin."/plugin.conf.php");
             if(isset($plugin_info[5]) and is_array($plugin_info[5])) {
                 foreach($plugin_info[5] as $platzh => $info) {
+                    $platzh = $specialchars->rebuildSpecialChars($platzh, false, true);
                     $platzhtext = str_replace("|}","|...}",$platzh);
                     $selectbox .= '<option title="'.$specialchars->rebuildSpecialChars($info, false, true).'" value="'.$platzh.'">'.$platzhtext.'</option>';
                 }

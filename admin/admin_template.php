@@ -181,7 +181,7 @@ else {
     if(ACTION == "catpage" or ACTION == "config" or ACTION == "template") {
         $html .= '<link type="text/css" rel="stylesheet" href="jquery/coloredit/coloredit.min.css" />';
 $html .= '<script language="Javascript" type="text/javascript">/*<![CDATA[*/';
-$html .= 'var mo_docu_coloredit = \''.getHelpIcon("editsite","color").'\';';
+$html .= 'var mo_docu_coloredit = \''.str_replace("/",'\/',getHelpIcon("editsite","color")).'\';';
 $html .= '/*]]>*/</script>';
         $html .= '<script type="text/javascript" charset="utf-8" src="jquery/coloredit/coloredit.js"></script>';
 
