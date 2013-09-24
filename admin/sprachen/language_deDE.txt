@@ -106,16 +106,16 @@ toolbar_platzhalter_MEMORYUSAGE      =
 toolbar_platzhalter_EXECUTETIME      = 
 toolbar_platzhalter_VALUE            = 
 toolbar_platzhalter_DESCRIPTION      = 
-toolbar_editor_linenumber            = Zeilen Nummern Anzeigen/Ausblenden
+toolbar_editor_linenumber            = Zeilennummern Anzeigen/Ausblenden
 toolbar_editor_controlcharacter      = Steuerzeichen Anzeigen/Ausblenden
-toolbar_editor_highlighter           = Syntaxhervorhebe Modus
-toolbar_editor_fontsize              = Schrieft Größe
-toolbar_editor_undo                  = Letzte Änderung Rückgängig machen
-toolbar_editor_redo                  = Letzte Änderung wiederherstellen machen
-toolbar_editor_togglefold            = Alle Syntaxelemente die über mehrere Zeilen gehen Ein/Ausklappen
-toolbar_editor_search                = Ein Begriff Suchen
-toolbar_editor_searchall             = Alle gefunden Begriffe Finden
-toolbar_editor_replace               = gefundene Begriffe Ersetzen
+toolbar_editor_highlighter           = Syntax hervorhebe Modus
+toolbar_editor_fontsize              = Editor-Schriftgröße
+toolbar_editor_undo                  = Letzte Aktion rückgängig machen
+toolbar_editor_redo                  = Letzte Aktion wiederherstellen
+toolbar_editor_togglefold            = Mehrzeilige Syntaxelemente ein-/ausklappen
+toolbar_editor_search                = Nächsten Suchbegriff finden
+toolbar_editor_searchall             = Alle Suchbegriffe finden
+toolbar_editor_replace               = Suchergebnisse ersetzen
 
 filter_button_all_hide               = Alle Inhaltsseiten ausblenden
 filter_button_all_show               = Alle Inhaltsseiten einblenden
@@ -337,9 +337,9 @@ plugins_error_regex_error            = Fehler regex_error gibts nicht
 plugins_info                         = Information
 plugins_title_manage                 = Plugins verwalten
 plugins_text_filebutton              = Installieren oder überschreiben
-plugins_text_fileinfo                = nur die "plugin.conf.php" wird nicht überschrieben
+plugins_text_fileinfo                = (Beim Überschreiben vorhandener Plugins bleiben bisherige Einstellungen erhalten.)
 plugins_button_install               = Install
-plugins_button_delete                = Alle Ausgewählten Plugins löschen
+plugins_button_delete                = Ausgewählte Plugins löschen
 
 template_button                      = Template
 template_title_grafiken              = Grafiken
@@ -363,8 +363,15 @@ install_tab_rewrite                  = Schöne URLs
 install_tab_password                 = Passwort
 install_tab_update                   = Daten konvertieren
 install_tab_finish                   = Abschließen
+install_toggle_open                  = ... Weiter Lesen
+install_toggle_close                 = Weniger ...
 
-install_help                         = <b>Willkommen im moziloCMS Installationsdialog</b><br /><br />In den nächsten Schritten wird getestet ob der Webserver bzw. das Webhosting-Paket die für moziloCMS nötigen Voraussetzungen erfüllt.<br />Zudem werden grundlegende Voreinstellungen getroffen. All diese Einstellungen können später im Admin-Bereich jederzeit wieder geändert werden.<br /><br /><b>Update?!</b> <br />Soll moziloCMS von einer früheren Version upgedatet werden, bitte zuerst die <b>install.txt</b> lesen und danach vorgehen!<br /><br /><b>ACHTUNG!</b> <br />Die "<b>install.php</b>" und wenn vorhanden die "<b>update.php</b>" sowie der Ordner "<b>update</b>" müssen nach dem Installationsvorgang gelöscht werden, da sie ein großes Sicherheitsrisiko darstellen.
+
+install_help                         = <b>Willkommen im moziloCMS Installationsdialog</b><br /><br />In den nächsten Schritten wird getestet ob der Webserver bzw. das Webhosting-Paket die für moziloCMS nötigen Voraussetzungen erfüllt.<br />Zudem werden grundlegende Voreinstellungen getroffen. All diese Einstellungen können später im Admin-Bereich jederzeit wieder geändert werden.<br /><br />Bei Problemen mit "Dateirechte" oder "Schöne URLs" gibts <a href="http://www.mozilo.de/forum/index.php/topic,18.0.html" target="_blank">in diesen Beitrag im Forum</a> Wahrscheinlich schon die nötige Hilfe. Ansonsten einfach Fragen<br /><br /><b>Der Installer ist auch nötig wenn:</b><ul><li>das Password vergessen wurde</li><li>oder das moziloCMS vom Rechner auf den Webserver Kopiert wurde</li><li>oder es aus einer Alten moziloCMS Version noch Daten Upgedatet werden sollen.</li></ul><br /><b>ACHTUNG!</b> <br />Die "<b>install.php</b>" und wenn vorhanden die "<b>update.php</b>" sowie der Ordner "<b>update</b>" müssen nach dem Installationsvorgang gelöscht werden, da sie ein großes Sicherheitsrisiko darstellen, unbedingt Prüfen ob dies der Fall ist.
+
+install_help_update_title            = <b>Update Anleitung von moziloCMS 1.12 auf moziloCMS 2.0</b>
+install_help_update_text             = Alle hier genannten Punkte können auch Später noch Nacheinander oder auf einmal Durchgeführt werden.<ul><li>alle Kategorien mit deren Inhalt, in den 2.0-Ordner <b>kategorien</b> kopieren.</li><li>die Galerien in den 2.0er Ordner <b>gallerien</b> kopieren.</li><li>die Layouts in den 2.0er Ordner <b>layouts</b> kopieren.</li><li>nun im Wurzelverzeichnis (beispielsweise: moziloCMS/) den Ordner <b>update</b> erstellen.</li><li>in diesen Ordner <b>update</b>, alle <b>.conf</b> Dateien aus <b>.../admin/conf</b> und <b>.../cms/conf</b> und wenn vorhanden <b>.../formular/formular.conf</b> kopieren.</li></ul>moziloCMS 1.12 Plugin Konfigurations Dateien (<b>plugin.conf</b>) auf moziloCMS 2.0 Updaten<br /><br />Voraussetzung:<ol><li>Es gibt das Plugin auch für moziloCMS 2.0</li><li>Die Einstellungen sind so Komplex das eine Anpassung von Hand zu viel Wäre</li><li>Es gibt die gleichen Einstellungen wie im Alten</li></ol>Anleitung:<ol><li>Wenn vorhanden die <b>plugin.conf.php</b> Löschen.</li><li>Aus dem alten Plugin die <b>plugin.conf</b> in das neue Kopieren.</li></ol>
+
 
 install_help_password                = Ich habe nur mein Password Vergessen und möchte ein neues Vergeben
 install_help_password_button         = nur das Password Ändern
@@ -383,12 +390,12 @@ install_chmod_no_chmod               = Kein chmod nötig.
 install_chmod_testfile_rw            = Lässt sich die Datei "<b>{PARAM1}</b>" per FTP <b>löschen?</b> Aktueller Wert {PARAM2}
 install_chmod_testfile_next_button   = Dateirechte erweitern
 
-install_chmod_use                    = Diese Dateirechte werden Benutzt: "<b>{PARAM1}</b>"
+install_chmod_use                    = Ergebnis der Dateirechte-Konfiguration: "<b>{PARAM1}</b>"
 
 install_chmod_change_ftp             = Wenn Du wie empfohlen einen eigenen Ordner für das moziloCMS angelegt hast, kannst Du rekursiv die Dateirechte auf diesen anwenden. Ansonsten musst du das auf alle Ordner die zu moziloCMS gehören machen.<br />Es wird empfohlen dies schrittweise zu machen, solange bis die Meldung nicht mehr erscheint.<br />Dein FTP Programm unterstützt sehr wahrscheinlich die Funktion "nur auf Dateien -" und "nur auf Ordner anwenden", das solltest Du auch machen.<br />Ordner brauchen das x-Bit, Dateien nicht und sollten es auch nicht haben.<br />Achtung: Der hier ermittelte Wert muss jedes mal, wenn du mit FTP Dateien hochlädst, angewendet werden.
 install_chmod_change_ftp_button      = Habe ich gemacht.
 
-install_environment_help             = <b>Serverumgebung</b><br /> Der Webserver wurde auf die für moziloCMS notwendigen Grundvoraussetzungen hin geprüft.<br /><br />Nicht hervorgehobene Funktionen sind optional, d.h. moziloCMS funktioniert grundlegend, Du musst aber unter Umständen auf die entsprechende Funktion verzichten.
+install_environment_help             = <b>Serverumgebung</b><br /> Der Webserver wurde auf die für moziloCMS notwendigen Grundvoraussetzungen hin geprüft.<br /><br />Nicht hervorgehobene Funktionen sind optional. Das heißt: moziloCMS funktioniert zwar grundlegend, es kann jedoch sein, dass einzelne Funktionen nicht aktiviert werden konnten.
 install_environment_session          = "Session" verfügbar?
 install_environment_conf             = Konfigurationsdateien des moziloCMS wurden angelegt bzw. waren vorhanden:
 
@@ -400,10 +407,10 @@ install_rewrite_test_text            = Teste Einstellung {PARAM1} von {PARAM2}
 
 install_password_help                = <b>Passwort</b><br />Hier werden die Zugangsdaten festgelegt, mit denen sich der "<b>Super-User</b>" nach der Installation im Admin-Bereich anmeldet. <br />Dem Super-User steht der Administrationsbereich in vollem Umfang zur Verfügung.
 
-install_finish_help                  = <b>Abschließen</b><br />Es ist geschafft. <br />Die Installation war erfolgreich.<br /><br /><i>Viel Freude beim Erstellen der Website!</i><br />Das moziloCMS-Team<br /><br /><b>Wichtig! </b>Da die Dateien "install.php", "update.php“ und der Ordner "update" ein Sicherheitsrisiko für die Website darstellen, unbedingt per FTP kontrollieren, ob der Löschbefehl korrekt ausgeführt wurde.<br />
+install_finish_help                  = <b>Installation abschließen:</b><br />Geschafft – die Installation war erfolgreich.<br /><br /><i>Viel Freude beim Erstellen der Website!</i><br />Das moziloCMS-Team<br /><br /><b>Wichtig! </b>Da die Dateien "install.php", "update.php“ und der Ordner "update" ein Sicherheitsrisiko für die Website darstellen, unbedingt per FTP kontrollieren, ob der Löschbefehl korrekt ausgeführt wurde.<br />
 
 install_finish_delerror              = <b>ACHTUNG</b> Es konnten nicht alle Dateien gelöscht werden<br />Es muss mit einem FTP-Programm von Hand die <br /><br /><b>{PARAM1}</b><br />gelöscht werden
-install_finish_del                   = Es wurden alle relevanten Dateien erfolgreich gelöscht
+install_finish_del                   = Es wurden alle relevanten Dateien erfolgreich gelöscht.
 install_finish_local                 = <b>ACHTUNG:</b> Es handelt sich um eine lokale Installation.<br />Deshalb brauchen die sicherheitsrelevanten Dateien nicht gelöscht zu werden.
 install_finish_submit                = Hier geht es zum moziloCMS Login
 install_finish_clean_button          = Sicherheitsrelevante Daten löschen
