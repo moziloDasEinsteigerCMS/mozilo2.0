@@ -16,6 +16,9 @@ class Language {
             }
             $this->LANG_CONF = new Properties(BASE_DIR_CMS."sprachen/language_".$currentlanguage.".txt");
         } else {
+            # gibts die Sprache nicht wird es mit der Defaultsprache versucht
+            if(!file_exists($lang_dir) and true === file_exists(substr($lang_dir,0,-8)."deDE.txt"))
+                $lang_dir = substr($lang_dir,0,-8)."deDE.txt";
             $this->LANG_CONF = new Properties($lang_dir);
         }
     }
