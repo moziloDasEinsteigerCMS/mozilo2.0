@@ -62,6 +62,8 @@ $Punycode = new idna_convert();
 require_once(BASE_DIR_CMS."Language.php");
 $language       = new Language();
 
+setTimeLocale($language);
+
 $activ_plugins = array();
 $deactiv_plugins = array();
 $plugin_first = array();

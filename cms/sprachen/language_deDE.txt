@@ -6,6 +6,8 @@
 #
 _dateformat_0                                   = %d.%m.%Y, %H:%M:%S
 _translator_0                                   = mozilo
+# der Wert ist für date_default_timezone_set()
+_timezone                                       = Europe/Berlin
 # komma separierte list von Grossbuchstaben die in Kleine gewandelt werden müssen
 # siehe SearchClass.php setLowerChars()
 _search_chars_lo                                = 

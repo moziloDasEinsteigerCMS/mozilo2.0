@@ -1,9 +1,5 @@
 <?php if(!defined('IS_CMS')) die();
 
-#!!!!!!!!! prüfen
-if(function_exists('date_default_timezone_set'))
-    @date_default_timezone_set(@date_default_timezone_get());
-
 define("CMSVERSION","2.0.beta");
 define("CMSNAME","Amalia");
 define("CMSREVISION","3");

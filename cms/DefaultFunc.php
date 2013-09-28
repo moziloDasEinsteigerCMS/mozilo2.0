@@ -264,4 +264,22 @@ function helpFuncReplaceFileMarker(&$value, $key) {
     $value = str_replace("/","%2F",$value);
 }
 
+# diese function setzt die locale nur wenn es eine ??_??.utf8 gibt
+# wird auf Windowsservern nicht gehen
+function setTimeLocale($language) {
+    global $CMS_CONF;
+    $local = $CMS_CONF->get("cmslanguage").".utf8";
+    $local = substr($local,0,2)."_".substr($local,2);
+    $timezone = $language->getLanguageValue("_timezone");
+    $tmp = @ini_get('date.timezone');
+    if(false === @ini_set('date.timezone',$timezone))
+        @ini_set('date.timezone',$tmp);
+    $tmp = @date_default_timezone_get();
+    if(false === @date_default_timezone_set($timezone))
+        @date_default_timezone_set($tmp);
+    $tmp = @setlocale(LC_TIME, "0");
+    if(false === @setlocale(LC_TIME, $local))
+        @setlocale(LC_TIME, $tmp);
+}
+
 ?>
