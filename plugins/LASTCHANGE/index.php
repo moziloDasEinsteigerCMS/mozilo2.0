@@ -47,9 +47,6 @@ class LASTCHANGE extends Plugin {
 
         return "";
     } // function getContent
-    
-    
-    
     /***************************************************************
     * 
     * Gibt die Konfigurationsoptionen als Array zurück.
@@ -63,14 +60,12 @@ class LASTCHANGE extends Plugin {
         $config['deDE']['messagetext']  = array(
             "type" => "text",
             "description" => 'Eigener Text für "Letzte Änderung:"',
-            "maxlength" => "100",
-#            "size" => "30"
+            "maxlength" => "100"
             );
         $config['deDE']['date']  = array(
             "type" => "text",
             "description" => "Eigenes Datumsformat",
-            "maxlength" => "100",
-#            "size" => "30"
+            "maxlength" => "100"
             );
         $config['deDE']['showhiddenpagesinlastchanged'] = array(
             "type" => "checkbox",
@@ -85,9 +80,6 @@ class LASTCHANGE extends Plugin {
         }
 
     } // function getConfig
-    
-    
-    
     /***************************************************************
     * 
     * Gibt die Plugin-Infos als Array zurück. 
@@ -97,10 +89,10 @@ class LASTCHANGE extends Plugin {
         global $ADMIN_CONF;
         global $ADMIN_CONF;
         $adminlanguage = $ADMIN_CONF->get("language");
-               
+
         $info['deDE'] = array(
             // Plugin-Name
-            "<b>LastChange</b> \$Revision: 137 $",
+            "<b>LastChange</b> \$Revision: 138 $",
             // CMS-Version
             "2.0",
             // Kurzbeschreibung
@@ -114,7 +106,7 @@ class LASTCHANGE extends Plugin {
             {LASTCHANGE|date} gibt etwas aus wie: "(22.02.2010, 09:07:20)"<br />
             <br />
             <span style="font-weight:bold;">Konfiguration:</span><br />
-            Das Plugin bezieht den Text "Letzte Änderung" und das Datumsformat aus der CMS-Sprachdatei; man kann beides aber auch selbst angeben. Dabei orientiert sich das Datumsformat an der PHP-Funktion date().',
+            Das Plugin bezieht den Text "Letzte Änderung" und das Datumsformat aus der CMS-Sprachdatei; man kann beides aber auch selbst angeben. Dabei orientiert sich das Datumsformat an der PHP-Funktion strftime().',
             // Name des Autors
             "mozilo",
             // Download-URL
@@ -157,8 +149,7 @@ class LASTCHANGE extends Plugin {
         $url = $CatPage->get_Href($latestchanged['cat'],$latestchanged['page']);
         $titel = $language->getLanguageHTML("tooltip_link_page_2", $lastchangedpage, $CatPage->get_HrefText($latestchanged['cat'],false));
         $linktolastchangedpage = $CatPage->create_LinkTag($url,$lastchangedpage,false,$titel,false,"lastchangelink");
-        $lastchangedate = @date($this->dateformat, $latestchanged['time']);
-
+        $lastchangedate = strftime($this->dateformat, $latestchanged['time']);
         return array($lastchangedpage, $linktolastchangedpage,$lastchangedate);
     }
     // ------------------------------------------------------------------------------
