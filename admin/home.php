@@ -103,6 +103,13 @@ function home() {
         $time_zone = @date_default_timezone_get();
     $template[$titel][] = array(getLanguageValue("home_date_text"),date("Y-m-d H.i.s")." ".$time_zone);
 
+    // Sprache
+    $error[$titel][] = false;
+    if(false !== ($locale = @setlocale(LC_TIME, "0"))) {
+        $template[$titel][] = array(getLanguageValue("home_text_locale"),$locale);
+    } else
+        $template[$titel][] = array(getLanguageValue("home_text_locale"),getLanguageValue("home_text_nolocale"));
+
     // Zeile "PHP-Version"
     if(version_compare(PHP_VERSION, MIN_PHP_VERSION) >= 0) {
         $error[$titel][] = "ok";
