@@ -3,9 +3,9 @@
 function admin_Template($pagecontent,$message) {
     $html = get_HtmlHead();
 
-    $html .= '<body class="ui-widget" style="font-size:12px;">';
 
     if(!defined('PLUGINADMIN')) {
+        $html .= '<body class="ui-widget" style="font-size:12px;">';
         $html .= '<div id="mo-admin-td" class="mo-td-content-width">';
 
         $html .= '<noscript><div class="mo-noscript mo-td-content-width ui-state-error ui-corner-all"><div>'.getLanguageValue("error_no_javascript").'</div></div></noscript>';
@@ -46,6 +46,7 @@ $menu_fix = '<div id="menu-fix" class="ui-widget ui-widget-content ui-corner-rig
         $html .= '</div>';
 
     } else {
+        $html .= '<body class="ui-widget body-pluginadmin" style="font-size:12px;">';
         $html .= $pagecontent;
         if(LOGIN)
             $html .= get_Message($message);

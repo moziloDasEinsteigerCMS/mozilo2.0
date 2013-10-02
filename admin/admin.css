@@ -5,6 +5,10 @@ html, body {
     margin:0;
     height: 100%;
 }
+
+body.body-pluginadmin {
+    height: auto;
+}
 /* das sind die css atriebute von ui-state-hover. werden für die tabs benutzt */
 /* damit das nicht mit js gemacht werden muss */
 .mo-ui-state-hover:hover {
