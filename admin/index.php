@@ -11,7 +11,7 @@ $BASE_DIR = substr($BASE_DIR,0,-(strlen(ADMIN_DIR_NAME."/index.php")));
 define("BASE_DIR",$BASE_DIR);
 unset($BASE_DIR);
 
-$name_id = 'MOZILOID_'.md5($_SERVER['SERVER_ADDR'].substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], ADMIN_DIR_NAME."/index.php")));
+$name_id = 'MOZILOID_'.md5($_SERVER['SERVER_NAME'].BASE_DIR);
 define("SESSION_MO",$name_id);
 unset($name_id);
 
