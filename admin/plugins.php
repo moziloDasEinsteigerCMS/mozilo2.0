@@ -338,6 +338,8 @@ function get_plugin_config($conf_plugin,$config,$currentelement) {
                         $select_array = explode(",",$conf_plugin->get($name));
                     foreach($config[$name]['descriptions'] as $key => $descriptions) {
                         if(is_array($descriptions)) {
+                            if(count($descriptions) < 1)
+                                continue;
                             $input .= '<optgroup label="'.$key.'">';
                             foreach($descriptions as $opt_key => $opt_descriptions) {
                                 $selected = NULL;
