@@ -211,17 +211,22 @@ function help() {
         $php_version = contend_template(getLanguageValue("install_help_php_error",phpversion(),MIN_PHP_VERSION),false);
     }
     if($status) {
-        if(is_file(BASE_DIR_CMS.CONF_DIR_NAME.'/main.conf.php') and is_file(BASE_DIR_ADMIN.CONF_DIR_NAME.'/basic.conf.php')) {
-            $only = contend_template(getLanguageValue("install_help_password").'<br /><input type="submit" name="getonlypassword" value="'.getLanguageValue("install_help_password_button").'" />',true);
-            if(is_file('update.php'))
-                $only .= contend_template(getLanguageValue("install_help_update").'<br /><input type="submit" name="getonlyupdate" value="'.getLanguageValue("install_help_update_button").'" />',true);
-        } else {
-            $only = contend_template(getLanguageValue("install_help_password").'<br /><br /><b>'.getLanguageValue("install_help_no_button").'</b>',false);
-            if(is_file('update.php'))
-                $only .= contend_template(getLanguageValue("install_help_update").'<br /><br /><b>'.getLanguageValue("install_help_no_button").'</b>',false);
+        $deact = '';
+        $box_status = true;
+        $text_deact = '';
+        if(!is_file(BASE_DIR_CMS.CONF_DIR_NAME.'/main.conf.php') or !is_file(BASE_DIR_ADMIN.CONF_DIR_NAME.'/basic.conf.php')) {
+            $deact = ' disabled="disabled"';
+            $box_status = false;
+            $text_deact = '<b>'.getLanguageValue("install_help_no_button").'</b><br />';
         }
+        $only = contend_template($text_deact.getLanguageValue("install_help_password").'<br /><input type="submit" name="getonlypassword" value="'.getLanguageValue("install_help_password_button").'"'.$deact.' />',$box_status);
+        if(is_file('update.php'))
+            $only .= contend_template($text_deact.getLanguageValue("install_help_update").'<br /><input type="submit" name="getonlyupdate" value="'.getLanguageValue("install_help_update_button").'"'.$deact.' />',$box_status);
     }
-    return array($status,$php_version.contend_template(getLanguageValue("install_help")).$only);
+    $update_text = '<br /><br />'.getLanguageValue("install_help_update_title");
+    $update_text .= '<div class="toggle-content"><br />'.getLanguageValue("install_help_update_text").'</div>';
+
+    return array($status,$php_version.contend_template(getLanguageValue("install_help").$update_text).$only);
 }
 
 
@@ -961,6 +966,33 @@ $(function() {
         if($("#step_input").val() == "")
             $("#step_input").val($(".ui-tabs-selected a").attr("name"));
     });
+
+    var toggle_out = "'.getLanguageValue("install_toggle_open").'",
+        toggle_in = "'.getLanguageValue("install_toggle_close").'",
+        toggle_speed = 600,
+        toggle_speed_half = Math.round(toggle_speed / 2),
+        toggle_before = "&nbsp;&nbsp;&nbsp;<a class=\"toggle-link\" href=\"#\">"+toggle_out+"</a>";
+    $(".toggle-content").fadeOut(0).before(toggle_before);
+    $("body").on({
+        click: function(event) {
+            event.preventDefault();
+            var toggle_item = $(this).next(".toggle-content").eq(0),
+                that = $(this),
+                toggle_out_in = toggle_out;
+            if(toggle_item.is(":hidden")) {
+                toggle_item.fadeIn(toggle_speed);
+                toggle_out_in = toggle_in;
+            } else {
+                toggle_item.fadeOut(toggle_speed);
+            };
+            that.animate({opacity : 0},toggle_speed_half,function() {
+                that.text(toggle_out_in);
+                that.animate({opacity : 1},toggle_speed_half);
+            });
+        }
+    },".toggle-link");
+
+
 });';
 
 $html_start = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'
