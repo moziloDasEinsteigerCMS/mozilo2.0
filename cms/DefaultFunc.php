@@ -26,7 +26,7 @@ function cleanREQUEST($post_return) {
             # auf manchen Systemen mus ein stripslashes() gemacht werden
             if(strpos("tmp".$key,'\\') > 0
                 and  addslashes(stripslashes($key)) == $key) {
-                $value = stripslashes($key);
+                $key = stripslashes($key);
             }
             if(function_exists("mb_convert_encoding")) {
                 $value = @mb_convert_encoding($value,CHARSET,@mb_detect_encoding($value,"UTF-8,ISO-8859-1,ISO-8859-15",true));
