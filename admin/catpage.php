@@ -199,7 +199,7 @@ function li_table($name,$in_cat_page,$status,$type,$cat_files,$cat_page_link = f
 
 # hier bleiben die rechte erhalten
 function cat_page_move($name) {
-    if(false === ($error = moveFileDir(CONTENT_DIR_REL.$name["org"],CONTENT_DIR_REL.$name["new"])))
+    if(true !== ($error = moveFileDir(CONTENT_DIR_REL.$name["org"],CONTENT_DIR_REL.$name["new"])))
         return ajax_return("error",false,$error,true,"js-dialog-reload");
     return write_sort_list($name);
 }
