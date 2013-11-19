@@ -861,32 +861,22 @@ return '<span class="'.$cssclass.'"><img src="'.$imgsrc.'" alt="'.$language->get
                 // Plugin-Code includieren
                 require_once(PLUGIN_DIR_REL.$plugin."/index.php");
             }
-            $plugin_true = true;
             // Enthaelt der Code eine Klasse mit dem Namen des Plugins?
             if(class_exists($plugin)) {
                 // Objekt instanziieren und Inhalt holen!
                 if(!isset($this->$plugin))
                     $this->$plugin = new $plugin();
+                if(file_exists(PLUGIN_DIR_REL.$plugin."/plugin.css")) {
+                    $css = '<style type="text/css"> @import "'.URL_BASE.PLUGIN_DIR_NAME.'/'.$plugin.'/plugin.css"; </style>';
+                    $this->insert_in_head($css);
+                }
                 $replacement = $this->$plugin->getPluginContent($plugin_parameter);
             } else {
-                $plugin_true = false;
                 $replacement = $this->createDeadlink($plugin, $language->getLanguageValue("plugin_error_1", $plugin));
-            }
-            if($plugin_true and file_exists(PLUGIN_DIR_REL.$plugin."/plugin.css")) {
-                $css = '<style type="text/css"> @import "'.URL_BASE.PLUGIN_DIR_NAME.'/'.$plugin.'/plugin.css"; </style>';
-                if(strpos($this->content,$css) < 1 and !in_array($css,$this->script_replace)) {
-                    $dummy = '<!-- dummy script style '.count($this->script_search).' -->';
-                    $this->script_search[] = $dummy;
-                    $this->script_replace[] = $css;
-                    $this->content = str_replace(array("</head>","</HEAD>"),$dummy."\n</head>",$this->content);
-                }
             }
             # return Plugin inhalt
             return $replacement;
-        } #elseif(in_array($plugin, $this->deactiv_plugins)) {
-            # Deactiviertes Plugin mit nichts ersetzen
-#            return NULL;
-#        }
+        }
         # Deactiviertes Plugin mit nichts ersetzen oder alles was nicht in $this->activ_plugins steht
         return NULL;
     }
