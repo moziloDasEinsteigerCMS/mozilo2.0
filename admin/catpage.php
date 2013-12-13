@@ -301,19 +301,19 @@ function save_page($cat, $page) {
 }
 
 function make_NewOrgCatPageFromRequest() {
-    $post = getRequestValue('cat_page_change','post');
+    $post = getRequestValue('cat_page_change','post',false);
     $new_cat = key($post);
     $new_page = false;
     if(is_array($post[$new_cat])) {
         $new_page = key($post[$new_cat]);
-        $tmp = substr($post[$new_cat][$new_page],3,-3);
-        if(strpos($tmp,"%5D%5B") > 1)
-            list($org_cat,$org_page) = explode("%5D%5B",$tmp);
+        $tmp = substr($post[$new_cat][$new_page],1,-1);
+        if(strpos($tmp,"][") > 1)
+            list($org_cat,$org_page) = explode("][",$tmp);
         else
             return false;
     } else {
         $org_page = false;
-        $org_cat = substr($post[$new_cat],3,-3);
+        $org_cat = substr($post[$new_cat],1,-1);
     }
     global $CatPage;
     $name = array();
