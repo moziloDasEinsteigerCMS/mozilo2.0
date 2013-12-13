@@ -1,5 +1,7 @@
 _dateformat                          = %d.%m.%Y, %H:%M:%S
 _translator                          = mozilo
+# der Wert ist für date_default_timezone_set()
+_timezone                            = Europe/Berlin
 language_name                        = Deutsch
 cms_admin_titel                      = moziloCMS Admin
 file                                 = Datei
