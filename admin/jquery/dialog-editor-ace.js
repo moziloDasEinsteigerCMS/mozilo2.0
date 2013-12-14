@@ -2,6 +2,7 @@ var editor_file = ""; // das muss gesetzt werden beim öfnen des editors
 var dialog_editor = false;
 var editor;
 var editor_session;
+var dialog_prev_pageedit_box = false;
 //var ace_width_test_string = '<pre id="ace_width_test_string" class="ace_editor">WWWWWWWWWW</pre>';
 
 function send_editor_data(para,savepage) {
@@ -79,6 +80,51 @@ if(dialog_editor.data("close_after_save") === true) {
     });
 }
 
+
+function send_editor_preview() {
+    var prev_url = $('.ui-dialog-title a',dialog_editor.parents('.ui-dialog')).attr("href");
+    $.ajax({
+        global: true,
+        cache: false,
+        type: "POST",
+        url: prev_url,
+        data: "prevcontentadmin="+ rawurlencode_js(editor_session.getValue()),
+        async: true,
+        dataType: "html",// html
+        // timeout geht nur bei async: true und ist in error und complete verfügbar
+        timeout:20000,
+        beforeSend: function(jqXHR) {
+            dialog_editor.data("send_object",jqXHR);
+            // das dient dazu das der error dialog nich aufgeht
+            dialog_editor.data("send_abort",false);
+            dialog_open("editor_send_cancel");
+        },
+        success: function(getdata, textStatus, jqXHR){
+            if(dialog_multi.dialog("isOpen")) {
+                dialog_multi.dialog("close");
+            }
+            if(getdata == "true") {
+                var prev_iframe = $('<iframe frameborder="0" width="100%" height="100%" align="left" style="overflow:visible;"></iframe>').prop('src', prev_url);
+                dialog_prev_pageedit_box.dialog({
+                    width: (parseInt($(window).width()) - dialogMaxheightOffset),
+                    height: (parseInt($(window).height()) - dialogMaxheightOffset)
+                }).append(prev_iframe).dialog("open");
+            } else {
+                dialog_open("error_messages","unbekanter fehler");
+            }
+            dialog_editor.data("send_object",false);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            if(dialog_multi.dialog("isOpen")) {
+                dialog_multi.dialog("close");
+            }
+            dialog_editor.data("send_object",false);
+            if(!dialog_editor.data("send_abort")) {
+                dialog_open("error_messages","status= " + textStatus + "\nerror:\n" + errorThrown);
+            }
+        }
+    });
+}
 
 function dialog_editor_send_cancel() {
     dialog_multi.css("background", "url(" + ICON_URL + "ajax-loader.gif) center center no-repeat")
@@ -380,6 +426,9 @@ $(function() {
         editor.focus();
     });
 
+
+    $("body").append('<div id="prev-pageedit-box"></div>')
+
     $("#pageedit-box").dialog({
         autoOpen: false,
         height: "auto",
@@ -423,7 +472,6 @@ $(function() {
             }
         },
         open: function(event, ui) {
-//$("#out").html($("#out").html()+"<br />dialogopen");
             if($('.js-coloreditor-button').length > 0)
                 $('#ce-colorchange').dialog("close");
             $("#menu-fix").hide(0).attr("id","menu-fix-close-editor");
@@ -438,6 +486,41 @@ $(function() {
             init_ace_editor();
         }
     });
+
+    if(action_activ == "catpage") {
+        dialog_editor.dialog({buttons: [{
+            text: mozilo_lang["button_save"],
+            click: function() {
+                send_editor_data(editor_file+"&content="+rawurlencode_js(editor_session.getValue()),true);
+            }
+        },{
+            text: mozilo_lang["button_preview"],
+            click: function() {
+                send_editor_preview();
+            }
+        }]});
+
+        $("#prev-pageedit-box").dialog({
+            autoOpen: false,
+            width: "auto",
+            height: "auto",
+            modal: true,
+            position: "center",
+            resizable: true,
+            create: function(event, ui) {
+                dialog_prev_pageedit_box = $(this);
+            },
+            close: function(event, ui) {
+                if(dialog_editor.data("send_object"))
+                    dialog_editor.data("send_object").abort();
+                dialog_editor.data("send_object",false);
+                var file_href = $('.ui-dialog-title a',dialog_editor.parents('.ui-dialog')).attr("href");
+                $.post( file_href,{ prevcontentadmin: "prevcontentadminthisclear"});
+                $(this).html("");
+                editor.focus();
+            }
+        });
+    }
 
     $('.overviewselect, .usersyntaxselectbox').multiselect({
         multiple: false,

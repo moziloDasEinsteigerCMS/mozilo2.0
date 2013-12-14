@@ -194,6 +194,17 @@ if(!defined("ACTION_CONTENT"))
 // Zuerst: Uebergebene Parameter ueberpruefen
 set_CatPageRequest();
 
+# session setzen mit der vorschau vom editor aus dem admin
+if(DRAFT and getRequestValue('prevcontentadmin','post',false)) {
+    unset($_SESSION['prevcontentadmin']);
+    $tmp = getRequestValue('prevcontentadmin','post',false);
+    if($tmp != "prevcontentadminthisclear") {
+        $_SESSION['prevcontentadmin'][CAT_REQUEST][PAGE_REQUEST] = $tmp;
+    }
+    exit("true");
+} elseif(!DRAFT)
+    unset($_SESSION['prevcontentadmin']);
+
 // Dann: HTML-Template einlesen und mit Inhalt fuellen
 readTemplate($template,$pagecontent);
 
@@ -364,6 +375,9 @@ function getContent() {
     # kein Draft mode und page ist draft
     if(!DRAFT and $CatPage->get_Type(CAT_REQUEST,PAGE_REQUEST) == EXT_DRAFT)
         return "";
+    # die session mit der vorschau als Inhaltsseite ausgeben
+    elseif(DRAFT and isset($_SESSION['prevcontentadmin'][CAT_REQUEST][PAGE_REQUEST]))
+        return $_SESSION['prevcontentadmin'][CAT_REQUEST][PAGE_REQUEST];
     elseif($CatPage->exists_CatPage(CAT_REQUEST,PAGE_REQUEST))
         return $CatPage->get_PageContent(CAT_REQUEST,PAGE_REQUEST);
     return "";

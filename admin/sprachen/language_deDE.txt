@@ -71,6 +71,7 @@ images                               = Bilder
 function_exists_error                = Funktion existiert nicht
 button_cancel                        = Abbrechen
 button_save                          = Speichern
+button_preview                       = Vorschau
 files_button                         = Dateien
 get_memory                           = Memory verwendet
 get_execut_time                      = Seite in {PARAM1} Sek. erstelt
