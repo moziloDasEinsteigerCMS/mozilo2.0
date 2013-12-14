@@ -164,6 +164,8 @@ home_titel_test_mail                 = Mailversand-Test
 home_text_backupsystem               = Backup- und Install-System verfügbar
 home_error_backupsystem              = Backup- und Install-System nicht verfügbar
 home_date_text                       = Aktuelles Jahr-Monat-Tag Stunde:Minute:Sekunde Zeitzone
+home_text_locale                     = Sprache die für Datums Ausgabe Verwendet wird
+home_text_nolocale                   = Sprache des Webservers
 
 catpage_button                       = Inhalt
 category_button                      = Kategorien
