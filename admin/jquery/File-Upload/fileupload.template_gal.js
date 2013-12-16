@@ -24,7 +24,7 @@ $.widget('blueimpUI.fileupload', $.blueimpUI.fileupload, {
                     '<tr>' +
                         '<td rowspan="2" width="1%" class="preview"><span class="fade"></span></td>' +
                         '<td class="size mo-pading-l-r" width="1%"></td>' +
-                        '<td class="mo-pading-l-r">'+
+                        '<td class="mo-pading-l-r" width="93%">'+
                             '<div class="progress progress-success progress-striped active"><div class="bar" style="width:0%;"></div></div>'+
                         '</td>' +
                         '<td rowspan="2" width="1%" class="mo-nowrap">' +
@@ -71,7 +71,7 @@ $.widget('blueimpUI.fileupload', $.blueimpUI.fileupload, {
                     '<tr>' +
                         '<td rowspan="3" width="1%" class="preview"></td>' +
                         '<td class="size mo-pading-l-r" width="1%"></td>' +
-                        '<td class="pixelsize mo-pading-l-r"><span></span> Pixel</td>' +
+                        '<td class="pixelsize mo-pading-l-r" width="93%"><span></span> Pixel</td>' +
                         '<td rowspan="3" class="delete" width="1%">' +
                         '<button class="fu-img-button mo-icons-icon mo-icons-delete">&nbsp;</button>'+
                        '<img class="fu-img-button resize mo-icons-icon mo-icons-img-scale" src="'+ICON_URL_SLICE+'" alt="img-scale" />'+
@@ -100,11 +100,7 @@ $.widget('blueimpUI.fileupload', $.blueimpUI.fileupload, {
             if(file.subtitle)
                 row.find('.subtitle span').text(rawurldecode_js(file.subtitle));
             else  {
-                row.find('.subtitle span')
-                        .css('width','100%')
-                        .css('height','1em')
-                        .css('display','block')
-                        .css('cursor','text');
+                row.find('.subtitle span').addClass('fu-empty');
                 if(typeof file.subtitle == "undefined")
                     row.find('.subtitle-lang').text("");
             }

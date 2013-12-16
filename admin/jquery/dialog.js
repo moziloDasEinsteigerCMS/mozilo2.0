@@ -398,6 +398,10 @@ function send_data(para,change_item) {
                         cange_size(change_item);
                     } else if(send_item_status == "gallery_subtitle") {
                         change_item.siblings('.fu-subtitle').text(change_item.val()).show(0);
+if(change_item.siblings('.fu-subtitle').text().length < 1)
+    change_item.siblings('.fu-subtitle').text(change_item.val()).addClass('fu-empty');
+else
+    change_item.siblings('.fu-subtitle').text(change_item.val()).removeClass('fu-empty');
                         change_item.remove();
                     } else if(send_item_status == "file_rename") {
                         file_rename(change_item);

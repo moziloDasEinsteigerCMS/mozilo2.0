@@ -145,6 +145,14 @@ vertical-align:middle;
     width: 100%;
 }
 
+.files td.subtitle span.fu-empty {
+    width: 97%;
+    height: 1em;
+    display: block;
+    cursor: text;
+    background-color: #E6E6E6;
+}
+
 .files img {
 vertical-align:middle;
   border: none;
