@@ -155,40 +155,40 @@ class Properties {
     # oder nur $key
     public function getToTextarea($key = false) {
         $syntax = NULL;
+        # alle $this->properties zeilenweise als key = value
         if($key === false) {
             foreach($this->properties as $key => $value) {
-                $syntax .= $key." = ".$value."\n";#<br />
+                $syntax .= $key." = ".$value."\n";
             }
-            if(strlen($syntax) >= strlen("\n"))#<br />
-                $syntax = substr($syntax,0,(strlen($syntax)-strlen("\n")));#<br />
-        } else
+            # denn letzen zeilenumbruch entfernen
+            if(strlen($syntax) >= strlen("\n"))
+                $syntax = substr($syntax,0,(strlen($syntax)-strlen("\n")));
+        # denn inhalt von key
+        } else {
             $syntax = $this->get($key);
-        $syntax = str_replace(array("<br />","&","<",">"),array("\n","&#38;","&#60;","&#62;"),$syntax);
+            $syntax = str_replace("<br />","\n",$syntax);
+        }
+        $syntax = str_replace(array("&","<",">"),array("&#38;","&#60;","&#62;"),$syntax);
         return $syntax;
     }
 
-    # setzt die props anhand einer textarea. Achtung löscht vorher die $this->properties
+    # setzt die $this->properties anhand einer textarea. Achtung löscht vorher die $this->properties
     public function setFromTextarea($content) {
-#        if(strstr($this->file,"syntax.conf.php"))
-#            global $specialchars;
         $content = str_replace(array("\r\n","\r","\n"),"\n",$content);
-#$tmp = $content;
         $content = explode("\n",$content);
         $syntax = array();
         $key = "d*u*m*y";
         $syntax[$key] = NULL;
         foreach($content as $value) {
-#            $value = trim($value);
             preg_match("/^([^=][a-zA-Z0-9_]*) = (.*)/",$value,$array);
             if(count($array) == 3) {
                 $key = trim($array[1]);
                 $syntax[$key] = $array[2];
             } else {
-                $syntax[$key] .= "\n".$value;#"<br />".
+                $syntax[$key] .= "\n".$value;
             }
         }
-#        if(isset($syntax["d*u*m*y"]))
-            unset($syntax["d*u*m*y"]);
+        unset($syntax["d*u*m*y"]);
         $this->properties = array();
         $this->setFromArray($syntax);
         return $syntax;
