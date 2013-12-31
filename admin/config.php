@@ -12,7 +12,7 @@ function config() {
             $ret = $USER_SYNTAX->setFromTextarea($content);
             $syntax = "";
             foreach($ret as $key => $value) {
-                $syntax .= '<b>'.$key.'</b> = <span style="color:#ff0000">SYNTAX&gt;&gt;&gt;</span>'.htmlentities($value).'<span style="color:#ff0000">&lt;&lt;&lt;SYNTAX</span><br /><hr />';
+                $syntax .= '<b>'.$key.'</b> = <span style="color:#00ff00">SYNTAX&gt;&gt;&gt;</span>'.htmlentities($value).'<span style="color:#00ff00">&lt;&lt;&lt;SYNTAX</span><br /><hr />';
             }
             $syntax = '<div class="mo-nowrap">'.$syntax."</div>";
             require_once(BASE_DIR_ADMIN.'editsite.php');
