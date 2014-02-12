@@ -3,13 +3,21 @@ var dialog_editor = false;
 var editor;
 var editor_session;
 var dialog_prev_pageedit_box = false;
+
+if(typeof moziloSyntax == "undefined")
+    var moziloSyntax = false;
+if(typeof moziloUserSyntax != "undefined") {
+    if(!moziloSyntax)
+        moziloSyntax = moziloUserSyntax;
+    else
+        moziloSyntax += "|"+moziloUserSyntax;
+}
 //var ace_width_test_string = '<pre id="ace_width_test_string" class="ace_editor">WWWWWWWWWW</pre>';
 
 function send_editor_data(para,savepage) {
     if(para.substring(0, 1) != "&")
         para = "&"+para;
-    para = "action="+action_activ+para; //escape()
-//$("#out").html($("#out").html()+"<br />savepage= "+para);
+    para = "action="+action_activ+para;
     $.ajax({
         global: true,
         cache: false,
@@ -17,7 +25,7 @@ function send_editor_data(para,savepage) {
         url: "index.php",
         data: para,
         async: true,
-        dataType: "html",// html
+        dataType: "html",
         // timeout geht nur bei async: true und ist in error und complete verfügbar
         timeout:20000,
         beforeSend: function(jqXHR) {
@@ -30,34 +38,28 @@ function send_editor_data(para,savepage) {
             if(dialog_multi.dialog("isOpen")) {
                 dialog_multi.dialog("close");
             }
-//$("#out").html($("#out").html()+"<br />success");
             // Achtung vom server muss immer ein tag zurückkommen
             getdata = clean_data(getdata);
             if(retError !== false) {
-//$("#out").html($("#out").html()+"<br />error_messages"+retError.html());
                 dialog_open("from_php",retError);
             } else if(retSuccess !== false) {
-//$("#out").html($("#out").html()+"<br />dialog_messages="+retSuccess.length);
                 // nur öffnen wenn es auch einen inhalt gibt
                 if(retSuccess.text().length > 5) {
                     dialog_open("from_php",retSuccess);
                 }
                 if(!savepage && pagecontent !== false) {
-//$("#out").html($("#out").html()+"<br />open");
-//                    $("#" + meditorID).text(pagecontent);
                     dialog_editor.dialog("open");
-editor_session.setValue(pagecontent);
-init_ace_editor(); //pagecontent
+                    editor_session.setValue(pagecontent);
+                    init_ace_editor();
                     dialog_editor.data("diffcontent",pagecontent);
                 }
 
                 if(savepage) {
-//editor_session.getValue();
                     dialog_editor.data("diffcontent",editor_session.getValue());
-if(dialog_editor.data("close_after_save") === true) {
-    dialog_editor.dialog("close");
-    return;
-}
+                    if(dialog_editor.data("close_after_save") === true) {
+                        dialog_editor.dialog("close");
+                        return;
+                    }
                 }
                 // beim config wird nee select mit geschickt die müssen wir mit dem original ersetzen
                 if(replace_item !== false) {
@@ -163,6 +165,36 @@ function dialog_editor_save_beforclose() {
     }]}).html(returnMessage(false, mozilo_lang["error_save_beforeclose"]));
 }
 
+function isSyntaxSelect(range_ace,aTag) {
+    var tmp_test;
+    range_ace.start.column -= 1;
+    range_ace.end.column += 1;
+    var test_string = editor_session.doc.getTextRange(range_ace);
+    range_ace.start.column += 1;
+    range_ace.end.column -= 1;
+
+    if(moziloSyntax) {
+        tmp_test = new RegExp("^\\[(("+moziloSyntax+"){1,1}[\\|\\]]{1,1}|("+moziloSyntax+"){1,1}=(.|\\s)*\\|)$");
+        if(tmp_test.test(test_string) && tmp_test.test(aTag))
+            return aTag.replace(/[\[\|\]]/g, "");
+    }
+    // nur mozilo Eigen Platzhalter Tauschen
+    if(typeof moziloPlace != "undefined") {
+        tmp_test = new RegExp("^\\{("+moziloPlace+")\\}$");
+        if(tmp_test.test(test_string) && tmp_test.test(aTag))
+            return aTag.replace(/[\{\}]/g, "");
+    }
+    if(typeof moziloSmileys != "undefined") {
+        var tmp_test = new RegExp("^\\:("+moziloSmileys+")\\:$");
+        var tmp_aTag = aTag.substr(1, (aTag.length -2));
+        if(tmp_test.test(test_string) && tmp_test.test(tmp_aTag)) {
+            aTag = aTag.substr(2, (aTag.length -4));
+            return aTag;
+        }
+    }
+    return false;
+}
+
 function insert_ace(aTag, eTag, select) {
     var test_range = editor_session.selection.rangeList,
         range_ace = [],
@@ -172,21 +204,32 @@ function insert_ace(aTag, eTag, select) {
         tmp_aTag,
         tmp_eTag,
         syntax_color = "[farbe=";
+
     // im css mode gibts nur #hex
     if($('#select-mode').val() == "css") {
         aTag = "#"+aTag.substr(syntax_color.length,6);
         eTag = false;
     }
-    tmp_aTag = aTag;
-    tmp_eTag = eTag;
-//$('#out').html($('#out').html()+"getMode="+$('#select-mode').val()+"<br>")
+
     if(test_range.ranges.length == 0) {
         range_ace[0] = editor.getSelectionRange();
+        if(false !== (tmp = isSyntaxSelect(range_ace[0],aTag))) {
+            aTag = tmp;
+            eTag = false;
+            select = false;
+        }
     } else {
         for (var i = 0; i < test_range.ranges.length; i++) {
             range_ace[i] = test_range.ranges[i];
+            if(false !== (tmp = isSyntaxSelect(range_ace[i],aTag))) {
+                aTag = tmp;
+                eTag = false;
+                select = false;
+            }
         }
     }
+    tmp_aTag = aTag;
+    tmp_eTag = eTag;
 
     editor.exitMultiSelectMode();
     var row_column_offset = 0;
@@ -253,8 +296,7 @@ function insert_ace(aTag, eTag, select) {
     editor.focus();
 }
 
-function init_ace_editor() { // pagecontent
-//$("#out").html($("#out").html()+"<br>box="+$('#pagecontent-border').width());
+function init_ace_editor() {
     var box_height = $('#pageedit-box-inhalt').height(),
         new_width = $('#pagecontent-border').width(),
         mo_syntax_box = 0;
@@ -296,7 +338,6 @@ function get_editor_settings() {
     if(navigator.cookieEnabled == true) {
         if(document.cookie && document.cookie.match(/mozilo_editor_settings=[^;]+/i)) {
             var settings = document.cookie.match(/mozilo_editor_settings=[^;]+/i)[0].split("=")[1].split(",");
-//$("#out").html($("#out").html()+"<br>get_cookie = "+settings[0]+","+settings[1]+","+settings[2]+","+settings[3]+",");
 
             if(settings[0] == "true")
                 $('#show_gutter').addClass('ed-ace-icon-active');
