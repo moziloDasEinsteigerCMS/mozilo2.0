@@ -393,6 +393,15 @@ class Syntax {
         }
     }
 
+    function insert_in_tail($data) {
+        if(!in_array($data,$this->script_replace)) {
+            $dummy = '<!-- dummy script_tail '.count($this->script_search).' -->';
+            $this->content = str_replace(array("</body>","</BODY>"),$dummy."\n</body>",$this->content);
+            $this->script_search[] = $dummy;
+            $this->script_replace[] = $data;
+        }
+    }
+
     function insert_jquery_in_head($jquery_type) {
         $jquery =array();
         $jquery['jquery'] = '<script type="text/javascript" src="'.URL_BASE.CMS_DIR_NAME.'/jquery/jquery-1.7.2.min.js"></script>';
@@ -629,13 +638,7 @@ class Syntax {
             elseif ($syntax == "bildrechts") {
                 $cssclass = "rightcontentimage";
             }
-#!!!!!!!!!!!! mal schauen ob das schlau ist?
-/*
-$subtitle_tag = "";
-if($subtitle != "")
-    $subtitle_tag = '<br /><span class="imagesubtitle">'.$subtitle.'</span>';
-return '<span class="'.$cssclass.'"><img src="'.$imgsrc.'" alt="'.$language->getLanguageHtml("alttext_image_1", $alt).'" class="'.$cssclass.'" />'.$subtitle_tag.'</span>';
-*/
+
             // ohne Untertitel
             if ($subtitle == "") {
                 // normales Bild: ohne <span> rundrum
