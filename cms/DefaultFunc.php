@@ -145,6 +145,9 @@ function getDirAsArray($dir,$filetype = false,$sort_type = "sort") {
         global $ALOWED_IMG_ARRAY;
         $filetype = $ALOWED_IMG_ARRAY;
     }
+    # alle ext im array in kleinschreibung wandeln
+    if(is_array($filetype))
+        $filetype = array_map('strtolower', $filetype);
     $dateien = array();
     if(is_dir($dir) and false !== ($currentdir = opendir($dir))) {
         while(false !== ($file = readdir($currentdir))) {
@@ -153,8 +156,6 @@ function getDirAsArray($dir,$filetype = false,$sort_type = "sort") {
                 continue;
             # nur mit ext
             if(is_array($filetype)) {
-                # alle ext im array in kleinschreibung wandeln
-                $filetype = array_map('strtolower', $filetype);
                 $ext1 = strtolower(substr($file,-(EXT_LENGTH)));
                 $ext2 = strtolower(substr($file,strrpos($file,".")));
                 if(in_array($ext2,$filetype) or in_array($ext1,$filetype)) {
