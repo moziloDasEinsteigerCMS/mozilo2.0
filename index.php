@@ -88,11 +88,6 @@ $TEMPLATE_FILE  = $LAYOUT_DIR."/template.html";
 
 $LAYOUT_DIR_URL = $specialchars->replaceSpecialChars(URL_BASE.$LAYOUT_DIR,true);
 
-#!!!!!! wird der noch benutzt?
-$WEBSITE_NAME = $specialchars->rebuildSpecialChars($CMS_CONF->get("websitetitle"),false,true);
-if ($WEBSITE_NAME == "")
-    $WEBSITE_NAME = "Titel der Website";
-
 if ($CMS_CONF->get("usecmssyntax") == "false")
     define("USE_CMS_SYNTAX",false);
 else
