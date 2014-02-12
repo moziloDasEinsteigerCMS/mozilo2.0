@@ -5675,6 +5675,13 @@
   // --------------------------------------------------------------------------------
   function PclZipUtilTranslateWinPath($p_path, $p_remove_disk_letter=true)
   {
+    $p_path = trim($p_path);
+    if($p_remove_disk_letter and ctype_alpha($p_path[0]) and $p_path[1] == ":")
+        $p_path = substr($p_path, 2);
+
+    if(strpos($p_path, '\\') !== false)
+        $p_path = str_replace(array('\\\\','\\'), '/',$p_path);
+/*
     if (stristr(php_uname(), 'windows')) {
       // ----- Look for potential disk letter
       if (($p_remove_disk_letter) && (($v_position = strpos($p_path, ':')) != false)) {
@@ -5685,6 +5692,7 @@
           $p_path = strtr($p_path, '\\', '/');
       }
     }
+*/
     return $p_path;
   }
   // --------------------------------------------------------------------------------
