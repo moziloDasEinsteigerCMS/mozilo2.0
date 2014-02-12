@@ -5,9 +5,12 @@
     function buildContactForm($settings) {
         global $lang_contact;
         global $CMS_CONF;
-        global $WEBSITE_NAME;
         global $specialchars;
         global $lang_contact;
+
+        $WEBSITE_NAME = $specialchars->rebuildSpecialChars($CMS_CONF->get("websitetitle"),false,true);
+        if($WEBSITE_NAME == "")
+            $WEBSITE_NAME = "Titel der Website";
 
         foreach(array("name","website","mail","message","privacy") as $name) {
             ${"config_".$name}[0] = $lang_contact->getLanguageValue("contactform_".$name);
