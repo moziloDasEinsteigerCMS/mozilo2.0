@@ -27,7 +27,7 @@ function send_editor_data(para,savepage) {
         async: true,
         dataType: "html",
         // timeout geht nur bei async: true und ist in error und complete verfügbar
-        timeout:20000,
+        timeout:30000,
         beforeSend: function(jqXHR) {
             dialog_editor.data("send_object",jqXHR);
             // das dient dazu das der error dialog nich aufgeht
