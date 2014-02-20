@@ -67,7 +67,6 @@ class MenuSubs extends Plugin {
                     and $CMS_CONF->get("hidecatnamedpages") == "true"
                     and substr($cat,(strrpos($cat,"%2F") + 3)) == $page)
                 continue;
-#echo CAT_REQUEST." = ".$cat." -> ".$page." 1<br />\n";
             if(strpos($page,"%2F") > 1
                     and $CatPage->get_Type($cat,$page) == EXT_HIDDEN
                     and $CatPage->get_Type($page,false) == "cat") {
@@ -77,7 +76,6 @@ class MenuSubs extends Plugin {
 #                if($CatPage->is_Activ($cat,$page))
                     $ul .= $this->getBreadcrumbPage($page,true);
             } elseif($CatPage->get_Type($cat,$page) != EXT_HIDDEN and $CatPage->is_Activ($cat,$page)) {
-#echo $cat." -> ".$page." 2<br />\n";
                 if($CMS_CONF->get("hidecatnamedpages") == "true" and $cat == $page)
                     continue;
                 $ul .= '<li>'.$this->breadcrumb_delimiter.$CatPage->create_AutoLinkTag($cat,$page,"").'</li>';
@@ -118,6 +116,7 @@ class MenuSubs extends Plugin {
                 } elseif($CatPage->is_Activ($cat,false)) {
 #                    $cssactiv = "active";
                     $activ = true;
+#echo "catactiv=".$cat."<br />\n";
                 }
                 $ul .= '<li class="cat-menusubs">'.$CatPage->create_AutoLinkTag($cat,false,$css.$cssactiv);
                 if(!$only_main and ($activ or $CMS_CONF->get("usesubmenu") == 2)) {# or $CatPage->is_Activ($cat,false)
@@ -152,7 +151,8 @@ class MenuSubs extends Plugin {
             }
             if(strpos($page,"%2F") > 1
                     and $CatPage->get_Type($cat,$page) == EXT_HIDDEN
-                    and $CatPage->get_Type($page,false) == "cat") {
+                    and $CatPage->get_Type($page,false) == "cat"
+                    and count($CatPage->get_PageArray($page,array(EXT_PAGE,EXT_HIDDEN,EXT_LINK))) > 0) {
                 $ul .= '<li class="subcat-menusubs">'.$this->create_CatSubLinkTag($cat,$page,"subcat-menusubs-link menusubs-link");
                 if(strstr(CAT_REQUEST,$page) or $CMS_CONF->get("usesubmenu") == 2)
                     $ul .= $this->getMenuPage($page,true);
@@ -173,15 +173,15 @@ class MenuSubs extends Plugin {
     function create_CatSubLinkTag($cat,$page,$css) {
         global $specialchars, $CatPage, $language;
         $cssactiv = "";
-#echo CAT_REQUEST."<br />\n";
-        if(strstr(CAT_REQUEST,$page)) {
-#        if(strstr(CAT_REQUEST,$cat."%2F")) {
+        if(strstr(CAT_REQUEST,$page))
             $cssactiv = "active";
-#echo CAT_REQUEST." = ".$page."<br />\n";
-        }
+        $text = $CatPage->get_HrefText($page,false);
+        $text = substr($text,(strrpos($text,"/")));
+        if($text[0] == "/")
+            $text = substr($text,1);
         return $CatPage->create_LinkTag(
                 $CatPage->get_Href($page,false),
-                $specialchars->rebuildSpecialChars(substr($page,(strrpos($page,"%2F") + 3)),true,true),
+                $text,
                 $css.$cssactiv,
                 $language->getLanguageHtml("tooltip_link_category_1", $CatPage->get_HrefText($page,false)));
     }
