@@ -825,6 +825,8 @@ class CatPageClass {
     # $cat muss nicht url codiert sein
     function make_DummyCat($cat) {
         $cat = $this->get_AsKeyName($cat, true);
+        if($this->exists_CatPage($cat,false))
+            return false;
         $this->CatPageArray[$cat]['_pages-'] = array();
         $this->CatPageArray[$cat]["_name-"] = $cat;
         $this->CatPageArray[$cat]["_orgname-"] = $cat;
@@ -833,6 +835,26 @@ class CatPageClass {
         $this->CatPageArray[$cat]["_time-"] = "1";
         $this->CatPageArray[$cat]["_protect-"] = false;
         $this->OrgCatPageArray[$cat] = $this->CatPageArray[$cat];
+        return true;
+    }
+
+    # erzeugen in einer Kategorie eine Inhaltseite die es nicht gibt
+    # $cat und $page muss nicht url codiert sein
+    # $type = EXT_PAGE, EXT_HIDDEN oder EXT_DRAFT
+    function make_DummyPage($cat,$page,$type = EXT_PAGE) {
+        if($type != EXT_PAGE and $type != EXT_HIDDEN and $type != EXT_DRAFT)
+            return false;
+        $cat = $this->get_AsKeyName($cat, true);
+        $page = $this->get_AsKeyName($page, true);
+        if($this->exists_CatPage($cat,$page))
+            return false;
+        $this->CatPageArray[$cat]['_pages-'][$page]["_name-"] = $page;
+        $this->CatPageArray[$cat]['_pages-'][$page]["_orgname-"] = $page;
+        $this->CatPageArray[$cat]['_pages-'][$page]["_type-"] = $type;
+        $this->CatPageArray[$cat]['_pages-'][$page]["_time-"] = "1";
+        $this->CatPageArray[$cat]['_pages-'][$page]["_protect-"] = false;
+        $this->OrgCatPageArray[$cat]['_pages-'][$page] = $this->CatPageArray[$cat]['_pages-'][$page];
+        return true;
     }
 
 ###############################################################################
