@@ -43,8 +43,7 @@ function catpage() {
         exit();
     }
 
-
-    $page_lang = array("pages" => "","url" => "","target" => "","page_saveasnormal" => "","page_saveashidden" => "","page_saveasdraft" => "");
+    $page_lang = array("category" => "","page" => "","pages" => "","url" => "","target" => "","page_saveasnormal" => "","page_saveashidden" => "","page_saveasdraft" => "");
     # Variable erzeugen z.B. pages = $text_pages
     foreach($page_lang as $language => $tmp) {
         $page_lang[$language] = getLanguageValue($language);
@@ -61,19 +60,19 @@ function new_cat_page($page_lang) {
     $new_catpage = '<ul class="js-new-ul">'
                         .'<li class="js-li-cat mo-li ui-widget-content ui-corner-all">';
                             $status = '<span class="js-status">0</span> '.$page_lang["pages"];
-                            $new_catpage .= li_table("Kategorie","[Kategorie]",$status,"cat",$cat_files)
+                            $new_catpage .= li_table($page_lang["category"],"[".$page_lang["category"]."]",$status,"cat",$cat_files)
                         .'</li>'
                         .'<li class="js-li-page mo-in-ul-li new-page ui-widget ui-state-default ui-corner-all">';
                             $status = '<span class="js-status">'.$page_lang[EXT_HIDDEN].'</span>';
-                            $new_catpage .= li_table("Inhaltsseite","[Kategorie][Inhaltsseite".EXT_HIDDEN."]",$status,EXT_HIDDEN,"")
+                            $new_catpage .= li_table($page_lang["page"],"[".$page_lang["category"]."][".$page_lang["page"].EXT_HIDDEN."]",$status,EXT_HIDDEN,"")
                         .'</li>'
                         .'<li class="js-li-cat mo-li js-link ui-widget-content ui-corner-all">';
                             $status = $page_lang["url"].' '.$page_lang["target"].' <span class="js-status">blank</span>';
-                            $new_catpage .= li_table("Link Kategorie","[Link%20Kategorie-_blank-".EXT_LINK."]",$status,"cat","",true)
+                            $new_catpage .= li_table($page_lang["url"]." ".$page_lang["category"] ,"[".$page_lang["url"]."%20".$page_lang["category"]."-_blank-".EXT_LINK."]",$status,"cat","",true)
                         .'</li>'
                         .'<li class="js-li-page mo-in-ul-li new-page js-link ui-widget ui-state-default ui-corner-all">';
                             $status = $page_lang["url"].' '.$page_lang["target"].' <span class="js-status">blank</span>';
-                            $new_catpage .= li_table("Link Inhaltsseite","[Kategorie][Link%20Inhaltsseite-_blank-".EXT_LINK."]",$status,EXT_LINK,"",true)
+                            $new_catpage .= li_table($page_lang["url"]." ".$page_lang["page"],"[".$page_lang["category"]."][".$page_lang["url"]."%20".$page_lang["page"]."-_blank-".EXT_LINK."]",$status,EXT_LINK,"",true)
                         .'</li>'
                     .'</ul>';
     return $new_catpage;

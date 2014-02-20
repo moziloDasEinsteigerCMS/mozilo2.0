@@ -55,9 +55,9 @@ function getFileUpload($curent_dir,$dir = false,$count_text = false,$newcss = ""
                         $tmp_h = $GALLERY_CONF->get('maxheight');
                     $fileupload .= ''
                     .'<img style="width:2em;height:1px;" src="'.ICON_URL_SLICE.'" alt=" " />'
-                    .'Bildgröße <input type="text" name="new_width" value="'.$tmp_w.'" size="4" maxlength="4" class="mo-input-digit js-in-digit" /> x <input type="text" name="new_height" value="'.$tmp_h.'" size="4" maxlength="4" class="mo-input-digit js-in-digit" />'
+                    .getLanguageValue("gallery_image_size").' <input type="text" name="new_width" value="'.$tmp_w.'" size="4" maxlength="4" class="mo-input-digit js-in-digit" /> x <input type="text" name="new_height" value="'.$tmp_h.'" size="4" maxlength="4" class="mo-input-digit js-in-digit" />'
                     .'<img style="width:2em;height:1px;" src="'.ICON_URL_SLICE.'" alt=" " />'
-                    .'Vorschaugröße <input type="text" name="thumbnail_max_width" value="'.$GALLERY_CONF->get('maxthumbwidth').'" size="4" maxlength="4" class="mo-input-digit js-in-digit" /> x <input type="text" name="thumbnail_max_height" value="'.$GALLERY_CONF->get('maxthumbheight').'" size="4" maxlength="4" class="mo-input-digit js-in-digit" />'
+                    .getLanguageValue("gallery_preview_size").' <input type="text" name="thumbnail_max_width" value="'.$GALLERY_CONF->get('maxthumbwidth').'" size="4" maxlength="4" class="mo-input-digit js-in-digit" /> x <input type="text" name="thumbnail_max_height" value="'.$GALLERY_CONF->get('maxthumbheight').'" size="4" maxlength="4" class="mo-input-digit js-in-digit" />'
                     .'';
                 }
                 $fileupload .= '</div>'

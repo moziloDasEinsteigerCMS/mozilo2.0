@@ -199,6 +199,9 @@ gallery_error_newname                = Die Galerie konnte nicht umbenannt werden
 gallery_help_conf                    = Skalierungseinstellungen vorbelegen.
 gallery_error_noexists               = Es existiert keine Galerie mit diesem Namen.
 gallery_delete_confirm               = Diese Galerie mit allen Bildern und Untertiteln löschen?
+gallery_image_size                   = Bildgröße
+gallery_preview_size                 = Vorschaugröße
+gallery_text_subtitle                = Untertitel
 
 config_button                        = Einstellungen
 config_text                          = In diesem Bereich können verschiedene Grundeinstellungen und Vorgaben für die Website ausgewählt werden.
