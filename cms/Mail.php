@@ -38,8 +38,7 @@ function getHeader($from, $replyto) {
         ."Reply-To: ".$replyto."\r\n"
         ."X-Priority: 0\r\n"
         ."X-MimeOLE: \r\n"
-        ."X-mailer: moziloCMS\r\n"
-        ."\r\n";
+        ."X-mailer: moziloCMS\r\n";
 }
 
 // Prüft ob die Mail-Funktion verfügbar ist
