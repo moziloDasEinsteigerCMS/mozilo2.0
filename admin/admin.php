@@ -375,6 +375,12 @@ function send_backup_zip() {
             $dirs[] = BASE_DIR."install.php";
         if(is_file(BASE_DIR."update.php"))
             $dirs[] = BASE_DIR."update.php";
+        if(is_file(BASE_DIR."robots.txt"))
+            $dirs[] = BASE_DIR."robots.txt";
+        if(is_file(BASE_DIR."sitemap.xml"))
+            $dirs[] = BASE_DIR."sitemap.xml";
+        if(is_file(BASE_DIR."sitemap_addon.xml"))
+            $dirs[] = BASE_DIR."sitemap_addon.xml";
         if(is_file(BASE_DIR.".htaccess"))
             $dirs[] = BASE_DIR.".htaccess";
     }
