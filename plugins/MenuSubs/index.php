@@ -22,8 +22,9 @@ class MenuSubs extends Plugin {
             } else
                 return $this->getMenuPage(CAT_REQUEST);
         }
-        if($value === "menusubs_2" and $CatPage->exists_CatPage($this->settings->get("menusubs_2"),false))
-            return $this->getMenuPage($this->settings->get("menusubs_2"),false,true);
+        $menu2 = replaceFileMarker($this->settings->get("menusubs_2"),false);
+        if($value === "menusubs_2" and $CatPage->exists_CatPage($menu2,false))
+            return $this->getMenuPage($menu2,false,true);
         if($value === "sitemap_content")
             return $this->getSitemapCat();
         if($value === "breadcrumb") {
@@ -262,7 +263,7 @@ class MenuSubs extends Plugin {
         $cat_array = $CatPage->get_CatArray(false,false,array(EXT_PAGE,EXT_HIDDEN));
         foreach($cat_array as $cat) {
             if(strpos($cat,"%2F") !== false) continue;
-            $descriptions[$cat] = $CatPage->get_HrefText($cat, false);
+            $descriptions[FILE_START.$cat.FILE_END] = $CatPage->get_HrefText($cat, false);
         }
         $config['menusubs_2'] = array(
             "type" => "select",
