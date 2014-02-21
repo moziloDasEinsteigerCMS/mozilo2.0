@@ -115,13 +115,12 @@ $HTML                   = "";
 require_once(BASE_DIR_CMS."CatPageClass.php");
 $CatPage         = new CatPageClass();
 
-createGetCatPageFromModRewrite();
+if(!array_key_exists("cat",$_GET))
+    createGetCatPageFromModRewrite();
 
 # aus mod_rewrite url $_GET['cat'] und $_GET['page'] erstellen
 # das wird auch gebraucht wenn ein Plugin Virtuelle cat und pages erstellt
 function createGetCatPageFromModRewrite() {
-    if(array_key_exists("cat",$_GET))
-        return;
     # ein tmp dafor weil wenn URL_BASE = / ist werden alle / ersetzt durch nichts
     $url_get = str_replace("tmp".URL_BASE,"","tmp".$_SERVER['REQUEST_URI']);
     $url_get = str_replace("&amp;","&",$url_get);
