@@ -177,65 +177,65 @@ function copyFile($org,$new) {
 // und gallery/template.html und Pluginsconfs diese geändert
 // ------------------------------------------------------------------------------
 # wird nur von moveFileDir() aufgerufen
-# in den plugin.conf.php's muss der cat, page/file, gallery name urlcodiert sein nur die
-# trennung : nicht und es mus FILE_START und FILE_END benutzt werden
+# in den plugin.conf.php's es mus FILE_START und FILE_END benutzt werden
+# und die Inhaltseiten ext darf nicht Enthalten sein
 function updateFileNameInAll($old_name,$new_name) {
-    global $CMS_CONF;
     # nur diese pfade werden unterstüzt
     # dir/kategorie/CAT
     # dir/kategorie/CAT/PAGE
     # dir/kategorie/CAT/dateien/FILE
     # dir/galerien/GALLERY
 
+    $oldnew = array("old" => array("str" => array(),"url" => array()),
+                "new" => array("str" => array(),"url" => array()));
     # Kategorie Inhaltseite/Datei
-    if(strstr($old_name,"/".CONTENT_DIR_NAME."/")) {
+    if(strstr($old_name,"/".CONTENT_DIR_NAME."/") and substr($old_name,-EXT_LENGTH) != EXT_LINK) {
         $old_name = str_replace(CONTENT_DIR_REL,"",$old_name);
         $new_name = str_replace(CONTENT_DIR_REL,"",$new_name);
         # es ist eine Datei
         if(strstr($old_name,"/".CONTENT_FILES_DIR_NAME."/")) {
             $old_name = str_replace("/".CONTENT_FILES_DIR_NAME."/",":",$old_name);
             $new_name = str_replace("/".CONTENT_FILES_DIR_NAME."/",":",$new_name);
-            $old_name_p = array(FILE_START.$old_name.FILE_END);
-            $new_name_p = array(FILE_START.$new_name.FILE_END);
-            $old_name = FILE_START.rawurldecode($old_name).FILE_END;
-            $new_name = FILE_START.rawurldecode($new_name).FILE_END;
+            $oldnew["old"]["url"][0] = FILE_START.$old_name.FILE_END;
+            $oldnew["new"]["url"][0] = FILE_START.$new_name.FILE_END;
+            $oldnew["old"]["str"][0] = FILE_START.rawurldecode($old_name).FILE_END;
+            $oldnew["new"]["str"][0] = FILE_START.rawurldecode($new_name).FILE_END;
         # es wurde die Kategorie oder Inhaltseite geändert
         } else {
             # es wurde nur die Inhaltseite geändert
             if(strstr($old_name,"/")) {
-                $old_name = str_replace("/",":",$old_name);
-                $new_name = str_replace("/",":",$new_name);
-                $old_name_p = array(FILE_START.$old_name.FILE_END);
-                $new_name_p = array(FILE_START.$new_name.FILE_END);
-                $old_name = FILE_START.rawurldecode($old_name).FILE_END;
-                $new_name = FILE_START.rawurldecode($new_name).FILE_END;
+                $old_name = str_replace(array("/",EXT_PAGE,EXT_HIDDEN,EXT_DRAFT),array(":"),$old_name);
+                $new_name = str_replace(array("/",EXT_PAGE,EXT_HIDDEN,EXT_DRAFT),array(":"),$new_name);
+                $oldnew["old"]["url"][0] = FILE_START.$old_name.FILE_END;
+                $oldnew["new"]["url"][0] = FILE_START.$new_name.FILE_END;
+                $oldnew["old"]["str"][0] = FILE_START.rawurldecode($old_name).FILE_END;
+                $oldnew["new"]["str"][0] = FILE_START.rawurldecode($new_name).FILE_END;
             # es wurde die Kategorie geändert
             } else {
+                global $CMS_CONF;
                 if($CMS_CONF->get("defaultcat") == $old_name)
                     $CMS_CONF->set("defaultcat",$new_name);
                 $tmp_oldname = rawurldecode($old_name);
                 $tmp_newname = rawurldecode($new_name);
-                $tmp_oldname_p = $old_name;
-                $tmp_newname_p = $new_name;
                 $tmp_dir = CONTENT_DIR_REL.$new_name;
-                $old_name = array(FILE_START.$tmp_oldname.FILE_END);
-                $new_name = array(FILE_START.$tmp_newname.FILE_END);
-                $old_name_p = array(FILE_START.$tmp_oldname_p.FILE_END);
-                $new_name_p = array(FILE_START.$tmp_newname_p.FILE_END);
+                $oldnew["old"]["url"][0] = FILE_START.$old_name.FILE_END;
+                $oldnew["new"]["url"][0] = FILE_START.$new_name.FILE_END;
+                $oldnew["old"]["str"][0] = FILE_START.$tmp_oldname.FILE_END;
+                $oldnew["new"]["str"][0] = FILE_START.$tmp_newname.FILE_END;
                 # alle Inhaltseiten
                 foreach(getDirAsArray($tmp_dir,array(EXT_PAGE,EXT_HIDDEN,EXT_DRAFT)) as $page) {
                     $page_tmp = str_replace(array(EXT_PAGE,EXT_HIDDEN,EXT_DRAFT),"",$page);
-                    $old_name[] = FILE_START.$tmp_oldname.":".rawurldecode($page_tmp).FILE_END;
-                    $new_name[] = FILE_START.$tmp_newname.":".rawurldecode($page_tmp).FILE_END;
-                    $old_name_p[] = FILE_START.$tmp_oldname_p.":".$page_tmp.FILE_END;
-                    $new_name_p[] = FILE_START.$tmp_newname_p.":".$page_tmp.FILE_END;
+                    $oldnew["old"]["str"][] = FILE_START.$tmp_oldname.":".rawurldecode($page_tmp).FILE_END;
+                    $oldnew["new"]["str"][] = FILE_START.$tmp_newname.":".rawurldecode($page_tmp).FILE_END;
+                    $oldnew["old"]["url"][] = FILE_START.$oldnew.":".$page_tmp.FILE_END;
+                    $oldnew["new"]["url"][] = FILE_START.$new_name.":".$page_tmp.FILE_END;
                 }
                 # alle Dateien
                 foreach(getDirAsArray($tmp_dir."/".CONTENT_FILES_DIR_NAME,"file") as $file) {
-                    $old_name[] = FILE_START.$tmp_oldname.":".rawurldecode($file).FILE_END;
-                    $new_name[] = FILE_START.$tmp_newname.":".rawurldecode($file).FILE_END;
-                    $old_name_p[] = FILE_START.$tmp_oldname_p.":".$file.FILE_END;
-                    $new_name_p[] = FILE_START.$tmp_newname_p.":".$file.FILE_END;
+                    $oldnew["old"]["str"][] = FILE_START.$tmp_oldname.":".rawurldecode($file).FILE_END;
+                    $oldnew["new"]["str"][] = FILE_START.$tmp_newname.":".rawurldecode($file).FILE_END;
+                    $oldnew["old"]["url"][] = FILE_START.$oldnew.":".$file.FILE_END;
+                    $oldnew["new"]["url"][] = FILE_START.$new_name.":".$file.FILE_END;
                 }
             }
         }
@@ -243,10 +243,10 @@ function updateFileNameInAll($old_name,$new_name) {
     } elseif(strstr($old_name,"/".GALLERIES_DIR_NAME."/")) {
         $old_name = str_replace(GALLERIES_DIR_REL,"",$old_name);
         $new_name = str_replace(GALLERIES_DIR_REL,"",$new_name);
-        $old_name_p = array(FILE_START.$old_name.FILE_END);
-        $new_name_p = array(FILE_START.$new_name.FILE_END);
-        $old_name = FILE_START.rawurldecode($old_name).FILE_END;
-        $new_name = FILE_START.rawurldecode($new_name).FILE_END;
+        $oldnew["old"]["url"][0] = FILE_START.$old_name.FILE_END;
+        $oldnew["new"]["url"][0] = FILE_START.$new_name.FILE_END;
+        $oldnew["old"]["str"][0] = FILE_START.rawurldecode($old_name).FILE_END;
+        $oldnew["new"]["str"][0] = FILE_START.rawurldecode($new_name).FILE_END;
     } else
         return;
 
@@ -255,56 +255,73 @@ function updateFileNameInAll($old_name,$new_name) {
         if(substr($cat, -(EXT_LENGTH)) == EXT_LINK)
             continue;
         foreach(getDirAsArray(CONTENT_DIR_REL.$cat,array(EXT_PAGE,EXT_HIDDEN,EXT_DRAFT)) as $page) {
-            updateFileName(CONTENT_DIR_REL.$cat."/".$page,$old_name,$new_name);
+            updateFileName(CONTENT_DIR_REL.$cat."/".$page,$oldnew);
         }
     }
     # alle template.html und gallerytemplate.html dateien
     foreach(getDirAsArray(BASE_DIR.LAYOUT_DIR_NAME,"dir") as $template_dir) {
         if(file_exists(BASE_DIR.LAYOUT_DIR_NAME."/".$template_dir."/template.html")) {
-            updateFileName(BASE_DIR.LAYOUT_DIR_NAME."/".$template_dir."/template.html",$old_name,$new_name);
+            updateFileName(BASE_DIR.LAYOUT_DIR_NAME."/".$template_dir."/template.html",$oldnew);
         }
         if(file_exists(BASE_DIR.LAYOUT_DIR_NAME."/".$template_dir."/gallerytemplate.html")) {
-            updateFileName(BASE_DIR.LAYOUT_DIR_NAME."/".$template_dir."/gallerytemplate.html",$old_name,$new_name);
+            updateFileName(BASE_DIR.LAYOUT_DIR_NAME."/".$template_dir."/gallerytemplate.html",$oldnew);
         }
     }
     # Plugins Conf
     foreach(getDirAsArray(BASE_DIR.PLUGIN_DIR_NAME,"dir") as $plugin_dir) {
         if(file_exists(BASE_DIR.PLUGIN_DIR_NAME."/".$plugin_dir."/plugin.conf.php")) {
-            $tmp_conf = new Properties(BASE_DIR.PLUGIN_DIR_NAME."/".$plugin_dir."/plugin.conf.php");
-            $tmp_conf_array = $tmp_conf->toArray();
-            foreach($old_name_p as $pos => $test) {
-                foreach($tmp_conf_array as $key => $value) {
-                    if($test == $value) {
-                        $tmp_conf->set($key,$new_name_p[$pos]);
-                        continue;
-                    }
-                    if(str_replace(array(EXT_PAGE.FILE_END,EXT_HIDDEN.FILE_END,EXT_DRAFT.FILE_END,EXT_LINK.FILE_END),FILE_END,$test) == $value) {
-                        $tmp_conf->set($key,str_replace(array(EXT_PAGE.FILE_END,EXT_HIDDEN.FILE_END,EXT_DRAFT.FILE_END,EXT_LINK.FILE_END),FILE_END,$new_name_p[$pos]));
-                        continue;
-                    }
-                    if($test == $key) {
-                        $tmp_val = $tmp_conf->get($key);
-                        $tmp_conf->delete($key);
-                        $tmp_conf->set($new_name_p[$pos],$tmp_val);
-                        continue;
-                    }
-                    if(str_replace(array(EXT_PAGE.FILE_END,EXT_HIDDEN.FILE_END,EXT_DRAFT.FILE_END,EXT_LINK.FILE_END),FILE_END,$test) == $key) {
-                        $tmp_val = $tmp_conf->get($key);
-                        $tmp_conf->delete($key);
-                        $tmp_conf->set(str_replace(array(EXT_PAGE.FILE_END,EXT_HIDDEN.FILE_END,EXT_DRAFT.FILE_END,EXT_LINK.FILE_END),FILE_END,$new_name_p[$pos]),$tmp_val);
-                    }
-                }
-            }
-            unset($tmp_conf,$tmp_conf_array);
+            changeCatPageInConf(BASE_DIR.PLUGIN_DIR_NAME."/".$plugin_dir."/plugin.conf.php",$oldnew);
         }
     }
 }
 
-function updateFileName($file,$old_name,$new_name) {
-    $old_name = str_replace(array(EXT_PAGE.FILE_END,EXT_HIDDEN.FILE_END,EXT_DRAFT.FILE_END,EXT_LINK.FILE_END),FILE_END,$old_name);
-    $new_name = str_replace(array(EXT_PAGE.FILE_END,EXT_HIDDEN.FILE_END,EXT_DRAFT.FILE_END,EXT_LINK.FILE_END),FILE_END,$new_name);
+function changeCatPageInConf($conf,$oldnew) {
+    $content = file_get_contents($conf);
+    $status = false;
+    $new_content = "";
+    $content_array = preg_split('/([\{;]s:(\d+):\")/', $content, -1, PREG_SPLIT_DELIM_CAPTURE);
+    for($i = 0;$i < count($content_array);$i++) {
+        if(isset($content_array[($i + 1)]) and ctype_digit($content_array[($i + 1)])) {
+            $s_d = $content_array[$i];
+            $s_len = $content_array[($i + 1)];
+            $new_len = $s_len;
+            $line = $content_array[($i + 2)];
+            $i += 2;
+            $pregstatus = false;
+            if($s_len > 5) {
+                foreach($oldnew["old"]["str"] as $pos => $tmp) {
+                    $count = 0;
+                    $line = preg_replace('/'.preg_quote($oldnew["old"]["str"][$pos],"/").'/',$oldnew["new"]["str"][$pos],$line,-1,$count);
+                    if($count > 0) {
+                        $new_len += ((strlen($oldnew["new"]["str"][$pos]) * $count) - (strlen($oldnew["old"]["str"][$pos]) * $count));
+                        $status = true;
+                        $pregstatus = true;
+                    }
+                    $count = 0;
+                    $line = preg_replace('/'.preg_quote($oldnew["old"]["url"][$pos],"/").'/',$oldnew["new"]["url"][$pos],$line,-1,$count);
+                    if($count > 0) {
+                        $new_len += ((strlen($oldnew["new"]["url"][$pos]) * $count) - (strlen($oldnew["old"]["url"][$pos]) * $count));
+                        $status = true;
+                        $pregstatus = true;
+                    }
+                }
+            }
+            if($pregstatus) {
+                $s_d = str_replace($s_len,$new_len,$s_d);
+            }
+            $new_content .= $s_d.$line;
+        } else
+            $new_content .= $content_array[$i];
+    }
+
+    if($status) {
+        file_put_contents($conf,$new_content);
+    }
+}
+
+function updateFileName($file,$oldnew) {
     $content = file_get_contents($file);
-    $content_new = str_replace($old_name,$new_name,$content);
+    $content_new = str_replace($oldnew["old"]["str"],$oldnew["new"]["str"],$content);
     # nur wenn sich was geändert hat inhalt schreiben
     if($content != $content_new) {
         file_put_contents($file,$content_new);
