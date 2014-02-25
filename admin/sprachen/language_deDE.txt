@@ -85,6 +85,7 @@ toolbar_usersyntax                   = Benutzerdefinierte Syntaxelemente:
 toolbar_contents                     = Inhalte:
 toolbar_plugins                      = Plugins:
 toolbar_platzhalter                  = CMS-Variablen:
+toolbar_template_css                 = Template CSS und Bilder
 toolbar_platzhalter_CATEGORY         = Aktuelle Kategorie: Verzeichnisname
 toolbar_platzhalter_CATEGORY_NAME    = Aktuelle Kategorie: Name
 toolbar_platzhalter_PAGE             = Aktuelle Inhaltsseite: Dateiname ohne Erweiterung

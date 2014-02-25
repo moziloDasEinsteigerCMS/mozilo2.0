@@ -315,7 +315,7 @@ function returnTemplateSelectbox() {
 
     $LAYOUT_DIR = BASE_DIR.LAYOUT_DIR_NAME."/".$CMS_CONF->get("cmslayout").'/';
 
-    $selectbox = '<select name="template_css" class="overviewselect" title="'."Template CSS und Bilder".':">';#getLanguageValue("toolbar_plugins")
+    $selectbox = '<select name="template_css" class="overviewselect" title="'.getLanguageValue("toolbar_template_css",true).':">';
     $selectbox .= '<optgroup label="CSS">';
     foreach(getDirAsArray($LAYOUT_DIR.'css',array(".css"),"natcasesort") as $file) {
         $selectbox .= '<option value="{LAYOUT_DIR}/css/'.$specialchars->replaceSpecialChars($file,true).'">'.$specialchars->rebuildSpecialChars($file, false, true).'</option>';
