@@ -9,12 +9,7 @@ function config() {
     if(getRequestValue('savesyntax','post') == "true") {
         if(false !== ($content = getRequestValue('content','post',false))
                 and $CMS_CONF->get('usecmssyntax') == "true") {
-            $ret = $USER_SYNTAX->setFromTextarea($content);
-            $syntax = "";
-            foreach($ret as $key => $value) {
-                $syntax .= '<b>'.$key.'</b> = <span style="color:#00ff00">SYNTAX&gt;&gt;&gt;</span>'.htmlentities($value).'<span style="color:#00ff00">&lt;&lt;&lt;SYNTAX</span><br /><hr />';
-            }
-            $syntax = '<div class="mo-nowrap">'.$syntax."</div>";
+            $USER_SYNTAX->setFromTextarea($content);
             require_once(BASE_DIR_ADMIN.'editsite.php');
             $selctbox = '<span id="replace-item">'.returnUserSyntaxSelectbox().'</span>';
             $var_UserSyntax = '0E0M0P0T0Y0';
@@ -27,8 +22,7 @@ function config() {
                 $var_UserSyntax = implode('|',$moziloUserSyntax);
             }
             $var_UserSyntax = '<span id="moziloUserSyntax">'.$var_UserSyntax.'</span>';
-
-            echo ajax_return("success",false,returnMessage(true,$syntax),getLanguageValue("config_titel_usersyntax_test"),true).$selctbox.$var_UserSyntax;
+            echo ajax_return("success",false).$selctbox.$var_UserSyntax;
         } elseif($CMS_CONF->get('usecmssyntax') == "true") {
             require_once(BASE_DIR_ADMIN.'editsite.php');
             $selctbox = '<span id="replace-item">'.returnUserSyntaxSelectbox().'</span>';

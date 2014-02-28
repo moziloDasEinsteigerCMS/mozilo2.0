@@ -59,8 +59,13 @@ $moziloSyntax .= '----";';
 
 $editor_area_html = '<link type="text/css" rel="stylesheet" href="editsite.css" />';
 
+$editor_edit_usersyntax = "false";
+if(ACTION == "config")
+    $editor_edit_usersyntax = "true";
+
 $editor_area_html .= '<script language="Javascript" type="text/javascript" charset="utf-8">/*<![CDATA[*/
 var meditorID = "pagecontent";
+var editor_edit_usersyntax = '.$editor_edit_usersyntax.';
 '.$var_PluginsActiv.'
 '.$var_PluginsDeactiv.'
 '.$var_Place.'
