@@ -120,6 +120,7 @@ toolbar_editor_togglefold            = Alle Syntaxelemente die über mehrere Zei
 toolbar_editor_search                = Einen Begriff suchen
 toolbar_editor_searchall             = Alle gefunden Begriffe finden
 toolbar_editor_replace               = gefundene Begriffe ersetzen
+toolbar_editor_textall               = Alle
 
 filter_button_all_hide               = Alle Inhaltsseiten ausblenden
 filter_button_all_show               = Alle Inhaltsseiten einblenden

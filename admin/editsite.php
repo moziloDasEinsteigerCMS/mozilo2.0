@@ -54,7 +54,7 @@ function showEditPageForm()    {
             .'<input class="mo-ace-in-text" id="search-text" type="text" name="search-text" value="" />'
             .'<img id="search" class="ed-ace-icon ed-syntax-icon ed-find" src="'.ICON_URL_SLICE.'" alt="find"  title="'.getLanguageValue("toolbar_editor_search",true).'"hspace="0" vspace="0" />'
             .'<input class="mo-ace-in-check" type="checkbox" id="search-all" title="'.getLanguageValue("toolbar_editor_searchall",true).'" />'
-            .'<label class="mo-ace-in-check-label" for="search-all">Alle</label>'
+            .'<label class="mo-ace-in-check-label" for="search-all">'.getLanguageValue("toolbar_editor_textall",true).'</label>'
             .'<input class="mo-ace-in-text" id="replace-text" type="text" name="search" value="" />'
             .'<img id="replace" class="ed-ace-icon ed-syntax-icon ed-replace" src="'.ICON_URL_SLICE.'" alt="replace" title="'.getLanguageValue("toolbar_editor_replace",true).'" hspace="0" vspace="0" />'
     .'</td>'
