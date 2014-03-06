@@ -166,8 +166,8 @@ home_titel_test_mail                 = Mailversand-Test
 home_text_backupsystem               = Backup- und Install-System verfügbar
 home_error_backupsystem              = Backup- und Install-System nicht verfügbar
 home_date_text                       = Aktuelles Jahr-Monat-Tag Stunde:Minute:Sekunde Zeitzone
-home_text_locale                     = Sprache die für Datums Ausgabe Verwendet wird
-home_text_nolocale                   = Sprache des Webservers
+home_text_locale                     = Spracheinstellung der Serverumgebung - (PHP setlocale)
+home_text_nolocale                   = Webservers
 
 catpage_button                       = Inhalt
 category_button                      = Kategorien
@@ -347,7 +347,7 @@ plugins_error_regex_error            = Fehler regex_error existiert nicht
 plugins_info                         = Information
 plugins_title_manage                 = Plugins verwalten
 plugins_text_filebutton              = Installieren oder überschreiben
-plugins_text_fileinfo                = nur die "plugin.conf.php" wird nicht überschrieben
+plugins_text_fileinfo                = Vorhandene Konfigurationseinstellungen bleiben auch beim Überschreiben erhalten
 plugins_button_install               = Install
 plugins_button_delete                = Alle Ausgewählten Plugins löschen
 

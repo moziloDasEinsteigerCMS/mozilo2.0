@@ -240,13 +240,23 @@ $html .= '<script type="text/javascript" src="'.URL_BASE.ADMIN_DIR_NAME.'/jquery
 }
 
 function get_Head() {
+    global $CMS_CONF, $specialchars;
+
     $html = '<div class="mo-td-content-width mo-margin-bottom">'
-        .'<div class="ui-widget ui-state-default ui-corner-all mo-li-head-tag-no-ul mo-li-head-tag mo-td-middle ui-helper-clearfix">'
-            .getHelpIcon()
-            .'<a href="../index.php?draft=true" title="'.getLanguageValue("help_website_button",true).'" target="_blank" class="mo-butten-a-img"><img class="mo-icons-icon mo-icons-website" src="'.ICON_URL_SLICE.'" alt="" /></a>'
-            .'<span class="mo-bold mo-td-middle mo-padding-left">'.getLanguageValue("cms_admin_titel",true).'</span>'
+        .'<div class="mo-align-center mo-head-box ui-widget ui-state-default ui-corner-all mo-li-head-tag-no-ul mo-li-head-tag mo-td-middle ui-helper-clearfix">'
+            .'<span style="float:left;" class="mo-td-middle">'
+                .getHelpIcon()
+                .'<a href="../index.php?draft=true" title="'.getLanguageValue("help_website_button",true).'" target="_blank" class="mo-butten-a-img"><img class="mo-icons-icon mo-icons-website" src="'.ICON_URL_SLICE.'" alt="" /></a>'
+                .'<span class="mo-bold mo-td-middle mo-padding-left">'
+                    .getLanguageValue("cms_admin_titel",true)
+                .'</span>'
 # ist eigendlich nur zum entwikeln brauchbar
-.'<span class="mo-td-middle mo-padding-left"> - <!--{EXECUTETIME}--> <!--{MEMORYUSAGE}--></span>'
+#.'<span class="mo-td-middle mo-padding-left"> - <!--{EXECUTETIME}--> <!--{MEMORYUSAGE}--></span>'
+            .'</span>'
+            .'<span id="admin-websitetitle" class="mo-bold mo-td-middle">'
+                .$specialchars->rebuildSpecialChars($CMS_CONF->get("websitetitle"), false, true)
+            .'</span>'
+            .'<img style="width:1px;" class="mo-icons-icon mo-icons-blank mo-td-middle" src="'.ICON_URL_SLICE.'" alt="" />'
             .'<a style="float:right;" href="index.php?logout=true" title="'.getLanguageValue("logout_button",true).'" class="mo-butten-a-img"><img class="mo-icons-icon mo-icons-logout" src="'.ICON_URL_SLICE.'" alt="" /></a>'
         ."</div>"
     ."</div>";
