@@ -180,10 +180,10 @@ class Properties {
         $key = "d*u*m*y";
         $syntax[$key] = NULL;
         foreach($content as $value) {
-            preg_match("/^([^=][a-zA-Z0-9_]*) = (.*)/",$value,$array);
-            if(count($array) == 3) {
-                $key = trim($array[1]);
-                $syntax[$key] = $array[2];
+            preg_match("/^([a-zA-Z0-9_]+){1,1}( = ){1,1}(.*)$/",$value,$array);
+            if(count($array) == 4) {
+                $key = $array[1];
+                $syntax[$key] = $array[3];
             } else {
                 $syntax[$key] .= "\n".$value;
             }
