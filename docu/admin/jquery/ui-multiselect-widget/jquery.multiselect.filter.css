@@ -1,0 +1,11 @@
+/*1=oben, 2=rechts, 3=unten, 4=links*/
+
+.ui-multiselect-hasfilter ul { position:relative; top:2px; }
+.ui-multiselect-filter { width:100%; float:left; margin-right:10px; font-size:11px; }
+.ui-multiselect-filter input { width:50%; line-height:16px; font-size:12px; margin:0 0 0 5px; height:12px; padding:2px; border:none; -webkit-appearance:textfield; -webkit-box-sizing:content-box; }
+
+/*
+.ui-multiselect-hasfilter ul { position:relative; top:2px }
+.ui-multiselect-filter { float:left; margin-right:10px; font-size:11px }
+.ui-multiselect-filter input { width:100px; font-size:10px; margin-left:5px; height:15px; padding:2px; border:1px solid #292929; -webkit-appearance:textfield; -webkit-box-sizing:content-box; }
+*/

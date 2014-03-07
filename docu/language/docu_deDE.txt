@@ -1,0 +1,38 @@
+do_toggle_in_text       = ... weniger
+do_toggle_out_text      = ... mehr
+do_title                = moziloCMS Dokumentation
+
+do_editor_text_title = Herzlichen Glückwunsch!
+do_editor_text_row   = Mit moziloCMS haben Sie ein modernes Webseitenssystem das seine Programmierer einfach und genial geschaffen haben. Bereits dieser elegante Editor besticht mit durchdachter Funktionalität. – Wenn Sie jetzt denken, hier wird aber ordentlich rumgeschleimt, dann haben Sie völlig Recht. Nichts davon ist wahr. Es ging nur darum mit irgendeinem Blödsinn ausreichend Text zusammenzubekommen um den Zeilenfluss neben einem Bild darstellen zu können.
+
+do_editor_text_row_new = Mit NEUER TEXT haben Sie ein modernes Webseitenssystem das seine Programmierer einfach und genial geschaffen haben. Bereits dieser elegante Editor besticht mit durchdachter NEUER TEXT. – Wenn Sie jetzt denken, hier wird aber ordentlich rumgeschleimt, dann haben Sie völlig Recht. Nichts davon ist wahr. Es ging nur darum mit irgendeinem Blödsinn ausreichend Text zusammenzubekommen um den Zeilenfluss neben einem NEUER TEXT darstellen zu können.
+
+do_catpage     = Willkommen
+do_page2    = Eine Galerie
+do_page3    = Kontakt
+do_file1    = mozilo.jpg
+do_file2    = text.txt
+do_file3    = Test_PDF.pdf
+do_file4    = Test_ZIP.zip
+do_gallery1    = moziloCMS
+do_gallery2    = Galerie 1
+do_websitetitle = moziloCMS - Das CMS für Einsteiger
+do_username = Benutzername
+do_pluginname = Demo Plugin
+
+domenu_docu_help               = Dokumentations Hilfe
+domenu_install                 = Instalation
+domenu_start                   = Einführung
+domenu_home                    = Info
+domenu_catpage                 = Inhalt
+domenu_files                   = Dateien
+domenu_gallery                 = Galerien
+domenu_config                  = Einstellungen
+domenu_admin                   = Admin
+domenu_plugins                 = Plugins
+domenu_template                = Template
+domenu_editsite                = Editor
+domenu_editsite_syntax         = CMS Syntax
+domenu_editsite_rule           = CMS Syntax Regeln
+domenu_editsite_editusersyntax = Eigene Syntaxelemente
+domenu_editsite_template       = Edit Template

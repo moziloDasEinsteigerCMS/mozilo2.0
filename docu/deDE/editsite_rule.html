@@ -1,0 +1,247 @@
+<p class="do-margin-start">Die mozilo-eigenen <b>CMS-Syntax Elemente</b> erzeugen einen <b>HTML-Code</b>, der von den Webbrowsern in die entsprechende Seitenanzeige umgesetzt wird.<br />
+Daher müssen die für HTML geltenden Grundregeln ebenso bei der moziloCMS-Syntax beachtet werden.</p>
+
+<div class="do-separate"></div>
+
+<h2>Grundeinteilung</h2>
+
+<p>Syntaxelemente werden grundsätzlich in in zwei Typen eingeteilt:</p>
+<ul>
+<li><b>Block</b> – erzeugt einen eigenen Bereich, der vom (Quell)Text vorher und nachher durch einen Zeilenumbruch getrennt ist.</li>
+</ul>
+<ul>
+<li><b>Inline</b> – fügt sich fließend in den (Quell)Text ein.</li>
+</ul>
+<br />
+<h2>Syntax Elemente verschachteln</h2>
+<p>In ein Syntaxelement können weiterere Elemente eingefügt werden, nach der Regel:</p>
+<ul>
+<li><b>Block</b> darf enthalten: <b>Block</b>, <b>Inline</b>, <b>Text</b><br />
+<br /> </li>
+<li><b>Inline</b> darf enthalten: <b>Inline</b>, <b>Text</b></li>
+</ul>
+<br />
+
+<p>Beispiel: <span style="font-size:18px; font-weight:bold;"><i>Überschrift</i></span><br />
+<br />
+<b>Richtig:</b> <span class="do-paren">[</span><span class="do-mo-syntax">ueber2</span><span class="do-paren">|</span><span class="do-paren">[</span><span class="do-mo-syntax">kursiv</span><span class="do-paren">|</span>Überschrift<span class="do-paren">] ]</span> – weil <b>Inline</b>-Element im <b>Block</b>-Element.<br />
+<b>Falsch:</b> <span class="do-paren">[</span><span class="do-mo-syntax">kursiv</span><span class="do-paren">|</span><span class="do-paren">[</span><span class="do-mo-syntax">ueber2</span><span class="do-paren">|</span>Überschrift<span class="do-paren">] ]</span> – weil <b>Block</b>-Element im <b>Inline</b>-Element.
+<br />
+<div class="do-error-box">Sollte eine falsche Anordnung auf den ersten Blick trotzdem zum richtigen Ergebnis führen, so muss dies nicht in allen Browsern der Fall sein.<br />
+Unterschiedliche Browser interpretieren Verstöße gegen die allgemeinen Syntax Regeln unterschiedlich "großzügig".</div>
+<br />
+
+<p>Die bei Verschachtelungen jeweils erlaubten Inhalte können folgender Tabelle entnommen werden:</p>
+
+<br />
+
+<table style="d_width:100%;" class="do-table" cellspacing="0" border="0" cellpadding="0">
+<tbody><tr>
+<th colspan="2">Syntax Element</th>
+<th>Typ</th>
+<th><span class="do-paren">=</span> Darf enthalten <span class="do-paren">|</span></th>
+<th><span class="do-paren">|</span> Darf enthalten <span class="do-paren">]</span></th>
+</tr>
+<tr>
+<td>{ED_ICON_link}</td>
+<td><span class="do-paren">[</span><span class="do-mo-syntax">link</span><span class="do-paren">=</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+<td class="do-td-center"><b>Inline</b></td>
+<td class="do-td-center"><b>Text, Inline</b></td>
+<td class="do-td-center"><b>Text</b></td>
+</tr>
+<tr>
+<td>{ED_ICON_mail}</td>
+<td><span class="do-paren">[</span><span class="do-mo-syntax">mail</span><span class="do-paren">=</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+<td class="do-td-center"><b>Inline</b></td>
+<td class="do-td-center"><b>Text, Inline</b></td>
+<td class="do-td-center"><b>Text</b></td>
+</tr>
+<tr>
+<td>{ED_ICON_seite}</td>
+<td><span class="do-paren">[</span><span class="do-mo-syntax">seite</span><span class="do-paren">=</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+<td class="do-td-center"><b>Inline</b></td>
+<td class="do-td-center"><b>Text, Inline</b></td>
+<td class="do-td-center"><b>{MODUL_select_catpage}</b></td>
+</tr>
+<tr>
+<td>{ED_ICON_kategorie}</td>
+<td><span class="do-paren">[</span><span class="do-mo-syntax">kategorie</span><span class="do-paren">=</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+<td class="do-td-center"><b>Inline</b></td>
+<td class="do-td-center"><b>Text, Inline</b></td>
+<td class="do-td-center"><b>{MODUL_select_catpage}</b></td>
+</tr>
+<tr>
+<td>{ED_ICON_datei}</td>
+<td><span class="do-paren">[</span><span class="do-mo-syntax">datei</span><span class="do-paren">=</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+<td class="do-td-center"><b>Inline</b></td>
+<td class="do-td-center"><b>Text, Inline</b></td>
+<td class="do-td-center"><b>{MODUL_select_file}</b></td>
+</tr>
+<tr>
+<td>{ED_ICON_bild}</td>
+<td><span class="do-paren">[</span><span class="do-mo-syntax">bild</span><span class="do-paren">=</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+<td class="do-td-center"><b>Inline</b></td>
+<td class="do-td-center"><b>Text</b></td>
+<td class="do-td-center"><b>{MODUL_select_file}</b></td>
+</tr>
+<tr>
+<td>{ED_ICON_bildlinks}</td>
+<td><span class="do-paren">[</span><span class="do-mo-syntax">bildlinks</span><span class="do-paren">=</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+<td class="do-td-center"><b>Inline</b></td>
+<td class="do-td-center"><b>Text</b></td>
+<td class="do-td-center"><b>{MODUL_select_file}</b></td>
+</tr>
+<tr>
+<td>{ED_ICON_bildrechts}</td>
+<td><span class="do-paren">[</span><span class="do-mo-syntax">bildrechts</span><span class="do-paren">=</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+<td class="do-td-center"><b>Inline</b></td>
+<td class="do-td-center"><b>Text</b></td>
+<td class="do-td-center"><b>{MODUL_select_file}</b></td>
+</tr>
+<tr>
+<td>{ED_ICON_absatz}</td>
+<td><span class="do-paren">[</span><span class="do-mo-syntax">absatz</span><span class="do-paren">=</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+<td class="do-td-center"><b>Inline</b></td>
+<td class="do-td-center"><b>Text</b></td>
+<td class="do-td-center"><b>Text aus {ED_ICON_ueber1}{ED_ICON_ueber2}{ED_ICON_ueber3}</b></td>
+</tr>
+<tr>
+<td>{ED_ICON_liste}</td>
+<td><span class="do-paren">[</span><span class="do-mo-syntax">liste</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+<td class="do-td-center"><b>Block</b></td>
+<td class="do-td-center">&nbsp;</td>
+<td class="do-td-center"><b>Text, Block, Inline</b></td>
+</tr>
+<tr>
+<td>{ED_ICON_numliste}</td>
+<td><span class="do-paren">[</span><span class="do-mo-syntax">numliste</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+<td class="do-td-center"><b>Block</b></td>
+<td class="do-td-center">&nbsp;</td>
+<td class="do-td-center"><b>Text, Block, Inline</b></td>
+</tr>
+<tr>
+<td>{ED_ICON_tabelle}</td>
+<td><span class="do-paren">[</span><span class="do-mo-syntax">tabelle</span><span class="do-paren">=</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+<td class="do-td-center"><b>Block</b></td>
+<td class="do-td-center"><b>class name</b></td>
+<td class="do-td-center"><b>Text, Block, Inline</b></td>
+</tr>
+<tr>
+<td>{ED_ICON_linie}</td>
+<td><span class="do-paren">[</span><span class="do-mo-syntax">----</span><span class="do-paren">]</span></td>
+<td class="do-td-center"><b>Block</b></td>
+<td class="do-td-center">&nbsp;</td>
+<td class="do-td-center">&nbsp;</td>
+</tr>
+<tr>
+<td>{ED_ICON_html}</td>
+<td><span class="do-paren">[</span><span class="do-mo-syntax">html</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+<td class="do-td-center">&nbsp;</td>
+<td class="do-td-center">&nbsp;</td>
+<td class="do-td-center"><b>html</b></td>
+</tr>
+<tr>
+<td>{ED_ICON_include}</td>
+<td><span class="do-paren">[</span><span class="do-mo-syntax">include</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+<td class="do-td-center">&nbsp;</td>
+<td class="do-td-center">&nbsp;</td>
+<td class="do-td-center"><b>{MODUL_select_catpage}</b></td>
+</tr>
+<tr>
+<td class="do-no-td" colspan="5">&nbsp;</td>
+</tr>
+<tr>
+<td>{ED_ICON_ueber1}</td>
+<td><span class="do-paren">[</span><span class="do-mo-syntax">ueber1</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+<td class="do-td-center"><b>Block</b></td>
+<td class="do-td-center">&nbsp;</td>
+<td class="do-td-center"><b>text, Inline</b></td>
+</tr>
+<tr>
+<td>{ED_ICON_ueber2}</td>
+<td><span class="do-paren">[</span><span class="do-mo-syntax">ueber2</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+<td class="do-td-center"><b>Block</b></td>
+<td class="do-td-center">&nbsp;</td>
+<td class="do-td-center"><b>text, Inline</b></td>
+</tr>
+<tr>
+<td>{ED_ICON_ueber3}</td>
+<td><span class="do-paren">[</span><span class="do-mo-syntax">ueber3</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+<td class="do-td-center"><b>Block</b></td>
+<td class="do-td-center">&nbsp;</td>
+<td class="do-td-center"><b>Text, Inline</b></td>
+</tr>
+<tr>
+<td>{ED_ICON_links}</td>
+<td><span class="do-paren">[</span><span class="do-mo-syntax">links</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+<td class="do-td-center"><b>Block</b></td>
+<td class="do-td-center">&nbsp;</td>
+<td class="do-td-center"><b>Text, Block, Inline</b></td>
+</tr>
+<tr>
+<td>{ED_ICON_zentriert}</td>
+<td><span class="do-paren">[</span><span class="do-mo-syntax">zentriert</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+<td class="do-td-center"><b>Block</b></td>
+<td class="do-td-center">&nbsp;</td>
+<td class="do-td-center"><b>Text, Block, Inline</b></td>
+</tr>
+<tr>
+<td>{ED_ICON_block}</td>
+<td><span class="do-paren">[</span><span class="do-mo-syntax">block</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+<td class="do-td-center"><b>Block</b></td>
+<td class="do-td-center">&nbsp;</td>
+<td class="do-td-center"><b>Text, Block, Inline</b></td>
+</tr>
+<tr>
+<td>{ED_ICON_rechts}</td>
+<td><span class="do-paren">[</span><span class="do-mo-syntax">rechts</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+<td class="do-td-center"><b>Block</b></td>
+<td class="do-td-center">&nbsp;</td>
+<td class="do-td-center"><b>Text, Block, Inline</b></td>
+</tr>
+<tr>
+<td>{ED_ICON_fett}</td>
+<td><span class="do-paren">[</span><span class="do-mo-syntax">fett</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+<td class="do-td-center"><b>Inline</b></td>
+<td class="do-td-center">&nbsp;</td>
+<td class="do-td-center"><b>Text, Inline</b></td>
+</tr>
+<tr>
+<td>{ED_ICON_kursiv}</td>
+<td><span class="do-paren">[</span><span class="do-mo-syntax">kursiv</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+<td class="do-td-center"><b>Inline</b></td>
+<td class="do-td-center">&nbsp;</td>
+<td class="do-td-center"><b>Text, Inline</b></td>
+</tr>
+<tr>
+<td>{ED_ICON_unter}</td>
+<td><span class="do-paren">[</span><span class="do-mo-syntax">unter</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+<td class="do-td-center"><b>Inline</b></td>
+<td class="do-td-center">&nbsp;</td>
+<td class="do-td-center"><b>Text, Inline</b></td>
+</tr>
+<tr>
+<td>{ED_ICON_durch}</td>
+<td><span class="do-paren">[</span><span class="do-mo-syntax">durch</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+<td class="do-td-center"><b>Inline</b></td>
+<td class="do-td-center">&nbsp;</td>
+<td class="do-td-center"><b>Text, Inline</b></td>
+</tr>
+<tr>
+<td>{ED_ICON_fontsize}</td>
+<td><span class="do-paren">[</span><span class="do-mo-syntax">fontsize</span><span class="do-paren">=</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+<td class="do-td-center"><b>Inline</b></td>
+<td class="do-td-center"><b>Größenparameter</b></td>
+<td class="do-td-center"><b>Text, Inline</b></td>
+</tr>
+<tr>
+<td class="do-no-td" colspan="5">&nbsp;</td>
+</tr>
+<tr>
+<td>{ED_ICON_farbe}</td>
+<td><span class="do-paren">[</span><span class="do-mo-syntax">farbe</span><span class="do-paren">=</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+<td class="do-td-center"><b>Inline</b></td>
+<td class="do-td-center"><b>Farbcode</b></td>
+<td class="do-td-center"><b>Text, Inline</b></td>
+</tr>
+</tbody></table>

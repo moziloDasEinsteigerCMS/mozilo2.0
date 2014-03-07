@@ -1,0 +1,131 @@
+<p class="do-margin-start">Der <b>Editor</b> öffnet sich nach Klick auf das <b>Edit-Icon</b> {MO_ICON_page-edit} auf einer neuen Ebene, die sich über den ADMIN-Bereich legt. <br />
+<br />
+Er hat im Wesentlichen drei Aufgaben:</p>
+<ul class="do-list">
+<li><b>Bearbeiten von Inhaltsseiten</b> – dabei werden die Inhaltsseiten mit Texten, Bildern, Links, etc. gefüllt und nach Wunsch formatiert.</li>
+<li><b>Bearbeiten von Syntaxelementen</b> – dabei kann der Benutzer per CSS und html eigene, zusätzliche Syntax-Elemente anlegen.</li>
+<li><b>Bearbeiten von Templates</b> – dabei können die HTML- und CSS-Dateien des Templates bearbeitet werden, um das Layout der Website zu verändern.</li>
+</ul>
+
+<div class="do-separate"></div>
+
+<h1>Der Gebrauch des Editors</h1>
+<h2>Text erstellen:</h2>
+<p class="do-arrow-point-box"><b class="do-arrow-point">1</b>Text ins Arbeitsfenster hineinschreiben oder per Zwischenablage hineinkopieren. <br />
+Mit der <b>Enter-Taste</b> eingefügte Zeilenschaltungen und Leerzeilen erscheinen im Text genau so wie sie gemacht wurden.<br />
+Mit der <b>Leer-Taste</b> eingefügte Leerzeichen, auch mehrere hintereinander, erscheinen im Text genau so wie sie gemacht wurden.</p>
+<p class="do-arrow-point-box"><b class="do-arrow-point">2</b>Die Selectbox {MODUL_select_template_css} wird nur beim Editieren des Templates angezeigt, ansonsten ist sie ausgeblendet.<br />
+Hier befinden sich alle Grafiken und CSS-Dateien, die in das Layout-Template eingefügt werden können.</p>
+<p class="do-arrow-point-box"><b class="do-arrow-point">3</b>Nach Klick auf <b>Speichern</b> werden die gemachten Änderungen übernommen!</p>
+<div class="do-after-br do-error-box">Durch <b>Speichern</b> werden die gemachten Änderungen sofort im Internet sichtbar.<br />
+Ist dies nicht gewünscht, muss der Seitenstatus im <b>Admin-Tab Inhalt</b> auf "<b>versteckt</b>" oder "<b>Entwurf</b>" geschaltet sein.</div>
+<div class="do-after-br do-arrow-warp">{MODUL_editor_dialog_editor_00}
+<div class="do-arrow-left-nr" style="top:255px;left:350px;padding-left:0;background-position:center center;">1</div>
+<div class="do-arrow-right-nr" style="top:120px;left:510px;">2</div>
+<div class="do-arrow-right-nr" style="top:343px;left:623px;">3</div>
+<div class="do-arrow-left-nr" style="top:6px;left:34px;">4</div>
+<div class="do-arrow-right-nr" style="top:6px;left:783px;">5</div>
+</div>
+
+<p class="do-arrow-point-box"><b class="do-arrow-point">4</b> Anleitung des Editors Öffnen</p>
+<p class="do-arrow-point-box"><b class="do-arrow-point">5</b> Wird der Editor geschlossen {MO_ICON_dialog_close_button} ohne die letzten Änderungen gespeichert zu haben, erscheint eine Dialogbox mit einer Warnmeldung:</p>
+{MODUL_editor_dialog_save_close}
+<p><b>{BUTTON_SAVE}</b> = Speichert den letzten Stand und schließt den Editor.<br />
+<b>{BUTTON_CANCEL}</b> = Bricht das Schließen ab und kehrt zum Editor zurück.<br />
+<b>{PAGE_EDIT_DISCARD}</b> = Schließt den Editor ohne die letzten Änderungen zu speichern.</p>
+
+<h2 class="do-space-top"><u>Text formatieren</u> am Beispiel: Überschrift</h2>
+<p class="do-arrow-point-box"><b class="do-arrow-point">1</b>Den zu bearbeitenden Text, in diesem Fall die Überschrift, komplett markieren.</p>
+<div class="do-after-br do-arrow-warp">{MODUL_editor_ace_editor_01}
+<div class="do-arrow-left-nr" style="top:-4px;left:216px;">1</div>
+</div>
+<p class="do-arrow-point-box"><b class="do-arrow-point">2</b>Durch Klick auf {ED_ICON_ueber1} (Überschrift 1) in der <b>CMS-Syntax Leiste</b>, legt sich das Syntax-Element um den markierten Bereich.</p>
+<p>Genauso wird auch mit allen anderen Befehlen zur Textformatierung verfahren.</p>
+<div class="do-after-br do-arrow-warp">{MODUL_editor_row_syntax_00}{MODUL_editor_ace_editor_02}
+<div class="do-arrow-up-nr" style="top:25px;left:391px;">2</div>
+</div>
+<p class="do-link-box">Eine Beschreibung aller <b>Syntax-Elemente zur Textformatierung</b> ist im Kapitel: <b>{INTERNAL_LINK|editsite:syntax}</b></p>
+
+<h2 class="do-space-top"><u>Element einfü</u>g<u>en</u> am Beispiel: Bild</h2>
+<p>Um ein Bild links, am Beginn des Textes einzufügen...</p>
+<p class="do-arrow-point-box"><b class="do-arrow-point">1</b>Cursor &nbsp;{MO_ICON_editor_cursor_noblink}an die Stelle setzen, wo das Bild stehen soll – in diesem Fall vor die erste Textzeile.</p>
+<div class="do-after-br do-arrow-warp">{MODUL_editor_ace_editor_03}
+<div class="do-arrow-up-nr" style="top:45px;left:40px;">1</div>
+</div>
+<p class="do-arrow-point-box"><b class="do-arrow-point">2</b>In der <b>CMS-Syntax Leiste</b> auf "<b>Bild links</b>" {ED_ICON_bildlinks} klicken und das Syntaxelement zum Bildeinfügen wird im Text platziert.</p>
+<div class="do-after-br do-arrow-warp">{MODUL_editor_row_syntax_01}{MODUL_editor_ace_editor_04}
+<div class="do-arrow-up-nr" style="top:25px;left:150px;">2</div>
+</div>
+<p class="do-arrow-point-box"><b class="do-arrow-point">3</b>Jetzt in der <b>Selectbox "Dateien"</b> das gewünschte Bild anklicken und der Bild-Code erscheint innerhalb des Syntax-Elementes.</p>
+<div class="do-arrow-warp">{MODUL_editor_row_sel_catpage_00}{MODUL_editor_ace_editor_05}
+<div class="do-arrow-right-nr" style="top:45px;left:136px;">3</div>
+</div>
+<p class="do-link-box">Eine Beschreibung aller einfügbaren <b>Elemente</b> und der verschiedenen <b>Selectboxen</b> ist im Kapitel: <b>{INTERNAL_LINK|editsite:syntax}</b></p>
+<p class="do-info-box">Damit das Bild in der <b>Selectbox "Dateien"</b> zur verfügung steht, muss es vorher über den <b>Admin-Tab "Dateien"</b> hochgeladen werden.<br />
+Die Anleitung zum hochladen von Dateien ist im Kapitel: <b>{INTERNAL_LINK|files}</b></p>
+
+<h2 class="do-space-top">Den Anfang oder das Ende eines Syntaxelementes finden</h2>
+<p class="do-after-br do-arrow-point-box"><b class="do-arrow-point">1</b>Durch Platzierung des Cursors &nbsp;{MO_ICON_editor_cursor_noblink}direkt hinter einer Syntaxklammer <span class="do-paren">[</span> <span class="do-paren">]</span> <span class="do-paren">{</span> <span class="do-paren">}</span> wird die korrespondierende Klammer <span class="do-paren do_bracket">[</span> &nbsp;<span class="do-paren do_bracket">]</span> &nbsp;<span class="do-paren do_bracket">{</span> &nbsp;<span class="do-paren do_bracket">}</span> hervorgehoben.</p>
+<div class="do-after-br do-arrow-warp">{MODUL_editor_ace_editor_08}
+<div class="do-arrow-right-nr" style="top:-4px;left:4px;">1</div>
+<div class="do-arrow-up-nr" style="top:45px;left:296px;">1</div>
+</div>
+
+<h2 class="do-space-top">Vorschau:</h2>
+<p class="do-arrow-point-box"><b class="do-arrow-point">1</b>Zur Arbeitskontrolle öffnet sich nach Klick auf <b>Vorschau</b> eine Seitenansicht mit dem jeweils aktuellen Bearbeitungsstand.<br />
+Vorheriges Speichern und die damit ggf. verbundene Freigabe im Web, ist nicht nötig.</p>
+<div class="do-after-br do-arrow-warp">{MODUL_editor_row_save_preview}
+<div class="do-arrow-right-nr" style="top:20px;left:710px;">1</div>
+</div>
+<h2 class="do-space-top">Ansicht:</h2>
+{MODUL_editor_dialog_preview}
+<div class="do-separate do-space-top"></div>
+
+<h2>Das Arbeitsfenster im Detail:</h2>
+<p class="do-arrow-point-box"><b class="do-arrow-point">1</b><b>Zeilennummerierung:</b> Spalte mit der Zeilennummerierung ausblenden.</p>
+<p class="do-arrow-point-box"><b class="do-arrow-point">2</b><b>Formatierungszeichen:</b> Absatzmarken, Leerzeichen oder sonstige Formatierungszeichen einblenden.</p>
+<p class="do-arrow-point-box"><b class="do-arrow-point">3</b><b>Quelltextauswahl:</b> Hebt die jeweilige Syntax verschiedener Quelltexte farblich hervor und verbessert so die Übersichtlichkeit.</p>
+<p class="do-arrow-point-box"><b class="do-arrow-point">4</b><b>Editor-Schriftgröße:</b> Ändert die Schriftgröße im Editorfenster. <br />(Dies dient nur zur Augenschonung des Bearbeiters und hat auf die Schriftgröße auf der Website keinen Einfluss.)</p>
+<p class="do-arrow-point-box"><b class="do-arrow-point">5</b><b>Rückwärts/Vorwärts:</b> Zum rückgängig machen bzw. wiederherstellen von Änderungen.</p>
+<p class="do-arrow-point-box"><b class="do-arrow-point">6</b><b>Klappt alle Syntaxelemente ein/aus</b>, die über mehrere Zeilen gehen.</p>
+<p class="do-arrow-point-box"><b class="do-arrow-point">7</b><b>Zeichenfolge suchen:</b> Zeichenfolge eingeben und auf {ED_ICON_find} klicken. Die nächste Stelle mit dieser Zeichenfolge wird markiert.<br />
+Erneutes klicken auf {ED_ICON_find} markiert die darauf folgende Stelle mit dieser Zeichenfolge usw.<br />
+Wird die Checkbox "<b>Alle</b>" aktiviert, werden alle Stellen gleichzeitg markiert, an denen die Zeichenfolge vorkommt.</p>
+<p class="do-arrow-point-box do-after-br">
+<b class="do-arrow-point">8</b><b>Zeichenfolge Ersetzen:</b> Durch Klick auf {ED_ICON_replace} werden alle markierten Zeichenfolgen durch den hier eingetragenen Text ersetzt.</p>
+
+<br />
+<div class="do-arrow-warp do-space-top">{MODUL_editor_ace_head}
+<div class="do-arrow-down-nr" style="top:-40px;left:5px;">1</div>
+<div class="do-arrow-down-nr" style="top:-40px;left:32px;">2</div>
+<div class="do-arrow-down-nr" style="top:-40px;left:100px;">3</div>
+<div class="do-arrow-down-nr" style="top:-40px;left:195px;">4</div>
+<div class="do-arrow-down-nr" style="top:-40px;left:258px;">5</div>
+<div class="do-arrow-down-nr" style="top:-40px;left:296px;">6</div>
+<div class="do-arrow-down-nr" style="top:-40px;left:430px;">7</div>
+<div class="do-arrow-down-nr" style="top:-40px;left:680px;">8</div>
+</div>
+
+<h2 class="do-space-top">Multi-Cursor & Markierungs Erweiterung:</h2>
+
+<p>Das Editor Arbeitsfenster ist so genial programmiert, dass es erlaubt beliebig viele Cursor &nbsp;{MO_ICON_editor_cursor}und Textmarkierungen gleichzeitig zu setzen!<br />
+Bei gedrückter "Ctrl/Strg" (PC) oder "Command" (MAC) Taste können weitere Cursor &nbsp;{MO_ICON_editor_cursor}oder Textmarkierungen hinzugefügt bzw. wieder entfernt werden.<br />
+</p>
+
+<ul>
+    <li>Sind <b>mehrere Cursor gesetzt</b>, so wird durch Tastatureingabe der entsprechende Text an allen Stellen gleichzeitig eingefügt.</li>
+</ul>
+<ul>
+    <li>Sind <b>mehrere Textstellen markiert</b>, so können sie entweder durch Tastatureingabe gleichzeitig überschrieben werden,<br />oder durch Texteingabe in das Feld "<b>Ersetzen</b>" <b class="do-arrow-point" style="margin-left:0;margin-right:0;">8</b> und anklicken von {ED_ICON_replace}.</li>
+</ul>
+<ul>
+    <li>Zum Aufheben eines Cursors, oder einer Textmarkierung, den jeweiligen Cursor bei gedrückter "Ctrl/Strg" (PC) oder "Command" (MAC) Taste<br /> mit dem Maus-Cursor anklicken.</li>
+</ul>
+
+<h4 class="do-h4">Beispiel:</h4>
+<div class="do-arrow-warp">{MODUL_editor_ace_editor_06}
+</div>
+
+<h4 class="do-h4">Ergebnis:</h4>
+<div class="do-arrow-warp">{MODUL_editor_ace_editor_07}
+</div>

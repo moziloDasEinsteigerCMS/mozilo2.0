@@ -1,0 +1,72 @@
+<p class="do-error-box do-margin-start"><b>Zum Erstellen eigener Syntaxelemente sind HTML-Kenntnisse erforderlich!</b><br />
+Daher werden bei den Erläuterungen in dieser Anleitung die entsprechenden Kenntnisse vorausgesetzt.</p>
+
+<p class="do-info-box">Hilfe beim Erstellen eigener Syntaxelemente erhält man <a class="link" href="http://www.mozilo.de/forum/index.php" title="im Supportforum" target="_blank"><b>im mozilo Supportforum</b></a><br />
+Dort sind auch <a class="link" href="http://www.mozilo.de/forum/index.php/topic,15.0.html" title="im Supportforum" target="_blank"><b>weitere Beispiele</b></a> für eigene Syntaxelemente zu finden.</p>
+
+<p><b>Eigene Syntaxelemente werden verwendet:</b></p>
+<ul class="d_do-li-tag do-nomargin-top">
+    <li>Um den Syntax-Umfang von moziloCMS zu <b>erweitern</b>.</li>
+    <li>Um häufig verwendete Elemente oder Texte auf einfache Weise <b>einzubinden</b>.</li>
+    <li>Um vorhandene CMS-Syntaxelemente zu modifizieren, bzw. zu <b>überschreiben</b>.</li>
+</ul>
+<p class="do-link-box">Der Zugang zur Erstellung eigener Syntax Elemente befindet sich im Admin-Bereich <b>{INTERNAL_LINK|config#do_tousersyntax}</b></p>
+
+<div class="do-separate"></div>
+
+<h2>Grundregeln:</h2>
+<p>Eigene Syntaxelemente <u>müssen</u> in einer <b>neuen Zeile</b> beginnen und bestehen aus <b>drei Teilen</b>:</p>
+<ol class="d_do-li-tag do-nomargin-top">
+    <li><b>Name:</b> Erlaubt sind die Buchstaben <b>A - Z</b> und <b>a - z</b>, die Zahlen <b>0 - 9</b>, sowie der Unterstrich "<b>_</b>".</li>
+    <li><b>Trennung:</b> Besteht immer aus "<b> = </b>" (Leerzeichen, Gleichheitszeichen, Leerzeichen).</li>
+    <li><b>Quelltext:</b> Erlaubt ist alles, was auch in <b>HTML</b> möglich ist, sowie natürlich auch alle <b>CMS-Syntaxelemente</b>. <br />
+Darüberhinaus sind im Gegensatz zu früheren mozilo-Versionen jetzt auch <b>Zeilenumbrüche</b> innerhalb eigener Syntaxelemente zulässig.</li>
+</ol>
+<p>Erscheinen Syntaxname und Trennung farblich markiert: "<span class="do-mo-user-syntax"><b>Syntaxname = </b></span>" wurden die Regeln eingehalten und das System hat das Element erkannt.</p>
+
+<p>Im Quelltext werden an Stellen mit individuellen Inhalten sogenannte "<b>Platzhalter</b>" eingefügt.</p>
+
+<p style="margin-left:25px;">Der Platzhalter <span class="do-paren">{</span><span class="do-mo-syntax">DESCRIPTION</span><span class="do-paren">}</span> übernimmt den Wert zwischen <span class="do-paren">=</span> und <span class="do-paren">|</span><br />
+Der Platzhalter <span class="do-paren">{</span><span class="do-mo-syntax">VALUE</span><span class="do-paren">}</span> übernimmt den Wert zwischen <span class="do-paren">|</span> und <span class="do-paren">]</span></p>
+
+<h2 class="do-space-top">Syntaxbeispiele</h2>
+{MODUL_editor_ace_editor_usersyntax_00}
+
+<br />
+<table class="do-after-br do-table do-table-example" cellspacing="0" border="0" cellpadding="0">
+    <tr>
+        <th>Beispiel:</th>
+        <th>Ergebnis:</th>
+    </tr>
+    <tr>
+        <td style="padding:.4em;"><span class="do-paren">[</span><span class="do-mo-syntax">syntax1</span><span class="do-paren">]</span></td>
+        <td style="padding:.4em;"><a class="do-molink" href="http://www.mozilo.de">www.mozilo.de</a></td>
+    </tr>
+    <tr>
+        <td style="padding:.4em;"><span class="do-paren">[</span><span class="do-mo-syntax">syntax2</span><span class="do-paren">|</span>www.mozilo.de/forum/<span class="do-paren">]</span></td>
+        <td style="padding:.4em;"><a class="do-molink" href="http://www.mozilo.de/forum/">www.mozilo.de/forum/</a></td>
+    </tr>
+    <tr>
+        <td style="padding:.4em;"><span class="do-paren">[</span><span class="do-mo-syntax">syntax3</span><span class="do-paren">=</span>gehe zu mozilo<span class="do-paren">|</span>www.mozilo.de<span class="do-paren">]</span></td>
+        <td style="padding:.4em;"><a class="do-molink" href="http://www.mozilo.de">gehe zu mozilo</a></td>
+    </tr>
+</table>
+
+<h4 class="do-h4 do-space-top">Überschreiben eines vorhandenen CMS-Syntaxelementes:</h4>
+<p>Soll zum Beispiel der Inhalt des vorhandenen CMS-Syntaxelementes <span class="do-paren">[</span><span class="do-mo-syntax">fett</span><span class="do-paren">|</span> <span class="do-paren">]</span> {ED_ICON_fett} von "<b>&lt;b&gt; &lt;/b&gt;</b>" zu "<b>&lt;strong&gt; &lt;/strong&gt;</b>" verändert werden, <br />
+genügt es ein neues Syntaxelement unter dem Namen "<b>fett = </b>" anzulegen.</p>
+<br />
+{MODUL_editor_ace_editor_usersyntax_01}
+
+<br />
+
+<h2 class="do-space-top">Beispiel einer Fehlinterpretation:</h2>
+<p>Steht im Quelltext nach dem ersten Wort in einer Zeile zufällig "<b> = </b>" (Leerzeichen, Gleichheitszeichen, Leerzeichen), <br />
+so wird das Ganze von mozilo als Syntaxname interpretiert.<br />
+<br />
+<b>Zum Beispiel in einem Textbaustein mit einer Liste von Einwohnerzahlen:</b></p>
+{MODUL_editor_ace_editor_usersyntax_02}
+<p>Bei dieser Eingabe werden <span class="do-mo-user-syntax"><b>Paris =</b></span> und <span class="do-mo-user-syntax"><b>London =</b></span> als neue Syntaxnamen erkannt.<br />
+<br />
+Um dies zu verhindern genügt es, es ein <b>Leerzeichen</b> oder <b>Zirkumflex</b> (Hochdach) <b>^</b> vor die Wörter "<b>Paris</b>" und "<b>London</b>" zu setzen.</p>
+{MODUL_editor_ace_editor_usersyntax_03}

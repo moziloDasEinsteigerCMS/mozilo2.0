@@ -1,0 +1,153 @@
+<!--no_dialog_start--><p class="do-margin-start">Mit Mausklick auf den entsprechenden Admin-Tab den Arbeitsbereich <img class="mo-icon-text-right mo-tabs-icon mo-tab-config" src="{ICONS_CLEAR}" alt=" " hspace="0" vspace="0" border="0" /><span class="mo-bold">{CONFIG_BUTTON}</span> aufrufen.</p>
+<div class="d_do-after-br do-arrow-warp">{MODUL_mozilo_tabs_config}</div>
+
+<div class="do-separate-1 do-after-br"></div><!--no_dialog_end-->
+
+<p>In diesem Bereich können verschiedene Grundeinstellungen und Vorgaben für die Website ausgewählt werden.</p>
+<div class="do-error-box do-after-br"><b>Achtung:</b> Eingaben in Textfeldern <u>müssen</u> durch drücken der <b>Eingabetaste/Enter</b> gespeichert werden.</div>
+
+<div class="do-separate"></div>
+
+<h2>Allgemeine Einstellungen</h2>
+{MODUL_config_00}
+<h3 id="do_towebsitename">Anzeige des Webseitentitels zusammenstellen:</h3>
+<p class="do-arrow-point-box"><b class="do-arrow-point">1</b>Name der Website. Was hier steht erscheint auch in der Kopfleiste des Admin-Bereiches.</p>
+<p class="do-arrow-point-box"><b class="do-arrow-point">2</b>Mit diesem Zeichen werden die einzelnen Anzeige-Elemente in der Titelleiste des Browsers voneinander getrennt.</p>
+<p class="do-after-br do-arrow-point-box"><b class="do-arrow-point">3</b>Hier wird zusammengestellt, was in der Titelleiste des Browsers angezeigt wird. </p>
+
+<div class="do-arrow-warp">{MODUL_config_00_1}
+<div class="do-arrow-right-nr" style="top:4px;left:525px;">1</div>
+<div class="do-arrow-left-nr" style="top:30px;left:780px;">2</div>
+<div class="do-arrow-left-nr" style="top:92px;left:780px;">3</div>
+</div>
+<br />
+
+<p>Erlaubt sind folgende Elemente:</p>
+<ul class="do-list">
+<li><b>{WEBSITE}</b> = der bei <b class="do-arrow-point">1</b>definierte Titel der Website</li>
+<li><b>{SEP}</b> = das bei <b class="do-arrow-point">2</b>definierte Trennzeichen</li>
+<li><b>{CATEGORY}</b> = Name der aktuell angezeigten Kategorie</li>
+<li><b>{PAGE}</b> = Name der aktuell angezeigten Inhaltsseite</li>
+<li>beliebiger <b>Text</b></li>
+</ul>
+
+<p>Wenn in der Kategorie "Willkommen" die Seite "Kontakt" geöffnet ist, erzeugt das obige Beispiel in der Titelleiste des Browsers den Text:</p>
+<b>moziloCMS - Das CMS für Einsteiger :: Willkommen :: Kontakt</b>
+
+<h3 class="do-space-top">Informationen für Suchmaschinen:</h3>
+<p class="do-arrow-point-box"><b class="do-arrow-point">1</b>Feld für eine aussagekräftige Kurzbeschreibung der Website. Dieser Text wird bei den Suchergebnissen in Suchmaschinen angezeigt. </p>
+<p class="do-arrow-point-box"><b class="do-arrow-point">2</b>Feld für die Suchwörter (Keywords) unter denen die Seite gefunden werden soll (mit Komma und Leerzeichen voneinander trennen).</p>
+
+<p class="do-info-box do-after-br">Je klarer die Kurzbeschreibung das Thema der Website wiedergibt, desto bessere Chancen bestehen zu diesem Thema gut gerankt zu werden.<br />
+Auch bei den Suchwörtern gilt: <b>"Weniger ist mehr!"</b> Eingaben über 255 Zeichen werden von den meisten Suchmaschinen ohnehin ignoriert.</p>
+
+<div class="do-arrow-warp">{MODUL_config_00_2}
+<div class="do-arrow-left-nr" style="top:24px;left:780px;">1</div>
+<div class="do-arrow-left-nr" style="top:69px;left:780px;">2</div>
+</div>
+
+<h3 class="do-space-top">Sprache des CMS:</h3>
+<p class="do-arrow-point-box"><b class="do-arrow-point">1</b>Hier kann über ein Scrollmenü die Sprache ausgewählt werden, in der die Website Infos und Meldungen ausgibt. </p>
+<div class="do-arrow-warp">{MODUL_config_00_3}
+<div class="do-arrow-left-nr" style="top:3px;left:780px;">1</div>
+</div>
+
+<h3 class="do-space-top">Startkategorie:</h3>
+<p class="do-arrow-point-box"><b class="do-arrow-point">1</b>Auswahl der Kategorie, die beim Erstaufruf der Website angezeigt werden soll, oder dann, wenn eine aufgerufene Seite nicht existiert. </p>
+<p class="do-info-box do-after-br">Es wird immer die <b>erste Inhaltsseite</b> einer Kategorie angezeigt, die den Status "<b>normal</b>" hat und somit sichtbar geschaltet ist.</p>
+<div class="do-arrow-warp">{MODUL_config_00_4}
+<div class="do-arrow-left-nr" style="top:3px;left:780px;">1</div>
+</div>
+
+<h3 class="do-space-top">Baustellenmodus:</h3>
+<p>Der Baustellenmodus ermöglicht es eine Infoseite anzuzeigen, während im Hintergrund an der Website gearbeitet wird.<br />
+Dazu wird eine ansonsten versteckte Baustellen-Kategorie mit der Infoseite sichtbar geschaltet und als Startkategorie festgelegt (<i>siehe oben</i>).<br />
+Soll am Template selbst gearbeitet werden, ist es sinnvoll währenddessen ein separates Baustellen-Template zu aktivieren.<br />
+Die Originalwebsite ist jederzeit über das Icon {MO_ICON_website} im Admin-Bereich erreichbar, oder durch Anhängen eines <b>"?draft=true"</b> an den Seitenaufruf.</p>
+
+<p class="do-arrow-point-box"><b class="do-arrow-point">1</b>Aktivierung des Baustellenmodus. Dies blendet im Menü der Website alle Kategorien, außer der Startkategorie aus.</p>
+<p class="do-arrow-point-box"><b class="do-arrow-point">2</b>Auswahl, welches Template im Baustellenmodus angezeigt werden soll.</p>
+<div class="do-arrow-warp">{MODUL_config_00_5}
+<div class="do-arrow-right-nr" style="top:3px;left:530px;">1</div>
+<div class="do-arrow-left-nr" style="top:30px;left:780px;">2</div>
+</div>
+
+<h3 class="do-space-top">Sitemap:</h3>
+<p class="do-arrow-point-box"><b class="do-arrow-point">1</b>Durch aktivierung oder deaktivierung dieser Checkbox wird eine Sitemap erzeugt, bzw. wieder gelöscht. <br />
+Eine Sitemap ist eine tabellarische Übersicht der einzelnen Seiten einer Website, nach der die Robots der Suchmaschinen navigieren.</p>
+<p class="do-info-box">Bei jeder Änderung in der Kategorie- und/oder Seitenstruktur der Website wird die Sitemap automatisch aktualisiert und die robots.txt angepasst.</p>
+<div class="do-arrow-warp">{MODUL_config_00_6}
+<div class="do-arrow-left-nr" style="top:3px;left:780px;">1</div>
+</div>
+
+
+<h2 class="do-space-top">Syntax Einstellungen</h2>
+{MODUL_config_01}
+
+<h3>CMS-Syntax benutzen:</h3>
+<p class="do-after-br do-arrow-point-box"><b class="do-arrow-point">1</b>Die standardmäßige mozilo-eigene CMS-Syntax kann hier deaktiviert werden.<br />
+Zur Formatierung der Seiteninhalte muss dann html-Code verwendet werden.</p>
+<div class="do-arrow-warp">{MODUL_config_01_1}
+<div class="do-arrow-right-nr" style="top:3px;left:520px;">1</div>
+</div>
+
+<h3 id="do_tousersyntax" class="do-space-top">Eigene Syntax-Elemente:</h3>
+<p class="do-after-br do-arrow-point-box"><b class="do-arrow-point">1</b>Bei Klick auf das Editor-Icon {MO_ICON_page-edit} geht ein Fenster auf, in dem eigene Syntax-Elemente per CSS und html definiert werden können.</p>
+<div class="do-arrow-warp">{MODUL_config_01_2}
+<div class="do-arrow-right-nr" style="top:3px;left:520px;">1</div>
+</div>
+<p class="do-link-box">Die <b>Beschreibung</b> wie eigene <b>Syntax-Elemente</b> angelegt werden ist bei <b>{INTERNAL_LINK|editsite:editusersyntax}</b></p>
+
+<h3 class="do-space-top">Emoticons:</h3>
+<p class="do-after-br do-arrow-point-box"><b class="do-arrow-point">1</b>Wenn diese Checkbox aktiviert ist, stehen im Seiteneditor einige lustige Emoticons zur verfügung.</p>
+<div class="do-arrow-warp">{MODUL_config_01_3}
+<div class="do-arrow-right-nr" style="top:3px;left:520px;">1</div>
+</div>
+
+<h3 id="do_tocoloredit" class="do-space-top">Farbwähler und speichern vordefinierter Farben:</h3>
+<p>Hier können Farben ausgewählt und gespeichert werden um sie später beim editieren der Inhaltsseiten per schnellem Klick verwenden zu können.</p>
+<p class="do-arrow-point-box"><b class="do-arrow-point">1</b>Bei Klick auf das bunte Icon öffnet sich der Farbwähler. Hier können alle am Bildschirm anzeigbaren Farben eingestellt werden.</p>
+<p class="do-arrow-point-box"><b class="do-arrow-point">2</b>Die im Farbwähler eingestellte Farbe erscheint im Anzeigefeld als Hintergrund und Hexadezimal-Wert.<br />
+In diesem Feld kann die Farbe auch durch Eingabe eines Hexadezimal-Wertes eingestellt werden.</p>
+<div class="do-arrow-warp">{MODUL_config_01_4}
+<div class="do-arrow-down-nr" style="top:-12px;left:680px;">1</div>
+<div class="do-arrow-down-nr" style="top:-12px;left:642px;">2</div>
+</div>
+<p class="do-link-box do-after-br">Eine genaue <b>Beschreibung</b> des <b>Farbwählers</b> ist bei <b>{INTERNAL_LINK|editsite:syntax#do12}</b></p>
+<p class="do-after-br do-arrow-point-box"><b class="do-arrow-point">3</b>Um Farben zu speichern muss das kleine Farbfeld zuerst nach links, in das breite Eingabefeld <b style="margin:0;" class="do-arrow-point">&nbsp;</b> gezogen und dort abgelegt werden. <br />
+Hier können die Farben durch einfaches hin und her schieben in der gewünschten Reihenfolge sortiert werden.</p>
+<p class="do-arrow-point-box"><b class="do-arrow-point">4</b>Durch einen Klick auf das Speichern-Icon {MO_ICON_save} wird der Inhalt des Eingabefeldes dann gespeichert.</p>
+<p class="do-arrow-point-box do-after-br"><b class="do-arrow-point">5</b>Zum Löschen einfach die Farbfelder auf den Mülleimer {MO_ICON_delete} ziehen und danach Speichern {MO_ICON_save}</p>
+
+<div class="do-arrow-warp">{MODUL_config_01_4a}
+<div class="do-arrow-down-nr" style="top:-12px;left:43px;">4</div>
+<div class="do-arrow-down-nr" style="top:-12px;left:79px;">5</div>
+<div class="do-arrow-down-nr" style="top:-9px;left:583px;">3</div>
+<b class="do-arrow-point" style="position:absolute;top:35px;left:280px;">&nbsp;</b>
+</div>
+<br />
+
+
+<h2 class="do-space-top">Erweiterte Einstellungen</h2>
+<div class="do-after-br">{MODUL_config_02}</div>
+
+<p class="do-after-br">Hier kann ausgewählt werden wo Inhaltsseiten mit dem Attribut "versteckt" trotzdem angezeigt werden sollen.</p>
+{MODUL_config_02_1}
+
+<p class="do-space-top do-after-br">Hier kann ausgewählt werden, ob externe Links oder Datei-Downloads im aktuellen, oder in einem neuen Browserfenster geöffnet werden sollen.</p>
+{MODUL_config_02_2}
+
+<p class="do-space-top do-after-br">Hier wird eingestellt ob Inhaltsseiten, mit gleichem Namen wie die Kategorie in der sie sich befinden, im Detailmenü ausgeblendet werden.<br />
+Diese Einstellung ist für die erste Seite einer Kategorie gedacht. Da diese ja bereits durch Klick auf die Kategorie aufgerufen wird muss sie nicht noch einmal im Detailmenü erscheinen.</p>
+<div class="do-after-br">{MODUL_config_02_3}</div>
+<div class="do-after-br do-error-box"><b>Vorsicht:</b> Ist eine namensgleiche Seite <u>nicht</u> die erste Seite der Kategorie, wird sie durch die Aktivierung dieser Funktion unsichtbar.</div>
+
+<p class="do-space-top do-after-br">Checkbox zur Aktivierung von "mod_rewrite".<br />
+Diese Serverfunktion wandelt die oft sehr kryptisch zusammengesetzten Seitenaufrufe in schönere, leichter lesbare und damit einprägsamere Links um.<br />
+Ein Link der normalerweise <b><i>"www.domain.de?cat=Wilkommen&amp;page=Kontakt"</i></b> lautet, wird dadurch zu <b><i>"www.domain.de/Wilkommen/Kontakt.html"</i></b>.</p>
+{MODUL_config_02_4}
+
+<p class="do-space-top do-after-br">Checkbox zur Aktivierung von Tooltips. <br />
+Tooltips sind kleine Pop-up-Fenster, die eine kurze Beschreibung oder Info anzeigen, wenn der Mauszeiger über einen Link gehalten wird. <br />
+Beispiel: <a href="#" title="Das ist ein Tooltip">Einfach den Mauszeiger hier drüber halten</a></p>
+{MODUL_config_02_5}

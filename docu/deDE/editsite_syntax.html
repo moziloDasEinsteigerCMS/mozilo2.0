@@ -1,0 +1,430 @@
+<p class="do-margin-start">Bei der "<b>CMS-Syntax</b>" handelt es sich um eine eigens entwickelte, mozilo-interne Befehlssprache. <br />
+Sie dient dazu Elemente wie z. B. Bilder und Links auf Inhaltsseiten zu platzieren und auszurichten, oder Texte zu formatieren. <br />
+<br />
+Sämtliche CMS-Syntax Elemente sind nach bestimmten Regeln beliebig miteinander verschachtelbar. <br />Eine Anleitung dazu gibt es im Kapitel: <b>{INTERNAL_LINK|editsite:rule}</b></p>
+<p class="do-info-box">Im Admin-Tab "<b>Einstellungen</b>" können unter "<b>Syntax-Einstellungen</b>" per CSS und html selbst definierte Syntax-Elemente hinzugefügt werden.</p>
+
+<div class="do-error-box do-after-br">Durch Voranstellen eines <b>Zirkumflex</b> (Hochdach) <b>^</b> wird das folgende Zeichen geschützt und vom System als <b>normales Textzeichen</b> interpretiert.<br />
+Zum Beispiel <b>eckige und geschwungene Klammern</b>, sowie der <b>senkrechte Strich</b> <span class="do-paren">[</span> <span class="do-paren">|</span> <span class="do-paren">]</span> <span class="do-paren">{</span> <span class="do-paren">}</span> sind bei moziloCMS <b>Bestandteil von Syntax Elementen</b>.<br />
+Kommen diese Zeichen im normalen Seitentext vor, müssen sie mit einem vorangestellten <b>Hochdach ^</b> geschützt werden ( z.B. <b>^[</b> ).<br />
+Ansonsten kann es sein, dass Mozilo sie als Syntaxzeichen interpretiert und es zu Fehlanzeigen kommt.</div>
+
+<div class="do-separate"></div>
+
+<a id="doTopLink" href="#doTop" style="margin-left:-150px;width:300px;">Zum Beginn der "CMS-Syntax Elemente"</a>
+<h2 id="doTop">CMS-Syntax Elemente</h2>
+<p>Ein Klick auf das Icon springt direkt zur jeweiligen Erklärung:</p>
+<div class="do-arrow-warp">{MODUL_editor_row_syntax_anchor}</div>
+<p>Alle Befehle, die bei der Seitengestaltung benötigt werden, sind in der <b>CMS-Syntax Leiste</b> des Editors als Schaltflächen vorhanden.<br />
+<br />
+Nach Druck auf eine Schaltfläche erscheint der entsprechende CMS-Syntax Befehl an der Cursorposition im Arbeitsfenster des Editors.<br />
+Bezieht sich ein Befehl auf ein Inhaltselement, so wird es zwischen diesen beiden Zeichen <span class="do-paren">|</span> <i>hier das Inhaltselement</i> <span class="do-paren">]</span> eingefügt. <br />
+<br />
+Inhaltselemente werden auf folgende Weise eingefügt:<br />
+<b>Per Eingabe oder aus der Zwischenablage</b> – z. B. Texte, Internetadressen, Mailadressen<br />
+<b>Per Auswahl aus den Selectboxen</b> – z. B. Bilder, Dateien, Links zu anderen Inhaltsseiten, Plugins</p>
+<p class="do-info-box">Wird zuerst das <b>Inhaltselement</b> platziert und <b>vollständig markiert</b>, dann fügt sich anschließend auf Klick das <b>Syntax-Element</b> korrekt hinzu.</p>
+
+<h2 class="do-space-top">Links</h2>
+<h4 id="do0" class="do-h4">Externer Link:</h4>
+<table width="100%" class="do-after-br do-table" cellspacing="0" border="0" cellpadding="0">
+    {MODUL_editor_tabele_th}
+    <tr>
+        <td class="do-td-center">{ED_ICON_link}</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">link</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+           <td>Öffnet einen Internet Link</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">link</span><span class="do-paren">|</span>http://www.mozilo.de/<span class="do-paren">]</span></td>
+        <td><a class="do-molink" title="Externe Adresse &quot;www.mozilo.de&quot; aufrufen" target="_blank">http://www.mozilo.de</a></td>
+    </tr>
+    <tr>
+        <td class="do-td-center">{ED_ICON_mail}</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">mail</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+           <td>Öffnet den E-Mail Versand zur eingetragenen Adresse</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">link</span><span class="do-paren">|</span>mail@server.de<span class="do-paren">]</span></td>
+        <td><a class="do-molink" title="E-Mail an &quot;mail@server.de&quot; verfassen">mail@server.de</a></td>
+    </tr>
+</table>
+<p class="do-after-br do-info-box">Im <b>Admin-Tab "Einstellungen"</b> kann festgelegt werden, ob externe Links im gleichen, oder in einem neuen Browserfenster geöffnet werden.<br />
+Bei Internetlinks ist es nicht nötig ein "http://" voranzustellen. Sowohl <b>http://www.link.de</b> als auch <b>www.link.de</b> ist beides gültig.</p>
+<h4 id="do1" class="do-h4">Interner Link:</h4>  
+<table width="100%" class="do-after-br do-table" cellspacing="0" border="0" cellpadding="0">
+    {MODUL_editor_tabele_th}
+    <tr>
+        <td class="do-td-center">{ED_ICON_seite}</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">seite</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+           <td>Öffnet eine Inhaltsseite</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">seite</span><span class="do-paren">|</span><span class="do-mo-files-place">@=</span><span class="do-mo-files">Kategorie 1:Seite 1</span><span class="do-mo-files-place">=@</span><span class="do-paren">]</span></td>
+        <td><a class="do-molink" title="Inhaltsseite &quot;Seite 1&quot; der Kategorie &quot;Kategorie 1&quot; anzeigen">Seite 1</a></td>
+    </tr>
+    <tr>
+        <td class="do-td-center">{ED_ICON_kategorie}</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">kategorie</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+           <td>Öffnet die erste Seite einer Inhaltskategorie</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">kategorie</span><span class="do-paren">|</span><span class="do-mo-files-place">@=</span><span class="do-mo-files">Home</span><span class="do-mo-files-place">=@</span><span class="do-paren">]</span></td>
+        <td><a class="do-molink" title="Zur Kategorie &quot;Home&quot; wechseln">Home</a></td>
+    </tr>
+</table>
+<p class="do-after-br">Die zur Verfügung stehenden Inhaltsseiten, bzw. Kategorien, werden aus der <b>Selectbox</b> {MODUL_select_catpage} eingefügt.</p>
+<h4 id="do2" class="do-h4">Download-Link:</h4> 
+<table width="100%" class="do-after-br do-table" cellspacing="0" border="0" cellpadding="0">
+    {MODUL_editor_tabele_th}
+    <tr>
+        <td class="do-td-center">{ED_ICON_datei}</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">datei</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+           <td>Startet den Download, oder je nach <br />Browser-Plugin, auch die Anzeige einer Datei</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">datei</span><span class="do-paren">|</span><span class="do-mo-files-place">@=</span><span class="do-mo-files">Home:archive.zip</span><span class="do-mo-files-place">=@</span><span class="do-paren">]</span></td>
+        <td><a class="do-molink" title="Datei &quot;archive.zip&quot; der Kategorie &quot;Home&quot; herunterladen">archive.zip</a></td>
+    </tr>
+</table>
+<p class="do-after-br">Die zur Verfügung stehenden Dateien werden aus der <b>Selectbox</b> {MODUL_select_file} eingefügt.</p>
+<h4 class="do-h4"><u>Für alle Link-Syntax-Elemente gilt:</u></h4>
+<p class="do-nomargin-top">Wird hinter den Befehlsnamen ein <span class="do-paren">=</span> Zeichen gesetzt, gefolgt von Text oder einem weiteren Syntax-Befehl, ändert sich die Anzeige des Links entsprechend.</p>
+<h4 class="do-h4">Variante 1:</h4>
+<p class="do-nomargin-top">Wird nach dem <span class="do-paren">=</span> Zeichen Text eingefügt, so wird dieser Text angezeigt, anstatt des ursprünglichen Linknamens.</p>
+<table class="do-after-br do-table do-table-example" cellspacing="0" border="0" cellpadding="0">
+    <tr>
+        <th>Beispiel:</th>
+        <th>Ergebnis:</th>
+    </tr>
+    <tr>
+        <td style="padding:.4em;"><span class="do-paren">[</span><span class="do-mo-syntax">link</span><span class="do-paren">=</span>Hier Klicken<span class="do-paren">|</span>http://www.mozilo.de/<span class="do-paren">]</span></td>
+        <td style="padding:.4em;"><a class="do-molink" title="Externe Adresse &quot;www.mozilo.de&quot; aufrufen" target="_blank">Hier Klicken</a></td>
+    </tr>
+</table>
+<h4 class="do-h4">Variante 2:</h4>
+<p class="do-nomargin-top">Wird nach dem <span class="do-paren">=</span> Zeichen per Syntaxelement <span class="do-paren">[</span><span class="do-mo-syntax">bild</span><span class="do-paren">|</span> <span class="do-paren">]</span> ein Bild eingefügt, so wird dieses anstelle des Linknamens angezeigt.</p>
+<table class="do-table do-table-example" cellspacing="0" border="0" cellpadding="0">
+    <tr>
+        <th>Beispiel:</th>
+        <th>Ergebnis:</th>
+    </tr>
+    <tr>
+        <td style="padding:.4em;"><span class="do-paren">[</span><span class="do-mo-syntax">link</span><span class="do-paren">=</span><span class="do-paren">[</span><span class="do-mo-syntax">bild</span><span class="do-paren">|</span><span class="do-mo-files-place">@=</span><span class="do-mo-files">Home:bild.jpg</span><span class="do-mo-files-place">=@</span><span class="do-paren">]</span><span class="do-paren">|</span>http://www.mozilo.de<span class="do-paren">]</span></td>
+        <td style="padding:.4em;"><a class="do-molink" title="Externe Adresse &quot;www.mozilo.de&quot; aufrufen" target="_blank">{IMG_lotusbluete}</a></td>
+    </tr>
+</table>
+
+<h2 id="do3" class="do-space-top">Bilder einfügen:</h2>
+<table width="100%" class="do-after-br do-table" cellspacing="0" border="0" cellpadding="0">
+    {MODUL_editor_tabele_th}
+    <tr>
+        <td class="do-td-center">{ED_ICON_bild}</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">bild</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+           <td>Platziert ein Bild auf einer Inhaltsseite <br />(Textfluss wird an beiden Seiten unterbrochen)</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">bild</span><span class="do-paren">|</span><span class="do-mo-files-place">@=</span><span class="do-mo-files">Home:bild.jpg</span><span class="do-mo-files-place">=@</span><span class="do-paren">]</span></td>
+        <td>Lorem ipsum dolor sit amet, con<br />{IMG_lotusbluete}<br />Stet clita kas dgu bergren, no sea tak imata sanctu s est Lorem ipsum dolor sit amet.</td>
+    </tr>
+    <tr>
+        <td class="do-td-center">{ED_ICON_bildlinks}</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">bildlinks</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+           <td>Platziert ein Bild am linken Rand einer Inhaltsseite (Text fließt am rechten Bildrand vorbei)</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">bildlinks</span><span class="do-paren">|</span><span class="do-mo-files-place">@=</span><span class="do-mo-files">Home:bild.jpg</span><span class="do-mo-files-place">=@</span><span class="do-paren">]</span></td>
+        <td>Lorem ipsum dolor sit amet, con<br /><span style="float:left;margin:6px 10px 0 0;">{IMG_lotusbluete}</span>Stet clita kas dgu bergren, no sea tak imata sanctu s est Lorem ipsum dolor sit amet.</td>
+    </tr>
+    <tr>
+        <td class="do-td-center">{ED_ICON_bildrechts}</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">bildrechts</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+           <td>Platziert ein Bild am rechten Rand einer Inhaltsseite (Text fließt am linken Bildrand vorbei)</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">bildrechts</span><span class="do-paren">|</span><span class="do-mo-files-place">@=</span><span class="do-mo-files">Home:bild.jpg</span><span class="do-mo-files-place">=@</span><span class="do-paren">]</span></td>
+        <td>Lorem ipsum dolor sit amet, con<br /><span style="float:right;margin:6px 0 0 10px;">{IMG_lotusbluete}</span>Stet clita kas dgu bergren, no sea tak imata sanctu s est Lorem ipsum dolor sit amet.</td>
+    </tr>
+</table>
+<p class="do-after-br">Die zur Verfügung stehenden Bilder werden aus der <b>Selectbox</b> {MODUL_select_file} eingefügt.</p>
+<h4 class="do-h4"><u>Für alle Bild-Syntax-Elemente gilt:</u></h4>
+<p class="do-nomargin-top">Wird hinter den Befehlsnamen ein <span class="do-paren">=</span> Zeichen gesetzt, und danach Text eingegeben, so wird dieser als Bildunterschrift angezeigt.</p>
+<table class="do-after-br do-table do-table-example" cellspacing="0" border="0" cellpadding="0">
+    <tr>
+        <th>Beispiel:</th>
+        <th>Ergebnis:</th>
+    </tr>
+    <tr>
+        <td style="padding:.4em;"><span class="do-paren">[</span><span class="do-mo-syntax">bild</span><span class="do-paren">=</span>Lotusblüte am See<span class="do-paren">|</span><span class="do-mo-files-place">@=</span><span class="do-mo-files">Home:bild.jpg</span><span class="do-mo-files-place">=@</span><span class="do-paren">]</span></td>
+        <td style="padding:.4em;"><span style="display:inline-block;">{IMG_lotusbluete}<br /><span style="display:block;font-size:.8em;text-align:center;">Lotusblüte am See</span></span></td>
+    </tr>
+</table>
+<div class="do-info-box">Ein mit {ED_ICON_bild}<span class="do-paren">[</span><span class="do-mo-syntax">bild</span><span class="do-paren">|</span> <span class="do-paren">]</span> platziertes Bild kann mit den Befehlen {ED_ICON_links}<span class="do-paren">[</span>links<span class="do-paren">|</span> <span class="do-paren">]</span>, {ED_ICON_zentriert}<span class="do-paren">[</span>zentriert<span class="do-paren">|</span> <span class="do-paren">]</span>, {ED_ICON_rechts}<span class="do-paren">[</span>rechts<span class="do-paren">|</span> <span class="do-paren">]</span> horizontal ausgerichtet werden.</div>
+
+<h2 id="do4" class="do-space-top">Sprung-Verweis</h2>
+<table width="100%" class="do-after-br do-table" cellspacing="0" border="0" cellpadding="0">
+    {MODUL_editor_tabele_th}
+    <tr>
+        <td class="do-td-center">{ED_ICON_absatz}</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">absatz</span><span class="do-paren">=</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+           <td>Link, der zu einer Überschrift springt.</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">absatz</span><span class="do-paren">=</span>weiter unten &gt;<span class="do-paren">|</span>Anleitung<span class="do-paren">]</span></td>
+        <td><a class="do-molink" title="Zu Absatz &quot;Anleitung&quot; springen">weiter unten &gt;</a></td>
+    </tr>
+</table>
+<p>Im obigen Beispiel wird im Satz: "<i>Eine Anleitung dazu gibt es <a class="do-molink" title="Zu Absatz &quot;Anleitung&quot; springen">weiter unten &gt;</a></i>" auf den letzten beiden Wörtern ein <b>Sprung-Link</b> erzeugt.<br />
+<b>Sprung-Ziel</b> ist das auf der gleichen Seite an anderer Stelle stehende Wort: "Anleitung", das mit {ED_ICON_ueber1} oder {ED_ICON_ueber2} oder {ED_ICON_ueber3} als Überschrift formatiert ist.
+<div class="do-info-box">Ohne weitere Angaben wird mit <span class="do-paren">[</span><span class="do-mo-syntax">absatz</span><span class="do-paren">|</span> <span class="do-paren">]</span> ein Link erzeugt, der automatisch an den Seitenanfang springt.</div></p>
+
+<h2 id="do5" class="do-space-top">Textdarstellung als Liste</h2>
+<table width="100%" class="do-after-br do-table" cellspacing="0" border="0" cellpadding="0">
+    {MODUL_editor_tabele_th}
+    <tr>
+        <td class="do-td-center">{ED_ICON_liste}</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">liste</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+           <td>Erzeugt eine eingerückte Textzeile mit vorangestelltem Listenpunkt.</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">liste</span><span class="do-paren">|</span>Erste Zeile<span class="do-paren">]</span><br /><span class="do-paren">[</span><span class="do-mo-syntax">liste</span><span class="do-paren">|</span>Zweite Zeile<span class="do-paren">]</span></td>
+        <td><ul style="margin-top:0;margin-bottom:0;">
+                <li>Erste Zeile</li>
+                <li>Zweite Zeile</li></ul>
+        </td>
+    </tr>
+    <tr>
+        <td class="do-td-center">{ED_ICON_numliste}</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">numliste</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+           <td>Erzeugt eine eingerückte Textzeile mit vorangestellter Nummerierung.</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">numliste</span><span class="do-paren">|</span>Erste Zeile<span class="do-paren">]</span><br /><span class="do-paren">[</span><span class="do-mo-syntax">numliste</span><span class="do-paren">|</span>Zweite Zeile<span class="do-paren">]</span></td>
+        <td><ol style="margin-top:0;margin-bottom:0;">
+                <li>Erste Zeile</li>
+                <li>Zweite Zeile</li></ol>
+        </td>
+    </tr>
+</table>
+<h4 class="do-h4">Beide Syntax-Elemente können auch miteinander verschachtelt werden.</h4>
+<table class="do-table do-table-example" cellspacing="0" border="0" cellpadding="0">
+    <tr>
+        <th>Beispiel:</th>
+        <th>Ergebnis:</th>
+    </tr>
+    <tr>
+        <td style="padding:.4em;"><span class="do-paren">[</span><span class="do-mo-syntax">numliste</span><span class="do-paren">|</span> Erste Zeile<span class="do-paren">]</span><br />
+<span class="do-paren">[</span><span class="do-mo-syntax">numliste</span><span class="do-paren">|</span> Zweite Zeile<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="do-paren">[</span><span class="do-mo-syntax">liste</span><span class="do-paren">|</span>Erste Unterzeile<span class="do-paren">]</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="do-paren">[</span><span class="do-mo-syntax">liste</span><span class="do-paren">|</span>Zweite Unterzeile<span class="do-paren">]</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="do-paren">[</span><span class="do-mo-syntax">liste</span><span class="do-paren">|</span>Dritte Unterzeile<span class="do-paren">]</span><br />
+<span class="do-paren">]</span><br />
+<span class="do-paren">[</span><span class="do-mo-syntax">numliste</span><span class="do-paren">|</span>Dritte Zeile<span class="do-paren">]</span></td>
+        <td style="padding:.4em;"><ol style="margin-top:0;list-style-position:inside;padding-left:0;white-space:nowrap;">
+<li>Erste Zeile</li>
+<li>Zweite Zeile
+    <ul style="list-style-position:outside;">
+    <li>Erste Unterzeile</li>
+    <li>Zweite Unterzeile</li>
+    <li>Dritte Unterzeile</li>
+    </ul>
+</li>
+<li>Dritte Zeile</li>
+</ol>
+        </td>
+    </tr>
+</table>
+
+<h2 id="do6" class="do-space-top">Tabelle</h2>
+<table width="100%" class="do-after-br do-table" cellspacing="0" border="0" cellpadding="0">
+    {MODUL_editor_tabele_th}
+    <tr>
+        <td class="do-td-center">{ED_ICON_tabelle}</td>
+        <td>
+            <span class="do-paren">[</span><span class="do-mo-syntax">tabelle</span><span class="do-paren">|</span><br />
+            &lt;&lt;  <span class="do-paren">|</span>  &gt;&gt;<br />
+            &lt;  <span class="do-paren">|</span>  &gt;<br />
+            <span class="do-paren">]</span></td>
+           <td>Text oder Andere Elemente in eine nach Zeilen und Spalten geordnete (tabellarische) Anordnung bringen.</td>
+        <td>
+            <span class="do-paren">[</span><span class="do-mo-syntax">tabelle</span><span class="do-paren">|</span><br />
+            &lt;&lt; Kopf-Spalte 1<span class="do-paren">|</span>Kopf-Spalte 2 &gt;&gt;<br />
+            &lt; Zeile 1-Spalte 1<span class="do-paren">|</span>Zeile 1-Spalte 2 &gt;<br />
+            &lt; Zeile 2-Spalte 1<span class="do-paren">|</span>Zeile 2-Spalte 2 &gt;<br />
+            <span class="do-paren">]</span>
+        </td>
+        <td>
+<table cellspacing="1" border="1" cellpadding="0">
+  <thead>
+    <tr>
+      <th>Kopf-Spalte 1</th>
+      <th>Kopf-Spalte 2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="white-space: nowrap;">Zeile 1-Spalte 1</td>
+      <td style="white-space: nowrap;">Zeile 1-Spalte 2</td>
+    </tr>
+    <tr>
+      <td>Zeile 2-Spalte 1</td>
+      <td>Zeile 2-Spalte 2</td>
+    </tr>
+  </tbody>
+</table>
+        </td>
+    </tr>
+</table>
+<p>Durch Hinzufügen weiterer Zeilenbegrenzer &lt; &gt; und Spaltentrenner <span class="do-paren">|</span> kann eine Tabelle aus beliebig vielen Zeilen und Spalten bestehen.</p>
+<div class="do-error-box">Tabellen können nur symetrisch aufgebaut sein. Das heißt: <b>Jede Zeile muss die gleiche Anzahl von Spalten enthalten</b>.</div>
+
+<h2 id="do7" class="do-space-top">Trennlinie</h2>
+<table width="100%" class="do-table" cellspacing="0" border="0" cellpadding="0">
+    {MODUL_editor_tabele_th}
+    <tr>
+        <td class="do-td-center">{ED_ICON_linie}</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">----</span><span class="do-paren">]</span></td>
+        <td>Horizontale Trennlinie</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">----</span><span class="do-paren">]</span></td>
+        <td><hr /></td>
+    </tr>
+</table>
+
+<h2 id="do8" class="do-space-top">html-Quelltext einfügen</h2>
+<table width="100%" class="do-after-br do-table" cellspacing="0" border="0" cellpadding="0">
+    {MODUL_editor_tabele_th}
+    <tr>
+        <td class="do-td-center">{ED_ICON_html}</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">html</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+        <td>Nimmt html-Text als solchen wahr und generiert die entsprechende Anzeige.</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">html</span><span class="do-paren">|</span>&lt;marquee&gt; Text &lt;/marquee&gt;<span class="do-paren">]</span></td>
+        <td><marquee> Text </marquee></td>
+    </tr>
+</table>
+<p class="do-info-box">Mit diesem Syntax-Element kann zum Beispiel auch ein <b>Video-Link</b> eingebettet werden, oder eine interaktive <b>Landkarte</b>.</p>
+
+<h2 id="do9" class="do-space-top">Include</h2>
+<table width="100%" class="do-after-br do-table" cellspacing="0" border="0" cellpadding="0">
+    {MODUL_editor_tabele_th}
+    <tr>
+        <td class="do-td-center">{ED_ICON_include}</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">include</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+        <td>Fügt den Inhalt einer anderen Seite ein</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">include</span><span class="do-paren">|</span><span class="do-mo-files-place">@=</span><span class="do-mo-files">Kategorie 1:Seite 2</span><span class="do-mo-files-place">=@</span><span class="do-paren">]</span></td>
+        <td><b>Dieser Text steht auf S. 2, wird aber überall angezeigt, wo S. 2 per "include" eingefügt wurde.</b></td>
+    </tr>
+</table>
+<p>Die zur Verfügung stehenden Inhaltsseiten werden aus der <b>Selectbox</b> {MODUL_select_catpage} eingefügt.</p>
+<p class="do-info-box"><b>Ist immer dann nützlich, wenn gleicher Inhalt an mehreren Stellen vorkommt:</b> Soll z. B. an mehreren Stellen eine bestimmte Adresse angezeigt werden, so wird diese in eine separate Seite geschrieben, die das Attribut "versteckt" erhält. Per "include" kann dann der Inhalt dieser Seite, inklusive aller Formatierungen, überall eingefügt werden. <b>Vorteil:</b> Etwaige Änderungen an der Adresse müssen nur einmal ausgeführt werden.</p>
+
+<h2 id="do10" class="do-space-top">Schrift- und Absatzformatierung</h2>
+<table width="100%" class="do-table" cellspacing="0" border="0" cellpadding="0">
+    {MODUL_editor_tabele_th}
+    <tr>
+        <td class="do-td-center">{ED_ICON_ueber1}</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">ueber1</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+        <td>Überschrift groß</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">ueber1</span><span class="do-paren">|</span>Überschrift groß<span class="do-paren">]</span></td>
+        <td><div style="font-size:22px; font-weight:bold;">Überschrift groß</div></td>
+    </tr>
+    <tr>
+        <td class="do-td-center">{ED_ICON_ueber2}</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">ueber2</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+        <td>Überschrift mittel</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">ueber2</span><span class="do-paren">|</span>Überschrift mittel<span class="do-paren">]</span></td>
+        <td><div style="font-size:18px; font-weight:bold;">Überschrift mittel</div></td>
+    </tr>
+        <tr>
+        <td class="do-td-center">{ED_ICON_ueber3}</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">ueber3</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+        <td>Überschrift klein</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">ueber3</span><span class="do-paren">|</span>Überschrift klein<span class="do-paren">]</span></td>
+        <td><div style="font-size:14px; font-weight:bold;">Überschrift klein</div></td>
+    </tr>
+    <tr>
+        <td class="do-td-center">{ED_ICON_links}</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">links</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+        <td>Textabsatz linksbündig</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">links</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+        <td style="text-align:left;">Hier geht der Text los.<br />Hier geht er weiter. Alle Zeilen sind am linken Rand bündig ausgerichtet.</td>
+    </tr>
+    <tr>
+        <td class="do-td-center">{ED_ICON_zentriert}</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">zentriert</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+        <td>Textabsatz zentriert</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">zentriert</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+        <td style="text-align:center;">Hier geht der Text los. <br />Hier geht er weiter. Alle Zeilen sind mittig ausgerichtet.</td>
+    </tr>
+    <tr>
+        <td class="do-td-center">{ED_ICON_block}</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">block</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+        <td>Textabsatz im Blocksatz</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">block</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+        <td style="text-align:justify;">Hier geht der Text los. Hier geht er weiter. Und alles, ist bis zur vorletzten Zeile an beiden Rändern bündig ausgerichtet.</td>
+    </tr>
+    <tr>
+        <td class="do-td-center">{ED_ICON_rechts}</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">rechts</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+        <td>Textabsatz rechtsbündig</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">rechts</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+        <td style="text-align:right;">Hier geht der Text los.<br />Hier geht er weiter. Alle Zeilen sind am rechten Rand bündig ausgerichtet.</td>
+    </tr>
+    <tr>
+        <td class="do-td-center">{ED_ICON_fett}</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">fett</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+        <td>Text fett</td>
+        <td>Text wird<span class="do-paren">[</span><span class="do-mo-syntax">fett</span><span class="do-paren">|</span>dicker<span class="do-paren">]</span> dargestellt</td>
+        <td>Text wird <b>dicker</b> dargestellt</td>
+    </tr>
+    <tr>
+        <td class="do-td-center">{ED_ICON_kursiv}</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">kursiv</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+        <td>Text kursiv</td>
+        <td>Text wird <span class="do-paren">[</span><span class="do-mo-syntax">kursiv</span><span class="do-paren">|</span>schräg<span class="do-paren">]</span> dargestellt</td>
+        <td>Text wird <i>schräg</i> dargestellt</td>
+    </tr>
+    <tr>
+        <td class="do-td-center">{ED_ICON_unter}</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">unter</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+        <td>Text unterstrichen</td>
+        <td>Text wird <span class="do-paren">[</span><span class="do-mo-syntax">unter</span><span class="do-paren">|</span>unterstrichen<span class="do-paren">]</span></td>
+        <td>Text wird <u>unterstrichen</u></td>
+    </tr>
+    <tr>
+        <td class="do-td-center">{ED_ICON_durch}</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">durch</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+        <td>Text durchgestrichen</td>
+        <td>Text wird<span class="do-paren">[</span><span class="do-mo-syntax">durch</span><span class="do-paren">|</span>durchgestrichen<span class="do-paren">]</span></td>
+        <td>Text wird <s>durchgestrichen</s></td>
+    </tr>
+</table>
+
+<h2 id="do11" class="do-space-top">Schriftgröße</h2>
+<table width="100%" class="do-table do-after-br" cellspacing="0" border="0" cellpadding="0">
+    {MODUL_editor_tabele_th}
+    <tr>
+        <td class="do-td-center">{ED_ICON_fontsize}</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">fontsize</span><span class="do-paren">=</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+        <td>Ändert die Schriftgröße<br />(nach dem <span class="do-paren">=</span> ist ein Parameter erforderlich)</td>
+        <td>Er war ein <span class="do-paren">[</span><span class="do-mo-syntax">fontsize</span><span class="do-paren">=</span>22px<span class="do-paren">|</span>GIGANT<span class="do-paren">]</span></td>
+        <td>Er war ein <span style="font-size:22px;">GIGANT</span></td>
+    </tr>
+</table>
+<div class="do-info-box">Ausführliche Informationen zu den möglichen Größenparametern von <b>Fontsize</b> gibt es hier, bei <a href="http://de.selfhtml.org/css/formate/wertzuweisung.htm#numerische" target="_blank"><b>de.selfhtml.org &gt;</b></a></div>
+
+<h2 id="do12" class="do-space-top">Schriftfarbe</h2>
+<table width="100%" class="do-table do-after-br" cellspacing="0" border="0" cellpadding="0">
+    {MODUL_editor_tabele_th}
+    <tr>
+        <td class="do-td-center">{ED_ICON_farbe}</td>
+        <td><span class="do-paren">[</span><span class="do-mo-syntax">farbe</span><span class="do-paren">=</span><span class="do-paren">|</span> <span class="do-paren">]</span></td>
+        <td>Ändert die Schriftfarbe<br />(nach dem <span class="do-paren">=</span> ist ein Farbname oder hexadezimaler Farbcode erforderlich)</td>
+        <td>Dieses Wort ist<span class="do-paren">[</span><span class="do-mo-syntax">farbe</span><span class="do-paren">=</span>00FF00<span class="do-paren">|</span>grün<span class="do-paren">]</span></td>
+        <td>Dieses Wort ist <span style="color:#00FF00;">grün</span></td>
+    </tr>
+</table>
+<p>Dem <b>Syntax Element Farbe</b> {ED_ICON_farbe} wird <u>vor</u> seiner Anwendung der benötigte Farbcode zugewiesen. <br />
+Dafür hat moziloCMS einen integrierten <b>Farbwähler</b> {ED_ICON_farbeedit}.</p>
+<div class="do-info-box do-after-br">Bei Markierung eines bereits vorhandenen Farbcodes <span class="do-paren">[</span><span class="do-mo-syntax">farbe</span><span class="do-paren ">=</span><span class="ace-mozilo"><span class="ace_marker-layer"><span class="ace_selection" style="position:static;">00FF00</span></span></span><span class="do-paren">|</span>grün<span class="do-paren">]</span> und anschließendem Klick auf {ED_ICON_farbe} wird nur der Farbcode ersetzt.</div>
+<p>Zur Einstellung der gewünschten Farbe bietet er drei verschiedene Möglichkeiten.</p>
+<p><b>Farbring:</b></p>
+<p class="do-arrow-point-box"><b class="do-arrow-point">1</b>Im äußeren Kreis die gewünschte <b>Grundfarbe</b> durch Verschieben der <b>Kreismarkierung</b> {MODUL_color_editor_marker} einstellen.</p>
+<p class="do-arrow-point-box do-after-br"><b class="do-arrow-point">2</b></b> Im inneren Dreieck kann das Verhältnis zwischen Helligkeit und Sättigung festgelegt werden.</p>
+
+<p><b>RGB-Werte:</b></p>
+<p class="do-arrow-point-box do-after-br""><b class="do-arrow-point">3</b>Durch Verschieben der <b>Slider</b> (Rot, Grün, Blau, Sättigung und Helligkeit) oder Eingabe der entsprechenden Zahlenwerte (0 - 255) in die Textfelder.</p>
+
+<p><b>Direkteingabe des Farbcodes:</b></p>
+<p class="do-arrow-point-box do-after-br"><b class="do-arrow-point">4</b>Ist der 6-stelige Farbcode bekannt, kann er direkt in dieses Textfenster eingetragen werden.</p><!--<br />-->
+
+<p><u>Weitere Elemente:</u></p>
+<p class="do-arrow-point-box"><b class="do-arrow-point">5</b>Anzeige der aktuell eingestellten Farbe</p>
+<p class="do-arrow-point-box"><b class="do-arrow-point">6</b>Anzeige der zuletzt benutzten Farbe. Per Klick kann hier die aktuelle Einstellung rückgängig gemacht werden.</p>
+<p class="do-arrow-point-box"><b class="do-arrow-point">7</b>Vordefinierte Farben, die im Admin-Tab <b>{INTERNAL_LINK|config#do_tocoloredit}</b> gespeichert wurden.</p>
+<div class="do-arrow-warp" style="margin-left:203px;margin-top:40px;padding-bottom:1em;">{MODUL_color_editor}
+<div class="do-arrow-right-nr" style="top:85px;left:-15px;">1</div>
+<div class="do-arrow-down-nr" style="top:60px;left:125px;">2</div>
+<div class="do-arrow-left-nr" style="top:138px;left:398px;">3</div>
+<div class="do-arrow-down-nr" style="top:20px;left:230px;">4</div>
+<div class="do-arrow-down-nr" style="top:0px;left:320px;">5</div>
+<div class="do-arrow-down-nr" style="top:0px;left:360px;">6</div>
+<div class="do-arrow-left-nr" style="top:236px;left:90px;">7</div>
+</div>
+

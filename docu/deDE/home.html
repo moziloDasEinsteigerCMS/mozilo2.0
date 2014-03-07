@@ -1,0 +1,77 @@
+<!--no_dialog_start--><p class="do-margin-start">Mit Mausklick auf den entsprechenden Admin-Tab den Arbeitsbereich <img class="mo-icon-text-right mo-tabs-icon mo-tab-home" src="{ICONS_CLEAR}" alt=" " hspace="0" vspace="0" border="0" /><span class="mo-bold">{HOME_BUTTON}</span> aufrufen.</p>
+<div class="d_do-after-br do-arrow-warp">{MODUL_mozilo_tabs_home}</div>
+
+<div class="do-separate-1 do-after-br"></div><!--no_dialog_end-->
+
+<p>Im Admin-Bereich "<b>Info</b>" werden verschiedene Basis-Informationen angezeigt, die das CMS und den Server betreffen.</p>
+
+<div class="do-separate"></div>
+
+<h2>Hilfe und Dokumentation:</h2>
+<p class="do-arrow-point-box"><b class="do-arrow-point">1</b>Hier öffnet sich ein neues Browserfenster mit der kompletten moziloCMS-Dokumentation.</p>
+<p class="do-after-br do-arrow-point-box"><b class="do-arrow-point">2</b>Durch Klick auf das Info-Zeichen öffnet sich das Hilfe-Fenster mit einer Kurzanleitung.</p>
+<div class="do-arrow-warp">{MODUL_home_00}
+<div class="do-arrow-left-nr" style="top:46px;left:373px;">1</div>
+<div class="do-arrow-left-nr" style="top:86px;left:350px;">2</div>
+</div>
+
+<h2 id="do_tomultiuser" class="do-space-top">Multiuser Reset:</h2>
+<p>Der Multiuser-Modus von moziloCMS ermöglicht es, dass mehr als ein User gleichzeitig im System eingeloggt sein kann um darin zu arbeiten.<br />
+Um sich dabei nicht gegenseitig zu behindern ist jeweils der Bereich, in dem sich ein User gerade befindet, für andere User gesperrt.</p>
+<p>Verlässt ein User den Admin-Bereich <b>ohne korrektes Logout {MO_ICON_logout}</b> bleibt diese Sperrung für den letzten Bereich, in dem er sich befand, weiter bestehen.<br />
+<b>Das bedeutet:</b> Andere User, oder auch er selbst, nach erneutem Login, können auf diesen Bereich nicht mehr zugreifen.</p>
+<p class="do-after-br do-arrow-point-box"><b class="do-arrow-point">1</b>Durch Klick auf den Button "<b>Andere User abmelden</b>" werden solche Sperren aufgehoben und betroffene Arbeitsbereiche wieder freigegeben.</p>
+<div class="do-after-br do-error-box"><b>Vorsicht:</b> Die Betätigung dieses Buttons bereinigt nicht nur die durch nicht erfolgte Logouts übrig gebliebenen Sperren. <br />
+Es werden tatsächlich <b>ALLE</b> anderen User abgemeldet. Auch dann, wenn sie noch im System aktiv sind!</div>
+<div class="do-arrow-warp">{MODUL_home_01}
+<div class="do-arrow-right-nr" style="top:44px;left:527px;">1</div>
+</div>
+
+<h2 class="do-space-top">CMS-Informationen:</h2>
+<p class="do-after-br">Hier wird neben dem belegten Speicherplatz die Versionsnummer von moziloCMS und der genaue Serverpfad angezeigt. <br />
+Diese Informationen können bei einer möglichen Fehlersuche hilfreich sein.</p>
+<div class="do-arrow-warp">{MODUL_home_02}</div>
+
+<h2 class="do-space-top">Server-Informationen / Voraussetzungen:</h2>
+<p class="do-after-br">In diesem Bereich wird das Vorhandensein verschiedener Servereigenschaften geprüft, die Voraussetzung für den korrekten Betrieb von moziloCMS sind.</p>
+
+<div class="do-after-br do-error-box">Sollte einer dieser Balken nicht grün, sondern <b>rot</b> unterlegt sein, liegt ein Mangel vor, der die Funktion von moziloCMS beeinträchtigen kann. <br />
+Wenden Sie sich in einem solchen Fall an Ihren Provider, mit der Bitte, die Servereinstellungen zu überprüfen und ggf. anzupassen.</div>
+<div class="do-arrow-warp">{MODUL_home_03}</div>
+
+<ul class="do-list do-li-tag">
+<li><b>Datum/Zeit/Zeitzone:</b>
+<div>Anzeige der genauen Serverzeit. Diese kann z. B. zum Abgleich bestimmter Module oder Plugins wichtig sein.</div></li>
+
+<li><b>Spracheinstellung der Serverumgebung:</b>
+<div>Ist für PHP Entwickler wichtig, oder ggf. bei der Fehlersuche.</div></li>
+
+<li><b>Installierte PHP-Version:</b>
+<div>Zeigt die auf dem Server aktive PHP-Version an. Mozilo 2.0 benötigt mindestens PHP 5.2 oder höher.</div></li>
+
+<li><b>Safe-Mode aktiv</b> (Standard = <b>Nein</b>)<b>:</b><br />
+<div>Sollte Safe-Mode aktiv sein, können wichtige Funktionen des CMS blockiert werden.</div></li>
+
+<li><b>Grafikbibliothek GDlib verfügbar</b> (Standard = <b>Ja</b>)<b>:</b>
+<div>Ohne die Grafikbibliothek GDlib sind verschiedene Funktionen nicht verfügbar. Zum Beispiel das automatische skalieren von Bildern, beim Upload.</div></li>
+
+<li><b>mod_rewrite verfügbar:</b> (Standard = <b>Ja</b>)<b>:</b>
+<div>Diese Funktion sorgt für schönere, suchmaschinengerechtere Links zu den einzelnen Seiten.</div></li>
+
+<li><b>Back Up und Install System verfügbar</b> (Standard = <b>Ja</b>)<b>:</b>
+<div>Gibt an, ob die Funktionen verfügbar sind, um Backups der Website zu machen und Plugins oder Templates zu installieren.</div></li>
+
+<li><b>Multiuser-Mode verfügbar:</b>
+<div>Gibt an, ob der Server mehrere gleichzeitige Logins in den Admin-Bereich zulässt.<br />
+<b>Zeitangabe</b> = Führt der eingeloggte User während dieses Zeitraums keine Aktion aus, wird die Verbindung danach automatisch geschlossen.</div></li>
+</ul>
+
+<h2 id="do_tomailtest" class="do-space-top">Mailversand-Test:</h2>
+<p class="do-after-br do-arrow-point-box"><b class="do-arrow-point">1</b>In dieses Feld eine E-Mail Adresse eingeben und ENTER-Taste drücken. Jetzt versucht moziloCMS eine Testmail an diese Adresse zu schicken.<br />
+Wenn die E-Mail ankommt ist der Server für das Versenden von Mails eingerichtet.</p>
+<div class="do-after-br do-error-box">Sollte die Testmail <b>nicht</b> ankommen, können Funktionen, wie das Abschicken eines Kontaktformulars, oder der Empfang wichtiger <br />
+System-Meldungen nicht eingesetzt werden. – Zur Lösung des Problems kontaktieren Sie bitte Ihren Provider.</div>
+
+<div class="do-arrow-warp">{MODUL_home_04}
+<div class="do-arrow-down-nr" style="top:15px;left:690px;">1</div>
+</div>

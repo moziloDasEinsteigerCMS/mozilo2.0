@@ -1,0 +1,621 @@
+/*1=oben, 2=rechts, 3=unten, 4=links*/
+html, body {
+    font-size:12px;/* !important*/
+    padding:0;
+    margin:0;
+    height: 100%;
+}
+/* das sind die css atriebute von ui-state-hover. werden für die tabs benutzt */
+/* damit das nicht mit js gemacht werden muss */
+.mo-ui-state-hover:hover {
+    background-color:#a9b7cb;
+    background-image:url(css/mozilo/images/ui-bg_highlight-soft_90_a9b7cb_1x100.png);
+}
+
+#mo-admin-td {
+    margin:0 auto;
+    text-align:left;
+    padding: 1em 0 5em 0;
+}
+
+form {
+    display:inline;
+}
+
+.mo-shadow {
+    -webkit-box-shadow: 4px 6px 10px #666;
+    -moz-box-shadow: 4px 6px 10px #666;
+    box-shadow: 4px 6px 10px #666;
+}
+/* wens kein javascript gibt */
+.mo-noscript {
+    position:absolute;
+    /* siehe mo-td-content-width */
+    width: 73em;
+    z-index:999999;
+}
+
+/*1=oben, 2=rechts, 3=unten, 4=links*/
+.mo-noscript div {
+    font-size:3em;
+    margin:2em 1em 2em 1em;
+    text-align:center;
+}
+
+/* 16 22 24 32 48 */
+.mo-td-content-width {
+    width: 75em;
+    padding:0;
+}
+
+.mo-icon-text-right {
+    margin-right:.4em;
+}
+
+/*1=oben, 2=rechts, 3=unten, 4=links*/
+.mo-butten-a-img {
+    margin:0 .4em 0 .4em;
+    display:inline-block;
+    vertical-align:middle;
+}
+
+.mo-butten-a-img img {
+    border:0;
+    padding:0;
+    vertical-align:middle;
+}
+
+.mo-tool-icon {
+    width: 24px;
+    height:24px;
+    cursor: pointer;
+    border:0;
+    padding:0;
+    margin:0 .4em 0 .4em;
+    /*das ist nötig damits nicht son rand unten im a tag gibt*/
+    vertical-align:middle;
+}
+
+.mo-icon-link {
+    cursor:pointer;
+    width: 18px;
+    vertical-align:middle;
+}
+
+.mo-icon-blank {
+    cursor: default;
+}
+
+.mo-ui-tabs {
+    border-width: 0;
+}
+
+/*1=oben, 2=rechts, 3=unten, 4=links*/
+.mo-ui-tabs-panel {
+    padding: 1px .4em .4em .4em;
+    min-height:3em;
+}
+
+.mo-menu-tabs {
+    border-bottom-width:0;
+}
+
+.mo-ul {
+    list-style-type: none;
+    margin: 0;
+    /*den oben 1px brauchen wir damit der margin-top von der li greift*/
+    padding: 1px 0 0 0;
+    min-height:2em;
+}
+
+.mo-ul input {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.mo-li {
+    list-style-type: none;
+    margin-top: .8em;
+}
+/* das ist der cat head*/
+.mo-li-head-tag {
+    padding: .4em .4em 0 .4em;
+}
+
+/* das wird wens danach keine ul gibt dem head hinzugefügt
+weil ansonsten unter dem head die ul hinzu kommt (mo-in-ul-ul) */
+.mo-li-head-tag-no-ul {
+    padding-bottom: .4em;
+}
+
+.mo-li .mo-li-head-tag {
+    border-width:0;
+}
+
+/* für alle tags wo die tools icon enthaten sind damit beim hover die höhe nicht wackelt
+richtet sich nach der icon grösse = 2 * body font-size */
+.mo-tag-height-from-icon {
+    height:24px;
+}
+/*1=oben, 2=rechts, 3=unten, 4=links*/
+.mo-in-ul-ul {
+    list-style-type: none;
+    margin: 0 .4em 0 2.4em;
+    /*Achtung der wird auch gebraucht wir damit der drop geht*/
+    padding: 0 0 .4em 0;
+}
+
+.mo-settings-div {
+    /*Achtung der margin rechts ist der gleiche wie bei mo-in-ul-ul */
+    margin: 0 .4em .4em 2.4em;
+    padding: .4em;
+}
+
+.mo-in-ul-li {
+    list-style-type: none;
+    padding: .4em 0 .4em .8em;
+    margin-top: .4em;
+}
+
+.config .mo-in-ul-li, .admin .mo-in-ul-li, .plugins .mo-in-ul-li, .install .mo-in-ul-li, .template .mo-in-ul-li {
+    padding-right:.8em;
+}
+
+.mo-input-text {
+    width:96%;
+}
+
+.mo-input-digit {
+    width:4em;
+}
+
+.mo-select-div {
+    margin-right:1em;
+}
+
+.mo-select {
+    width:97%;
+}
+
+.mo-checkbox {
+    vertical-align:middle;
+    margin-right: .4em;
+}
+
+.mo-radio {
+    margin-right: .4em;
+}
+
+.mo-plugin-input {
+    vertical-align: middle;
+    margin: 0px;
+    padding: 0px;
+    color: #000000;
+    border: 1px solid #C0C0C0;
+}
+
+.mo-plugin-textarea {
+    margin: 0px;
+    padding: 0px;
+    border: 1px solid #C0C0C0;
+}
+
+.mo-plugin-select {
+    margin: 0px;
+    padding: 0px;
+    border: 1px solid #C0C0C0;
+    /*width: 200px;*/
+}
+
+.mo-plugin-size-cols {
+    width: 100%;
+}
+
+/* 1=oben, 2=rechts, 3=unten, 4=links */
+.mo-content {
+    margin: .4em .4em .4em 2.4em;
+}
+
+.mo-staus {
+    margin:0 1.6em;
+}
+
+.mo-font-small {
+    font-size: .85em;
+}
+
+.mo-nowrap {
+    white-space:nowrap;
+}
+
+.mo-new-table {
+    margin: .4em 0;
+}
+
+.mo-new-td {
+    width:25%;
+}
+
+.mo-img-trans {
+    background-image:url(gfx/trans_background.gif);
+    background-repeat:repeat;
+}
+
+#menu-fix {
+    position:absolute;
+    overflow:hidden;
+    top:50px;
+    /* right = -width */
+    right:-20px;
+    /* geschlossene menu breite */
+    min-width:20px;
+    /* sichtbare menu breite */
+    max-width:200px;
+    min-height:3em;
+    background-image:url(gfx/menu.png);
+    background-position: 5px center;
+    background-repeat:no-repeat;
+    border-left-width:0;
+    z-index:99999;
+}
+
+#menu-fix-content {
+    overflow:hidden;
+    margin:0;
+    /* siehe #menu-fix width */
+    margin-left:20px;
+}
+
+/* 1=oben, 2=rechts, 3=unten, 4=links */
+#menu-fix-content ul {
+    overflow:hidden;
+    list-style-type: none;
+    padding: 0;
+    margin: 0 .8em .8em .8em;
+}
+
+#menu-fix-content li {
+    white-space:nowrap;
+    cursor:move;
+    overflow:hidden;
+    margin: .8em 0 0 0;
+}
+
+#menu-fix-content li span {
+    cursor:move;
+}
+
+#menu-fix-content .mo-in-ul-li {
+    padding-left:.4em;
+}
+
+li.ui-draggable-dragging {
+    /* siehe #menu-fix max-width */
+    width:200px;
+}
+
+/* der hilfe button im editor title  */
+.ui-dialog-titlebar .js-docu-link {
+    float:left;
+    display:block;
+    height:22px;
+    width: 22px;
+    margin:-3px 1em -3px -.6em;
+}
+
+/* 1=oben, 2=rechts, 3=unten, 4=links */
+.ui-dialog-titlebar .js-docu-link img {
+    width: 22px;
+    padding:0;
+    margin:0;
+    vertical-align:top;
+}
+
+.js-move-me-page, .js-move-me-cat, .mo-icons-copy {
+    cursor:move;
+}
+
+.js-page-name, .js-cat-name {
+    cursor:text;
+    vertical-align:middle;
+}
+
+.js-in-link, .js-in-name {
+    width:17em;
+    margin-right: 1em;
+}
+
+.mo-td-middle {
+    vertical-align:middle;
+}
+
+/* da wo wir keine td haben machens wir mit der line-height siehe mo-tag-height-from-icon */
+.mo-middle {
+    line-height:22px;
+}
+
+.mo-margin-bottom {
+    margin-bottom:.8em;
+}
+
+.mo-margin-top, input.mo-margin-top {
+    margin-top:.8em;
+}
+
+.mo-in-li-l {
+    width:65%;
+}
+
+div.mo-in-li-l  {
+    float:left;
+}
+
+.mo-in-li-r {
+    width:34%;
+}
+
+div.mo-in-li-r  {
+    float:right;
+}
+
+.mo-no-border-top {
+    border-top-width: 0;
+}
+
+.mo-no-border-bottom {
+    border-bottom-width: 0;
+}
+
+.file-cat-content {
+    border-top:0;
+}
+
+input.mo-input-margin-top  {
+    margin-top:.4em;
+}
+
+.mo-padding-left {
+    padding-left:.4em;
+}
+
+.mo-padding-top {
+    padding-top:.4em;
+}
+
+.mo-padding-right {
+    padding-right:.4em;
+}
+
+.mo-padding-plugin {
+    padding:.4em .4em .4em .8em;
+}
+
+.mo-help-box {
+    padding:.4em .8em .4em .4em;
+}
+
+.mo-checkbox-del {
+    margin-left:2em;
+}
+
+/*1=oben, 2=rechts, 3=unten, 4=links*/
+.align-right {
+  text-align: right;
+}
+
+.align-left {
+  text-align: left;
+}
+
+.mo-align-center {
+  text-align: center;
+}
+
+.js-file-dir-header td {
+    vertical-align:middle;
+}
+
+.mo-hidden {
+    display:none;
+}
+
+.mo-bold {
+    font-weight: bold;
+}
+
+.mo-clear {
+    font-size:0;
+    line-height:0;
+    margin:0;
+    padding:0;
+    height:0;
+    width:0;
+    clear:both;
+}
+
+.mo-error {
+    font-weight: bold;
+    padding-bottom:.4em;
+}
+
+#dialog-del ul {
+    margin:0;
+    padding:0;
+    list-style-type:none;
+    text-align:left;
+}
+
+#dialog-del ul ul {
+    padding-left:2.4em;
+    list-style-type:disc;
+}
+
+#dialog-del li {
+    text-align:left;
+}
+
+.textarea_cms {
+    margin: 0px;
+    padding: 0px;
+    height: 120px;
+    border: 1px solid #C0C0C0;
+    width: 99%;
+}
+
+.mo-overlay {
+    /* must be initially hidden */
+    display:none;
+    /* place overlay on top of other elements */
+    z-index:10000;
+    /* styling */
+    background-color:#fff;
+    width:300px;
+    min-height:200px;
+    border:1px solid #666;
+    /* CSS3 styling for latest browsers */
+    -moz-box-shadow:0 0 90px 5px #000;
+    -webkit-box-shadow: 0 0 90px #000;  
+}
+
+.mo-message-erfolg {
+    display: block;
+    padding: .8em 0 .8em 34px;
+}
+
+.mo-message-fehler {
+    display: block;
+    padding: .8em 0 .8em 34px;
+}
+
+.mo-message-icon {
+    width: 24px;
+    height:24px;
+    border:0;
+    padding:0;
+    margin:-.4em 10px 0 -34px;
+    float:left;
+}
+
+/* login sachen */
+.mo-login_input {
+    border: 1px solid #c0c0c0;
+    width: 100%;
+}
+
+.mo-login_submit {
+    border: 1px solid #c0c0c0;
+    margin-top: .8em;
+    margin-bottom: .4em;
+    background-color: #ffffff;
+    cursor: pointer;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -khtml-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.mo-login-box {
+    width: 33em;
+    padding: 0;
+    margin:0;
+    margin-left: 20em;
+    margin-top: 10em;
+    margin-bottom: 10em;
+    text-align:center;
+}
+
+/*1=oben, 2=rechts, 3=unten, 4=links*/
+.mo-login {
+    text-align:left;
+    width: 25em;
+    margin:0 auto;
+    padding: 0;
+}
+
+.mo-login_message_fehler {
+    font-weight: bold;
+    padding:.4em;
+    text-align:center;
+    margin-bottom:1em;
+}
+
+div#dialog-multi .mo-login-box, div#dialog-test-w .mo-login-box {
+    margin:0;
+}
+
+#js-menu-config-default-color * {
+    vertical-align:middle;
+}
+
+#js-menu-config-default-color .ce-default-color-img {
+    cursor: move;
+    margin-right:2em;
+}
+.mo-ul .mo-in-hex {
+    margin:2px 0 0 0;
+}
+
+/*1=oben, 2=rechts, 3=unten, 4=links*/
+#js-config-default-color-box {
+    margin:1px 0 2px 6em;
+}
+
+#js-config-default-color-box img {
+    cursor: move;
+}
+
+#js-del-config-default-color, .js-save-default-color{
+    float:left;
+}
+
+.mo-tabs-icon {
+    width:18px;
+    height:18px;
+    background-image: url(gfx/tabs_icons.png);
+    background-repeat:no-repeat;
+}
+
+.mo-tab-home        {background-position: 0 0;}
+.mo-tab-catpage     {background-position: -18px 0;}
+.mo-tab-files       {background-position: -36px 0;}
+.mo-tab-gallery     {background-position: -54px 0;}
+.mo-tab-config      {background-position: -72px 0;}
+.mo-tab-admin       {background-position: -90px 0;}
+.mo-tab-plugins     {background-position: -108px 0;}
+.mo-tab-template    {background-position: -126px 0;}
+
+.mo-icons-icon {
+    width:24px;
+    height:24px;
+    background-image: url(gfx/mo_icons.png);
+    background-repeat:no-repeat;
+}
+/* ICON_URL.'icons_img.gif mo-icons-icon mo-icons- */
+.mo-icons-add-file      {background-position: 0 0;}
+.mo-icons-copy          {background-position: -24px 0;}
+.mo-icons-delete        {background-position: -48px 0;}
+.mo-icons-docu          {background-position: -72px 0;}
+.mo-icons-edit          {background-position: -96px 0;}
+.mo-icons-error         {background-position: 0 -24px;}
+.mo-icons-help          {background-position: -24px -24px;}
+.mo-icons-img-scale     {background-position: -48px -24px;}
+.mo-icons-info          {background-position: -72px -24px;}
+.mo-icons-information   {background-position: -96px -24px;}
+.mo-icons-logout        {background-position: 0 -48px;}
+.mo-icons-move          {background-position: -24px -48px;}
+.mo-icons-page-edit     {background-position: -48px -48px;}
+.mo-icons-pw            {background-position: -72px -48px;}
+.mo-icons-save          {background-position: -96px -48px;}
+.mo-icons-stop          {background-position: 0 -72px;}
+.mo-icons-warning       {background-position: -24px -72px;}
+.mo-icons-website       {background-position: -48px -72px;}
+.mo-icons-website-small {background-position: -72px -72px;}
+.mo-icons-work          {background-position: -96px -72px;}
+.mo-icons-delete-full   {background-position: 0 -96px;}
+.mo-icons-blank         {background-position: -96px -96px; cursor: default;}
+
+#js-del-config-default-color.ui-state-default {
+    background-image:url(gfx/mo_icons.png);
+    background-position: 0 -96px;
+}
+
