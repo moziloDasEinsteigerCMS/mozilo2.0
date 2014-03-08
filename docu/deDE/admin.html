@@ -1,0 +1,71 @@
+<!--no_dialog_start--><p class="do-margin-start">Mit Mausklick auf den entsprechenden Admin-Tab den Arbeitsbereich <img class="mo-icon-text-right mo-tabs-icon mo-tab-admin" src="{ICONS_CLEAR}" alt=" " hspace="0" vspace="0" border="0" /><span class="mo-bold">{ADMIN_BUTTON}</span> aufrufen.</p>
+<div class="d_do-after-br do-arrow-warp">{MODUL_mozilo_tabs_admin}</div>
+
+<div class="do-separate-1 do-after-br"></div><!--no_dialog_end-->
+
+<p>Hier werden Einstellungen für den Admin-Bereich von moziloCMS vorgenommen.</p>
+<div class="do-separate"></div>
+
+
+<h3>Sprache für den Admin-Bereich auswählen:</h3>
+<p class="do-arrow-point-box"><b class="do-arrow-point">1</b>Über dieses Ausklappmenü kann in eine andere Sprache für den Admin-Bereich umgeschaltet werden.</p>
+<p class="do-info-box do-after-br">Diese Sprachauswahl bezieht sich ausschließlich auf den <b>Admin-Bereich</b> von moziloCMS.<br />
+Die Sprache, in der <b>Meldungen für den Betrachter der Website</b> angezeigt werden, wird im Bereich "<b>Einstellungen</b>" festgelegt.</p>
+<div class="do-arrow-warp">{MODUL_admin_00}
+<div class="do-arrow-right-nr" style="top:3px;left:524px;">1</div>
+</div>
+
+<h3 class="do-space-top">Mailadresse für System-Mitteilungen:</h3>
+<p class="do-arrow-point-box"><b class="do-arrow-point">1</b>Hier die E-Mail-Adresse eingeben (und mit Eingabetaste/Enter abschließen), an die wichtige System-Mitteilungen geschickt werden sollen. <br />
+Zum Beispiel, wenn versucht wurde, sich mehr als dreimal hintereinander mit falschen Zugangsdaten einzuloggen. </p>
+<p class="do-info-box do-after-br">Nicht vergessen diese Mailadresse mit dem <b>E-Mail-Test</b> im Admin-Bereich <b>{INTERNAL_LINK|home#do_tomailtest}</b> auf ihre Funktionalität zu überprüfen.</p>
+<div class="do-arrow-warp">{MODUL_admin_01}
+<div class="do-arrow-right-nr" style="top:3px;left:524px;">1</div>
+</div>
+
+<h3 class="do-space-top">Backup-Erinnerung:</h3>
+<p class="do-arrow-point-box"><b class="do-arrow-point">1</b>Nach Ablauf der hier eingestellten Frist erscheint beim nächsten Login als <b>Super-User</b> eine Erinnerung an die fällige Datensicherung.<br />Durch Eingabe von "0" kann dieser Hinweis deaktiviert werden. </p>
+<div class="do-arrow-warp">{MODUL_admin_02}
+<div class="do-arrow-right-nr" style="top:3px;left:524px;">1</div>
+</div>
+
+<h3 class="do-space-top">Datensicherung / Backup-Generator:</h3>
+<p>Mit dem mozilo-Backup-Generator wird auf Knopfdruck ein komplettes, oder teilweises Backup der Website erzeugt, das dann als zip-Datei auf den eigenen Rechner heruntergeladen wird.<br />Durch Aktivierung der einzelnen Checkboxen kann der Umfang des Backups je nach Bedarf individuell bestimmt werden.
+</p>
+<p class="do-info-box do-after-br">Je nach Geschwindigkeit der Internetverbindung und Umfang des Backups kann dies einige Zeit in Anspruch nehmen.</p>
+{MODUL_admin_03}
+
+<h3 class="do-space-top">Zugriffsrechte für moziloCMS setzen:</h3>
+<p>Dieser Wert wird bei der Installation von moziloCMS in der Regel automatisch gesetzt. Auch neue Dateien, die über das CMS erstellt oder hochgeladen werden, erhalten dann automatisch die korrekten Dateirechte.<br />Falls das automatische Setzen der Rechte fehlschlägt, oder nach einem Dateiupload per ftp, können hier nachträglich die Rechte für alles gesetzt werden.</p>
+<p class="do-arrow-point-box"><b class="do-arrow-point">1</b>Den gewünschten CHMOD-Wert als dreistellige Zahl (z. B. 777) in das Fenster eingeben und per Klick auf den Button aktivieren. </p>
+<div class="do-arrow-warp">{MODUL_admin_04}
+<div class="do-arrow-right-nr" style="top:3px;left:524px;">1</div>
+</div>
+
+<h3 class="do-space-top">Dateitypen festlegen, die nicht hochgeladen werden dürfen:</h3>
+<p>Hier können Dateitypen festgelegt werden, die vom Upload ausgeschlossen sind. Damit lässt sich z. B. verhindern, dass versehentlich Programmdateien hochgeladen werden, die unter Umständen das CMS beschädigen.</p>
+<p class="do-arrow-point-box"><b class="do-arrow-point">1</b>Hier die Dateierweiterungen, der vom Upload ausgeschlossenen Dateitypen eingeben. <u>Nur</u> mit Komma getrennt und <u>ohne</u> den führenden Punkt</u>. </p>
+<div class="do-arrow-warp">{MODUL_admin_05}
+<div class="do-arrow-right-nr" style="top:3px;left:524px;">1</div>
+</div>
+
+<h3 class="do-space-top">Benutzerverwaltung:</h3>
+<p>MoziloCMS ist so konzipiert, dass es von einem Hauptbenutzer, dem sogenannten "<b>Super-User</b>" verwaltet wird. Darüberhinaus kann der Super-User aber noch einen weiteren, untergeordneten Userzugang anlegen, und festlegen welche Bereiche dieser User administrieren darf.</p>
+<div class="do-error-box do-after-br">Änderungen der Zugangsdaten <u>müssen</u> durch drücken der <b>Eingabetaste/Enter</b> gespeichert werden.<br />Dabei müssen alle drei Felder ausgefüllt sein und der Schreibcursor muss sich im unteren Feld befinden.</div>
+<p class="do-space-top"><b>Super-User</b></p>
+<p>Der Super-User hat sämtliche Rechte und kann auf alle Bereiche zugreifen. <br />Hier können die bei der Installation von moziloCMS festgelegten Zugangsdaten für den Super-User geändert werden.</p>
+<p class="do-arrow-point-box"><b class="do-arrow-point">1</b>Durch entsprechende Einträge in diesen drei Textfeldern kann entweder der Benutzername, oder das Passwort, oder beides geändert werden.</p>
+<div class="do-arrow-warp">{MODUL_admin_06}
+<div class="do-arrow-down-nr" style="top:20px;left:673px;">1</div>
+</div>
+
+<p class="do-space-top"><b>User</b></p>
+<p>Zweiter Userzugang, bei dem die Administrationsrechte für einzelne Bereiche freigegeben oder gesperrt werden können. Damit lassen sich die Zugriffsmöglichkeiten des <b>User</b> ganz nach Wunsch begrenzen.</p>
+<p class="do-arrow-point-box"><b class="do-arrow-point">1</b>Durch entsprechende Einträge in diesen drei Textfeldern werden Benutzername und Passwort für den <b>User-Zugang</b> erstellt oder geändert. </p>
+<p class="do-arrow-point-box"><b class="do-arrow-point">2</b>Durch Klick auf den Button "<b>User löschen</b>" wird ein vorhandener zweiter Userzugang wieder gelöscht.</p>
+<p class="do-arrow-point-box"><b class="do-arrow-point">3</b>Hinter den blauen Balken befinden sich Ausklappmenüs in denen die Administrationsrechte für den User-Zugang festgelegt werden.</p>
+<div class="do-arrow-warp">{MODUL_admin_07}
+<div class="do-arrow-down-nr" style="top:48px;left:683px;">1</div>
+<div class="do-arrow-right-nr" style="top:64px;left:524px;">2</div>
+<div class="do-arrow-right-nr" style="top:169px;left:524px;">3</div>
+</div>

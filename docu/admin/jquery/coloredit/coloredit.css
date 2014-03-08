@@ -1,0 +1,122 @@
+#ce-colorchange {
+    float:left;
+    padding:0;
+    margin:10px;
+}
+
+#ce-colorchange .ce-color-hsv-dim {
+    width:194px;
+    height:194px;
+}
+
+#ce-colorchange .ce-tri-dim {
+    width:126px;
+    height:109px;
+    top:24px;
+    left:34px;
+}
+
+#ce-colorchange .ce-pos-rel {
+    position:relative;
+}
+
+#ce-colorchange .ce-pos-abs {
+    position:absolute;
+}
+
+#ce-colorchange .ce-marker {
+    width:16px;
+    height:16px;
+    margin:-8px 0 0 -8px;
+    background:url(marker.png) no-repeat;
+}
+
+#ce-colorchange .ce-color-hsv {
+    background:url(hsv.png) no-repeat;
+}
+
+#ce-colorchange .ce-prev-box {
+    left:194px;
+    top:0;
+    height:54px;
+}
+
+#ce-colorchange .ce-prev-box .ce-in-hex {
+    left:10px;
+    bottom:12px;
+}
+
+#ce-colorchange .ce-prev-box .ce-color-curent {
+    top:0;
+    right:0;
+    cursor:pointer;
+    width:40px;
+    height:40px;
+    border-left-width:0;
+    background-image:none;
+    background-color:#ffffff;
+}
+
+#ce-colorchange .ce-prev-box .ce-bg-color-change {
+    top:0;
+    right:40px;
+    width:40px;
+    height:40px;
+    background-image:none;
+}
+
+#ce-colorchange ul {
+    list-style-type:none;
+    padding:0;
+    margin:0;
+    top:54px;
+    left:194px;
+}
+
+#ce-colorchange ul li {
+    text-align:right;
+    white-space:nowrap;
+    padding:0;
+    margin:0;
+    height:26px;
+    vertical-align:middle;
+}
+
+#ce-colorchange .ce-value {
+    width:24px;
+    vertical-align:middle;
+}
+
+#ce-colorchange .ce-slide {
+    display:inline-block;
+    width:100px;
+    margin:0 15px 0 15px;
+    vertical-align:middle;
+}
+
+.ce-default-color-box {
+    line-height:1px;
+    white-space:normal;
+    padding:0 0 2px 2px;
+    min-height:19px;
+}
+
+/*1=oben, 2=rechts, 3=unten, 4=links*/
+.ui-widget-content .ce-default-color-img {
+    display:inline-block;
+    cursor:pointer;
+    padding:0;
+    margin:2px 2px 0 0;
+    width:15px;
+    height:15px;
+    background-image:none;
+}
+
+#ce-colorchange .ce-in-hex, #js-color-menu .ce-in-hex, #js-menu-config-default-color .ce-in-hex {
+    width:50px;
+    height: 16px;
+    font-size:12px;
+    padding:0 2px 0 2px;
+    margin:2px 0 0 0;
+    vertical-align:middle;
+}

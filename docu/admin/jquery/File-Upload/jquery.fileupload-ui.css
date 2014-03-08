@@ -1,0 +1,208 @@
+@charset 'UTF-8';
+/*
+ * jQuery File Upload UI Plugin CSS 6.3
+ * https://github.com/blueimp/jQuery-File-Upload
+ *
+ * Copyright 2010, Sebastian Tschan
+ * https://blueimp.net
+ *
+ * Licensed under the MIT license:
+ * http://www.opensource.org/licenses/MIT
+ */
+
+
+button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0;}
+
+.fu-img-button {
+    padding:0;
+    margin: 0 .8em 0 0;
+    border:none;
+    vertical-align:middle;
+    cursor: pointer;
+}
+
+button.fu-img-button {
+/*    border:none;*/
+    /*background-repeat:no-repeat;
+    background-position:0 0;*/
+    background-color:transparent;
+/*    padding:0;
+    margin: 0 .8em 0 0;*/
+    width:24px;
+    height:24px;
+/*    vertical-align:middle;
+    cursor: pointer;*/
+}
+
+.fileinput-button {
+  overflow: hidden;
+  position: relative;
+  float: left;
+  margin: 0 .8em 0 .4em;
+  /*margin-right: 4px;*/
+}
+/*1=oben, 2=rechts, 3=unten, 4=links*/
+.fileinput-button input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  border: solid transparent;
+  border-width: 0 0 0px 24px;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -moz-transform: translate(-300px, 0) scale(4);
+  direction: ltr;
+  cursor: pointer;
+  height: 24px;
+}
+
+.fileupload-buttonbar .toggle {
+    vertical-align:middle;
+}
+
+.fileupload-buttonbar .toggle {
+  /*margin-bottom: 5px;*/
+}
+
+.fileupload-buttonbar button, .fileupload-button-img {
+/*    margin:0;
+    padding:0;*/
+    border:none;
+    /*background:transparent;*/
+  /*cursor: pointer;*/
+}
+
+.files .progress {
+  width: 200px;
+}
+
+.progress-animated .bar {
+  background: url(progressbar.gif) !important;
+  filter: none;
+}
+
+.fileupload-loading {
+  position: absolute;
+  left: 50%;
+  width: 128px;
+  height: 128px;
+  background: url(loading.gif) center no-repeat;
+  display: none;
+}
+
+.fileupload-processing .fileupload-loading {
+  display: block;
+}
+
+/* Fix for IE 6: */
+*html .fileinput-button {
+  line-height: 22px;
+  margin: 1px -3px 0 0;
+}
+
+/* Fix for IE 7: */
+*+html .fileinput-button {
+  margin: 1px 0 0 0;
+}
+
+/*1=oben, 2=rechts, 3=unten, 4=links*/
+ul.files {
+    list-style-type: none;
+    margin: .4em .4em 0 .4em;
+    padding:0;
+}
+
+ul.files li {
+    margin: 0 0 .4em 0;
+    padding:.4em;
+
+}
+
+.mo-pading-l-r {
+    padding: 0 .8em 0 .8em;
+}
+
+.files {
+/* width: 100%; */
+  /*margin: 10px 0;*/
+  border-collapse: collapse;
+}
+
+.files td {
+vertical-align:middle;
+  /*padding: 5px;
+  border-spacing: 5px;*/
+  white-space: nowrap;
+  text-align: left;
+}
+
+.files td.subtitle {
+  white-space: normal;
+}
+
+.files td.subtitle input ,.files td.name input {
+    width: 100%;
+}
+
+.files td.subtitle span.fu-empty {
+    width: 97%;
+    height: 1em;
+    display: block;
+    cursor: text;
+    background-color: #E6E6E6;
+}
+
+.files img {
+vertical-align:middle;
+  border: none;
+}
+
+.files td.error {
+    padding: 0;
+    font-size:1px;
+ /* border-spacing: 0;*/
+}
+
+.files .ui-state-error td.error {
+  /*border-spacing: 5px;*/
+    /*padding: 5px;*/
+    font-size:1em;
+}
+
+.fu-ext-imgs {
+    width:24px;
+    height:24px;
+    background-image: url(ext_icons.png);
+    background-repeat:no-repeat;
+}
+
+.fu-ext-doc   {background-position: 0 0;}
+.fu-ext-img   {background-position: -24px 0;}
+.fu-ext-iso   {background-position: -48px 0;}
+.fu-ext-mov   {background-position: -72px 0;}
+.fu-ext-none  {background-position: -96px 0;}
+.fu-ext-pdf   {background-position: 0 -24px;}
+.fu-ext-txt   {background-position: -24px -24px;}
+.fu-ext-wav   {background-position: -48px -24px;}
+.fu-ext-zip   {background-position: -72px -24px;}
+
+@media (max-width: 480px) {
+  .files .btn span {
+    display: none;
+  }
+  .files .preview * {
+    width: 40px;
+  }
+  .files .name * {
+    width: 80px;
+    display: inline-block;
+    word-wrap: break-word;
+  }
+  .files .progress {
+    width: 20px;
+  }
+  .files .delete {
+    width: 60px;
+  }
+}

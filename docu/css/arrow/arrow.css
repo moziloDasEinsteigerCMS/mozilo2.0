@@ -1,0 +1,88 @@
+.do-arrow-warp {
+    position:relative;
+}
+
+.do-arrow-point {
+    background-repeat:no-repeat;
+    background-position:0 0;
+    background-image:url(arrow_point.png);
+    color:#fff;
+    display:inline-block;
+    text-align:center;
+    line-height:18px;
+    width:18px;
+    height:18px;
+    vertical-align:middle;
+    margin-top:-1px;
+    margin-right:8px;
+    margin-left:2px;
+}
+
+.do-arrow-point-box {
+    margin-left:28px;
+}
+.do-arrow-point-box .do-arrow-point {
+    margin-left:-26px;
+}
+
+.do-arrow-up-nr, .do-arrow-down-nr, .do-arrow-left-nr, .do-arrow-right-nr,
+.do-arrow-up, .do-arrow-down, .do-arrow-left, .do-arrow-right, .do-arrow-bogen-nr, .do-arrow-bogen-r-nr {
+    background-color:transparent;
+    background-repeat:no-repeat;
+    background-image:url(arrow_k_point_60.png);
+    position:absolute;
+    font-size:18px;
+    font-weight:bold;
+    line-height:24px;
+    color:#fff;
+    padding:0;
+    margin:0;
+    text-align:center;
+    width:24px;
+    height:24px;
+    z-index:100;
+}
+
+.do-arrow-bogen-nr {/*90 80*/
+    background-image:url(arrow_bogen_nr_60.png);
+    padding-left:66px;
+    padding-bottom:56px;
+}
+
+.do-arrow-bogen-r-nr {
+    background-image:url(arrow_bogen_r_nr_60.png);
+    padding-right:66px;
+    padding-bottom:56px;
+}
+
+.do-arrow-up-nr, .do-arrow-up {
+    background-position:center top;
+    padding-top:18px;
+}
+
+.do-arrow-down-nr, .do-arrow-down {
+    background-position:center bottom;
+    padding-bottom:18px;
+}
+
+.do-arrow-left-nr, .do-arrow-left {
+    background-position:left center;
+    padding-left:18px;
+}
+
+.do-arrow-right-nr, .do-arrow-right {
+    background-position:right center;
+    padding-right:18px;
+}
+
+.do-arrow-up, .do-arrow-down, .do-arrow-left, .do-arrow-right {
+    background-image:url(arrow_kreuz_60.png);
+    padding:0;
+    width:42px;
+    height:24px;
+}
+
+.do-arrow-up, .do-arrow-down {
+    width:24px;
+    height:42px;
+}

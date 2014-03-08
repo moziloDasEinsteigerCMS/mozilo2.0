@@ -1,0 +1,156 @@
+.do-arrow-warp {
+    position:relative;
+}
+
+.do-arrow-point {
+    background-repeat:no-repeat;
+    background-position:0 0;
+    background-image:url(arrow_point.png);
+    color:#fff;
+    display:inline-block;
+    text-align:center;
+    line-height:18px;
+    width:18px;
+    height:18px;
+    vertical-align:middle;
+    margin-top:-1px;
+    margin-right:8px;
+    margin-left:2px;
+}
+
+.do-arrow-point-box {
+    margin-left:28px;
+}
+.do-arrow-point-box .do-arrow-point {
+    margin-left:-26px;
+}
+
+.do-arrow-up-nr, .do-arrow-down-nr, .do-arrow-left-nr, .do-arrow-right-nr,
+.do-arrow-top-left, .do-arrow-top-right, .do-arrow-bottom-left, .do-arrow-bottom-right,
+.do-arrow-up, .do-arrow-down, .do-arrow-left, .do-arrow-right, .do-arrow-bogen-nr, .do-arrow-bogen-r-nr {
+    background-color:transparent;
+    background-repeat:no-repeat;
+    background-image:url(arrow_k_point.png);
+    position:absolute;
+    font-size:36px;
+    font-weight:bold;
+    line-height:46px;
+    color:#fff;
+    padding:0;
+    margin:0;
+    text-align:center;
+    width:46px;
+    height:46px;
+    z-index:100;
+}
+
+.do-arrow-up-nr, .do-arrow-down-nr, .do-arrow-left-nr, .do-arrow-right-nr,
+.do-arrow-up, .do-arrow-down, .do-arrow-left, .do-arrow-right, .do-arrow-bogen-nr, .do-arrow-bogen-r-nr {
+/* 79 46 */
+background-image:url(arrow_k_point_60.png);
+/*background-size:59px 59px; 42 24 */
+width:24px;
+height:24px;
+font-size:18px;
+line-height:24px;
+}
+
+
+.do-arrow-top-left, .do-arrow-top-right, .do-arrow-bottom-left, .do-arrow-bottom-right {
+    background-image:url(arrow_k_45_point_1.png);
+    width:46px;
+    height:46px;
+}
+.do-arrow-top-left {
+    background-position:left top;
+    padding-left:17px;
+    padding-top:17px;
+}
+.do-arrow-top-right {
+    background-position:right top;
+    padding-right:17px;
+    padding-top:17px;
+}
+.do-arrow-bottom-left {
+    background-position:left bottom;
+    padding-left:17px;
+    padding-bottom:17px;
+}
+.do-arrow-bottom-right {
+    background-position:right bottom;
+    padding-right:17px;
+    padding-bottom:17px;
+}
+
+.do-arrow-bogen-nr {
+    background-image:url(arrow_bogen_nr.png);
+    padding-left:68px;
+    padding-bottom:46px;
+}
+
+.do-arrow-bogen-nr {
+background-image:url(arrow_bogen_nr_60.png);
+padding-top:11px;
+padding-right:12px;
+padding-left:78px;
+padding-bottom:57px;
+}
+
+.do-arrow-bogen-r-nr {
+    background-image:url(arrow_bogen_r_nr.png);
+    padding-right:68px;
+    padding-bottom:46px;
+}
+
+.do-arrow-up-nr, .do-arrow-up {
+    background-position:center top;
+    padding-top:33px;
+padding-top:18px;
+margin-left:11px;
+}
+
+.do-arrow-down-nr, .do-arrow-down {
+    background-position:center bottom;
+    padding-bottom:33px;
+padding-bottom:18px;
+margin-top:37px;
+margin-left:11px;
+}
+
+.do-arrow-left-nr, .do-arrow-left {
+    background-position:left center;
+    padding-left:33px;
+padding-left:18px;
+margin-top:11px;
+}
+
+.do-arrow-right-nr, .do-arrow-right {
+    background-position:right center;
+    padding-right:33px;
+padding-right:18px;
+margin-left:37px;
+margin-top:11px;
+}
+
+.do-arrow-up, .do-arrow-down, .do-arrow-left, .do-arrow-right {
+    background-image:url(arrow_kreuz.png);
+    padding:0;
+    width:79px;
+    height:46px;
+}
+
+.do-arrow-up, .do-arrow-down, .do-arrow-left, .do-arrow-right {
+background-image:url(arrow_kreuz_60.png);
+width:42px;
+height:24px;
+}
+
+.do-arrow-up, .do-arrow-down {
+    width:46px;
+    height:79px;
+}
+
+.do-arrow-up, .do-arrow-down {
+width:24px;
+height:42px;
+}

@@ -1,0 +1,184 @@
+<div class="to-toggle">
+    <h1 class="to-open to-close do-placholder-link">mozilo Icons</h1>
+    <div class="to-content">
+        <table class="do-placholder" width="100%" cellspacing="0" border="0" cellpadding="0">
+        <tr>
+            <td width="34%">
+                <table class="do-table" width="100%">
+                    <tr><th colspan="2">Icons</th></tr>
+                    {function_makeMoImgPlacholder}
+                </table>
+            </td><td width="34%">
+                <table class="do-table" width="100%">
+                    <tr><th colspan="2">Editor Icons</th></tr>
+                    {function_makeEdImgPlacholder}
+                </table>
+            </td><td class="do-placholder-last">
+                <table class="do-table" width="100%">
+                    <tr><th colspan="2">Datei Icons</th></tr>
+                    {function_makeIconsExtPlacholder}
+                </table>
+            </td>
+        </tr>
+        </table>
+    </div>
+</div>
+<div class="to-toggle do-space-top">
+    <h1 class="to-open to-close do-placholder-link">Der <span class="do-rot">module</span> Ordner</h1>
+    <div class="to-content">
+        Beschreibungen die sich in der Docu wiederholen können hier als ???.html Datei abgelegt werden.<br />Um sie dann über den Platzhalter zu verwenden<br /><br />
+        <table class="do-docu-table" width="100%">
+            <tr><th class="do-docu-table-th" width="40%">Platzhalter</th><th class="do-docu-table-th" width="40%">HTML Datei</th><th class="do-docu-table-th">Inhalt Zeigen <b id="to-docu-button-all-o">[ + ]</b><b id="to-docu-button-all-c" style="display:none;">[ - ]</b></th></tr>
+            {function_makeModulPlacholder}
+        </table>
+    </div>
+</div>
+<div class="to-toggle do-space-top">
+    <h1 class="to-open to-close do-placholder-link">Der <span class="do-rot">img</span> Ordner</h1>
+    <div class="to-content">
+        Aus den Bildern die hier enthalten sind wird ein Platzhalter erzeugt der in den Docu HTML Datein benutzt werden kann.<br />
+        Die Bilder werden <b>nicht</b> Skaliert.<br /><br />
+        <table class="do-table" width="100%">
+            <tr><th width="1%">Platzhalter</th><th>Bilder</th></tr>
+            {function_makeImgPlacholder}
+        </table>
+    </div>
+</div>
+<div class="to-toggle do-space-top">
+    <h1 class="to-open to-close do-placholder-link">Der <span class="do-rot">sprachen</span> Ordner</h1>
+    <div class="to-content">
+        <table class="do-table" width="100%">
+            <tr><th width="1%">Platzhalter</th><th>Sprach Eintrag</th></tr>
+            {function_makeLanguagePlacholder}
+        </table>
+    </div>
+</div>
+<div class="to-toggle do-space-top">
+    <h1 class="to-open to-close do-placholder-link">Die Docu css classen</h1>
+    <div class="to-content">
+        <b>Inhalt Auf/Zuklappen. Die Anleitung öffnet sich mit Klick darauf</b>
+        <div class="do-indent">
+            <div class="to-toggle">
+                <span class="to-open to-close">Beispiel Inhalt Auf/Zuklappen mit dem gleichen TAG</span>
+                <div class="to-content">
+                    <b class="do-indent">Anleitung</b>:
+                    <div class="do-indent">
+                        &lt;div class="to-toggle"&gt; <b>mit dem TAG der classe "to-toggle" starten wir</b><br />
+                        <div class="do-indent">
+                            &lt;span class="to-open to-close"&gt;gleicher TAG Auf/Zuklappen&lt;/span&gt; <b>für das Auf/Zuklappen ist die classe "to-open to-close" zuständig</b><br />
+                            &lt;div class="to-content"&gt; <b>Der TAG der Auf/Zuklappen soll erhält die classe "to-content"</b>
+                            <div class="do-indent">Das ist der Inhat den mann Auf/Zuklappen kann</div>
+                            &lt;/div&gt;
+                        </div>
+                        &lt;/div&gt;
+                    </div>
+                </div>
+            </div>
+            <div class="to-toggle do-p-tag">
+                <span class="to-close">Inhalt Zuklappen mit dem CLOSE TAG</span>
+                <span class="to-open">Beispiel Inhalt Aufklappen mit dem OPEN TAG</span>
+                <div class="to-content">
+                    <b class="do-indent">Anleitung</b>:
+                    <div class="do-indent">
+                        &lt;div class="to-toggle"&gt; <b>mit dem TAG der classe "to-toggle" starten wir</b><br />
+                        <div class="do-indent">
+                            &lt;span class="to-open"&gt;TAG Aufklappen&lt;/span&gt; <b>für das Aufklappen ist die classe "to-open" zuständig</b><br />
+                            &lt;span class="to-close"&gt;TAG Zuklappen&lt;/span&gt; <b>für das Zuklappen ist die classe "to-close" zuständig</b><br />
+                            &lt;div class="to-content"&gt; <b>Der TAG der Auf/Zuklappen soll erhält die classe "to-content"</b>
+                            <div class="do-indent">Das ist der Inhat den mann Auf/Zuklappen kann</div>
+                            &lt;/div&gt;
+                        </div>
+                        &lt;/div&gt;
+                    </div>
+                </div>
+            </div>
+            <div class="do-p-tag">
+                Beispiel Inhalt Auf/Zuklappen mit <b>Automatisch</b> erzeugten TAG für das Auf/Zuklappen
+                <div class="to-auto-content">
+                    <b class="do-indent">Anleitung</b>:
+                    <div class="do-indent">
+                        &lt;div class="to-auto-content"&gt; <b>Der TAG der Auf/Zuklappen soll erhält die classe "to-auto-content"</b>
+                        <div class="do-indent">
+                            Das ist der Inhat den mann Auf/Zuklappen kann
+                        </div>
+                        &lt;/div&gt;<br />
+                        Das wars mehr ist nicht nötig
+                    </div>
+                </div>
+            </div>
+        </div>
+        &lt;table width="100%" class="do-table"&gt;
+        <table width="100%" class="do-table">
+        <tr>
+            <th colspan="2"> &lt;th colspan="2"&gt; &lt;/th&gt; </th>
+        </tr>
+        <tr>
+            <td width="30%">&lt;td width="30%"&gt; &lt;/td&gt;</td>
+            <td><br /><br /><br /></td>
+        </tr>
+        <tr>
+            <td class="do-no-td" colspan="2">&lt;td class="do-no-td" colspan="2"&gt; &lt;/td&gt;</td>
+        </tr>
+        <tr>
+            <td class="do-td-top">&lt;td class="do-td-top"&gt; &lt;/td&gt;</td>
+            <td><br /><br /><br /></td>
+        </tr>
+        <tr>
+            <td class="do-td-top do-td-center">&lt;td class="do-td-top do-td-center"&gt; &lt;/td&gt;</td>
+            <td><br /><br /><br /></td>
+        </tr>
+        <tr>
+            <td class="do-td-center">&lt;td class="do-td-center"&gt; &lt;/td&gt;</td>
+            <td><br /><br /><br /></td>
+        </tr>
+        </table>
+        &lt;p class="do-separate"&gt; &lt;/p&gt;
+        <p class="do-separate"></p>
+        &lt;p class="do-separate do-space-top"&gt; &lt;/p&gt;
+        <p class="do-separate do-space-top"></p>
+        <p class="do-indent">
+            &lt;p class="do-indent"&gt; &lt;/p&gt;<b> Text einrücken</b>
+        </p>
+
+        <div class="do-p-tag">
+            &lt;div class="do-p-tag"&gt;&lt;/div&gt;<b> damit ein DIV sich wie ein P TAG verhält</b>
+        </div>
+        <span class="do-rot">&lt;span class="do-rot"&gt;<b>Roter Text</b>&lt;/span&gt;</span>
+        <p class="do-info-box">&lt;p class="do-info-box"&gt; &lt;/p&gt;</p>
+        <p class="do-info-box do-after-br">&lt;p class="do-info-box do-after-br"&gt; &lt;/p&gt;</p>
+        <p class="do-error-box">&lt;p class="do-error-box"&gt; &lt;/p&gt;</p>
+        {MODUL_mozilo_tabs_home}<div class="do-arrow-warp">{MODUL_home_00}
+        <div class="do-arrow-up-nr" style="top:0;left:23px;">1</div>
+        <div class="do-arrow-left-nr" style="top:55px;left:373px;">2</div></div>
+        &lt;div class="do-arrow-warp"&gt;&#123;IMG_docu_help}<br />
+        &lt;div class="do-arrow-up-nr" style="top:0;left:23px;"&gt;1&lt;/div&gt;<br />
+        &lt;div class="do-arrow-left-nr" style="top:55px;left:373px;"&gt;2&lt;/div><br />
+        &lt;/div&gt;<br />
+
+        Die Position der Pfeile wird über die Werte top und left gesteuert<br />
+        Wichtig ist nur das ein div mit der classe "do-arrow-warp" drumherum ist<br />
+        Bei den classen mit "-nr" am ende kann in dem div eine Zahl benutzt werden<br />
+
+        <p><b class="do-arrow-point">1</b>Der Punkt dazu &lt;b class="do-arrow-point"&gt;1&lt;/b&gt;</p>
+        <p class="do-arrow-point-box"><b class="do-arrow-point">1</b>Der Punkt im &lt;p class="do-arrow-point-box"&gt;&lt;b class="do-arrow-point"&gt;2&lt;/b&gt;<br />mehrzeiligem Text&lt;/p&gt;</p>
+        Folgende Pfeile (classen) gibt es:
+<pre style="padding-left:2em;">do-arrow-up-nr    = Pfeil nach oben mit Zahl
+do-arrow-down-nr  = Pfeil nach unten mit Zahl
+do-arrow-left-nr  = Pfeil nach links mit Zahl
+do-arrow-right-nr = Pfeil nach rechts mit Zahl
+do-arrow-up       = nur Pfeil nach oben
+do-arrow-down     = nur Pfeil unten oben
+do-arrow-left     = nur Pfeil links oben
+do-arrow-right    = nur Pfeil rechts oben
+do-arrow-bogen-nr = Bogen Pfeil nach links unten
+</pre>
+    </div>
+</div>
+
+<div class="to-toggle do-space-top">
+    <h1 class="to-open to-close do-placholder-link">nicht Verwendeten Elemente Auflisten</h1>
+    <div class="to-content">
+        {function_testNotUsed}
+    </div>
+</div>
+

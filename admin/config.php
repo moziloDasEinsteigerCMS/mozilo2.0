@@ -231,8 +231,9 @@ function config() {
 }
 
 function set_config_para() {
-    global $CMS_CONF;
+    global $CMS_CONF, $specialchars;
 
+    $title = "";
     $main = makeDefaultConf("main");
     unset($main['expert']);
     foreach($main as $type => $type_array) {
@@ -242,6 +243,8 @@ function set_config_para() {
             if($type == 'text') {
                 if($CMS_CONF->get($syntax_name) != $syntax_value) {
                     $CMS_CONF->set($syntax_name, $syntax_value);
+                    if($syntax_name == "websitetitle")
+                        $title = '<span id="replace-item"><span id="admin-websitetitle" class="mo-bold mo-td-middle">'.$specialchars->rebuildSpecialChars($syntax_value, false, true).'</span></span>';
                 }
             }
             if($type == 'checkbox') {
@@ -258,6 +261,6 @@ function set_config_para() {
             }
         }
     }
-    return ajax_return("success",false);
+    return ajax_return("success",false).$title;
 }
 ?>
