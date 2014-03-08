@@ -43,6 +43,8 @@ if($DocuClass->dialog)
 
 $html .= '</head><body class="ui-widget'.$css.'" style="font-size:12px;">';
 
+$html .= '<div id="do-box">';
+
 if(!$DocuClass->dialog) {
     $html .= '<table id="do-main" width="100%" cellspacing="0" border="0" cellpadding="0">'
         .'<tr><td width="50%">&nbsp;</td>'
@@ -80,7 +82,7 @@ if(!$DocuClass->dialog) {
     $html .= '<div id="do-content" class="ui-tabs mo-ui-tabs">'.$DocuClass->makeSubMenu().$DocuClass->docu_artikel.'</div>';
 }
 
-$html .= "</body></html>";
+$html .= "</div></body></html>";
 
 echo $html;
 

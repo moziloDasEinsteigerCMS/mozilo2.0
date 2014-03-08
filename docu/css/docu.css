@@ -1,16 +1,13 @@
 #do-main {
-    font-size:12px;
-    font-family: Arial, Verdana, sans-serif;
+    font-size:12px !important;
+    font-family: "Arial", "Verdana", sans-serif !important;
     padding:1em 0 3em 0;
     margin:0;
     background-color:#f8f8f8;
 }
 
-#do-content p {
-    line-height:1.5em;
-}
-
 #do-content {
+    line-height: initial;
     width: 850px;
     padding:0;
     margin:0;
@@ -18,66 +15,6 @@
     vertical-align : top;
     color:#3d3d3d;
   }
-
-#getplaceholder {
-    float:right;
-}
-
-.do-nodialog-warp {
-    padding:1em 2em;
-}
-
-/* die mo- sachen sind die aus der admin/admin.css kommen */
-.mo-ui-tabs {
-    border-width: 0;
-    padding:0;
-}
-
-.mo-no-border-top {
-    border-top-width: 0;
-}
-
-.mo-menu-tabs {
-    border-bottom-width:0;
-}
-
-.mo-menu-tabs li {
-    white-space:nowrap;
-}
-
-.do-lang {
-    float: right;
-    position: relative;
-    left: -50%;
-    text-align: left;
-}
-
-.do-lang ul {
-    list-style: none;
-    list-style-position:inside;
-    position: relative;
-    left: 50%;
-}
-
-.do-lang li {
-    float: left;
-    position: relative;
-    top: 0;
-    margin: 0 .4em 0 .4em;
-    padding: 0;
-    white-space: nowrap;
-}
-
-.do-lang li a {
-    display:block;
-    padding:4px;
-    position: relative;
-    top: 0;
-}
-
-.do-lang li a img {
-    display:block;
-}
 
 .do-body-nodialog #do-content {
     min-height:28em;
@@ -87,77 +24,168 @@
 .do-body-dialog #do-content {
   }
 
+#do-content p {
+    line-height:1.5em;
+}
+
+#do-box h1 {
+    font-size: 2em;
+    font-weight: bold;
+    margin-top: 0.67em;
+    margin-bottom: 0.67em;
+}
+
+#do-box h2 {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-top: 0.83em;
+    margin-bottom: 0.83em;
+}
+
+#do-box h3 {
+    font-size: 1.17em;
+    font-weight: bold;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+#do-content h4 {
+    font-weight: bold;
+    margin-top: 1.33em;
+    margin-bottom: 1.33em;
+}
+
+#getplaceholder {
+    float:right;
+}
+
+#do-box .do-nodialog-warp {
+    padding:1em 2em;
+}
+
+/* die mo- sachen sind die aus der admin/admin.css kommen */
+#do-box .mo-ui-tabs {
+    border-width: 0;
+    padding:0;
+}
+
+#do-box .mo-no-border-top {
+    border-top-width: 0;
+}
+
+#do-box .mo-menu-tabs {
+    border-bottom-width:0;
+}
+
+#do-box .mo-menu-tabs li {
+    white-space:nowrap;
+}
+
+#do-box .do-lang {
+    float: right;
+    position: relative;
+    left: -50%;
+    text-align: left;
+}
+
+#do-box .do-lang ul {
+    list-style: none;
+    list-style-position:inside;
+    position: relative;
+    left: 50%;
+}
+
+#do-box .do-lang li {
+    float: left;
+    position: relative;
+    top: 0;
+    margin: 0 .4em 0 .4em;
+    padding: 0;
+    white-space: nowrap;
+}
+
+#do-box .do-lang li a {
+    display:block;
+    padding:4px;
+    position: relative;
+    top: 0;
+}
+
+#do-box .do-lang li a img {
+    display:block;
+}
+
 /* das do-menu ist nur sichtbar in der standalone sache */
-.do-menu {
+#do-box .do-menu {
     position:relative;
     margin-top:2.6em;
     margin-left:-1px;
     z-index:100;
   }
 
-.do-menu li {
+#do-box .do-menu li {
     margin-bottom: .4em;
     white-space:nowrap;
   }
 
-.do-menu li.ui-state-active {
+#do-box .do-menu li.ui-state-active {
     border-left-width: 0;
   }
 
-.do-menu li a {
+#do-box .do-menu li a {
     padding: .4em 1em;
     display:block;
   }
 
 /* do-img die bilder aus dem oedner img */
-.do-img {
+#do-box .do-img {
     vertical-align:middle;
 }
 
 /* die von der docu.php erzeugten platzhalter */
-.do-placholder-link {
+#do-box .do-placholder-link {
     padding-left:30%;
 }
 
-.do-placholder-top {
+#do-box .do-placholder-top {
     margin-top:1em;
 }
 
-.do-placholder td {
+#do-box .do-placholder td {
     vertical-align:top;
     padding-right:1em;
     text-align:left;
 }
 
-.do-placholder .do-placholder-last {
+#do-box .do-placholder .do-placholder-last {
     padding-right:0;
 }
 
-.to-auto-button {
+#do-box .to-auto-button {
     font-weight : bold;
     text-decoration:underline;
     cursor:pointer;
 }
 
-.to-open, .to-close {
+#do-box .to-open, .to-close {
     text-decoration:underline;
     display:none;
     cursor:pointer;
 }
 
-.to-docu-button, #to-docu-button-all-o, #to-docu-button-all-c {
+#do-box .to-docu-button, #to-docu-button-all-o, #to-docu-button-all-c {
     font-weight : bold;
     font-family:monospace;
     text-decoration:none;
     cursor:pointer;
 }
 
-.do-docu-table {
+#do-box .do-docu-table {
     border-collapse:collapse;
     background-color:transparent;
 }
 
-.do-docu-table-td {
+#do-box .do-docu-table-td {
     padding:.2em .5em;
     text-align:center;
     vertical-align : middle;
@@ -165,7 +193,7 @@
     background-color:#72FF72;
 }
 
-.do-docu-table-th {
+#do-box .do-docu-table-th {
     font-weight:bold;
     padding:.2em .5em;
     text-align:center;
@@ -174,38 +202,38 @@
     background-color:#CCCCCC;
 }
 
-.do-placholder-modul-content {
+#do-box .do-placholder-modul-content {
     border-bottom:.4em dashed #f00;
 }
 
-.do-docu-table-td-content {
+#do-box .do-docu-table-td-content {
     padding:0;
     padding-bottom:1em;
 }
 
-p .mo-icons-icon, p .mo-icons-file {
+#do-box p .mo-icons-icon, #do-box p .mo-icons-file {
     margin-top:-4px;
     margin-bottom:-2px;
 }
 
-p .mo-icons-file {
+#do-box p .mo-icons-file {
     height:24px;
 }
 
-p input {
+#do-box p input {
     margin-top:-4px;
     margin-bottom:-4px;
     vertical-align : middle;
 }
 
-.js-in-link, .js-in-name {
+#do-box .js-in-link, #do-box .js-in-name {
     width:14em;
     margin-right: 1em;
 }
 
 /* ################################################################################# */
 /* ab hier algemeine css sachen */
-.do-separate {
+#do-box .do-separate {
     border-collapse:collapse;
     border:2px ridge #D6D6D6;
     border-left-width:0;
@@ -214,7 +242,7 @@ p input {
     margin: .5em 0 .5em 0;
 }
 
-.do-separate-1 {
+#do-box .do-separate-1 {
     border-collapse:collapse;
     border:2px ridge #D6D6D6;
     border-left-width:0;
@@ -224,29 +252,29 @@ p input {
     margin: .5em 0 .5em 0;
 }
 
-.do-space-top {
+#do-box .do-space-top {
     margin-top:3.5em;
 }
 
-.do-after-br {
+#do-box .do-after-br {
     margin-bottom:1.5em;
 }
 
-.do-indent {
+#do-box .do-indent {
     padding-left:2em;
 }
 
-.do-rot {
+#do-box .do-rot {
     color : #f00;
 }
 
-.do-table {
+#do-box .do-table {
     border-collapse:collapse;
     background-color:transparent;
 }
 
 /*1=oben, 2=rechts, 3=unten, 4=links*/
-.do-table td {
+#do-box .do-table td {
     padding:.2em .5em;
     text-align:left;
     vertical-align : middle;
@@ -254,7 +282,7 @@ p input {
     background-color:#fff;
 }
 
-.do-table th {
+#do-box .do-table th {
     padding:.2em .5em;
     font-weight:bold;
     text-align:center;
@@ -262,29 +290,29 @@ p input {
     border:1px solid #000;
 }
 
-.do-table-example th {
+#do-box .do-table-example th {
     text-align:left;
     background-color:transparent;
 }
 
-td.do-no-td {
+#do-box td.do-no-td {
     border:0;
     background-color:transparent;
 }
 
-td.do-td-top {
+#do-box td.do-td-top {
     vertical-align : top;
   }
 
-td.do-td-center {
+#do-box td.do-td-center {
     text-align:center;
 }
 
-td.do-td-right {
+#do-box td.do-td-right {
     text-align:right;
 }
 
-.do-info-box {
+#do-box .do-info-box {
     background-image:url('information.png');
     background-position: .3em .3em;
     background-repeat: no-repeat;
@@ -292,13 +320,13 @@ td.do-td-right {
     padding: .5em .5em .5em 2.5em;
 }
 
-.do-link-box {
+#do-box .do-link-box {
     background-color:#c9fdd1;
 	text-align:right;
     padding: .5em .5em .5em 2.5em;
 }
 
-.do-error-box {
+#do-box .do-error-box {
     background-image:url('warning.png');
     background-position: .3em .3em;
     background-repeat: no-repeat;
@@ -306,12 +334,12 @@ td.do-td-right {
     padding: .5em .5em .5em 2.5em;
 }
 
-.do-p-tag {
+#do-box .do-p-tag {
     margin: 1em 0;
 }
 
 /* das kann iregend wann raus da wir jetzt pfeile ins bild machen */
-.do-div-legende {
+#do-box .do-div-legende {
     position:absolute;
     padding: .1em .4em;
     border:1px solid #f00;
@@ -321,44 +349,44 @@ td.do-td-right {
     vertical-align:middle;
 }
 
-.do-list {
+#do-box .do-list {
     padding-left: 1.6em;
 }
 
-.do-list li div {
+#do-box .do-list li div {
     padding-left: .8em;
 }
 
-.do-li-tag li {
+#do-box .do-li-tag li {
     margin-top: 1em;
     margin-bottom: 1em;
 }
 
-.do-nomargin-top {
+#do-box .do-nomargin-top {
     margin-top:0;
 }
 
-.do-margin-start {
+#do-box .do-margin-start {
     margin-top:1.5em;
 }
 
-h4.do-h4 {
+#do-box h4.do-h4 {
     font-size:1em;
     font-weight:bold;
     margin-bottom:.2em;
 }
 
-a.do-molink, a.do-molink:link, a.do-molink:visited , a.do-molink:active {
+#do-box a.do-molink, #do-box a.do-molink:link, #do-box a.do-molink:visited , #do-box a.do-molink:active {
     cursor:pointer;
     text-decoration:underline;
     color:#6A849D;
 }
 
-a.do-molink:hover {
+#do-box a.do-molink:hover {
     color:#AE6427;
 }
 
-.do-paren {
+#do-box .do-paren {
     padding-left:.2em;
     padding-right:.1em;
 }
@@ -388,40 +416,40 @@ a.do-molink:hover {
     border-bottom-right-radius: .6em;
 }
 
-.fu-ext-imgs {
+#do-box .fu-ext-imgs {
     vertical-align : middle;
 }
 
-.ed-syntax-icon {
+#do-box .ed-syntax-icon {
     margin-right: 1px;
 }
 
-.mo-icons-icon, .mo-icons-file {
+#do-box .mo-icons-icon, #do-box .mo-icons-file {
     vertical-align:middle;
 }
 
-.mo-icons-editor-cursor {
+#do-box .mo-icons-editor-cursor {
     vertical-align:middle;
 }
 
-.ed-farbe {
+#do-box .ed-farbe {
     background-color: #d30000;
     color: #000;
 }
 
 /* die id muss nee class werden siehe editsite.css */
-.pagecontent {
+#do-box .pagecontent {
     margin: 0;
     padding: 0;
     top: 0;
     left: 0;
 }
 
-.pagecontent .mo-icons-editor-cursor {
+#do-box .pagecontent .mo-icons-editor-cursor {
     position:absolute;
 }
 
-.pagecontent-border {
+#do-box .pagecontent-border {
     margin: 0;
     padding: 0;
 }
