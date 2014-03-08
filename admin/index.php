@@ -439,8 +439,8 @@ function getHelpIcon($artikel = false,$subartikel = false) {
         $artikel = ACTION;
     if($subartikel !== false)
         $subartikel = "&amp;subartikel=".$subartikel;
-    if(file_exists(BASE_DIR."docu/docu.php"))
-        return '<a href="'.URL_BASE.'docu/docu.php?menu=false&amp;artikel='.$artikel.$subartikel.'" target="_blank" class="js-docu-link mo-butten-a-img"><img class="mo-icons-icon mo-icons-help" src="'.ICON_URL_SLICE.'" alt="help" hspace="0" vspace="0" border="0" /></a>';
+    if(file_exists(BASE_DIR."docu/index.php"))
+        return '<a href="'.URL_BASE.'docu/index.php?menu=false&amp;artikel='.$artikel.$subartikel.'" target="_blank" class="js-docu-link mo-butten-a-img"><img class="mo-icons-icon mo-icons-help" src="'.ICON_URL_SLICE.'" alt="help" hspace="0" vspace="0" border="0" /></a>';
     else return NULL;
 }
 

@@ -34,11 +34,11 @@ function home() {
 
     // CMS-Hilfe
     $titel = "home_help";
-    if(file_exists(BASE_DIR."docu/docu.php")) {
+    if(file_exists(BASE_DIR."docu/index.php")) {
         $error[$titel][] = false;
-        $template[$titel][] = getLanguageValue("home_help_text_docu").'&nbsp;&nbsp;<a href="'.URL_BASE.'docu/docu.php" target="_blank" class="mo-butten-a-img"><img class="mo-icons-icon mo-icons-docu" src="'.ICON_URL_SLICE.'" alt="docu" hspace="0" vspace="0" border="0" /></a>';
+        $template[$titel][] = getLanguageValue("home_help_text_docu").'&nbsp;&nbsp;<a href="'.URL_BASE.'docu/index.php" target="_blank" class="mo-butten-a-img"><img class="mo-icons-icon mo-icons-docu" src="'.ICON_URL_SLICE.'" alt="docu" hspace="0" vspace="0" border="0" /></a>';
         $error[$titel][] = false;
-        $template[$titel][] = getLanguageValue("home_help_text_info").'&nbsp;&nbsp;<a href="'.URL_BASE.'docu/docu.php?menu=false&amp;artikel=start" target="_blank" class="js-docu-link mo-butten-a-img"><img class="mo-icons-icon mo-icons-help" src="'.ICON_URL_SLICE.'" alt="help" hspace="0" vspace="0" border="0" /></a>';
+        $template[$titel][] = getLanguageValue("home_help_text_info").'&nbsp;&nbsp;<a href="'.URL_BASE.'docu/index.php?menu=false&amp;artikel=start" target="_blank" class="js-docu-link mo-butten-a-img"><img class="mo-icons-icon mo-icons-help" src="'.ICON_URL_SLICE.'" alt="help" hspace="0" vspace="0" border="0" /></a>';
     } else {
         $error[$titel][] = true;
         $template[$titel][] = getLanguageValue("home_no_help");

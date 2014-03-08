@@ -260,7 +260,7 @@ class moziloDocuClass {
             if(!isset($this->menu[$match[1][$pos]]))
                 continue;
             $link_text = $this->getDocuLanguage("domenu_".$match[1][$pos]);
-            $link = "docu.php?artikel=".$match[1][$pos];
+            $link = "index.php?artikel=".$match[1][$pos];
             if($this->isplugin)
                 $page = $CatPage->get_AsKeyName($this->getDocuLanguage("domenu_".$match[1][$pos]),true);
             if(isset($match[2][$pos]) and $match[2][$pos] and $match[2][$pos][0] == ":") {
