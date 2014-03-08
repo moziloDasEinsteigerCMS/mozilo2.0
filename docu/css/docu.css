@@ -396,7 +396,6 @@
     color:#3d3d3d;
     font-size:1.2em;
     position:fixed;
-    top:0;
     left:50%;
     display:inline-block;
     background-color:#A0A0A0;
@@ -406,6 +405,10 @@
     text-align:center;
     padding:5px;
     z-index:2000;
+}
+
+.do-body-nodialog #doTopLink {
+    top:0;
     -moz-border-radius-bottomleft: .6em;
     -webkit-border-bottom-left-radius: .6em;
     -khtml-border-bottom-left-radius: .6em;
@@ -414,6 +417,18 @@
     -webkit-border-bottom-right-radius: .6em;
     -khtml-border-bottom-right-radius: .6em;
     border-bottom-right-radius: .6em;
+}
+
+.do-body-dialog #doTopLink {
+    bottom:0;
+    -moz-border-radius-topleft: .6em;
+    -webkit-border-top-left-radius: .6em;
+    -khtml-border-top-left-radius: .6em;
+    border-top-left-radius: .6em;
+    -moz-border-radius-topright: .6em;
+    -webkit-border-top-right-radius: .6em;
+    -khtml-border-top-right-radius: .6em;
+    border-top-right-radius: .6em;
 }
 
 #do-box .fu-ext-imgs {
