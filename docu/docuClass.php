@@ -127,6 +127,7 @@ class moziloDocuClass {
 
 
         $html .= '<link type="text/css" rel="stylesheet" href="'.BASE_URL_DOCU.'css/docu.css" />';
+        $html .= '<link type="text/css" rel="stylesheet" href="'.BASE_URL_DOCU.'css/change_admin.css" />';
         $html .= '<link type="text/css" rel="stylesheet" href="'.BASE_URL_DOCU.'css/arrow/arrow.css" />';
         $html .= '<link type="text/css" rel="stylesheet" href="'.BASE_URL_DOCU.'css/mo_icons/mo_icons_tabs.css" />';
 

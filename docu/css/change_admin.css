@@ -1,0 +1,58 @@
+/* admin/admin.css */
+.menu-fix {
+    position:absolute;
+    overflow:hidden;
+    top:50px;
+    /* right = -width */
+    right:-20px;
+    /* geschlossene menu breite */
+    min-width:20px;
+    /* sichtbare menu breite */
+    max-width:200px;
+    min-height:3em;
+    background-image:url(gfx/menu.png);
+    background-position: 5px center;
+    background-repeat:no-repeat;
+    border-left-width:0;
+    z-index:99999;
+}
+
+.menu-fix-content {
+    overflow:hidden;
+    margin:0;
+    /* siehe #menu-fix width */
+    margin-left:20px;
+}
+
+/* 1=oben, 2=rechts, 3=unten, 4=links */
+.menu-fix-content ul {
+    overflow:hidden;
+    list-style-type: none;
+    padding: 0;
+    margin: 0 .8em .8em .8em;
+}
+
+.menu-fix-content li {
+    white-space:nowrap;
+    cursor:move;
+    overflow:hidden;
+    margin: .8em 0 0 0;
+}
+
+.menu-fix-content li span {
+    cursor:move;
+}
+
+.menu-fix-content .mo-in-ul-li {
+    padding-left:.4em;
+}
+
+/* admin/jquery/coloredit/coloredit.css */
+#do-content .ce-in-hex {
+    width:50px;
+    height: 16px;
+    font-size:12px;
+    padding:0 2px 0 2px;
+    margin:2px 0 0 0;
+    vertical-align:middle;
+}
