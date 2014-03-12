@@ -799,6 +799,19 @@ class CatPageClass {
         if($this->CatPageArray[$cat]['_pages-'][$page]['_protect-']) {
             return false;
         }
+        # wenn das nee Vituelle page ist
+        if(isset($this->CatPageArray[$cat]['_pages-'][$page]["_content-"]) and $this->CatPageArray[$cat]['_pages-'][$page]["_content-"]) {
+            $page_content = $this->CatPageArray[$cat]['_pages-'][$page]["_content-"];
+            if($for_syntax and !$convert_content) {
+                global $syntax;
+                $page_content = $syntax->preparePageContent($page_content);
+            }
+            if($convert_content) {
+                $mysyntax = new Syntax();
+                $page_content = $mysyntax->convertContent($page_content, $for_syntax);
+            }
+            return $page_content;
+        }
 
         $cat = $this->get_FileSystemName($cat,false);
         $page = $this->get_FileSystemName($cat,$page);
@@ -816,7 +829,7 @@ class CatPageClass {
                     $page_content = $mysyntax->convertContent($page_content, $for_syntax);
                 }
                 return $page_content;
-           }
+            }
         }
         return false;
     }
@@ -841,7 +854,10 @@ class CatPageClass {
     # erzeugen in einer Kategorie eine Inhaltseite die es nicht gibt
     # $cat und $page muss nicht url codiert sein
     # $type = EXT_PAGE, EXT_HIDDEN oder EXT_DRAFT
-    function make_DummyPage($cat,$page,$type = EXT_PAGE) {
+    # $content = da es die Inhaltsseite nicht gibt kann das der Inhalt der Inhaltsseit sein
+    #            wird dann ausgegenen mit get_PageContent()
+    #            Achtung das solte nur ein Plugin Platzhalter sein
+    function make_DummyPage($cat,$page,$type = EXT_PAGE,$content = false) {
         if($type != EXT_PAGE and $type != EXT_HIDDEN and $type != EXT_DRAFT)
             return false;
         $cat = $this->get_AsKeyName($cat, true);
@@ -853,6 +869,7 @@ class CatPageClass {
         $this->CatPageArray[$cat]['_pages-'][$page]["_type-"] = $type;
         $this->CatPageArray[$cat]['_pages-'][$page]["_time-"] = "1";
         $this->CatPageArray[$cat]['_pages-'][$page]["_protect-"] = false;
+        $this->CatPageArray[$cat]['_pages-'][$page]["_content-"] = $content;
         $this->OrgCatPageArray[$cat]['_pages-'][$page] = $this->CatPageArray[$cat]['_pages-'][$page];
         return true;
     }
