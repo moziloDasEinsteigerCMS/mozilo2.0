@@ -264,7 +264,7 @@ class moziloDocuClass {
             $link = "index.php?artikel=".$match[1][$pos];
             if($this->isplugin)
                 $page = $CatPage->get_AsKeyName($this->getDocuLanguage("domenu_".$match[1][$pos]),true);
-            if(isset($match[2][$pos]) and $match[2][$pos] and $match[2][$pos][0] == ":") {
+            if($match[2][$pos] and $match[2][$pos][0] == ":") {
                 $link_text .= " → ".$this->getDocuLanguage("domenu_".$match[1][$pos]."_".substr($match[2][$pos],1));
                 $link .= '&amp;subartikel='.substr($match[2][$pos],1);
                 if($this->isplugin) {
@@ -275,9 +275,11 @@ class moziloDocuClass {
             $link_add = '&amp;lang='.$this->curent_lang.$this->dialog;
             if(isset($match[3][$pos]) and $match[3][$pos])
                 $link_add .= $match[3][$pos];
-            if($this->isplugin)
+            if($this->isplugin) {
+                if(is_array($this->menu[$match[1][$pos]]) and !$match[2][$pos])
+                    $cat .= "%2F".$page;
                 $this->docu_artikel = str_replace($search,'<a href="'.$CatPage->get_Href($cat,$page,$link_add).'">'.$link_text.' &gt;</a>',$this->docu_artikel);
-            else
+            } else
                 $this->docu_artikel = str_replace($search,'<a href="'.$link.$link_add.'">'.$link_text.' &gt;</a>',$this->docu_artikel);
 
         }
