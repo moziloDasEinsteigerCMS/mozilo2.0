@@ -1,10 +1,14 @@
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
 @media (max-width: 767px) {
-.visible-xs.collapse.in {
+  .visible-xs.collapse.in {
     display: block !important;
-}
-.visible-xs.collapse {
+  }
+  .visible-xs.collapse {
     display: none !important;
+  }
 }
+
+.mce-tinymce.mce-container.mce-panel.mce-fullscreen {
+  z-index: 9999;
 }
