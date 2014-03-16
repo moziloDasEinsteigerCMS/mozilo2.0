@@ -1,0 +1,10 @@
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+@media (max-width: 767px) {
+.visible-xs.collapse.in {
+    display: block !important;
+}
+.visible-xs.collapse {
+    display: none !important;
+}
+}

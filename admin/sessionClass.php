@@ -45,9 +45,9 @@ class SessionSaveHandler {
         );
     }
 
-    public function open($savePath, $sessionName) {
+    public function open($savePath, $sessionName) {        
         $this->savePath = $savePath.((substr($savePath,-1) != "/") ? "/" : "");
-        $this->sessionName = $sessionName;
+        $this->sessionName = $sessionName;        
         if(!is_file($this->savePath."users.conf.php")) {
             @file_put_contents($this->savePath."users.conf.php","<?php die(); ?>\n".serialize(array()),LOCK_EX);
         }
