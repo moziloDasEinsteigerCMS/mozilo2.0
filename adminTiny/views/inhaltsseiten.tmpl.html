@@ -9,10 +9,11 @@
   </ul>
 </div>  
 <br><br>
-
-<form>
- <textarea ui-tinymce ng-model="content" id="content" ></textarea><br>
+<form ng-if="(pagename.length > 0)">
+ <textarea ui-tinymce="tinymceOptions" ng-model="content" id="contentTinyMCE" ></textarea><br>
  <button ng-click="save()" class="btn btn-default">Speichern</button>
 </form>
+<br><br>
+<pre ng-if="debug">{{ content }}</pre>
 <br><br>
 <pre ng-if="debug">{{ message }}</pre>

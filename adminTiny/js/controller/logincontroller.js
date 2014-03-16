@@ -12,6 +12,7 @@ app.controller("LoginController", function($scope, $http, $location,$rootScope){
 	$scope.showerror = false;
 	$scope.message = "";
 	$scope.submit = function(form) {
+		$scope.message = "";
 		if (typeof($scope.user) != "undefined" && typeof($scope.pw) != "undefined" && $scope.user.length > 0 && $scope.pw.length > 0) {
 			$http({
 				methode: 'GET',

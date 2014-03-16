@@ -3,7 +3,7 @@
  by black-night http://www.black-night.org
  License: LGPL
 */
-app.controller("AppController", function($scope, $http){
+app.controller("AppController", function($scope, $http, $location){
 	$scope.loggedin = false;
 	$scope.$on('LogedInEvent',function(){
 		$http({
@@ -12,7 +12,7 @@ app.controller("AppController", function($scope, $http){
 			params: {'function':'logedin'}
 		}).success(function(data, status, headers, config) {
 			$scope.loggedin = data;
-			if (!data) {
+			if (data == 'false') {
 				$location.path('/login');
 			}
 		});		

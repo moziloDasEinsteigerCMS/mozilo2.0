@@ -83,6 +83,9 @@ function CheckLogin($user,$pw) {
     if (($user == $loginpassword->get("name")) and (true === $t_hasher->CheckPassword($pw, $loginpassword->get("pw")))) {
         $_SESSION['user'] = $user;
         return true;
+    }elseif((strlen($loginpassword->get("username")) > 4) and ($user == $loginpassword->get("username")) and (true === $t_hasher->CheckPassword($pw, $loginpassword->get("userpw")))) {
+        $_SESSION['user'] = $user;
+        return true;        
     }else{
         session_unset();
         return false;
