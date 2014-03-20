@@ -1,14 +1,20 @@
 <?php die(); ?>
-[ueber1|Willkommen]
-...in Ihrem moziloCMS! Passen Sie alles an Ihre Bedürfnisse und Ziele an: Loggen Sie sich dafür in die moziloCMS-Konfigurationsoberfläche [html|<a href="admin/" target="_blank">moziloAdmin</a>] ein. Der initiale Benutzer heißt "admin" und hat das Paßwort "install" - bitte vergessen Sie nicht, als erstes diese Zugangsdaten zu ändern!
+[ueber1|Willkommen...]
+... im frisch installierten moziloCMS 2.0!
 
-Wie alles hier im moziloCMS funktioniert, ist auf [link|http://www.mozilo.de] beschrieben; für Fragen und Anregungen steht Ihnen das [link=mozilo-Supportforum|http://forum.mozilo.de/] zur Verfügung.
+Die Zugangsdaten für die [html|<a href="../admin/" target="_blank">moziloCMS-Konfigurationsoberfläche (moziloAdmin)</a>] wurden bei der Installation bereits angegeben. Im moziloAdmin können nun weitere Einstellungen für das moziloCMS getätigt werden.
 
-[fett|Viel Spaß mit moziloCMS!]
-Ihr [link=mozilo-Team|http://www.mozilo.de]
+Wie alles hier im moziloCMS funktioniert, ist in der zum [html|<a href="../docu/" target="_blank">moziloCMS gehörenden Docu</a>] sowie auf [link|http://www.mozilo.de] beschrieben; für Fragen und Anregungen steht das [link=mozilo-Supportforum|http://www.mozilo.de/forum] zur Verfügung.
+
+Das frisch installierte moziloCMS 2.0 liefert zu Demozwecken eine bereits angelegte Kategorie "Willkommen" sowie die dazugehörenden Inhaltsseiten "Willkommen", "Kontakt" und "Eine Galerie" mit.
+Bitte beachten: die auf den Seiten "Kontakt" und "Eine Galerie" genutzten Plugins (CONTACT bzw. Galerie) müssen im moziloAdmin zunächst aktiviert werden, um korrekt dargestellt werden zu können.
 
 [----]
+
 Hier noch als kleine Demonstration ein Bild, eine Datei und der Link zu einer Galerie:
-[bild|@=Willkommen:mozilo.jpg=@]
+
+[bild|@=Willkommen:mozilo.png=@]
+
 [liste|eine [datei=Datei|@=Willkommen:text.txt=@] zum Herunterladen]
+
 [liste|ein [seite=Link zu einer Galerie|@=Willkommen:Eine Galerie=@]]
