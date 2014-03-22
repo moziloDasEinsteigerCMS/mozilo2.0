@@ -56,6 +56,19 @@ switch ($function) {
             }
         }        
         break;
+    case 'data':
+        $userLogedIn = isset($_SESSION['user']);
+        if ($userLogedIn == false) {
+            echo json_encode($userLogedIn);
+        }else{
+            $kindOfData = getRequestValue('kind','get',false);
+            if ($kindOfData == 'imglist') {
+                echo json_encode(GetFileList(array('.jpg','.jepg','.gif','.png','.svg')));
+            }else if ($kindOfData == 'filelist') {
+                echo json_encode(GetFileList(false));
+            }
+        }        
+        break;
     case 'logout' :
         session_unset();
         echo json_encode(true);
@@ -68,7 +81,13 @@ switch ($function) {
         if ((isset($JSONData->function)) && ($JSONData->function == 'save')) {
             echo json_encode(Save($JSONData));
         }else{
-            echo file_get_contents(BASE_DIR.ADMIN_TINY_DIR_NAME.'/views/index.tmpl.html');
+            if (isset($_SERVER['HTTPS']) and $_SERVER['HTTPS'] != 'off') {
+                $document_base_url = 'https://'.$_SERVER['SERVER_NAME'].$_SERVER['SCRIPT_NAME'];
+            }else {
+                $document_base_url = 'http://'.$_SERVER['SERVER_NAME'].$_SERVER['SCRIPT_NAME'];
+            }
+            $document_base_url = substr($document_base_url,0,strpos($document_base_url,ADMIN_TINY_DIR_NAME."/index.php"));
+            echo str_replace('{DOCUMENT_BASE_URL}',$document_base_url,file_get_contents(BASE_DIR.ADMIN_TINY_DIR_NAME.'/views/index.tmpl.html'));
         }
         break;
 }
@@ -137,4 +156,17 @@ function Save($JSONData) {
         return false;
 }
 
+function GetFileList($types) {
+    require_once("../".CMS_DIR_NAME."/CatPageClass.php");
+    $CatPage = new CatPageClass();
+    $CatArray = $CatPage->get_CatArray(false,true);
+    $Result = array();
+    for ($i = 0; $i < count($CatArray); $i++) {
+        $FileArray = $CatPage->get_FileArray($CatArray[$i],$types);
+        for ($j = 0; $j < count($FileArray); $j++) {
+            $Result[] = array("title"=>$CatPage->get_HrefText($CatArray[$i],false).'/'.$CatPage->get_FileText($CatArray[$i],$FileArray[$j]),"value"=>$CatPage->get_srcFile($CatArray[$i],$FileArray[$j]));
+        }
+    }
+    return $Result;
+}
 ?>
