@@ -116,7 +116,7 @@ $(function () {
         if(e.which == 13) { // enter
             e.preventDefault();
             send_item_status = "gallery_subtitle";
-            var para = "subtitle="+$(this).val()+
+            var para = "subtitle="+rawurlencode_js($(this).val())+
                 "&curent_dir="+rawurlencode_js($(this).closest('.fileupload').find('input[name="curent_dir"]').val())+
                 "&file="+$(this).closest('.template-download').find('.fu-rename-file').text();
             send_data(para,$(this));
