@@ -145,11 +145,14 @@ vertical-align:middle;
     width: 100%;
 }
 
-.files td.subtitle span.fu-empty {
+.files td.subtitle span {
     width: 97%;
-    height: 1em;
+    min-height: 1em;
     display: block;
     cursor: text;
+}
+
+.files td.subtitle span.fu-empty {
     background-color: #E6E6E6;
 }
 
