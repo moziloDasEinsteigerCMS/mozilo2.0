@@ -1,0 +1,426 @@
+/*
+Theme Name: Standard moziloCMS 
+Description: Tabellenloses Design
+Version: 0.1
+Author: sbDESIGN, S. Bechtold
+Author URI: http://bechti.de
+*/
+
+/*************************** GLOBALE EINSTELLUNGEN ****************************/
+*{
+    margin  : 0;
+    padding : 0;
+}
+
+html, body, #sb-main {
+    height : 100%;
+}
+
+body > #sb-main {
+    height     : auto;
+    min-height : 100%;
+}
+
+body {
+    background  : #ebf0f3;
+    color       : #000000;
+    font-family : Corbel, Arial, Helvetica, sans-serif;
+    font-size   : 100%;
+    max-width   : 100%;
+    text-align  : center
+}
+
+/* Absätze */
+p {
+    padding       : 5px 0 15px 0;
+    margin-bottom : 10px;
+}
+
+/* allgemeine Links */
+a {
+    font-weight     : bold;
+    color           : #73a7cf;
+    text-decoration : none;
+    padding         : 0px 2px 0px 2px;
+}
+
+a:link, a:visited, a:active {
+    color           : #73a7cf;
+    font-weight     : bold;
+    text-decoration : none;
+}
+
+a:hover {
+    color : #9ea666;
+}
+:hover {
+    transition: color 0.2s ease 0s;
+}
+
+/******************************* LAYOUT ***************************************/
+/***** main, umschliesst die gesamte Seite *****/
+#sb-main {
+    width      : 100%;
+    font-size  : 1.0em;
+}
+
+/**** Header, beinhaltet Suche und Seitentitel/Logo ****/
+#sb-header {
+    background-color : #ffffff;
+    border-top       : 20px solid #73a7cf;
+    border-bottom    : 1px solid #73a7cf;
+}
+
+.sb-header_inner {
+    margin     : 0 auto;
+    width      : 980px;
+    position   : relative; 
+}
+
+/*** Seitentitel ***/
+#sb-titel {
+    text-align  : left;
+    width       : auto;
+    padding     : 0;
+    font-size   : 1.3em;
+    font-weight : normal;
+    color       : #000;
+    position    : absolute;
+    left        : 420px;
+    bottom      : 0;
+}
+/** Seitentitel Ueberschrift **/
+#sb-titel h1 {
+    font-size      : 1.5em;
+    font-weight    : bold;
+}
+
+/*** Container fuer Suche ***/
+.sb-search {
+    width    : 220px;
+    position : absolute;
+    right    : 0;
+    top      : 0;
+}
+
+/**** Container fuer das Menue und den Inhalt ****/
+div.sb-content {
+    overflow   : hidden;
+    position   : relative;
+    width      : 980px;
+    margin     : 0px auto;
+    text-align : left;
+    background : transparent;
+    border     : none;
+    display    : table;
+    border-spacing : 10px;
+    padding    : 10px 0 120px 0;
+}
+
+/*** linke Sitebar ***/
+#sb-sidebar {
+    background     : #ffffff;
+    padding        : 0px 0 55px 0;
+    width          : 240px;
+    height         : 100%;
+    text-align     : left;
+    vertical-align : top;
+    height         : 100%;
+    display        : table-cell;
+}
+
+/** Navigation **/
+#sb-nav {
+    background : #f7f7f7;
+    margin-bottom : 20px;
+}
+/** Inhalte in der Sidebar **/
+.sb-sidebarblock {
+    margin-top : 50px;
+    padding    : 0 20px 10px 20px;
+}
+
+.sb-sidebarblock h2 {
+    text-transform : uppercase;
+    border-bottom  : 1px solid #e6e6e6;
+}
+
+/** Container für Inhalt **/
+div#sb-page {
+    padding    : 10px 25px 55px 15px;
+    background : #ffffff;
+    width      : 710px;
+    text-align : left;
+    display    : table-cell;
+    vertical-align : top;
+    line-height    : 1.3em;
+}
+
+  
+/**** Footer ****/
+div#footer {
+    background : #444444;
+    color      : rgba(255, 255, 255, 0.57);
+    margin     : -120px auto 0px auto;
+    overflow   : hidden;
+    position   : relative;
+    font-size  : 0.875em;
+    height     : 120px; 
+}
+
+#footer p {
+    margin : 0;
+    padding : 30px 0 0 0;
+}
+
+/*** Footer-Links, Admin-Login, Credits ***/          
+.sb-credit a, .sb-credit a:visited {
+    color : rgba(255, 255, 255, 0.78);
+}
+.sb-credit a:hover {
+    color : #ffffff;
+}
+
+/******************************* MAINMENU *************************************/
+/** Hauptmenue **/
+ul.mainmenu {
+    margin          : 0 0 0.5em 0;
+    list-style-type : none;
+    padding-left    : 0;
+    font-size       : 1em;
+}
+
+li.mainmenu {
+    border-bottom : 1px solid #e6e6e6;
+}
+
+/* Hauptmenuepunkt */  
+a.menu {
+    padding     : 15px 20px 15px 25px;
+    color       : #000000;
+    font-weight : normal;
+    display     : block;
+}
+
+/* aktiver Hauptmenuepunkt */
+a.menuactive {
+    padding       : 15px 20px 15px 25px;
+    color         : #9da665;
+    text-align    : left;
+    margin        : 0px;
+    font-weight   : normal;
+    display       : block;
+    margin-bottom : 1px;
+}
+
+/* Hover */
+a.menu:hover, a.menuactive:hover {
+    text-decoration : none;
+    color           : #73a7d0;
+    background-color      : #ffffff;
+    transition      : color 0.2s ease 0s;
+}
+
+/** Submenue / Detailmenue **/
+ul.detailmenu {
+    margin-bottom   : 0px;
+    padding-bottom  : 5px;
+    padding-left    : 35px;
+    list-style-type : none;
+    font-size       : 0.875em;
+}
+
+li.detailmenu {
+    padding : 2px;
+}
+
+/* Submenuepunkt */
+a.submenu {
+    font-weight  : normal;
+    color        : #404040;
+}
+
+/* aktiver Submenuepunkt */
+a.submenuactive {
+    font-weight  : normal;
+    color        : #9da665;
+}
+
+/* Hover */
+a.submenu:hover, a.submenuactive:hover {
+    color           : #73a7d0;
+    text-decoration : none;
+    transition      : color 0.2s ease 0s;
+}
+
+/* -------------------------------------------------------- */
+/* (MenuSubs) */
+/* ---------- */
+
+/* Trennlinie unter Hauptmenuepunkt */
+li.cat-menusubs {
+    border-bottom : 1px solid #e6e6e6 !important;
+}
+/* Hauptmenuepunkt */
+a.cat-menusubs-link {
+    padding : 15px 20px 15px 25px !important;
+}
+/** Submenue 1.Ebene **/
+ul.page-menusubs {
+    margin-bottom   : 0px !important;
+    padding-bottom  : 5px !important;
+    padding-left    : 35px !important;
+    font-size       : 0.875em !important;
+}
+
+li.page-menusubs, li.subcat-menusubs {
+    padding : 2px !important;
+}
+
+a.cat-menusubs-link:hover, a.cat-menusubs-link.menusubs-linkactive:hover {
+    color      : #AE6427;
+    background-color : #ffffff !important;
+    transition : color 0.2s ease 0s !important;
+}
+
+.page-menusubs-link.menusubs-linkactive:hover, .subcat-menusubs-link.menusubs-linkactive:hover {
+    color : #AE6427;
+}
+
+a.menusubs-linkactive  {
+    color : #AE6427;
+}
+
+/********************************** Suchfeld *********************************/
+/* Suchfeld */
+.searchform {
+    width : 220px;}
+
+fieldset#searchfieldset {
+    border  : none;
+    padding : 10px 0 0 0 ;
+}
+
+input.searchtextfield {
+    border           : 1px solid #ffffff;
+    border-radius    : 5px;
+    width            : 200px;
+    height           : 24px;
+    background-color : #ffffff;
+    margin-bottom    : 10px;
+    padding-left     : 5px;
+    color            : #000000;
+    -moz-box-shadow    : inset 0 0 5px #B0B0B0;
+    -webkit-box-shadow : inset 0 0 5px #B0B0B0;
+    box-shadow         : inset 0 0 5px #B0B0B0;
+}
+
+/* Suchbutton */
+input.searchbutton {
+    border : none;
+    margin : 5px 0px -5px -20px;
+}
+
+/******************************* Kontaktformular *****************************/
+form#contact_form { }
+
+table#contact_table {
+    width      : 99%;
+    margin     : 0;
+    background : #F2F2F2;
+    border     : 1px solid #E2E2E2;
+}
+
+table#contact_table td {
+    vertical-align : top;
+    padding        : 5px;
+}
+
+span#contact_errormessage {
+    color       : #880000;
+    font-weight : bold;
+}
+
+span#contact_successmessage {
+    color       : #008800;
+    font-weight : bold;
+}
+
+input#contact_name, input#contact_mail, input#contact_website {
+    width      : 200px !important;
+    background : #E5E5E5 !important;
+    border     : 1px solid #E2E2E2;
+    color      : #000000;
+}
+
+textarea#contact_message {
+    width      : 400px !important;
+    background : #E5E5E5;
+    border     : 1px solid #E2E2E2;
+    color      : #000000;
+}
+
+input#contact_calculation {
+    background : #E5E5E5 !important;
+    border     : 1px solid #E2E2E2;
+    color      : #000000;
+}
+
+input#contact_submit {
+    width : 250px !important;
+}
+
+/*---------------------------------------------------------------------------*/
+/******************************* GALLERY LAYOUT ******************************/
+/*---------------------------------------------------------------------------*/
+/* bei Einstellung "target self" */
+div.embeddedgallery {
+    text-align : center;
+    margin     : 5px auto;
+    background : #ffffff;
+}
+
+/* Hauptmenü (Galerie) */
+ul.gallerymenu {
+    padding     : 11px 8px 0px 0px;
+    line-height : 23px;
+    text-align  : center;
+}
+
+/* Detailmenü (Galerie) */
+ul.gallerynumbermenu {
+    padding     : 6px 8px 0px 8px;
+    line-height : 20px;
+    text-align  : center;
+    width       : 100%;
+    float       : none;
+    margin      : 2px auto;
+}
+
+li.gallerymenu, li.gallerynumbermenu {
+    display : inline;
+    padding : 0 5px 0 5px;
+}
+
+/* Galerie-Tabelle (Übersichtsmodus) */
+table.gallerytable {
+    margin          : 0px auto;
+    border-collapse : collapse;
+    width           : 90%;
+}
+
+td.gallerytd {
+    vertical-align : top;
+    text-align     : center;
+    padding        : 3px;
+}
+
+img.thumbnail {
+    margin     : 5px auto 3px auto;
+    border     : 5px solid #d0d0d0;
+    box-shadow : 2px 2px 2px #333
+}
+
+.gallerytd a:hover img.thumbnail {
+    box-shadow:none;
+}
