@@ -10,73 +10,50 @@
 |===============================================================================|
 --> 
 <head>
- <title> {WEBSITE_TITLE} </title>
- <meta http-equiv="Content-Type" content="text/html; charset={CHARSET}" />
- <meta http-equiv="Content-Script-Type" content="text/javascript" />
- <meta http-equiv="Content-Style-Type" content="text/css" />
- <meta name="content-language" content="deutsch,de,at,ch" />
- <meta name="author" content="" />
- <meta name="date" content="" />
- <meta name="keywords" content="{WEBSITE_KEYWORDS}" />
- <meta name="description" content="{WEBSITE_DESCRIPTION}" />
- <meta name="robots" content="index,follow" />
- <link rel="SHORTCUT ICON" href="{LAYOUT_DIR}/favicon.ico" />
- <style type="text/css"> @import "{LAYOUT_DIR}/css/style.css"; </style>
- <script type="text/javascript"><!--
-	function setSearchFocus() {
-		if (document.search) {
-				document.search.query.focus();
-				document.search.query.select();
-			}
-	}
- --></script>
+    <title>{WEBSITE_TITLE}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset={CHARSET}" />
+    <meta http-equiv="Content-Script-Type" content="text/javascript" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="content-language" content="deutsch,de,at,ch" />
+    <meta name="author" content="" />
+    <meta name="date" content="" />
+    <meta name="keywords" content="{WEBSITE_KEYWORDS}" />
+    <meta name="description" content="{WEBSITE_DESCRIPTION}" />
+    <meta name="robots" content="index,follow" />
+    <link rel="SHORTCUT ICON" href="{LAYOUT_DIR}/favicon.ico" />
+    <style type="text/css">
+        @import "{LAYOUT_DIR}/css/style.css";
+        @import "{LAYOUT_DIR}/css/syntax.css";
+    </style>
 </head>
-
 <body>
-
- <!-- main umschliesst die gesamte Seite, hier kann ein zusaetzliches Hintergrundbild ueber dem body eingefuegt und positioniert werden -->
- <div id="sb-main">
-
-  <!-- Logo, Slogan, Suche -->
-  <div id="sb-header"> 
-   <div class="sb-header_inner">  
-    <!-- Suche -->
-    <div class="sb-search">
-      {SEARCH}
-    </div> 
-    <!-- Seitentitel, Logo -->
-    <div id="sb-titel">
-     <a href="index.html"><img src="{LAYOUT_DIR}/grafiken/logo.png" alt="Logo" /></a>
+    <!-- hier kann ein zusaetzliches Hintergrundbild ueber dem body eingefuegt und positioniert werden -->
+    <div id="sb-main">
+        <!-- Logo, Slogan, Suche -->
+        <div id="sb-header">
+            <div class="sb-header_inner">
+                <!-- Logo -->
+                <img src="{LAYOUT_DIR}/grafiken/header.png" alt="Logo" />
+                <!-- Seitentitel
+                <div id="sb-titel"></div> -->
+                <!-- Suche -->
+                <div class="sb-search">{SEARCH}</div>
+            </div>
+        </div>
+        <!-- Container fuer die Navigation und den Inhaltsbereich -->
+        <div class="sb-content">
+            <!--beginn Inhalt -->
+            <div class="embeddedgallery">{Galerie}</div>
+        </div>
+     </div>
+    <!-- beginn Footer -->
+    <div id="footer">
+        <p class="sb-copy">
+            alle Bilder &copy;&nbsp;<script type="text/javascript"> document.write(new Date().getFullYear()); </script>&nbsp;by&nbsp;{WEBSITE_TITLE}  
+        </p>
+        <p class="sb-credit" >
+            Powered by {CMSINFO} | Theme by <a href="http://bechti.de">sbDESIGN</a> | <a href="#sb-header">Top</a>
+        </p>
     </div>
-   </div>  
-  </div>
-  <!-- ende Logo, Slogan, Suche -->
-
-  <!-- Container fuer die Navigation und den Inhaltsbereich -->
-  <div class="sb-content">
-   
-   <!--beginn Inhalt -->
-   <div class="embeddedgallery">
-    {Galerie}
-   </div>
-   <!--ende Inhalt -->
-  </div>
-  <!--ende Container -->
-
- </div>
- <!-- ende main -->
-  
- <!-- beginn Footer -->
- <div id="footer">
-  <p class="sb-copy">
-   alle Bilder &copy;&nbsp;<script type="text/javascript"> var datum = new Date(); var Jahr = datum.getFullYear(); document.write(Jahr); </script>&nbsp;by&nbsp;{WEBSITE_TITLE}  
-  </p>
-  <p class="sb-credit" >
-   Powered by {CMSINFO} | Theme by <a href="http://bechti.de">sbDESIGN</a> | <a href="#sb-header">Top</a>
-  </p>
- </div>
- <!-- ende Footer -->
-
-
 </body>
 </html>
