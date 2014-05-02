@@ -1,0 +1,39 @@
+/*@media screen and (max-width: 768px) {*/
+@media (max-width: 768px) {
+    #sb-header {
+        border-top       : 55px solid #73a7cf;
+    }
+    .sb-header_inner {
+        margin     : 0;
+        width      : auto;
+    }
+    div.sb-content {
+        display    : block;
+        margin     : 0;
+        width      : auto;
+        position:static;
+    }
+    #sb-sidebar {
+        display    : block;
+        width      : auto;
+        padding:0;
+    }
+    div#sb-page {
+        display    : block;
+        width      : auto;
+    }
+    #sb-nav {
+        width      : 100%;
+        position:absolute;
+        top:0;
+        left:0;
+    }
+    .sb-sidebarblock {
+        margin:0 0 .2em 0;
+        display:none;
+    }
+    .menusubs-box {
+        z-index:100;
+        background-color:#73a7cf;
+    }
+}
