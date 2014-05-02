@@ -4,6 +4,7 @@
     padding:1em 0 3em 0;
     margin:0;
     background-color:#f8f8f8;
+    width: 100%;
 }
 
 #do-content {
@@ -467,4 +468,13 @@
 #do-box .pagecontent-border {
     margin: 0;
     padding: 0;
+}
+
+@media print {
+    #do-main {
+        width: 850px;
+    }
+    .do-noprint {
+        display:none;
+    }
 }

@@ -46,8 +46,8 @@ $html .= '</head><body class="ui-widget'.$css.'" style="font-size:12px;">';
 $html .= '<div id="do-box">';
 
 if(!$DocuClass->dialog) {
-    $html .= '<table id="do-main" width="100%" cellspacing="0" border="0" cellpadding="0">'
-        .'<tr><td width="50%">&nbsp;</td>'
+    $html .= '<table id="do-main" cellspacing="0" border="0" cellpadding="0">'
+        .'<tr class="do-noprint"><td width="50%">&nbsp;</td>'
         .'<td colspan="2">'
         .'<div class="mo-margin-bottom ui-widget ui-state-default ui-corner-all mo-li-head-tag-no-ul mo-li-head-tag mo-td-middle">'
         .'<b class="mo-padding-left" style="float:left;line-height:23px;">'.$DocuClass->getDocuLanguage("do_title").'</b>';
@@ -69,20 +69,22 @@ if(!$DocuClass->dialog) {
 
     $html .= '<br class="mo-clear" /></div>'
         .'</td><td width="50%">&nbsp;</td></tr>'
-        .'<tr><td>&nbsp;</td>'
+        .'<tr><td class="do-noprint">&nbsp;</td>'
         .'<td class="do-td-top">'
         .'<div class="ui-tabs mo-ui-tabs">'.$DocuClass->makeSubMenu().'</div>'
         .'<div id="do-content" class="ui-widget-content ui-corner-bottom mo-no-border-top">'.$DocuClass->docu_artikel.'</div>'
         .'</td>'
-        .'<td class="do-td-top">'
+        .'<td class="do-noprint do-td-top">'
         .$DocuClass->makeDocuMenu()
         .'</td>'
-        .'<td>&nbsp;</td></tr></table>';
+        .'<td class="do-noprint">&nbsp;</td></tr></table>';
 } else {
     $html .= '<div id="do-content" class="ui-tabs mo-ui-tabs">'.$DocuClass->makeSubMenu().$DocuClass->docu_artikel.'</div>';
 }
 
 $html .= "</div></body></html>";
+
+header('content-type: text/html; charset='.CHARSET.'');
 
 echo $html;
 
