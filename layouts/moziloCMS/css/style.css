@@ -237,16 +237,17 @@ li.detailmenu, li.page-menusubs, li.subcat-menusubs {
 
 /* Submenuepunkt */
 a.submenu, a.page-menusubs-link, a.subcat-menusubs-link {
-    display       : block;
+    display      : block;
     font-weight  : normal;
     color        : #404040;
-    font-size       : 0.875em;
+    font-size    : 0.875em;
 }
 
 /* aktiver Submenuepunkt */
 a.submenuactive, a.page-menusubs-link.menusubs-linkactive, a.subcat-menusubs-link.menusubs-linkactive {
     font-weight  : normal;
     color        : #9da665 !important;
+    font-size    : 0.875em;
 }
 
 /* Hover */
