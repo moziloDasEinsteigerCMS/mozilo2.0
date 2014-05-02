@@ -72,9 +72,10 @@ a:hover {
 }
 
 .sb-header_inner {
+    background : #ffffff url('../grafiken/header.png') no-repeat center center;
     margin     : 0 auto;
     width      : 980px;
-    position   : relative; 
+    position   : relative;
 }
 
 /*** Seitentitel ***/
@@ -85,9 +86,6 @@ a:hover {
     font-size   : 1.3em;
     font-weight : normal;
     color       : #000;
-    position    : absolute;
-    left        : 420px;
-    bottom      : 0;
 }
 /** Seitentitel Ueberschrift **/
 #sb-titel h1 {
@@ -173,7 +171,7 @@ div#footer {
     padding : 30px 0 0 0;
 }
 
-/*** Footer-Links, Admin-Login, Credits ***/          
+/*** Footer-Links, Admin-Login, Credits ***/
 .sb-credit a, .sb-credit a:visited {
     color : rgba(255, 255, 255, 0.78);
 }
@@ -181,21 +179,21 @@ div#footer {
     color : #ffffff;
 }
 
-/******************************* MAINMENU *************************************/
+/**************** MAINMENU und MenuSubs, MenuSubsMobile ****************/
 /** Hauptmenue **/
-ul.mainmenu {
+ul.mainmenu, ul.cat-menusubs {
     margin          : 0 0 0.5em 0;
     list-style-type : none;
     padding-left    : 0;
     font-size       : 1em;
 }
 
-li.mainmenu {
+li.mainmenu, li.cat-menusubs {
     border-bottom : 1px solid #e6e6e6;
 }
 
-/* Hauptmenuepunkt */  
-a.menu {
+/* Hauptmenuepunkt */
+a.menu, a.cat-menusubs-link {
     padding     : 15px 20px 15px 25px;
     color       : #000000;
     font-weight : normal;
@@ -203,9 +201,9 @@ a.menu {
 }
 
 /* aktiver Hauptmenuepunkt */
-a.menuactive {
+a.menuactive, a.cat-menusubs-link.menusubs-linkactive {
     padding       : 15px 20px 15px 25px;
-    color         : #9da665;
+    color         : #9da665 !important;
     text-align    : left;
     margin        : 0px;
     font-weight   : normal;
@@ -214,7 +212,7 @@ a.menuactive {
 }
 
 /* Hover */
-a.menu:hover, a.menuactive:hover {
+a.menu:hover, a.menuactive:hover, a.cat-menusubs-link:hover {
     text-decoration : none;
     color           : #73a7d0;
     background-color      : #ffffff;
@@ -222,73 +220,40 @@ a.menu:hover, a.menuactive:hover {
 }
 
 /** Submenue / Detailmenue **/
-ul.detailmenu {
+ul.detailmenu, ul.page-menusubs, ul.subcat-menusubs {
     margin-bottom   : 0px;
     padding-bottom  : 5px;
     padding-left    : 35px;
     list-style-type : none;
-    font-size       : 0.875em;
 }
 
-li.detailmenu {
+ul.subcat-menusubs {
+    padding-left    : 15px;
+}
+
+li.detailmenu, li.page-menusubs, li.subcat-menusubs {
     padding : 2px;
 }
 
 /* Submenuepunkt */
-a.submenu {
+a.submenu, a.page-menusubs-link, a.subcat-menusubs-link {
+    display       : block;
     font-weight  : normal;
     color        : #404040;
+    font-size       : 0.875em;
 }
 
 /* aktiver Submenuepunkt */
-a.submenuactive {
+a.submenuactive, a.page-menusubs-link.menusubs-linkactive, a.subcat-menusubs-link.menusubs-linkactive {
     font-weight  : normal;
-    color        : #9da665;
+    color        : #9da665 !important;
 }
 
 /* Hover */
-a.submenu:hover, a.submenuactive:hover {
+a.submenu:hover, a.submenuactive:hover, a.page-menusubs-link:hover, a.subcat-menusubs-link:hover {
     color           : #73a7d0;
     text-decoration : none;
     transition      : color 0.2s ease 0s;
-}
-
-/* -------------------------------------------------------- */
-/* (MenuSubs) */
-/* ---------- */
-
-/* Trennlinie unter Hauptmenuepunkt */
-li.cat-menusubs {
-    border-bottom : 1px solid #e6e6e6 !important;
-}
-/* Hauptmenuepunkt */
-a.cat-menusubs-link {
-    padding : 15px 20px 15px 25px !important;
-}
-/** Submenue 1.Ebene **/
-ul.page-menusubs {
-    margin-bottom   : 0px !important;
-    padding-bottom  : 5px !important;
-    padding-left    : 35px !important;
-    font-size       : 0.875em !important;
-}
-
-li.page-menusubs, li.subcat-menusubs {
-    padding : 2px !important;
-}
-
-a.cat-menusubs-link:hover, a.cat-menusubs-link.menusubs-linkactive:hover {
-    color      : #AE6427;
-    background-color : #ffffff !important;
-    transition : color 0.2s ease 0s !important;
-}
-
-.page-menusubs-link.menusubs-linkactive:hover, .subcat-menusubs-link.menusubs-linkactive:hover {
-    color : #AE6427;
-}
-
-a.menusubs-linkactive  {
-    color : #AE6427;
 }
 
 /********************************** Suchfeld *********************************/
@@ -319,6 +284,23 @@ input.searchtextfield {
 input.searchbutton {
     border : none;
     margin : 5px 0px -5px -20px;
+}
+/********************************** Sitemap *********************************/
+.sitemap {
+    margin:1.4em 0 0 1em;
+}
+
+.sitemap ul {
+    list-style-type : none;
+    padding-left:2.4em;
+}
+
+.sitemap li {
+    margin-top:.5em;
+}
+
+.sitemap h2 {
+    margin-top:1em;
 }
 
 /******************************* Kontaktformular *****************************/
