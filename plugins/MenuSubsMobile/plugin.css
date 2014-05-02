@@ -1,0 +1,247 @@
+/*
+menusubs-noinput wird nur bei usesubmenu = 2 gesetzt
+
+Das <div id="menusubs-cats" solte in der Mobilen Ansicht ganz Oben Platziert werden, da es einen Bug in dem Android Browser 4.1.2 gibt der verhindert das der unterste Link Anklickbar ist.
+Für den Oberen Abstand ist das <div class="menusubs-box-margintop"> zu benutzen.
+Für die Schrieftgröße ist das <div class="menusubs-box-fontsize"> zu benutzen.
+
+<div id="menusubs-cats" class="menusubs-box (menusubs-noinput)">
+    <div class="menusubs-box-margintop">
+        <div class="menusubs-box-fontsize">
+            <ul class="cat-menusubs">
+                <lable class="menusubs-show-hide"><span>&equiv;</span></lable>
+                <input class="menusubs-show-hide">
+                <li class="cat-menusubs">
+                    <div><a class="cat-menusubs-link menusubs-link/active"></div>
+
+                    <lable class="menusubs-show-hide"><span>&equiv;</span></lable>
+                    <input class="menusubs-show-hide">
+                    <ul class="page-menusubs">
+                        <li class="page-menusubs">
+                            <div><a class="page-menusubs-link menusubs-link/active"></div>
+
+                        <li class="subcat-menusubs">
+                            <div><a class="subcat-menusubs-link menusubs-link/active"></div>
+                            <lable class="menusubs-show-hide"><span>&equiv;</span></lable>
+                            <input class="menusubs-show-hide">
+                            <ul class="subcat-menusubs">
+                                <li class="page-menusubs">
+                                    <div><a class="page-menusubs-link menusubs-link/active"></div>
+
+id für Plugin 2tes Menu = #menusubs_2
+
+*/
+
+body {
+    width: 100%;
+}
+
+.menusubs-box input[type="checkbox"], .menusubs-box input[type="checkbox"]:after, .menusubs-box input[type="checkbox"]:before {
+   -webkit-box-sizing: border-box;
+   -moz-box-sizing: border-box;
+   box-sizing: border-box;
+   padding: 0;
+   margin: 0;
+}
+
+.menusubs-box ul.menusubs-hidden {
+    display:none;
+}
+
+.menusubs-box ul.menusubs-show {
+    display:block;
+}
+
+.menusubs-box li {
+    position: relative;
+}
+
+.menusubs-show-hide {
+    display:none;
+}
+
+
+/*@media screen and (max-width: 768px) {*/
+@media (max-width: 768px) {
+
+    .menusubs-box {
+        padding:0 .4em 0 .4em !important;
+        overflow:auto;
+        position: relative;
+    }
+
+    /* opera mini kann keine divs scrollen*/
+    #menusubs-cats.menusubs-is-operamini {
+        overflow:visible;
+    }
+
+    .menusubs-box-margintop {
+    }
+
+    .menusubs-box-fontsize {
+        font-size: 1.4em !important;
+    }
+
+    .menusubs-box-fontsize a {
+        font-size: 1em !important;
+    }
+
+    .menusubs-box li {
+        margin:.6em 0 .6em 0 !important;
+        border:none !important;
+        padding:0 !important;
+    }
+
+    .menusubs-box li div {
+        padding-left: 2.8em !important;
+        padding-right: .7em !important;
+    }
+
+    .noinput li div {
+        padding-left: .7em !important;
+    }
+
+    label.menusubs-show-hide, input.menusubs-show-hide {
+        overflow:hidden;
+        display:block;
+        position: relative;
+        top:0;
+        left:0;
+        z-index: 20;
+        width: 100%;
+        height: 2.2em;
+        /*achtung wichtig für android browser*/
+        min-height:2.2em;
+        min-width:100%;
+        text-align: center;
+        border:none;
+        margin:0;
+        padding:0;
+        cursor: pointer;
+    }
+
+    label.menusubs-show-hide span {
+        display:block;
+        font-size:2em;
+        line-height: 1.1em;
+    }
+
+    input.menusubs-show-hide {
+        /* Achtung manche Browser brauchen das weil nicht vererbt wird */
+        font-size:1em;
+        display:inline;
+        position: absolute;
+        /*firefox damit die größe änderbar ist*/
+        -moz-appearance: none;
+        z-index: 25;
+        opacity: 0;
+    }
+
+    /* opera mini kann den checkbox nicht transparent machen
+       und er den label bug nicht hat setzen wir die checkbox unter das label*/
+    .menusubs-is-operamini input.menusubs-show-hide {
+        z-index: 15;
+    }
+
+    li label.menusubs-show-hide, li input.menusubs-show-hide {
+        width: 2.2em;
+        min-width: 2.2em;
+        position: absolute;
+    }
+
+    /* das ist der trick um über die checkbox das menue aufzuklappen */
+    input[type="checkbox"].menusubs-show-hide + ul {
+        display:block;
+    }
+    /* das ist der trick um über die checkbox das menue zuzuklappen */
+    input[type="checkbox"].menusubs-show-hide:checked + ul {
+        display:none;
+    }
+
+    ul.cat-menusubs, ul.subcat-menusubs, ul.page-menusubs {
+        position: relative;
+        margin:0 !important;
+        padding:0 !important;
+        list-style-type:none !important;
+    }
+
+    ul.subcat-menusubs, ul.page-menusubs {
+        left:2.8em !important;
+    }
+
+    label.menusubs-show-hide, .menusubs-link, .menusubs-linkactive {
+        text-decoration:none !important;
+        font-weight:normal !important;
+        cursor: pointer;
+        display:block !important;
+        color: #fff !important;
+        border:none !important;
+        background-color:#060606 !important;
+        /* FF3.6+ */
+        background-image: -moz-linear-gradient(top, rgb(151,151,151) 0%, rgb(6,6,6) 40%);
+        /* Chrome,Safari4+ */
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(151,151,151)), color-stop(40%,rgb(6,6,6)));
+        /* Chrome10+,Safari5.1+ */
+        background-image: -webkit-linear-gradient(top, rgb(151,151,151) 0%,rgb(6,6,6) 40%);
+        /* Opera 11.10+ */
+        background-image: -o-linear-gradient(top, rgb(151,151,151) 0%,rgb(6,6,6) 40%);
+        /* IE10+ */
+        background-image: -ms-linear-gradient(top, rgb(151,151,151) 0%,rgb(6,6,6) 40%);
+        /* W3C */
+        background-image: linear-gradient(to bottom, rgb(151,151,151) 0%,rgb(6,6,6) 40%);
+        /* IE6-9 */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#979797', endColorstr='#060606',GradientType=0 );
+        -moz-border-radius: .4em;
+        -webkit-border-radius: .4em;
+        -khtml-border-radius: .4em;
+        border-radius: .4em;
+    }
+
+    /* alle Links */
+    .menusubs-link, .menusubs-linkactive {
+        min-height: 1.4em !important;
+        padding:.5em .7em .3em .7em !important;
+    }
+
+}
+
+/* Sitemap */
+#menusubs-sitemap-title {
+}
+
+#menusubs-sitemap {
+}
+
+#menusubs-sitemap ul {
+}
+
+#menusubs-sitemap a {
+}
+
+#menusubs-sitemap-menu2 {
+}
+
+
+.menusubs-breadcrumb {
+    margin:0;
+    padding:0;
+    list-style-type:none;
+}
+
+.menusubs-breadcrumb li {
+    list-style-position:inside;
+    display:inline;
+    padding-left:.6em;
+}
+
+.menusubs-breadcrumb li a {
+    margin-left:.6em;
+}
+li.menusubs-breadcrumb-home {
+    padding-left:0;
+}
+li.menusubs-breadcrumb-home a {
+    margin-left:0;
+}
+
+

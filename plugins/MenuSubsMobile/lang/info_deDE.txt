@@ -1,0 +1,76 @@
+Erzeugt ein Menu mit fast unbegrenzter Submenu Verschachtelungen.<br />
+<br />
+Ist eine Erweiterung des MenuSubs Plugins<br />
+Es braucht kein Javascript<br />
+Beim Opera Mini werden die Checkbox Hacken nicht Durchsichtig deshalb gibts da ein Bisschen Javascript.<br />
+<br />
+<b>Die Änderungen sind:</b>
+<ul>
+<li>In der Liste sind immer alle Kategorien und Inhaltsseiten. Sie werden jetzt über die Classen menusubs-hidden und menusubs-show gesteuert</li>
+<li>Jede Kategorie erhält zusätzlich ein label und input checkbox HTML Element Außer beim Template Schalter usesubmenu = 2</li>
+<li>Vor der Liste gibts auch ein label und input checkbox HTML Element um das Menu Aus/Zuklappen zu können</li>
+<li>In der Normalen Ansicht sind alle label und input checkbox HTML Elemente Unsichtbar so das es ein ganz Normale Menu ist</li>
+</ul>
+<br />
+<b>Tipp</b> da wir für den Opera Mini ein Bisschen Javascript haben gibts eine Function die beim Aus/Zuklappen des Menus das HTML Element mit der ID <b>content</b> mit Aus/Zuklappt.<br />
+<br />
+<b>Achtung</b> in der plugin.css sind ein paar Besonderheiten Dockumentiert.<br />
+<br />
+<b>Achtung</b> Kategorien, die ein "/" (Schrägstrich) enthalten, werden nicht mehr angezeigt, da wir den "/" für das Submenu verwenden.<br />
+<br />
+Um ein Detailmenu zu verwenden musst du {MenuSubsMobile|main} und {MenuSubsMobile|detail} benutzen,
+ansonsten nur {MenuSubsMobile}<br />
+<b>Achtung</b> Der Schalter "usesubmenu = 0" (in den Layouts ganz oben eingetragen) wird hier nicht benutzt!<br />
+<br />
+<b>Beschreibung:</b>
+<ul>
+<li>Sobald eine versteckte Inhaltseite mit einem "/" im Namen gefunden wird, wird sie mit der Kategorie, die den gleichen Namen hat, als Submenu ersetzt.</li>
+<li><b>Wichtig</b> Der Name wird als Pfad angesehen.</li>
+<li>Um bei SubKategorien eine Inhaltsseite zu benutzen, die über die Einstellung "Lege fest, ob Inhaltsseiten, die genau wie die Kategorie heißen, im Detailmenü versteckt werden sollen:" versteckt wird, muss der Name wie der letzte Teil der SubKategorien lauten, z.B SubKategorien=Kategorie/Submenu_1 Inhaltseite=Submenu_1 und muss die erste Inhaltseite sein.</li>
+</ul>
+<br />
+<b>Beispiel:</b><br />
+<ul><li style="list-style-type:none;"><b>Kategorie</b>
+<ul>
+    <li>Inhaltseite_1</li>
+    <li>Kategorie / Submenu_1 <b>versteckt</b></li>
+    <li>Inhaltseite_2</li>
+</ul>
+<b>Kategorie / Submenu_1</b>
+<ul>
+    <li>Inhaltseite_3</li>
+    <li>Kategorie / Submenu_1 / Submenu_2 <b>versteckt</b></li>
+</ul>
+<b>Kategorie / Submenu_1 / Submenu_2</b>
+<ul>
+    <li>Inhaltseite_4</li>
+    <li>Inhaltseite_5</li>
+</ul>
+</li></ul>
+<br />
+<b>Ergebnis:</b><br />
+<ul><li style="list-style-type:none;"><b>Kategorie</b>
+<ul>
+    <li>Inhaltseite_1</li>
+    <li><b>Submenu_1</b>
+    <ul>
+        <li>Inhaltseite_3</li>
+        <li><b>Submenu_2</b>
+        <ul>
+            <li>Inhaltseite_4</li>
+            <li>Inhaltseite_5</li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li>Inhaltseite_2</li>
+</ul>
+</li></ul>
+<br />
+Ein zweites Menu kann mit <b>{MenuSubsMobile|menusubs_2}</b> erstellt werden.<br />
+Zum Beispiel für Impressum und Kontakt im Fußbereich der Seite.<br />
+Einfach in der Plugin Konfiguration eine Kategorie auswählen und im Template <b>{MenuSubsMobile|menusubs_2}</b> <br />an die gewünschten Stelle eintragen.<br />
+Es sind nur Kategorien auswählbar, die kein "/" im Namen haben.<br />
+Da sind natürlich auch SubKategorien mit möglich.<br />
+<br />
+Für eine Brotkrümelnavigation einfach <b>{MenuSubsMobile|breadcrumb}</b> an die gewünschten Stelle eintragen.

@@ -1,0 +1,3 @@
+no_menusubs_2 = Kein MenuSubs_2
+menusubs_2 = Kategorie wählen für MenuSubs_2
+sitemap_show_menu2 = In der Sitemap MenuSubs_2 zeigen
