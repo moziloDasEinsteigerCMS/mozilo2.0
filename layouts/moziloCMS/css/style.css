@@ -152,9 +152,9 @@ div#sb-page {
     display    : table-cell;
     vertical-align : top;
     line-height    : 1.3em;
+    border-spacing : 0;
 }
 
-  
 /**** Footer ****/
 div#footer {
     background : #444444;
