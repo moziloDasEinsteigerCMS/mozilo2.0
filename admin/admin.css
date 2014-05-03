@@ -1,6 +1,5 @@
 /*1=oben, 2=rechts, 3=unten, 4=links*/
 html, body {
-    font-size:12px;/* !important*/
     padding:0;
     margin:0;
     height: 100%;
