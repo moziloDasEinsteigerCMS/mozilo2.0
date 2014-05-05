@@ -2,7 +2,7 @@
 
 class MenuSubsMobile extends Plugin {
     var $breadcrumb_delimiter = "";
-var $id = 0;
+    var $id = 0;
     function getContent($value) {
         global $CatPage;
 
@@ -110,13 +110,31 @@ var $id = 0;
         $noinput = '';
         if($CMS_CONF->get("usesubmenu") == 2)
             $noinput = ' menusubs-noinput';
-        $js_label = ' onclick="menuSubsToggleContent(\'content\',\'display\',\'none\');"';
-        $js_input = ' onclick="menuSubsToggleContent(\'content\',\'display\',\'none\');"';
+
+        $js = '';
+        $js_onclick = '';
+        if(strlen($this->settings->get("hidden")) > 10) {
+            $hidden = $this->settings->get("hidden");
+            $hidden = explode(",",$hidden);
+            $js = '<script type="text/javascript">'
+                .'var ms_hidden = new Array();';
+            foreach($hidden as $pos => $object) {
+                $js .= 'ms_hidden['.$pos.'] = new Object();';
+                $tmp = explode("=",$object);
+                $js .= 'ms_hidden['.$pos.']["id"] = "'.trim($tmp[0]).'";';
+                $tmp = explode(":",$tmp[1]);
+                $js .= 'ms_hidden['.$pos.']["para"] = "'.trim($tmp[0]).'";'
+                    .'ms_hidden['.$pos.']["val"] = "'.trim($tmp[1]).'";';
+            }
+            $js .= '</script>';
+            $js_onclick = ' onclick="menuSubsToggleContent();"';
+        }
         $ul = '<div id="menusubs-cats" class="menusubs-box'.$noinput.'">'
+                .$js
                 .'<div class="menusubs-box-margintop">'
                     .'<div class="menusubs-box-fontsize">'
-                        .'<label for="menusubs-label-id'.$this->id.'" class="menusubs-show-hide"'.$js_label.'><span>&equiv;</span></label>'
-                        .'<input id="menusubs-label-id'.$this->id.'" class="menusubs-show-hide" type="checkbox"'.$js_input.' checked="checked" />'
+                        .'<label for="menusubs-label-id'.$this->id.'" class="menusubs-show-hide"'.$js_onclick.'><span>&equiv;</span></label>'
+                        .'<input id="menusubs-label-id'.$this->id.'" class="menusubs-show-hide" type="checkbox"'.$js_onclick.' checked="checked" />'
                         .'<ul class="cat-menusubs">';
         foreach($CatPage->get_CatArray() as $cat) {
             if(strpos($cat,"%2F") > 1) continue;
@@ -316,7 +334,12 @@ var $id = 0;
             "type" => "text",
             "maxlength" => "10",
             "size" => "10",
-            "description" => 'Trennzeichen der Brotkrümel Einträge. Default ist "»"'
+            "description" => $conf_txt->get("breadcrumb_delimiter")
+        );
+        $config['hidden'] = array(
+            "type" => "text",
+            "description" => $conf_txt->get("hidden"),
+            'template' => '{hidden_description}<br />{hidden_text}'
         );
         return $config;
     }
@@ -337,7 +360,7 @@ var $id = 0;
             // Name des Autors
             "stefanbe",
             // Download-URL
-            array("http://www.mozilo.de/forum/index.php?action=media","Templates und Plugins"),
+            '',
             array("{MenuSubsMobile|main/detail/menusubs_2/breadcrumb}" => "MenuSubsMobile")
         );
         return $info;
