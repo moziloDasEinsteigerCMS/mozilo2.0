@@ -24,20 +24,20 @@
     <style type="text/css">
         @import "{LAYOUT_DIR}/css/style.css";
         @import "{LAYOUT_DIR}/css/syntax.css";
+        /* Bei nutzung vom MenuSubsMobile Plugin
+        @import "{LAYOUT_DIR}/css/responsive.css"; */
     </style>
 </head>
 <body>
     <!-- hier kann ein zusaetzliches Hintergrundbild ueber dem body eingefuegt und positioniert werden -->
     <div id="sb-main">
         <!-- Logo, Slogan, Suche -->
-        <div id="sb-header">
+        <div id="sb-header" class="embeddedgallery-head">
             <div class="sb-header_inner">
-                <!-- Logo -->
-                <img src="{LAYOUT_DIR}/grafiken/header.png" alt="Logo" />
-                <!-- Seitentitel
-                <div id="sb-titel"></div> -->
-                <!-- Suche -->
-                <div class="sb-search">{SEARCH}</div>
+                <!-- Logo, Seitentitel -->
+                <div id="sb-titel">
+                    <img src="{LAYOUT_DIR}/grafiken/logo.png" alt="Logo" />
+                </div>
             </div>
         </div>
         <!-- Container fuer die Navigation und den Inhaltsbereich -->
