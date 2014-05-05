@@ -34,10 +34,10 @@ span.rightcontentimage {
 
 /* Untertitle für [bild|...] [bildlinks|...] [bildrechts|...] */
 span .imagesubtitle {
-    text-align:center;
-    font-size:.6em;
-    display:block;
-    width:100%;
+    text-align : center;
+    font-size  : .6em;
+    display    : block;
+    width      : 100%;
 }
 
 /* [fett|...] */
@@ -82,21 +82,21 @@ span .imagesubtitle {
 
 /* [ueber1|...] */
 .heading1 {
-    font-size : 1.375em;
+    font-size     : 1.375em;
     margin-top    : 10px;
     margin-bottom : 5px;
 }
 
 /* [ueber2|...] */
 .heading2 {
-    font-size : 1.25em;
+    font-size     : 1.25em;
     margin-top    : 10px;
     margin-bottom : 5px;
 }
 
 /* [ueber3|...] */
 .heading3 {
-    font-size : 1.125em;
+    font-size     : 1.125em;
     margin-top    : 10px;
     margin-bottom : 5px;
 }

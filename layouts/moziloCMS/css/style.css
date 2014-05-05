@@ -60,8 +60,8 @@ a:hover {
 /******************************* LAYOUT ***************************************/
 /***** main, umschliesst die gesamte Seite *****/
 #sb-main {
-    width      : 100%;
-    font-size  : 1.0em;
+    width     : 100%;
+    font-size : 1.0em;
 }
 
 /**** Header, beinhaltet Suche und Seitentitel/Logo ****/
@@ -89,8 +89,8 @@ a:hover {
 }
 /** Seitentitel Ueberschrift **/
 #sb-titel h1 {
-    font-size      : 1.5em;
-    font-weight    : bold;
+    font-size   : 1.5em;
+    font-weight : bold;
 }
 
 /*** Container fuer Suche ***/
@@ -103,16 +103,16 @@ a:hover {
 
 /**** Container fuer das Menue und den Inhalt ****/
 div.sb-content {
-    overflow   : hidden;
-    position   : relative;
-    width      : 980px;
-    margin     : 0px auto;
-    text-align : left;
-    background : transparent;
-    border     : none;
-    display    : table;
+    overflow       : hidden;
+    position       : relative;
+    width          : 980px;
+    margin         : 0px auto;
+    text-align     : left;
+    background     : transparent;
+    border         : none;
+    display        : table;
     border-spacing : 10px;
-    padding    : 10px 0 120px 0;
+    padding        : 10px 0 120px 0;
 }
 
 /*** linke Sitebar ***/
@@ -129,7 +129,7 @@ div.sb-content {
 
 /** Navigation **/
 #sb-nav {
-    background : #f7f7f7;
+    background    : #f7f7f7;
     margin-bottom : 20px;
 }
 /** Inhalte in der Sidebar **/
@@ -145,11 +145,11 @@ div.sb-content {
 
 /** Container für Inhalt **/
 div#sb-page {
-    padding    : 10px 25px 55px 15px;
-    background : #ffffff;
-    width      : 710px;
-    text-align : left;
-    display    : table-cell;
+    padding        : 10px 25px 55px 15px;
+    background     : #ffffff;
+    width          : 710px;
+    text-align     : left;
+    display        : table-cell;
     vertical-align : top;
     line-height    : 1.3em;
     border-spacing : 0;
@@ -167,7 +167,7 @@ div#footer {
 }
 
 #footer p {
-    margin : 0;
+    margin  : 0;
     padding : 30px 0 0 0;
 }
 
@@ -213,10 +213,10 @@ a.menuactive, a.cat-menusubs-link.menusubs-linkactive {
 
 /* Hover */
 a.menu:hover, a.menuactive:hover, a.cat-menusubs-link:hover {
-    text-decoration : none;
-    color           : #73a7d0;
-    background-color      : #ffffff;
-    transition      : color 0.2s ease 0s;
+    text-decoration  : none;
+    color            : #73a7d0;
+    background-color : #ffffff;
+    transition       : color 0.2s ease 0s;
 }
 
 /** Submenue / Detailmenue **/
@@ -228,7 +228,7 @@ ul.detailmenu, ul.page-menusubs, ul.subcat-menusubs {
 }
 
 ul.subcat-menusubs {
-    padding-left    : 15px;
+    padding-left : 15px;
 }
 
 li.detailmenu, li.page-menusubs, li.subcat-menusubs {
@@ -237,17 +237,17 @@ li.detailmenu, li.page-menusubs, li.subcat-menusubs {
 
 /* Submenuepunkt */
 a.submenu, a.page-menusubs-link, a.subcat-menusubs-link {
-    display      : block;
-    font-weight  : normal;
-    color        : #404040;
-    font-size    : 0.875em;
+    display     : block;
+    font-weight : normal;
+    color       : #404040;
+    font-size   : 0.875em;
 }
 
 /* aktiver Submenuepunkt */
 a.submenuactive, a.page-menusubs-link.menusubs-linkactive, a.subcat-menusubs-link.menusubs-linkactive {
-    font-weight  : normal;
-    color        : #9da665 !important;
-    font-size    : 0.875em;
+    font-weight : normal;
+    color       : #9da665 !important;
+    font-size   : 0.875em;
 }
 
 /* Hover */
@@ -268,17 +268,20 @@ fieldset#searchfieldset {
 }
 
 input.searchtextfield {
-    border           : 1px solid #ffffff;
-    border-radius    : 5px;
-    width            : 200px;
-    height           : 24px;
-    background-color : #ffffff;
-    margin-bottom    : 10px;
-    padding-left     : 5px;
-    color            : #000000;
-    -moz-box-shadow    : inset 0 0 5px #B0B0B0;
-    -webkit-box-shadow : inset 0 0 5px #B0B0B0;
-    box-shadow         : inset 0 0 5px #B0B0B0;
+    border                : 1px solid #ffffff;
+    -moz-border-radius    : 5px;
+    -khtml-border-radius  : 5px;
+    -webkit-border-radius : 5px;
+    border-radius         : 5px;
+    width                 : 200px;
+    height                : 24px;
+    background-color      : #ffffff;
+    margin-bottom         : 10px;
+    padding-left          : 5px;
+    color                 : #000000;
+    -moz-box-shadow       : inset 0 0 5px #B0B0B0;
+    -webkit-box-shadow    : inset 0 0 5px #B0B0B0;
+    box-shadow            : inset 0 0 5px #B0B0B0;
 }
 
 /* Suchbutton */
@@ -288,20 +291,20 @@ input.searchbutton {
 }
 /********************************** Sitemap *********************************/
 .sitemap {
-    margin:1.4em 0 0 1em;
+    margin : 1.4em 0 0 1em;
 }
 
 .sitemap ul {
     list-style-type : none;
-    padding-left:2.4em;
+    padding-left    : 2.4em;
 }
 
 .sitemap li {
-    margin-top:.5em;
+    margin-top : .5em;
 }
 
 .sitemap h2 {
-    margin-top:1em;
+    margin-top : 1em;
 }
 
 /******************************* Kontaktformular *****************************/
@@ -399,11 +402,15 @@ td.gallerytd {
 }
 
 img.thumbnail {
-    margin     : 5px auto 3px auto;
-    border     : 5px solid #d0d0d0;
-    box-shadow : 2px 2px 2px #333
+    margin             : 5px auto 3px auto;
+    border             : 5px solid #d0d0d0;
+    -moz-box-shadow    : 2px 2px 2px #333;
+    -webkit-box-shadow : 2px 2px 2px #333;
+    box-shadow         : 2px 2px 2px #333
 }
 
 .gallerytd a:hover img.thumbnail {
-    box-shadow:none;
+    -moz-box-shadow    : none;
+    -webkit-box-shadow : none;
+    box-shadow         : none;
 }
