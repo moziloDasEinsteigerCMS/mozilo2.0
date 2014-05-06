@@ -113,18 +113,20 @@ class MenuSubsMobile extends Plugin {
 
         $js = '';
         $js_onclick = '';
-        if(strlen($this->settings->get("hidden")) > 10) {
-            $hidden = $this->settings->get("hidden");
+        $hidden = $this->settings->get("hidden");
+        if(strlen($hidden) > 4 and  strpos($hidden,"=") > 0 and strpos($hidden,":") > 3) {
             $hidden = explode(",",$hidden);
             $js = '<script type="text/javascript">'
                 .'var ms_hidden = new Array();';
             foreach($hidden as $pos => $object) {
-                $js .= 'ms_hidden['.$pos.'] = new Object();';
-                $tmp = explode("=",$object);
-                $js .= 'ms_hidden['.$pos.']["id"] = "'.trim($tmp[0]).'";';
-                $tmp = explode(":",$tmp[1]);
-                $js .= 'ms_hidden['.$pos.']["para"] = "'.trim($tmp[0]).'";'
-                    .'ms_hidden['.$pos.']["val"] = "'.trim($tmp[1]).'";';
+                $object = explode("=",$object);
+                if(isset($object[0]) and isset($object[1]) and strpos($object[1],":") > 2) {
+                    $js .= 'ms_hidden['.$pos.'] = new Object();';
+                    $js .= 'ms_hidden['.$pos.']["id"] = "'.trim($object[0]).'";';
+                    $object = explode(":",$object[1]);
+                    $js .= 'ms_hidden['.$pos.']["para"] = "'.trim($object[0]).'";'
+                        .'ms_hidden['.$pos.']["val"] = "'.trim($object[1]).'";';
+                }
             }
             $js .= '</script>';
             $js_onclick = ' onclick="menuSubsToggleContent();"';
