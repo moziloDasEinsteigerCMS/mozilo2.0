@@ -257,6 +257,10 @@ a.submenu:hover, a.submenuactive:hover, a.page-menusubs-link:hover, a.subcat-men
     transition      : color 0.2s ease 0s;
 }
 
+a.subcat-menusubs-link, a.subcat-menusubs-link.menusubs-linkactive {
+    font-weight : bold;
+}
+
 /********************************** Suchfeld *********************************/
 /* Suchfeld */
 .searchform {
