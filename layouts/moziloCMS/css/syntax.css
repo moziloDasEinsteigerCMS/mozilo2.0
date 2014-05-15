@@ -16,13 +16,18 @@
 /* [bild|...] */
 .contentimage {
     border : none;
+    display:table;
 }
 
+.contentimage br {
+    display:none;
+}
 /* [bildlinks|...] */
 span.leftcontentimage {
     margin : 8px 8px 8px 0;
     border : none;
     float  : left;
+    display:table;
 }
 
 /* [bildrechts|...] */
@@ -30,10 +35,11 @@ span.rightcontentimage {
     margin : 8px 0 8px 8px;
     border : none;
     float  : right;
+    display:table;
 }
 
 /* Untertitle für [bild|...] [bildlinks|...] [bildrechts|...] */
-span .imagesubtitle {
+span.imagesubtitle {
     text-align : center;
     font-size  : .6em;
     display    : block;
@@ -117,7 +123,7 @@ span .imagesubtitle {
     list-style-type : decimal-leading-zero;
 }
 
-li {
+.unorderedlist li, .orderedlist li {
     margin-top    : 0px;
     margin-bottom : 0px;
 }
