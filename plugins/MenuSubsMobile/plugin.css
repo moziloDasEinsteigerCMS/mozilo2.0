@@ -137,7 +137,7 @@ body {
         opacity: 0;
     }
 
-    /* opera mini kann den checkbox nicht transparent machen
+    /* opera mini kann die checkbox nicht transparent machen
        und er den label bug nicht hat setzen wir die checkbox unter das label*/
     .menusubs-is-operamini input.menusubs-show-hide {
         z-index: 15;
