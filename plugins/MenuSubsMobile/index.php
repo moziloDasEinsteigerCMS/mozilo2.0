@@ -129,13 +129,13 @@ class MenuSubsMobile extends Plugin {
                 }
             }
             $js .= '</script>';
-            $js_onclick = ' onclick="menuSubsToggleContent();"';
+            $js_onclick = ' onchange="menuSubsToggleContent();"';
         }
         $ul = '<div id="menusubs-cats" class="menusubs-box'.$noinput.'">'
                 .$js
                 .'<div class="menusubs-box-margintop">'
                     .'<div class="menusubs-box-fontsize">'
-                        .'<label for="menusubs-label-id'.$this->id.'" class="menusubs-show-hide"'.$js_onclick.'><span>&equiv;</span></label>'
+                        .'<label for="menusubs-label-id'.$this->id.'" class="menusubs-show-hide"><span>&equiv;</span></label>'
                         .'<input id="menusubs-label-id'.$this->id.'" class="menusubs-show-hide" type="checkbox"'.$js_onclick.' checked="checked" />'
                         .'<ul class="cat-menusubs">';
         foreach($CatPage->get_CatArray() as $cat) {
