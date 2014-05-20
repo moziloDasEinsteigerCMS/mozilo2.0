@@ -26,9 +26,9 @@ class MenuSubsMobile extends Plugin {
         if($value === "detail") {
             if(strpos(CAT_REQUEST,"%2F") > 1) {
                 $tmp_cat = explode("%2F",CAT_REQUEST);
-                return $this->getMenuPage($tmp_cat[0]);
+                return $this->getMenuPage($tmp_cat[0],false,false,true);
             } else
-                return $this->getMenuPage(CAT_REQUEST);
+                return $this->getMenuPage(CAT_REQUEST,false,false,true);
         }
         $menu2 = replaceFileMarker($this->settings->get("menusubs_2"),false);
         if($value === "menusubs_2" and $CatPage->exists_CatPage($menu2,false))
@@ -155,20 +155,16 @@ class MenuSubsMobile extends Plugin {
                     $activ = true;
                 }
                 $ul .= '<li class="cat-menusubs"><div>'.$CatPage->create_AutoLinkTag($cat,false,$css.$cssactiv).'</div>';
-                if(!$only_main) {
-                    $cc = ' checked="checked"';
-                    if(strlen(($tmp = $this->getMenuPage($cat))) > 1) {
-                        if($activ or $CMS_CONF->get("usesubmenu") == 2) {
-                            $tmp = substr_replace($tmp, 'menusubs-show', 11, 15);
-                            $cc = '';
-                        }
-                        if($CMS_CONF->get("usesubmenu") < 2) {
-                            $this->id++;
-                            $ul .= '<label for="menusubs-label-id'.$this->id.'" class="menusubs-show-hide" onclick><span>&equiv;</span></label>'
-                                .'<input id="menusubs-label-id'.$this->id.'" class="menusubs-show-hide" type="checkbox"'.$cc.' />';
-                        }
-                        $ul .= $tmp;
+                $cc = ' checked="checked"';
+                if(strlen(($tmp = $this->getMenuPage($cat))) > 1) {
+                    if(!$only_main and ($activ or $CMS_CONF->get("usesubmenu") == 2)) {
+                        $tmp = substr_replace($tmp, 'menusubs-show', 11, 15);
+                        $cc = '';
                     }
+                    $this->id++;
+                    $ul .= '<label for="menusubs-label-id'.$this->id.'" class="menusubs-show-hide" onclick><span>&equiv;</span></label>'
+                            .'<input id="menusubs-label-id'.$this->id.'" class="menusubs-show-hide" type="checkbox"'.$cc.' />';
+                    $ul .= $tmp;
                 }
                 $ul .= '</li>';
                 $return = true;
@@ -179,12 +175,14 @@ class MenuSubsMobile extends Plugin {
         return null;
     }
 
-    function getMenuPage($cat,$subcat = false,$menu_2 = false) {
+    function getMenuPage($cat,$subcat = false,$menu_2 = false,$only_detail = false) {
         global $CatPage, $CMS_CONF;
         $return = false;
         $ul = '<ul class="menusubs-hidden page-menusubs">';
         if($subcat)
             $ul = '<ul class="menusubs-hidden subcat-menusubs">';
+        if($only_detail)
+            $ul = '<ul class="page-menusubs">';
         if($menu_2)
             $ul = '<ul class="cat-menusubs" id="menusubs2">';
         foreach($CatPage->get_PageArray($cat,array(EXT_PAGE,EXT_HIDDEN,EXT_LINK)) as $page) {
