@@ -30,14 +30,16 @@
 
         $errormessage = "";
         $form = "";
-        
+
         if (isset($_SESSION['contactform_name'])) {
             $name       = getRequestValue($_SESSION['contactform_name'],'post', false);
             $mail       = getRequestValue($_SESSION['contactform_mail'],'post', false);
             $website    = getRequestValue($_SESSION['contactform_website'],'post', false);
             $message    = getRequestValue($_SESSION['contactform_message'],'post', false);
             $calcresult = getRequestValue($_SESSION['contactform_calculation'],'post', false);
-            $privacy = getRequestValue($_SESSION['contactform_privacy'],'post', false);
+            $privacy    = "";
+            if(getRequestValue($_SESSION['contactform_privacy'],'post', false))
+                $privacy    = getRequestValue($_SESSION['contactform_privacy'],'post', false);
         }
         else {
             $name       = "";
@@ -45,7 +47,7 @@
             $website    = "";
             $message    = "";
             $calcresult = "";
-            $privacy = "";
+            $privacy    = "";
         }
         // Das Formular wurde abgesendet
         if (getRequestValue('submit','post', false) <> "") { 
