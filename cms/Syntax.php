@@ -852,7 +852,7 @@ class Syntax {
             $value = $specialchars->rebuildSpecialChars($value, true, true);
         }
         // Platzhalter {VALUE} im definierten Syntaxelement ersetzen
-        $replacetext = str_replace("{VALUE}", $value, $user_syntax);
+        $replacetext = str_replace("{VALUE}", $value, $syntax);
 
         if(preg_match('#<(col|embed|img|input|link|track){1,1}[^>]*?(alt|title|label){1,1}=["\']{DESCRIPTION}["\'][^>]*?>#is', $syntax)) {
             $desciption = $specialchars->rebuildSpecialChars($desciption, true, true);
