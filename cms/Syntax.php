@@ -846,11 +846,19 @@ class Syntax {
         global $specialchars;
         # Wichtig für die syntax.conf da müssen alle Zeichen mit einem ^ dafor geschützt werden
         # das war mal in der Properties
+        $syntax = $specialchars->encodeProtectedChr($USER_SYNTAX->get($syntax));
+
+        if(preg_match('#<(col|embed|img|input|link|track){1,1}[^>]*?(alt|title|label){1,1}=["\']{VALUE}["\'][^>]*?>#is', $syntax)) {
+            $value = $specialchars->rebuildSpecialChars($value, true, true);
+        }
         // Platzhalter {VALUE} im definierten Syntaxelement ersetzen
-        $replacetext = str_replace("{VALUE}", $value, $specialchars->encodeProtectedChr($USER_SYNTAX->get($syntax)));
-        // Platzhalter {DESCRIPTION} im definierten Syntaxelement durch die Beschreibung ersetzen
-        if(strip_tags($desciption) == $desciption)
+        $replacetext = str_replace("{VALUE}", $value, $user_syntax);
+
+        if(preg_match('#<(col|embed|img|input|link|track){1,1}[^>]*?(alt|title|label){1,1}=["\']{DESCRIPTION}["\'][^>]*?>#is', $syntax)) {
             $desciption = $specialchars->rebuildSpecialChars($desciption, true, true);
+        }
+
+        // Platzhalter {DESCRIPTION} im definierten Syntaxelement durch die Beschreibung ersetzen
         $replacetext = str_replace("{DESCRIPTION}", $desciption, $replacetext);
         return $replacetext;
     }
