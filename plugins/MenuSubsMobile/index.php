@@ -182,7 +182,7 @@ class MenuSubsMobile extends Plugin {
         if($subcat)
             $ul = '<ul class="menusubs-hidden subcat-menusubs">';
         if($only_detail)
-            $ul = '<ul class="menusubs-box page-menusubs">';
+            $ul = '<ul class="menusubs-box-detail page-menusubs">';
         if($menu_2)
             $ul = '<ul class="cat-menusubs" id="menusubs2">';
         foreach($CatPage->get_PageArray($cat,array(EXT_PAGE,EXT_HIDDEN,EXT_LINK)) as $page) {

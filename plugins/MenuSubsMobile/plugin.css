@@ -86,13 +86,13 @@ ul.menusubs-show {
         font-size: 1em !important;
     }
 
-    .menusubs-box li {
+    .menusubs-box li, .menusubs-box-detail li {
         margin:.6em 0 .6em 0 !important;
         border:none !important;
         padding:0 !important;
     }
 
-    .menusubs-box li div {
+    .menusubs-box li div, .menusubs-box-detail li div {
         padding-left: 2.8em !important;
         padding-right: .7em !important;
     }
