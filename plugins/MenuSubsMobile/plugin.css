@@ -44,11 +44,11 @@ body {
    margin: 0;
 }
 
-.menusubs-box ul.menusubs-hidden {
+ul.menusubs-hidden {
     display:none;
 }
 
-.menusubs-box ul.menusubs-show {
+ul.menusubs-show {
     display:block;
 }
 
