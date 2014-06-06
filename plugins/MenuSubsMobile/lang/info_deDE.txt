@@ -12,8 +12,6 @@ Beim Opera Mini werden die Checkbox Hacken nicht Durchsichtig deshalb gibts da e
 <li>In der Normalen Ansicht sind alle label und input checkbox HTML Elemente Unsichtbar so das es ein ganz Normale Menu ist</li>
 </ul>
 <br />
-<b>Tipp</b> da wir für den Opera Mini ein Bisschen Javascript haben gibts eine Function die beim Aus/Zuklappen des Menus das HTML Element mit der ID <b>content</b> mit Aus/Zuklappt.<br />
-<br />
 <b>Achtung</b> in der plugin.css sind ein paar Besonderheiten Dockumentiert.<br />
 <br />
 <b>Achtung</b> Kategorien, die ein "/" (Schrägstrich) enthalten, werden nicht mehr angezeigt, da wir den "/" für das Submenu verwenden.<br />
