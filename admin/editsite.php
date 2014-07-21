@@ -192,6 +192,8 @@ function returnUserSyntaxSelectbox() {
             $inhalt = "[".$key."=|...]";
         } elseif(false === strpos($value,"{DESCRIPTION}") and false === strpos($value,"{VALUE}")) {
             $inhalt = "[".$key."]";
+            if(strlen($value) == 0)
+                $inhalt = "[".$key."|...]";
         }
         $content .= '<option value="'.$inhalt.'">'.$inhalt.'</option>';
     }

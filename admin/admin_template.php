@@ -231,7 +231,8 @@ $html .= '<script type="text/javascript" src="'.URL_BASE.ADMIN_DIR_NAME.'/jquery
     # der plugin eigne admin ist im dialog fenster
     if(defined('PLUGINADMIN')) {
         global $PLUGIN_ADMIN_ADD_HEAD;
-        $html .= '<link type="text/css" rel="stylesheet" href="'.URL_BASE.PLUGIN_DIR_NAME.'/'.PLUGINADMIN.'/plugin.css" />';
+        if(is_file(BASE_DIR.PLUGIN_DIR_NAME.'/'.PLUGINADMIN.'/plugin.css'))
+            $html .= '<link type="text/css" rel="stylesheet" href="'.URL_BASE.PLUGIN_DIR_NAME.'/'.PLUGINADMIN.'/plugin.css" />';
         if(is_array($PLUGIN_ADMIN_ADD_HEAD))
             $html .= implode("",$PLUGIN_ADMIN_ADD_HEAD);
     }

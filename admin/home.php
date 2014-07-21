@@ -44,7 +44,7 @@ function home() {
         $template[$titel][] = getLanguageValue("home_no_help");
     }
     // Zeile "Multiuser Reset"
-    if(defined('MULTI_USER') and MULTI_USER and ROOT) {
+    if(defined('MULTI_USER') and MULTI_USER) {
         $titel = "home_multiuser";
         $error[$titel][] = false;
         $template[$titel][] = array(getLanguageValue("home_multiuser_text"),

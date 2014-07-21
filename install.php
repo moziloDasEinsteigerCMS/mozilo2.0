@@ -94,9 +94,6 @@ foreach($LANG_INSTALL as $lang => $tmp) {
     if(!is_file(BASE_DIR_ADMIN.LANGUAGE_DIR_NAME."/language_".$lang.".txt"))
         unset($LANG_INSTALL[$lang]);
 }
-
-if(is_file(BASE_DIR_CMS.CONF_DIR_NAME.'/main.conf.php') and isFileRW(BASE_DIR_CMS.CONF_DIR_NAME.'/main.conf.php'))
-    $CMS_CONF = new Properties(BASE_DIR_CMS.CONF_DIR_NAME.'/main.conf.php');
 if(is_file(BASE_DIR_ADMIN.CONF_DIR_NAME.'/basic.conf.php') and isFileRW(BASE_DIR_ADMIN.CONF_DIR_NAME.'/basic.conf.php'))
     $ADMIN_CONF = new Properties(BASE_DIR_ADMIN.CONF_DIR_NAME.'/basic.conf.php');
 if(($ADMIN_CONF !== false)
@@ -104,6 +101,11 @@ if(($ADMIN_CONF !== false)
         and (is_file(BASE_DIR_ADMIN.LANGUAGE_DIR_NAME."/language_".$ADMIN_CONF->get('language').".txt")))
     $LANG_TMP = $ADMIN_CONF->get('language');
 $LANG = new Language(BASE_DIR_ADMIN.LANGUAGE_DIR_NAME."/language_".$LANG_TMP.".txt");
+
+if(is_file(BASE_DIR_CMS.CONF_DIR_NAME.'/main.conf.php') and isFileRW(BASE_DIR_CMS.CONF_DIR_NAME.'/main.conf.php')) {
+    $CMS_CONF = new Properties(BASE_DIR_CMS.CONF_DIR_NAME.'/main.conf.php');
+    setTimeLocale($LANG);
+}
 
 session_start();
 
