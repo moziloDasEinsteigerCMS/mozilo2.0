@@ -1,5 +1,7 @@
-﻿_dateformat                          = %Y-%d-%m, %H:%M:%S
+_dateformat                          = %Y-%d-%m, %H:%M:%S
 _translator                          = termoyer
+# der Wert ist für date_default_timezone_set()
+_timezone                            = Europe/London
 language_name                        = English
 cms_admin_titel                      = moziloCMS Admin 
 file                                 = File
