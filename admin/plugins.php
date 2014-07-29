@@ -461,15 +461,13 @@ $debug .= "del=".$plugin."<br />\n";
 }
 
 function plugin_install() {
-    global $message;
     if(!function_exists('gzopen'))
         return;
-    global $specialchars;
-global $debug;
+
+    global $message, $specialchars;
 
     $dir = BASE_DIR.PLUGIN_DIR_NAME."/";
     $zip_file = $dir.$specialchars->replaceSpecialChars($_FILES["plugin-install-file"]["name"],false);
-    $zip_name = substr($_FILES["plugin-install-file"]["name"],0,-4);
 
     if(true === (move_uploaded_file($_FILES["plugin-install-file"]["tmp_name"], $zip_file))) {
 
@@ -477,95 +475,76 @@ global $debug;
         $archive = new PclZip($zip_file);
 
         if(0 != ($list = $archive->listContent())) {
-/*$debug .= "<pre>";
-$debug .= var_export($list,true);
-$debug .= "</pre><br />";
-*/
-            $add_dir = false;
-            # der replace pfad ist erstmal der zip file name
-            $remove_dir = $zip_name;
-            $tmp_dir_merker = false;
-            $tmp_index = false;
+            $name = false;
+            $remove_dir = false;
+            $index = false;
             foreach($list as $tmp) {
                 # fehler im zip keine ../ im pfad erlaubt
-                if(false !== strpos($tmp["filename"],"../")) {
-                    $tmp_index = false;
+                if(false !== strpos($tmp["stored_filename"],"../"))
                     break;
-                }
-#$debug .= "test_dir1=".$tmp["filename"]."<br />";
-#$debug .= "test_dir2=".basename($tmp["filename"])."<br />";
                 # wir suchen den ordner wo die index.php enthalten ist
-                if(basename($tmp["filename"]) == "index.php") {
-                    $tmp_dir = substr($tmp["filename"],0,-(strlen("index.php")));
+                if(basename($tmp["stored_filename"]) == "index.php") {
                     # da scheint noch nee index.php in eine unterordner zu sein
-                    if($tmp_dir_merker !== false and strlen($tmp_dir) > strlen($tmp_dir_merker))
+                    if($remove_dir !== false and strlen($remove_dir) < strlen(dirname($tmp["stored_filename"])))
                         continue;
-                    $tmp_dir_merker = $tmp_dir;
-                    $tmp_index = $tmp["index"];
-$debug .= "index_dir1=".$tmp_dir."<br />";
-                    if(!empty($tmp_dir) and $tmp_dir[(strlen($tmp_dir)-1)] == "/")
-                        $tmp_dir = substr($tmp_dir,0,-1);
-$debug .= "index_dir2=".$tmp_dir."<br />";
-                    # das template ist im zip in einen eigenen ordner
-                    if(strrpos($tmp_dir,"/") !== false) {
-                        # der replace pfad damit der eigene template ordner aus dem zip benutzt wird
-                        $remove_dir = $tmp_dir;
-                    }
+                    $remove_dir = dirname($tmp["stored_filename"]);
+                    $index = $tmp["index"];
                 }
             }
             # wenn wir die index nummer von der index.php gefunden haben
-            if($tmp_index !== false) {
-                # nur index.php auspacken
-                $archive->extractByIndex($tmp_index
-                    ,PCLZIP_OPT_PATH, $dir
-                    ,PCLZIP_OPT_REMOVE_ALL_PATH
-                    ,PCLZIP_OPT_REPLACE_NEWER);
+            if($index !== false) {
+                $tmp_list = $archive->extractByIndex($index
+                    ,PCLZIP_OPT_EXTRACT_AS_STRING);
                 # wurde die index.php entpackt
-                if(is_file($dir."index.php")) {
+                if(isset($tmp_list[key($tmp_list)]["content"])) {
                     # die index.php einlessen
-                    if(false !== ($tmp_index = @file($dir."index.php"))) {
-                        foreach($tmp_index as $rows) {
-                            # die zeile suchen wo der Pluginname steht
-                            if(strpos($rows,"class") !== false and strpos($rows,"extends") !== false and strpos($rows,"Plugin") !== false) {
-                                $rows = substr($rows,0,strpos($rows,"extends"));
-                                $rows = str_replace("class","",$rows);
-                                $add_dir = trim($rows);
-#$debug .= "#".$add_dir."#"."<br />";
-                                # ist das ein gültiger Pluginname
-                                if($specialchars->replaceSpecialChars($add_dir,true) != $add_dir)
-                                    $add_dir = false;
-                                break;
-                            }
-                        }
-                        unset($tmp_index);
+                    preg_match("/class\ (.*)\ extends\ Plugin/U",$tmp_list[key($tmp_list)]["content"],$tmp);
+                    if(isset($tmp[1])) {
+                        $name = trim($tmp[1]);
                     }
                 }
-                unlink($dir."index.php");
-            }
-
-            # wenn es den Pluginnamen gibt
-            if($add_dir !== false and getChmod() !== false) {
-                $list = $archive->extract(PCLZIP_OPT_PATH, $dir
-                    ,PCLZIP_OPT_ADD_PATH, $add_dir
-                    ,PCLZIP_OPT_REMOVE_PATH, $remove_dir
-                    ,PCLZIP_OPT_SET_CHMOD, getChmod()
-                    ,PCLZIP_CB_PRE_EXTRACT, "PclZip_PreExtractCallBack"
-                    ,PCLZIP_OPT_REPLACE_NEWER);
-                setChmod($dir.$add_dir);
-            } elseif($add_dir !== false) {
-                $list = $archive->extract(PCLZIP_OPT_PATH, $dir
-                    ,PCLZIP_OPT_ADD_PATH, $add_dir
-                    ,PCLZIP_OPT_REMOVE_PATH, $remove_dir
-                    ,PCLZIP_CB_PRE_EXTRACT, "PclZip_PreExtractCallBack"
-                    ,PCLZIP_OPT_REPLACE_NEWER);
-            } else {
-                # die file strucktur im zip stimt nicht
-                $message .= returnMessage(false,getLanguageValue("error_zip_structure"));
             }
         } else {
             # scheint kein gühltiges zip zu sein
             $message .= returnMessage(false,getLanguageValue("error_zip_nozip"));
         }
+
+        if($name) {
+            if($remove_dir[(strlen($remove_dir)-1)] == "/")
+                $remove_dir = substr($remove_dir,0,-1);
+
+            $index = array();
+            foreach($list as $tmp) {
+                if(substr(dirname($tmp["stored_filename"]),0,strlen($remove_dir)) == $remove_dir)
+                    $index[] = $tmp["index"];
+            }
+            if(count($index) > 0) {
+                if(getChmod() !== false) {
+                    $tmp1 = $archive->extractByIndex(implode(",",$index)
+                                ,PCLZIP_OPT_PATH, $dir
+                                ,PCLZIP_OPT_ADD_PATH, $name
+                                ,PCLZIP_OPT_REMOVE_PATH, $remove_dir
+                                ,PCLZIP_OPT_SET_CHMOD, getChmod()
+                                ,PCLZIP_CB_PRE_EXTRACT, "PclZip_PreExtractCallBack"
+                                ,PCLZIP_OPT_REPLACE_NEWER);
+                    setChmod($dir.$name);
+                } else {
+                    $tmp1 = $archive->extractByIndex(implode(",",$index)
+                                ,PCLZIP_OPT_PATH, $dir
+                                ,PCLZIP_OPT_ADD_PATH, $name
+                                ,PCLZIP_OPT_REMOVE_PATH, $remove_dir
+                                ,PCLZIP_CB_PRE_EXTRACT, "PclZip_PreExtractCallBack"
+                                ,PCLZIP_OPT_REPLACE_NEWER);
+                }
+            } else {
+                # die file strucktur im zip stimt nicht
+                $message .= returnMessage(false,getLanguageValue("error_zip_structure"));
+            }
+        } else {
+            # die file strucktur im zip stimt nicht
+            $message .= returnMessage(false,getLanguageValue("error_zip_structure"));
+        }
+
         unlink($zip_file);
     } else {
         # das zip konnte nicht hochgeladen werden
@@ -575,14 +554,10 @@ $debug .= "index_dir2=".$tmp_dir."<br />";
 
 
 function PclZip_PreExtractCallBack($p_event, &$p_header) {
-global $debug;
-    if(basename($p_header['filename']) == "plugin.conf.php" and is_file($p_header['filename'])) {
-$debug .= "nicht überschreiben=".$p_header['filename']."<br />";
+    if(basename($p_header['filename']) == "plugin.conf.php" and is_file($p_header['filename']))
         return 0;
-}
     if(!$p_header['folder'] and substr($p_header['filename'],-4) != ".php" and !isValidDirOrFile(basename($p_header['filename'])))
         return 0;
-$debug .= $p_header['filename']."<br />";
     return 1;
 }
 

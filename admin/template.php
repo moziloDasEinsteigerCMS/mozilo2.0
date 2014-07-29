@@ -191,86 +191,83 @@ function template_setactiv() {
 }
 
 function template_install() {
-    global $message;
     if(!function_exists('gzopen'))
         return;
-    global $specialchars;
-global $debug;
+
+    global $message, $specialchars;
 
     $dir = BASE_DIR.LAYOUT_DIR_NAME."/";
     $zip_file = $dir.$specialchars->replaceSpecialChars($_FILES["template-install-file"]["name"],false);
-    $zip_name = substr($_FILES["template-install-file"]["name"],0,-4);
 
     if(true === (move_uploaded_file($_FILES["template-install-file"]["tmp_name"], $zip_file))) {
 
         require_once(BASE_DIR_ADMIN."pclzip.lib.php");
         $archive = new PclZip($zip_file);
-        $extract = false;
 
         if(0 != ($list = $archive->listContent())) {
-/*$debug .= "<pre>";
-$debug .= var_export($list,true);
-$debug .= "</pre><br />";
-*/
-            # der ordner name vom neuen template ist estmal er zip file name
-            $add_dir = $zip_name;
-            # der replace pfad ist erstmal der zip file name
-            $remove_dir = $zip_name;
-            $tmp_dir_merker = false;
+            $name = false;
+            $remove_dir = false;
             foreach($list as $tmp) {
                 # fehler im zip keine ../ im pfad erlaubt
-                if(false !== strpos($tmp["filename"],"../")) {
-                    $extract = false;
+                if(false !== strpos($tmp["stored_filename"],"../"))
                     break;
-                }
-#$debug .= "test_dir1=".$tmp["filename"]."<br />";
-#$debug .= "test_dir2=".basename($tmp["filename"])."<br />";
                 # wir suchen den ordner wo die template.html enthalten ist
-                if(basename($tmp["filename"]) == "template.html") {
-                    $tmp_dir = substr($tmp["filename"],0,-(strlen("template.html")));
-$debug .= "template_dir1=".$tmp_dir."<br />";
+                if(basename($tmp["stored_filename"]) == "template.html") {
                     # da scheint noch nee template.html in eine unterordner zu sein
-                    if($tmp_dir_merker !== false and strlen($tmp_dir) > strlen($tmp_dir_merker))
+                    if($remove_dir !== false and strlen($remove_dir) < strlen(dirname($tmp["stored_filename"])))
                         continue;
-                    $tmp_dir_merker = $tmp_dir;
-                    if(!empty($tmp_dir) and $tmp_dir[(strlen($tmp_dir)-1)] == "/")
-                        $tmp_dir = substr($tmp_dir,0,-1);
-$debug .= "template_dir2=".$tmp_dir."<br />";
-                    # das template ist im zip in einen eigenen ordner
-                    if(strrpos($tmp_dir,"/") !== false) {
-                        # der tatsächlichen template name
-                        $add_dir = substr($tmp_dir,strrpos($tmp_dir,"/")+1);
-                        # der replace pfad damit der eigene template ordner aus dem zip benutzt wird
-                        $remove_dir = $tmp_dir;
-                    }
-                    $extract = true;
+                    $remove_dir = dirname($tmp["stored_filename"]);
                 }
             }
-$debug .= "install=".$add_dir."<br />";
 
-            $add_dir = $specialchars->replaceSpecialChars($add_dir,false);
-            if($extract and getChmod() !== false) {
-                $list = $archive->extract(PCLZIP_OPT_PATH, $dir
-                    ,PCLZIP_OPT_ADD_PATH, $add_dir
-                    ,PCLZIP_OPT_REMOVE_PATH, $remove_dir
-                    ,PCLZIP_OPT_SET_CHMOD, getChmod()
-                    ,PCLZIP_CB_PRE_EXTRACT, "PclZip_PreExtractCallBack"
-                    ,PCLZIP_OPT_REPLACE_NEWER);
-                setChmod($dir.$add_dir);
-            } elseif($extract) {
-                $list = $archive->extract(PCLZIP_OPT_PATH, $dir
-                    ,PCLZIP_OPT_ADD_PATH, $add_dir
-                    ,PCLZIP_OPT_REMOVE_PATH, $remove_dir
-                    ,PCLZIP_CB_PRE_EXTRACT, "PclZip_PreExtractCallBack"
-                    ,PCLZIP_OPT_REPLACE_NEWER);
+            if(strrpos($remove_dir,"/") !== false) {
+                $name = $specialchars->replaceSpecialChars(substr($remove_dir,strrpos($remove_dir,"/")+1),false);
+                if(strlen($name) < 3)
+                    $name = false;
+            } elseif(strlen($remove_dir) > 2)
+                $name = $specialchars->replaceSpecialChars($remove_dir,false);
+
+        } else {
+            # scheint kein gühltiges zip zu sein
+            $message .= returnMessage(false,getLanguageValue("error_zip_nozip"));
+        }
+
+        if($name) {
+            if($remove_dir[(strlen($remove_dir)-1)] == "/")
+                $remove_dir = substr($remove_dir,0,-1);
+
+            $index = array();
+            foreach($list as $tmp) {
+                if(substr(dirname($tmp["stored_filename"]),0,strlen($remove_dir)) == $remove_dir)
+                    $index[] = $tmp["index"];
+            }
+            if(count($index) > 0) {
+                if(getChmod() !== false) {
+                    $tmp1 = $archive->extractByIndex(implode(",",$index)
+                                ,PCLZIP_OPT_PATH, $dir
+                                ,PCLZIP_OPT_ADD_PATH, $name
+                                ,PCLZIP_OPT_REMOVE_PATH, $remove_dir
+                                ,PCLZIP_OPT_SET_CHMOD, getChmod()
+                                ,PCLZIP_CB_PRE_EXTRACT, "PclZip_PreExtractCallBack"
+                                ,PCLZIP_OPT_REPLACE_NEWER);
+                    setChmod($dir.$name);
+                } else {
+                    $tmp1 = $archive->extractByIndex(implode(",",$index)
+                                ,PCLZIP_OPT_PATH, $dir
+                                ,PCLZIP_OPT_ADD_PATH, $name
+                                ,PCLZIP_OPT_REMOVE_PATH, $remove_dir
+                                ,PCLZIP_CB_PRE_EXTRACT, "PclZip_PreExtractCallBack"
+                                ,PCLZIP_OPT_REPLACE_NEWER);
+                }
             } else {
                 # die file strucktur im zip stimt nicht
                 $message .= returnMessage(false,getLanguageValue("error_zip_structure"));
             }
         } else {
-            # scheint kein gühltiges zip zu sein
-            $message .= returnMessage(false,getLanguageValue("error_zip_nozip"));
+            # die file strucktur im zip stimt nicht
+            $message .= returnMessage(false,getLanguageValue("error_zip_structure"));
         }
+
         unlink($zip_file);
     } else {
         # das zip konnte nicht hochgeladen werden
@@ -296,10 +293,8 @@ $debug .= "del=".$template."<br />\n";
 }
 
 function PclZip_PreExtractCallBack($p_event, &$p_header) {
-global $debug;
     if(!$p_header['folder'] and !isValidDirOrFile(basename($p_header['filename'])))
         return 0;
-$debug .= $p_header['filename']."<br />";
     return 1;
 }
 
