@@ -219,7 +219,8 @@ function template_install() {
                     $remove_dir = dirname($tmp["stored_filename"]);
                 }
             }
-
+            if($remove_dir and $remove_dir[(strlen($remove_dir)-1)] == "/")
+                $remove_dir = substr($remove_dir,0,-1);
             if(strrpos($remove_dir,"/") !== false) {
                 $name = $specialchars->replaceSpecialChars(substr($remove_dir,strrpos($remove_dir,"/")+1),false);
                 if(strlen($name) < 3)
