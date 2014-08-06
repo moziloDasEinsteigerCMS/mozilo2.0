@@ -176,6 +176,10 @@ richtet sich nach der icon grösse = 2 * body font-size */
     width:97%;
 }
 
+.mo-install-select {
+    width:20em;
+}
+
 .mo-checkbox {
     vertical-align:middle;
     margin-right: .4em;

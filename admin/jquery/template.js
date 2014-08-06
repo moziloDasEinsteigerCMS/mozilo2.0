@@ -53,6 +53,9 @@ $(function() {
     $("body").on("click","#js-template-install-submit", function(event) {
         if(checkIsZipFile($("#js-template-install-file")))
             return true;
+        if($('select[name="template-install-select"] option:selected').val() != "") {
+            return true;
+        }
         event.preventDefault();
         dialog_open("error_messages",returnMessage(false, mozilo_lang["error_zip_nozip"]));
     });

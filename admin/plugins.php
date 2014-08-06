@@ -6,8 +6,10 @@ function plugins() {
     global $ADMIN_CONF;
     global $CatPage;
     global $message;
+    global $specialchars;
 
 global $debug;
+
     $plugin_manage_open = false;
     # plugins löschen
     if(getRequestValue('plugin-all-del','post') and getRequestValue('plugin-del','post')) {
@@ -15,16 +17,26 @@ global $debug;
         $plugin_manage_open = true;
     }
     # hochgeladenes plugin installieren
-    if(isset($_FILES["plugin-install-file"]["error"]) and getRequestValue('plugin-install','post')) {
+    if(isset($_FILES["plugin-install-file"]["error"])
+            and getRequestValue('plugin-install','post')
+            and $_FILES["plugin-install-file"]["error"] == 0
+            and strtolower(substr($_FILES["plugin-install-file"]["name"],-4)) == ".zip") {
 $debug .= "install=".$_FILES["plugin-install-file"]["name"]."<br />\n";
-        if($_FILES["plugin-install-file"]["error"] == 0 and strtolower(substr($_FILES["plugin-install-file"]["name"],-4)) == ".zip") {
-            plugin_install();
-            $plugin_manage_open = true;
-        }
+        plugin_install();
+        $plugin_manage_open = true;
+    }
+    # per FTP hochgeladenes plugin installieren
+    elseif(($plugin_select = $specialchars->rebuildSpecialChars(getRequestValue('plugin-install-select','post'),false,false))
+            and getRequestValue('plugin-install','post')
+            and is_file(PLUGIN_DIR_REL.$specialchars->replaceSpecialChars($plugin_select,false)) !== false
+            and strtolower(substr($plugin_select,-4)) == ".zip") {
+$debug .= "local install=".getRequestValue('plugin-install-select','post')."<br />\n";
+        plugin_install($plugin_select);
+        $plugin_manage_open = true;
     }
 
-$debug = false;
-if($debug)
+$showdebug = false;
+if($showdebug and !empty($debug))
     $message .= returnMessage(false,$debug);
 
 
@@ -102,10 +114,23 @@ if($debug)
         $disabled = '';
         if(!function_exists('gzopen'))
             $disabled = ' disabled="disabled"';
+
+        $plugin_install = array();
+        foreach(getDirAsArray(PLUGIN_DIR_REL,array(".zip")) as $zip_file) {
+            $plugin_install[] = '<option value="'.mo_rawurlencode($zip_file).'">'.$zip_file.'</option>';
+        }
+        $plugin_install_html = "";
+        if(count($plugin_install) > 0) {
+            $plugin_install_html .= '<br /><select class="mo-install-select mo-select-div" name="plugin-install-select" size="1"'.$disabled.'>'
+                    .'<option value="">'.getLanguageValue("plugins_select",true).'</option>'
+                    .implode("",$plugin_install)
+                .'</select>';
+        }
         $plugin_manage["plugins_title_manage"][] = '<form id="js-plugin-manage" action="index.php?nojs=true&amp;action=plugins'.$multi_user.'" method="post" enctype="multipart/form-data">'
             .'<div class="mo-nowrap align-right ui-helper-clearfix">'
                 .'<span class="align-left" style="float:left"><span class="mo-bold">'.getLanguageValue("plugins_text_filebutton").'</span><br />'.getLanguageValue("plugins_text_fileinfo").'</span>'
                 .'<input type="file" id="js-plugin-install-file" name="plugin-install-file" class="mo-select-div"'.$disabled.' />'
+                .$plugin_install_html
                 .'<input type="submit" id="js-plugin-install-submit" name="plugin-install" value="'.getLanguageValue("plugins_button_install",true).'"'.$disabled.' /><br />'
                 .'<input type="submit" id="js-plugin-del-submit" value="'.getLanguageValue("plugins_button_delete",true).'" class="mo-margin-top js-send-del-stop" />'
             .'</div></form>';
@@ -452,106 +477,142 @@ global $debug;
     if(is_array($plugin_del)) {
         foreach($plugin_del as $plugin) {
 $debug .= "del=".$plugin."<br />\n";
-            if(true !== ($error = deleteDir(BASE_DIR.PLUGIN_DIR_NAME."/".$plugin)))
-                $message .= $error;/**/
+            if(true !== ($error = deleteDir(PLUGIN_DIR_REL.$plugin)))
+                $message .= $error;
         }
     } else {
         $message .= returnMessage(false,getLanguageValue("error_post_parameter"));
     }
 }
 
-function plugin_install() {
+function plugin_install($zip = false) {
     if(!function_exists('gzopen'))
         return;
+global $debug;
 
+    @set_time_limit(600);
     global $message, $specialchars;
 
-    $dir = BASE_DIR.PLUGIN_DIR_NAME."/";
-    $zip_file = $dir.$specialchars->replaceSpecialChars($_FILES["plugin-install-file"]["name"],false);
+    $dir = PLUGIN_DIR_REL;
 
-    if(true === (move_uploaded_file($_FILES["plugin-install-file"]["tmp_name"], $zip_file))) {
+    if($zip === false)
+        $zip_file = $dir.$specialchars->replaceSpecialChars($_FILES["plugin-install-file"]["name"],false);
+    else {
+        if(getChmod() !== false)
+            setChmod($dir.$zip);
+        $zip_file = $dir.$zip;
+    }
+$debug .= $zip_file."<br />";
+#    if(true === (move_uploaded_file($_FILES["plugin-install-file"]["tmp_name"], $zip_file))) {
+    if(($zip !== false
+                and strlen($zip_file) > strlen($dir))
+            or ($zip === false
+                and true === (move_uploaded_file($_FILES["plugin-install-file"]["tmp_name"], $zip_file)))) {
 
         require_once(BASE_DIR_ADMIN."pclzip.lib.php");
         $archive = new PclZip($zip_file);
 
-        if(0 != ($list = $archive->listContent())) {
-            $name = false;
-            $remove_dir = false;
-            $index = false;
-            foreach($list as $tmp) {
-                # fehler im zip keine ../ im pfad erlaubt
-                if(false !== strpos($tmp["stored_filename"],"../"))
-                    break;
-                # wir suchen den ordner wo die index.php enthalten ist
-                if(basename($tmp["stored_filename"]) == "index.php") {
-                    # da scheint noch nee index.php in eine unterordner zu sein
-                    if($remove_dir !== false and strlen($remove_dir) < strlen(dirname($tmp["stored_filename"])))
-                        continue;
-                    $remove_dir = dirname($tmp["stored_filename"]);
-                    $index = $tmp["index"];
-                }
-            }
-            # wenn wir die index nummer von der index.php gefunden haben
-            if($index !== false) {
-                $tmp_list = $archive->extractByIndex($index
-                    ,PCLZIP_OPT_EXTRACT_AS_STRING);
-                # wurde die index.php entpackt
-                if(isset($tmp_list[key($tmp_list)]["content"])) {
-                    # die index.php einlessen
-                    preg_match("/class\ (.*)\ extends\ Plugin/U",$tmp_list[key($tmp_list)]["content"],$tmp);
-                    if(isset($tmp[1])) {
-                        $name = trim($tmp[1]);
+        if(0 != ($file_list = $archive->listContent())) {
+            uasort($file_list,function($a,$b) {
+                                if($a['stored_filename'] == $b['stored_filename'])
+                                    return 0;
+                                return (strlen($a['stored_filename']) < strlen($b['stored_filename'])) ? -1 : 1;
+                            });
+
+            $find = installFindPlugins($file_list,$archive);
+
+            if(count($find) > 0) {
+                foreach($find as $liste) {
+                    if(strlen($liste['index']) > 0) {
+$debug .= '<pre>';
+$debug .= var_export($liste,true);
+$debug .= '</pre>';
+                        if(getChmod() !== false) {
+                            $tmp1 = $archive->extractByIndex($liste['index']
+                                    ,PCLZIP_OPT_PATH, $dir
+                                    ,PCLZIP_OPT_ADD_PATH, $liste['name']
+                                    ,PCLZIP_OPT_REMOVE_PATH, $liste['remove_dir']
+                                    ,PCLZIP_OPT_SET_CHMOD, getChmod()
+                                    ,PCLZIP_CB_PRE_EXTRACT, "PclZip_PreExtractCallBack"
+                                    ,PCLZIP_OPT_REPLACE_NEWER);
+                            setChmod($dir.$liste['name']);
+                        } else {
+                            $tmp1 = $archive->extractByIndex($liste['index']
+                                    ,PCLZIP_OPT_PATH, $dir
+                                    ,PCLZIP_OPT_ADD_PATH, $liste['name']
+                                    ,PCLZIP_OPT_REMOVE_PATH, $liste['remove_dir']
+                                    ,PCLZIP_CB_PRE_EXTRACT, "PclZip_PreExtractCallBack"
+                                    ,PCLZIP_OPT_REPLACE_NEWER);
+                        }
+                    } else {
+                        # die file strucktur im zip stimt nicht
+                        $message .= returnMessage(false,getLanguageValue("error_zip_structure"));
                     }
-                }
-            }
-        } else {
-            # scheint kein gühltiges zip zu sein
-            $message .= returnMessage(false,getLanguageValue("error_zip_nozip"));
-        }
-
-        if($name) {
-            if($remove_dir[(strlen($remove_dir)-1)] == "/")
-                $remove_dir = substr($remove_dir,0,-1);
-
-            $index = array();
-            foreach($list as $tmp) {
-                if(substr(dirname($tmp["stored_filename"]),0,strlen($remove_dir)) == $remove_dir)
-                    $index[] = $tmp["index"];
-            }
-            if(count($index) > 0) {
-                if(getChmod() !== false) {
-                    $tmp1 = $archive->extractByIndex(implode(",",$index)
-                                ,PCLZIP_OPT_PATH, $dir
-                                ,PCLZIP_OPT_ADD_PATH, $name
-                                ,PCLZIP_OPT_REMOVE_PATH, $remove_dir
-                                ,PCLZIP_OPT_SET_CHMOD, getChmod()
-                                ,PCLZIP_CB_PRE_EXTRACT, "PclZip_PreExtractCallBack"
-                                ,PCLZIP_OPT_REPLACE_NEWER);
-                    setChmod($dir.$name);
-                } else {
-                    $tmp1 = $archive->extractByIndex(implode(",",$index)
-                                ,PCLZIP_OPT_PATH, $dir
-                                ,PCLZIP_OPT_ADD_PATH, $name
-                                ,PCLZIP_OPT_REMOVE_PATH, $remove_dir
-                                ,PCLZIP_CB_PRE_EXTRACT, "PclZip_PreExtractCallBack"
-                                ,PCLZIP_OPT_REPLACE_NEWER);
                 }
             } else {
                 # die file strucktur im zip stimt nicht
                 $message .= returnMessage(false,getLanguageValue("error_zip_structure"));
             }
         } else {
-            # die file strucktur im zip stimt nicht
-            $message .= returnMessage(false,getLanguageValue("error_zip_structure"));
+            # scheint kein gühltiges zip zu sein
+            $message .= returnMessage(false,getLanguageValue("error_zip_nozip")."<br />".$zip_file);
         }
-
         unlink($zip_file);
     } else {
         # das zip konnte nicht hochgeladen werden
-        $message .= returnMessage(false,getLanguageValue("error_file_upload"));
+        $message .= returnMessage(false,getLanguageValue("error_file_upload")."<br />".$zip_file);
     }
 }
 
+function installFindPlugins($file_list,$archive,$no_subfolder = false) {
+    global $specialchars;
+    $find = array();
+    $count_file_list = count($file_list);
+    foreach($file_list as $tmp) {
+        # fehler im zip keine ../ im pfad erlaubt
+        if(false !== strpos($tmp["stored_filename"],"../"))
+            continue;
+        if(basename($tmp["stored_filename"]) == "index.php") {
+            $name = dirname($tmp["stored_filename"]) == "." ? "" : basename(dirname($tmp["stored_filename"]));
+            if(strlen($name) > 0 and $name[0] == ".")
+                continue;
+            $content = $archive->extractByIndex($tmp['index'],PCLZIP_OPT_EXTRACT_AS_STRING);
+            # wurde die index.php entpackt
+            if(isset($content[key($content)]["content"])) {
+                # die index.php einlessen
+                preg_match("/class[\s]+([a-zA-Z\_][a-zA-Z0-9\_\-]*)[\s]+extends[\s]+Plugin[\s]+\{/U",$content[key($content)]["content"],$tmp_name);
+                if(isset($tmp_name[1])) {
+                    $name = trim($tmp_name[1]);
+                    if(!isset($find[$name])) {
+                        $remove_dir = dirname($tmp["stored_filename"]);
+                        if($remove_dir and $remove_dir == ".")
+                            $remove_dir = "";
+                        $index = array();
+                        foreach($file_list as $key => $tmp1) {
+                            $test_dir = substr($tmp1["stored_filename"],0,(strlen($remove_dir)+1));
+                            if($no_subfolder and strlen($test_dir) === 1 and $test_dir[0] !== "/")
+                                $test_dir = "/";
+                            if($test_dir == $remove_dir."/") {
+                                $index[] = $tmp1["index"];
+                                unset($file_list[$key]);
+                            }
+                        }
+                        if(count($index) > 0) {
+                            $find[$name]['name'] = $name;
+                            $find[$name]['remove_dir'] = $remove_dir;
+                            sort($index,SORT_NUMERIC);
+                            $find[$name]['index'] = implode(",",$index);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    if(!$no_subfolder and $count_file_list == count($file_list)) {
+        $find = installFindPlugins($file_list,$archive,true);
+    }
+    return $find;
+}
 
 function PclZip_PreExtractCallBack($p_event, &$p_header) {
     if(basename($p_header['filename']) == "plugin.conf.php" and is_file($p_header['filename']))

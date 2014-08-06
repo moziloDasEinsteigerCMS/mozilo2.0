@@ -152,6 +152,9 @@ $(function() {
     $("body").on("click","#js-plugin-install-submit", function(event) {
         if(checkIsZipFile($("#js-plugin-install-file")))
             return true;
+        if($('select[name="plugin-install-select"] option:selected').val() != "") {
+            return true;
+        }
         event.preventDefault();
         dialog_open("error_messages",returnMessage(false, mozilo_lang["error_zip_nozip"]));
     });
