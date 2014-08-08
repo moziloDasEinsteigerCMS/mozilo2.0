@@ -513,11 +513,8 @@ $debug .= $zip_file."<br />";
         $archive = new PclZip($zip_file);
 
         if(0 != ($file_list = $archive->listContent())) {
-            uasort($file_list,function($a,$b) {
-                                if($a['stored_filename'] == $b['stored_filename'])
-                                    return 0;
-                                return (strlen($a['stored_filename']) < strlen($b['stored_filename'])) ? -1 : 1;
-                            });
+
+            uasort($file_list,"helpUasort");
 
             $find = installFindPlugins($file_list,$archive);
 
@@ -562,6 +559,12 @@ $debug .= '</pre>';
         # das zip konnte nicht hochgeladen werden
         $message .= returnMessage(false,getLanguageValue("error_file_upload")."<br />".$zip_file);
     }
+}
+
+function helpUasort($a,$b) {
+    if($a['stored_filename'] == $b['stored_filename'])
+        return 0;
+    return (strlen($a['stored_filename']) < strlen($b['stored_filename'])) ? -1 : 1;
 }
 
 function installFindPlugins($file_list,$archive,$no_subfolder = false) {
