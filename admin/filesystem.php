@@ -263,43 +263,30 @@ function updateFileNameInAll($old_name,$new_name) {
 function changeCatPageInConf($conf,$oldnew) {
     $content = file_get_contents($conf);
     $status = false;
-    $new_content = "";
-    $content_array = preg_split('/([\{;]s:(\d+):\")/', $content, -1, PREG_SPLIT_DELIM_CAPTURE);
-    for($i = 0;$i < count($content_array);$i++) {
-        if(isset($content_array[($i + 1)]) and ctype_digit($content_array[($i + 1)])) {
-            $s_d = $content_array[$i];
-            $s_len = $content_array[($i + 1)];
-            $new_len = $s_len;
-            $line = $content_array[($i + 2)];
-            $i += 2;
-            $pregstatus = false;
-            if($s_len > 5) {
-                foreach($oldnew["old"]["str"] as $pos => $tmp) {
-                    $count = 0;
-                    $line = preg_replace('/'.preg_quote($oldnew["old"]["str"][$pos],"/").'/',$oldnew["new"]["str"][$pos],$line,-1,$count);
-                    if($count > 0) {
-                        $new_len += ((strlen($oldnew["new"]["str"][$pos]) * $count) - (strlen($oldnew["old"]["str"][$pos]) * $count));
-                        $status = true;
-                        $pregstatus = true;
-                    }
-                    $count = 0;
-                    $line = preg_replace('/'.preg_quote($oldnew["old"]["url"][$pos],"/").'/',$oldnew["new"]["url"][$pos],$line,-1,$count);
-                    if($count > 0) {
-                        $new_len += ((strlen($oldnew["new"]["url"][$pos]) * $count) - (strlen($oldnew["old"]["url"][$pos]) * $count));
-                        $status = true;
-                        $pregstatus = true;
-                    }
-                }
-            }
-            if($pregstatus)
-                $s_d = str_replace($s_len,$new_len,$s_d);
-            $new_content .= $s_d.$line;
-        } else
-            $new_content .= $content_array[$i];
-    }
+    preg_match_all('/s\:[\d]+\:\"('.FILE_START.'.+'.FILE_END.'){1}\"\;/U',$content,$match);
+    $result = array_intersect($match[1],array_merge($oldnew["old"]["str"], $oldnew["old"]["url"]));
+    if(count($result) < 1)
+        return;
 
+    foreach($oldnew["old"]["str"] as $pos => $tmp) {
+        if(false !== ($search = helpcChangeCatPageInConf($content,$oldnew["old"]["url"][$pos]))) {
+            $content =  str_replace($search,serialize($oldnew["new"]["url"][$pos]),$content);
+            $status = true;
+        }
+        if(false !== ($search = helpcChangeCatPageInConf($content,$oldnew["old"]["str"][$pos]))) {
+            $content =  str_replace($search,serialize($oldnew["new"]["str"][$pos]),$content);
+            $status = true;
+        }
+    }
     if($status)
-        file_put_contents($conf,$new_content);
+        file_put_contents($conf,$content);
+}
+
+function helpcChangeCatPageInConf($content,$search) {
+    preg_match('/s\:([\d]+)\:\"('.preg_quote($search).'){1}\"\;/',$content,$match);
+    if(isset($match[0]))
+        return $match[0];
+    return false;
 }
 
 function updateFileName($file,$oldnew) {
