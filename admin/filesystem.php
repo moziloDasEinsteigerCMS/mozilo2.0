@@ -260,31 +260,51 @@ function updateFileNameInAll($old_name,$new_name) {
     }
 }
 
-function changeCatPageInConf($conf,$oldnew) {
+function changeCatPageInConf($conf,$oldnew,$sub = false) {
     $content = file_get_contents($conf);
     $status = false;
     preg_match_all('/s\:[\d]+\:\"('.FILE_START.'.+'.FILE_END.'){1}\"\;/U',$content,$match);
     $result = array_intersect($match[1],array_merge($oldnew["old"]["str"], $oldnew["old"]["url"]));
-    if(count($result) < 1)
+    if(count($result) < 1) {
+        if($sub === false)
+            helpPluginReplaceCatPageFile($conf,$content,$oldnew);
         return;
-
+    }
     foreach($oldnew["old"]["str"] as $pos => $tmp) {
-        if(false !== ($search = helpcChangeCatPageInConf($content,$oldnew["old"]["url"][$pos]))) {
+        if(false !== ($search = helpChangeCatPageInConf($content,$oldnew["old"]["url"][$pos]))) {
             $content =  str_replace($search,serialize($oldnew["new"]["url"][$pos]),$content);
             $status = true;
         }
-        if(false !== ($search = helpcChangeCatPageInConf($content,$oldnew["old"]["str"][$pos]))) {
+        if(false !== ($search = helpChangeCatPageInConf($content,$oldnew["old"]["str"][$pos]))) {
             $content =  str_replace($search,serialize($oldnew["new"]["str"][$pos]),$content);
             $status = true;
         }
     }
     if($status)
         file_put_contents($conf,$content);
+    if($sub === false)
+        helpPluginReplaceCatPageFile($conf,$content,$oldnew);
 }
 
-function helpcChangeCatPageInConf($content,$search) {
-    preg_match('/s\:([\d]+)\:\"('.preg_quote($search).'){1}\"\;/',$content,$match);
-    if(isset($match[0]))
+function helpPluginReplaceCatPageFile($conf,$content,$oldnew) {
+    if(preg_match('/(s\:26\:\"plugin_replace_catpagefile\"\;){1}s\:([\d]+)\:\"(.+){1}\"\;/U',$content,$match)) {
+        if(($dir = dirname($match[3])) != ".") {
+            $dir = dirname($conf)."/".$dir."/";
+            $type = basename($match[3]);
+            if(strpos("tmp".$type,"*") === 3 and false !== ($scandir = scandir($dir))) {
+                $type = substr($type,1);
+                foreach($scandir as $file) {
+                    if($file[0] != "." and substr($file,-(strlen($type))) === $type and is_file($dir.$file))
+                        changeCatPageInConf($dir.$file,$oldnew,true);
+                }
+            } elseif(strpos($type,"*") === false and is_file($dir.$type))
+                changeCatPageInConf($dir.$type,$oldnew,true);
+        }
+    }
+}
+
+function helpChangeCatPageInConf($content,$search) {
+    if(preg_match('/s\:([\d]+)\:\"('.preg_quote($search).'){1}\"\;/U',$content,$match))
         return $match[0];
     return false;
 }
