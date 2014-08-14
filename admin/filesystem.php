@@ -263,7 +263,7 @@ function updateFileNameInAll($old_name,$new_name) {
 function changeCatPageInConf($conf,$oldnew,$sub = false) {
     $content = file_get_contents($conf);
     $status = false;
-    preg_match_all('/s\:[\d]+\:\"('.FILE_START.'.+'.FILE_END.'){1}\"\;/U',$content,$match);
+    preg_match_all('#s\:[\d]+\:\"('.preg_quote(FILE_START).'.+'.preg_quote(FILE_END).'){1}\"\;#U',$content,$match);
     $result = array_intersect($match[1],array_merge($oldnew["old"]["str"], $oldnew["old"]["url"]));
     if(count($result) < 1) {
         if($sub === false)
@@ -287,7 +287,7 @@ function changeCatPageInConf($conf,$oldnew,$sub = false) {
 }
 
 function helpPluginReplaceCatPageFile($conf,$content,$oldnew) {
-    if(preg_match('/(s\:26\:\"plugin_replace_catpagefile\"\;){1}s\:([\d]+)\:\"(.+){1}\"\;/U',$content,$match)) {
+    if(preg_match('#(s\:26\:\"plugin_replace_catpagefile\"\;){1}s\:([\d]+)\:\"(.+){1}\"\;#U',$content,$match)) {
         if(($dir = dirname($match[3])) != ".") {
             $dir = dirname($conf)."/".$dir."/";
             $type = basename($match[3]);
@@ -304,7 +304,7 @@ function helpPluginReplaceCatPageFile($conf,$content,$oldnew) {
 }
 
 function helpChangeCatPageInConf($content,$search) {
-    if(preg_match('/s\:([\d]+)\:\"('.preg_quote($search).'){1}\"\;/U',$content,$match))
+    if(preg_match('#s\:([\d]+)\:\"('.preg_quote($search,'#').'){1}\"\;#U',$content,$match))
         return $match[0];
     return false;
 }
