@@ -397,7 +397,7 @@ if(!is_dir($this->options['upload_dir'])
         $error = $this->has_error($uploaded_file, $file, $error);
 
         if (!$error && $file->name) {
-            $file_path = $this->options['upload_dir'].$file->name;
+            $file_path = $this->options['upload_dir'].".".$file->name;
             $append_file = !$this->options['discard_aborted_uploads'] &&
                 is_file($file_path) && $file->size > filesize($file_path);
             clearstatcache();
@@ -422,6 +422,10 @@ if(!is_dir($this->options['upload_dir'])
             }
             $file_size = filesize($file_path);
             if ($file_size === $file->size) {
+                if(is_file($this->options['upload_dir'].$file->name))
+                    unlink($this->options['upload_dir'].$file->name);
+                rename($file_path,$this->options['upload_dir'].$file->name);
+                $file_path = $this->options['upload_dir'].$file->name;
                 global $specialchars;
             	if ($this->options['orient_image']) {
             		$this->orient_image($file_path);
