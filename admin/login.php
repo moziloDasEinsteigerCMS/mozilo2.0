@@ -153,10 +153,11 @@ function checkLoginData($user, $pass) {
 
 
 function getClientDaten() {
+    $client = array('HTTP_USER_AGENT','REMOTE_ADDR');
     # ie browser senden kein HTTP_USER_AGENT bei einer ajax anfrage
     if(!isset($_SERVER['HTTP_USER_AGENT']) or stristr($_SERVER['HTTP_USER_AGENT'],'MSIE'))
-        return "";
-    $client = array('HTTP_USER_AGENT','HTTP_ACCEPT_ENCODING','HTTP_ACCEPT_LANGUAGE','HTTP_ACCEPT_CHARSET','REMOTE_ADDR');
+        $client = array('REMOTE_ADDR');
+
     $hash = "";
     foreach($client as $tmp) {
         if(isset($_SERVER[$tmp])) {
