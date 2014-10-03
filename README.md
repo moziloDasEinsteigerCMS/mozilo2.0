@@ -20,7 +20,7 @@ Update von moziloCMS1.12 auf moziloCMS2.0
 
 Nach dem entpacken von moziloCMS2.0:
 * alle Kategorien mit deren Inhalt, in den 2.0-Ordner "kategorien" kopieren
-* die Gallerien in den 2.0er Ordner "gallerien" kopieren
+* die Galerien in den 2.0er Ordner "galerien" kopieren
 * die Layouts in den 2.0er Ordner "layouts" kopieren
 * nun im Wurzelverzeichnis (beispielsweise: moziloCMS/) den Ordner "update" erstellen
 * in diesen Ordner "update", alle ".conf" dateien aus ".../admin/conf" und ".../cms/conf" und wenn vorhanden ".../formular/formular.conf" kopieren
