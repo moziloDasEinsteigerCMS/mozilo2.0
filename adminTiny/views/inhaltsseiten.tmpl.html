@@ -1,0 +1,19 @@
+<h2>Inhaltsseiten</h2>
+
+<div class="btn-group">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Inhaltsseiten bearbeiten <span class="caret"></span></button>
+  <ul class="dropdown-menu" role="menu">
+    <li ng-repeat="seite in seiten" role="presentation" class="{{seite.class}}">
+        <a ng-if="seite.link" ng-click="loadPage(seite.name)" style="cursor:pointer;">{{seite.caption}}</a><span ng-if="!seite.link">{{seite.caption}}</span>
+    </li>
+  </ul>
+</div>  
+<br><br>
+<form ng-show="(pagename.length > 0)">
+ <textarea ui-tinymce="tinymceOptions" ng-model="content" id="contentTinyMCE" ></textarea><br>
+ <button ng-click="save()" class="btn btn-default">Speichern</button>
+</form>
+<br><br>
+<pre ng-if="debug">{{ content }}</pre>
+<br><br>
+<pre ng-if="debug">{{ message }}</pre>

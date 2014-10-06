@@ -1,3 +1,10 @@
+!!"Wichtig"!!: Dies ist eine BETA vom Tiny Admin für moziloCMS2.0. Es beinhaltet eine komplette moziloCMS2.0 installation. Diese muss ganz normal durchgeführt werden (siehe unten). Damit der Tiny Admin funktioniert muss im normalen mozilo Admin unter Einstellungen "moziloCMS Syntax-Elemente benutzen" deaktiviert sein. Der Tiny Admin ist dann über /adminTiny zu erreichen.
+Als je nach installation:
+* z.B.: http://www.deineSeite/adminTiny
+* oder: http://www.deineSeite/moziloCMS/adminTiny
+
+---
+
 Installations-Anleitung von moziloCMS2.0
 und Update-Anleitung moziloCMS1.12 auf moziloCMS2.0
 

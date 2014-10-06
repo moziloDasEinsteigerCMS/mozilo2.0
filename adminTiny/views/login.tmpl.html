@@ -1,0 +1,12 @@
+<div class="row">
+	<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
+		<h2>Login</h2>
+		<span class="label label-danger" ng-show="showerror">{{ message }}</span><br ng-show="showerror"><br ng-show="showerror">
+		<span class="label label-success" ng-show="!showerror">{{ message }}</span>
+		<form name="login" role="form">
+			<input type="text" autofocus placeholder="Username" name="user" ng-model="user" class="form-control" required ><br> 
+			<input type="password" placeholder="Passwort" name="pw" ng-model="pw" class="form-control" required ><br>
+			<button ng-click="submit(login)" class="btn btn-default">Login</button>
+		</form>
+	</div>
+</div>

@@ -61,3 +61,7 @@ layouts/*
 Icon?
 ehthumbs.db
 Thumbs.db
+
+#TinyAdmin
+!adminTiny/
+!adminTiny/**
