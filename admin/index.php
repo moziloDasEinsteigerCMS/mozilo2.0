@@ -425,12 +425,12 @@ function get_template_truss($content,$titel,$toggle = false) {
     return $template;
 }
 
-function getLanguageValue($confpara,$html = false,$param1 = '', $param2 = '', $param3 = '', $param4 = '') {
+function getLanguageValue($confpara,$html = false,$param1 = '', $param2 = '') {
     global $LANGUAGE;
     if($html)
-        return $LANGUAGE->getLanguageHtml($confpara, $param1, $param2, $param3, $param4);
+        return $LANGUAGE->getLanguageHtml($confpara, $param1, $param2);
     else
-        return $LANGUAGE->getLanguageValue($confpara, $param1, $param2, $param3, $param4);
+        return $LANGUAGE->getLanguageValue($confpara, $param1, $param2);
 }
 
 function getHelpIcon($artikel = false,$subartikel = false) {
