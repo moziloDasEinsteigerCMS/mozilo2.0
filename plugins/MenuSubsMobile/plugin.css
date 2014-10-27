@@ -10,12 +10,12 @@ Für die Schrieftgröße ist das <div class="menusubs-box-fontsize"> zu benutzen
         <div class="menusubs-box-fontsize">
             <ul class="cat-menusubs">
                 <lable class="menusubs-show-hide"><span>&equiv;</span></lable>
-                <input class="menusubs-show-hide">
+                <input class="menusubs-show-hide" type="checkbox">
                 <li class="cat-menusubs">
                     <div><a class="cat-menusubs-link menusubs-link/active"></div>
 
                     <lable class="menusubs-show-hide"><span>&equiv;</span></lable>
-                    <input class="menusubs-show-hide">
+                    <input class="menusubs-show-hide" type="checkbox">
                     <ul class="page-menusubs">
                         <li class="page-menusubs">
                             <div><a class="page-menusubs-link menusubs-link/active"></div>
@@ -23,7 +23,7 @@ Für die Schrieftgröße ist das <div class="menusubs-box-fontsize"> zu benutzen
                         <li class="subcat-menusubs">
                             <div><a class="subcat-menusubs-link menusubs-link/active"></div>
                             <lable class="menusubs-show-hide"><span>&equiv;</span></lable>
-                            <input class="menusubs-show-hide">
+                            <input class="menusubs-show-hide" type="checkbox">
                             <ul class="subcat-menusubs">
                                 <li class="page-menusubs">
                                     <div><a class="page-menusubs-link menusubs-link/active"></div>
