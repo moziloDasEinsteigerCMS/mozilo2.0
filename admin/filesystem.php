@@ -472,7 +472,8 @@ function write_robots() {
         if(false === ($lines = file(BASE_DIR.'robots.txt')))
             return ajax_return("error",false,returnMessage(false,getLanguageValue("error_read_robots")),true,true);
     } else {
-        $lines = array('User-agent: *','Disallow: /'.ADMIN_DIR_NAME.'/','Disallow: /'.CMS_DIR_NAME.'/','Disallow: /kategorien/','Disallow: /galerien/','Disallow: /layouts/','Disallow: /plugins/');
+#        $lines = array('User-agent: *','Disallow: /'.ADMIN_DIR_NAME.'/','Disallow: /'.CMS_DIR_NAME.'/','Disallow: /kategorien/','Disallow: /galerien/','Disallow: /layouts/','Disallow: /plugins/');
+        $lines = array('User-agent: *','Disallow: /'.ADMIN_DIR_NAME.'/','Disallow: /'.CMS_DIR_NAME.'/','Disallow: /tmp/');
     }
     foreach($lines as $pos => $value) {
         if(strstr($value,'Sitemap:')) {
