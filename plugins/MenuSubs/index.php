@@ -2,6 +2,7 @@
 
 class MenuSubs extends Plugin {
     var $breadcrumb_delimiter = "";
+    var $menu2 = false;
     function getContent($value) {
         global $CatPage;
 
@@ -11,6 +12,10 @@ class MenuSubs extends Plugin {
             $pagecontent = "{MenuSubs|sitemap_content}";
             return;
         }
+
+        if($this->settings->get("menusubs_2") != "no_menusubs_2"
+                and $CatPage->exists_CatPage(replaceFileMarker($this->settings->get("menusubs_2"),false),false))
+            $this->menu2 = replaceFileMarker($this->settings->get("menusubs_2"),false);
         if($value === false)
             return $this->getMenuCat();
         if($value === "main")
@@ -22,9 +27,8 @@ class MenuSubs extends Plugin {
             } else
                 return $this->getMenuPage(CAT_REQUEST);
         }
-        $menu2 = replaceFileMarker($this->settings->get("menusubs_2"),false);
-        if($value === "menusubs_2" and $CatPage->exists_CatPage($menu2,false))
-            return $this->getMenuPage($menu2,false,true);
+        if($this->menu2 and $value === "menusubs_2")
+            return $this->getMenuPage($this->menu2,false,true);
         if($value === "sitemap_content")
             return $this->getSitemapCat();
         if($value === "breadcrumb") {
@@ -103,7 +107,7 @@ class MenuSubs extends Plugin {
         $ul = '<ul class="cat-menusubs">';
         foreach($CatPage->get_CatArray() as $cat) {
             if(strpos($cat,"%2F") > 1) continue;
-            if($this->settings->get("menusubs_2") == $cat)
+            if($this->menu2 and $this->menu2 == $cat)
                 continue;
             if($CatPage->get_Type($cat,false) == EXT_LINK) {
                 $ul .= '<li class="cat-menusubs">'.$CatPage->create_AutoLinkTag($cat,false,$css).'</li>';
