@@ -296,7 +296,7 @@ class MenuSubs extends Plugin {
             $info_txt = file_get_contents(BASE_DIR.PLUGIN_DIR_NAME."/MenuSubs/lang/info_deDE.txt");
         $info = array(
             // Plugin-Name
-            "<b>MenuSubs</b> Revision: 2",
+            "<b>MenuSubs</b> Revision: 3",
             // Plugin-Version
             "2.0",
             // Kurzbeschreibung
