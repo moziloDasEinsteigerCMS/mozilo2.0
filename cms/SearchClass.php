@@ -175,49 +175,48 @@ class SearchClass {
         }
     }
 
-function findInPage($cat,$page) {
-    global $CatPage;
+    function findInPage($cat,$page) {
+        global $CatPage;
 
-    // Dateiinhalt auslesen, wenn vorhanden...
-    if(false !== ($pagecontent = $CatPage->get_PageContent($cat,$page))) {
-        if(strlen($pagecontent) < 1)
+        // Dateiinhalt auslesen, wenn vorhanden...
+        if(false !== ($pagecontent = $CatPage->get_PageContent($cat,$page))) {
+            if(strlen($pagecontent) < 1)
             return false;
 
-        # den eigenen Placholder raus nehmen sonst endlosschleife
-        $pagecontent = preg_replace("/\{".$this->placeholder."\|(.*)\}/m","", $pagecontent);
-        $pagecontent = str_replace("{".$this->placeholder."}","",$pagecontent);
-        $tmp_syntax = new Syntax();
-        $pagecontent = $tmp_syntax->convertContent($pagecontent, true);
+            # den eigenen Placholder raus nehmen sonst endlosschleife
+            $pagecontent = preg_replace("/\{".$this->placeholder."\|(.*)\}/m","", $pagecontent);
+            $pagecontent = str_replace("{".$this->placeholder."}","",$pagecontent);
+            $tmp_syntax = new Syntax();
+            $pagecontent = $tmp_syntax->convertContent($pagecontent, true);
 
-        # alle Komentare raus
-        $pagecontent = preg_replace("/\<!--(.*)-->/Umsi"," ", $pagecontent);
-        # alle script, select, object, embed sachen raus
-        $pagecontent = preg_replace("/\<script(.*)\<\/script>/Umsi", "", $pagecontent);
-        $pagecontent = preg_replace("/\<select(.*)\<\/select>/Umsi", "", $pagecontent);
-        $pagecontent = preg_replace("/\<object(.*)\<\/object>/Umsi", "", $pagecontent);
-        $pagecontent = preg_replace("/\<embed(.*)\<\/embed>/Umsi", "", $pagecontent);
-        # alle tags raus
-        $pagecontent = strip_tags($pagecontent);
-        $pagecontent = $this->lowercase($pagecontent);
-        # nach alle Suchbegrieffe suchen
-        foreach($this->phrasearray as $phrase) {
-            if($phrase == "")
-                continue;
-#            $query = $specialchars->rebuildSpecialChars($query, false, true);
-            // Wenn...
-            if(
-                // ...der aktuelle Suchbegriff im Seitennamen...
-                (substr_count($this->lowercase($CatPage->get_HrefText($cat,$page)), $phrase) > 0)
-                // ...oder im eigentlichen Seiteninhalt vorkommt
-                or (substr_count($pagecontent, $phrase) > 0)
-                ) {
-                // gefunden
-                return true;
+            # alle Komentare raus
+            $pagecontent = preg_replace("/\<!--(.*)-->/Umsi"," ", $pagecontent);
+            # alle script, select, object, embed sachen raus
+            $pagecontent = preg_replace("/\<script(.*)\<\/script>/Umsi", "", $pagecontent);
+            $pagecontent = preg_replace("/\<select(.*)\<\/select>/Umsi", "", $pagecontent);
+            $pagecontent = preg_replace("/\<object(.*)\<\/object>/Umsi", "", $pagecontent);
+            $pagecontent = preg_replace("/\<embed(.*)\<\/embed>/Umsi", "", $pagecontent);
+            # alle tags raus
+            $pagecontent = strip_tags($pagecontent);
+            $pagecontent = $this->lowercase($pagecontent);
+            # nach alle Suchbegrieffe suchen
+            foreach($this->phrasearray as $phrase) {
+                if($phrase == "")
+                    continue;
+                // Wenn...
+                if(
+                    // ...der aktuelle Suchbegriff im Seitennamen...
+                    (substr_count($this->lowercase($CatPage->get_HrefText($cat,$page)), $phrase) > 0)
+                    // ...oder im eigentlichen Seiteninhalt vorkommt
+                    or (substr_count($pagecontent, $phrase) > 0)
+                    ) {
+                    // gefunden
+                    return true;
+                }
             }
-        }
-    } else
-        return false;
-}
+        } else
+            return false;
+    }
 
     // ------------------------------------------------------------------------------
     // Phrasen in Inhalt hervorheben
@@ -243,9 +242,9 @@ function findInPage($cat,$page) {
             // Slashes im zu highlightenden Text escapen
             $phrase = preg_replace("/\//", "\\\\/", $phrase);
             # die such worte hervorheben
-#!!!!!! wir brauchen eine regex die nicht in script style tags text hervorhebt
-# dann kann auch das find_script_style() wieder raus
-            $content = preg_replace("/((<[^>]*)|$phrase)/iue", '"\2"=="\1"? "\1":"<span class=\"highlight\">\1</span>"', $content); 
+            while(preg_match('/(>|^)[^<]*(?<!\<span class\="highlight"\>)'.$phrase.'(?!\<\/span\>)[^>]*(<|$)/isU', $content))
+                $content = preg_replace('/(^[^<]*|>[^<]*)(?<!\<span class\="highlight"\>)('.$phrase.')(?!\<\/span\>)([^>]*<|[^>]*$)/isU', '${1}<span class="highlight">${2}</span>${3}', $content);
+
         }
         return $content;
     }
