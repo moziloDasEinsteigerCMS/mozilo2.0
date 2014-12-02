@@ -384,9 +384,13 @@ function environment() {
         $html_ret .= contend_template($html,"");
     }
     // Aktueles Datum
-    $time_zone = date("T");
-    if(function_exists('date_default_timezone_get'))
+    if(true === $conf and function_exists('date_default_timezone_get')) {
+        global $CMS_CONF,$LANG;
+        $CMS_CONF = new Properties(BASE_DIR_CMS.CONF_DIR_NAME.'/main.conf.php');
+        setTimeLocale($LANG);
         $time_zone = @date_default_timezone_get();
+    } else
+        $time_zone = date("T");
     $html = array(getLanguageValue("home_date_text"),date("Y-m-d H.i.s")." ".$time_zone);
     $html_ret .= contend_template($html,"");
 
