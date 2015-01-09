@@ -3,6 +3,7 @@
 class MenuSubs extends Plugin {
     var $breadcrumb_delimiter = "";
     var $menu2 = false;
+    var $sub_count = 1;
     function getContent($value) {
         global $CatPage;
 
@@ -14,8 +15,10 @@ class MenuSubs extends Plugin {
         }
 
         if($this->settings->get("menusubs_2") != "no_menusubs_2"
-                and $CatPage->exists_CatPage(replaceFileMarker($this->settings->get("menusubs_2"),false),false))
-            $this->menu2 = replaceFileMarker($this->settings->get("menusubs_2"),false);
+                and $CatPage->exists_CatPage(replaceFileMarker($this->settings->get("menusubs_2"),false),false)) {
+            global $specialchars;
+            $this->menu2 = $specialchars->replaceSpecialChars(replaceFileMarker($this->settings->get("menusubs_2"),false),false);
+        }
         if($value === false)
             return $this->getMenuCat();
         if($value === "main")
@@ -105,12 +108,15 @@ class MenuSubs extends Plugin {
         $return = false;
         $css = "cat-menusubs-link menusubs-link";
         $ul = '<ul class="cat-menusubs">';
+        $count = 1;
+
         foreach($CatPage->get_CatArray() as $cat) {
             if(strpos($cat,"%2F") > 1) continue;
             if($this->menu2 and $this->menu2 == $cat)
                 continue;
+
             if($CatPage->get_Type($cat,false) == EXT_LINK) {
-                $ul .= '<li class="cat-menusubs">'.$CatPage->create_AutoLinkTag($cat,false,$css).'</li>';
+                $ul .= '<li class="cat-menusubs cat'.$count.'">'.$CatPage->create_AutoLinkTag($cat,false,$css).'</li>';
                 $return = true;
             } elseif($CatPage->get_Type($cat,false) == "cat") {
                 $cssactiv = "";
@@ -121,15 +127,16 @@ class MenuSubs extends Plugin {
                 } elseif($CatPage->is_Activ($cat,false)) {
 #                    $cssactiv = "active";
                     $activ = true;
-#echo "catactiv=".$cat."<br />\n";
                 }
-                $ul .= '<li class="cat-menusubs">'.$CatPage->create_AutoLinkTag($cat,false,$css.$cssactiv);
+                $ul .= '<li class="cat-menusubs cat'.$count.'">'.$CatPage->create_AutoLinkTag($cat,false,$css.$cssactiv);
                 if(!$only_main and ($activ or $CMS_CONF->get("usesubmenu") == 2)) {# or $CatPage->is_Activ($cat,false)
+                    $this->sub_count = 1;
                     $ul .= $this->getMenuPage($cat);
                 }
                 $ul .= '</li>';
                 $return = true;
             }
+            $count++;
         }
         if($return)
             return $ul.'</ul>';
@@ -139,18 +146,21 @@ class MenuSubs extends Plugin {
     function getMenuPage($cat,$subcat = false,$menu_2 = false) {
         global $CatPage, $CMS_CONF;
         $return = false;
-        $ul = '<ul class="page-menusubs">';
+        $ul = '<ul class="page-menusubs sub'.$this->sub_count.'">';
         if($subcat)
-            $ul = '<ul class="subcat-menusubs">';
+            $ul = '<ul class="subcat-menusubs sub'.$this->sub_count.'">';
+        $this->sub_count++;
+
         if($menu_2)
             $ul = '<ul class="cat-menusubs" id="menusubs2">';
+        $count = 1;
         foreach($CatPage->get_PageArray($cat,array(EXT_PAGE,EXT_HIDDEN,EXT_LINK)) as $page) {
             if(strpos($cat,"%2F") > 1
                     and $CMS_CONF->get("hidecatnamedpages") == "true"
                     and substr($cat,(strrpos($cat,"%2F") + 3)) == $page)
                 continue;
             if($CatPage->get_Type($cat,$page) == EXT_LINK) {
-                $ul .= '<li class="page-menusubs">'.$CatPage->create_AutoLinkTag($cat,$page,"page-menusubs-link menusubs-link").'</li>';
+                $ul .= '<li class="page-menusubs page'.$count.'">'.$CatPage->create_AutoLinkTag($cat,$page,"page-menusubs-link menusubs-link").'</li>';
                 $return = true;
                 continue;
             }
@@ -158,7 +168,7 @@ class MenuSubs extends Plugin {
                     and $CatPage->get_Type($cat,$page) == EXT_HIDDEN
                     and $CatPage->get_Type($page,false) == "cat"
                     and count($CatPage->get_PageArray($page,array(EXT_PAGE,EXT_HIDDEN,EXT_LINK))) > 0) {
-                $ul .= '<li class="subcat-menusubs">'.$this->create_CatSubLinkTag($cat,$page,"subcat-menusubs-link menusubs-link");
+                $ul .= '<li class="subcat-menusubs page'.$count.'">'.$this->create_CatSubLinkTag($cat,$page,"subcat-menusubs-link menusubs-link");
                 if(strstr(CAT_REQUEST,$page) or $CMS_CONF->get("usesubmenu") == 2)
                     $ul .= $this->getMenuPage($page,true);
                 $ul .= '</li>'."\n";
@@ -166,9 +176,10 @@ class MenuSubs extends Plugin {
             } elseif($CatPage->get_Type($cat,$page) != EXT_HIDDEN) {
                 if($CatPage->get_Type($cat,$page) == EXT_LINK)
                     continue;
-                $ul .= '<li class="page-menusubs">'.$CatPage->create_AutoLinkTag($cat,$page,"page-menusubs-link menusubs-link").'</li>';
+                $ul .= '<li class="page-menusubs page'.$count.'">'.$CatPage->create_AutoLinkTag($cat,$page,"page-menusubs-link menusubs-link").'</li>';
                 $return = true;
             }
+            $count++;
         }
         if($return)
             return $ul.'</ul>';
@@ -296,7 +307,7 @@ class MenuSubs extends Plugin {
             $info_txt = file_get_contents(BASE_DIR.PLUGIN_DIR_NAME."/MenuSubs/lang/info_deDE.txt");
         $info = array(
             // Plugin-Name
-            "<b>MenuSubs</b> Revision: 3",
+            "<b>MenuSubs</b> Revision: 4",
             // Plugin-Version
             "2.0",
             // Kurzbeschreibung
