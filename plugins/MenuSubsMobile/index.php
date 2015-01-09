@@ -3,8 +3,10 @@
 class MenuSubsMobile extends Plugin {
     var $breadcrumb_delimiter = "";
     var $id = 0;
+    var $menu2 = false;
+var $sub_count = 1;
     function getContent($value) {
-        global $CatPage;
+        global $CatPage, $specialchars;
 
         if($value == "plugin_first") {
             if(getRequestValue('action', 'get') and getRequestValue('action', 'get') == "sitemap") {
@@ -18,6 +20,11 @@ class MenuSubsMobile extends Plugin {
 
         global $syntax;
         $syntax->insert_in_head('<script type="text/javascript" src="'.$this->PLUGIN_SELF_URL.'menusubsmobile.js"></script>');
+        if($this->settings->get("menusubs_2") != "no_menusubs_2"
+                and $CatPage->exists_CatPage(replaceFileMarker($this->settings->get("menusubs_2"),false),false)) {
+            global $specialchars;
+            $this->menu2 = $specialchars->replaceSpecialChars(replaceFileMarker($this->settings->get("menusubs_2"),false),false);
+        }
 
         if($value === false)
             return $this->getMenuCat();
@@ -30,9 +37,9 @@ class MenuSubsMobile extends Plugin {
             } else
                 return $this->getMenuPage(CAT_REQUEST,false,false,true);
         }
-        $menu2 = replaceFileMarker($this->settings->get("menusubs_2"),false);
-        if($value === "menusubs_2" and $CatPage->exists_CatPage($menu2,false))
-            return $this->getMenuPage($menu2,false,true);
+
+        if($this->menu2 and $value === "menusubs_2")
+            return $this->getMenuPage($this->menu2,false,true);
         if($value === "sitemap_content")
             return $this->getSitemapCat();
         if($value === "breadcrumb") {
@@ -111,6 +118,7 @@ class MenuSubsMobile extends Plugin {
         if($CMS_CONF->get("usesubmenu") == 2)
             $noinput = ' menusubs-noinput';
 
+$count = 1;
         $js = '';
         $js_onclick = '';
         $hidden = $this->settings->get("hidden");
@@ -140,10 +148,10 @@ class MenuSubsMobile extends Plugin {
                         .'<ul class="cat-menusubs">';
         foreach($CatPage->get_CatArray() as $cat) {
             if(strpos($cat,"%2F") > 1) continue;
-            if($this->settings->get("menusubs_2") == $cat)
+            if($this->menu2 and $this->menu2 == $cat)
                 continue;
             if($CatPage->get_Type($cat,false) == EXT_LINK) {
-                $ul .= '<li class="cat-menusubs"><div>'.$CatPage->create_AutoLinkTag($cat,false,$css).'</div></li>';
+                $ul .= '<li class="cat-menusubs cat'.$count.'"><div>'.$CatPage->create_AutoLinkTag($cat,false,$css).'</div></li>';
                 $return = true;
             } elseif($CatPage->get_Type($cat,false) == "cat") {
                 $cssactiv = "";
@@ -154,8 +162,9 @@ class MenuSubsMobile extends Plugin {
                 } elseif($CatPage->is_Activ($cat,false)) {
                     $activ = true;
                 }
-                $ul .= '<li class="cat-menusubs"><div>'.$CatPage->create_AutoLinkTag($cat,false,$css.$cssactiv).'</div>';
+                $ul .= '<li class="cat-menusubs cat'.$count.'"><div>'.$CatPage->create_AutoLinkTag($cat,false,$css.$cssactiv).'</div>';
                 $cc = ' checked="checked"';
+$this->sub_count = 1;
                 if(strlen(($tmp = $this->getMenuPage($cat))) > 1) {
                     if(!$only_main and ($activ or $CMS_CONF->get("usesubmenu") == 2)) {
                         $tmp = substr_replace($tmp, 'menusubs-show', 11, 15);
@@ -169,6 +178,7 @@ class MenuSubsMobile extends Plugin {
                 $ul .= '</li>';
                 $return = true;
             }
+$count++;
         }
         if($return)
             return $ul.'</ul></div></div></div>';
@@ -178,20 +188,22 @@ class MenuSubsMobile extends Plugin {
     function getMenuPage($cat,$subcat = false,$menu_2 = false,$only_detail = false) {
         global $CatPage, $CMS_CONF;
         $return = false;
-        $ul = '<ul class="menusubs-hidden page-menusubs">';
+        $ul = '<ul class="menusubs-hidden page-menusubs sub'.$this->sub_count.'">';
         if($subcat)
-            $ul = '<ul class="menusubs-hidden subcat-menusubs">';
+            $ul = '<ul class="menusubs-hidden subcat-menusubs sub'.$this->sub_count.'">';
         if($only_detail)
-            $ul = '<ul class="menusubs-box-detail page-menusubs">';
+            $ul = '<ul class="menusubs-box-detail page-menusubs sub'.$this->sub_count.'">';
+$this->sub_count++;
         if($menu_2)
             $ul = '<ul class="cat-menusubs" id="menusubs2">';
+$count = 1;
         foreach($CatPage->get_PageArray($cat,array(EXT_PAGE,EXT_HIDDEN,EXT_LINK)) as $page) {
             if(strpos($cat,"%2F") > 1
                     and $CMS_CONF->get("hidecatnamedpages") == "true"
                     and substr($cat,(strrpos($cat,"%2F") + 3)) == $page)
                 continue;
             if($CatPage->get_Type($cat,$page) == EXT_LINK) {
-                $ul .= '<li class="page-menusubs"><div>'.$CatPage->create_AutoLinkTag($cat,$page,"page-menusubs-link menusubs-link").'</div></li>';
+                $ul .= '<li class="page-menusubs page'.$count.'"><div>'.$CatPage->create_AutoLinkTag($cat,$page,"page-menusubs-link menusubs-link").'</div></li>';
                 $return = true;
                 continue;
             }
@@ -199,7 +211,7 @@ class MenuSubsMobile extends Plugin {
                     and $CatPage->get_Type($cat,$page) == EXT_HIDDEN
                     and $CatPage->get_Type($page,false) == "cat"
                     and count($CatPage->get_PageArray($page,array(EXT_PAGE,EXT_HIDDEN,EXT_LINK))) > 0) {
-                $ul .= '<li class="subcat-menusubs"><div>'.$this->create_CatSubLinkTag($cat,$page,"subcat-menusubs-link menusubs-link").'</div>';
+                $ul .= '<li class="subcat-menusubs page'.$count.'"><div>'.$this->create_CatSubLinkTag($cat,$page,"subcat-menusubs-link menusubs-link").'</div>';
                 $cc = ' checked="checked"';
                 $tmp = $this->getMenuPage($page,true);
                 if(strstr(CAT_REQUEST,$page) or $CMS_CONF->get("usesubmenu") == 2) {
@@ -216,9 +228,11 @@ class MenuSubsMobile extends Plugin {
             } elseif($CatPage->get_Type($cat,$page) != EXT_HIDDEN) {
                 if($CatPage->get_Type($cat,$page) == EXT_LINK)
                     continue;
-                $ul .= '<li class="page-menusubs"><div>'.$CatPage->create_AutoLinkTag($cat,$page,"page-menusubs-link menusubs-link").'</div></li>';
+                $ul .= '<li class="page-menusubs page'.$count.'"><div>'.$CatPage->create_AutoLinkTag($cat,$page,"page-menusubs-link menusubs-link").'</div></li>';
                 $return = true;
             }
+#$this->sub_count++;
+$count++;
         }
         if($return) {
             return $ul.'</ul>';
@@ -352,7 +366,7 @@ class MenuSubsMobile extends Plugin {
             $info_txt = file_get_contents($this->PLUGIN_SELF_DIR."lang/info_deDE.txt");
         $info = array(
             // Plugin-Name
-            "<b>MenuSubsMobile</b> Revision: 4",
+            "<b>MenuSubsMobile</b> Revision: 5",
             // Plugin-Version
             "2.0",
             // Kurzbeschreibung
