@@ -197,10 +197,10 @@ echo getHtml("end").'</body></html>';
 
 function testInstall() {
     if(!is_file(BASE_DIR.CMS_DIR_NAME."/Language.php") and !is_file(BASE_DIR.ADMIN_DIR_NAME."/sessionClass.php"))
-        exit("Du must das CMS schonn mit FTP hochladen");
+        exit("Du musst das CMS schon mit FTP hochladen!");
 
     if(!is_readable(ADMIN_DIR_NAME) and !is_readable(CMS_DIR_NAME) and !is_readable(BASE_DIR.CMS_DIR_NAME."/Language.php") and !is_readable(BASE_DIR.ADMIN_DIR_NAME."/sessionClass.php"))
-        exit("Die rechte Vergabe von deinem Provider ist echt beschissen");
+        exit("Die Rechtevergabe von Deinem Provider ist echt bescheiden.");
 }
 
 function help() {
