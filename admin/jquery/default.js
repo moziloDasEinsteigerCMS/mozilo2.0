@@ -128,15 +128,15 @@ function test_modrewrite(that) {
         dataType: "html",
         timeout:20000,
         beforeSend: function(jqXHR) {
-            if(dialog_multi.dialog("isOpen")) {
-                dialog_multi.dialog("close");
+            if(dialog_mod_rewrite.dialog("isOpen")) {
+                dialog_mod_rewrite.dialog("close");
             }
-            send_object = jqXHR;
-            dialog_open("send_cancel");
+            send_object_mod_rewrite = jqXHR;
+            dialog_mod_rewrite.dialog("open");
         },
         success: function(data, textStatus, jqXHR) {
-            send_object = false;
-            dialog_multi.dialog("close");
+            send_object_mod_rewrite = false;
+            dialog_mod_rewrite.dialog("close");
             var tmp = $("<span>"+data+"</span>");
             if(tmp.find("#mod-rewrite-true").length > 0) {
                 // in Info die li austauschen
@@ -157,8 +157,8 @@ function test_modrewrite(that) {
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            send_object = false;
-            dialog_multi.dialog("close");
+            send_object_mod_rewrite = false;
+            dialog_mod_rewrite.dialog("close");
             dialog_open("error_messages",returnMessage(false, mozilo_lang["config_error_modrewrite"]));
             $("#modrewrite").prop('checked', false);
         }

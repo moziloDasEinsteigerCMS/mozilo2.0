@@ -113,7 +113,8 @@ $LANGUAGE  = new Language(BASE_DIR_ADMIN."sprachen/language_".$ADMIN_CONF->get("
 setTimeLocale($LANGUAGE);
 $LOGINCONF = new Properties(BASE_DIR_ADMIN.CONF_DIR_NAME."/logindata.conf.php");
 # Achtung die loginpass darf nur mit php Angelegt werden
-@chmod(BASE_DIR_ADMIN.CONF_DIR_NAME."/loginpass.conf.php",0600);
+if(is_file(BASE_DIR_ADMIN.CONF_DIR_NAME."/loginpass.conf.php"))
+    @chmod(BASE_DIR_ADMIN.CONF_DIR_NAME."/loginpass.conf.php",0600);
 $loginpassword = new Properties(BASE_DIR_ADMIN.CONF_DIR_NAME."/loginpass.conf.php");
 
 // Login ueberpruefen

@@ -434,6 +434,7 @@ else
 
 $(function() {
     $('body').append('<div id="dialog-multi"></div>');
+    $('body').append('<div id="dialog-mod-rewrite"></div>');
     $('body').append('<div style="height:1px;overflow:hidden;"><div id="dialog-test-w" style="float:left;"></div><div class="mo-clear"></div></div>');
     $("#dialog-multi").dialog({
         autoOpen: false,
@@ -474,5 +475,32 @@ $(function() {
                 dialog_multi.parents(".ui-dialog").find(".ui-dialog-titlebar-close").show(0);
         }
     });
-dialog_set_offset();
+    dialog_set_offset();
+    $("#dialog-mod-rewrite").dialog({
+        autoOpen: false,
+        resizable: true,
+        height: "auto",
+        width: "auto",
+        modal: true,
+        title: mozilo_lang["dialog_title_send"],
+        buttons: [{
+                text: mozilo_lang["page_cancel_reload"],
+                click: function() {
+                    send_object_mod_rewrite.abort();
+                    send_object_mod_rewrite = false;
+                    var actives_tab = "";
+                    if(window.location.search != "")
+                        actives_tab = window.location.search;
+                    window.location.href = "index.php"+actives_tab;
+                }
+            }],
+        create: function(event, ui) {
+            dialog_mod_rewrite = $(this);
+            dialog_mod_rewrite.css("background", "url(" + ICON_URL + "ajax-loader.gif) center center no-repeat");
+        },
+        open: function(event, ui) {
+            dialog_mod_rewrite.parents(".ui-dialog").find(".ui-dialog-titlebar-close").hide(0);
+        }
+    });
+
 });

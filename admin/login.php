@@ -46,13 +46,13 @@ if(isset($_SESSION['login_okay']) and $_SESSION['login_okay'] === true
     $LOGINCONF->set("falselogincounttemp", $falselogincounttemp); // Zähler für die aktuelle Sperrzeit
     $falselogincount = ($LOGINCONF->get("falselogincount"))+1;
     $LOGINCONF->set("falselogincount", $falselogincount); // Gesamtzähler
-
     // maximale Anzahl falscher Logins erreicht?
     if($falselogincounttemp >= $FALSELOGINLIMIT) {
         // Sperrzeit starten
         $LOGINCONF->set("loginlockstarttime", time());
         // Mail an Admin
-        if(strlen($ADMIN_CONF->get("adminmail")) > 5) {
+        if(strlen($ADMIN_CONF->get("adminmail")) > 5
+                and ($falselogincounttemp == $FALSELOGINLIMIT or $falselogincounttemp % 100 == 0)) {
             $mailcontent = getLanguageValue("loginlocked_mailcontent")."\r\n\r\n"
                 .strftime(getLanguageValue("_dateformat"), time())."\r\n"
                 .$_SERVER['REMOTE_ADDR']." / ".gethostbyaddr($_SERVER['REMOTE_ADDR'])."\r\n"
@@ -65,8 +65,7 @@ if(isset($_SESSION['login_okay']) and $_SESSION['login_okay'] === true
         }
         // Formular ausgrauen
         return login_formular(false,"warning_false_logins");
-    }
-    else {
+    } else {
         // Formular nochmal normal anzeigen
         return login_formular(true,"incorrect_login");
     }
@@ -97,10 +96,13 @@ function login_formular($enabled,$error_lang = false) {
         $enabled_css = "ui-state-error";
         $enabled_input = ' readonly="readonly"';
     }
-    if($error_lang !== false)
+    if($error_lang !== false) {
         $form .= '<div class="mo-login_message_fehler ui-widget-content ui-state-error ui-corner-all ui-helper-clearfix">'.returnMessage(false, getLanguageValue($error_lang))."</div>";
-
-   $form .= '<div class="mo-login '.$enabled_css.' ui-corner-all">';
+        if($error_lang == "install_login") {
+            return $form.'</div>';
+        }
+    }
+    $form .= '<div class="mo-login '.$enabled_css.' ui-corner-all">';
 
     if ($enabled)
         $form .= '<form accept-charset="'.CHARSET.'" name="loginform" action="'.URL_BASE.ADMIN_DIR_NAME."/index.php".'" method="post">';
