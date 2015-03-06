@@ -50,6 +50,11 @@ $(function () {
             $(this).addClass('js-img-loadet');
             load_files_datajson($(this).parents('.fileupload'))
         });
+    } else if(action_activ == "files") {
+        $('.js-files').on("click",'.js-toggle:not(.js-img-loadet)', function(event) {
+            $(this).addClass('js-img-loadet');
+            load_files_datajson($(this).parents('.fileupload'))
+        });
     } else {
         $('.fileupload').each(function () {
             if($(this).parents('#menu-fix').length > 0) {

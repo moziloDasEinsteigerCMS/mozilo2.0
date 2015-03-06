@@ -9,6 +9,9 @@ function getFileUpload($curent_dir,$dir = false,$count_text = false,$newcss = ""
             $count = count(getDirAsArray(GALLERIES_DIR_REL.$curent_dir,"img"));
             $gallery_tools = '<img class="js-tools-icon-show-hide js-rename-file mo-tool-icon mo-icon'.$newcss.' mo-icons-icon mo-icons-work" src="'.ICON_URL_SLICE.'" alt="work" />'
                     .'<img class="js-tools-icon-show-hide js-edit-delete mo-tool-icon mo-icon'.$newcss.' mo-icons-icon mo-icons-delete" src="'.ICON_URL_SLICE.'" alt="delete" hspace="0" vspace="0" />';
+        } elseif(ACTION == "files") {
+            global $CatPage;
+            $count = count($CatPage->get_FileArray($curent_dir));
         }
         $head = '<div class="js-tools-show-hide mo-li-head-tag mo-li-head-tag-no-ul ui-state-active ui-corner-all mo-middle">'
             .'<span class="js-gallery-name mo-padding-left mo-bold">'.$dir.'</span>'
