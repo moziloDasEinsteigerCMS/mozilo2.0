@@ -1,9 +1,5 @@
 <?php if(!defined('IS_CMS')) die();
 
-function callback_makePhraseArray($arr) {
-    return str_replace(" ","%20",$arr[1]);
-}
-
 class SearchClass {
     var $chars_to_lower;
     var $placeholder;
@@ -72,7 +68,7 @@ class SearchClass {
             # Leerzeichen die in einer Umklammerung sind zu %20 wandeln
             $string = preg_replace_callback(
                         "/[\"|\'](.*)[\"|\']/Umsi",
-                        "callback_makePhraseArray",
+                        array($this,"callback_makePhraseArray"),
                         $searchstring
                       );
             $matches = explode(" ",$string);
@@ -85,6 +81,11 @@ class SearchClass {
         }
         return $return_array;
     }
+
+    function callback_makePhraseArray($arr) {
+        return str_replace(" ","%20",$arr[1]);
+    }
+
     # die standart mozilo function
     function searchInPages() {
         return $this->getFindPagesMenuList($this->getFindPageArray());
