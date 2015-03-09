@@ -422,7 +422,7 @@ function get_plugin_config($conf_plugin,$config,$currentelement) {
             } else {
                 $input = '<input name="'.$currentelement.'['.$name.']"'.$type.$value.$maxlength.$size.' class="mo-plugin-input'.$css_add.'" />';
                 if($template !== false or $template_conf === true) {
-                    $search[] = '{'.$name.'_text}';
+                    $search[] = '{'.$name.'_'.$config[$name]['type'].'}';
                     $replace[] = $input;
                 }
             }
