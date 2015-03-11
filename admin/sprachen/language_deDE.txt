@@ -45,6 +45,8 @@ error_save_beforeclose               = Soll der Inhalt jetzt gespeichert werden?
 error_zip_structure                  = Die ZIP-Datei hat keine Gültige Struktur
 error_file_upload                    = Die Datei konnte nicht hochgeladen werden.
 error_zip_nozip                      = Das ist keine ZIP-Datei
+error_read_htaccess                  = Fehler beim Lesen der .htaccess.
+error_write_htaccess                 = Fehler beim Schreiben der .htaccess.
 
 dialog_title_error                   = Fehlermeldungen
 dialog_title_messages                = Meldungen

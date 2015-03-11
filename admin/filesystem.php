@@ -491,4 +491,27 @@ function write_robots() {
     return true;
 }
 
+function write_modrewrite($status) {
+    if(false === ($lines = @file(BASE_DIR.".htaccess")) or !is_file(BASE_DIR.".htaccess"))
+        return ajax_return("error",false,returnMessage(false,getLanguageValue("error_read_htaccess")),true,true);
+
+    $change = false;
+    foreach($lines as $pos => $value) {
+        if(strpos($value,"# mozilo generated not change from here to mozilo_end") !== false) {
+            $change = true;
+            continue;
+        }
+        if(strpos($value,"# mozilo_end") !== false)
+            break;
+        if($change and strpos($value,"RewriteRule \.html$ index\.php [QSA,L]") !== false) {
+            $lines[$pos] = str_replace("# mozilo_change ","",$lines[$pos]);
+            if($status == "false")
+                $lines[$pos] = "# mozilo_change ".$lines[$pos];
+        }
+    }
+    if($change and true != (mo_file_put_contents(BASE_DIR.".htaccess",implode("",$lines))))
+        return ajax_return("error",false,returnMessage(false,getLanguageValue("error_write_htaccess")),true,true);
+    return true;
+}
+
 ?>
