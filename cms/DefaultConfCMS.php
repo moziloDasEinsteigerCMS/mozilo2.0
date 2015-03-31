@@ -2,7 +2,7 @@
 
 define("CMSVERSION","2.0");
 define("CMSNAME","Amalia");
-define("CMSREVISION","26");
+define("CMSREVISION","27");
 
 #!!!!!!!! die version müssen wir noch checken
 define("MIN_PHP_VERSION","5.1.2");
@@ -95,7 +95,8 @@ function makePlatzhalter($all = false) {
                         '{MAINMENU}',
                         '{DETAILMENU}',
                         '{MEMORYUSAGE}',
-                        '{EXECUTETIME}'
+                        '{EXECUTETIME}',
+                        '{JQUERY}'
     );
 
     if($all) {
