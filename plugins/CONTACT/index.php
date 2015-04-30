@@ -67,7 +67,7 @@ class CONTACT extends Plugin {
             "type" => "text",
             "description" => $lang_contact_admin->get("config_text_formularmail"),
             "maxlength" => "100",
-            "regex" => "/^[\w-]+(\.[\w-]+)*@([0-9a-z][0-9a-z-]*[0-9a-z]\.)+([a-z]{2,4})$/i",
+            "regex" => MAIL_REGEX,
             "regex_error" => $lang_contact_admin->get("config_error_formularmail")
         );
         $config['contactformwaittime']  = array(

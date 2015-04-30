@@ -2,7 +2,7 @@
 
 define("CMSVERSION","2.0");
 define("CMSNAME","Amalia");
-define("CMSREVISION","27");
+define("CMSREVISION","28");
 
 #!!!!!!!! die version müssen wir noch checken
 define("MIN_PHP_VERSION","5.1.2");
@@ -33,6 +33,9 @@ define("CONTENT_DIR_REL",BASE_DIR.CONTENT_DIR_NAME."/");
 define("GALLERIES_DIR_REL",BASE_DIR.GALLERIES_DIR_NAME."/");
 define("PLUGIN_DIR_REL",BASE_DIR.PLUGIN_DIR_NAME."/");
 define("SORT_CAT_PAGE",BASE_DIR.CONTENT_DIR_NAME."/SortCatPage.php");
+
+// Punycode-URLs können beliebige Zeichen im Domainnamen enthalten!
+define("MAIL_REGEX",'/^([^\s@,:"<>]+)@([^\s@,:"<>]+\.[^\s@,:"<>.\d]{2,40}|(\d{1,3}\.){3}\d{1,3})$/');
 
 global $ALOWED_IMG_ARRAY;
 $ALOWED_IMG_ARRAY = array(".png",".jpg",".jpeg",".gif",".ico");

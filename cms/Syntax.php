@@ -12,7 +12,6 @@ class Syntax {
     
     var $LANG;
     var $LINK_REGEX;
-    var $MAIL_REGEX;
     var $content;
     var $is_preparePageContent = false;
 #    var $content;
@@ -34,9 +33,6 @@ class Syntax {
                     // port                     \:[\d]{1,5}
                     // subdirs|files            (\w)+
         $this->LINK_REGEX   = "/^(https?|t?ftps?|gopher|telnets?|mms|imaps?|irc|pop3s?|rdp|smb|smtps?|sql|ssh|svn)\:\/\/((\w)+\:(\w)+\@)?[((\w)+\.)?(\w)+\.[a-zA-Z]{2,4}|([\d]{1,3}\.){3}[\d]{1,3}](\:[\d]{1,5})?((\w)+)?$/";
-        // Punycode-URLs können beliebige Zeichen im Domainnamen enthalten!
-        // $this->MAIL_REGEX   = "/^\w[\w|\.|\-]+@\w[\w|\.|\-]+\.[a-zA-Z]{2,4}$/";
-        $this->MAIL_REGEX   = "/^.+@.+\..+$/";
 
         if(!isset($GLOBALS['syntax_anchor_counter']))
             $GLOBALS['syntax_anchor_counter'] = 1;
@@ -456,7 +452,7 @@ class Syntax {
         global $language;
         global $specialchars;
         // überprüfung auf korrekten Link
-        if (preg_match($this->MAIL_REGEX, $value)) {
+        if (preg_match(MAIL_REGEX, $value)) {
             global $Punycode;
             $mailto = $Punycode->encode($value);
             $value = $Punycode->decode($value);
@@ -842,11 +838,35 @@ class Syntax {
     }
 
     function syntax_user($desciption,$value,$syntax) {
-        global $USER_SYNTAX;
-        global $specialchars;
+        global $USER_SYNTAX, $specialchars;
         # Wichtig für die syntax.conf da müssen alle Zeichen mit einem ^ dafor geschützt werden
         # das war mal in der Properties
         $syntax = $specialchars->encodeProtectedChr($USER_SYNTAX->get($syntax));
+
+        if(strpos($value,FILE_START) !== false and strpos($value,FILE_END) !== false
+                and preg_match('#<(frame|iframe|img|input|a|area|base|link){1,1}[^>]*?(src|href){1,1}=["\']{VALUE}["\'][^>]*?>#is', $syntax)) {
+            global $CatPage;
+            list($cat, $file) = $CatPage->split_CatPage_fromSyntax($value, true);
+            if($file !== false)
+                $value = $CatPage->get_srcFile($cat, $file);
+            if($cat === false and $file === false) {
+                list($cat, $page) = $CatPage->split_CatPage_fromSyntax($value);
+                if($cat !== false)
+                    $value = $CatPage->get_Href($cat,$page);
+            }
+        }
+        if(strpos($desciption,FILE_START) !== false and strpos($desciption,FILE_END) !== false
+                and preg_match('#<(frame|iframe|img|input|a|area|base|link){1,1}[^>]*?(src|href){1,1}=["\']{DESCRIPTION}["\'][^>]*?>#is', $syntax)) {
+            global $CatPage;
+            list($cat, $file) = $CatPage->split_CatPage_fromSyntax($desciption, true);
+            if($file !== false)
+                $desciption = $CatPage->get_srcFile($cat, $file);
+            if($cat === false and $file === false) {
+                list($cat, $page) = $CatPage->split_CatPage_fromSyntax($desciption);
+                if($cat !== false)
+                    $desciption = $CatPage->get_Href($cat, $page);
+            }
+        }
 
         if(preg_match('#<(col|embed|img|input|link|track){1,1}[^>]*?(alt|title|label){1,1}=["\']{VALUE}["\'][^>]*?>#is', $syntax)) {
             $value = $specialchars->rebuildSpecialChars($value, true, true);

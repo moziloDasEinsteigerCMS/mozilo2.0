@@ -49,7 +49,7 @@ function isMailAvailable() {
 function isMailAddressValid($from) {
     global $Punycode;
     $from = $Punycode->encode($from);
-    if(preg_match("/^\w[\w|\.|\-]+@\w[\w|\.|\-]+\.[a-zA-Z]{2,4}$/", $from))
+    if(preg_match(MAIL_REGEX, $from))
         return true;
     return false;
 }
