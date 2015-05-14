@@ -278,9 +278,11 @@ if(LOGIN) { #-------------------------------
 } else
     die("Fatal Error");
 
+require_once(BASE_DIR_CMS."javaScriptPacker.php");
+require_once(BASE_DIR_CMS."cssMinifier.php");
 require_once(BASE_DIR_ADMIN.'admin_template.php');
 // Ausgabe der kompletten Seite 
-echo admin_Template($pagecontent,$message);
+admin_Template($pagecontent,$message);
 
 function get_executTime($start_time) {
     if(!function_exists('gettimeofday'))

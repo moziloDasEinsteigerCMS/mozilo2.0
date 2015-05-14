@@ -57,22 +57,19 @@ foreach($syntax_elemente as $element) {
 }
 $moziloSyntax .= '----";';
 
-$editor_area_html = '<link type="text/css" rel="stylesheet" href="editsite.css" />';
+$cssMinifier = new cssMinifier();
+$cssMinifier->echoCSS(ADMIN_DIR_NAME.'/editsite.css');
 
-$editor_edit_usersyntax = "false";
-if(ACTION == "config")
-    $editor_edit_usersyntax = "true";
-
-$editor_area_html .= '<script language="Javascript" type="text/javascript" charset="utf-8">/*<![CDATA[*/
-var meditorID = "pagecontent";
-var editor_edit_usersyntax = '.$editor_edit_usersyntax.';
-'.$var_PluginsActiv.'
-'.$var_PluginsDeactiv.'
-'.$var_Place.'
-'.$var_UserSyntax.'
-'.$var_Smileys.'
-'.$moziloSyntax.
-'/*]]>*/</script>';
-$editor_area_html .= '<script src="ace_editor/src-min/ace.js" type="text/javascript" charset="utf-8"></script>';
+$editor_area_html = '<script language="Javascript" type="text/javascript" charset="utf-8">/*<![CDATA[*/'."\n"
+.'var meditorID = "pagecontent";'
+.'var editor_edit_usersyntax = '.((ACTION == "config") ? "true" : "false").';'
+.$var_PluginsActiv
+.$var_PluginsDeactiv
+.$var_Place
+.$var_UserSyntax
+.$var_Smileys
+.$moziloSyntax
+.'/*]]>*/</script>'."\n"
+.'<script src="ace_editor/src-min/ace.js" type="text/javascript" charset="utf-8"></script>'."\n";
 
 ?>
