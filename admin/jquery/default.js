@@ -3,8 +3,10 @@ var dialogMaxheightOffset = 40;
 var max_menu_tab = false;
 
 function sleep(milliSeconds) {
-    var startTime = new Date().getTime();
-    while (new Date().getTime() < startTime + milliSeconds);
+    var startTime = new Date().getTime(),
+        curTime = null;
+    do { curTime = new Date().getTime(); }
+    while(curTime - startTime < milliSeconds);
 }
 
 function getCaretPos(item) {
@@ -163,11 +165,11 @@ function test_modrewrite(that) {
             $("#modrewrite").prop('checked', false);
         }
     });
-};
+}
 
 $(function() {
 
-    $("body").on("click",".js-no-click", function(event) { event.preventDefault() });
+    $("body").on("click",".js-no-click", function(event) { event.preventDefault(); });
 
     /* bei allen input's mit dieser class nur zahlen zulassen */
     $("body").on("keyup",".js-in-digit", function(event) {
@@ -194,7 +196,7 @@ $(function() {
     });
 
     /* toggle für die tools icons */
-    $(".js-tools-icon-show-hide").css("opacity", 0);
+//    $(".js-tools-icon-show-hide").css("opacity", 0);
     $("body").on({
         mouseenter: function() { 
             $(this).find(".js-tools-icon-show-hide:not(.mo-icon-blank)").css("opacity", 1);

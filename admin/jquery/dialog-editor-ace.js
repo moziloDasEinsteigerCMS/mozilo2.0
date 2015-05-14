@@ -468,7 +468,7 @@ $(function() {
     });
 
 
-    $("body").append('<div id="prev-pageedit-box"></div>')
+    $("body").append('<div id="prev-pageedit-box"></div>');
 
     $("#pageedit-box").dialog({
         autoOpen: false,

@@ -37,7 +37,7 @@ if(options.prev_img === true) {
 var current_appendTo = $(this);
 $.each($(options.filesContainer).find('.template-download'), function (index) {
     if($(this).find('.name').text() == current_appendTo.find('.name').text()) {
-        var time = (new Date()).getTime()
+        var time = (new Date()).getTime();
         $(this).hide(0).attr('id','oldfile'+index+time);
         current_appendTo.addClass('ui-state-error name-twice').attr('id','newfile'+index+time);
         current_appendTo.find('.progress').prepend('<b>Überschreibe Datei</b>');
@@ -302,7 +302,7 @@ if(template.hasClass('name-twice')) {
             if(template.hasClass('ui-state-disabled')) return;
 //$("#out").html($("#out").html()+"<br />_resizeImgHandler");
                 template.addClass('ui-state-disabled').removeClass('in');
-                template.find('.delete input').addClass('disabled')
+                template.find('.delete input').addClass('disabled');
 
             e.data.fileupload._trigger('resize_all_new', e, {
                 context: template,

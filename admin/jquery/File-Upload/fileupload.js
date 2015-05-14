@@ -11,9 +11,9 @@ function file_rename(change_item) {
     template.find('.delete button').attr('data-url',template.find('.delete button').attr('data-url').replace(curent_name,curent_newname));
 
     if(template.find('.preview').length > 0) {
-        template.find('.preview a').prop('href',template.find('.preview a').prop('href').replace(curent_name_srv,curent_newname_srv)).prop('title',change_item.val())
+        template.find('.preview a').prop('href',template.find('.preview a').prop('href').replace(curent_name_srv,curent_newname_srv)).prop('title',change_item.val());
 
-        template.find('.preview img').prop('src',template.find('.preview img').prop('src').replace(curent_name_srv,curent_newname_srv))
+        template.find('.preview img').prop('src',template.find('.preview img').prop('src').replace(curent_name_srv,curent_newname_srv));
     }
     change_item.remove();
 }
@@ -48,12 +48,12 @@ $(function () {
     if(action_activ == "gallery") {
         $('.js-gallery').on("click",'.js-toggle:not(.js-img-loadet)', function(event) {
             $(this).addClass('js-img-loadet');
-            load_files_datajson($(this).parents('.fileupload'))
+            load_files_datajson($(this).parents('.fileupload'));
         });
     } else if(action_activ == "files") {
         $('.js-files').on("click",'.js-toggle:not(.js-img-loadet)', function(event) {
             $(this).addClass('js-img-loadet');
-            load_files_datajson($(this).parents('.fileupload'))
+            load_files_datajson($(this).parents('.fileupload'));
         });
     } else {
         $('.fileupload').each(function () {

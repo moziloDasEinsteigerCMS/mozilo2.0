@@ -75,7 +75,7 @@ $(function() {
                 // 1. sonderzeichen escapen auser lehrzeichen und +
                 // 2. + und oder lehrzeichen+ ist gleich oder suche also ein |
                 // 3. die restlichen lehrzeichen escapen
-                search_str = search_str.replace(/[\-\[\]{}()*?.,\\\^$|#]/g,"\\$&")
+                search_str = search_str.replace(/[\-\[\]{}()\*?.,\\\^$|#]/g,"\\$&")
                     .replace(/[\s]*[+]/g,"|")
                     .replace(/[\s]/g,"\\$&");
 

@@ -28,7 +28,7 @@ $('.fileupload').fileupload({
                 '</tr></tbody></table>'+
                 '</li>');
                 if(!o.options.prev_img) {
-                    row.find('.preview').append('<a><img class="fu-ext-imgs fu-ext-'+o.mimeType(file)+'" src="'+ICON_URL_SLICE+'"></a>')
+                    row.find('.preview').append('<a><img class="fu-ext-imgs fu-ext-'+o.mimeType(file)+'" src="'+ICON_URL_SLICE+'"></a>');
                     row.find('a').prop('title', file.name);
                 }
             row.find('.name').text(file.name);
@@ -46,7 +46,6 @@ $('.fileupload').fileupload({
         $.each(o.files, function (index, file) {
 
             var row = $('<li class="template-download fade ui-widget-content ui-corner-all">'+
-
                 '<table width="100%" cellspacing="0" border="0" cellpadding="0">'+
                 '<tbody>'+
                     '<tr><td colspan="4" class="error"></td></tr>'+
@@ -68,7 +67,7 @@ $('.fileupload').fileupload({
                 row.find('.name span').text(file.name);
 
                 if(!o.options.prev_img) {
-                    row.find('.preview').append('<a><img class="fu-ext-imgs fu-ext-'+o.mimeType(file)+'" src="'+ICON_URL_SLICE+'"></a>')
+                    row.find('.preview').append('<a><img class="fu-ext-imgs fu-ext-'+o.mimeType(file)+'" src="'+ICON_URL_SLICE+'"></a>');
                     row.find('a').prop('title', file.name);
                 }
                 row.find('a').prop('href', file.url);

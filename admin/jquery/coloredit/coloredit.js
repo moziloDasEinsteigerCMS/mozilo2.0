@@ -258,13 +258,13 @@ $(function() {
                 left : (top_left[1] + 34) + 'px'
             });
             this.color_sv.css("backgroundColor", "#"+this._HSVtoHEX([this.hsv[0], 1, 1]));
-            var i, f_length = this.a_rgb.length
+            var i, f_length = this.a_rgb.length;
             for(i = 0; i < f_length; i++) {
                 if($('a:not(.ui-state-active)',this["s_"+this.a_rgb[i]]).length > 0)
                     this["s_"+this.a_rgb[i]].slider("value", rgb[i]);
                 this["i_"+this.a_rgb[i]].not(':focus').val(rgb[i]);
             }
-            f_length = this.a_sv.length
+            f_length = this.a_sv.length;
             for(i = 0; i < f_length; i++) {
                 if($('a:not(.ui-state-active)',this["s_"+this.a_sv[i]]).length > 0)
                     this["s_"+this.a_sv[i]].slider("value", this.hsv[i + 1] * 100);
