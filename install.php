@@ -456,7 +456,6 @@ function rewrite() {
             $text_status = false;
             if(is_file(BASE_DIR.'.htaccess'))
                 $html .= '<br />'.getLanguageValue("install_rewrite_no_htaccess");
-#                rename(BASE_DIR.'.htaccess',BASE_DIR.'dot_htaccess');
             if(is_file(BASE_DIR_ADMIN.'.htaccess'))
                 unlink(BASE_DIR_ADMIN.'.htaccess');
             $CMS_CONF->set("modrewrite","false");
@@ -712,8 +711,8 @@ function writeHtaccess($art,$step,$getcount = false) {
 
     $rewrite_rule_test  = 'RewriteRule test\.php$ test\.php?rewritetest=true [QSA,L]';
 
-    $rewrite_rule_cms   = 'RewriteRule ^(.*)/mod_rewrite_t_e_s_t.html$ $1/index.php?moderewrite=ok [L]'."\n";
-    $rewrite_rule_cms   .= 'RewriteRule \.html$ index.php [QSA,L]';
+    $rewrite_rule_cms   = 'RewriteRule ^(.*)/mod_rewrite_t_e_s_t\.html$ $1/index\.php?moderewrite=ok [L]'."\n";
+    $rewrite_rule_cms   .= 'RewriteRule \.html$ index\.php [QSA,L]';
 
 
     // die verschiedenen test-configs die wir probieren
