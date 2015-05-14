@@ -138,8 +138,8 @@ function get_HtmlHead() {
          echo 'var mo_docu_coloredit = \''.str_replace("/",'\/',getHelpIcon("editsite","color")).'\';';
 
     echo '/*]]>*/</script>'."\n"
-        .'<script type="text/javascript" src="'.URL_BASE.CMS_DIR_NAME.'/jquery/jquery-1.7.2.min.js"></script>'."\n"
-        .'<script type="text/javascript" src="'.URL_BASE.CMS_DIR_NAME.'/jquery/jquery-ui-1.9.2.custom.min.js"></script>'."\n";
+        .'<script type="text/javascript" src="'.URL_BASE.CMS_DIR_NAME.'/jquery/jquery-'.ADMIN_JQUERY.'.min.js"></script>'."\n"
+        .'<script type="text/javascript" src="'.URL_BASE.CMS_DIR_NAME.'/jquery/jquery-ui-'.ADMIN_JQUERY_UI.'.custom.min.js"></script>'."\n";
 
 /*
     if(LOGIN and defined('MULTI_USER') and MULTI_USER)

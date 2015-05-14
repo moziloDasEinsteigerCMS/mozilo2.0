@@ -400,8 +400,8 @@ class Syntax {
 
     function insert_jquery_in_head($jquery_type) {
         $jquery =array();
-        $jquery['jquery'] = '<script type="text/javascript" src="'.URL_BASE.CMS_DIR_NAME.'/jquery/jquery-1.7.2.min.js"></script>';
-        $jquery['jquery-ui'] = '<script type="text/javascript" src="'.URL_BASE.CMS_DIR_NAME.'/jquery/jquery-ui-1.9.2.custom.min.js"></script>';
+        $jquery['jquery'] = '<script type="text/javascript" src="'.URL_BASE.CMS_DIR_NAME.'/jquery/jquery-'.JQUERY.'.min.js"></script>';
+        $jquery['jquery-ui'] = '<script type="text/javascript" src="'.URL_BASE.CMS_DIR_NAME.'/jquery/jquery-ui-'.JQUERY_UI.'.custom.min.js"></script>';
         if(isset($jquery[$jquery_type]) and !in_array($jquery_type,$this->jquery_search)) {
             $this->jquery_search[] = $jquery_type;
             $this->jquery_replace[] = $jquery[$jquery_type];
