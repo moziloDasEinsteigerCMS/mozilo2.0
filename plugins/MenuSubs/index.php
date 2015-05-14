@@ -8,7 +8,8 @@ class MenuSubs extends Plugin {
         global $CatPage;
 
         if($value == "plugin_first" and getRequestValue('action', 'get') and getRequestValue('action', 'get') == "sitemap") {
-            define("ACTION_CONTENT",false);
+            if(!defined("ACTION_CONTENT"))
+                define("ACTION_CONTENT",false);
             global $pagecontent;
             $pagecontent = "{MenuSubs|sitemap_content}";
             return;
@@ -307,7 +308,7 @@ class MenuSubs extends Plugin {
             $info_txt = file_get_contents(BASE_DIR.PLUGIN_DIR_NAME."/MenuSubs/lang/info_deDE.txt");
         $info = array(
             // Plugin-Name
-            "<b>MenuSubs</b> Revision: 4",
+            "<b>MenuSubs</b> Revision: 5",
             // Plugin-Version
             "2.0",
             // Kurzbeschreibung
