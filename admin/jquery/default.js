@@ -196,7 +196,6 @@ $(function() {
     });
 
     /* toggle für die tools icons */
-//    $(".js-tools-icon-show-hide").css("opacity", 0);
     $("body").on({
         mouseenter: function() { 
             $(this).find(".js-tools-icon-show-hide:not(.mo-icon-blank)").css("opacity", 1);
