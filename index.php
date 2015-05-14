@@ -427,9 +427,9 @@ function getTemplate($TEMPLATE_FILE) {
     if(false === ($template = file_get_contents($TEMPLATE_FILE)))
         die($language->getLanguageValue("message_template_error_1", $TEMPLATE_FILE));
     # usesubmenu aus der template.html auslesen und setzten
-    # 0 = ein menue mit submenue alles ausgeklapt
+    # 0 = ein menue nur mit cats und eins nur mit pages
     # 1 = ein menue mit submenue nur active ausgeklapt
-    # 2 = ein menue nur mit cats und eins nur mit pages
+    # 2 = ein menue mit submenue alles ausgeklapt
     $dummy = 1;
     if(strpos($template,"usesubmenu") > 1 and strpos($template,"usesubmenu") < 10) {
         $tmp = substr($template,0,strpos($template,"<!DOCTYPE"));
