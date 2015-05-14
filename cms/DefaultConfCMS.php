@@ -2,13 +2,13 @@
 
 define("CMSVERSION","2.0");
 define("CMSNAME","Amalia");
-define("CMSREVISION","28");
+define("CMSREVISION","29");
 
 #!!!!!!!! die version müssen wir noch checken
 define("MIN_PHP_VERSION","5.1.2");
 
-define('PACK_JS',true);
-define('PACK_CSS',true);
+define("PACK_JS",true);
+define("PACK_CSS",true);
 
 define("CHARSET","UTF-8");
 define("CONTENT_DIR_NAME","kategorien");
