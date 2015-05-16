@@ -60,7 +60,7 @@ $moziloSyntax .= '----";';
 $cssMinifier = new cssMinifier();
 $cssMinifier->echoCSS(ADMIN_DIR_NAME.'/editsite.css');
 
-$editor_area_html = '<script language="Javascript" type="text/javascript" charset="utf-8">/*<![CDATA[*/'."\n"
+$editor_area_html = '<script type="text/javascript" charset="'.strtolower(CHARSET).'">/*<![CDATA[*/'."\n"
 .'var meditorID = "pagecontent";'
 .'var editor_edit_usersyntax = '.((ACTION == "config") ? "true" : "false").';'
 .$var_PluginsActiv
@@ -70,6 +70,6 @@ $editor_area_html = '<script language="Javascript" type="text/javascript" charse
 .$var_Smileys
 .$moziloSyntax
 .'/*]]>*/</script>'."\n"
-.'<script src="ace_editor/src-min/ace.js" type="text/javascript" charset="utf-8"></script>'."\n";
+.'<script src="ace_editor/src-min/ace.js" type="text/javascript" charset="'.strtolower(CHARSET).'"></script>'."\n";
 
 ?>
