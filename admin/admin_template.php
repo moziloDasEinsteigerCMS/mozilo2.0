@@ -100,7 +100,7 @@ function get_HtmlHead() {
 
     $catpage_jslang = array("self","blank","target","page_status","files","pages","page_edit","url_adress","page_error_save",array(EXT_PAGE,"page_saveasnormal"),array(EXT_HIDDEN,"page_saveashidden"),array(EXT_DRAFT,"page_saveasdraft"));
 
-    echo '<script language="Javascript" type="text/javascript">/*<![CDATA[*/'."\n"
+    echo '<script type="text/javascript">/*<![CDATA[*/'."\n"
         .'var FILE_START = "'.FILE_START.'";'
         .'var FILE_END = "'.FILE_END.'";'
         .'var EXT_PAGE = "'.EXT_PAGE.'";'
@@ -191,10 +191,34 @@ function get_HtmlHead() {
     }
 
 #!!!!!!!!!!! nee function insert_in_head und alle js und css über die einzelnen ACTION.php steuern
-    # der plugin eigne admin ist im dialog fenster
+    # der plugin eigene admin ist im dialog fenster
     global $PLUGIN_ADMIN_ADD_HEAD;
-    if(defined('PLUGINADMIN') and is_array($PLUGIN_ADMIN_ADD_HEAD))
+    $unique = false;
+    $packCSS = array();
+    if(defined('PLUGINADMIN') and is_array($PLUGIN_ADMIN_ADD_HEAD)) {
+        foreach($PLUGIN_ADMIN_ADD_HEAD as $pos => $item) {
+            if(strpos($item,"<script") !== false and strpos($item,"src=") !== false) {
+                preg_match('#<(script){1,1}[^>]*?(src){1,1}=["\'](.*)["\'][^>]*?>#is', $item,$match);
+                if(isset($match[3]) and strpos($match[3],".min.js") === false) {
+                    $packJS[] = str_replace(URL_BASE,"",$match[3]);
+                    unset($PLUGIN_ADMIN_ADD_HEAD[$pos]);
+                    $unique = true;
+                }
+            } elseif(strpos($item,"<link") !== false and strpos($item,"href=") !== false) {
+                preg_match('#<(link){1,1}[^>]*?(href){1,1}=["\'](.*)["\'][^>]*?>#is', $item,$match);
+                if(isset($match[3]) and strpos($match[3],".min.css") === false) {
+                    $packCSS[] = str_replace(URL_BASE,"",$match[3]);
+                    unset($PLUGIN_ADMIN_ADD_HEAD[$pos]);
+                }
+            }
+        }
+        if(count($packCSS) > 0)
+            $cssMinifier->echoCSS($packCSS);
+
+        if($unique)
+            $packJS = array_unique($packJS);
         echo implode("",$PLUGIN_ADMIN_ADD_HEAD);
+    }
 
     echo "</head>"."\n";
     return $packJS;
