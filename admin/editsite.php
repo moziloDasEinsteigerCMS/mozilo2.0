@@ -268,15 +268,16 @@ function returnCatPagesSelectbox() {
     $select = '<select name="pages" class="overviewselect" title="'.getLanguageValue("category_button",true)." &#047; ".getLanguageValue("page_button",true).':">';
     foreach ($CatPage->get_CatArray(true,false) as $catdir) {
         $cleancatname = $CatPage->get_HrefText($catdir,false);
-        $select .= '<optgroup label="'.$cleancatname.'">';
+        $optgroup = "";
         foreach($CatPage->get_PageArray($catdir, array(EXT_PAGE,EXT_HIDDEN), true) as $file) {
             $cleanpagename = $CatPage->get_HrefText($catdir,$file);
             $label = NULL;
             if ($CatPage->get_Type($catdir,$file) == EXT_HIDDEN)
                 $label = " (".getLanguageValue("page_saveashidden").")";
-            $select .= '<option value="'.$cleancatname.":".$cleanpagename.'">'.$cleanpagename.$label."</option>";
+            $optgroup .= '<option value="'.$cleancatname.":".$cleanpagename.'">'.$cleanpagename.$label."</option>";
         }
-        $select .= '</optgroup>';
+        if(!empty($optgroup))
+            $select .= '<optgroup label="'.$cleancatname.'">'.$optgroup.'</optgroup>';
     }
     $select .= "</select>";
     return $select;
@@ -288,13 +289,12 @@ function returnFilesSelectbox() {
     $select = '<select name="files" class="overviewselect" title="'.getLanguageValue("files_button",true).':">';
     foreach($CatPage->get_CatArray(true,false) as $catdir) {
         $cleancatname = $CatPage->get_HrefText($catdir,false);
-        if(count($CatPage->get_FileArray($catdir)) > 0) {
-            $select .= '<optgroup label="'.$cleancatname.'">';
-            foreach($CatPage->get_FileArray($catdir) as $current_file) {
-                $select .= '<option value="'.$cleancatname.":".$specialchars->rebuildSpecialChars($current_file, true, true).'">'.$specialchars->rebuildSpecialChars($current_file, false, true)."</option>";
-            }
-            $select .= '</optgroup>';
+        $optgroup = "";
+        foreach($CatPage->get_FileArray($catdir) as $current_file) {
+            $optgroup .= '<option value="'.$cleancatname.":".$specialchars->rebuildSpecialChars($current_file, true, true).'">'.$specialchars->rebuildSpecialChars($current_file, false, true)."</option>";
         }
+        if(!empty($optgroup))
+            $select .= '<optgroup label="'.$cleancatname.'">'.$optgroup.'</optgroup>';
     }
     $select .= "</select>";
     return $select;
@@ -317,13 +317,13 @@ function returnTemplateSelectbox() {
 
     $LAYOUT_DIR = BASE_DIR.LAYOUT_DIR_NAME."/".$CMS_CONF->get("cmslayout").'/';
 
-    $selectbox = '<select name="template_css" class="overviewselect" title="'.getLanguageValue("toolbar_template_css",true).':">';
-    $selectbox .= '<optgroup label="CSS">';
+    $selectbox = '<select name="template_css" class="overviewselect" title="'.getLanguageValue("toolbar_template",true).':">';
+    $selectbox .= '<optgroup label="'.getLanguageValue("toolbar_template_css",true).'">';
     foreach(getDirAsArray($LAYOUT_DIR.'css',array(".css"),"natcasesort") as $file) {
         $selectbox .= '<option value="{LAYOUT_DIR}/css/'.$specialchars->replaceSpecialChars($file,true).'">'.$specialchars->rebuildSpecialChars($file, false, true).'</option>';
     }
     $selectbox .= '</optgroup>';
-    $selectbox .= '<optgroup label="Bilder">';
+    $selectbox .= '<optgroup label="'.getLanguageValue("toolbar_template_image",true).'">';
 
     foreach(getDirAsArray($LAYOUT_DIR.'grafiken',"img","natcasesort") as $file) {
         $selectbox .= '<option value="{LAYOUT_DIR}/grafiken/'.$specialchars->replaceSpecialChars($file,true).'">'.$specialchars->rebuildSpecialChars($file, false, true).'</option>';
