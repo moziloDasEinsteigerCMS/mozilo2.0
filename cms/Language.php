@@ -11,10 +11,10 @@ class Language {
         if(!$lang_dir) {
             $currentlanguage = $CMS_CONF->get("cmslanguage");
             // Standardsprache Deutsch verwenden, wenn konfigurierte Sprachdatei nicht vorhanden
-            if (($currentlanguage == "") || (!file_exists(BASE_DIR_CMS."sprachen/language_".$currentlanguage.".txt"))) {
+            if (($currentlanguage == "") || (!file_exists(BASE_DIR_CMS.LANGUAGE_DIR_NAME."/language_".$currentlanguage.".txt"))) {
                 $currentlanguage = "deDE";
             }
-            $this->LANG_CONF = new Properties(BASE_DIR_CMS."sprachen/language_".$currentlanguage.".txt");
+            $this->LANG_CONF = new Properties(BASE_DIR_CMS.LANGUAGE_DIR_NAME."/language_".$currentlanguage.".txt");
         } else {
             # gibts die Sprache nicht wird es mit der Defaultsprache versucht
             if(!file_exists($lang_dir) and true === file_exists(substr($lang_dir,0,-8)."deDE.txt"))

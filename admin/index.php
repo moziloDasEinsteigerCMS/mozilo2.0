@@ -109,7 +109,7 @@ $ADMIN_CONF = new Properties(BASE_DIR_ADMIN.CONF_DIR_NAME."/basic.conf.php");
 $CMS_CONF    = new Properties(BASE_DIR_CMS.CONF_DIR_NAME."/main.conf.php");
 #$LANGUAGE  = new Properties(BASE_DIR_ADMIN."sprachen/language_".$ADMIN_CONF->get("language").".txt");
 require_once(BASE_DIR_CMS."Language.php");
-$LANGUAGE  = new Language(BASE_DIR_ADMIN."sprachen/language_".$ADMIN_CONF->get("language").".txt");
+$LANGUAGE  = new Language(BASE_DIR_ADMIN.LANGUAGE_DIR_NAME."/language_".$ADMIN_CONF->get("language").".txt");
 setTimeLocale($LANGUAGE);
 $LOGINCONF = new Properties(BASE_DIR_ADMIN.CONF_DIR_NAME."/logindata.conf.php");
 # Achtung die loginpass darf nur mit php Angelegt werden
