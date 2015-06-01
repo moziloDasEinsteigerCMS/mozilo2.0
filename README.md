@@ -1,47 +1,41 @@
-Installations-Anleitung von moziloCMS2.0
-und Update-Anleitung moziloCMS1.12 auf moziloCMS2.0
+# moziloCMS
 
----
+moziloCMS ist ein einfaches und einsteigerfreundliches Content-Management-System (CMS) für Benutzer mit geringen HTML-Kenntnissen.
 
-Installation von moziloCMS2.0
+## Vorraussetzungen
+Ein Webserver mit PHP 4.3.2 oder höher ist notwendig. Eine Datenbank wird nicht benötigt, da moziloCMS ein Flat-file CMS ist (alle Daten werden in einfachen Dateien gespeichert).
 
-Nach dem entpacken von moziloCMS2.0 must du die install.php aufrufen:
-* http://www.deineSeite/install.php  
-* oder: http://www.deineSeite/moziloCMS/install.php
+## Installation
+1. moziloCMS 2.0 [herunterladen](https://github.com/mozilo/mozilo2.0/archive/master.zip), ggf. entpacken und auf den eigenen Webserver hochladen
+2. Die `install.php` aufrufen, z.B.:
+  * `http://www.deineSeite/install.php` oder
+  * `http://www.deineSeite/moziloCMS/install.php`
+3. Der Installationsanleitung folgen
 
-!!"Wichtig"!!: nachdem die Installation abgeschlossen ist "lösche" auf jeden Fall:
-* die install.php
-* die update.php
-* und den Ordner update
+**Wichtig**: Nach erfolgreicher Installation (falls noch vorhanden) löschen:
+* die `install.php`
+* die `update.php`
+* und den Ordner `update/`
 
----
+## Update von 1.12 auf 2.0
+* moziloCMS 2.0 [herunterladen](https://github.com/mozilo/mozilo2.0/archive/master.zip) und entpacken
+* Folgende Ordnerinhalte in 2.0 durch entsprechenden Inhalte der alten 1.12 Installation ersetzen:
+  * `kategorien/`
+  * `galerien/`
+  * `layouts/`
+* Im 2.0 Wurzelverzeichnis den Ordner `update/` erstellen
+* Folgende `.conf` Dateien (falls vorhanden) von 1.12 in den Ordner `update.php` kopieren:
+* `admin/conf/` (alle `.conf` Dateien)
+* `cms/conf/` (alle `.conf` Dateien)
+* `cms/formular/formular.conf`
+* *Optional*: Falls bisher genutzte Plugins auch in 2.0 vorhanden sind, können die Einstellungen von 1.12-Plugins ebenfalls übernommen werden:
+  * Entsprechende 2.0 Plugins downloaden und in den `plugins/` Ordner kopieren
+  * Die `plugin.conf.php` in dem jeweiligen 2.0-Plugin durch die plugin.conf der 1.12-Version ersetzen (bitte kein .php dahinter setzen)
+* Jetzt mit Schritt 2 der Installationsanleitung fortfahren.
 
-Update von moziloCMS1.12 auf moziloCMS2.0
-
-Nach dem entpacken von moziloCMS2.0:
-* alle Kategorien mit deren Inhalt, in den 2.0-Ordner "kategorien" kopieren
-* die Galerien in den 2.0er Ordner "galerien" kopieren
-* die Layouts in den 2.0er Ordner "layouts" kopieren
-* nun im Wurzelverzeichnis (beispielsweise: moziloCMS/) den Ordner "update" erstellen
-* in diesen Ordner "update", alle ".conf" dateien aus ".../admin/conf" und ".../cms/conf" und wenn vorhanden ".../formular/formular.conf" kopieren
-
----
-* wenn bisher genutzte Plugins auch in moziloCMS2.0 vorhanden sind, können die Einstellungen von moziloCMS1.12-Plugins ebenfalls upgedatet werden:
-* dazu müssen die Plugins natürlich schon im Plugin-Ordner "moziloCMS/plugins" vorhanden sein.
-* die plugin.conf.php in dem jeweiligen 2.0-Plugin durch die plugin.conf der 1.12-Version ersetzen \(bitte kein .php dahinter setzen\)
-
----
-
-Jetzt musst du die install.php aufrufen
-* z.B.: http://www.deineSeite/install.php
-* oder: http://www.deineSeite/moziloCMS/install.php
-
-Die oben genanten Schritte können auch einzeln durchgeführt werden
-Die install.php kann so oft Ausgeführt werden wie mann möchte.
-
-!!"Wichtig"!!: nachdem die Installation abgeschlossen ist "lösche" auf jeden Fall:
-* die install.php
-* die update.php
-* und den Ordner update
+Die oben genanten Schritte können auch einzeln durchgeführt werden. Die `install.php` kann so oft Ausgeführt werden wie mann möchte.
 
 www.mozilo.de/forum für Fragen und Antworten
+
+## Lizenz
+moziloCMS ist OpenSource-Software und steht unter der [General Public License (GPL)](http://www.fsf.org/licensing/licenses/gpl.txt). Das heißt, es darf für alle Zwecke kostenlos genutzt, beliebig verändert und weiterverbreitet werden; veränderte Versionen unterliegen wieder der GPL.
