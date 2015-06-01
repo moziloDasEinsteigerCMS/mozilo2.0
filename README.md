@@ -3,7 +3,7 @@
 moziloCMS ist ein einfaches und einsteigerfreundliches Content-Management-System (CMS) für Benutzer mit geringen HTML-Kenntnissen.
 
 ## Vorraussetzungen
-Ein Webserver mit PHP 4.3.2 oder höher ist notwendig. Eine Datenbank wird nicht benötigt, da moziloCMS ein Flat-file CMS ist (alle Daten werden in einfachen Dateien gespeichert).
+Ein Webserver mit PHP 5.1.2 oder höher ist notwendig. Eine Datenbank wird nicht benötigt, da moziloCMS ein Flat-file CMS ist (alle Daten werden in einfachen Dateien gespeichert).
 
 ## Installation
 1. moziloCMS 2.0 [herunterladen](https://github.com/mozilo/mozilo2.0/archive/master.zip), ggf. entpacken und auf den eigenen Webserver hochladen
