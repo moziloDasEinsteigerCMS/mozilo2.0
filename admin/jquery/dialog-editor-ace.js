@@ -644,6 +644,24 @@ $(function() {
         minWidth: 20,
         selectedList: 1
     });
+
+
+    $("body").on("click",".ed-syntax-user", function(event){
+        event.preventDefault();
+        // [user syntax|...] und [user syntax=|...] nur {VALUE} wird ersetzt
+        if (this.value.search(/\|\.\.\.\]/) != -1) {
+            insert_ace(this.value.substring(0, this.value.length-4), ']',true);
+        }
+        // [user syntax=|] nur {DESCRIPTION} wird ersetzt da keine {VALUE}
+        else if (this.value.search(/\=\.\.\.\|\]/) != -1) {
+            insert_ace(this.value.substring(0, this.value.length-5), '|]',true);
+        }
+        // [user syntax] kein {DESCRIPTION} und {VALUE} [user syntax] wird eingesetzt
+        else {
+            insert_ace(this.value,false,false);
+        }
+    });
+
 /*
     $('#pageedit-box').on({
         mouseenter: function() { 

@@ -124,8 +124,13 @@ function returnFormatToolbar() {
 
 
     // Smileys
-    if ($CMS_CONF->get("replaceemoticons") == "true") {
-        $content .= '<table class="mo-menue-row-bottom" width="33%" cellspacing="0" border="0" cellpadding="0"><tr><td class="mo-nowrap">'.returnSmileyBar().'</td></tr></table>';
+    if(($user_icons = returnUserSyntaxIcons()) or $CMS_CONF->get("replaceemoticons") == "true") {
+        $content .= '<table class="mo-menue-row-bottom" width="100%" cellspacing="0" border="0" cellpadding="0"><tr>';
+        if($CMS_CONF->get("replaceemoticons") == "true")
+            $content .= '<td class="mo-nowrap" width="2%">'.returnSmileyBar().'</td><td width="3%">&nbsp;</td>';
+        if($user_icons)
+            $content .= '<td class="mo-nowrap">'.$user_icons.'</td>';
+        $content .= '</tr></table>';
     }
 
 
@@ -178,27 +183,55 @@ function returnFormatToolbarIcon($tag) {
 }
 
 
+// Icons mit benutzerdefinierten Syntaxelementen
+function returnUserSyntaxIcons() {
+    global $USER_SYNTAX, $CatPage;
+    $user_array = $USER_SYNTAX->toArray();
+    $content = NULL;
+    foreach($user_array as $key => $value) {
+        if(array_key_exists($key.'___icon',$user_array)) {
+            $inhalt = getUserSyntaxValueDescription($key,$value);
+            $user_array[$key.'___icon'] = trim($user_array[$key.'___icon']);
+            if(false !== strpos($user_array[$key.'___icon'],FILE_START)
+                    and false !== strpos($user_array[$key.'___icon'],FILE_END)) {
+                list($cat,$file) = $CatPage->split_CatPage_fromSyntax($user_array[$key.'___icon'],true);
+                if($CatPage->exists_File($cat,$file))
+                    $content .= '<input class="ed-syntax-user ed-icon-border" type="image" src="'.$CatPage->get_srcFile($cat,$file).'" title="'.$inhalt.'" value="'.$inhalt.'" />';
+            } else
+                $content .= '<button type="button" class="ed-syntax-user ed-icon-border" title="'.$inhalt.'" value="'.$inhalt.'">'.$user_array[$key.'___icon'].'</button>';
+        }
+    }
+    return $content;
+}
+
 // Selectbox mit allen benutzerdefinierten Syntaxelementen
 function returnUserSyntaxSelectbox() {
     global $USER_SYNTAX;
 
     $content = '<select name="usersyntax" class="usersyntaxselectbox" title="'.getLanguageValue("toolbar_usersyntax",true).'">';
-    foreach($USER_SYNTAX->toArray() as $key => $value) {
-        if(false !== strpos($value,"{DESCRIPTION}") and false === strpos($value,"{VALUE}")) {
-            $inhalt = "[".$key."=...|]";
-        } elseif(false === strpos($value,"{DESCRIPTION}") and false !== strpos($value,"{VALUE}")) {
-            $inhalt = "[".$key."|...]";
-        } elseif(false !== strpos($value,"{DESCRIPTION}") and false !== strpos($value,"{VALUE}")) {
-            $inhalt = "[".$key."=|...]";
-        } elseif(false === strpos($value,"{DESCRIPTION}") and false === strpos($value,"{VALUE}")) {
-            $inhalt = "[".$key."]";
-            if(strlen($value) == 0)
-                $inhalt = "[".$key."|...]";
-        }
+    $user_array = $USER_SYNTAX->toArray();
+    foreach($user_array as $key => $value) {
+        if(array_key_exists($key.'___icon',$user_array)
+                or false !== strpos($key,'___icon')) #,max(0,strlen($key) - 7)
+            continue;
+        $inhalt = getUserSyntaxValueDescription($key,$value);
         $content .= '<option value="'.$inhalt.'">'.$inhalt.'</option>';
     }
     $content .= "</select>";
     return $content;
+}
+
+function getUserSyntaxValueDescription($key,$value) {
+    if(false !== strpos($value,"{DESCRIPTION}") and false === strpos($value,"{VALUE}")) {
+        return "[".$key."=...|]";
+    } elseif(false === strpos($value,"{DESCRIPTION}") and false !== strpos($value,"{VALUE}")) {
+        return "[".$key."|...]";
+    } elseif(false !== strpos($value,"{DESCRIPTION}") and false !== strpos($value,"{VALUE}")) {
+        return "[".$key."=|...]";
+    } elseif(false === strpos($value,"{DESCRIPTION}") and false === strpos($value,"{VALUE}")) {
+        return (strlen($value) == 0) ? "[".$key."|...]" : "[".$key."]";
+    }
+    return NULL;
 }
 
 // Selectbox mit allen benutzerdefinierten Syntaxelementen

@@ -149,3 +149,26 @@ div.ace_scroller {
 .ed-find        {background-position: -80px -100px;}
 .ed-replace     {background-position: -100px -100px;}
 
+
+.ed-syntax-user {
+    cursor: pointer;
+    background-color: #f8f8f8;
+    padding: 2px;
+    margin:0 2px 0 2px;
+    vertical-align:middle;
+    text-align:center;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -khtml-border-radius: 4px;
+    border-radius: 4px;
+    line-height:16px;
+    display:inline-block;
+}
+
+input.ed-syntax-user {
+    height:16px;
+}
+
+.ed-syntax-user:hover {
+    background-color: #a9b7cb;
+}
