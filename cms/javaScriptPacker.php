@@ -21,30 +21,12 @@
  * ----------------------------------------------------------------------
  *
  * examples of usage :
- * $myPacker = new JavaScriptPacker($script, 62, true, false);
- * $packed = $myPacker->pack();
- *
- * or
- *
- * $myPacker = new JavaScriptPacker($script, 'Normal', true, false);
- * $packed = $myPacker->pack();
- *
- * or (default values)
- *
  * $myPacker = new JavaScriptPacker($script);
  * $packed = $myPacker->pack();
  *
  *
  * params of the constructor :
  * $script:       the JavaScript to pack, string.
- * $encoding:     level of encoding, int or string :
- *                0,10,62,95 or 'None', 'Numeric', 'Normal', 'High ASCII'.
- *                default: 62.
- * $fastDecode:   include the fast decoder in the packed result, boolean.
- *                default : true.
- * $specialChars: if you are flagged your private and local variables
- *                in the script, boolean.
- *                default: false.
  * 
  * The pack() method return the compressed JavasScript, as a string.
  *
@@ -60,17 +42,12 @@
  *   in fact preserve this order (but that's not require by the
  *   ECMAScript standard). So the encoded keywords order can be
  *   different in the two results.
- *
- * # Be careful with the 'High ASCII' Level encoding if you use
- *   UTF-8 in your files... 
  */
 
 
 class JavaScriptPacker {
-    // constants
-    const IGNORE = '$1';
 
-    // validate parameters
+    const IGNORE = '$1';
     private $_script = '';
 
     public function getPack($_script) {
@@ -140,11 +117,6 @@ class JavaScriptPacker {
         // done
         return $parser->exec($script);
     }
-
-    // protect characters used by the parser
-/*    private function _escape($script) {
-        return preg_replace('/([\\\\\'])/', '\\\$1', $script);
-    }*/
 }
 
 
