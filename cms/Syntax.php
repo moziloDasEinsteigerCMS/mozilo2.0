@@ -454,18 +454,14 @@ class Syntax {
         // überprüfung auf korrekten Link
         if (preg_match(MAIL_REGEX, $value)) {
             global $Punycode;
+            $value = $specialchars->rebuildSpecialChars($Punycode->decode($value),false,false);
             $mailto = $Punycode->encode($value);
-            $value = $Punycode->decode($value);
             if(empty($desciption))
                 $desciption = $value;
-#            $desciption = $specialchars->replaceSpecialChars($desciption,false);
             if(strip_tags($desciption) == $desciption)
-                $desciption = $specialchars->rebuildSpecialChars($specialchars->obfuscateAdress($desciption, 3), true, true);
-            $mailto = $specialchars->replaceSpecialChars($mailto,false);
-            $mailto = str_replace(array('%3A','%3F','%26','%3B','%3D','%40'),array(':','?','&amp;',';','=','@'),$mailto);
+                $desciption = $specialchars->obfuscateAdress($specialchars->rebuildSpecialChars($desciption,false,false), 3);
             $mailto = $specialchars->obfuscateAdress('mailto:'.$mailto, 3);
-            $value = $specialchars->replaceSpecialChars($value,false);
-            return '<a class="mail" href="'.$mailto.'"'.$this->getTitleAttribute($language->getLanguageHtml("tooltip_link_mail_1", $specialchars->rebuildSpecialChars($specialchars->obfuscateAdress($value, 3), true, true))).'>'.$desciption.'</a>';
+            return '<a class="mail" href="'.$mailto.'"'.$this->getTitleAttribute($specialchars->obfuscateAdress($language->getLanguageValue("tooltip_link_mail_1",$value), 3)).'>'.$desciption.'</a>';
         } else {
             if(empty($desciption))
                 $desciption = $value;
