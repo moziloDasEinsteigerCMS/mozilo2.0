@@ -212,7 +212,7 @@ function returnUserSyntaxSelectbox() {
     $user_array = $USER_SYNTAX->toArray();
     foreach($user_array as $key => $value) {
         if(array_key_exists($key.'___icon',$user_array)
-                or false !== strpos($key,'___icon')) #,max(0,strlen($key) - 7)
+                or false !== strpos($key,'___icon'))
             continue;
         $inhalt = getUserSyntaxValueDescription($key,$value);
         $content .= '<option value="'.$inhalt.'">'.$inhalt.'</option>';
