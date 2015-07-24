@@ -840,7 +840,7 @@ class Syntax {
         $syntax = $specialchars->encodeProtectedChr($USER_SYNTAX->get($syntax));
 
         if(strpos($value,FILE_START) !== false and strpos($value,FILE_END) !== false
-                and preg_match('#<(frame|iframe|img|input|a|area|base|link){1,1}[^>]*?(src|href){1,1}=["\']{VALUE}["\'][^>]*?>#is', $syntax)) {
+                and preg_match('#<(frame|iframe|img|input|a|area|audio|base|link|source|video){1,1}[^>]*?(src|href){1,1}=["\']{VALUE}["\'][^>]*?>#is', $syntax)) {
             global $CatPage;
             list($cat, $file) = $CatPage->split_CatPage_fromSyntax($value, true);
             if($file !== false)
