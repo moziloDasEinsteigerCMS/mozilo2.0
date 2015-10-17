@@ -33,8 +33,6 @@ define("DRAFT", true);
 error_reporting(-1);
 // Initial: Fehlerausgabe unterdrücken, um Path-Disclosure-Attacken ins Leere laufen zu lassen
 ini_set("display_errors", 1);
-// UTF-8 erzwingen - experimentell!
-@ini_set("default_charset", CHARSET);
 # ab php > 5.2.0 hat preg_* ein default pcre.backtrack_limit von 100000 zeichen
 # deshalb der versuch mit ini_set
 @ini_set('pcre.backtrack_limit', 1000000);
@@ -47,6 +45,8 @@ if (is_file(BASE_DIR.CMS_DIR_NAME."/DefaultConfCMS.php")) {
 } else {
     die("Fatal Error File doesn't exist: "."DefaultConfCMS.php");
 }
+// UTF-8 erzwingen - experimentell!
+@ini_set("default_charset", CHARSET);
 
 #$start_time = get_executTime(false);
 define("START_TIME",get_executTime(false));

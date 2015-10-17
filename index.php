@@ -9,8 +9,6 @@ define("IS_ADMIN",false);
 # ab php > 5.2.0 hat preg_* ein default pcre.backtrack_limit von 100000 zeichen
 # deshalb der versuch mit ini_set
 @ini_set('pcre.backtrack_limit', 1000000);
-// UTF-8 erzwingen - experimentell!
-@ini_set("default_charset", CHARSET);
 
 # fals da bei winsystemen \\ drin sind in \ wandeln
 $BASE_DIR = str_replace("\\\\", "\\",__FILE__);
@@ -26,6 +24,9 @@ if(is_file(BASE_DIR.CMS_DIR_NAME."/DefaultConfCMS.php")) {
 } else {
     die("Fatal Error ".BASE_DIR.CMS_DIR_NAME."/DefaultConfCMS.php Datei existiert nicht");
 }
+// UTF-8 erzwingen - experimentell!
+@ini_set("default_charset", CHARSET);
+
 $start_time = get_executTime(false);
 
 if(!is_file(BASE_DIR.CMS_DIR_NAME."/conf/main.conf.php") and is_file(BASE_DIR."install.php")) {
