@@ -228,7 +228,8 @@ class CatPageClass {
 
     # erzeugt einen default link wie im menue mit default tooltips und setzt in automatisch activ
     # $css = css class, wenn cat oder page activ wird an die class ein "active" angehängt
-    function create_AutoLinkTag($cat,$page,$css) {
+    # $request = TEXT für url Parameter und alle & werden nach $amp; gewandelt
+    function create_AutoLinkTag($cat,$page,$css,$request = false) {
         global $language;
         if($page !== false) {
             if($this->get_Type($cat,$page) == EXT_LINK) {
@@ -239,7 +240,7 @@ class CatPageClass {
                 $target = false;
             }
             return $this->create_LinkTag(
-                    $this->get_Href($cat,$page),
+                    $this->get_Href($cat,$page,$request),
                     $this->get_HrefText($cat,$page),
                     $css.$this->get_CssActiv($cat,$page),
                     $title,$target);
@@ -252,7 +253,7 @@ class CatPageClass {
             $target = false;
         }
         return $this->create_LinkTag(
-                $this->get_Href($cat,false),
+                $this->get_Href($cat,false,$request),
                 $this->get_HrefText($cat,false),
                 $css.$this->get_CssActiv($cat,false),
                 $title,$target);
