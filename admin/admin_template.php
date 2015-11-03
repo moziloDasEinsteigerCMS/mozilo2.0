@@ -214,7 +214,6 @@ function get_HtmlHead() {
         }
         if(count($packCSS) > 0)
             $cssMinifier->echoCSS($packCSS);
-
         if($unique)
             $packJS = array_unique($packJS);
         echo implode("",$PLUGIN_ADMIN_ADD_HEAD);
