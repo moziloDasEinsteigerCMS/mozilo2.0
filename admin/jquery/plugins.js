@@ -39,7 +39,7 @@ var save_handler = function() {
 
 $(function() {
 
-    $('body').append('<div id="dialog-plugin-admin"><iframe frameborder="0" width="100%" height="100%" align="left" style="overflow:visible;" /></div>');
+    $('body').append('<div id="dialog-plugin-admin"><iframe frameborder="0" width="100%" height="100%" align="left" style="overflow:visible;" \/><\/div>');
     $('#dialog-plugin-admin').dialog({
         autoOpen: false,
         resizable: true,
@@ -120,7 +120,7 @@ $(function() {
         event.preventDefault();
         if($(".js-plugin-del:checked").length > 0) {
             $(".js-plugin-del:checked").each(function(){
-                $("<span class=\"mo-bold\">"+$(this).val()+"</span><br />").appendTo(dialog_multi);
+                $("<span class=\"mo-bold\">"+$(this).val()+"<\/span><br \/>").appendTo(dialog_multi);
             });
             dialog_multi.dialog({
                 title: mozilo_lang["dialog_title_delete"],
@@ -128,9 +128,9 @@ $(function() {
                     text: mozilo_lang["yes"],
                     click: function() {
                         var form_manage = $("#js-plugin-manage");
-                        $("<input type=\"hidden\" name=\"plugin-all-del\" value=\"true\" />").appendTo(form_manage);
+                        $("<input type=\"hidden\" name=\"plugin-all-del\" value=\"true\" \/>").appendTo(form_manage);
                         $(".js-plugin-del:checked").each(function(){
-                            $("<input type=\"hidden\" name=\"plugin-del[]\" value=\""+$(this).val()+"\" />").appendTo(form_manage);
+                            $("<input type=\"hidden\" name=\"plugin-del[]\" value=\""+$(this).val()+"\" \/>").appendTo(form_manage);
                         });
                         form_manage.submit();
                     }

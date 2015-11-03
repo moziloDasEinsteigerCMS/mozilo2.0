@@ -341,7 +341,7 @@
             // The iframe transport accepts a serialized array as form data:
             options.formData = this._getFormData(options);
             // Add redirect url to form data on cross-domain uploads:
-            if (options.redirect && $('<a></a>').prop('href', options.url)
+            if (options.redirect && $('<a><\/a>').prop('href', options.url)
                     .prop('host') !== location.host) {
                 options.formData.push({
                     name: options.redirectParamName || 'redirect',
@@ -601,7 +601,7 @@ options.url = options.form.attr('action') || location.href;
                         that._getXHRPromise(false, options.context, args)
                     ).done(function (result, textStatus, jqXHR) {
 //$("#out").html($("#out").html()+"<br />done");
-var tmpdata = $("<span>"+result+"</span>");
+var tmpdata = $("<span>"+result+"<\/span>");
 if(tmpdata.find("#json-data").length > 0) {
 //$("#out").html($("#out").html()+"<br />done="+result+"<br /><br />");
 //    result = JSON.parse(tmpdata.find("#json-data").text());
@@ -722,7 +722,7 @@ if(tmpdata.find("#json-data").length > 0) {
 
         _replaceFileInput: function (input) {
             var inputClone = input.clone(true);
-            $('<form></form>').append(inputClone)[0].reset();
+            $('<form><\/form>').append(inputClone)[0].reset();
             // Detaching allows to insert the fileInput on another form
             // without loosing the file input value:
             input.after(inputClone).detach();

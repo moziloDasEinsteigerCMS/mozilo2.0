@@ -3,7 +3,7 @@ function change_to_rename_mode(this_item) {
         return false;
 
     var name = this_item.find('.js-gallery-name');
-    $('<input type="text" />')
+    $('<input type="text" \/>')
         .val(name.text())
         .addClass('in-gallery-new-name')
         .insertAfter(name).focus();

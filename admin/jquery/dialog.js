@@ -260,7 +260,7 @@ function clean_data(data) {
     retError = false;
     replace_item = false;
     pagecontent = false;
-    data = $("<span>"+data+"</span>");
+    data = $("<span>"+data+"<\/span>");
     // vom Server kamm ein tag mit der id replace-item
     if(data.find("#replace-item").length > 0) {
         replace_item = data.find("#replace-item");
@@ -301,7 +301,7 @@ function clean_data(data) {
     });
     // wenn ja dann ist das eine php error meldung
     if(data.html().length > 10) {
-        retError = $("<span class=\"error js-dialog-reload js-dialog-content\" title=\""+mozilo_lang["dialog_title_error"]+"\">"+data.html()+"</span>");
+        retError = $("<span class=\"error js-dialog-reload js-dialog-content\" title=\""+mozilo_lang["dialog_title_error"]+"\">"+data.html()+"<\/span>");
     }
     return data;
 }
@@ -433,9 +433,9 @@ else
 }
 
 $(function() {
-    $('body').append('<div id="dialog-multi"></div>');
-    $('body').append('<div id="dialog-mod-rewrite"></div>');
-    $('body').append('<div style="height:1px;overflow:hidden;"><div id="dialog-test-w" style="float:left;"></div><div class="mo-clear"></div></div>');
+    $('body').append('<div id="dialog-multi"><\/div>');
+    $('body').append('<div id="dialog-mod-rewrite"><\/div>');
+    $('body').append('<div style="height:1px;overflow:hidden;"><div id="dialog-test-w" style="float:left;"><\/div><div class="mo-clear"><\/div><\/div>');
     $("#dialog-multi").dialog({
         autoOpen: false,
         resizable: true,

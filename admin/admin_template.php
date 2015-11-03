@@ -200,14 +200,14 @@ function get_HtmlHead() {
             if(strpos($item,"<script") !== false and strpos($item,"src=") !== false) {
                 preg_match('#<(script){1,1}[^>]*?(src){1,1}=["\'](.*)["\'][^>]*?>#is', $item,$match);
                 if(isset($match[3]) and strpos($match[3],".min.js") === false) {
-                    $packJS[] = str_replace(URL_BASE,"",$match[3]);
+                    $packJS[] = substr_replace($match[3],"",0,strlen(URL_BASE));
                     unset($PLUGIN_ADMIN_ADD_HEAD[$pos]);
                     $unique = true;
                 }
             } elseif(strpos($item,"<link") !== false and strpos($item,"href=") !== false) {
                 preg_match('#<(link){1,1}[^>]*?(href){1,1}=["\'](.*)["\'][^>]*?>#is', $item,$match);
                 if(isset($match[3]) and strpos($match[3],".min.css") === false) {
-                    $packCSS[] = str_replace(URL_BASE,"",$match[3]);
+                    $packCSS[] = substr_replace($match[3],"",0,strlen(URL_BASE));
                     unset($PLUGIN_ADMIN_ADD_HEAD[$pos]);
                 }
             }

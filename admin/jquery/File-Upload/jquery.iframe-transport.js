@@ -41,7 +41,7 @@
                 iframe;
             return {
                 send: function (_, completeCallback) {
-                    form = $('<form style="display:none;"></form>');
+                    form = $('<form style="display:none;"><\/form>');
                     // javascript:false as initial iframe src
                     // prevents warning popups on HTTPS in IE6.
                     // IE versions below IE8 cannot set the name property of
@@ -49,7 +49,7 @@
                     // so we set the name along with the iframe HTML markup:
                     iframe = $(
                         '<iframe src="javascript:false;" name="iframe-transport-' +
-                            (counter += 1) + '"></iframe>'
+                            (counter += 1) + '"><\/iframe>'
                     ).bind('load', function () {
                         var fileInputClones,
                             paramNames = $.isArray(options.paramName) ?
@@ -80,7 +80,7 @@
                                 );
                                 // Fix for IE endless progress bar activity bug
                                 // (happens on form submits to iframe targets):
-                                $('<iframe src="javascript:false;"></iframe>')
+                                $('<iframe src="javascript:false;"><\/iframe>')
                                     .appendTo(form);
                                 form.remove();
                             });
@@ -90,7 +90,7 @@
                             .prop('method', options.type);
                         if (options.formData) {
                             $.each(options.formData, function (index, field) {
-                                $('<input type="hidden"/>')
+                                $('<input type="hidden" \/>')
                                     .prop('name', field.name)
                                     .val(field.value)
                                     .appendTo(form);

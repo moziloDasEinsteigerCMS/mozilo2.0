@@ -106,7 +106,7 @@ function send_editor_preview() {
                 dialog_multi.dialog("close");
             }
             if(getdata == "true") {
-                var prev_iframe = $('<iframe frameborder="0" width="100%" height="100%" align="left" style="overflow:visible;"></iframe>').prop('src', prev_url);
+                var prev_iframe = $('<iframe frameborder="0" width="100%" height="100%" align="left" style="overflow:visible;"><\/iframe>').prop('src', prev_url);
                 dialog_prev_pageedit_box.dialog({
                     width: (parseInt($(window).width()) - dialogMaxheightOffset),
                     height: (parseInt($(window).height()) - dialogMaxheightOffset)
@@ -468,7 +468,7 @@ $(function() {
     });
 
 
-    $("body").append('<div id="prev-pageedit-box"></div>');
+    $("body").append('<div id="prev-pageedit-box"><\/div>');
 
     $("#pageedit-box").dialog({
         autoOpen: false,

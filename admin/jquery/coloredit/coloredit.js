@@ -24,9 +24,9 @@ $(function() {
             $('.ce-in-hex').removeClass('js-in-hex');
             $('.js-coloreditor-button').show();
 
-            this.color_box = $('<div id="ce-colorchange" />').addClass("ce-pos-rel").appendTo("body");
+            this.color_box = $('<div id="ce-colorchange" \/>').addClass("ce-pos-rel").appendTo("body");
 
-            var hsv_box = $('<div />').addClass("ce-pos-rel ce-color-hsv-dim")
+            var hsv_box = $('<div \/>').addClass("ce-pos-rel ce-color-hsv-dim")
                 .bind({
                 mousedown: function(event) {
                     if(event.which != 1) return true;
@@ -56,27 +56,27 @@ $(function() {
                         $(this).css("cursor", "default");
                 }}).appendTo(this.color_box);
 
-            this.color_sv = $('<div />').addClass("ce-pos-abs ce-tri-dim").appendTo(hsv_box);
+            this.color_sv = $('<div \/>').addClass("ce-pos-abs ce-tri-dim").appendTo(hsv_box);
 
-            this.color_hsv = $('<div />').addClass("ce-pos-abs ce-color-hsv ce-color-hsv-dim").appendTo(hsv_box);
+            this.color_hsv = $('<div \/>').addClass("ce-pos-abs ce-color-hsv ce-color-hsv-dim").appendTo(hsv_box);
 
-            this.marker_h = $('<div />').addClass("ce-pos-abs ce-marker").appendTo(hsv_box);
+            this.marker_h = $('<div \/>').addClass("ce-pos-abs ce-marker").appendTo(hsv_box);
 
             this.marker_sv = this.marker_h.clone().appendTo(hsv_box);
 
-            var default_colors = $('<div class="ce-default-color-box ui-widget-content ui-corner-all" />').on("click", "img", function(event){that._updateTagBG(event)}).appendTo(this.color_box);
+            var default_colors = $('<div class="ce-default-color-box ui-widget-content ui-corner-all" \/>').on("click", "img", function(event){that._updateTagBG(event)}).appendTo(this.color_box);
 
             this._makeDefaultColors();
 
-            var prev_box = $('<div />').addClass("ce-pos-abs ce-prev-box").appendTo(this.color_box);
+            var prev_box = $('<div \/>').addClass("ce-pos-abs ce-prev-box").appendTo(this.color_box);
 
-            $('<input type="text" value="" size="6" maxlength="6" />').addClass('ce-pos-abs ce-in-hex').appendTo(prev_box);
+            $('<input type="text" value="" size="6" maxlength="6" \/>').addClass('ce-pos-abs ce-in-hex').appendTo(prev_box);
 
-            this.color_curent = $('<div />').addClass("ce-pos-abs ce-color-curent ui-widget-content ui-corner-right").click( function(event) {that._updateTagBG(event)}).appendTo(prev_box);
+            this.color_curent = $('<div \/>').addClass("ce-pos-abs ce-color-curent ui-widget-content ui-corner-right").click( function(event) {that._updateTagBG(event)}).appendTo(prev_box);
 
-            $('<div />').addClass("ce-pos-abs ce-bg-color-change ui-widget-content ui-corner-left").appendTo(prev_box);
+            $('<div \/>').addClass("ce-pos-abs ce-bg-color-change ui-widget-content ui-corner-left").appendTo(prev_box);
 
-            var slider_ul = $('<ul />').addClass("ce-pos-abs").appendTo(this.color_box);
+            var slider_ul = $('<ul \/>').addClass("ce-pos-abs").appendTo(this.color_box);
 
             this.a_rgb = new Array("red","lime","blue");
             this.a_sv = new Array("saturation","brightness");
@@ -86,7 +86,7 @@ $(function() {
             for(i = 0; i < n.length; i++) {
                 if(n[i] == "saturation" || n[i] == "brightness")
                     max_value = 100;
-                this["s_"+n[i]] = $('<div />').addClass("ce-slide").slider({
+                this["s_"+n[i]] = $('<div \/>').addClass("ce-slide").slider({
                         range:"min",min:0,max:max_value,value:0,
                         slide: function(event, ui) {
                             switch ($(this).data("art")) {
@@ -112,18 +112,18 @@ $(function() {
                 if(n[i] == "saturation" || n[i] == "brightness") {
                     this["s_"+n[i]].css("background-image","url("+img_url+n[i]+".png)").find('.ui-slider-range').css("background","transparent");
                     if(n[i] == "saturation")
-                        this["s_"+n[i]].prepend('<img src="'+img_url+'black.png" style="position:absolute;width:100px" class="ui-corner-all ui-slider-horizontal" />');
+                        this["s_"+n[i]].prepend('<img src="'+img_url+'black.png" style="position:absolute;width:100px" class="ui-corner-all ui-slider-horizontal" \/>');
                 } else {
                     this["s_"+n[i]].find('.ui-slider-range').css("background",n[i]);
                     this["s_"+n[i]].find('.ui-slider-handle').css("border-color",n[i]);
                 }
-                this["i_"+n[i]] = $('<input type="text" value="0" size="3" maxlength="3" />')
+                this["i_"+n[i]] = $('<input type="text" value="0" size="3" maxlength="3" \/>')
                     .addClass("ce-value").data("max_value",max_value)
                     .bind({
                         keyup: function(event) {that._checkDezValue(event);},
                         focusout: function() {$(this).val(that._getInputDez($(this)));}
                     });
-                $('<li />').append(this["s_"+n[i]]).append(this["i_"+n[i]]).appendTo(slider_ul);
+                $('<li \/>').append(this["s_"+n[i]]).append(this["i_"+n[i]]).appendTo(slider_ul);
                 if($().spinner)
                     this["i_"+n[i]].spinner({max:max_value,min:0,value:0,
                         spin: function(event,ui) { that._checkDezValue(event); }
@@ -169,7 +169,7 @@ $(function() {
             if(defaultcolors.length > 1) {
                 defaultcolors_a = defaultcolors.split(",");
                 for (var i = 0; i < defaultcolors_a.length; ++i) {
-                    html += '<img title="'+defaultcolors_a[i]+'" class="ce-default-color-img ui-widget-content ui-corner-all" style="background-color:#'+defaultcolors_a[i]+';" src="'+ICON_URL_SLICE+'" />';
+                    html += '<img title="'+defaultcolors_a[i]+'" class="ce-default-color-img ui-widget-content ui-corner-all" style="background-color:#'+defaultcolors_a[i]+';" src="'+ICON_URL_SLICE+'" \/>';
                 }
                 $('.ce-default-color-box').html(html);
             } else
