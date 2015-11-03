@@ -168,11 +168,11 @@ function get_ext(cat_page) {
 function make_input_name(cat_page) {
     var name = get_page(cat_page);
     if(name) {
-        return $("<input type=\"text\" class=\"js-in-name js-make-input\" />").val(rawurldecode_js(name));
+        return $("<input type=\"text\" class=\"js-in-name js-make-input\" \/>").val(rawurldecode_js(name));
     }
     name = get_cat(cat_page);
     if(name)
-        return $("<input type=\"text\" class=\"js-in-name js-make-input\" />").val(rawurldecode_js(name));
+        return $("<input type=\"text\" class=\"js-in-name js-make-input\" \/>").val(rawurldecode_js(name));
     return "";
 }
 
@@ -181,14 +181,14 @@ function make_input_link(cat_page) {
     if(typeof link == "boolean") {
         return "";
     }
-    return mozilo_lang["url_adress"] + " <input type=\"text\" value=\""+rawurldecode_js(link)+"\" class=\"js-in-link js-make-input\" />";
+    return mozilo_lang["url_adress"] + " <input type=\"text\" value=\""+rawurldecode_js(link)+"\" class=\"js-in-link js-make-input\" \/>";
 }
 
 function make_input_target(cat_page) {
     var curent_target = get_target(cat_page);
     if(!curent_target)
         return "";
-    var inputs = "<b>" + mozilo_lang["target"] + "</b>" + " <form>";
+    var inputs = "<b>" + mozilo_lang["target"] + "<\/b>" + " <form>";
     var for_id = new Date();
     for_id = for_id.getTime();
     for(var i = 0; i < target_array.length; i++) {
@@ -196,17 +196,17 @@ function make_input_target(cat_page) {
         if(target_array[i] == curent_target) {
             inputs += " checked=\"checked\"";
         }
-        inputs += " />";
-        inputs += "<label for=\"target" + for_id + i + "\">" + mozilo_lang[target_array[i].replace(/-|_/g,"")] + "</label>";
+        inputs += " \/>";
+        inputs += "<label for=\"target" + for_id + i + "\">" + mozilo_lang[target_array[i].replace(/-|_/g,"")] + "<\/label>";
     }
-    return inputs + "</form>";
+    return inputs + "<\/form>";
 }
 
 function make_input_ext(cat_page) {
     var curent_ext = get_ext(cat_page);
     if(!curent_ext || curent_ext == EXT_LINK)
         return "";
-    var inputs = "<b>" + mozilo_lang["page_status"] + "</b>" + ": <form>",
+    var inputs = "<b>" + mozilo_lang["page_status"] + "<\/b>" + ": <form>",
         for_id = new Date();
     for_id = for_id.getTime();
     for(var i = 0; i < ext_array.length - 1; i++) {
@@ -214,10 +214,10 @@ function make_input_ext(cat_page) {
         if(ext_array[i] == curent_ext) {
             inputs += " checked=\"checked\"";
         }
-        inputs += " />";
-        inputs += "<label for=\"status" + for_id + i + "\">" + mozilo_lang[ext_array[i]] + "</label>";
+        inputs += " \/>";
+        inputs += "<label for=\"status" + for_id + i + "\">" + mozilo_lang[ext_array[i]] + "<\/label>";
     }
-    return inputs + "</form>";
+    return inputs + "<\/form>";
 }
 
 // die änderungen bei new, copy und move machen aber nur den name send macht dann den rest

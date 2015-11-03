@@ -19,7 +19,7 @@
 	$.widget("ech.multiselectfilter", {
 		
 		options: {
-            label: '<span class="ui-icon ui-icon-search"></span>',
+            label: '<span class="ui-icon ui-icon-search"><\/span>',
 			width: null, /* override default width set in css file (px). null will inherit */
 			placeholder: "",
 			autoReset: false,
@@ -36,7 +36,7 @@
 				
 
 				// wrapper elem
-				wrapper = (this.wrapper = $('<div class="ui-multiselect-filter">'+(opts.label.length ? opts.label : '')+'<input placeholder="'+opts.placeholder+'" type="search"' + (/\d/.test(opts.width) ? 'style="width:'+opts.width+'px"' : '') + ' /></div>').prependTo( this.header ));
+				wrapper = (this.wrapper = $('<div class="ui-multiselect-filter">'+(opts.label.length ? opts.label : '')+'<input placeholder="'+opts.placeholder+'" type="search"' + (/\d/.test(opts.width) ? 'style="width:'+opts.width+'px"' : '') + ' \/><\/div>').prependTo( this.header ));
 
 			// reference to the actual inputs
 			this.inputs = instance.menu.find('input[type="checkbox"], input[type="radio"]');

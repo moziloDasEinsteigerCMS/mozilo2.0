@@ -40,7 +40,7 @@ $.each($(options.filesContainer).find('.template-download'), function (index) {
         var time = (new Date()).getTime();
         $(this).hide(0).attr('id','oldfile'+index+time);
         current_appendTo.addClass('ui-state-error name-twice').attr('id','newfile'+index+time);
-        current_appendTo.find('.progress').prepend('<b>Überschreibe Datei</b>');
+        current_appendTo.find('.progress').prepend('<b>Überschreibe Datei<\/b>');
     }
 });
 //$("#out").html($("#out").html()+"<br>files=");
@@ -105,7 +105,7 @@ that._changeFilesCount();
 //var context = data.context;
                     $.ajax(data)
                         .success(function (result) {
-                            var tmpdata = $("<span>"+result+"</span>");
+                            var tmpdata = $("<span>"+result+"<\/span>");
                             if(tmpdata.find(".error").length > 0) {
                                 window.location.href = "index.php?fileupload="+action_activ;
                             }
@@ -128,7 +128,7 @@ that._changeFilesCount();
                     context = data.context;
                     $.ajax(data)
                         .success(function (file) {
-                            var tmpdata = $("<span>"+file+"</span>");
+                            var tmpdata = $("<span>"+file+"<\/span>");
                             if(tmpdata.find(".error").length > 0) {
                                 window.location.href = "index.php?fileupload="+action_activ;
                             } else if(tmpdata.find("#json-data").length > 0) {
@@ -152,7 +152,7 @@ that._changeFilesCount();
                                     if(context.find('.preview img').length > 0)
                                         context.find('.preview img').prop('src', file.thumbnail_url+"?"+(new Date()).getTime());
                                     else {
-                                        context.find('.preview').append('<a><img></a>')
+                                        context.find('.preview').append('<a><img><\/a>')
                                         .find('img').prop('src', file.thumbnail_url+"?"+(new Date()).getTime());
                                         context.find('a').prop('title', file.name);
                                     }
@@ -275,7 +275,7 @@ mimeType: this._mimeType,
             } else {
 //$("#out").html($("#out").html()+"<br />dilaog öffnen");
                 dialog_multi.data("del_object",$(this));
-                dialog_open("delete_file","<b>"+$(this).closest('.template-download').find('.name').text()+"</b>");
+                dialog_open("delete_file","<b>"+$(this).closest('.template-download').find('.name').text()+"<\/b>");
             }
         },
 
@@ -343,9 +343,9 @@ if(template.hasClass('name-twice')) {
                     filesList.find('.delete input:checked').each(function() {//.del.delete ete 
 //$("#out").html($("#out").html()+"<br />file="+$(this).closest('.template-download').find('.name').text());
                         dialog = true;
-                        dialog_text += "<li><b>"+$(this).closest('.template-download').find('.name').text()+"</b></li>";
+                        dialog_text += "<li><b>"+$(this).closest('.template-download').find('.name').text()+"<\/b><\/li>";
                     });
-                    dialog_text += "</ul></div>";
+                    dialog_text += "<\/ul><\/div>";
                     if(dialog)
                         dialog_open("delete_files",dialog_text);
 //return false;

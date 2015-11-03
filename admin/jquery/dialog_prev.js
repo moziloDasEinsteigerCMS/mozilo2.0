@@ -15,7 +15,7 @@ function dialog_img_preview(file_href) {
             }).dialog("open");
         if(prev_img.width() > dialog_prev.width() || prev_img.height() > dialog_prev.height()) {
             dialog_prev.css('overflow','hidden');
-            prev_img.wrap('<div id="js-imgload-box" style="overflow:auto;padding:0;margin:0;width:100%;height:100%;" />');
+            prev_img.wrap('<div id="js-imgload-box" style="overflow:auto;padding:0;margin:0;width:100%;height:100%;" \/>');
             prev_img.css('cursor','move');
         }
     });
@@ -37,7 +37,7 @@ function dialog_img_preview_wait(file_title) {
 }
 
 function dialog_iframe_preview(file_href) {
-    var prev_iframe = $('<iframe frameborder="0" width="100%" height="100%" align="left" style="overflow:visible;"></iframe>').prop('src', file_href);
+    var prev_iframe = $('<iframe frameborder="0" width="100%" height="100%" align="left" style="overflow:visible;"><\/iframe>').prop('src', file_href);
     dialog_prev.dialog({
         title: file_href.substring(file_href.lastIndexOf("/")+1),
         width: $(".mo-td-content-width").eq(0).width(),
@@ -53,7 +53,7 @@ function is_img(file_href) {
 }
 
 $(function () {
-    $('body').append('<div id="prev-dialog"></div>');
+    $('body').append('<div id="prev-dialog"><\/div>');
 
     $("#js-imgload-box img").live({
         mousedown: function(event) {

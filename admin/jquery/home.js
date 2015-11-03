@@ -3,7 +3,7 @@ var in_enter_handler = function(event) {
         if($(this).val().length > 5)
             send_data($(this).serialize());
         else {
-            dialog_open("messages",returnMessage(false, mozilo_lang["home_error_test_mail"]+"<br /><br /><b>"+$(this).val()+"</b>"));
+            dialog_open("messages",returnMessage(false, mozilo_lang["home_error_test_mail"]+"<br \/><br \/><b>"+$(this).val()+"<\/b>"));
         }
         return false;
     }

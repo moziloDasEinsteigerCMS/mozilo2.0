@@ -55,33 +55,33 @@ showClose: true,
 		this._isOpen = false; // assume no
 	
 		var 
-			button = (this.button = $('<button type="button"><span class="ui-icon ui-icon-triangle-2-n-s ui-corner-right"></span></button>'))
+			button = (this.button = $('<button type="button"><span class="ui-icon ui-icon-triangle-2-n-s ui-corner-right"><\/span><\/button>'))
 				.addClass('ui-multiselect ui-widget ui-state-default ui-corner-all ui-helper-clearfix')
 				.addClass( o.classes )
 				.attr({ 'title':el.attr('title'), 'aria-haspopup':true, 'tabIndex':el.attr('tabIndex') })
 				.insertAfter( el ),
 			
-			buttonlabel = (this.buttonlabel = $('<span />'))
+			buttonlabel = (this.buttonlabel = $('<span \/>'))
                 .addClass( 'ui-multiselect-select-text ui-corner-left' )
 				.html( o.noneSelectedText )
 				.appendTo( button ),
 				
-			menu = (this.menu = $('<div />'))
+			menu = (this.menu = $('<div \/>'))
 				.addClass('ui-multiselect-menu ui-widget ui-widget-content ui-corner-all mo-shadow')
 				.addClass( o.classes )
 				.appendTo( document.body ),
 				
-			header = (this.header = $('<div />'))
+			header = (this.header = $('<div \/>'))
 				.addClass('ui-widget-header ui-corner-all ui-multiselect-header ui-helper-clearfix')
 				.appendTo( menu ),
 				
-			headerLinkContainer = (this.headerLinkContainer = $('<ul />'))
+			headerLinkContainer = (this.headerLinkContainer = $('<ul \/>'))
 				.addClass('ui-helper-reset')
-                .append('<li><a class="ui-multiselect-all" href="#"><span class="ui-icon ui-icon-check"></span><span>' + o.checkAllText + '</span></a></li><li><a class="ui-multiselect-none" href="#"><span class="ui-icon ui-icon-closethick"></span><span>' + o.uncheckAllText + '</span></a></li>')
-                .append('<li class="ui-multiselect-close"><a href="#" class="ui-multiselect-close"><span class="ui-icon ui-icon-circle-close"></span></a></li>')
+                .append('<li><a class="ui-multiselect-all" href="#"><span class="ui-icon ui-icon-check"><\/span><span>' + o.checkAllText + '<\/span><\/a><\/li><li><a class="ui-multiselect-none" href="#"><span class="ui-icon ui-icon-closethick"><\/span><span>' + o.uncheckAllText + '<\/span><\/a><\/li>')
+                .append('<li class="ui-multiselect-close"><a href="#" class="ui-multiselect-close"><span class="ui-icon ui-icon-circle-close"><\/span><\/a><\/li>')
 				.appendTo( header ),
 			
-			checkboxContainer = (this.checkboxContainer = $('<ul />'))
+			checkboxContainer = (this.checkboxContainer = $('<ul \/>'))
 				.addClass('ui-multiselect-checkboxes ui-helper-reset')
 				.appendTo( menu );
 		
@@ -154,7 +154,7 @@ liClassInOpt = false;
 liClassInOpt = "ui-multiselect-li-in-opt";
 				// has this optgroup been added already?
 				if( $.inArray(optLabel, optgroups) === -1 ){
-                    html += '<li class="ui-multiselect-optgroup-label ' + parent.className + '"><a href="#" class="ui-state-active ui-corner-all">' + optLabel + '</a></li>';
+                    html += '<li class="ui-multiselect-optgroup-label ' + parent.className + '"><a href="#" class="ui-state-active ui-corner-all">' + optLabel + '<\/a><\/li>';
 					optgroups.push( optLabel );
 				}
 			}
@@ -188,7 +188,7 @@ liClassInOpt = "ui-multiselect-li-in-opt";
 			}
 
 			// add the title and close everything off
-			html += ' /><span>' + title + '</span></label></li>';
+			html += ' \/><span>' + title + '<\/span><\/label><\/li>';
 		});
 		
 		// insert into the DOM

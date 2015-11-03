@@ -29,7 +29,7 @@ function load_files_datajson(that) {
         dropZone: that
     });
     $.get(URL_BASE+ADMIN_DIR_NAME+"/index.php?"+that.serialize(), function (result) {
-        var tmpdata = $("<span>"+result+"</span>");
+        var tmpdata = $("<span>"+result+"<\/span>");
         if(tmpdata.find("#json-data").length > 0) {
             result = jQuery.parseJSON(tmpdata.find("#json-data").text());
         } else

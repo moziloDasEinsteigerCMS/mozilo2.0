@@ -114,9 +114,9 @@ function rawurldecode_js(str) {
 // das ist die gleiche function wie in der index.php
 function returnMessage(success, message) {
     if (success === true) {
-        return "<span class=\"mo-message-erfolg\"><img class=\"mo-message-icon mo-icons-icon mo-icons-information\" src=\""+ICON_URL_SLICE+"\" alt=\"information\" />"+message+"</span>";
+        return "<span class=\"mo-message-erfolg\"><img class=\"mo-message-icon mo-icons-icon mo-icons-information\" src=\""+ICON_URL_SLICE+"\" alt=\"information\" \/>"+message+"<\/span>";
     } else {
-        return "<span class=\"mo-message-fehler\"><img class=\"mo-message-icon mo-icons-icon mo-icons-error\" src=\""+ICON_URL_SLICE+"\" alt=\"error\" />"+message+"</span>";
+        return "<span class=\"mo-message-fehler\"><img class=\"mo-message-icon mo-icons-icon mo-icons-error\" src=\""+ICON_URL_SLICE+"\" alt=\"error\" \/>"+message+"<\/span>";
     }
 }
 
@@ -139,7 +139,7 @@ function test_modrewrite(that) {
         success: function(data, textStatus, jqXHR) {
             send_object_mod_rewrite = false;
             dialog_mod_rewrite.dialog("close");
-            var tmp = $("<span>"+data+"</span>");
+            var tmp = $("<span>"+data+"<\/span>");
             if(tmp.find("#mod-rewrite-true").length > 0) {
                 // in Info die li austauschen
                 if($("#mod-rewrite-false").length > 0)
@@ -249,7 +249,7 @@ $(function() {
 
     $("body").on("click",".js-docu-link", function(event) {
         event.preventDefault();
-        var iframe = $('<iframe frameborder="0" width="100%" height="100%" align="left" style="overflow:visible;" />');
+        var iframe = $('<iframe frameborder="0" width="100%" height="100%" align="left" style="overflow:visible;" \/>');
         iframe.attr("src",$(this).attr("href"));
         dialog_open("docu",iframe);
     });

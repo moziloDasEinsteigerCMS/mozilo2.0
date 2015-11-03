@@ -9,24 +9,24 @@ var delete_handler = function (event) {
         return false;
     var li_cat_page = find_li_cat_page(that),
         this_table = li_cat_page.find("table").eq(0),
-        dialog_text = "<div id=\"dialog-del\"><ul><li><b>" + this_table.find(".js-normal-in-name").text() + "</b><br />";
+        dialog_text = "<div id=\"dialog-del\"><ul><li><b>" + this_table.find(".js-normal-in-name").text() + "<\/b><br \/>";
     if(!is_page(this_table.find(".js-in-cat-page").val()) && !get_target(this_table.find(".js-in-cat-page").val())) {
         if(li_cat_page.find(".js-li-page").length > 0) {
-            dialog_text += "<br /><b>" + mozilo_lang["pages"] + ":</b><br /><ul>";
+            dialog_text += "<br \/><b>" + mozilo_lang["pages"] + ":<\/b><br \/><ul>";
             li_cat_page.find(".js-li-page").each(function(index) {
-                dialog_text += "<li>" + $(this).find(".js-page-name").text() + "</li>";
+                dialog_text += "<li>" + $(this).find(".js-page-name").text() + "<\/li>";
             });
-            dialog_text += "</ul>";
+            dialog_text += "<\/ul>";
         }
         if(this_table.find(".js-cat-files").val() != "false") {
-            dialog_text += "<br /><b>" + mozilo_lang["files"] + ":</b><br /><ul>";
+            dialog_text += "<br \/><b>" + mozilo_lang["files"] + ":<\/b><br \/><ul>";
             var files = this_table.find(".js-cat-files").val().split("-#-");
             for (var i = 0; i < files.length; ++i)
-                dialog_text += "<li>" + files[i] + "</li>";
-            dialog_text += "</ul>";
+                dialog_text += "<li>" + files[i] + "<\/li>";
+            dialog_text += "<\/ul>";
         }
     }
-    dialog_text += "</li></ul></div>";
+    dialog_text += "<\/li><\/ul><\/div>";
 
     send_item_status = "cat_page_del";
 
@@ -231,7 +231,7 @@ var edit_handler = function() {
 
     dialog_editor.data("send_object",false)
         .dialog({
-            title: mozilo_lang["page_edit"] + " → " + "<a href=\"" + link_href.replace(/%2F/g,"/") + "\" target=\"_blank\">" + link_text + "</a>",
+            title: mozilo_lang["page_edit"] + " → " + "<a href=\"" + link_href.replace(/%2F/g,"/") + "\" target=\"_blank\">" + link_text + "<\/a>",
             width: $(".mo-td-content-width").eq(0).width(),
             height: (parseInt($(window).height()) - dialogMaxheightOffset)});
     editor_file = "editpage="+make_clean_cat_page_name(cat_page).replace(/\]\[/, ":");
@@ -302,7 +302,7 @@ $(function() {
             // nur wenn es kein Link ist
             if(!get_target(ui.draggable.find(".js-in-cat").attr("name"))) {
                 ui.draggable.find(".mo-li-head-tag").removeClass("mo-li-head-tag-no-ul");
-                var new_ul = $("<ul class=\"js-ul-pages  mo-in-ul-ul\"></ul>")
+                var new_ul = $("<ul class=\"js-ul-pages  mo-in-ul-ul\"><\/ul>")
                         .appendTo(ui.draggable);
                 new_ul.droppable(option_page_droppable).sortable(option_page_sortable);
             } else {

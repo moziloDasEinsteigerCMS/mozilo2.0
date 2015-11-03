@@ -14,9 +14,9 @@ $(function() {
             this.rows = [];
             this.search_rows = [];
 
-            this.search_fild = $('<div class="js-mofilterplugin mo-margin-top ui-state-default ui-corner-all ui-helper-clearfix mo-li-head-tag-no-ul mo-li-head-tag mo-tag-height-from-icon mo-middle"></div>');
-            this.search_fild.append('<span class="mo-bold mo-padding-right mo-padding-left">'+this.options.filter_text+'</span>');
-            this.search_fild.append('<input class="mo-plugin-input" value="" type="search" style="width:15em" />');
+            this.search_fild = $('<div class="js-mofilterplugin mo-margin-top ui-state-default ui-corner-all ui-helper-clearfix mo-li-head-tag-no-ul mo-li-head-tag mo-tag-height-from-icon mo-middle"><\/div>');
+            this.search_fild.append('<span class="mo-bold mo-padding-right mo-padding-left">'+this.options.filter_text+'<\/span>');
+            this.search_fild.append('<input class="mo-plugin-input" value="" type="search" style="width:15em" \/>');
 
             this.search_fild.insertBefore(this.element);
 
@@ -31,7 +31,7 @@ $(function() {
                 },'input[type="search"]');
 
             if(this.options.filter_action == "catpage") {
-                this.search_fild.append('<input type="button" class="js-filter-page-hide mo-checkbox-del mo-td-middle" value="'+mozilo_lang["filter_button_all_hide"]+'" />');
+                this.search_fild.append('<input type="button" class="js-filter-page-hide mo-checkbox-del mo-td-middle" value="'+mozilo_lang["filter_button_all_hide"]+'" \/>');
                 this.search_fild.on({
                         click: function(e) {
                             e.preventDefault();

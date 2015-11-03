@@ -64,7 +64,7 @@ $(function() {
         event.preventDefault();
         if($("#js-template-manage [type=checkbox]:checked").length > 0) {
             $("#js-template-manage [type=checkbox]:checked").each(function(){
-                $("<span class=\"mo-bold\">"+rawurldecode_js($(this).val())+"</span><br />").appendTo(dialog_multi);
+                $("<span class=\"mo-bold\">"+rawurldecode_js($(this).val())+"<\/span><br \/>").appendTo(dialog_multi);
             });
             dialog_multi.dialog({
                 title: mozilo_lang["dialog_title_delete"],
@@ -72,7 +72,7 @@ $(function() {
                     text: mozilo_lang["yes"],
                     click: function() {
                         var form_manage = $("#js-template-manage");
-                        $("<input type=\"hidden\" name=\"template-all-del\" value=\"true\" />").appendTo(form_manage);
+                        $("<input type=\"hidden\" name=\"template-all-del\" value=\"true\" \/>").appendTo(form_manage);
                         form_manage.submit();
                     }
                 },{

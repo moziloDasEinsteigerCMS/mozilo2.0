@@ -8,7 +8,7 @@ var delete_handler = function (event) {
         return false;
     var this_li = that.parents(".js-file-dir");
 
-    var dialog_text = "<b>" + this_li.find(".js-gallery-name").text() + "</b><br />" + mozilo_lang["gallery_delete_confirm"];
+    var dialog_text = "<b>" + this_li.find(".js-gallery-name").text() + "<\/b><br \/>" + mozilo_lang["gallery_delete_confirm"];
 
     send_item_status = "gallery_del";
     dialog_multi.data("del_object",this_li);

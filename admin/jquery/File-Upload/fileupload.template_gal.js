@@ -19,29 +19,29 @@ $.widget('blueimpUI.fileupload', $.blueimpUI.fileupload, {
                 '<table width="100%" cellspacing="0" border="0" cellpadding="0">' +
                 '<tbody>' +
                     '<tr>' +
-                        '<td colspan="4" class="error mo-pading-l-r"></td>' +
-                    '</tr>' +
+                        '<td colspan="4" class="error mo-pading-l-r"><\/td>' +
+                    '<\/tr>' +
                     '<tr>' +
-                        '<td rowspan="2" width="1%" class="preview"><span class="fade"></span></td>' +
-                        '<td class="size mo-pading-l-r" width="1%"></td>' +
+                        '<td rowspan="2" width="1%" class="preview"><span class="fade"><\/span><\/td>' +
+                        '<td class="size mo-pading-l-r" width="1%"><\/td>' +
                         '<td class="mo-pading-l-r" width="93%">'+
-                            '<div class="progress progress-success progress-striped active"><div class="bar" style="width:0%;"></div></div>'+
-                        '</td>' +
+                            '<div class="progress progress-success progress-striped active"><div class="bar" style="width:0%;"><\/div><\/div>'+
+                        '<\/td>' +
                         '<td rowspan="2" width="1%" class="mo-nowrap">' +
                             '<span class="start">'+
-                                '<button class="fu-img-button mo-icons-icon mo-icons-save">&nbsp;</button>'+
-                            '</span>'+
+                                '<button class="fu-img-button mo-icons-icon mo-icons-save">&nbsp;<\/button>'+
+                            '<\/span>'+
                             '<span class="cancel">'+
-                                '<button class="fu-img-button mo-icons-icon mo-icons-stop">&nbsp;</button>'+
-                            '</span>'+
-                        '</td>' +
-                    '</tr>' +
+                                '<button class="fu-img-button mo-icons-icon mo-icons-stop">&nbsp;<\/button>'+
+                            '<\/span>'+
+                        '<\/td>' +
+                    '<\/tr>' +
                     '<tr>' +
-                        '<td colspan="2" class="name mo-pading-l-r"></td>' +
-                    '</tr>' +
-                '</tbody>' +
-                '</table>' +
-            '</li>');
+                        '<td colspan="2" class="name mo-pading-l-r"><\/td>' +
+                    '<\/tr>' +
+                '<\/tbody>' +
+                '<\/table>' +
+            '<\/li>');
 //$("#out").html($("#out").html()+"<br>files=1");
             row.find('.name').text(file.name);
             row.find('.size').text(o.formatFileSize(file.size));
@@ -66,27 +66,27 @@ $.widget('blueimpUI.fileupload', $.blueimpUI.fileupload, {
                 '<table width="100%" cellspacing="0" border="0" cellpadding="0">' +
                 '<tbody>' +
                     '<tr>' +
-                        '<td colspan="4" class="error"></td>' +
-                    '</tr>' +
+                        '<td colspan="4" class="error"><\/td>' +
+                    '<\/tr>' +
                     '<tr>' +
-                        '<td rowspan="3" width="1%" class="preview"></td>' +
-                        '<td class="size mo-pading-l-r" width="1%"></td>' +
-                        '<td class="pixelsize mo-pading-l-r" width="93%"><span></span> '+mozilo_lang["pixels"]+'</td>' +
+                        '<td rowspan="3" width="1%" class="preview"><\/td>' +
+                        '<td class="size mo-pading-l-r" width="1%"><\/td>' +
+                        '<td class="pixelsize mo-pading-l-r" width="93%"><span><\/span> '+mozilo_lang["pixels"]+'<\/td>' +
                         '<td rowspan="3" class="delete" width="1%">' +
-                        '<button class="fu-img-button mo-icons-icon mo-icons-delete">&nbsp;</button>'+
-                       '<img class="fu-img-button resize mo-icons-icon mo-icons-img-scale" src="'+ICON_URL_SLICE+'" alt="img-scale" />'+
-                        '<input type="checkbox" name="delete" value="1" /></td>'+
-                    '</tr>' +
+                        '<button class="fu-img-button mo-icons-icon mo-icons-delete">&nbsp;<\/button>'+
+                       '<img class="fu-img-button resize mo-icons-icon mo-icons-img-scale" src="'+ICON_URL_SLICE+'" alt="img-scale" \/>'+
+                        '<input type="checkbox" name="delete" value="1" \/><\/td>'+
+                    '<\/tr>' +
                     '<tr>' +
-                        '<td class="subtitle-lang mo-pading-l-r">'+mozilo_lang["gallery_text_subtitle"]+'</td>' +
-                        '<td class="subtitle mo-pading-l-r"><span class="fu-subtitle"></span></td>' +// style="border:1px solid #ff0000;"
-                    '</tr>' +
+                        '<td class="subtitle-lang mo-pading-l-r">'+mozilo_lang["gallery_text_subtitle"]+'<\/td>' +
+                        '<td class="subtitle mo-pading-l-r"><span class="fu-subtitle"><\/span><\/td>' +// style="border:1px solid #ff0000;"
+                    '<\/tr>' +
                     '<tr>' +
-                        '<td colspan="2" class="name mo-pading-l-r"><span class="fu-rename-file"></span></td>' +
-                    '</tr>' +
-                '</tbody>' +
-                '</table>' +
-            '</li>');
+                        '<td colspan="2" class="name mo-pading-l-r"><span class="fu-rename-file"><\/span><\/td>' +
+                    '<\/tr>' +
+                '<\/tbody>' +
+                '<\/table>' +
+            '<\/li>');
 
 
             if(file.pixel_w && file.pixel_h) {
@@ -114,7 +114,7 @@ $.widget('blueimpUI.fileupload', $.blueimpUI.fileupload, {
             } else {
                 row.find('.name span').text(file.name);
                 if (file.thumbnail_url) {
-                    row.find('.preview').append('<a><img></a>')
+                    row.find('.preview').append('<a><img><\/a>')
                         .find('img').prop('src', file.thumbnail_url+"?"+(new Date()).getTime());
                     row.find('a').prop('title', file.name);
                 }
