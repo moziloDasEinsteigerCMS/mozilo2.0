@@ -286,7 +286,7 @@ function get_plugin_info($plugin_info) {
             $link = strip_tags($plugin_info[4]);
             $link_text = strip_tags($plugin_info[4]);
         }
-        if(strlen($link_text) > 1 and stristr($link,"http://"))
+        if(strlen($link_text) > 1 and (stristr($link,"http://") or stristr($link,"https://")))
             $template["plugins_info"][] = array(getLanguageValue("plugins_titel_web"),'<a href="'.$link.'" target="_blank">'.$link_text.'</a>');
     }
     if(isset($plugin_info[2]) and strlen($plugin_info[2]) > 1)

@@ -2,7 +2,7 @@
 
 define("CMSVERSION","2.0");
 define("CMSNAME","Amalia");
-define("CMSREVISION","39");
+define("CMSREVISION","40");
 
 #!!!!!!!! die version müssen wir noch checken
 define("MIN_PHP_VERSION","5.1.2");
@@ -54,6 +54,11 @@ if(isset($_SERVER["SCRIPT_URL"]))
     $_SERVER["SCRIPT_URL"] = htmlspecialchars($_SERVER["SCRIPT_URL"], ENT_QUOTES, CHARSET);
 if(isset($_SERVER["SCRIPT_URI"]))
     $_SERVER["SCRIPT_URI"] = htmlspecialchars($_SERVER["SCRIPT_URI"], ENT_QUOTES, CHARSET);
+
+if(!empty($_SERVER['HTTPS']) and $_SERVER['HTTPS'] !== 'off')
+    define("HTTP","https://");
+else
+    define("HTTP","http://");
 
 $plus_search = "";
 if(defined('ADMIN_DIR_NAME'))

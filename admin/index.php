@@ -236,7 +236,7 @@ if(LOGIN) { #-------------------------------
             # seite besetzt
             if(in_array($tmp_action,$users_array)) {
                 $USERS->set($id,"busy#".$tmp_action);
-                header("Location: http://$url");
+                header("Location: ".HTTP.$url);
                 exit();
            }
         # nur reingehen wenn action home ist oder es noch keine get parameter gibt

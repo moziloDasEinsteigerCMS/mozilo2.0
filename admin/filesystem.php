@@ -437,14 +437,14 @@ function write_xmlsitmap($from_config = false) {
 #    $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'."\n";
     foreach($CatPage->get_CatArray(false,false,array(EXT_PAGE)) as $cat) {
         $xml .= '    <url>'."\n";
-        $xml .= '        <loc>http://'.$_SERVER['SERVER_NAME'].str_replace('?draft=true','',$CatPage->get_Href($cat,false)).'</loc>'."\n";
+        $xml .= '        <loc>'.HTTP.$_SERVER['SERVER_NAME'].str_replace('?draft=true','',$CatPage->get_Href($cat,false)).'</loc>'."\n";
         $xml .= '        <lastmod>'.date("Y-m-d",$CatPage->get_Time($cat,false)).'</lastmod>'."\n";
         $xml .= '        <changefreq>'.$changefreq.'</changefreq>'."\n";
         $xml .= '        <priority>'.$priority.'</priority>'."\n";
         $xml .= '    </url>'."\n";
         foreach($CatPage->get_PageArray($cat,array(EXT_PAGE)) as $page) {
             $xml .= '    <url>'."\n";
-            $xml .= '        <loc>http://'.$_SERVER['SERVER_NAME'].str_replace('?draft=true','',$CatPage->get_Href($cat,$page)).'</loc>'."\n";
+            $xml .= '        <loc>'.HTTP.$_SERVER['SERVER_NAME'].str_replace('?draft=true','',$CatPage->get_Href($cat,$page)).'</loc>'."\n";
             $xml .= '        <lastmod>'.date("Y-m-d",$CatPage->get_Time($cat,$page)).'</lastmod>'."\n";
             $xml .= '        <changefreq>'.$changefreq.'</changefreq>'."\n";
             $xml .= '        <priority>'.$priority.'</priority>'."\n";
@@ -484,7 +484,7 @@ function write_robots() {
     }
     $text = implode("\n",$lines)."\n";
     if($CMS_CONF->get('usesitemap') == "true") {
-        $text = 'Sitemap: http://'.$_SERVER['SERVER_NAME'].'/sitemap.xml'."\n".$text;
+        $text = 'Sitemap: '.HTTP.$_SERVER['SERVER_NAME'].'/sitemap.xml'."\n".$text;
     }
     if(true != (mo_file_put_contents(BASE_DIR."robots.txt",$text)))
         return ajax_return("error",false,returnMessage(false,getLanguageValue("error_write_robots")),true,true);
