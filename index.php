@@ -31,7 +31,7 @@ $start_time = get_executTime(false);
 
 if(!is_file(BASE_DIR.CMS_DIR_NAME."/conf/main.conf.php") and is_file(BASE_DIR."install.php")) {
     $install = $_SERVER['HTTP_HOST'].URL_BASE."install.php";
-    header("Location: http://$install");
+    header("Location: ".HTTP.$install);
     exit;
 }
 
