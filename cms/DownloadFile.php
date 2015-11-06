@@ -1,8 +1,5 @@
 <?php if(!defined('IS_CMS')) die();
 
-# define("DOWNLOAD_FILE",true);
-# RewriteRule download\.php$ index\.php [QSA,L]
-
 if(false !== ($filename = getRequestValue('file',"get"))
         and false !== ($file = $CatPage->get_pfadFile(CAT_REQUEST,$filename))) {
     # Infos zur Datei
