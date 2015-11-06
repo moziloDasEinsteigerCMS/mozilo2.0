@@ -594,12 +594,20 @@ class CatPageClass {
     function get_HrefFile($cat,$datei,$force_download = false) {
         $cat = $this->get_FileSystemName($cat,false);
         if($cat !== false and $this->exists_File($cat,$datei)) {
-            global $specialchars;
             $open_dialog = "";
             if($force_download)
                 $open_dialog = "&amp;dialog=true";
             $datei = $this->get_UrlCoded($datei);
-            return URL_BASE.CMS_DIR_NAME.'/download.php?cat='.$cat.'&amp;file='.$datei.$open_dialog;
+            # Achtung vor Entfernen der # Prüfen ob es die cms/download.php gibt
+#            return URL_BASE.CMS_DIR_NAME.'/download.php?cat='.$cat.'&amp;file='.$datei.$open_dialog;
+            $url = URL_BASE;
+            $cat = str_replace('%2F','/',$cat);
+            global $CMS_CONF;
+            if($CMS_CONF->get("modrewrite") == "true")
+                $url .= $cat.".html?";
+            else
+                $url .= "index.php?cat=".$cat."&amp;";
+            return $url.'file='.$datei.$open_dialog;
         }
         return false;
     }

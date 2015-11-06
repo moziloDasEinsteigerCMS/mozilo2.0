@@ -194,6 +194,8 @@ if(!defined("ACTION_CONTENT"))
 // Zuerst: Uebergebene Parameter ueberpruefen
 set_CatPageRequest();
 
+require_once(BASE_DIR_CMS."DownloadFile.php");
+
 # session setzen mit der vorschau vom editor aus dem admin
 if(DRAFT and getRequestValue('prevcontentadmin','post',false)) {
     unset($_SESSION['prevcontentadmin']);
