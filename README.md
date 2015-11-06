@@ -7,9 +7,11 @@ Ein Webserver mit PHP 5.1.2 oder höher ist notwendig. Eine Datenbank wird nicht
 
 ## Achtung Nutzer die ein Update machen
 ab Revision 41 hat sich der Pfad zum Download von Dateien geändert.
+
 Wer möchte das die Links zum Download Angebotener Dateien in den Suchmaschinen weiterhin funktionieren, hat folgende Möglichkeiten.
-1. in der .htaccess nach "# mozilo_end" folgende Zeile Hinzufügen "RewriteRule download\.php$ index\.php [QSA,L]".
-2. oder die cms/download.php Sichern und nach dem Update wieder zurück Kopieren und in der CatPageClass.php die Raute vor "# return URL_BASE.CMS_DIR_NAME.'/download.php?cat='.$cat.'&amp;file='.$datei.$open_dialog;" entfernen.
+
+1. in der .htaccess nach `# mozilo_end` folgende Zeile Hinzufügen `RewriteRule download\.php$ index\.php [QSA,L]`.
+2. oder die `cms/download.php` Sichern und nach dem Update wieder zurück Kopieren und in der CatPageClass.php die Raute vor `# return URL_BASE.CMS_DIR_NAME.'/download.php?cat='.$cat.'&amp;file='.$datei.$open_dialog;` entfernen.
 
 ## Installation
 1. moziloCMS 2.0 [herunterladen](https://github.com/mozilo/mozilo2.0/archive/master.zip), ggf. entpacken und auf den eigenen Webserver hochladen
