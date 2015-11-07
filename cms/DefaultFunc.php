@@ -283,4 +283,68 @@ function setTimeLocale($language) {
         @setlocale(LC_TIME, $tmp);
 }
 
+function getMimeType($ext,$foceDownload = false) {
+    $mime = array(
+        "txt"  => "text/plain",
+        "htm"  => "text/html",
+        "html" => "text/html",
+        "css"  => "text/css",
+        "js"   => "application/javascript",
+        "json" => "application/json",
+        "xml"  => "application/xml",
+        "swf"  => "application/x-shockwave-flash",
+        "flv"  => "video/x-flv",
+
+        "png"  => "image/png",
+        "jpe"  => "image/jpeg",
+        "jpeg" => "image/jpeg",
+        "jpg"  => "image/jpeg",
+        "gif"  => "image/gif",
+        "bmp"  => "image/bmp",
+        "ico"  => "image/vnd.microsoft.icon",
+        "tiff" => "image/tiff",
+        "tif"  => "image/tiff",
+        "svg"  => "image/svg+xml",
+        "svgz" => "image/svg+xml",
+
+        "zip"  => "application/zip",
+        "rar"  => "application/x-rar-compressed",
+        "exe"  => "application/octet-stream",
+        "msi"  => "application/x-msdownload",
+        "cab"  => "application/vnd.ms-cab-compressed",
+
+        "mp3"  => "audio/mpeg",
+        "wav"  => "audio/x-wav",
+        "qt"   => "video/quicktime",
+        "mov"  => "video/quicktime",
+        "mpeg" => "video/mpeg",
+        "mpg"  => "video/mpeg",
+        "mpe"  => "video/mpeg",
+        "avi"  => "video/x-msvideo",
+
+        "pdf"  => "application/pdf",
+        "psd"  => "image/vnd.adobe.photoshop",
+        "ai"   => "application/postscript",
+        "eps"  => "application/postscript",
+        "ps"   => "application/postscript",
+
+        "doc"  => "application/msword",
+        "docx" => "application/msword",
+        "rtf"  => "application/rtf",
+        "xls"  => "application/vnd.ms-excel",
+        "xlsx" => "application/vnd.ms-excel",
+        "ppt"  => "application/vnd.ms-powerpoint",
+
+        "odt"  => "application/vnd.oasis.opendocument.text",
+        "ods"  => "application/vnd.oasis.opendocument.spreadsheet"
+    );
+    return array_key_exists($ext,$mime) ? $mime[$ext] : ($foceDownload ? "application/force-download" : "text/plain");
+}
+
+function getMorTime() {
+    @ini_set('max_execution_time', 120);
+    @set_time_limit(120);
+    if(function_exists('apache_reset_timeout'))
+        @apache_reset_timeout();
+}
 ?>
