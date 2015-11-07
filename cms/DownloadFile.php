@@ -13,7 +13,6 @@ if(false !== ($name = getRequestValue('file',"get"))) {
     header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
     header("Cache-Control: public");
     header("Content-Description: File Transfer");
-    # oben ausgewählter Content-Type
     header("Content-Type: ".getMimeType($ext,true));
     # Datei direkt im Browser anzeigen (inline);
     $disposition = "inline;";
