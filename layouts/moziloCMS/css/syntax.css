@@ -16,7 +16,7 @@
 /* [bild|...] */
 .contentimage {
     border : none;
-    display:table;
+    display:inline-table;
 }
 
 .contentimage br {
@@ -27,7 +27,7 @@ span.leftcontentimage {
     margin : 8px 8px 8px 0;
     border : none;
     float  : left;
-    display:table;
+    display:inline-table;
 }
 
 /* [bildrechts|...] */
@@ -35,7 +35,7 @@ span.rightcontentimage {
     margin : 8px 0 8px 8px;
     border : none;
     float  : right;
-    display:table;
+    display:inline-table;
 }
 
 /* Untertitle für [bild|...] [bildlinks|...] [bildrechts|...] */
