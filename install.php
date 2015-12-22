@@ -153,6 +153,11 @@ if(in_array("update",$steps) and isset($_POST['getonlyupdate'])) {
         $current_step = "update";
 }
 
+$clean = false;
+if($current_step === "finish" and isset($_POST['clean_finish'])) {
+    $clean = cleanUpUpdate();
+}
+
 if(function_exists($current_step))
     list($status,$html_step) = $current_step();
 
@@ -162,8 +167,8 @@ echo $html_check_update;
 echo '<div style="padding-top:1.2em;" class="install mo-ui-tabs-panel ui-widget-content ui-corner-bottom mo-no-border-top">';
 
 
-if($current_step === "finish" and isset($_POST['clean_finish'])) {
-    echo cleanUpUpdate();
+if($clean) {
+    echo $clean;
 }
 
 echo $html_step;
@@ -558,7 +563,11 @@ function finish() {
         or (isset($_SERVER['SERVER_NAME']) and ($_SERVER['SERVER_NAME'] == "localhost" or substr($_SERVER['SERVER_NAME'],0,3) === "127"))) {
         $clean = "install_finish_local";
     }
-    $html .= contend_template(getLanguageValue($clean).'<br /><input type="submit" name="clean_finish" value="'.getLanguageValue("install_finish_clean_button").'" />',false);
+    $active = '';
+    if(!is_file('install.php'))
+        $active = ' disabled="disabled"';
+
+    $html .= contend_template(getLanguageValue($clean).'<br /><input type="submit" name="clean_finish" value="'.getLanguageValue("install_finish_clean_button").'"'.$active.' />',false);
 
     $html .= contend_template(installHelp("install_finish_help").'<br /><a href="'.ADMIN_DIR_NAME.'/index.php"><b>'.getLanguageValue("install_finish_submit").'</b></a>',"");
 
