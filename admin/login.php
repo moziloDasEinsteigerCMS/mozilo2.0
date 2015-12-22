@@ -14,7 +14,7 @@ if (($loginpassword->get("name") == "") or ($loginpassword->get("pw") == "")) {
 // User hat sich ausgeloggt
 if(getRequestValue('logout','get',false)) {
     // Session beenden und die Sessiondaten löschen
-    session_destroy();
+    @session_destroy();
     unset($_SESSION);
 }
 

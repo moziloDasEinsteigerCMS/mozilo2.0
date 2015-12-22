@@ -18,7 +18,7 @@ class Syntax {
 // ------------------------------------------------------------------------------    
 // Konstruktor
 // ------------------------------------------------------------------------------
-    function Syntax(){
+    function __construct(){
         global $CMS_CONF;
         global $USER_SYNTAX;
         global $activ_plugins;

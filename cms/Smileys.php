@@ -6,7 +6,7 @@ class Smileys {
     var $search = array("&",";","&amp&#059;","/","\\",":","!","'",'"','[',']','{','}','|');
     var $replace = array('&amp;','&#059;','&amp;','&#047;','&#092;','&#058;','&#033;','&apos;','&quot;','&#091;','&#093;','&#123;','&#125;','&#124;');
 
-    function Smileys($path) {
+    function __construct($path) {
         $smileys = new Properties("$path/smileys.txt");
         $this->smileysarray = $smileys->toArray();
     }

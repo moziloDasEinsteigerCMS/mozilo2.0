@@ -13,7 +13,7 @@ class SpecialChars {
 // ------------------------------------------------------------------------------    
 // Konstruktor
 // ------------------------------------------------------------------------------
-    function SpecialChars(){
+    function __construct(){
     }
 
     function getHtmlEntityDecode($string) {

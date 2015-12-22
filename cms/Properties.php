@@ -7,7 +7,7 @@ class Properties {
     private $properties;
     private $isConf;
 
-    function Properties($file = null) {
+    function __construct($file = null) {
         $this->isConf = true;
         if(substr($file,-9) == ".conf.php")
             $this->isConf = true;

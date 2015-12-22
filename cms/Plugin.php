@@ -24,7 +24,7 @@ class Plugin {
     /*
     * Konstruktor
     */
-    function Plugin() {
+    function __construct() {
         $plugin_str = 'Plugin';
         $plugin_class = get_class($this);
         $plugin_class_dir = $plugin_class;

@@ -27,7 +27,7 @@ class CatPageClass {
     var $ActionLinksearch;
     var $ActionLinksitemap;
 
-    function CatPageClass() {
+    function __construct() {
         if(defined("isCatPage"))
             die("die class CatPage darf nur einmal initaliesiert werden");
         $this->CatPageArray = $this->make_DirCatPageArray(CONTENT_DIR_REL);

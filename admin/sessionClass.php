@@ -70,7 +70,7 @@ class SessionSaveHandler {
         $id = md5($id);
         $conf = $this->getSessionArray();
         if(!array_key_exists($id, $conf))
-            return NULL;
+            return "";
         return $conf[$id][0];
     }
 

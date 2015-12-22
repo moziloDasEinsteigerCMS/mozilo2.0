@@ -12,7 +12,7 @@ class GalleryClass {
     var $Cols = false;
     var $Rows = false;
     var $GalleryTemplate = false;
-    function GalleryClass() {
+    function __construct() {
         global $ALOWED_IMG_ARRAY;
         $this->allowed_pics = $ALOWED_IMG_ARRAY;
         if(isset($_REQUEST['galtemplate']))

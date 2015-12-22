@@ -8,7 +8,7 @@ class SearchClass {
     var $showhiddenpagesinsearch;
     var $nosearchwords;
     var $searchnoresult;
-    function SearchClass($placeholder = "SEARCH") {
+    function __construct($placeholder = "SEARCH") {
         global $HIGHLIGHT_REQUEST;
         global $SEARCH_REQUEST;
         global $language;

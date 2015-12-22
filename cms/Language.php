@@ -6,7 +6,7 @@ class Language {
     // ------------------------------------------------------------------------------
     // Konstruktor
     // ------------------------------------------------------------------------------
-    function Language($lang_dir = false) {
+    function __construct($lang_dir = false) {
         global $CMS_CONF;
         if(!$lang_dir) {
             $currentlanguage = $CMS_CONF->get("cmslanguage");
