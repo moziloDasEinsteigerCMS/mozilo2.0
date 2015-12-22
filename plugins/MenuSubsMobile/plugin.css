@@ -202,6 +202,24 @@ ul.menusubs-show {
         min-height: 1.4em !important;
         padding:.5em .7em .3em .7em !important;
     }
+/* fixer menue button
+    .menusubs-box-fontsize > label.menusubs-show-hide, .menusubs-box-fontsize > input.menusubs-show-hide {
+        position: fixed;
+        z-index: 50;
+    }
+
+    .menusubs-box-fontsize > input.menusubs-show-hide {
+        z-index: 55;
+    }
+
+    .menusubs-is-operamini input.menusubs-show-hide {
+        z-index: 45;
+    }
+
+    .menusubs-box-fontsize > ul.cat-menusubs {
+        margin-top:1em !important;
+    }
+*/
 
 }
 
