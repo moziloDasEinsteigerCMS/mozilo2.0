@@ -253,7 +253,7 @@ function set_config_para() {
                 # die checkbox hat immer einen anderen wert als der gespeicherte deshalb keine prüfung
                 $CMS_CONF->set($syntax_name, $syntax_value);
                 if($syntax_name == "modrewrite" and true !== ($error = write_modrewrite($syntax_value)))
-                    return $error;;
+                    return $error;
                 if($syntax_name == "usesitemap") {
                     if(true !== ($error = write_robots()))
                         return $error;

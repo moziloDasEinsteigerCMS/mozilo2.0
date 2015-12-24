@@ -53,6 +53,10 @@ $base_dir = substr($base_dir, 0, -(strlen("install.php")));
 define("BASE_DIR", $base_dir);
 unset($base_dir); // verwendung im script verhindern
 
+$name_id = 'MOZILOID_'.md5($_SERVER['SERVER_NAME'].BASE_DIR);
+define("SESSION_MO",$name_id);
+unset($name_id);
+
 $LANG_INSTALL = array();
 $LANG_INSTALL['deDE'] = 'Deutsch';
 $LANG_INSTALL['enEN'] = 'English';
@@ -76,7 +80,12 @@ if(isset($_POST['language']) and $_POST['language'] != "false")
 $ADMIN_CONF = false;
 $CMS_CONF = false;
 # eigene session
-require_once(BASE_DIR_ADMIN."sessionClass.php");
+if(is_file(BASE_DIR_ADMIN."sessionClass.php")) {
+   require_once(BASE_DIR_ADMIN."sessionClass.php");
+} else
+    @session_name(SESSION_MO);
+
+session_start();
 # Default conf
 require_once(BASE_DIR.CMS_DIR_NAME."/DefaultConfCMS.php");
 # wenn die sachen kein die() oder fatal error ergeben ist es gut
@@ -106,8 +115,6 @@ if(is_file(BASE_DIR_CMS.CONF_DIR_NAME.'/main.conf.php') and isFileRW(BASE_DIR_CM
     $CMS_CONF = new Properties(BASE_DIR_CMS.CONF_DIR_NAME.'/main.conf.php');
     setTimeLocale($LANG);
 }
-
-session_start();
 
 ini_set("default_charset", CHARSET);
 header('content-type: text/html; charset='.strtolower(CHARSET));
