@@ -283,62 +283,57 @@ function setTimeLocale($language) {
         @setlocale(LC_TIME, $tmp);
 }
 
-function getMimeType($ext,$foceDownload = false) {
-    $mime = array(
-        "txt"  => "text/plain",
-        "htm"  => "text/html",
-        "html" => "text/html",
-        "css"  => "text/css",
-        "js"   => "application/javascript",
-        "json" => "application/json",
-        "xml"  => "application/xml",
-        "swf"  => "application/x-shockwave-flash",
-        "flv"  => "video/x-flv",
-
-        "png"  => "image/png",
-        "jpe"  => "image/jpeg",
-        "jpeg" => "image/jpeg",
-        "jpg"  => "image/jpeg",
-        "gif"  => "image/gif",
-        "bmp"  => "image/bmp",
-        "ico"  => "image/vnd.microsoft.icon",
-        "tiff" => "image/tiff",
-        "tif"  => "image/tiff",
-        "svg"  => "image/svg+xml",
-        "svgz" => "image/svg+xml",
-
-        "zip"  => "application/zip",
-        "rar"  => "application/x-rar-compressed",
-        "exe"  => "application/octet-stream",
-        "msi"  => "application/x-msdownload",
-        "cab"  => "application/vnd.ms-cab-compressed",
-
-        "mp3"  => "audio/mpeg",
-        "wav"  => "audio/x-wav",
-        "qt"   => "video/quicktime",
-        "mov"  => "video/quicktime",
-        "mpeg" => "video/mpeg",
-        "mpg"  => "video/mpeg",
-        "mpe"  => "video/mpeg",
-        "avi"  => "video/x-msvideo",
-
-        "pdf"  => "application/pdf",
-        "psd"  => "image/vnd.adobe.photoshop",
-        "ai"   => "application/postscript",
-        "eps"  => "application/postscript",
-        "ps"   => "application/postscript",
-
-        "doc"  => "application/msword",
-        "docx" => "application/msword",
-        "rtf"  => "application/rtf",
-        "xls"  => "application/vnd.ms-excel",
-        "xlsx" => "application/vnd.ms-excel",
-        "ppt"  => "application/vnd.ms-powerpoint",
-
-        "odt"  => "application/vnd.oasis.opendocument.text",
-        "ods"  => "application/vnd.oasis.opendocument.spreadsheet"
-    );
-    return array_key_exists($ext,$mime) ? $mime[$ext] : ($foceDownload ? "application/force-download" : "text/plain");
+function getHeaderMimeType($ext,$foceDownload = false) {
+    # abhängig von der Extension: Content-Type setzen
+    switch($ext) {
+        case "pdf":  return "application/pdf";
+        case "exe":  return "application/octet-stream";
+        case "zip":  return "application/zip";
+        case "rar":  return "application/x-rar-compressed";
+        case "msi":  return "application/x-msdownload";
+        case "cab":  return "application/vnd.ms-cab-compressed";
+        case "doc":
+        case "docx": return "application/msword";
+        case "xls":
+        case "xlsx": return "application/vnd.ms-excel";
+        case "psd":  return "image/vnd.adobe.photoshop";
+        case "ai":
+        case "eps":
+        case "ps":   return "application/postscript";
+        case "rtf":  return "application/rtf";
+        case "odt":  return "application/vnd.oasis.opendocument.text";
+        case "ods":  return "application/vnd.oasis.opendocument.spreadsheet";
+        case "ppt":  return "application/vnd.ms-powerpoint";
+        case "gif":  return "image/gif";
+        case "png":  return "image/png";
+        case "jpe":
+        case "jpeg":
+        case "jpg":  return "image/jpg";
+        case "bmp":  return "image/bmp";
+        case "ico":  return "image/vnd.microsoft.icon";
+        case "tiff":
+        case "tif":  return "image/tiff";
+        case "svg":
+        case "svgz": return "image/svg+xml";
+        case "mp3":  return "audio/mpeg";
+        case "wav":  return "audio/x-wav";
+        case "mpeg":
+        case "mpg":
+        case "mpe":  return "video/mpeg";
+        case "qt":
+        case "mov":  return "video/quicktime";
+        case "avi":  return "video/x-msvideo";
+        case "flv":  return "video/x-flv";
+        case "txt":  return "text/plain";
+        case "htm":
+        case "html": return "text/html";
+        case "css":  return "text/css";
+        case "js":   return "application/javascript";
+        case "json": return "application/json";
+        case "xml":  return "application/xml";
+        case "swf":  return "application/x-shockwave-flash";
+        default:     return ($foceDownload ? "application/force-download" : "text/plain");
+    }
 }
 
 function getMorTime() {

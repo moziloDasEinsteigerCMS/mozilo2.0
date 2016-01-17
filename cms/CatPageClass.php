@@ -600,14 +600,7 @@ class CatPageClass {
             $datei = $this->get_UrlCoded($datei);
             # Achtung vor Entfernen der # Prüfen ob es die cms/download.php gibt
 #            return URL_BASE.CMS_DIR_NAME.'/download.php?cat='.$cat.'&amp;file='.$datei.$open_dialog;
-            $url = URL_BASE;
-            $cat = str_replace('%2F','/',$cat);
-            global $CMS_CONF;
-            if($CMS_CONF->get("modrewrite") == "true")
-                $url .= $cat.".html?";
-            else
-                $url .= "index.php?cat=".$cat."&amp;";
-            return $url.'file='.$datei.$open_dialog;
+            return URL_BASE."index.php?cat=".str_replace('%2F','/',$cat)."&amp;file=".$datei.$open_dialog;
         }
         return false;
     }

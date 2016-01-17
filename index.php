@@ -9,6 +9,8 @@ define("IS_ADMIN",false);
 # ab php > 5.2.0 hat preg_* ein default pcre.backtrack_limit von 100000 zeichen
 # deshalb der versuch mit ini_set
 @ini_set('pcre.backtrack_limit', 1000000);
+// UTF-8 erzwingen - experimentell!
+@ini_set("default_charset", CHARSET);
 
 # fals da bei winsystemen \\ drin sind in \ wandeln
 $BASE_DIR = str_replace("\\\\", "\\",__FILE__);
@@ -24,10 +26,6 @@ if(is_file(BASE_DIR.CMS_DIR_NAME."/DefaultConfCMS.php")) {
 } else {
     die("Fatal Error ".BASE_DIR.CMS_DIR_NAME."/DefaultConfCMS.php Datei existiert nicht");
 }
-// UTF-8 erzwingen - experimentell!
-@ini_set("default_charset", CHARSET);
-
-$start_time = get_executTime(false);
 
 if(!is_file(BASE_DIR.CMS_DIR_NAME."/conf/main.conf.php") and is_file(BASE_DIR."install.php")) {
     $install = $_SERVER['HTTP_HOST'].URL_BASE."install.php";
@@ -44,9 +42,16 @@ if(is_file(BASE_DIR_CMS."DefaultFunc.php")) {
 $_GET = cleanREQUEST($_GET);
 $_REQUEST = cleanREQUEST($_REQUEST);
 $_POST = cleanREQUEST($_POST);
+
+if(false !== ($name = getRequestValue('file',"get",true)) and false !== ($cat = getRequestValue('cat',"get",true)))
+    require_once(BASE_DIR_CMS."DownloadFile.php");
+unset($name,$cat);
+
 #------------------------------
 # manche Provider sind auf iso eingestelt
-header('content-type: text/html; charset='.CHARSET.'');
+header('Content-Type: text/html; charset='.CHARSET.'');
+
+$start_time = get_executTime(false);
 
 require_once(BASE_DIR_CMS."SpecialChars.php");
 require_once(BASE_DIR_CMS."Properties.php");
@@ -193,8 +198,6 @@ if(!defined("ACTION_CONTENT"))
 
 // Zuerst: Uebergebene Parameter ueberpruefen
 set_CatPageRequest();
-
-require_once(BASE_DIR_CMS."DownloadFile.php");
 
 # session setzen mit der vorschau vom editor aus dem admin
 if(DRAFT and getRequestValue('prevcontentadmin','post',false)) {
