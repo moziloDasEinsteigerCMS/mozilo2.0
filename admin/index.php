@@ -127,7 +127,7 @@ if(!defined('LOGIN'))
     define("LOGIN",false);
 
 if(LOGIN) { #-------------------------------
-    header('content-type: text/html; charset='.CHARSET.'');
+    header('Content-Type: text/html; charset='.CHARSET.'');
 
     if(defined('MULTI_USER') and MULTI_USER and getRequestValue('logout_other_users','post') == "true") {
         define('LOGOUT_OTHER_USERS',true);
