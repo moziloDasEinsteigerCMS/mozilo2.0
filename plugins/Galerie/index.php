@@ -409,7 +409,7 @@ class Galerie extends Plugin {
 
         $info = array(
             // Plugin-Name
-            "<b>".$lang_gallery_admin->get("config_gallery_plugin_name")."</b> \$Revision: 141 $",
+            "<b>".$lang_gallery_admin->get("config_gallery_plugin_name")."</b> \$Revision: 142 $",
             // CMS-Version
             "2.0",
             // Kurzbeschreibung
