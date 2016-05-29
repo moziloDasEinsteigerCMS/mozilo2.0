@@ -63,9 +63,9 @@ class Galerie extends Plugin {
         if (($gal_request == "") || (!file_exists($GALERIE_DIR))) {
             global $syntax;
             if($gal_request == "") {
-                return $syntax->createDeadlink($lang_gallery_cms->getLanguageValue("message_gallerydir_error_0"),$lang_gallery_cms->getLanguageValue("message_gallerydir_error_0"));
+                return $syntax->createDeadlink($lang_gallery_cms->getLanguageHtml("message_gallerydir_error_0"),$lang_gallery_cms->getLanguageHtml("message_gallerydir_error_0"));
             } else {
-                return $syntax->createDeadlink($specialchars->rebuildSpecialChars($gal_request, false, true), $lang_gallery_cms->getLanguageValue("message_gallerydir_error_1", $specialchars->rebuildSpecialChars($gal_request, false, true)));
+                return $syntax->createDeadlink($specialchars->rebuildSpecialChars($gal_request, false, true), $lang_gallery_cms->getLanguageHtml("message_gallerydir_error_1", $specialchars->rebuildSpecialChars($gal_request, false, true)));
             }
         }
     
@@ -117,7 +117,7 @@ class Galerie extends Plugin {
             $html = $template;
     
             if (count($picarray) == 0) {
-                $html = str_replace('{NUMBERMENU}', $lang_gallery_cms->getLanguageValue("message_galleryempty_0"), $html);
+                $html = str_replace('{NUMBERMENU}', $lang_gallery_cms->getLanguageHtml("message_galleryempty_0"), $html);
             }
             # Titel der Galerie
             $html = str_replace('{CURRENTGALLERY}', $specialchars->rebuildSpecialChars($gal_request,false,true), $html);
@@ -156,7 +156,7 @@ class Galerie extends Plugin {
             } else {
                 global $syntax;
                 // Galerie nicht vorhanden
-                return $syntax->createDeadlink($specialchars->rebuildSpecialChars($values[0], false, true), $lang_gallery_cms->getLanguageValue("tooltip_link_gallery_error_1", $specialchars->rebuildSpecialChars($values[0], false, true)));
+                return $syntax->createDeadlink($specialchars->rebuildSpecialChars($values[0], false, true), $lang_gallery_cms->getLanguageHtml("tooltip_link_gallery_error_1", $specialchars->rebuildSpecialChars($values[0], false, true)));
             }
             $gal_name = NULL;
             if(isset($values[0])) {
@@ -166,7 +166,7 @@ class Galerie extends Plugin {
                 $gal_name = $specialchars->rebuildSpecialChars($values[1], false, false);
             }
             global $syntax;
-            return "<a class=\"gallery\" href=\"".$linkprefix."gal=".$gal_request."\" ".$syntax->getTitleAttribute($lang_gallery_cms->getLanguageValue("tooltip_link_gallery_2", $specialchars->rebuildSpecialChars($values[0], false, true), $j))."target=\"".$this->settings->get("target")."\">".$gal_name."</a>";
+            return "<a class=\"gallery\" href=\"".$linkprefix."gal=".$gal_request."\" ".$syntax->getTitleAttribute($lang_gallery_cms->getLanguageHtml("tooltip_link_gallery_2", $specialchars->rebuildSpecialChars($values[0], false, true), $j))." target=\"".$this->settings->get("target")."\">".$gal_name."</a>";
         }
     } // function getContent
     
@@ -188,17 +188,17 @@ class Galerie extends Plugin {
             $linkclass = "gallerymenuactive";
         else
             $linkclass = "gallerymenu";
-        $gallerymenu .= "<li class=\"gallerymenu\"><a href=\"".$linkprefix."gal=".$gal_request."&amp;index=".$first."\" class=\"$linkclass\">".$lang_gallery_cms->getLanguageValue("message_firstimage_0")."</a></li>";
+        $gallerymenu .= "<li class=\"gallerymenu\"><a href=\"".$linkprefix."gal=".$gal_request."&amp;index=".$first."\" class=\"$linkclass\">".$lang_gallery_cms->getLanguageHtml("message_firstimage_0")."</a></li>";
         // Link "Voriges Bild"
-        $gallerymenu .= "<li class=\"gallerymenu\"><a href=\"".$linkprefix."gal=".$gal_request."&amp;index=".$previous."\" class=\"gallerymenu\">".$lang_gallery_cms->getLanguageValue("message_previousimage_0")."</a></li>";
+        $gallerymenu .= "<li class=\"gallerymenu\"><a href=\"".$linkprefix."gal=".$gal_request."&amp;index=".$previous."\" class=\"gallerymenu\">".$lang_gallery_cms->getLanguageHtml("message_previousimage_0")."</a></li>";
         // Link "Nächstes Bild"
-        $gallerymenu .= "<li class=\"gallerymenu\"><a href=\"".$linkprefix."gal=".$gal_request."&amp;index=".$next."\" class=\"gallerymenu\">".$lang_gallery_cms->getLanguageValue("message_nextimage_0")."</a></li>";
+        $gallerymenu .= "<li class=\"gallerymenu\"><a href=\"".$linkprefix."gal=".$gal_request."&amp;index=".$next."\" class=\"gallerymenu\">".$lang_gallery_cms->getLanguageHtml("message_nextimage_0")."</a></li>";
         // Link "Letztes Bild"
         if ($index == $last)
             $linkclass = "gallerymenuactive";
         else
             $linkclass = "gallerymenu";
-        $gallerymenu .= "<li class=\"gallerymenu\"><a href=\"".$linkprefix."gal=".$gal_request."&amp;index=".$last."\" class=\"$linkclass\">".$lang_gallery_cms->getLanguageValue("message_lastimage_0")."</a></li>";
+        $gallerymenu .= "<li class=\"gallerymenu\"><a href=\"".$linkprefix."gal=".$gal_request."&amp;index=".$last."\" class=\"$linkclass\">".$lang_gallery_cms->getLanguageHtml("message_lastimage_0")."</a></li>";
         // Rückgabe des Menüs
         return $gallerymenu."</ul>";
     }
@@ -246,9 +246,9 @@ class Galerie extends Plugin {
             $thumbs .= "<td class=\"gallerytd\" style=\"width:".floor(100 / $picsperrow)."%;\">";
 
             if (file_exists($GALERIE_DIR.PREVIEW_DIR_NAME."/".$specialchars->replaceSpecialChars($picarray[$i],false))) {
-                $thumbs .= "<a href=\"".$GALERIE_DIR_SRC.$specialchars->replaceSpecialChars($picarray[$i],true)."\" target=\"_blank\" title=\"".$lang_gallery_cms->getLanguageValue("tooltip_gallery_fullscreen_1", $specialchars->rebuildSpecialChars($picarray[$i],true,true))."\"><img src=\"".$GALERIE_DIR_SRC.PREVIEW_DIR_NAME."/".$specialchars->replaceSpecialChars($picarray[$i],true)."\" alt=\"".$specialchars->rebuildSpecialChars($picarray[$i],true,true)."\" class=\"thumbnail\" /></a><br />";
+                $thumbs .= "<a href=\"".$GALERIE_DIR_SRC.$specialchars->replaceSpecialChars($picarray[$i],true)."\" target=\"_blank\" title=\"".$lang_gallery_cms->getLanguageHtml("tooltip_gallery_fullscreen_1", $specialchars->rebuildSpecialChars($picarray[$i],true,true))."\"><img src=\"".$GALERIE_DIR_SRC.PREVIEW_DIR_NAME."/".$specialchars->replaceSpecialChars($picarray[$i],true)."\" alt=\"".$specialchars->rebuildSpecialChars($picarray[$i],true,true)."\" class=\"thumbnail\" /></a><br />";
             } else {
-                 $thumbs .= '<div style="text-align:center;"><a style="color:red;" href="'.$GALERIE_DIR_SRC.PREVIEW_DIR_NAME."/".$specialchars->replaceSpecialChars($picarray[$i],true).'" target="_blank" title="'.$lang_gallery_cms->getLanguageValue("tooltip_gallery_fullscreen_1", $specialchars->rebuildSpecialChars($picarray[$i],true,true)).'"><b>'.$lang_gallery_cms->getLanguageValue('message_gallery_no_preview').'</b></a></div>';
+                 $thumbs .= '<div style="text-align:center;"><a style="color:red;" href="'.$GALERIE_DIR_SRC.PREVIEW_DIR_NAME."/".$specialchars->replaceSpecialChars($picarray[$i],true).'" target="_blank" title="'.$lang_gallery_cms->getLanguageHtml("tooltip_gallery_fullscreen_1", $specialchars->rebuildSpecialChars($picarray[$i],true,true)).'"><b>'.$lang_gallery_cms->getLanguageHtml('message_gallery_no_preview').'</b></a></div>';
             }
             $thumbs .= $description
             ."</td>";
@@ -273,8 +273,8 @@ class Galerie extends Plugin {
         if (count($picarray) == 0)
             return "&nbsp;";
         // Link zur Vollbildansicht öffnen
-        $currentpic = "<a href=\"".$GALERIE_DIR_SRC.$specialchars->replaceSpecialChars($picarray[$index-1],true)."\" target=\"_blank\" title=\"".$lang_gallery_cms->getLanguageValue("tooltip_gallery_fullscreen_1", $specialchars->rebuildSpecialChars($picarray[$index-1],true,true))."\">";
-        $currentpic .= "<img src=\"".$GALERIE_DIR_SRC.$specialchars->replaceSpecialChars($picarray[$index-1],true)."\" alt=\"".$lang_gallery_cms->getLanguageValue("alttext_galleryimage_1", $specialchars->rebuildSpecialChars($picarray[$index-1],true,true))."\" />";
+        $currentpic = "<a href=\"".$GALERIE_DIR_SRC.$specialchars->replaceSpecialChars($picarray[$index-1],true)."\" target=\"_blank\" title=\"".$lang_gallery_cms->getLanguageHtml("tooltip_gallery_fullscreen_1", $specialchars->rebuildSpecialChars($picarray[$index-1],true,true))."\">";
+        $currentpic .= "<img src=\"".$GALERIE_DIR_SRC.$specialchars->replaceSpecialChars($picarray[$index-1],true)."\" alt=\"".$lang_gallery_cms->getLanguageHtml("alttext_galleryimage_1", $specialchars->rebuildSpecialChars($picarray[$index-1],true,true))."\" />";
         // Link zur Vollbildansicht schliessen
         $currentpic .= "</a>";
         // Rückgabe des Bildes
@@ -310,7 +310,7 @@ class Galerie extends Plugin {
         // Keine Bilder im Galerieverzeichnis?
         if (count($picarray) == 0)
         return "&nbsp;";
-        return $lang_gallery_cms->getLanguageValue("message_gallery_xoutofy_2", $index, $last);
+        return $lang_gallery_cms->getLanguageHtml("message_gallery_xoutofy_2", $index, $last);
     }
 
     // ------------------------------------------------------------------------------
@@ -409,7 +409,7 @@ class Galerie extends Plugin {
 
         $info = array(
             // Plugin-Name
-            "<b>".$lang_gallery_admin->get("config_gallery_plugin_name")."</b> \$Revision: 141 $",
+            "<b>".$lang_gallery_admin->get("config_gallery_plugin_name")."</b> \$Revision: 142 $",
             // CMS-Version
             "2.0",
             // Kurzbeschreibung
