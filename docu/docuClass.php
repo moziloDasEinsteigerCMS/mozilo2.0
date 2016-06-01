@@ -33,7 +33,7 @@ class moziloDocuClass {
                                     )
                     );
 
-    function moziloDocuClass($only_docu = false) {
+    function __construct($only_docu = false) {
         if($this->docu_writer)
             $this->menu[$this->docu_writer] = false;
 
