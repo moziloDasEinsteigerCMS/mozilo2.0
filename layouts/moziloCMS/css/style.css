@@ -69,6 +69,7 @@ a:hover {
     background-color : #ffffff;
     border-top       : 20px solid #73a7cf;
     border-bottom    : 1px solid #73a7cf;
+    min-width        : 980px;
 }
 
 .sb-header_inner {
@@ -163,7 +164,8 @@ div#footer {
     overflow   : hidden;
     position   : relative;
     font-size  : 0.875em;
-    height     : 120px; 
+    height     : 120px;
+    min-width : 980px;
 }
 
 #footer p {
@@ -245,6 +247,7 @@ a.submenu, a.page-menusubs-link, a.subcat-menusubs-link {
 
 /* aktiver Submenuepunkt */
 a.submenuactive, a.page-menusubs-link.menusubs-linkactive, a.subcat-menusubs-link.menusubs-linkactive {
+    display     : block;
     font-weight : normal;
     color       : #9da665 !important;
     font-size   : 0.875em;
