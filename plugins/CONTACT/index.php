@@ -49,6 +49,10 @@ class CONTACT extends Plugin {
         require_once($dir."func_contact.php");
 
         $return = buildContactForm($this->settings);
+        
+        /* security hotfix 2017-06-14 */
+        $return = str_replace(array('[',']','{','}','|'), array('&#091;','&#093;','&#123;','&#125;','&#124;'), $return);
+        
         return $return;
 
     } // function getContent
