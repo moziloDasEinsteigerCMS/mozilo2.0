@@ -1,0 +1,67 @@
+# Diese Zeilen nicht löschen / Do not remove these lines
+#
+# $Revision: 828 $
+# $LastChangedDate: 2011-01-06 20:21:05 +0100 (Do, 06. Jan 2011) $
+# $Author: hausl78 $
+#
+_dateformat_0                                   = o %d %m %Y, %H:%M:%S
+_translator_0                                   = Etienne Ruedin
+# alttext_galleryimage_1                          = Kɔbɛ́ ya bilílí "{PARAM1}"
+alttext_image_1                                 = Elílí "{PARAM1}"
+anchor_top_0                                    = Na likoló
+message_downloads                               = Kokɔ́ngɔlɔ
+message_draft_0                                 = Esquisse
+# message_firstimage_0                            = Elílí ya yambo
+message_galleries_0                             = Bakɔbɛ
+message_gallery_1                               = Kɔbɛ "{PARAM1}"
+# message_gallery_xoutofy_2                       = (Elílí {PARAM1} ya {PARAM2})
+# message_gallerydir_error_1                      = Mokɛ́lɛ mwa kɔbɛ "{PARAM1}" ezalí tɛ́!
+# message_gallerydir_error_0                      = Kɔbɛ ezalí tɛ́!
+message_galleryembed_error_0                    = Due to the current CMS settings, gallery can only be used embedded.
+# message_galleryempty_0                          = Bazalí bilílí tɛ́ na kɔbɛ óyo.
+message_gallerypreviewdir_error_1               = Botáli bwa kɔbɛ "{PARAM1}" ezalí tɛ́!
+# message_gallery_no_preview                      = Botáli ezalí tɛ́
+message_lastchange_0                            = Bobóngoli bwa libosó:
+# message_lastimage_0                             = Elílí ya libosó
+# message_nextimage_0                             = Elílí ya nsima
+message_nodatafound_0                           = Bokwi ezalí tɛ́.
+# message_previousimage_0                         = Elílí ya libosó
+message_search_0                                = Koluka
+message_searchresult_1                          = Elɔ́kɔ ya boluki na "{PARAM1}"
+message_sitemap_0                               = Liyɛmi lya sítɛ wɛ́bɛ
+message_template_error_1                        = Emekoli ya kásá "{PARAM1}" ezalí tɛ́! Veuillez contacter l'administrateur.
+passwordform_title_0                            = Banda required
+passwordform_pagepasswordplease_0               = Kokɔ́ta banda na sítɛ óyo:
+passwordform_message_passwordwrong_0            = Liyíngeli ezalí tɛ́: banda ya mabé.
+passwordform_send_0                             = Kotínda
+plugin_error_1                                  = General error in plugin {PARAM1}. Please contact the plugin's autor.
+plugin_error_missing_pluginconf_1               = Error in plugin {PARAM1}: plugin.conf is missing. Please contact the plugin's autor.
+plugin_error_missing_method_2                   = Error in plugin {PARAM1}: Method {PARAM2} is missing. Please contact the plugin's autor.
+thirsty_programmer                              = Vous me donnez une bière en provenance de :)
+tooltip_anchor_error_1                          = Eténi "{PARAM1}" ezalí tɛ́
+tooltip_anchor_goto_1                           = Kopumbwa na eténi "{PARAM1}"
+tooltip_anchor_gototop_0                        = Kopumbwa na likoló
+tooltip_attribute_error_1                       = Syntaxe incorrecte: Attribut inconnu "{PARAM1}"
+tooltip_color_error_1                           = Mmbenza ya lángi "{PARAM1}" bazalí ya mabé
+# tooltip_gallery_fullscreen_1                    = Emɔ́niseli-mobimba: "{PARAM1}"
+tooltip_image_error_1                           = Kásá eyébáná tɛ́ tǒ adɛlɛ́sɛ ya mabé: "{PARAM1}"
+tooltip_image_error_2                           = Kásá ya elílí "{PARAM1}" na loléngé "{PARAM2}" ezalí tɛ́
+tooltip_include_recursion_error_0               = Page de contenu ne peut pas monter eux-mêmes
+tooltip_include_reinclude_error_0               = Includes in included pages not allowed
+tooltip_link_category_1                         = Kosɛ́nzɛ loléngé "{PARAM1}"
+tooltip_link_category_error_1                   = Loléngé "{PARAM1}" ezalí tɛ́
+tooltip_link_extern_1                           = Kobénga adɛlɛ́sɛ ya libándá "{PARAM1}"
+tooltip_link_extern_error_1                     = Adɛlɛ́sɛ-LINK "{PARAM1}" ezalí ya mabé
+tooltip_link_file_1                             = Kokɔ́ngɔlɔ kásá "{PARAM1}"
+tooltip_link_file_2                             = Kokɔ́ngɔlɔ kásá "{PARAM1}" ya loléngé "{PARAM2}"
+tooltip_link_file_error_1                       = Kásá "{PARAM1}" ezalí tɛ́
+tooltip_link_file_error_2                       = Kásá "{PARAM1}" ya loléngé  "{PARAM2}" ezalí tɛ́ 
+# tooltip_link_gallery_2                          = Kɔbɛ "{PARAM1}" ({PARAM2} elílí) tálá
+# tooltip_link_gallery_error_1                    = Kɔbɛ "{PARAM1}" ezalí tɛ́
+tooltip_link_mail_1                             = Kotínda nkandá na "{PARAM1}"
+tooltip_link_mail_error_1                       = Adɛlɛ́sɛ-nkandá "{PARAM1}" ezalí ya mabé
+tooltip_link_page_1                             = Komɔ́́nisa lonkásá "{PARAM1}"
+tooltip_link_page_2                             = Komɔ́́nisa lonkásá "{PARAM1}" na loléngé "{PARAM2}"
+tooltip_link_page_error_1                       = Lonkásá "{PARAM1}" ezalí tɛ́
+tooltip_link_page_error_2                       = Lonkásá "{PARAM1}" na loléngé "{PARAM2}" ezalí tɛ́
+tooltip_showsitemap_0                           = Komɔ́́nisa liyɛmi lya sítɛ wɛ́bɛ
