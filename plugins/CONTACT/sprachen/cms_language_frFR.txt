@@ -1,6 +1,7 @@
 contactform_confirmation                      = Le message a été envoyé.
 contactform_fieldnotset                       = Suivants obligatoire n'est pas rempli:
 contactform_mail                              = Email
+contactform_subject                           = 
 contactform_mailsubject                       = De contact "{PARAM1}": Nouveau message reçu
 contactform_mailsubject_confirm               = Confirmation de livraison: Contacter par {PARAM1}
 contactform_mandatory_fields                  = * Obligatoire

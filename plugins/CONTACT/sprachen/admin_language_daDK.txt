@@ -10,6 +10,7 @@ config_titel_contact_show                = vis
 config_titel_contact_input               = Vis navn
 config_titel_contact_help                = Beskrivelse
 config_input_contact_name                = Enkel linje tekst indtastning "Navn"
+config_input_contact_subject    		 = 
 config_input_contact_mail                = Enkel linje tekst indtastning "E-mail"
 config_input_contact_website             = Enkel linje tekst indtastning "Websted"
 config_input_contact_textarea            = Flere linje tekst indtastning "Besked"

@@ -347,3 +347,12 @@ install_update_layouts_help          = The file "layoutsettings.conf" is not nee
 
 install_update_error                 = <b>Attention! There are some problems due to the file attributes in the category. You have to manage them via your FTP-client.</b><br />After solving you don't need to use this site. Simply click on the Update-Tab again.
 install_update_successful            = Update successful! <b>You need to check your Website</b>.
+
+install_tab_help                     = Help
+install_tab_language 				 = Language
+install_tab_chmod_test				 = Permissions
+install_tab_environment				 = Server Environment
+install_tab_rewrite					 = Rewrite URLs
+install_tab_password				 = Password
+install_tab_update					 = Update
+install_tab_finish					 = Finish

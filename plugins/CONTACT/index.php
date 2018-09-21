@@ -11,6 +11,9 @@ class CONTACT extends Plugin {
             "titel_name" => "",
             "titel_name_show" => "true",
             "titel_name_mandatory" => "false",
+            "titel_subject" => "",
+            "titel_subject_show" => "true",
+            "titel_subject_mandatory" => "false",
             "titel_website" => "",
             "titel_website_show" => "true",
             "titel_website_mandatory" => "false",
@@ -49,10 +52,6 @@ class CONTACT extends Plugin {
         require_once($dir."func_contact.php");
 
         $return = buildContactForm($this->settings);
-        
-        /* security hotfix 2017-06-14 */
-        $return = str_replace(array('[',']','{','}','|'), array('&#091;','&#093;','&#123;','&#125;','&#124;'), $return);
-        
         return $return;
 
     } // function getContent
@@ -102,6 +101,20 @@ class CONTACT extends Plugin {
             "description" => $lang_contact_admin->get("config_titel_contact_show")
         );
         $config['titel_name_mandatory'] = array(
+            "type" => "checkbox",
+            "description" => $lang_contact_admin->get("config_titel_contact_mandatory")
+        );
+        # subject
+        $config['titel_subject']  = array(
+            "type" => "text",
+            "description" => $lang_contact_admin->get("config_input_contact_subject"),
+            "maxlength" => "100",
+        );
+        $config['titel_subject_show'] = array(
+            "type" => "checkbox",
+            "description" => $lang_contact_admin->get("config_titel_contact_show")
+        );
+        $config['titel_subject_mandatory'] = array(
             "type" => "checkbox",
             "description" => $lang_contact_admin->get("config_titel_contact_mandatory")
         );
@@ -194,6 +207,12 @@ class CONTACT extends Plugin {
                         .'<td class="mo-padding-top">{titel_name_text}</td>'
                         .'<td class="mo-align-center mo-padding-top">{titel_name_show_checkbox}</td>'
                         .'<td class="mo-align-center mo-padding-top">{titel_name_mandatory_checkbox}</td>'
+					.'</tr><tr>'
+                        .'<td>&nbsp;</td>'
+                        .'<td class="mo-nowrap mo-padding-top">{titel_subject_description}</td>'
+                        .'<td class="mo-padding-top">{titel_subject_text}</td>'
+                        .'<td class="mo-align-center mo-padding-top">{titel_subject_show_checkbox}</td>'
+                        .'<td class="mo-align-center mo-padding-top">{titel_subject_mandatory_checkbox}</td>'
                     .'</tr><tr>'
                         .'<td>&nbsp;</td>'
                         .'<td class="mo-nowrap mo-padding-top">{titel_website_description}</td>'

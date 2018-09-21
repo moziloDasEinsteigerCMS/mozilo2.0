@@ -10,6 +10,7 @@ config_titel_contact_show       =
 config_titel_contact_input      = 
 config_titel_contact_help       = 
 config_input_contact_name       = 
+config_input_contact_subject    = 
 config_input_contact_mail       = 
 config_input_contact_website    = 
 config_input_contact_textarea   = 

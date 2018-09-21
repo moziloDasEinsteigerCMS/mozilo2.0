@@ -1,6 +1,7 @@
 contactform_confirmation                      = Sua mensagem foi enviada.
 contactform_fieldnotset                       = Por favor, Preencha os campos:
 contactform_mail                              = Email
+contactform_subject                           = 
 contactform_mailsubject                       = Contact form of {PARAM1}: New message arrived
 contactform_mailsubject_confirm               = 
 contactform_mandatory_fields                  = * Campo obrigatório

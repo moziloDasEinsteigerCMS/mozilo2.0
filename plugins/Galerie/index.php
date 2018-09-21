@@ -224,42 +224,82 @@ class Galerie extends Plugin {
         return $numbermenu;
     }
 
-    // ------------------------------------------------------------------------------
+        // ------------------------------------------------------------------------------
+
     // Nummernmenü erzeugen
+
     // ------------------------------------------------------------------------------
+
     function getThumbnails($picarray,$alldescriptions,$GALERIE_DIR,$GALERIE_DIR_SRC) {
+
         global $specialchars;
+
         global $lang_gallery_cms;
 
+ 
+
         $picsperrow = $this->settings->get("picsperrow");
+
         if (empty($picsperrow)) $picsperrow = 4;
-        $thumbs = "<table class=\"gallerytable\" summary=\"gallery table\"><tr>";
+
+        $thumbs = "<div class=\"gallerytable\" summary=\"gallery table\"><div class=\"row\">";
+
         $i = 0;
+
         for ($i=0; $i<count($picarray); $i++) {
+
             // Bildbeschreibung holen
+
             $description = $this->getCurrentDescription($picarray[$i],$picarray,$alldescriptions);
+
             if ($description == "")
+
                 $description = "&nbsp;";
+
             // Neue Tabellenzeile aller picsperrow Zeichen
+
             if (($i > 0) && ($i % $picsperrow == 0))
-                $thumbs .= "</tr><tr>";
-            $thumbs .= "<td class=\"gallerytd\" style=\"width:".floor(100 / $picsperrow)."%;\">";
+
+                $thumbs .= "</div><div class=\"row\">";
+
+            $thumbs .= "<div class=\"gallerytd\">";
+
+ 
 
             if (file_exists($GALERIE_DIR.PREVIEW_DIR_NAME."/".$specialchars->replaceSpecialChars($picarray[$i],false))) {
-                $thumbs .= "<a href=\"".$GALERIE_DIR_SRC.$specialchars->replaceSpecialChars($picarray[$i],true)."\" target=\"_blank\" title=\"".$lang_gallery_cms->getLanguageHtml("tooltip_gallery_fullscreen_1", $specialchars->rebuildSpecialChars($picarray[$i],true,true))."\"><img src=\"".$GALERIE_DIR_SRC.PREVIEW_DIR_NAME."/".$specialchars->replaceSpecialChars($picarray[$i],true)."\" alt=\"".$specialchars->rebuildSpecialChars($picarray[$i],true,true)."\" class=\"thumbnail\" /></a><br />";
+
+                $thumbs .= "<a href=\"".$GALERIE_DIR_SRC.$specialchars->replaceSpecialChars($picarray[$i],true)."\" target=\"_blank\" title=\"".$lang_gallery_cms->getLanguageHtml("tooltip_gallery_fullscreen_1", $specialchars->rebuildSpecialChars($picarray[$i],true,true))."\"><img src=\"".
+
+$GALERIE_DIR_SRC.PREVIEW_DIR_NAME."/".$specialchars->replaceSpecialChars($picarray[$i],true)."\" alt=\"".$specialchars->rebuildSpecialChars($picarray[$i],true,true)."\" class=\"thumbnail\" /></a>";
+
             } else {
-                 $thumbs .= '<div style="text-align:center;"><a style="color:red;" href="'.$GALERIE_DIR_SRC.PREVIEW_DIR_NAME."/".$specialchars->replaceSpecialChars($picarray[$i],true).'" target="_blank" title="'.$lang_gallery_cms->getLanguageHtml("tooltip_gallery_fullscreen_1", $specialchars->rebuildSpecialChars($picarray[$i],true,true)).'"><b>'.$lang_gallery_cms->getLanguageHtml('message_gallery_no_preview').'</b></a></div>';
+
+                 $thumbs .= '<div style="text-align:center;"><a style="color:red;" href="'.$GALERIE_DIR_SRC.PREVIEW_DIR_NAME."/".$specialchars->replaceSpecialChars($picarray[$i],true).'" target="_blank" title="'.$lang_gallery_cms->getLanguageHtml("tooltip_gallery_fullscreen_1", $specialchars->rebuildSpecialChars
+
+($picarray[$i],true,true)).'"><b>'.$lang_gallery_cms->getLanguageHtml('message_gallery_no_preview').'</b></a></div>';
+
             }
-            $thumbs .= $description
-            ."</td>";
+
+            $thumbs .= "<div class=\"desc\">$description</div>"
+
+            ."</div>";
+
         }
+
         while ($i % $picsperrow > 0) {
-            $thumbs .= "<td class=\"gallerytd\">&nbsp;</td>";
+
+            $thumbs .= "<div class=\"gallerytd\"></div>";
+
             $i++;
+
         }
-        $thumbs .= "</tr></table>";
+
+        $thumbs .= "</div></div>";
+
         // Rückgabe der Thumbnails
+
         return $thumbs;
+
     }
     
     // ------------------------------------------------------------------------------
@@ -355,14 +395,14 @@ class Galerie extends Plugin {
         // Das muß auf jeden Fall geschehen!
         $config = array();
 
-        $config['picsperrow'] = array(
+      /*  $config['picsperrow'] = array(
             "type" => "text",
             "maxlength" => "2",
             "size" => "3",
             "description" => $lang_gallery_admin->get("config_gallery_picsperrow"),
             "regex" => "/^[1-9][0-9]?/",
             "regex_error" => $lang_gallery_admin->get("config_gallery_picsperrow_regex_error")
-        );
+        );*/
         $config['usethumbs'] = array(
             "type" => "checkbox",
             "description" => $lang_gallery_admin->get("config_gallery_usethumbs"),
@@ -409,7 +449,7 @@ class Galerie extends Plugin {
 
         $info = array(
             // Plugin-Name
-            "<b>".$lang_gallery_admin->get("config_gallery_plugin_name")."</b> \$Revision: 142 $",
+            "<b>".$lang_gallery_admin->get("config_gallery_plugin_name")."</b> \$Revision: 143 $",
             // CMS-Version
             "2.0",
             // Kurzbeschreibung

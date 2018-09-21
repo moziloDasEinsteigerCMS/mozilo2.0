@@ -1,32 +1,52 @@
-#contact_form {
+.col-75 {margin: 1em 0;}
+input[type=text],input[type=email],input[type=url], select, textarea {
+	font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    width: 100%;
+    padding: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+input[type=submit] {
+    background:#ccc;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+}
+input[type=submit]:hover {
+    opacity:.8
+}
+label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+}
+label:last-of-type {padding: 12px}
+textarea {height: 200px}
+#contact_successmessage {color:green;}
+
+#contact_errormessage {color:red}
+
+@media screen and (min-width: 768px) {
+  .col-25 {
+    float: left;
+    width: 25%;
+    margin-top: 1em;
 }
 
-#contact_table {
+.col-75 {
+    float: left;
+    width: 75%;
+    margin-top: 1em;
 }
 
-#contact_table td {
-    vertical-align:top;
-    padding:5px;
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
 }
-
-#contact_errormessage{
-    color:#880000;
-    font-weight:bold;
-}
-
-#contact_successmessage{
-    color:#008800;
-    font-weight:bold;
-}
-
-#contact_name, #contact_mail, #contact_website {
-    width:200px;
-}
-
-#contact_message {
-    width:200px;
-}
-
-#contact_submit {
-    width:200px;
+  
 }

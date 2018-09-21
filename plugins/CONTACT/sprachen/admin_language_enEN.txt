@@ -10,6 +10,7 @@ config_titel_contact_show       = show
 config_titel_contact_input      = Display name
 config_titel_contact_help       = Description
 config_input_contact_name       = Single-line text input "Name"
+config_input_contact_subject    = Single-line text input "Subject"
 config_input_contact_mail       = Single-line text input "E-mail"
 config_input_contact_website    = Single-line text input "Website"
 config_input_contact_textarea   = Multi-line text input "Message"

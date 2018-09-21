@@ -1,6 +1,7 @@
 contactform_confirmation                      = Je bericht is verzonden.
 contactform_fieldnotset                       = Sorry, er is een verpicht veld nog niet ingevuld:
 contactform_mail                              = Mail
+contactform_subject                           = 
 contactform_mailsubject                       = Contact formulier van {PARAM1}: Nieuw bericht ontvangen
 contactform_mailsubject_confirm               = 
 contactform_mandatory_fields                  = * Verplicht

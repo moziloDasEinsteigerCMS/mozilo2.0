@@ -1,6 +1,7 @@
 contactform_confirmation_0                      = Din besked blev sendt.
 contactform_fieldnotset_0                       = Desværre, der er et tomt obligatorisk felt:
 contactform_mail_0                              = E-mail
+contactform_subject                             = Subject
 contactform_mailsubject_1                       = Kontakt formular {PARAM1}: Ny besked modtaget
 contactform_mailsubject_confirm_1               = 
 contactform_mandatory_fields_0                  = * Obligatorisk

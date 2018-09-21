@@ -1,6 +1,7 @@
 contactform_confirmation                      = Wiadomość wysłana
 contactform_fieldnotset                       = Nie wypełniono następującego pola:
 contactform_mail                              = Mail
+contactform_subject                           = 
 contactform_mailsubject                       = Formularz kontaktowy od {PARAM1}: Nadeszła nowa wiadomość
 contactform_mailsubject_confirm               = 
 contactform_mandatory_fields                  = * Pole obowiązkowe

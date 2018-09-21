@@ -1,11 +1,11 @@
 toolbar_platzhalter_CONTACT     = Kontaktformular
-#config_titel_contact            = Kontaktformular-Einstellungen
-config_text_formularmail        = Deine E-Mail an die das Kontaktformular gesendet werden soll.
+#config_titel_contact           = Kontaktformular-Einstellungen
+config_text_formularmail        = Deine E-Mail-Adresse, an die das Kontaktformular gesendet werden soll.
 config_error_formularmail       = Das ist keine gültige E-Mail-Adresse.
-config_text_contactformusespamprotection = Soll der Spamschutz für das Kontaktformular aktiviert werden? Die Besucher müssen dann eine einfache Spam Aufgabe lösen, um das Formular absenden zu können.
-config_text_contactformwaittime = Aller wieviel Sekunden darf ein Besucher eine neue Nachricht über das Kontaktformular versenden?
-config_help_contact             = Welche Felder sollen im Kontaktformular angezeigt werden - und welche müssen als Pflichtfeld unbedingt ausgefüllt werden?<br />Außerdem kanst Du eigene Bezeichnungen für die Eingabefelder vergeben so wie einen Spamschutz erstellen.<br />Das "Einzeiliges Textfeld E-Mail" wird als Absender für Nachrichten aus dem Kontaktformular verwendet.<br /><i>Auf der moziloAdmin-Startseite kanst Du überprüfen, ob der Mailversand unterstützt wird.</i>
-config_text_contact             = Welche Felder sollen im Kontaktformular angezeigt werden - und welche müssen als Pflichtfeld unbedingt ausgefüllt werden?<br />Außerdem kanst Du eigene Bezeichnungen für die Eingabefelder vergeben.
+config_text_contactformusespamprotection = Soll der Spamschutz für das Kontaktformular aktiviert werden? Die Besucher müssen dann eine einfache Spam-Aufgabe lösen, um das Formular absenden zu können.
+config_text_contactformwaittime = Ab wievielen Sekunden darf ein Besucher eine neue Nachricht über das Kontaktformular versenden?
+config_help_contact             = Welche Felder sollen im Kontaktformular angezeigt werden - und welche müssen als Pflichtfeld unbedingt ausgefüllt werden?<br />Außerdem kannst Du eigene Bezeichnungen für die Eingabefelder vergeben sowie einen Spamschutz erstellen.<br />Das "Einzeiliges Textfeld E-Mail" wird als Absender für Nachrichten aus dem Kontaktformular verwendet.<br /><i>Auf der moziloAdmin-Startseite kannst Du überprüfen, ob der Mailversand unterstützt wird.</i>
+config_text_contact             = Welche Felder sollen im Kontaktformular angezeigt werden - und welche müssen als Pflichtfeld unbedingt ausgefüllt werden?<br />Außerdem kannst Du eigene Bezeichnungen für die Eingabefelder vergeben.
 config_titel_contact_mandatory  = Pflichtfeld
 config_titel_contact_show       = Anzeigen
 config_titel_contact_input      = Bezeichnung
@@ -13,7 +13,8 @@ config_titel_contact_help       = Beschreibung
 config_input_contact_name       = Einzeiliges Textfeld "Name"
 config_input_contact_mail       = Einzeiliges Textfeld "E-Mail"
 config_input_contact_website    = Einzeiliges Textfeld "Website"
+config_input_contact_subject    = Einzeiliges Textfeld "Betreff"
 config_input_contact_textarea   = Mehrzeiliges Textfeld "Nachricht"
 config_input_contact_privacy    = Checkbox Text "Datenschutz"
-config_input_contact_mail_send_copy = Kopie an diese Senden
-config_titel_spam_question      = Spam Aufgaben<br />in jeder Zeile eine Neue<br />Frage = Antwort<br />z.B. 3 + 7 = 10
+config_input_contact_mail_send_copy = Kopie an diese senden
+config_titel_spam_question      = Spam-Aufgaben<br />in jeder Zeile eine neue<br />Frage = Antwort<br />z.B. 3 + 7 = 10

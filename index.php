@@ -228,7 +228,7 @@ function get_executTime($start_time) {
     if($start_time === false) {
         return ((float)$usec + (float)$sec);
     }
-    return "Seite in ".sprintf("%.4f", (((float)$usec + (float)$sec) - $start_time))." Sek. erstelt";
+    return "Seite in ".sprintf("%.4f", (((float)$usec + (float)$sec) - $start_time))." Sek. erstellt";
 }
 
 function get_memory() {
@@ -238,7 +238,7 @@ function get_memory() {
     if(function_exists('memory_get_peak_usage'))
         $size = @memory_get_peak_usage();
     $unit=array('B','KB','MB','GB','TB','PB');
-    return @round($size/pow(1024,($i=floor(log($size,1024)))),2).' '.$unit[$i].' Memory Benutzt';
+    return @round($size/pow(1024,($i=floor(log($size,1024)))),2).' '.$unit[$i].' Memory benutzt';
 }
 
 // ------------------------------------------------------------------------------
@@ -401,13 +401,13 @@ function getSiteMap() {
         $include_pages = array(EXT_PAGE,EXT_HIDDEN);
     }
 
-    $sitemap = "<h1>".$language->getLanguageValue("message_sitemap_0")."</h1>"
+    $sitemap = "<h1 class=\"heading1\">".$language->getLanguageValue("message_sitemap_0")."</h1>"
     ."<div class=\"sitemap\">";
     // Kategorien-Verzeichnis einlesen
     $categoriesarray = $CatPage->get_CatArray(false, false, $include_pages);
     // Jedes Element des Arrays an die Sitemap anhaengen
     foreach ($categoriesarray as $currentcategory) {
-        $sitemap .= "<h2>".$CatPage->get_HrefText($currentcategory,false)."</h2><ul>";
+        $sitemap .= "<h2 class=\"heading2\">".$CatPage->get_HrefText($currentcategory,false)."</h2><ul class=\"unorderedlist\">";
         // Inhaltsseiten-Verzeichnis einlesen
         $contentarray = $CatPage->get_PageArray($currentcategory,$include_pages,true);
         // Alle Inhaltsseiten der aktuellen Kategorie auflisten...
@@ -417,7 +417,7 @@ function getSiteMap() {
             $urltext = $CatPage->get_HrefText($currentcategory,$currentcontent);
             $titel = $language->getLanguageValue("tooltip_link_page_2", $CatPage->get_HrefText($currentcategory,$currentcontent), $CatPage->get_HrefText($currentcategory,false));
 
-            $sitemap .= "<li>".$CatPage->create_LinkTag($url,$urltext,false,$titel)."</li>";
+            $sitemap .= "<li class=\"listitem\">".$CatPage->create_LinkTag($url,$urltext,false,$titel)."</li>";
         }
         $sitemap .= "</ul>";
     }
