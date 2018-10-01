@@ -1,5 +1,4 @@
 # mozilo
-*
 !.gitignore
 !install.php
 !lgpl.txt
@@ -11,7 +10,7 @@
 !update.php
 !sitemap_addon.xml
 
-*/
+
 # admin
 admin/*
 !admin/
@@ -154,10 +153,10 @@ docu/*
 !docu/index.php
 
 # gallery
-galerien/*
-!galerien/
-!galerien/moziloCMS/*
-!galerien/moziloCMS/vorschau/*
+## galerien/*
+## !galerien/
+## !galerien/moziloCMS/*
+## !galerien/moziloCMS/vorschau/*
 
 # kategorien
 kategorien/*
@@ -166,13 +165,13 @@ kategorien/*
 !kategorien/Willkommen/dateien/*
 
 # layouts
-layouts/*
-!layouts/
-!layouts/moziloCMS/*
-!layouts/moziloCMS/css/*
-!layouts/moziloCMS/grafiken/*
-!layouts/moziloCMS_Standard_Dunkel/*
-!layouts/moziloCMS_Standard_Dunkel/css/*
+## layouts/*
+## !layouts/
+## !layouts/moziloCMS/*
+## !layouts/moziloCMS/css/*
+## !layouts/moziloCMS/grafiken/*
+## !layouts/moziloCMS_Standard_Dunkel/*
+## !layouts/moziloCMS_Standard_Dunkel/css/*
 
 # plugins
 plugins/*

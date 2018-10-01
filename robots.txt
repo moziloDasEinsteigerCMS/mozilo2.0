@@ -1,0 +1,5 @@
+Sitemap: http://localhost/sitemap.xml
+User-agent: *
+Disallow: /admin/
+Disallow: /cms/
+Disallow: /tmp/

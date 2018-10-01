@@ -1,0 +1,328 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0
+}
+
+html,
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  color: #333;
+  height: 100%;
+}
+
+.flexcontainer {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.flexcontainer>* {
+  padding: .625em;
+}
+
+header {
+  display: none;
+  flex-shrink: 0
+}
+
+nav {
+  background: #333;
+  border-top: 1px solid #fff;
+  display: none;
+  flex-shrink: 0
+}
+
+main {
+  flex: 1 0 auto
+}
+
+footer {
+  background: #333;
+  color: #fff;
+  text-align: center
+}
+
+footer a {
+  color: #fff;
+}
+
+/*MENÜ*/
+
+#menu-checkbox {
+  display: none
+}
+
+/*Show menu when invisible checkbox is checked*/
+
+#menu-checkbox:checked~nav {
+  display: -webkit-flex;
+  display: flex;
+}
+
+#menu-toggler {
+  display: -webkit-flex;
+  display: flex;
+  flex-shrink: 0;
+  padding: 0 .625em;
+  height: 4.375em;
+  line-height: 4.375em;
+  background: #333;
+  color: #fff;
+}
+
+#menu-toggler-icon:after,
+#menu-toggler-icon:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -9px;
+}
+
+#menu-toggler-icon:after {
+  top: 9px;
+}
+
+#menu-toggler-icon {
+  position: absolute;
+  right: .625em;
+  top: 1.875em
+}
+
+#menu-toggler-icon,
+#menu-toggler-icon:after,
+#menu-toggler-icon:before {
+  width: 2.500em;
+  height: 5px;
+  background-color: #fff;
+  transition: all 0.3s;
+  border-radius: 2px;
+}
+
+/* on menu activation */
+
+#menu-checkbox:checked~#menu-toggler>#menu-toggler-icon {
+  background-color: transparent;
+}
+
+#menu-checkbox:checked~#menu-toggler>#menu-toggler-icon:before {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+#menu-checkbox:checked~#menu-toggler>#menu-toggler-icon:after {
+  transform: rotate(-45deg) translate(7px, -8px);
+}
+
+nav ul li a {
+  padding: 1em;
+  color: #fff;
+  text-decoration: none
+}
+
+ul.mainmenu,
+ul.mainmenu a,
+ul.detailmenu,
+ul.detailmenu a {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex: 1 0 0;
+  flex: 1 0 0;
+  list-style: none;
+}
+
+ul.mainmenu a:hover {
+  background: #fff;
+  color: #333
+}
+
+ul.detailmenu {
+  padding-left: 2em
+}
+
+.menuactive {
+  font-weight: 700
+}
+
+/*MENÜ Ende*/
+
+/*moziloCMS Syntax*/
+
+.heading1,
+.heading2,
+.heading3,
+h1,
+h2,
+h3 {
+  color: #333;
+  margin-bottom: .625em;
+  margin-top: .625em;
+}
+
+.heading1 {
+  font-size: 2em
+}
+
+.heading2 {
+  font-size: 1.5em
+}
+
+.heading3 {
+  font-size: 1.2em
+}
+
+.leftcontentimage {
+  float: left
+}
+
+.rightcontentimage {
+  float: right
+}
+
+.listitem {
+  list-style-position: inside
+}
+
+.alignright {
+  text-align: right
+}
+
+.alignleft {
+  text-align: left
+}
+
+.aligncenter {
+  text-align: center
+}
+
+table.contenttable {
+  width: 100%;
+  text-align: center;
+}
+
+th.contenttable {
+  background: #333;
+  color: #fff;
+  border-right: 1px solid;
+  padding: 7px
+}
+
+th.contenttable:last-child {
+  border-right: none
+}
+
+td {
+  padding: 7px;
+  border-bottom: 1px solid #333
+}
+
+a.link,
+a {
+  color: #333;
+}
+
+a.link:hover,
+a:hover {
+  text-decoration: none;
+}
+
+/*Syntax Ende*/
+
+@media only screen and (min-width: 768px) {
+  header {
+    order: 1
+  }
+  nav {
+    order: 2
+  }
+  main {
+    order: 3;
+    width: 70%;
+    margin: 0 auto;
+  }
+  footer {
+    order: 4;
+    padding-top: 2em !important;
+    padding-bottom: 2em !important;
+  }
+  header {
+    display: -webkit-flex;
+    display: flex;
+    height: 15em;
+    background: #333;
+    color: #fff;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: .625em
+  }
+  header span {
+    font-size: 5em;
+  }
+  nav {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    justify-content: center;
+    border-top: none;
+  }
+  nav a {
+    font-size: 1.2em;
+  }
+  ul.mainmenu {
+    display: -webkit-flex;
+    display: flex;
+    flex: inherit;
+    flex-direction: row;
+    position: initial;
+    margin-top: 0;
+    border-top: 0
+  }
+  ul.mainmenu li {
+    flex: inherit;
+    position: relative;
+    margin: 0;
+    padding: 0;
+  }
+  ul.mainmenu a {
+    height: 100%;
+    align-items: center
+  }
+  ul.detailmenu {
+    display: none;
+    position: absolute;
+    padding: 0;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    line-height: 1.5em;
+    background: #333;
+    min-width: 150%;
+  }
+  nav ul li:hover>ul {
+    display: block
+  }
+  ul.detailmenu a {
+    align-items: flex-start
+  }
+  ul.detailmenu a:hover {
+    background: #fff;
+    color: #333
+  }
+  .menuactive {
+    background: #fff;
+    color: #333;
+    font-weight: 400;
+  }
+  #menu-toggler {
+    display: none
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  main {
+    width: 60%;
+  }
+}
