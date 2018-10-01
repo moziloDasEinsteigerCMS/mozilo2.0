@@ -173,7 +173,6 @@ layouts/*
 !layouts/moziloCMS/grafiken/*
 !layouts/moziloCMS_Standard_Dunkel/*
 !layouts/moziloCMS_Standard_Dunkel/css/*
-!layouts/moziloCMS_Standard_Dunkel/grafiken/*
 
 # plugins
 plugins/*
