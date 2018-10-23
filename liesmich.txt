@@ -10,7 +10,7 @@ werden, unterliegt in veränderten Versionen aber wieder der
 GPL.
 moziloCMS nutzt andere, ebenfalls freie Software und Grafiken, 
 die unter verschiendenen Lizenzen stehen. Sie sind unter 
-http://cms.mozilo.de/hilfe/?thema=lizenz aufgelistet.
+http://cms.mozilo.de/moziloCMS/Lizenz.html aufgelistet.
 Der Wortlaut der GPL bzw. LGPL liegt als lgpl_de.txt  und im
 original als lgpl_en.txt im moziloCMS-Hauptverzeichnis.
 
