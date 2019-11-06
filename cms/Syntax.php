@@ -747,7 +747,7 @@ class Syntax {
         $tablecontent = "";
         // Tabellenzeilen
 
-        preg_match_all("/(&lt;|&lt;&lt;)(.*)(&gt;|&gt;&gt;)/Umsie", $value, $tablelines);
+        preg_match_all("/(&lt;|&lt;&lt;)(.*)(&gt;|&gt;&gt;)/Umsi", $value, $tablelines);
         foreach ($tablelines[0] as $j => $tablematch) {
             // Kopfzeilen
             if (preg_match("/&lt;&lt;([^&gt;]*)/Umsi", $tablematch)) {
