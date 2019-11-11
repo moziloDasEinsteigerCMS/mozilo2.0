@@ -8,7 +8,7 @@ means, you may use, alter and deploy moziloCMS; altered
 versions have to be licensed und GPL again, though.
 moziloCMS uses other free software and graphics, which are 
 licensed differently. See the full list at
-http://cms.mozilo.de/hilfe/?thema=lizenz .
+http://cms.mozilo.de/moziloCMS/Lizenz.html .
 GPL and LGPL in their exact wording can be found in the 
 moziloCMS root directory.
 
