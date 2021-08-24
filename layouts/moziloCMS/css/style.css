@@ -1,422 +1,651 @@
 /*
-Theme Name: Standard moziloCMS 
-Description: Tabellenloses Design
-Version: 0.1
-Author: sbDESIGN, S. Bechtold
+|===============================================================================|
+| Template: moziloCMS_Standard_Hell                                             |
+| Author: Sven Svetic, Twinix-Design                                            |
+| Version: 0.1                                                                  | 
+| *********  Dieser Hinweis darf nicht entfernt werden!  *********              |
+|===============================================================================|
 */
-
-/*************************** GLOBALE EINSTELLUNGEN ****************************/
-*{
-    margin  : 0;
-    padding : 0;
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
 }
 
-html, body, #sb-main {
-    height : 100%;
+*,
+*:before,
+*:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0
 }
-
-body > #sb-main {
-    height     : auto;
-    min-height : 100%;
-}
+/*--------------------------------------------------------------
+# Body Style
+--------------------------------------------------------------*/
+html,
+body {
+    scroll-behavior: smooth
+} 
 
 body {
-    background  : #ebf0f3;
-    color       : #000000;
-    font-family : Corbel, Arial, Helvetica, sans-serif;
-    font-size   : 100%;
-    max-width   : 100%;
-    text-align  : center;
+    background: #ebf0f3;
+    color: #212529;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.7
 }
-
-/* Absätze */
-p {
-    padding       : 5px 0 15px 0;
-    margin-bottom : 10px;
-}
-
-/* allgemeine Links */
+/*--------------------------------------------------------------
+# allgemeiner Style 
+--------------------------------------------------------------*/
 a {
-    font-weight     : bold;
-    color           : #73a7cf;
-    text-decoration : none;
-    padding         : 0px 2px 0px 2px;
+    color: #73a7cf;
+    text-decoration: none
 }
 
-a:link, a:visited, a:active {
-    color           : #73a7cf;
-    font-weight     : bold;
-    text-decoration : none;
+a:link,
+a:visited,
+a:active {
+    color: #73a7cf;
+    text-decoration: none
 }
 
 a:hover {
-    color : #9ea666;
+    color: #30a5ff
 }
+
 :hover {
-    transition: color 0.2s ease 0s;
+    transition: color 0.2s ease 0s
 }
 
-/******************************* LAYOUT ***************************************/
-/***** main, umschliesst die gesamte Seite *****/
-#sb-main {
-    width     : 100%;
-    font-size : 1.0em;
+p {
+    line-height: 1.61em;
+    font-weight: 300;
+    font-size: 1em
 }
 
-/**** Header, beinhaltet Suche und Seitentitel/Logo ****/
-#sb-header {
-    background-color : #ffffff;
-    border-top       : 20px solid #73a7cf;
-    border-bottom    : 1px solid #73a7cf;
-    min-width        : 980px;
+iframe {
+    border: 0
 }
 
-.sb-header_inner {
-    background : #ffffff url('../grafiken/header.png') no-repeat center center;
-    margin     : 0 auto;
-    width      : 980px;
-    position   : relative;
+article,
+aside,
+figure,
+footer,
+header,
+hgroup,
+section {
+    display: block
 }
 
-/*** Seitentitel ***/
-#sb-titel {
-    text-align  : left;
-    width       : auto;
-    padding     : 0;
-    font-size   : 1.3em;
-    font-weight : normal;
-    color       : #000;
-}
-/** Seitentitel Ueberschrift **/
-#sb-titel h1 {
-    font-size   : 1.5em;
-    font-weight : bold;
+input[type=checkbox],
+input[type=radio] {
+    vertical-align: baseline
 }
 
-/*** Container fuer Suche ***/
-.sb-search {
-    width    : 220px;
-    position : absolute;
-    right    : 0;
-    top      : 0;
+span {
+    font-style: inherit;
+    font-weight: inherit
 }
 
-/**** Container fuer das Menue und den Inhalt ****/
-div.sb-content {
-    overflow       : hidden;
-    position       : relative;
-    width          : 980px;
-    margin         : 0px auto;
-    text-align     : left;
-    background     : transparent;
-    border         : none;
-    display        : table;
-    border-spacing : 10px;
-    padding        : 10px 0 120px 0;
+fieldset {
+    border: none
 }
 
-/*** linke Sitebar ***/
-#sb-sidebar {
-    background     : #ffffff;
-    padding        : 0px 0 55px 0;
-    width          : 240px;
-    height         : 100%;
-    text-align     : left;
-    vertical-align : top;
-    height         : 100%;
-    display        : table-cell;
+.noborder {
+	border:none
 }
 
-/** Navigation **/
-#sb-nav {
-    background    : #f7f7f7;
-    margin-bottom : 20px;
-}
-/** Inhalte in der Sidebar **/
-.sb-sidebarblock {
-    margin-top : 50px;
-    padding    : 0 20px 10px 20px;
+/*--------------------------------------------------------------
+# Überschriften Style
+--------------------------------------------------------------*/
+h1,
+h2,
+h3 {
+    font-weight: 400
 }
 
-.sb-sidebarblock h2 {
-    text-transform : uppercase;
-    border-bottom  : 1px solid #e6e6e6;
+h1 {
+    font-size: 2.7em;
+    line-height: 1.15;
+    margin-bottom: 1.25em
 }
 
-/** Container für Inhalt **/
-div#sb-page {
-    padding        : 10px 25px 55px 15px;
-    background     : #ffffff;
-    width          : 710px;
-    text-align     : left;
-    display        : table-cell;
-    vertical-align : top;
-    line-height    : 1.3em;
-    border-spacing : 0;
+h2 {
+    font-size: 2.2em;
+    margin-bottom: 1.25em
 }
 
-/**** Footer ****/
-div#footer {
-    background : #444444;
-    color      : rgba(255, 255, 255, 0.57);
-    margin     : -120px auto 0px auto;
-    overflow   : hidden;
-    position   : relative;
-    font-size  : 0.875em;
-    height     : 120px;
-    min-width : 980px;
+h3 {
+    font-size: 1.625em;
+    margin-bottom: 1.25em;
+    line-height: 1.4em
 }
 
-#footer p {
-    margin  : 0;
-    padding : 30px 0 0 0;
+.header h1 {
+    font-size: 3.75em;
+    font-weight: bold;
+    text-shadow: 0 0 2px #fff,
+        -1px -1px 0 hsl(80, 70%, 35%),
+        -2px -2px 1px hsl(80, 70%, 35%),
+        -2px -2px 2px hsl(80, 10%, 15%)
+}
+/*--------------------------------------------------------------
+# mozilo Syntax
+--------------------------------------------------------------*/
+hr {
+    border: none;
+    border-top: .111em #444444 solid;
+    max-width: 100%;
+    margin: .278em
 }
 
-/*** Footer-Links, Admin-Login, Credits ***/
-.sb-credit a, .sb-credit a:visited {
-    color : rgba(255, 255, 255, 0.78);
-}
-.sb-credit a:hover {
-    color : #ffffff;
+.leftcontentimage {
+    float: left;
+    margin: 0.25em
 }
 
-/**************** MAINMENU und MenuSubs, MenuSubsMobile ****************/
-/** Hauptmenue **/
-ul.mainmenu, ul.cat-menusubs {
-    margin          : 0 0 0.5em 0;
-    list-style-type : none;
-    padding-left    : 0;
-    font-size       : 1em;
+.rightcontentimage {
+    float: right;
+    margin: 0.25em
 }
 
-li.mainmenu, li.cat-menusubs {
-    border-bottom : 1px solid #e6e6e6;
+.alignleft {
+    text-align: left
 }
 
-/* Hauptmenuepunkt */
-a.menu, a.cat-menusubs-link {
-    padding     : 15px 20px 15px 25px;
-    color       : #000000;
-    font-weight : normal;
-    display     : block;
+.aligncenter {
+    text-align: center
 }
 
-/* aktiver Hauptmenuepunkt */
-a.menuactive, a.cat-menusubs-link.menusubs-linkactive {
-    padding       : 15px 20px 15px 25px;
-    color         : #9da665 !important;
-    text-align    : left;
-    margin        : 0px;
-    font-weight   : normal;
-    display       : block;
-    margin-bottom : 1px;
+.alignright {
+    text-align: right
 }
 
-/* Hover */
-a.menu:hover, a.menuactive:hover, a.cat-menusubs-link:hover {
-    text-decoration  : none;
-    color            : #73a7d0;
-    background-color : #ffffff;
-    transition       : color 0.2s ease 0s;
+.alignjustify {
+    text-align: justify
 }
 
-/** Submenue / Detailmenue **/
-ul.detailmenu, ul.page-menusubs, ul.subcat-menusubs {
-    margin-bottom   : 0px;
-    padding-bottom  : 5px;
-    padding-left    : 35px;
-    list-style-type : none;
+.highlight {
+    padding: .059em;
+    background: #dd0000;
+    color: #fff
 }
 
-ul.subcat-menusubs {
-    padding-left : 15px;
+.unorderedlist,
+.orderedlist {
+    margin-left: 1.471em
+}
+/*--------------------------------------------------------------
+# tabelle
+--------------------------------------------------------------*/
+table.contenttable {
+    width: 100%;
+    height: auto;
+    border: .059em solid #444444;
+    border-collapse: collapse;
+    padding: .294em
 }
 
-li.detailmenu, li.page-menusubs, li.subcat-menusubs {
-    padding : 2px;
+th.contenttable {
+    border: .059em solid #444444;
+    background: linear-gradient(to bottom, #444444, #fff);
+    text-align: center;
+    padding: .294em
 }
 
-/* Submenuepunkt */
-a.submenu, a.page-menusubs-link, a.subcat-menusubs-link {
-    display     : block;
-    font-weight : normal;
-    color       : #404040;
-    font-size   : 0.875em;
+td.contenttable1,
+td.contenttable2 {
+    border: .059em solid #444444;
+    text-align: center;
+    padding: .294em
 }
-
-/* aktiver Submenuepunkt */
-a.submenuactive, a.page-menusubs-link.menusubs-linkactive, a.subcat-menusubs-link.menusubs-linkactive {
-    display     : block;
-    font-weight : normal;
-    color       : #9da665 !important;
-    font-size   : 0.875em;
-}
-
-/* Hover */
-a.submenu:hover, a.submenuactive:hover, a.page-menusubs-link:hover, a.subcat-menusubs-link:hover {
-    color           : #73a7d0;
-    text-decoration : none;
-    transition      : color 0.2s ease 0s;
-}
-
-a.subcat-menusubs-link, a.subcat-menusubs-link.menusubs-linkactive {
-    font-weight : bold;
-}
-
-/********************************** Suchfeld *********************************/
-/* Suchfeld */
-.searchform {
-    width : 220px;}
-
-fieldset#searchfieldset {
-    border  : none;
-    padding : 10px 0 0 0 ;
-}
-
-input.searchtextfield {
-    border                : 1px solid #ffffff;
-    -moz-border-radius    : 5px;
-    -khtml-border-radius  : 5px;
-    -webkit-border-radius : 5px;
-    border-radius         : 5px;
-    width                 : 200px;
-    height                : 24px;
-    background-color      : #ffffff;
-    margin-bottom         : 10px;
-    padding-left          : 5px;
-    color                 : #000000;
-    -moz-box-shadow       : inset 0 0 5px #B0B0B0;
-    -webkit-box-shadow    : inset 0 0 5px #B0B0B0;
-    box-shadow            : inset 0 0 5px #B0B0B0;
-}
-
-/* Suchbutton */
-input.searchbutton {
-    border : none;
-    margin : 5px 0px -5px -20px;
-}
-/********************************** Sitemap *********************************/
+/*--------------------------------------------------------------
+# sitemap
+--------------------------------------------------------------*/
 .sitemap {
-    margin : 1.4em 0 0 1em;
-}
-
-.sitemap ul {
-    list-style-type : none;
-    padding-left    : 2.4em;
-}
-
-.sitemap li {
-    margin-top : .5em;
+    padding: 0 0 .588em 0.778em
 }
 
 .sitemap h2 {
-    margin-top : 1em;
+    margin: 1.176em .882em .588em 0;
+    padding-bottom: .118em;
+    color: #212529;
+    border-bottom: 1px #444444 solid
 }
 
-/******************************* Kontaktformular *****************************/
-form#contact_form { }
-
-table#contact_table {
-    width      : 99%;
-    margin     : 0;
-    background : #F2F2F2;
-    border     : 1px solid #E2E2E2;
+.sitemap li {
+    padding-bottom: .294em;
+    padding-left: 2.5em;
+    list-style-type: none
 }
 
-table#contact_table td {
-    vertical-align : top;
-    padding        : 5px;
+.sitemap a {
+    text-decoration: none;
+    color: #212529
 }
 
-span#contact_errormessage {
-    color       : #880000;
-    font-weight : bold;
+.sitemap a:hover {
+    color: #30a5ff
+}
+/*--------------------------------------------------------------
+# bilder
+--------------------------------------------------------------*/
+img {
+    border: 1px solid #444444;
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 3px;
+    -webkit-box-shadow: 3px 5px 8px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 3px 5px 8px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 3px 5px 8px 0px rgba(0, 0, 0, 0.75)
 }
 
-span#contact_successmessage {
-    color       : #008800;
-    font-weight : bold;
+.contentimage {
+    display: inline-block;
+    max-width: 100%
 }
 
-input#contact_name, input#contact_mail, input#contact_website {
-    width      : 200px !important;
-    background : #E5E5E5 !important;
-    border     : 1px solid #E2E2E2;
-    color      : #000000;
+span.imagesubtitle {
+    display: block;
+    font-size: .706em;
+    color: #444444;
+    line-height: .824em;
+    text-align: center
 }
 
-textarea#contact_message {
-    width      : 400px !important;
-    background : #E5E5E5;
-    border     : 1px solid #E2E2E2;
-    color      : #000000;
+img.leftcontentimage {
+    max-width: 14.706em
 }
 
-input#contact_calculation {
-    background : #E5E5E5 !important;
-    border     : 1px solid #E2E2E2;
-    color      : #000000;
+span.leftcontentimage {
+    float: left;
+    max-width: 14.706em;
+    margin: .235em .588em .588em 0
 }
 
-input#contact_submit {
-    width : 250px !important;
+img.rightcontentimage {
+    max-width: 14.706em
 }
 
-/*---------------------------------------------------------------------------*/
-/******************************* GALLERY LAYOUT ******************************/
-/*---------------------------------------------------------------------------*/
-/* bei Einstellung "target self" */
-div.embeddedgallery {
-    text-align : center;
-    margin     : 5px auto;
-    background : #ffffff;
+span.rightcontentimage {
+    float: right;
+    max-width: 14.706em;
+    margin: .235em 0 .588em .588em
+}
+/*--------------------------------------------------------------
+# mozilo Gallery
+--------------------------------------------------------------*/
+.gallerymenu,
+.gallerynumbermenu {
+    display: block;
+    text-align: center;
+    padding: 0 10px 5px 10px
 }
 
-/* Hauptmenü (Galerie) */
-ul.gallerymenu {
-    padding     : 11px 8px 0px 0px;
-    line-height : 23px;
-    text-align  : center;
+.gallerymenu,
+.gallerynumbermenu>li {
+    display: inline-block
+}
+/*--------------------------------------------------------------
+# Searchfield
+--------------------------------------------------------------*/
+#searchfieldset {
+    display: flex;
+    flex-direction: row wrap;
+    height: 35px;
+    border-radius: 8px
 }
 
-/* Detailmenü (Galerie) */
-ul.gallerynumbermenu {
-    padding     : 6px 8px 0px 8px;
-    line-height : 20px;
-    text-align  : center;
-    width       : 100%;
-    float       : none;
-    margin      : 2px auto;
+#searchfieldset input[type=text] {
+    flex: 1 1 100%;
+    border-radius: 8px 0px 0px 8px
 }
 
-li.gallerymenu, li.gallerynumbermenu {
-    display : inline;
-    padding : 0 5px 0 5px;
+#searchfieldset input[type=text]:focus,
+#searchfieldset input[type=text]:hover {
+    background-color: rgba(95, 148, 177, 1)
 }
 
-/* Galerie-Tabelle (Übersichtsmodus) */
-table.gallerytable {
-    margin          : 0px auto;
-    border-collapse : collapse;
-    width           : 90%;
+#searchfieldset input[type=image] {
+    flex: 0 0 60px;
+    border-radius: 0px 8px 8px 0px
 }
 
-td.gallerytd {
-    vertical-align : top;
-    text-align     : center;
-    padding        : 3px;
+#searchfieldset input[type=image]:hover {
+    opacity: .8
+}
+/*--------------------------------------------------------------
+# Page Style
+--------------------------------------------------------------*/
+.header {
+    padding: 1.25em;
+    min-height: 15.625em;
+    text-align: center;
+    background: rgb(255, 137, 100);
+    background: linear-gradient(90deg, rgba(255, 137, 100, 1) 0%, rgba(158, 175, 98, 1) 50%, rgba(95, 148, 177, 1) 100%);
+    color: #212529;
+    -webkit-box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.75)
 }
 
-img.thumbnail {
-    margin             : 5px auto 3px auto;
-    border             : 5px solid #d0d0d0;
-    -moz-box-shadow    : 2px 2px 2px #333;
-    -webkit-box-shadow : 2px 2px 2px #333;
-    box-shadow         : 2px 2px 2px #333
+.header img {
+    display: inline-block;
+    box-shadow: none;
+    border: none
 }
 
-.gallerytd a:hover img.thumbnail {
-    -moz-box-shadow    : none;
-    -webkit-box-shadow : none;
-    box-shadow         : none;
+.topBar {
+    display: flex;
+    background-color: #333
+}
+
+.main-row {
+    display: flex;
+    width: 100%;
+    max-width: 120em;
+    margin: 0 auto
+}
+/*--------------------------------------------------------------
+# Sidebar / Nav Style
+--------------------------------------------------------------*/
+.side {
+    height: 100%;
+    min-width: 280px;
+    margin: 0;
+    padding: 1.25em
+}
+
+nav {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    line-height: 1
+}
+/*--------------------------------------------------------------
+# mainmenu {}
+--------------------------------------------------------------*/
+ul.mainmenu {
+    margin: 0;
+    padding: 0
+}
+
+li.mainmenu {
+    display: block;
+    width: 100%;
+    margin: 0
+}
+
+li.mainmenu a {
+    padding: 0.444em 0.889em;
+    border-bottom: 1px solid #ebf0f3;
+    text-decoration: none
+}
+
+li.mainmenu a:hover {}
+
+a.menu {
+    display: block;
+    color: #212529;
+    text-decoration: none
+}
+
+a.menu:hover {
+    color: #30a5ff
+}
+
+a.menuactive {
+    display: block;
+    font-weight: bold;
+    color: #212529;
+    text-decoration: none
+}
+
+a.menuactive:hover {
+    color: #30a5ff
+}
+/*--------------------------------------------------------------
+# submenu {}
+--------------------------------------------------------------*/
+ul.submenu {
+    margin: 0em;
+    padding: 0em
+}
+
+li.submenu {
+    margin: 0em;
+    padding: 0em;
+    list-style-type: none
+}
+
+a.submenu {
+    display: block;
+    color: #212529
+}
+
+a.submenu:hover {
+    color: #30a5ff
+}
+
+a.submenuactive {
+    display: block;
+    font-weight: bold;
+    color: #30a5ff
+}
+
+a.submenuactive:hover {
+    color: #30a5ff
+}
+/*--------------------------------------------------------------
+# detailmenu {}
+--------------------------------------------------------------*/
+ul.detailmenu {
+    margin: 0;
+    padding: 0
+}
+
+li.detailmenu {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    padding-left: .625em;
+    list-style-type: none
+}
+
+li.detailmenu a {
+    text-decoration: none;
+    color: #212529
+}
+/*--------------------------------------------------------------
+# Hamburger Button Checkbox
+--------------------------------------------------------------*/
+.dropdown input[type=checkbox] {
+    display: none
+}
+/*--------------------------------------------------------------
+# Content Style
+--------------------------------------------------------------*/
+.main {
+    flex: 3 1 0%;
+    margin: 0;
+    padding: 1.25em;
+    overflow: hidden
+}
+
+.panel {
+    height: 100% !important;
+    min-height: 5em;
+    background-color: #fff;
+    border: .063em solid transparent;
+    border-radius: .25em;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05)
+}
+
+.panel-body {
+    padding: .625em
+
+}
+
+.main .panel-body {
+    padding: .625em;
+    min-height: 100vh
+}
+
+.panel-heading {
+    padding: .625em .938em;
+    border-bottom: .063em solid transparent;
+    border-top-left-radius: .188em;
+    border-top-right-radius: .188em
+}
+
+.panel-title {
+    margin-top: 0;
+    margin-bottom: 0;
+    color: inherit
+}
+
+.panel-title>a {
+    color: inherit
+}
+
+.panel-footer {
+    padding: .625em .938em;
+    background-color: #f5f5f5;
+    border-top: .063em solid #ddd;
+    border-bottom-right-radius: .188em;
+    border-bottom-left-radius: .188em
+}
+/*--------------------------------------------------------------
+# Footer Style
+--------------------------------------------------------------*/
+.footer {
+    padding: 1.25em;
+    bottom: 0;
+    text-align: center;
+    background: #444444;
+    color: #ffffff
+}
+/* -------------------------------------- */
+/* ---------- max-width 768px ----------- */
+/* -------------------------------------- */
+@media screen and (max-width: 768px) {
+    body {
+        font-size: 15px
+    }
+
+    .main-row,
+    .navbar {
+        flex-direction: column
+    }
+
+    .panel {
+        min-height: 2.667em
+    }
+
+    h1 {
+        font-size: 2.2em
+    }
+
+    h2 {
+        font-size: 1.9em
+    }
+
+    h3 {
+        font-size: 1.425em
+    }
+
+    .header h1 {
+        font-size: 3.333em
+    }
+/*--------------------------------------------------------------
+# Hamburger Button 
+--------------------------------------------------------------*/
+.side {
+    position: absolute;
+    opacity: 0;
+    max-height: 0px;
+    overflow: hidden;
+    transition: all 1s cubic-bezier(.325, 1, .22, 1)
+}
+
+.dropdown input[type=checkbox]:checked ~ .side {
+    position: relative;
+    height: auto;
+    opacity: 1;
+    max-height: 500px;
+    transition: all 1s cubic-bezier(.5, 1, .22, 1)
+}
+
+.hamburger {
+    display: block;
+    position: absolute;
+    top: 18px;
+    right: 13px;
+    height: 27px;
+    width: 27px;
+    cursor: pointer;
+    transition: all 1s cubic-bezier(.19, 1, .22, 1)
+}
+
+.line {
+    position: absolute;
+    display: block;
+    background: #3d3d3d;
+    width: 22px;
+    height: 3px;
+    border-radius: 1px;
+    left: 0;
+    transition: all .6s cubic-bezier(.5, .1, 0, 1.2)
+}
+
+.line1 {
+    top: 0
+}
+
+.line2 {
+    top: 7px;
+    width: 18px;
+    transform: translateX(2px);
+    -webkit-transform: translateX(2px)
+}
+
+.line3 {
+    top: 14px
+}
+
+input[type=checkbox]:checked ~ label .line1 {
+    top: 0px;
+    width: 24px;
+    transform: translateX(-11px) rotate(-45deg) translateY(12px)
+}
+
+input[type=checkbox]:checked ~ label .line2 {
+    opacity: 0
+}
+
+input[type=checkbox]:checked ~ label .line3 {
+    top: 14px;
+    width: 24px;
+    transform: translateX(-8px) rotate(45deg) translateY(-8px)
+}
+}
+/* -------------------------------------- */
+/* ---------- max-width 550px ----------- */
+/* -------------------------------------- */
+@media only screen and (max-width: 550px) {
+    body {
+        font-size: 14px
+    }
+
+    .header h1 {
+        font-size: 2.857em
+    }
 }

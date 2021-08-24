@@ -25,6 +25,31 @@ function catpage() {
                 ajax_return("error",true,returnMessage(false,getLanguageValue("error_post_parameter")),true,true);
             else {
                 $name = make_NewOrgCatPageFromRequest();
+                
+                // echo "Type = " . $name['type'] . "<br />";
+                // echo "New = " . $name['new'] . "<br />";
+                // echo "Org = " . $name['org'] . "<br />";
+                
+                $counter = 0;
+                $xss_param_left = '%3C';    // <
+                $xss_param_right = '%3E';   // > 
+                
+                $pos = strpos($name['new'], $xss_param_left);
+                if ($pos !== false) {
+                  $counter++;
+                }
+                $pos = strpos($name['new'], $xss_param_right);
+                if ($pos !== false) {
+                  $counter++;
+                }                
+                
+                if ($counter > 0) {
+                  $name = array();
+                  $cleanup = getRequestValue('cat_page_change','post',true);
+                  ajax_return("error",true,returnMessage(false,getLanguageValue("error_datei_file_name")),true,true);
+                  exit();
+                }              
+                                              
                 if(is_array($name)) {
                     $function = $changeart;
                     echo $function($name);
@@ -324,6 +349,7 @@ function make_NewOrgCatPageFromRequest() {
         $name["new"] .= "/".$CatPage->get_UrlCoded($new_page);
         $name["org"] .= "/".$CatPage->get_UrlCoded($org_page);
     }
+        
     return $name;
 }
 
