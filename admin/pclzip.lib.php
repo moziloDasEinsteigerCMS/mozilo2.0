@@ -1836,19 +1836,6 @@
     $v_memory_limit = ini_get('memory_limit');
     $v_memory_limit = trim($v_memory_limit);
     $last = strtolower(substr($v_memory_limit, -1));
-
-    /*
-     * PHP 7.4 Notice: Non well formed numeric value issued by
-     * 
-     * Lösung: PHP 7.1 Patch von Github chamilo/pclzip
-     * 
-     *         $v_memory_limit = 128M
-     *         $v_memory_limit =  64M
-     *         $v_memory_limit = Zahl + Buchtsabe
-     *         
-     *         Also muss der Buchstabe weg!
-     */ 
-    $v_memory_limit = preg_replace('/\s*[KkMmGg]$/', '', $v_memory_limit);
  
     if($last == 'g')
         //$v_memory_limit = $v_memory_limit*1024*1024*1024;

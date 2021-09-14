@@ -9,6 +9,8 @@ define("IS_ADMIN",false);
 # ab php > 5.2.0 hat preg_* ein default pcre.backtrack_limit von 100000 zeichen
 # deshalb der versuch mit ini_set
 @ini_set('pcre.backtrack_limit', 1000000);
+// UTF-8 erzwingen - experimentell!
+@ini_set("default_charset", CHARSET);
 
 # fals da bei winsystemen \\ drin sind in \ wandeln
 $BASE_DIR = str_replace("\\\\", "\\",__FILE__);
@@ -24,9 +26,6 @@ if(is_file(BASE_DIR.CMS_DIR_NAME."/DefaultConfCMS.php")) {
 } else {
     die("Fatal Error ".BASE_DIR.CMS_DIR_NAME."/DefaultConfCMS.php Datei existiert nicht");
 }
-
-// UTF-8 erzwingen - experimentell!
-@ini_set("default_charset", CHARSET);
 
 if(!is_file(BASE_DIR.CMS_DIR_NAME."/conf/main.conf.php") and is_file(BASE_DIR."install.php")) {
     $install = $_SERVER['HTTP_HOST'].URL_BASE."install.php";
@@ -115,37 +114,6 @@ $template = getTemplate($TEMPLATE_FILE);
 
 // Request-Parameter einlesen und dabei absichern
 $SEARCH_REQUEST = stripcslashes(getRequestValue('search'));
-
-// XSS sample
-// <script type="text/javascript">alert()</script>
-
-$xss_remove_chars = $SEARCH_REQUEST;
-$xss_remove_chars1 = str_replace(chr(0x3C), '', $xss_remove_chars);   // >
-$xss_remove_chars2 = str_replace(chr(0x3E), '', $xss_remove_chars1);  // <
-$xss_remove_chars3 = str_replace(chr(0x2B), '', $xss_remove_chars2);  // +
-$xss_remove_chars4 = str_replace(chr(0x3D), '', $xss_remove_chars3);  // =
-$xss_remove_chars5 = str_replace(chr(0x3B), '', $xss_remove_chars4);  // ;
-$xss_remove_chars6 = str_replace(chr(0x28), '', $xss_remove_chars5);  // (
-$xss_remove_chars7 = str_replace(chr(0x29), '', $xss_remove_chars6);  // )
-$xss_remove_chars8 = str_replace(chr(0x2F), '', $xss_remove_chars7);  // /
-$xss_remove_chars9 = str_replace(chr(0x26), '', $xss_remove_chars8);  // &
-$SEARCH_REQUEST = $xss_remove_chars9;
-
-$xss_remove_chars = $SEARCH_REQUEST;
-$xss_remove_chars1 = str_replace('%3C', '', $xss_remove_chars);   // >
-$xss_remove_chars2 = str_replace('%3E', '', $xss_remove_chars1);  // <
-$xss_remove_chars3 = str_replace('%2B', '', $xss_remove_chars2);  // +
-$xss_remove_chars4 = str_replace('%3D', '', $xss_remove_chars3);  // =
-$xss_remove_chars5 = str_replace('%3B', '', $xss_remove_chars4);  // ;
-$xss_remove_chars6 = str_replace('%28', '', $xss_remove_chars5);  // (
-$xss_remove_chars7 = str_replace('%29', '', $xss_remove_chars6);  // )
-$xss_remove_chars8 = str_replace('%2F', '', $xss_remove_chars7);  // /
-$xss_remove_chars9 = str_replace('%26', '', $xss_remove_chars8);  // &
-$SEARCH_REQUEST = $xss_remove_chars9;
-
-// echo "Suchstring = " . $SEARCH_REQUEST;
-// die();
-
 $HIGHLIGHT_REQUEST = getRequestValue('highlight');
 
 $HTML                   = "";

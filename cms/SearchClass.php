@@ -25,7 +25,7 @@ class SearchClass {
 
         $this->nosearchwords = $language->getLanguageValue("message_searchhelp_0");
         $query = str_replace(array('"',"'","[","]","{","}"),array("&quot;","&apos;","&#091;","&#093;","&#123;","&#125;"),trim(rawurldecode($SEARCH_REQUEST)));
-        $this->searchnoresult = '<p>'.$language->getLanguageValue("message_searchnoresult_1", $query).'</p>';
+        $this->searchnoresult = $language->getLanguageValue("message_searchnoresult_1", $query);
     }
 
     function setLowerChars() {
@@ -114,26 +114,20 @@ class SearchClass {
     }
 
     function getFindPagesMenuList($matchingpages = array(),$searchquery = false,$css = "searchmap") {
-        global $CatPage, $language, $SEARCH_REQUEST;
-        
-        $searchresults = '<h1 class="heading1">' . $language->getLanguageValue("message_searchresult_0",$SEARCH_REQUEST) . '</h1>';
+        global $CatPage, $SEARCH_REQUEST;
 
-        // keine Suchwörter eingegeben?
-        if (count($this->phrasearray) < 1) {
-          $searchresults .= "<p>" . $this->nosearchwords . "</p>";
-          return $searchresults;        
-        }
+        if(count($this->phrasearray) < 1)
+            return $this->nosearchwords;
 
         // Keine Inhalte gefunden?
-        if (count($matchingpages) < 1) {
-          $searchresults .= "<p>" . $this->searchnoresult . "</p>";
-          return $searchresults;        
-        }
+        if(count($matchingpages) < 1)
+            return $this->searchnoresult;
 
         $hidepage = false;
         if($this->hidecatnamedpages == "true")
             $hidepage = true;
-        $searchresults .='<ul class="'.$css.'">';
+
+        $searchresults = '<ul class="'.$css.'">';
         foreach($matchingpages as $cat => $tmp) {
             $searchresults .= "<li>";
             $catname = $CatPage->get_HrefText($cat,false);

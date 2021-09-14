@@ -1,21 +1,14 @@
-﻿# Non eliminare queste righe / Do not remove these lines
+# Diese Zeilen nicht löschen / Do not remove these lines
 #
-# $Revision: 829 $
-# $LastChangedDate: 2020-09-22 20:21:05 +0100 (Di, 22. Sep 2020) $
-# $Author: moziloCMS $
+# $Revision: 828 $
+# $LastChangedDate: 2011-01-06 20:21:05 +0100 (Do, 06. Jan 2011) $
+# $Author: hausl78 $
 #
 _dateformat_0                                   = %Y-%d-%m, %H:%M:%S
 _translator_0                                   = Piergiorgio Bellezza
-# der Wert ist für date_default_timezone_set()
-_timezone                                       =
-# komma separierte list von Grossbuchstaben die in Kleine gewandelt werden müssen
-# siehe SearchClass.php setLowerChars()
-_search_chars_lo                                =
-_search_chars_hi                                =
-
 # alttext_galleryimage_1                          = Galleria immagini "{PARAM1}"
 alttext_image_1                                 = Immaginee "{PARAM1}"
-anchor_top_0                                    =
+anchor_top_0                                    = 
 message_downloads                               = Downloads
 message_draft_0                                 = Brutta copia
 # message_firstimage_0                            = Prima immagine
@@ -23,11 +16,11 @@ message_galleries_0                             = Gallerie
 message_gallery_1                               = Galleria "{PARAM1}"
 # message_gallery_xoutofy_2                       = (Immagine {PARAM1} su {PARAM2})
 # message_gallerydir_error_1                      = Cartella galleria sconosciuta "{PARAM1}"!
-# message_gallerydir_error_0                      =
-message_galleryembed_error_0                    =
+# message_gallerydir_error_0                      = 
+message_galleryembed_error_0                    = 
 # message_galleryempty_0                          = Questa galleria non contiene immagini.
 message_gallerypreviewdir_error_1               = Cartella di anteprima mancante "{PARAM1}"!
-# message_gallery_no_preview                      =
+# message_gallery_no_preview                      = 
 message_lastchange_0                            = Ultimo cambiamento:
 # message_lastimage_0                             = Ultima immagine
 # message_nextimage_0                             = Prossima immagine
@@ -35,18 +28,15 @@ message_nodatafound_0                           = Nessun contentuno corrisponden
 # message_previousimage_0                         = Immagine precedente
 message_search_0                                = Cerca
 message_searchresult_1                          = Cerca risultati per "{PARAM1}"
-message_searchnoresult_1                        =
-message_searchhelp_0                            =
 message_sitemap_0                               = Mappa del sito
 message_template_error_1                        = File di mascherina (template) "{PARAM1}" mancante! Si prega di contattare l'amministratore.
-passwordform_title_0                            =
-passwordform_pagepasswordplease_0               =
-passwordform_message_passwordwrong_0            =
-passwordform_send_0                             =
-plugin_error_1                                  =
-plugin_error_missing_pluginconf_1               =
-plugin_error_missing_method_2                   =
-plugin_error_value_1                            =
+passwordform_title_0                            = 
+passwordform_pagepasswordplease_0               = 
+passwordform_message_passwordwrong_0            = 
+passwordform_send_0                             = 
+plugin_error_1                                  = 
+plugin_error_missing_pluginconf_1               = 
+plugin_error_missing_method_2                   = 
 thirsty_programmer                              = Salve, mi piacerebbe avere una birra, gentilmente! ;)  
 tooltip_anchor_error_1                          = 
 tooltip_anchor_goto_1                           = 
@@ -56,8 +46,8 @@ tooltip_color_error_1                           = Valore di colore errato "{PARA
 # tooltip_gallery_fullscreen_1                    = Vista tutto schermo: "{PARAM1}"
 tooltip_image_error_1                           = File sconosciuto o indirizzo errato: "{PARAM1}"
 tooltip_image_error_2                           = File immagine mancante "{PARAM1}" nella categoria "{PARAM2}"
-tooltip_include_recursion_error_0               = La pagina non puÃ² includere se stessa
-# tooltip_include_reinclude_error_0               = Inclusioni non permesse nelle pagine incluse 
+tooltip_include_recursion_error_0               = La pagina non può includere se stessa
+tooltip_include_reinclude_error_0               = Inclusioni non permesse nelle pagine incluse 
 tooltip_link_category_1                         = Cambia nella categoria "{PARAM1}"
 tooltip_link_category_error_1                   = Categoria mancante "{PARAM1}"
 tooltip_link_extern_1                           = Chiama l'indirizzo esterno "{PARAM1}"
@@ -75,4 +65,3 @@ tooltip_link_page_2                             = Mostra pagina "{PARAM1}" dalla
 tooltip_link_page_error_1                       = Pagina mancante "{PARAM1}"
 tooltip_link_page_error_2                       = Pagina mancante "{PARAM1}" nella categoria "{PARAM2}"
 tooltip_showsitemap_0                           = Mostra mappa sito
-tooltip_link_cmsinfo                            =Sito web creato con moziloCMS

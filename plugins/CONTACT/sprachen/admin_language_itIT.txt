@@ -15,5 +15,3 @@ config_input_contact_mail       =
 config_input_contact_website    = 
 config_input_contact_textarea   = 
 config_titel_spam_question      = 
-config_category                          = Categoria in cui si trova la pagina sulla protezione dei dati
-config_data_protection_page              = Nome della pagina sulla protezione dei dati

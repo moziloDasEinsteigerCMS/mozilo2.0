@@ -1,67 +1,57 @@
-﻿# Diese Zeilen nicht löschen / Do not remove these lines
+# Diese Zeilen nicht löschen / Do not remove these lines
 #
-# $Revision: 829 $
-# $LastChangedDate: 2020-09-22 20:21:05 +0100 (Di, 22. Sep 2020) $
-# $Author: moziloCMS $
+# $Revision: 828 $
+# $LastChangedDate: 2011-01-06 20:21:05 +0100 (Do, 06. Jan 2011) $
+# $Author: hausl78 $
 #
 _dateformat_0                                   = %d-%m-%Y, %H:%M:%S
 _translator_0                                   = Ole Carlsen
-# der Wert ist für date_default_timezone_set()
-_timezone                                       =
-# komma separierte list von Grossbuchstaben die in Kleine gewandelt werden müssen
-# siehe SearchClass.php setLowerChars()
-_search_chars_lo                                =
-_search_chars_hi                                =
-
 # alttext_galleryimage_1                          = Galleri billede "{PARAM1}"
 alttext_image_1                                 = Billede "{PARAM1}"
-anchor_top_0                                    =
+anchor_top_0                                    = 
 message_downloads                               = Hentninger
 message_draft_0                                 = Kladde
-# message_firstimage_0                            = FÃ¸rste billede
+# message_firstimage_0                            = Første billede
 message_galleries_0                             = Gallerier
 message_gallery_1                               = Galleri "{PARAM1}"
 # message_gallery_xoutofy_2                       = Billede {PARAM1} ud af {PARAM2}
 # message_gallerydir_error_1                      = Ukendt galleri mappe "{PARAM1}"!
-# message_gallerydir_error_0                      =
-message_galleryembed_error_0                    =
+# message_gallerydir_error_0                      = 
+message_galleryembed_error_0                    = 
 # message_galleryempty_0                          = Dette galleri indeholder ingen billeder.
 message_gallerypreviewdir_error_1               = Manglende miniature mappe "{PARAM1}"!
-# message_gallery_no_preview                      =
-message_lastchange_0                            = Sidst Ã¦ndret:
+# message_gallery_no_preview                      = 
+message_lastchange_0                            = Sidst ændret:
 # message_lastimage_0                             = Sidste billede
-# message_nextimage_0                             = NÃ¦ste billede
+# message_nextimage_0                             = Næste billede
 message_nodatafound_0                           = Lignende indhold ikke fundet.
-# message_previousimage_0                         = ForegÃ¥ende billede
-message_search_0                                = SÃ¸g
-message_searchresult_1                          = SÃ¸ge resultater for "{PARAM1}"
-message_searchnoresult_1                        =
-message_searchhelp_0                            =
+# message_previousimage_0                         = Foregående billede
+message_search_0                                = Søg
+message_searchresult_1                          = Søge resultater for "{PARAM1}"
 message_sitemap_0                               = Oversigt
 message_template_error_1                        = Skabelon fil "{PARAM1}" mangler! Kontakt venligst administratoren.
-passwordform_title_0                            =
-passwordform_pagepasswordplease_0               =
-passwordform_message_passwordwrong_0            =
-passwordform_send_0                             =
-plugin_error_1                                  =
-plugin_error_missing_pluginconf_1               =
-plugin_error_missing_method_2                   =
-plugin_error_value_1                            =
-thirsty_programmer                              = Hallo, jeg vil gerne have en Ã¸l, tak! ;)
+passwordform_title_0                            = 
+passwordform_pagepasswordplease_0               = 
+passwordform_message_passwordwrong_0            = 
+passwordform_send_0                             = 
+plugin_error_1                                  = 
+plugin_error_missing_pluginconf_1               = 
+plugin_error_missing_method_2                   = 
+thirsty_programmer                              = Hallo, jeg vil gerne have en øl, tak! ;)
 tooltip_anchor_error_1                          = 
 tooltip_anchor_goto_1                           = 
 tooltip_anchor_gototop_0                        = 
 tooltip_attribute_error_1                       = Fejlagtig syntaks: Ukendt egenskab "{PARAM1}"
-tooltip_color_error_1                           = Fejlagtig farve vÃ¦rdi "{PARAM1}"
-# tooltip_gallery_fullscreen_1                    = FuldskÃ¦rm visning: "{PARAM1}"
+tooltip_color_error_1                           = Fejlagtig farve værdi "{PARAM1}"
+# tooltip_gallery_fullscreen_1                    = Fuldskærm visning: "{PARAM1}"
 tooltip_image_error_1                           = Ukendt fil eller fejlagtig adresse: "{PARAM1}"
 tooltip_image_error_2                           = Manglende billede fil "{PARAM1}" i kategori "{PARAM2}"
 tooltip_include_recursion_error_0               = Siden kan ikke inkludere sig selv
-# tooltip_include_reinclude_error_0               = Inkludering i inkluderede sider er ikke tilladt
+tooltip_include_reinclude_error_0               = Inkludering i inkluderede sider er ikke tilladt
 tooltip_link_category_1                         = Skift til kategori "{PARAM1}"
 tooltip_link_category_error_1                   = Manglende kategori "{PARAM1}"
 tooltip_link_extern_1                           = Kald ekstern adresse "{PARAM1}"
-tooltip_link_extern_error_1                     = Fejlagtig lÃ¦nke adresse "{PARAM1}"
+tooltip_link_extern_error_1                     = Fejlagtig lænke adresse "{PARAM1}"
 tooltip_link_file_1                             = Hent fil "{PARAM1}"
 tooltip_link_file_2                             = Hent fil "{PARAM1}" fra kategori "{PARAM2}"
 tooltip_link_file_error_1                       = Manglende fil "{PARAM1}"
@@ -75,4 +65,3 @@ tooltip_link_page_2                             = Vis side "{PARAM1}" fra katego
 tooltip_link_page_error_1                       = Manglende side "{PARAM1}"
 tooltip_link_page_error_2                       = Manglende side "{PARAM1}" i kategori "{PARAM2}"
 tooltip_showsitemap_0                           = Vis oversigt
-tooltip_link_cmsinfo                            =Websted oprettet med moziloCMS

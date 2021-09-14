@@ -73,17 +73,8 @@ if(isset($_SESSION['login_okay']) and $_SESSION['login_okay'] === true
 // Formular noch nicht abgeschickt? Dann wurde die Seite zum ersten Mal aufgerufen.
 } else {
     // Login noch gesperrt?
-    
-    //
-    // PHP 7.3 - Warnung: A non-numeric value encountered in ...
-    //
-    $loginstart = $LOGINCONF->get("loginlockstarttime");
-    if (!is_numeric($loginstart)) {
-      $loginstart = intval($loginstart);
-    }
-    $logintimecompare = time() - $loginstart;
-    
-    if (($LOGINCONF->get("falselogincounttemp") > 0) and ($logintimecompare <= $LOGINLOCKTIME * 60)) {
+    if (($LOGINCONF->get("falselogincounttemp") > 0)
+            and (time() - $LOGINCONF->get("loginlockstarttime")) <= $LOGINLOCKTIME * 60) {
         // gesperrtes Formular anzeigen
         return login_formular(false,"warning_false_logins");
     } else {

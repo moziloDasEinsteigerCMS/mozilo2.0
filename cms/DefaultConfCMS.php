@@ -2,7 +2,7 @@
 
 define("CMSVERSION","2.0");
 define("CMSNAME","Amalia");
-define("CMSREVISION","53");
+define("CMSREVISION","51");
 
 #!!!!!!!! die version müssen wir noch checken
 define("MIN_PHP_VERSION","5.1.2");
@@ -11,10 +11,10 @@ define("PACK_JS",true);
 define("PACK_CSS",true);
 define("ADMIN_JQUERY","1.8.3");
 define("ADMIN_JQUERY_UI","1.9.2");
-define("JQUERY","1.12.4");
+define("JQUERY","1.7.2");
 define("JQUERY_UI","1.9.2");
 
-define("CHARSET","utf-8");
+define("CHARSET","UTF-8");
 define("CONTENT_DIR_NAME","kategorien");
 define("CONTENT_FILES_DIR_NAME","dateien");
 define("PLUGIN_DIR_NAME","plugins");
