@@ -7,7 +7,7 @@ class CONTACT extends Plugin {
             "formularmail" => "",
             "contactformwaittime" => "15",
             "contactformusespamprotection" => "true",
-            "contactformcalcs" => "3 + 7 = 10<br />5 - 3 = 2<br />1 plus 1 = 2<br />17 minus 7 = 10<br />4 * 2 = 8<br />3x3 = 9<br />2 divided by 2 = 1<br />Abraham Lincols first Name = Abraham<br />James Bonds family name = Bond<br />bronze, silver, ... ? = gold",
+            "contactformcalcs" => "3 + 7 = 10<br />5 - 3 = 2<br />1 plus 1 = 2<br />17 minus 7 = 10<br />4 * 2 = 8<br />3x3 = 9<br />2 geteilt bei 2 = 1<br />Abraham Lincols Vorname = Abraham<br />James Bonds Nachname = Bond<br />bronze, silber, ... ? = gold",
             "titel_name" => "",
             "titel_name_show" => "true",
             "titel_name_mandatory" => "false",
@@ -52,6 +52,10 @@ class CONTACT extends Plugin {
         require_once($dir."func_contact.php");
 
         $return = buildContactForm($this->settings);
+        
+        /* security hotfix 2017-06-14 */
+        $return = str_replace(array('[',']','{','}','|'), array('&#091;','&#093;','&#123;','&#125;','&#124;'), $return);        
+        
         return $return;
 
     } // function getContent
@@ -178,6 +182,16 @@ class CONTACT extends Plugin {
             "type" => "checkbox",
             "description" => $lang_contact_admin->get("config_titel_contact_mandatory")
         );
+        $config['category']  = array(
+            "type" => "text",                           
+            "description" => $lang_contact_admin->get("config_category"), 
+            "maxlength" => "100"
+        );
+        $config['data_protection_page']  = array(
+            "type" => "text",
+            "description" => $lang_contact_admin->get("config_data_protection_page"), 
+            "maxlength" => "100"
+        );
         $config['--template~~'] = ''
                     .'<div class="mo-in-li-l">{formularmail_description}</div>'
                     .'<div class="mo-in-li-r">{formularmail_text}</div>'
@@ -185,7 +199,18 @@ class CONTACT extends Plugin {
                 .'<li class="mo-in-ul-li mo-inline ui-widget-content ui-corner-all ui-helper-clearfix"><div>'
                     .'<div class="mo-in-li-l">{contactformwaittime_description}</div>'
                     .'<div class="mo-in-li-r">{contactformwaittime_text}</div>'
-                .'</div></li>'
+                .'</div></li>'             
+                                
+                .'<li class="mo-in-ul-li mo-inline ui-widget-content ui-corner-all ui-helper-clearfix"><div>'
+                    .'<div class="mo-in-li-l">{category_description}</div>'
+                    .'<div class="mo-in-li-r">{category_text}</div>'
+                .'</div></li>'                
+                                
+                .'<li class="mo-in-ul-li mo-inline ui-widget-content ui-corner-all ui-helper-clearfix"><div>'
+                    .'<div class="mo-in-li-l">{data_protection_page_description}</div>'
+                    .'<div class="mo-in-li-r">{data_protection_page_text}</div>'
+                .'</div></li>' 
+                
                 .'<li class="mo-in-ul-li mo-inline ui-widget-content ui-corner-all ui-helper-clearfix"><div>'
                     .'<div class="mo-in-li-l" style="width:94%;">{contactformusespamprotection_description}<br /><br /></div>'
                     .'<div class="mo-in-li-r" style="width:5%;">{contactformusespamprotection_checkbox}</div>'
@@ -263,7 +288,7 @@ class CONTACT extends Plugin {
 
         $info = array(
             // Plugin-Name + Version
-            "<b>CONTACT</b>",
+            "<b>CONTACT</b> Revision: 2",
             // moziloCMS-Version
             "2.0",
             // Kurzbeschreibung nur <span> und <br /> sind erlaubt

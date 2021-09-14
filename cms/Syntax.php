@@ -2,11 +2,14 @@
 
 /*
 *
-* $Revision: 922 $
-* $LastChangedDate: 2011-07-12 14:55:50 +0200 (Di, 12. Jul 2011) $
+* $Revision: 923 $
+* $LastChangedDate: 2021-05-08 10:00:00 +0200 (So, 8. Mai 2021) $
 * $Author: stefanbe $
 *
+* Korrektur  2021-05-08:
+* Entfernen der Table Cellpadding, cellspacing, border und summary
 */
+
 
 class Syntax {
     
@@ -400,8 +403,8 @@ class Syntax {
 
     function insert_jquery_in_head($jquery_type) {
         $jquery =array();
-        $jquery['jquery'] = '<script type="text/javascript" src="'.URL_BASE.CMS_DIR_NAME.'/jquery/jquery-'.JQUERY.'.min.js"></script>';
-        $jquery['jquery-ui'] = '<script type="text/javascript" src="'.URL_BASE.CMS_DIR_NAME.'/jquery/jquery-ui-'.JQUERY_UI.'.custom.min.js"></script>';
+        $jquery['jquery'] = '<script src="'.URL_BASE.CMS_DIR_NAME.'/jquery/jquery-'.JQUERY.'.min.js"></script>';
+        $jquery['jquery-ui'] = '<script src="'.URL_BASE.CMS_DIR_NAME.'/jquery/jquery-ui-'.JQUERY_UI.'.custom.min.js"></script>';
         if(isset($jquery[$jquery_type]) and !in_array($jquery_type,$this->jquery_search)) {
             $this->jquery_search[] = $jquery_type;
             $this->jquery_replace[] = $jquery[$jquery_type];
@@ -772,7 +775,7 @@ class Syntax {
                 $tablecontent .= "</tr>";
             }
         }
-        return '<table class="'.$tabellecss.'" cellspacing="0" border="0" cellpadding="0" summary="">'.$tablecontent.'</table>';
+        return '<table class="'.$tabellecss.'">'.$tablecontent.'</table>';
     }
 
     function syntax_include($desciption,$value) {
@@ -894,7 +897,7 @@ class Syntax {
                 if(!isset($this->$plugin))
                     $this->$plugin = new $plugin();
                 if(file_exists(PLUGIN_DIR_REL.$plugin."/plugin.css")) {
-                    $css = '<style type="text/css"> @import "'.URL_BASE.PLUGIN_DIR_NAME.'/'.$plugin.'/plugin.css"; </style>';
+                    $css = '<link rel="stylesheet" href="'.URL_BASE.PLUGIN_DIR_NAME.'/'.$plugin.'/plugin.css">';
                     $this->insert_in_head($css);
                 }
                 $replacement = $this->$plugin->getPluginContent($plugin_parameter);
@@ -953,7 +956,7 @@ class Syntax {
                 break;
             case '{CMSINFO}':
                 global $language;
-                $replace = '<a href="http://www.mozilo.de/" target="_blank" id="cmsinfolink"'.$this->getTitleAttribute($language->getLanguageHtml("tooltip_link_cmsinfo")).">moziloCMS ".CMSVERSION."</a>";
+                $replace = '<a href="https://www.mozilo.de/" target="_blank" id="cmsinfolink"'.$this->getTitleAttribute($language->getLanguageHtml("tooltip_link_cmsinfo")).">moziloCMS ".CMSVERSION."</a>";
                 break;
             case '{TABLEOFCONTENTS}':
                 # Da es den Inhalt erst am schluss gibt setzen wir einen Verstägten Platzhalter

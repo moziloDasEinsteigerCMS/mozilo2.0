@@ -1,17 +1,22 @@
 toolbar_platzhalter_CONTACT             = Contact form
 config_titel_contact            = Contact form settings
-config_text_formularmail        = This "Single-line text input E-mail" will be the recipient of messages sent from the contact form.<br /><span style="font-style:italic;">On the moziloAdmin home page you may check if your server is able to send e-mails.</span>
+config_text_formularmail        = This "Single-line text input E-mail" will be the recipient of messages sent from the contact form.
 config_error_formularmail       = Please enter a valid e-mail adress.
 config_text_contactformusespamprotection = Should the contact form be spam-protected? With that option checked, your visitors will have to solve a simple task in order to send their message.
 config_text_contactformwaittime = How many seconds should a visitor have to wait until he can send the next message?
+config_help_contact             = Which fields should be displayed in the contact form - and which are mandatory fields? <br /> You can also assign your own designations for the input fields and create a spam protection. <br /> The "single-line text field e-mail" is used as the sender used for messages from the contact form. <br /> <i> On the moziloAdmin start page you can check whether mailing is supported. </i>
 config_text_contact             = Which input should be visible in the contact form, and which of them should be mandatory? You may also change the display names of the inputs.
 config_titel_contact_mandatory  = mandatory
 config_titel_contact_show       = show
 config_titel_contact_input      = Display name
 config_titel_contact_help       = Description
 config_input_contact_name       = Single-line text input "Name"
-config_input_contact_subject    = Single-line text input "Subject"
 config_input_contact_mail       = Single-line text input "E-mail"
 config_input_contact_website    = Single-line text input "Website"
+config_input_contact_subject    = Single-line text input "Subject"
 config_input_contact_textarea   = Multi-line text input "Message"
-config_titel_spam_question      = 
+config_input_contact_privacy    = Checkbox Text "Privacy Policy"
+config_input_contact_mail_send_copy = Send a copy to them
+config_titel_spam_question      = Spam tasks <br /> a new line for each<br /> question = answer <br /> e.g. 3 + 7 = 10
+config_category                          = Category in which the data protection page is located
+config_data_protection_page              = Name of the data protection page

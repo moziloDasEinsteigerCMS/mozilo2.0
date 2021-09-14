@@ -15,3 +15,5 @@ config_input_contact_mail       = Enkele invoer regel "E-mail"
 config_input_contact_website    = Enkele invoer regel  "Website"
 config_input_contact_textarea   = Text veld "Uw bericht"
 config_titel_spam_question      = 
+config_category                          = Categorie waarin de gegevensbeschermingspagina zich bevindt
+config_data_protection_page              = Naam van de gegevensbeschermingspagina

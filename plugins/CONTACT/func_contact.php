@@ -3,10 +3,11 @@
 // Gibt das Kontaktformular zurueck
 // ------------------------------------------------------------------------------
     function buildContactForm($settings) {
+    	  global $CatPage;
         global $lang_contact;
         global $CMS_CONF;
         global $specialchars;
-        global $lang_contact;
+        global $language;
 
         $WEBSITE_NAME = $specialchars->rebuildSpecialChars($CMS_CONF->get("websitetitle"),false,true);
         if($WEBSITE_NAME == "")
@@ -53,6 +54,14 @@
         }
         // Das Formular wurde abgesendet
         if (getRequestValue('submit','post', false) <> "") { 
+        
+        $hp = $_POST['url'];
+        $hpmessage = "Nice try but we don't like Spam!";
+        
+        //hp prüfen
+	if( ! empty( $hp ) ){
+		return $hpmessage;
+	}
 
             // Bot-Schutz: Wurde das Formular innerhalb von x Sekunden abgeschickt?
             $sendtime = $settings->get("contactformwaittime");
@@ -92,7 +101,7 @@
             }
             // Es ist ein Fehler aufgetreten!
             if ($errormessage <> "") {
-                $form .= "<span id=\"contact_errormessage\">".$errormessage."</span>";
+                $form .= "<div id=\"contact_errormessage\">".$errormessage."</div>";
             }
             else {
                 $mailcontent = "";
@@ -112,11 +121,11 @@
                     $mailcontent .= "\r\n".$config_message[0].":\r\n".$message."\r\n";
                 }
                 if ($config_privacy[1] == "true") {
-                    # ☐ &#x2610; ☒ &#x2612;
-                    $checket = "☐";
+                    # □ &#x25A1; ▣ &#x25A3;
+                    $checket = "□";
                     if(!empty($privacy))
-                        $checket = "☒";
-                    $mailcontent .= $checket." ".$config_privacy[0]."\r\n";
+                        $checket = "▣";
+                    $mailcontent .= "\r\n".$checket." ".$lang_contact->getLanguageValue("contactform_privacy")." ".$lang_contact->getLanguageValue("contactform_privacy1")." ".$lang_contact->getLanguageValue("contactform_privacy2")."\r\n";
                 }
                 $mailsubject = $lang_contact->getLanguageValue("contactform_mailsubject", $specialchars->getHtmlEntityDecode($WEBSITE_NAME));
                 $mailsubject_confirm = $lang_contact->getLanguageValue("contactform_mailsubject_confirm", $specialchars->getHtmlEntityDecode($WEBSITE_NAME));
@@ -129,7 +138,7 @@
                 // Mail an eingestellte Mail-Adresse (Mail-Absender muss auch diese Adresse sein,
                 // sonst gibts kein Mail wenn der keine oder ungültige Adresse eingibt..
                 sendMail($mailsubject, $mailcontent, $settings->get("formularmail"), $settings->get("formularmail"), $mail);
-                $form .= "<span id=\"contact_successmessage\">".$lang_contact->getLanguageValue("contactform_confirmation")."</span>";
+                $form .= "<div id=\"contact_successmessage\">".$lang_contact->getLanguageValue("contactform_confirmation")."</div>";
                 
                 // Felder leeren
                 $name = "";
@@ -151,79 +160,114 @@
         global $CatPage;
         $action_para = $CatPage->get_Href(CAT_REQUEST,PAGE_REQUEST);
 
-        $form .= "﻿<form accept-charset=\"".CHARSET."\" method=\"post\" action=\"$action_para\" name=\"contact_form\" id=\"contact_form\">"
+        $form .= "<form accept-charset=\"".CHARSET."\" method=\"post\" action=\"$action_para\" name=\"contact_form\" id=\"contact_form\">"
         ."<input type=\"hidden\" name=\"cat\" value=\"".$CatPage->get_AsKeyName(CAT_REQUEST)."\" />"
-        ."<input type=\"hidden\" name=\"page\" value=\"".$CatPage->get_AsKeyName(PAGE_REQUEST)."\" />"
-        ."<div id=\"contact_table\">";
+        ."<input type=\"hidden\" name=\"page\" value=\"".$CatPage->get_AsKeyName(PAGE_REQUEST)."\" />";
         if ($config_name[1] == "true") {
             // Bezeichner aus formular.conf nutzen, wenn gesetzt
-            $form .= "<div class=\"row\"><div class=\"col-25\">".$config_name[0];
             if ($config_name[2] == "true") {
-                $form .= "*";
+                $name_mandatory = "*";
             }
-            $form .= "</div><div class=\"col-75\"><input type=\"text\" id=\"contact_name\" name=\"".$_SESSION['contactform_name']."\" value=\"".$name."\" /></div></div>";
+             else { 
+					$name_mandatory = "";            
+            }
+            $form .= "<div class=\"form-group\">";
+            $form .= "<label class=\"hide-mobile\">$name_mandatory $config_name[0]</label>";
+            $form .= "<input type=\"text\" id=\"contact_name\" name=\"".$_SESSION['contactform_name']."\" placeholder=\"$name_mandatory $config_name[0] \">";
+            $form .= "</div>";
         }
       if ($config_mail[1] == "true") {
             // Bezeichner aus formular.conf nutzen, wenn gesetzt
-            $form .= "<div class=\"row\"><div class=\"col-25\">".$config_mail[0];
             if ($config_mail[2] == "true") {
-                $form .= "*";
+                $mail_mandatory = "*";
+            } else { 
+					$mail_mandatory = "";            
             }
-            $form .= "</div><div class=\"col-75\"><input type=\"email\" id=\"contact_mail\" name=\"".$_SESSION['contactform_mail']."\" value=\"".$mail."\" /></div></div>";
+            $form .= "<div class=\"form-group\">";
+            $form .= "<label class=\"hide-mobile\">$mail_mandatory $config_mail[0]</label>";
+            $form .= "<input type=\"email\" id=\"contact_mail\" name=\"".$_SESSION['contactform_mail']."\" placeholder=\"$mail_mandatory $config_mail[0]\">";
+            $form .= "</div>";
         }
         if ($config_website[1] == "true") {
             // Bezeichner aus formular.conf nutzen, wenn gesetzt
-            $form .= "<div class=\"row\"><div class=\"col-25\">".$config_website[0];
             if ($config_website[2] == "true") {
-                $form .= "*";
+                $website_mandatory = "*";
+            } else { 
+					$website_mandatory = "";            
             }
-            $form .= "</div><div class=\"col-75\"><input type=\"url\" id=\"contact_website\" name=\"".$_SESSION['contactform_website']."\" value=\"".$website."\" /></div></div>";
+            $form .= "<div class=\"form-group\">";
+            $form .= "<label class=\"hide-mobile\">$website_mandatory $config_website[0]</label>";
+            $form .= "<input type=\"url\" id=\"contact_website\" name=\"".$_SESSION['contactform_website']."\" placeholder=\"$website_mandatory $config_website[0]\">";
+            $form .= "</div>";
         }
+        //hp schutz
+            $form .= "<div class=\"form-group hp\">";
+            $form .= "<label class=\"hide-mobile\">*URL</label>";
+        		$form .= "<input name=\"url\" type=\"text\" id=\"url\" placeholder=\"Enter Your Website URL here\">";
+            $form .= "</div>";        
+        //hp Ende
           if ($config_subject[1] == "true") {
             // Bezeichner aus formular.conf nutzen, wenn gesetzt
-            $form .= "<div class=\"row\"><div class=\"col-25\">".$config_subject[0];
             if ($config_subject[2] == "true") {
-                $form .= "*";
+                $subject_mandatory = "*";
+            } else { 
+					$subject_mandatory = "";            
             }
-            $form .= "</div><div class=\"col-75\"><input type=\"text\" id=\"contact_subject\" name=\"".$_SESSION['contactform_subject']."\" value=\"".$subject."\" /></div></div>";
+            $form .= "<div class=\"form-group\">";
+            $form .= "<label class=\"hide-mobile\">$subject_mandatory $config_subject[0]</label>";
+            $form .= "<input type=\"text\" id=\"contact_subject\" name=\"".$_SESSION['contactform_subject']."\" placeholder=\"$subject_mandatory $config_subject[0]\">";
+            $form .= "</div>";
         }
         if ($config_message[1] == "true") {
             // Bezeichner aus formular.conf nutzen, wenn gesetzt
-            $form .= "<div class=\"row\"><div class=\"col-25\">".$config_message[0];
             if ($config_message[2] == "true") {
-                $form .= "*";
+                $message_mandatory = "*";
+            } else { 
+					$message_mandatory = "";            
             }
-            $form .= "</div><div class=\"col-75\"><textarea id=\"contact_message\" name=\"".$_SESSION['contactform_message']."\">".$message."</textarea></div></div>";
+            $form .= "<div class=\"form-group\">";
+            $form .= "<label class=\"hide-mobile\">$message_mandatory $config_message[0]</label>";
+            $form .= "<textarea id=\"contact_message\" name=\"".$_SESSION['contactform_message']."\" placeholder=\"$message_mandatory $config_message[0]\" >".$message."</textarea>";
+            $form .= "</div>";
         }
-
         if($settings->get("contactformusespamprotection") == "true") {
             $mandatory = true;
             // Spamschutz-Aufgabe
             $calculation_data = getRandomCalculationData($settings);
             $_SESSION['calculation_result'] = $calculation_data[1];
-            $form .= "<div class=\"row\">".$lang_contact->getLanguageValue("contactform_spamprotection_text")."</div>"
-                ."<div class=\"row\"><div class=\"col-25\">".$calculation_data[0]."*</div>"
-                ."<div class=\"col-75\"><input type=\"text\" id=\"contact_calculation\" name=\"".$_SESSION['contactform_calculation']."\" value=\"\" /></div></div>";
-            
+            $form .= "<label for=\"spamprotection\"><span>* ".$lang_contact->getLanguageValue("contactform_spamprotection_text")."</span>"
+                ."<span>&nbsp;".$calculation_data[0]."</span></label>"
+                ."<input type=\"text\" id=\"contact_calculation\" name=\"".$_SESSION['contactform_calculation']."\">";            
         }
-
         if ($config_privacy[1] == "true") {
-            $form .= "<div class=\"row\"><input type=\"checkbox\" id=\"contact_privacy\" name=\"".$_SESSION['contactform_privacy']."\" value=\"".$_SESSION['contactform_privacy']."\" /><label for=\"contact_privacy\">".$config_privacy[0];
-            if ($config_privacy[2] == "true") {
-                $form .= "*";
+        	$cat = $settings->get("category");
+        	$page = $settings->get("data_protection_page");
+			$linkprivacy = "index.php?cat=".$cat."&amp;page=".$page."";		
+			if($CMS_CONF->get("modrewrite") == "true") {
+				$linkprivacy = URL_BASE. $cat."/".$page.".html";          
+			}
+			if(!$CatPage->exists_CatPage($cat,$page)) {
+            $category_text = $specialchars->rebuildSpecialChars($cat,true,true);
+            $page_text = $specialchars->rebuildSpecialChars($page,true,true);
+            $deadlink = $language->getLanguageValue("tooltip_link_page_error_2", $page_text, $category_text);
+           $form .= "<label><input type=\"checkbox\" id=\"contact_privacy\" name=\"".$_SESSION['contactform_privacy']."\" value=\"".$_SESSION['contactform_privacy']."\" /><span>".$lang_contact->getLanguageValue("contactform_privacy")." <span class=\"deadlink\">".$deadlink."</span> ".$lang_contact->getLanguageValue("contactform_privacy2")."</span>";       
+        }
+		else {
+			$form .= "<label><input type=\"checkbox\" id=\"contact_privacy\" name=\"".$_SESSION['contactform_privacy']."\" value=\"".$_SESSION['contactform_privacy']."\" />";
+					if ($config_privacy[2] == "true") {
+                $form .= "*&nbsp;";
             }
-            $form .= "</label></div>";
+			$form .= "<span>".$lang_contact->getLanguageValue("contactform_privacy")." <a href=\"". $linkprivacy . "\">".$lang_contact->getLanguageValue("contactform_privacy1")."</a> ".$lang_contact->getLanguageValue("contactform_privacy2")."</span>";
+			}
+            $form .= "</label>";
         }
         if($mandatory)
-            $form .= "<div class=\"row\"><div class=\"col-25\"></div><div class=\"col-75\">".$lang_contact->getLanguageValue("contactform_mandatory_fields")."</div></div>";
-        $form .= "<div class=\"row\"><div class=\"col-25\"></div><div class=\"col-75\"><input type=\"submit\" class=\"submit\" id=\"contact_submit\" name=\"submit\" value=\"".$lang_contact->getLanguageValue("contactform_submit")."\" /></div></div>";
-        $form .= "</div>"
-        ."</form>";
+            $form .= "<span>".$lang_contact->getLanguageValue("contactform_mandatory_fields")."</span>";
+        $form .= "<input type=\"submit\" class=\"submit\" id=\"contact_submit\" name=\"submit\" value=\"".$lang_contact->getLanguageValue("contactform_submit")."\" />";
+        $form .= "</form>";
         
         return $form;
     }
-
-
 // ------------------------------------------------------------------------------
 // Hilfsfunktion: Zufaellige Spamschutz-Rechenaufgabe und deren Ergebnis zurueckgeben
 // ------------------------------------------------------------------------------
@@ -250,6 +294,4 @@
         $_SESSION['contactform_calculation'] = time()-rand(50, 60);
         $_SESSION['contactform_privacy'] = time()-rand(60, 70);
     }
-
-
 ?>

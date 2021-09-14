@@ -1,63 +1,64 @@
 # Diese Zeilen nicht löschen / Do not remove these lines
 #
-# $Revision: 844 $
-# $LastChangedDate: 2011-01-12 15:51:56 +0100 (Mi, 12. Jan 2011) $
-# $Author: stefanbe $
+# $Revision: 846 $
+# $LastChangedDate: 2021-06-16 20:21:05 +0100 (Mi, 16. Jun 2021) $
+# $Author: moziloCMS $
 #
 _dateformat_0                                   = %d.%m.%Y, %H:%M:%S
-_translator_0                                   = mozilo
+_translator_0                                   = moziloCMS
 # der Wert ist für date_default_timezone_set()
 _timezone                                       = Europe/Berlin
-# kommaseparierte Liste von Grossbuchstaben, die in Kleine gewandelt werden müssen
+# komma separierte list von Grossbuchstaben die in Kleine gewandelt werden müssen
 # siehe SearchClass.php setLowerChars()
 _search_chars_lo                                = 
 _search_chars_hi                                = 
 
-# alttext_galleryimage_1                          = Galeriebild "{PARAM1}"
+# alttext_galleryimage_1                        = Galeriebild "{PARAM1}"
 alttext_image_1                                 = Bild "{PARAM1}"
 anchor_top_0                                    = Seitenanfang
 message_downloads                               = Downloads
 message_draft_0                                 = Entwurf
-# message_firstimage_0                            = Erstes Bild
+# message_firstimage_0                          = Erstes Bild
 message_galleries_0                             = Galerien
 message_gallery_1                               = Galerie "{PARAM1}"
-# message_gallery_xoutofy_2                       = (Bild {PARAM1} von {PARAM2})
-# message_gallerydir_error_1                      = Unbekanntes Galerieverzeichnis "{PARAM1}"!
-# message_gallerydir_error_0                      = Es wurde kein Galerieverzeichnis angegeben!
+# message_gallery_xoutofy_2                     = (Bild {PARAM1} von {PARAM2})
+# message_gallerydir_error_1                    = Unbekanntes Galerieverzeichnis "{PARAM1}"!
+# message_gallerydir_error_0                    = Es wurde kein Galerieverzeichnis angegeben!
 message_galleryembed_error_0                    = Entsprechend den aktuellen CMS-Einstellungen können Galerien nur eingebettet genutzt werden.
-# message_galleryempty_0                          = Diese Galerie enthält keine Bilder.
+# message_galleryempty_0                        = Diese Galerie enthält keine Bilder.
 message_gallerypreviewdir_error_1               = Fehlendes Vorschauverzeichnis "{PARAM1}"!
-# message_gallery_no_preview                      = Vorschaubild nicht vorhanden
+# message_gallery_no_preview                    = Vorschaubild nicht vorhanden
 message_lastchange_0                            = Letzte Änderung:
-# message_lastimage_0                             = Letztes Bild
-# message_nextimage_0                             = Nächstes Bild
+# message_lastimage_0                           = Letztes Bild
+# message_nextimage_0                           = Nächstes Bild
 message_nodatafound_0                           = Keine passenden Inhalte gefunden.
-# message_previousimage_0                         = Voriges Bild
+# message_previousimage_0                       = Voriges Bild
 message_search_0                                = Suchen
+message_searchresult_0                          = Suchergebnisse
 message_searchresult_1                          = Suchergebnisse für "{PARAM1}"
-message_searchnoresult_1                        = Es konnte mit diesen Suchbegriffen "{PARAM1}" kein Inhalt gefunden werden!
-message_searchhelp_0                            = Für die Suche müssen Sie durch Leerzeichen getrennte Begriffe eingeben (Treffer sind Seiten, auf denen mindestens einer dieser Begriffe vorkommt). Begriffe, die ein Leerzeichen enthalten, bitte in Anführungszeichen setzen!
+message_searchnoresult_1                        = Die Suche nach "{PARAM1}" ergab keine Treffer, bitte eine neue Suche starten.
+message_searchhelp_0                            = Es muss mindestens ein Suchbegriff angegeben werden.
 message_sitemap_0                               = Sitemap
-message_template_error_1                        = Template-Datei "{PARAM1}" fehlt. Bitte kontaktiere den Administrator!
+message_template_error_1                        = Template-Datei "{PARAM1}" fehlt! Bitte kontaktiere den Administrator.
 passwordform_title_0                            = Passwortabfrage
 passwordform_pagepasswordplease_0               = Bitte Passwort für diese Seite eingeben:
-passwordform_message_passwordwrong_0            = Zugriff verweigert: Falsches Passwort!
+passwordform_message_passwordwrong_0            = Zugriff verweigert: Falsches Passwort.
 passwordform_send_0                             = Absenden
-plugin_error_1                                  = Allgemeiner Fehler im Plugin {PARAM1}. Bitte kontaktiere den Plugin-Autor!
-plugin_error_missing_pluginconf_1               = Fehler im Plugin {PARAM1}: plugin.conf fehlt. Bitte kontaktiere den Plugin-Autor!
-plugin_error_missing_method_2                   = Fehler im Plugin {PARAM1}: Methode {PARAM2} fehlt. Bitte kontaktiere den Plugin-Autor!
-plugin_error_value_1                            = Fehler im Plugin {PARAM1}: Fehlerhafte Parameter-Übergabe, siehe Plugin Hilfe!
+plugin_error_1                                  = Allgemeiner Fehler im Plugin {PARAM1}. Bitte kontaktiere den Plugin-Autor.
+plugin_error_missing_pluginconf_1               = Fehler im Plugin {PARAM1}: plugin.conf fehlt. Bitte kontaktiere den Plugin-Autor.
+plugin_error_missing_method_2                   = Fehler im Plugin {PARAM1}: Methode {PARAM2} fehlt. Bitte kontaktiere den Plugin-Autor.
+plugin_error_value_1                            = Fehler im Plugin {PARAM1}: Fehlerhafte Parameter Übergabe siehe Plugin Hilfe
 thirsty_programmer                              = Hallo, ich hätte bitte gern ein Bier! :)
 tooltip_anchor_error_1                          = Absatz "{PARAM1}" nicht vorhanden
 tooltip_anchor_goto_1                           = Zu Absatz "{PARAM1}" springen
 tooltip_anchor_gototop_0                        = Zum Seitenanfang springen
-tooltip_attribute_error_1                       = Falsche Syntax: Unbekanntes Attribut "{PARAM1}"!
-tooltip_color_error_1                           = Fehlerhafter Farbwert "{PARAM1}"!
+tooltip_attribute_error_1                       = Falsche Syntax: Unbekanntes Attribut "{PARAM1}"
+tooltip_color_error_1                           = Fehlerhafter Farbwert "{PARAM1}"
 # tooltip_gallery_fullscreen_1                  = Vollbildanzeige: "{PARAM1}"
-tooltip_image_error_1                           = Unbekannte Datei oder fehlerhafte Adresse: "{PARAM1}"!
-tooltip_image_error_2                           = Bilddatei "{PARAM1}" in der Kategorie "{PARAM2}" nicht vorhanden!
-tooltip_include_recursion_error_0               = Inhaltsseite kann sich nicht selbst einbinden!
-# tooltip_include_reinclude_error_0             = Includes in eingebundenen Inhaltsseiten sind verboten!
+tooltip_image_error_1                           = Unbekannte Datei oder fehlerhafte Adresse: "{PARAM1}"
+tooltip_image_error_2                           = Bilddatei "{PARAM1}" in der Kategorie "{PARAM2}" nicht vorhanden
+tooltip_include_recursion_error_0               = Inhaltsseite kann sich nicht selbst einbinden
+# tooltip_include_reinclude_error_0             = Includes in eingebundenen Inhaltsseiten sind verboten
 tooltip_link_category_1                         = Zur Kategorie "{PARAM1}" wechseln
 tooltip_link_category_error_1                   = Kategorie "{PARAM1}" nicht vorhanden
 tooltip_link_extern_1                           = Externe Adresse "{PARAM1}" aufrufen
@@ -65,14 +66,14 @@ tooltip_link_cmsinfo                            = Webseite erstellt mit moziloCM
 tooltip_link_extern_error_1                     = Fehlerhafte Link-Adresse "{PARAM1}"
 tooltip_link_file_1                             = Datei "{PARAM1}" herunterladen
 tooltip_link_file_2                             = Datei "{PARAM1}" der Kategorie "{PARAM2}" herunterladen
-tooltip_link_file_error_1                       = Datei "{PARAM1}" nicht vorhanden!
-tooltip_link_file_error_2                       = Datei "{PARAM1}" in der Kategorie "{PARAM2}" nicht vorhanden!
-# tooltip_link_gallery_2                          = Galerie "{PARAM1}" ({PARAM2} Bilder) ansehen
-# tooltip_link_gallery_error_1                    = Galerie "{PARAM1}" nicht vorhanden!
+tooltip_link_file_error_1                       = Datei "{PARAM1}" nicht vorhanden
+tooltip_link_file_error_2                       = Datei "{PARAM1}" in der Kategorie "{PARAM2}" nicht vorhanden
+# tooltip_link_gallery_2                        = Galerie "{PARAM1}" ({PARAM2} Bilder) ansehen
+# tooltip_link_gallery_error_1                  = Galerie "{PARAM1}" nicht vorhanden
 tooltip_link_mail_1                             = E-Mail an "{PARAM1}" verfassen
-tooltip_link_mail_error_1                       = Fehlerhafte E-Mail-Adresse "{PARAM1}"!
+tooltip_link_mail_error_1                       = Fehlerhafte E-Mail-Adresse "{PARAM1}"
 tooltip_link_page_1                             = Inhaltsseite "{PARAM1}" anzeigen
 tooltip_link_page_2                             = Inhaltsseite "{PARAM1}" der Kategorie "{PARAM2}" anzeigen
-tooltip_link_page_error_1                       = Inhaltsseite "{PARAM1}" nicht vorhanden!
-tooltip_link_page_error_2                       = Inhaltsseite "{PARAM1}" in der Kategorie "{PARAM2}" nicht vorhanden!
+tooltip_link_page_error_1                       = Inhaltsseite "{PARAM1}" nicht vorhanden
+tooltip_link_page_error_2                       = Inhaltsseite "{PARAM1}" in der Kategorie "{PARAM2}" nicht vorhanden
 tooltip_showsitemap_0                           = Sitemap anzeigen

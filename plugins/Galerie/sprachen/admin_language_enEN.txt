@@ -1,6 +1,3 @@
-
-config_gallery_picsperrow               = Thumbnails per row
-config_gallery_picsperrow_regex_error   = Number 1-99 allowed!
 config_gallery_target                   = Should the gallery be opened in a new browser window/tab or in the current one? 
 config_gallery_target_self              = In current window/tab.
 config_gallery_target_blank             = In new window/tab.

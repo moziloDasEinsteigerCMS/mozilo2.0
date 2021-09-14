@@ -88,6 +88,17 @@ if(is_file(BASE_DIR_CMS."DefaultFunc.php")) {
 $_GET = cleanREQUEST($_GET);
 $_REQUEST = cleanREQUEST($_REQUEST);
 $_POST = cleanREQUEST($_POST);
+
+if (isset($_GET['logout'])) {
+  $attack = $_GET['logout'];
+  if (!empty($attack)) {
+    if ($attack != "true") {
+      die("Fatal Error: possible attack");
+    }
+  }
+}
+
+
 if(isset($_FILE)) $_FILE = cleanREQUEST($_FILE);
 
 $message = NULL;
