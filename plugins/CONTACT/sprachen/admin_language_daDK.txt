@@ -14,6 +14,4 @@ config_input_contact_subject    		 =
 config_input_contact_mail                = Enkel linje tekst indtastning "E-mail"
 config_input_contact_website             = Enkel linje tekst indtastning "Websted"
 config_input_contact_textarea            = Flere linje tekst indtastning "Besked"
-config_titel_spam_question               = 
-config_category                          = Kategori, hvor databeskyttelsessiden er placeret
-config_data_protection_page              = Navn på databeskyttelsessiden
+config_titel_spam_question      = 

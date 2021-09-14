@@ -38,7 +38,7 @@ function makeDefaultConf($conf_array,$for_new = false) {
                         'titlebarformat' => '%7BWEBSITE%7D%7BSEP%7D%7BCATEGORY%7D%7BSEP%7D%7BPAGE%7D',
                         'websitetitle' => 'moziloCMS%20-%20Das%20CMS%20f%C3%BCr%20Einsteiger',
                         'cmslanguage' => 'deDE',
-                        'cmslayout' => 'moziloCMS',
+                        'cmslayout' => 'moziloCMS_Standard_Dunkel',
                         'defaultcat' => 'Willkommen',
                         'defaultcolors' => '',
                         'draftlayout' => 'false'),
@@ -88,8 +88,8 @@ function makeDefaultConf($conf_array,$for_new = false) {
     $gallery = array('digit' => array(
                         'maxheight' => '',
                         'maxwidth' => '',
-                        'maxthumbheight' => '200',
-                        'maxthumbwidth' => '250')
+                        'maxthumbheight' => '500',
+                        'maxthumbwidth' => '400')
                     );
 
     # für neue conf nur die subarrays benuzen

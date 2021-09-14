@@ -104,38 +104,38 @@ class moziloDocuClass {
 
 #!!!!!! Braucht das die normale Docu?
 #        if($this->docu_writer)
-            $this->docu_artikel .= '<script src="'.BASE_URL_DOCU.'jquery/toggle_jquery.js"></script>'
-                .'<script src="'.BASE_URL_DOCU.'jquery/docu.js"></script>';
+            $this->docu_artikel .= '<script type="text/javascript" src="'.BASE_URL_DOCU.'jquery/toggle_jquery.js"></script>'
+                .'<script type="text/javascript" src="'.BASE_URL_DOCU.'jquery/docu.js"></script>';
 
         return $this->docu_error;
     }
 
     function getDocuHead() {
-        $html = '<link rel="SHORTCUT ICON" href="'.BASE_URL_DOCU.'admin/favicon.ico" />'."\n";
+        $html = '<link type="image/x-icon" rel="SHORTCUT ICON" href="'.BASE_URL_DOCU.'admin/favicon.ico" />';
 
-        $html .= '<link rel="stylesheet" href="'.BASE_URL_DOCU.'admin/css/mozilo/jquery-ui-1.9.2.custom.css" />'."\n";
-        $html .= '<link rel="stylesheet" href="'.BASE_URL_DOCU.'admin/jquery/File-Upload/bootstrap.cms.css" />'."\n";
+        $html .= '<link type="text/css" rel="stylesheet" href="'.BASE_URL_DOCU.'admin/css/mozilo/jquery-ui-1.9.2.custom.css" />';
+        $html .= '<link type="text/css" rel="stylesheet" href="'.BASE_URL_DOCU.'admin/jquery/File-Upload/bootstrap.cms.css" />';
 
 #!!!!!!!! test
-        $html .= '<link rel="stylesheet" href="'.BASE_URL_DOCU.'admin/admin.css" />'."\n";
-        $html .= '<link rel="stylesheet" href="'.BASE_URL_DOCU.'admin/jquery/File-Upload/jquery.fileupload-ui.css" />'."\n";
-        $html .= '<link rel="stylesheet" href="'.BASE_URL_DOCU.'admin/editsite.css" />'."\n";
-        $html .= '<link rel="stylesheet" href="'.BASE_URL_DOCU.'admin/jquery/coloredit/coloredit.css" />'."\n";
-        $html .= '<link rel="stylesheet" href="'.BASE_URL_DOCU.'css/from_ace.css" />'."\n";
-        $html .= '<link rel="stylesheet" href="'.BASE_URL_DOCU.'admin/jquery/ui-multiselect-widget/jquery.multiselect.css" />'."\n";
-        $html .= '<link rel="stylesheet" href="'.BASE_URL_DOCU.'admin/jquery/ui-multiselect-widget/jquery.multiselect.filter.css" />'."\n";
+        $html .= '<link type="text/css" rel="stylesheet" href="'.BASE_URL_DOCU.'admin/admin.css" />';
+        $html .= '<link type="text/css" rel="stylesheet" href="'.BASE_URL_DOCU.'admin/jquery/File-Upload/jquery.fileupload-ui.css" />';
+        $html .= '<link type="text/css" rel="stylesheet" href="'.BASE_URL_DOCU.'admin/editsite.css" />';
+        $html .= '<link type="text/css" rel="stylesheet" href="'.BASE_URL_DOCU.'admin/jquery/coloredit/coloredit.css" />';
+        $html .= '<link type="text/css" rel="stylesheet" href="'.BASE_URL_DOCU.'css/from_ace.css" />';
+        $html .= '<link type="text/css" rel="stylesheet" href="'.BASE_URL_DOCU.'admin/jquery/ui-multiselect-widget/jquery.multiselect.css" />';
+        $html .= '<link type="text/css" rel="stylesheet" href="'.BASE_URL_DOCU.'admin/jquery/ui-multiselect-widget/jquery.multiselect.filter.css" />';
 
 
-        $html .= '<link rel="stylesheet" href="'.BASE_URL_DOCU.'css/docu.css" />'."\n";
-        $html .= '<link rel="stylesheet" href="'.BASE_URL_DOCU.'css/change_admin.css" />'."\n";
-        $html .= '<link rel="stylesheet" href="'.BASE_URL_DOCU.'css/arrow/arrow.css" />'."\n";
-        $html .= '<link rel="stylesheet" href="'.BASE_URL_DOCU.'css/mo_icons/mo_icons_tabs.css" />'."\n";
+        $html .= '<link type="text/css" rel="stylesheet" href="'.BASE_URL_DOCU.'css/docu.css" />';
+        $html .= '<link type="text/css" rel="stylesheet" href="'.BASE_URL_DOCU.'css/change_admin.css" />';
+        $html .= '<link type="text/css" rel="stylesheet" href="'.BASE_URL_DOCU.'css/arrow/arrow.css" />';
+        $html .= '<link type="text/css" rel="stylesheet" href="'.BASE_URL_DOCU.'css/mo_icons/mo_icons_tabs.css" />';
 
         if($this->isplugin) {
             global $syntax;
             $syntax->insert_jquery_in_head('jquery');
         } else
-            $html .= '<script src="'.BASE_URL_DOCU.'jquery/jquery-1.7.2.min.js"></script>'."\n";
+            $html .= '<script type="text/javascript" src="'.BASE_URL_DOCU.'jquery/jquery-1.7.2.min.js"></script>';
 #        $css = ' do-body-nodialog';
         $titel_artikel = "";
         $titel_subartikel = "";
@@ -149,13 +149,13 @@ class moziloDocuClass {
         }
         if($this->isplugin)
             $var_dialog = "false";
-        $html .= '<script>'
+        $html .= '<script type="text/javascript">'
             .'var dialog = '.$var_dialog.';'
             .'var titel_artikel = "'.$titel_artikel.'";'
             .'var titel_subartikel = "'.$titel_subartikel.'";'
             .'var in_text = "'.$this->getDocuLanguage("do_toggle_in_text").'";'
             .'var out_text = "'.$this->getDocuLanguage("do_toggle_out_text").'";'
-        .'</script>'."\n";
+        .'</script>';
         return $html;
     }
 

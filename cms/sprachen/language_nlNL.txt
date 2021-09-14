@@ -1,18 +1,11 @@
-﻿# Verwijder deze regels niet / Do not remove these lines
+# Diese Zeilen nicht löschen / Do not remove these lines
 #
-# $Revision: 829 $
-# $LastChangedDate: 2020-09-22 20:21:05 +0100 (Di, 22. Sep 2020) $
-# $Author: moziloCMS $
+# $Revision: 828 $
+# $LastChangedDate: 2011-01-06 20:21:05 +0100 (Do, 06. Jan 2011) $
+# $Author: hausl78 $
 #
-_dateformat_0                                   = %H:%M:%S %d-%m-%Y
-_translator_0                                   = T. Verhoef 
-# der Wert ist für date_default_timezone_set()
-_timezone                                       =
-# komma separierte list von Grossbuchstaben die in Kleine gewandelt werden müssen
-# siehe SearchClass.php setLowerChars()
-_search_chars_lo                                =
-_search_chars_hi                                =
-
+_dateformat_0                     		        = %H:%M:%S %d-%m-%Y
+_translator_0                     		        = T. Verhoef 
 # alttext_galleryimage_1                          = Afbeelding in foto album "{PARAM1}"
 alttext_image_1                                 = Afbeelding "{PARAM1}"
 anchor_top_0                                    = Terug naar boven
@@ -35,8 +28,6 @@ message_nodatafound_0                           = Geen overeenkomsten gevonden.
 # message_previousimage_0                         = Vorige afbeelding
 message_search_0                                = Zoeken
 message_searchresult_1                          = Zoek resultaat voor "{PARAM1}"
-message_searchnoresult_1                        =
-message_searchhelp_0                            =
 message_sitemap_0                               = Website overzicht
 message_template_error_1                        = Template besand "{PARAM1}" ontbreekt! Informeer aub de beheerder.
 passwordform_title_0                            = Wachtwoord vereist
@@ -46,7 +37,6 @@ passwordform_send_0                             = Ga verder
 plugin_error_1                                  = Fout in de plugin {PARAM1}. Neem svp contact op de de ontwikkelaar van deze plugin.
 plugin_error_missing_pluginconf_1               = Fout in de plugin {PARAM1}: plugin.conf ontbreekt. Neem svp contact op de de ontwikkelaar van deze plugin.
 plugin_error_missing_method_2                   = Fout in de plugin {PARAM1}: functie {PARAM2} ontbreekt. Neem svp contact op de de ontwikkelaar van deze plugin.
-plugin_error_value_1                            =
 thirsty_programmer                              = Hoi, voor mij graag een biertje! ;)
 tooltip_anchor_error_1                          = Paragraaf "{PARAM1}" bestaat niet
 tooltip_anchor_goto_1                           = Ga naar paragraaf "{PARAM1}"
@@ -57,7 +47,7 @@ tooltip_color_error_1                           = Foutieve kleur waarde "{PARAM1
 tooltip_image_error_1                           = Bestand of adres niet gevonden: "{PARAM1}"
 tooltip_image_error_2                           = Afbeelding "{PARAM1}" ontbreekt in categorie "{PARAM2}"
 tooltip_include_recursion_error_0               = Pagina kan niet zichzelf bevatten
-# tooltip_include_reinclude_error_0               = Ingevoegde webpagina's mogen geen invoeging bevatten
+tooltip_include_reinclude_error_0               = Ingevoegde webpagina's mogen geen invoeging bevatten
 tooltip_link_category_1                         = Verander naar categorie "{PARAM1}"
 tooltip_link_category_error_1                   = Ontbrekende categorie "{PARAM1}"
 tooltip_link_extern_1                           = Volg de koppeling naar "{PARAM1} (externe website)"
@@ -75,4 +65,3 @@ tooltip_link_page_2                             = Toon pagina "{PARAM1}" in de c
 tooltip_link_page_error_1                       = Ontbrekende webpagina "{PARAM1}"
 tooltip_link_page_error_2                       = Ontbrekende webpagina "{PARAM1}" in de categorie "{PARAM2}"
 tooltip_showsitemap_0                           = Toon het overzicht van de website pagina's
-tooltip_link_cmsinfo                            =Website gemaakt met moziloCMS

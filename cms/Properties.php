@@ -34,43 +34,9 @@ class Properties {
 
     # props und txt sachen lesen
     private function loadProperties() {
-    
         if($this->isConf === true) {
-        
-           /*
-            * PHP Notice: file_get_contents(): read of 8192 bytes failed with errno=13 Permission denied 
-            *             in /htdocs/mozilo20rev51/cms/Properties.php on line 38
-            *
-            * Hinweise aus dem Internet: 
-            * - Möglicher PHP 7.4 Bug: Erst ab PHP 7.4.x kommt die Notice, vorher nicht
-            *  
-            * -> Erster Ansatz: admin\index.php           
-            *    Einbau Prüfung der $_GET['logout'] Parameter Übergabe! 
-            * 
-            * -> Unterdrückung PHP Notice eingebaut - 19.09.2020
-            *    -> ... @file_get_contents($testfile)) ...
-            *    
-            */
-
-            $conf = "";                        
-            $testfile = "";
-            $testfile = trim($this->file, "\x00..\x1F");
-            
-            if (file_exists($testfile) && is_readable($testfile)) {
-             
-              if (!$conf = @file_get_contents($testfile)) {
-                die("Fatal Error: PHP 7.4 Bug or possible attack? -> ". basename($testfile));
-              } 
-       
-            }
-                                               
-            /* echo "Datei = " . $testfile . "<br />";
-            echo "Conf = " . $conf . "<br />";
-            echo "<br />"; */            
-            
-            // if(false === $conf)
-            //     die("Fatal Error Can't read file: ".basename($this->file));
-   
+            if(false === ($conf = file_get_contents($this->file)))
+                die("Fatal Error Can't read file: ".basename($this->file));
             global $page_protect_search;
             $conf = str_replace($page_protect_search,"",$conf);
             $conf = trim($conf);

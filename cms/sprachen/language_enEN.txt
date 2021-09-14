@@ -1,11 +1,11 @@
-﻿# Diese Zeilen nicht löschen / Do not remove these lines
+# Diese Zeilen nicht löschen / Do not remove these lines
 #
-# $Revision: 829 $
-# $LastChangedDate: 2020-09-22 20:21:05 +0100 (Di, 22. Sep 2020) $
-# $Author: moziloCMS $
+# $Revision: 828 $
+# $LastChangedDate: 2011-01-06 20:21:05 +0100 (Do, 06. Jan 2011) $
+# $Author: hausl78 $
 #
 _dateformat_0                                   = %Y-%d-%m, %H:%M:%S
-_translator_0                                   = moziloCMS
+_translator_0                                   = mozilo
 # alttext_galleryimage_1                          = Gallery image "{PARAM1}"
 alttext_image_1                                 = Image "{PARAM1}"
 anchor_top_0                                    = Back to top
@@ -28,8 +28,6 @@ message_nodatafound_0                           = No matching content found.
 # message_previousimage_0                         = Previous image
 message_search_0                                = Search
 message_searchresult_1                          = Search results for "{PARAM1}"
-message_searchnoresult_1                        =No results found for these keywords "{PARAM1}".
-message_searchhelp_0                            =For the search, you must enter terms separated by spaces (hits are pages that contain at least one of these terms). Set terms that contain a space in quotation marks.
 message_sitemap_0                               = Sitemap
 message_template_error_1                        = Template file "{PARAM1}" missing! Please contact the admininstrator.
 passwordform_title_0                            = Password required
@@ -39,7 +37,6 @@ passwordform_send_0                             = Send
 plugin_error_1                                  = General error in plugin {PARAM1}. Please contact the plugin's autor.
 plugin_error_missing_pluginconf_1               = Error in plugin {PARAM1}: plugin.conf is missing. Please contact the plugin's autor.
 plugin_error_missing_method_2                   = Error in plugin {PARAM1}: Method {PARAM2} is missing. Please contact the plugin's autor.
-plugin_error_value_1                            =Error in plugin {PARAM1}: Faulty parameter transfer see plugin Help
 thirsty_programmer                              = Hello, I'd like to have a beer, please! ;)
 tooltip_anchor_error_1                          = Paragraph "{PARAM1}" doesn't exist
 tooltip_anchor_goto_1                           = Jump to paragraph "{PARAM1}"
@@ -50,7 +47,7 @@ tooltip_color_error_1                           = Erroneous color value "{PARAM1
 tooltip_image_error_1                           = Unknown file or erroneous adress: "{PARAM1}"
 tooltip_image_error_2                           = Missing image file "{PARAM1}" in category "{PARAM2}"
 tooltip_include_recursion_error_0               = Page can't include itself
-# tooltip_include_reinclude_error_0               = Includes in included pages not allowed
+tooltip_include_reinclude_error_0               = Includes in included pages not allowed
 tooltip_link_category_1                         = Change to category "{PARAM1}"
 tooltip_link_category_error_1                   = Missing category "{PARAM1}"
 tooltip_link_extern_1                           = Call external adress "{PARAM1}"
@@ -68,4 +65,3 @@ tooltip_link_page_2                             = Show page "{PARAM1}" from cate
 tooltip_link_page_error_1                       = Missing page "{PARAM1}"
 tooltip_link_page_error_2                       = Missing page "{PARAM1}" in category "{PARAM2}"
 tooltip_showsitemap_0                           = Show sitemap
-tooltip_link_cmsinfo                            =Website created with moziloCMS

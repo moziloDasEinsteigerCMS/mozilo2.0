@@ -67,7 +67,6 @@ $LANG_INSTALL['nlNL'] = 'Nederlands';
 $LANG_INSTALL['plPL'] = 'Polski';
 $LANG_INSTALL['daDK'] = 'Dansk';
 $LANG_INSTALL['ptBR'] = 'Português';
-$LANG_INSTALL['hrHR'] = 'Hrvatski';
 
 testInstall();
 
@@ -201,8 +200,8 @@ if($debug) {
     echo "</pre>";
 }
 
-echo getHtml("end").'</body>'."\n"
-.'</html>';
+echo getHtml("end").'</body></html>';
+
 
 // -----------------------------------------------------------------------------
 // Funktionen
@@ -1017,21 +1016,22 @@ $(function() {
 
 });';
 
-$html_start = '<!DOCTYPE html>'."\n"
-        .'<html lang="de">'."\n"
-        .'<head>'."\n"
-        .'<meta charset="'.CHARSET.'">'."\n"
-        .'<title>Setup</title>'."\n"
-        .'<link rel="shortcut icon" href="'.URL_BASE.ADMIN_DIR_NAME.'/favicon.ico">'."\n"
-        .'<link type="text/css" rel="stylesheet" href="'.URL_BASE.ADMIN_DIR_NAME.'/css/mozilo/jquery-ui-1.9.2.custom.css" />'."\n"
-        .'<link type="text/css" rel="stylesheet" href="'.URL_BASE.ADMIN_DIR_NAME.'/admin.css" />'."\n"
-        .'<script src="'.URL_BASE.CMS_DIR_NAME.'/jquery/jquery-'.JQUERY.'.min.js"></script>'."\n"
+$html_start = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'
+    .'<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="de">'
+    .'<head>'
+        .'<meta http-equiv="Content-Type" content="text/html; charset='.CHARSET.'" />'
+        .'<link type="image/x-icon" rel="SHORTCUT ICON" href="'.URL_BASE.ADMIN_DIR_NAME.'/favicon.ico" />'
+        .'<link type="text/css" rel="stylesheet" href="'.URL_BASE.ADMIN_DIR_NAME.'/css/mozilo/jquery-ui-1.9.2.custom.css" />'
+        .'<link type="text/css" rel="stylesheet" href="'.URL_BASE.ADMIN_DIR_NAME.'/admin.css" />'
+        .'<script type="text/javascript" src="'.URL_BASE.CMS_DIR_NAME.'/jquery/jquery-1.7.2.min.js"></script>'
         .'<script language="Javascript" type="text/javascript">/*<![CDATA[*/'
         .$install_js
-        .'/*]]>*/</script>'."\n"        
-    .'</head>'."\n"
- #   .'<body>'
-    .'<body class="ui-widget" style="font-size:12px;">'."\n"
+        .'/*]]>*/</script>'
+
+        .'<title>Setup</title>'
+    .'</head>'
+    .'<body>'
+    .'<body class="ui-widget" style="font-size:12px;">'
     .'<table summary="" width="100%" cellspacing="0" border="0" cellpadding="0" style="margin-top:1.5em;">'
     .'<tr><td>&nbsp;</td>'
     .'<td class="mo-td-content-width" style="vertical-align:top;">'
@@ -1044,7 +1044,7 @@ $html_start = '<!DOCTYPE html>'."\n"
 
     $html_end = '</div></form>'
         .'<div id="out"></div>'
-        .'</td><td>&nbsp;</td></tr></table>'."\n";
+        .'</td><td>&nbsp;</td></tr></table>';
 
     if($art == "start")
         return $html_start;

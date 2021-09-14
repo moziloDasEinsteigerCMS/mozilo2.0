@@ -1,18 +1,11 @@
-﻿# Não exclua essas linhas / Do not remove these lines
+# Diese Zeilen nicht löschen / Do not remove these lines
 #
-# $Revision: 829 $
-# $LastChangedDate: 2020-09-22 20:21:05 +0100 (Di, 22. Sep 2020) $
-# $Author: moziloCMS $
+# $Revision: 828 $
+# $LastChangedDate: 2011-01-06 20:21:05 +0100 (Do, 06. Jan 2011) $
+# $Author: hausl78 $
 #
 _dateformat_0                                   = %d-%m-%Y, %H:%M:%S
 _translator_0                                   = Moises
-# der Wert ist für date_default_timezone_set()
-_timezone                                       =
-# komma separierte list von Grossbuchstaben die in Kleine gewandelt werden müssen
-# siehe SearchClass.php setLowerChars()
-_search_chars_lo                                =
-_search_chars_hi                                =
-
 # alttext_galleryimage_1                          = Galeria de Imagem "{PARAM1}"
 alttext_image_1                                 = Imagem "{PARAM1}"
 anchor_top_0                                    = 
@@ -23,44 +16,41 @@ message_galleries_0                             = Galerias
 message_gallery_1                               = Galeria "{PARAM1}"
 # message_gallery_xoutofy_2                       = (Imagem {PARAM1} de {PARAM2})
 # message_gallerydir_error_1                      = Pasta da galeria inexistente "{PARAM1}"!
-# message_gallerydir_error_0                      =
-message_galleryembed_error_0                    =
-# message_galleryempty_0                          = Essa galeria estÃ¡ vazia.
-message_gallerypreviewdir_error_1               = Pasta sem prÃ©-visualizaÃ§Ã£o "{PARAM1}"!
+# message_gallerydir_error_0                      = 
+message_galleryembed_error_0                    = 
+# message_galleryempty_0                          = Essa galeria está vazia.
+message_gallerypreviewdir_error_1               = Pasta sem pré-visualização "{PARAM1}"!
 # message_gallery_no_preview                      = 
-message_lastchange_0                            = Ãšltima alteraÃ§Ã£o:
-# message_lastimage_0                             = Ãšltima imagem
-# message_nextimage_0                             = PrÃ³xima imagem
-message_nodatafound_0                           = Nenhum conteÃºdo encontrado.
+message_lastchange_0                            = Última alteração:
+# message_lastimage_0                             = Última imagem
+# message_nextimage_0                             = Próxima imagem
+message_nodatafound_0                           = Nenhum conteúdo encontrado.
 # message_previousimage_0                         = Imagem anterior
 message_search_0                                = Busca
 message_searchresult_1                          = Resultados da busca para "{PARAM1}"
-message_searchnoresult_1                        =
-message_searchhelp_0                            =
 message_sitemap_0                               = Mapa do site
 message_template_error_1                        = Arquivo de designer "{PARAM1}" faltando! Entre em contato como o administrador.
-passwordform_title_0                            =
-passwordform_pagepasswordplease_0               =
-passwordform_message_passwordwrong_0            =
-passwordform_send_0                             =
-plugin_error_1                                  =
-plugin_error_missing_pluginconf_1               =
-plugin_error_missing_method_2                   =
-plugin_error_value_1                            =
-thirsty_programmer                              = OlÃ¡! Eu preciso de uma cerveja.. urgente! ;)
+passwordform_title_0                            = 
+passwordform_pagepasswordplease_0               = 
+passwordform_message_passwordwrong_0            = 
+passwordform_send_0                             = 
+plugin_error_1                                  = 
+plugin_error_missing_pluginconf_1               = 
+plugin_error_missing_method_2                   = 
+thirsty_programmer                              = Olá! Eu preciso de uma cerveja.. urgente! ;)
 tooltip_anchor_error_1                          = 
 tooltip_anchor_goto_1                           = 
 tooltip_anchor_gototop_0                        = 
 tooltip_attribute_error_1                       = Erro na syntax: Atributo inexistente "{PARAM1}"
 tooltip_color_error_1                           = Erro  no valor da cor "{PARAM1}"
 # tooltip_gallery_fullscreen_1                    = Ver em tamanho real: "{PARAM1}"
-tooltip_image_error_1                           = Arquivo desconhecido ou endereÃ§o invÃ¡lido: "{PARAM1}"
+tooltip_image_error_1                           = Arquivo desconhecido ou endereço inválido: "{PARAM1}"
 tooltip_image_error_2                           = Arquivo faltando "{PARAM1}" na categoria "{PARAM2}"
-tooltip_include_recursion_error_0               = A pÃ¡gina nÃ£o pode ser incluÃ­da em si mesma. 
-# tooltip_include_reinclude_error_0               = NÃ£o Ã© permitido incluir numa pÃ¡gina que jÃ¡ foi incluÃ­da. 
+tooltip_include_recursion_error_0               = A página não pode ser incluída em si mesma. 
+tooltip_include_reinclude_error_0               = Não é permitido incluir numa página que já foi incluída. 
 tooltip_link_category_1                         = Mudar para categoria "{PARAM1}"
 tooltip_link_category_error_1                   = Faltando categoria "{PARAM1}"
-tooltip_link_extern_1                           = Chamar endereÃ§o externo "{PARAM1}"
+tooltip_link_extern_1                           = Chamar endereço externo "{PARAM1}"
 tooltip_link_extern_error_1                     = Link errado "{PARAM1}"
 tooltip_link_file_1                             = Baixar arquivo "{PARAM1}"
 tooltip_link_file_2                             = Baixar arquivo "{PARAM1}" para categoria "{PARAM2}"
@@ -69,10 +59,9 @@ tooltip_link_file_error_2                       = Faltando arquivo "{PARAM1}" na
 # tooltip_link_gallery_2                          = Visualizar categoria "{PARAM1}" ({PARAM2} imagens)
 # tooltip_link_gallery_error_1                    = Faltando galeria "{PARAM1}"
 tooltip_link_mail_1                             = Enviar email para "{PARAM1}"
-tooltip_link_mail_error_1                       = Email invÃ¡lido "{PARAM1}"
-tooltip_link_page_1                             = Mostrar pÃ¡gina "{PARAM1}"
-tooltip_link_page_2                             = Mostrar pÃ¡gina "{PARAM1}" para categoria "{PARAM2}"
-tooltip_link_page_error_1                       = Faltando pÃ¡gina "{PARAM1}"
-tooltip_link_page_error_2                       = Faltando pÃ¡gina "{PARAM1}" na categoria "{PARAM2}"
+tooltip_link_mail_error_1                       = Email inválido "{PARAM1}"
+tooltip_link_page_1                             = Mostrar página "{PARAM1}"
+tooltip_link_page_2                             = Mostrar página "{PARAM1}" para categoria "{PARAM2}"
+tooltip_link_page_error_1                       = Faltando página "{PARAM1}"
+tooltip_link_page_error_2                       = Faltando página "{PARAM1}" na categoria "{PARAM2}"
 tooltip_showsitemap_0                           = Mostrar mapa do site
-tooltip_link_cmsinfo                            =Site criado com moziloCMS

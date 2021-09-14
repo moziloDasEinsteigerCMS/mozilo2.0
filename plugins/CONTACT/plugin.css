@@ -1,125 +1,52 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0
+.col-75 {margin: 1em 0;}
+input[type=text],input[type=email],input[type=url], select, textarea {
+	font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    width: 100%;
+    padding: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+input[type=submit] {
+    background:#ccc;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+}
+input[type=submit]:hover {
+    opacity:.8
+}
+label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+}
+label:last-of-type {padding: 12px}
+textarea {height: 200px}
+#contact_successmessage {color:green;}
+
+#contact_errormessage {color:red}
+
+@media screen and (min-width: 768px) {
+  .col-25 {
+    float: left;
+    width: 25%;
+    margin-top: 1em;
 }
 
-#contact_form {
-  display: -webkit-flex;
-  display: flex;
-  -webkit-flex-direction: column;
-  flex-direction: column
+.col-75 {
+    float: left;
+    width: 75%;
+    margin-top: 1em;
 }
 
-#contact_form>* {
-  padding: .5rem
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
 }
-
-#contact_form input,#contact_form textarea,#contact_errormessage, #contact_successmessage {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 1rem;
-  color:#333;
-  margin: .5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px
-}
-
-#contact_form input:focus,#contact_form textarea:focus {
-  outline: none !important;
-  border: 1px solid #333
-}
-
-#contact_form textarea {
-  height: 200px
-}
-
-#contact_form input[type=submit] {
-  background-color: #fff;
-  cursor: pointer
-}
-
-#contact_form label {
-	display: flex
-}
-
-#contact_errormessage {
-	padding: .5rem; 
-	border-color:red; 
-	color: red
-	}
-
-#contact_successmessage {
-	padding: .5rem;
-	border-color: green;
-	color: green
-}
-
-#contact_form .deadlink {
-	color: red;
-	font-style: italic
-}
-
-#contact_form label[for=spamprotection] {
-   flex-direction: column
-}
-
-.form-group {
-	display: flex;
-padding: 0!important
-}
-
-.hide-mobile {
-display: none!important;
-padding: .5rem
-}
-
-#contact_form .form-group input, #contact_form .form-group textarea, #contact_errormessage, #contact_successmessage {
-flex:1;
-padding: .5rem
-}
-
-#contact_form .hp {
-	display: none!important
-	}
-
-@media only screen and (min-width: 36rem) {
-  #contact_form, #contact_errormessage, #contact_successmessage {
-    width: 80%;
-   margin: 0 auto
-  }
-  #contact_form input[type=submit] {
-  width: 10rem
-}
-
-#contact_form .form-group {
-display: flex;
-align-items: center
-}
-
-#contact_form .form-group label {
-width: 10rem
-}
-
-.hide-mobile {
-display: flex!important
-}
-
-#contact_form ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: transparent;
-  opacity: 1; /* Firefox */
-}
-
-#contact_form :-ms-input-placeholder { /* Internet Explorer 10-11 */
-  color: transparent
-}
-
-#contact_form ::-ms-input-placeholder { /* Microsoft Edge */
-  color: transparent
-}
-
-@media only screen and (min-width: 75rem) {
-  #contact_form, #contact_errormessage, #contact_successmessage {
-    width: 70%
-  }
+  
 }

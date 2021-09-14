@@ -1,78 +1,67 @@
-﻿# No elimine estas líneas / Do not remove these lines
+# Diese Zeilen nicht löschen / Do not remove these lines
 #
-# $Revision: 829 $
-# $LastChangedDate: 2020-09-22 20:21:05 +0100 (Di, 22. Sep 2020) $
-# $Author: moziloCMS $
+# $Revision: 828 $
+# $LastChangedDate: 2011-01-06 20:21:05 +0100 (Do, 06. Jan 2011) $
+# $Author: hausl78 $
 #
 _dateformat_0                                   = %d-%m-%Y, %H:%M:%S
 _translator_0                                   = dnsystem.com
-# der Wert ist für date_default_timezone_set()
-_timezone                                       =
-# komma separierte list von Grossbuchstaben die in Kleine gewandelt werden müssen
-# siehe SearchClass.php setLowerChars()
-_search_chars_lo                                =
-_search_chars_hi                                =
-
-# alttext_galleryimage_1                          = GallerÃ­a de im&aacute;genes "{PARAM1}"
+# alttext_galleryimage_1                          = Gallería de im&aacute;genes "{PARAM1}"
 alttext_image_1                                 = imagen "{PARAM1}"
-anchor_top_0                                    =
+anchor_top_0                                    = 
 message_downloads                               = Descargas
 message_draft_0                                 = Borrador
 # message_firstimage_0                            = Primera imagen
-message_galleries_0                             = GallerÃ­as
-message_gallery_1                               = GallerÃ­a "{PARAM1}"
+message_galleries_0                             = Gallerías
+message_gallery_1                               = Gallería "{PARAM1}"
 # message_gallery_xoutofy_2                       = (imagen {PARAM1} fuera de {PARAM2})
-# message_gallerydir_error_1                      = Directorio de GalerÃ­a desconocido "{PARAM1}"!
-# message_gallerydir_error_0                      =
-message_galleryembed_error_0                    =
-# message_galleryempty_0                          = Esta galerÃ­a no contiene imagenes.
+# message_gallerydir_error_1                      = Directorio de Galería desconocido "{PARAM1}"!
+# message_gallerydir_error_0                      = 
+message_galleryembed_error_0                    = 
+# message_galleryempty_0                          = Esta galería no contiene imagenes.
 message_gallerypreviewdir_error_1               = Directorio perdido "{PARAM1}"!
 # message_gallery_no_preview                      = 
-message_lastchange_0                            = Ãºltimo cambio:
-# message_lastimage_0                             = Ãºltima imagen
+message_lastchange_0                            = último cambio:
+# message_lastimage_0                             = última imagen
 # message_nextimage_0                             = siguiente imagen
 message_nodatafound_0                           = No se encontraron coincidencias.
 # message_previousimage_0                         = Imagen previa
 message_search_0                                = Buscar
 message_searchresult_1                          = Buscar resultados por "{PARAM1}"
-message_searchnoresult_1                        =
-message_searchhelp_0                            =
 message_sitemap_0                               = Mapa del sitio
 message_template_error_1                        = Archivo de Template "{PARAM1}" perdido! Por favor contacta con el administrador.
-passwordform_title_0                            =
-passwordform_pagepasswordplease_0               =
-passwordform_message_passwordwrong_0            =
-passwordform_send_0                             =
-plugin_error_1                                  =
-plugin_error_missing_pluginconf_1               =
-plugin_error_missing_method_2                   =
-plugin_error_value_1                            =
-thirsty_programmer                              =
-tooltip_anchor_error_1                          =
-tooltip_anchor_goto_1                           =
-tooltip_anchor_gototop_0                        =
-tooltip_attribute_error_1                       = Sintaxis errÃ³nea: Atributo desconocido "{PARAM1}"
-tooltip_color_error_1                           = Valor de color errÃ³neo "{PARAM1}"
-# tooltip_gallery_fullscreen_1                    = Vista a tamaÃ±o completo: "{PARAM1}"
-tooltip_image_error_1                           = Archivo desconocido o direcciÃ³n errÃ³nea: "{PARAM1}"
-tooltip_image_error_2                           = Archivo de imagen perdido "{PARAM1}" en categorÃ­a "{PARAM2}"
-tooltip_include_recursion_error_0               = La p&aacute;gina no puede incluirse a sÃ­ misma
-# tooltip_include_reinclude_error_0               = Includes no permitidos
-tooltip_link_category_1                         = Cambiar a categorÃ­a "{PARAM1}"
-tooltip_link_category_error_1                   = CategorÃ­a perdida "{PARAM1}"
-tooltip_link_extern_1                           = Llamar direcciÃ³n externa "{PARAM1}"
-tooltip_link_extern_error_1                     = Enlace errÃ³neo "{PARAM1}"
+passwordform_title_0                            = 
+passwordform_pagepasswordplease_0               = 
+passwordform_message_passwordwrong_0            = 
+passwordform_send_0                             = 
+plugin_error_1                                  = 
+plugin_error_missing_pluginconf_1               = 
+plugin_error_missing_method_2                   = 
+thirsty_programmer                              = 
+tooltip_anchor_error_1                          = 
+tooltip_anchor_goto_1                           = 
+tooltip_anchor_gototop_0                        = 
+tooltip_attribute_error_1                       = Sintaxis errónea: Atributo desconocido "{PARAM1}"
+tooltip_color_error_1                           = Valor de color erróneo "{PARAM1}"
+# tooltip_gallery_fullscreen_1                    = Vista a tamaño completo: "{PARAM1}"
+tooltip_image_error_1                           = Archivo desconocido o dirección errónea: "{PARAM1}"
+tooltip_image_error_2                           = Archivo de imagen perdido "{PARAM1}" en categoría "{PARAM2}"
+tooltip_include_recursion_error_0               = La p&aacute;gina no puede incluirse a sí misma
+tooltip_include_reinclude_error_0               = Includes no permitidos
+tooltip_link_category_1                         = Cambiar a categoría "{PARAM1}"
+tooltip_link_category_error_1                   = Categoría perdida "{PARAM1}"
+tooltip_link_extern_1                           = Llamar dirección externa "{PARAM1}"
+tooltip_link_extern_error_1                     = Enlace erróneo "{PARAM1}"
 tooltip_link_file_1                             = Descargar archivo "{PARAM1}"
-tooltip_link_file_2                             = Descargar archivo "{PARAM1}" desde la categorÃ­a "{PARAM2}"
+tooltip_link_file_2                             = Descargar archivo "{PARAM1}" desde la categoría "{PARAM2}"
 tooltip_link_file_error_1                       = Archivo no encontrado "{PARAM1}"
-tooltip_link_file_error_2                       = Archivo no encontrado "{PARAM1}" en la categorÃ­a "{PARAM2}"
-# tooltip_link_gallery_2                          = Ver galerÃ­a "{PARAM1}" ({PARAM2} imagenes)
-# tooltip_link_gallery_error_1                    = GalerÃ­a perdida "{PARAM1}"
+tooltip_link_file_error_2                       = Archivo no encontrado "{PARAM1}" en la categoría "{PARAM2}"
+# tooltip_link_gallery_2                          = Ver galería "{PARAM1}" ({PARAM2} imagenes)
+# tooltip_link_gallery_error_1                    = Galería perdida "{PARAM1}"
 tooltip_link_mail_1                             = Enviar email a "{PARAM1}"
-tooltip_link_mail_error_1                       = Email errÃ³neo "{PARAM1}"
+tooltip_link_mail_error_1                       = Email erróneo "{PARAM1}"
 tooltip_link_page_1                             = Mostrar pagina "{PARAM1}"
-tooltip_link_page_2                             = Mostrar pagina "{PARAM1}" desde categorÃ­a "{PARAM2}"
+tooltip_link_page_2                             = Mostrar pagina "{PARAM1}" desde categoría "{PARAM2}"
 tooltip_link_page_error_1                       = Pagina no encontrada "{PARAM1}"
-tooltip_link_page_error_2                       = Pagina no encontrada "{PARAM1}" in categorÃ­a "{PARAM2}"
+tooltip_link_page_error_2                       = Pagina no encontrada "{PARAM1}" in categoría "{PARAM2}"
 tooltip_showsitemap_0                           = Mostras mapa del sitio
-tooltip_link_cmsinfo                            =Sitio web creado con moziloCMS

@@ -22,7 +22,7 @@ class Galerie extends Plugin {
 
         $dir = PLUGIN_DIR_REL."Galerie/";
         $lang_gallery_cms = new Language($dir."sprachen/cms_language_".$CMS_CONF->get("cmslanguage").".txt");
- 
+
         $embedded = $this->settings->get("target");
     
         $linkprefix = "index.php?cat=".CAT_REQUEST."&amp;page=".PAGE_REQUEST."&amp;";
@@ -87,32 +87,29 @@ class Galerie extends Plugin {
             else
                 $index = $index;
     
-            //
-            // Debug: 2020-08-01
-            //
-            $intindex = (int)$index;
-            $prev_pos = $intindex - 1;
-            $next_pos = $intindex + 1;
-    
             // Bestimmung der Positionen
             $first = 1;
             $last = count($allindexes);
-            if (!in_array($prev_pos, $allindexes))
+            if (!in_array($index-1, $allindexes))
                 $previous = $last;
             else
-                $previous = $prev_pos;
-            if (!in_array($next_pos, $allindexes))
+                $previous = $index-1;
+            if (!in_array($index+1, $allindexes))
                 $next = 1;
             else
-                $next = $next_pos;
+                $next = $index+1;
             $template = NULL;
             if($this->settings->get("gallerytemplate")) {
+                if ($embedded == "_self") {
+                    $template = '<div class="embeddedgallery">'.$this->settings->get("gallerytemplate").'</div>';
+                } else {
                     $template = $this->settings->get("gallerytemplate");
                     if(strrpos("tmp".$value,'{NUMBERMENU}') > 0) {
-                        $template = $value;                    
+                        $template = $value;
+                    }
                 }
             } else { 
-                $template = "{GALLERYMENU}{NUMBERMENU}\n{CURRENTPIC}";
+                $template = "{GALLERYMENU}{NUMBERMENU}\n{CURRENTPIC}\n{CURRENTDESCRIPTION}";
                 if(strrpos("tmp".$value,'{NUMBERMENU}') > 0) {
                     $template = $value;
                 }
@@ -135,18 +132,7 @@ class Galerie extends Plugin {
                 $html = str_replace('{NUMBERMENU}', $this->getNumberMenu($picarray,$linkprefix,$index,$gal_request,$first,$last), $html);
                 $html = str_replace('{CURRENTPIC}', $this->getCurrentPic($picarray,$index,$GALERIE_DIR_SRC), $html);
                 if (count($picarray) > 0) {
-
-                    $arraypos = 0;                
-                    $currentpos = 0;
-                    $currentpos = intval($index); 
-                    $arraypos = $currentpos - 1;
-                    
-                    $gallerypicname = "";
-                    $gallerypicname = $picarray[$arraypos];
-                    $getcurrentdescription = "";
-                    $getcurrentdescription = $this->getCurrentDescription($gallerypicname,$picarray,$alldescriptions);
-
-                    $html = str_replace('{CURRENTDESCRIPTION}', $getcurrentdescription, $html);
+                    $html = str_replace('{CURRENTDESCRIPTION}', $this->getCurrentDescription($picarray[$index-1],$picarray,$alldescriptions), $html);
                 } else {
                     $html = str_replace('{CURRENTDESCRIPTION}', "", $html);
                 }
@@ -180,7 +166,7 @@ class Galerie extends Plugin {
                 $gal_name = $specialchars->rebuildSpecialChars($values[1], false, false);
             }
             global $syntax;
-            return "<div class=\"galleries\"><figure class=\"galleries-item\"><a class=\"gallery\" href=\"".$linkprefix."gal=".$gal_request."\" ".$syntax->getTitleAttribute($lang_gallery_cms->getLanguageHtml("tooltip_link_gallery_2", $specialchars->rebuildSpecialChars($values[0], false, true), $j))." ><figcaption class=\"galleries-caption\">".$gal_name."</figcaption></a></figure></div>";
+            return "<a class=\"gallery\" href=\"".$linkprefix."gal=".$gal_request."\" ".$syntax->getTitleAttribute($lang_gallery_cms->getLanguageHtml("tooltip_link_gallery_2", $specialchars->rebuildSpecialChars($values[0], false, true), $j))." target=\"".$this->settings->get("target")."\">".$gal_name."</a>";
         }
     } // function getContent
     
@@ -195,26 +181,26 @@ class Galerie extends Plugin {
         if (count($picarray) == 0)
             return "&nbsp;";
 
-        $gallerymenu = "<div class=\"gallerymenu\">";
+        $gallerymenu = "<ul class=\"gallerymenu\">";
     
         // Link "Erstes Bild"
         if ($index == $first)
             $linkclass = "gallerymenuactive";
         else
             $linkclass = "gallerymenu";
-        $gallerymenu .= "<div class=\"gallerymenu-item\"><a href=\"".$linkprefix."gal=".$gal_request."&amp;index=".$first."\" class=\"$linkclass\">".$lang_gallery_cms->getLanguageHtml("message_firstimage_0")."</a></div>";
+        $gallerymenu .= "<li class=\"gallerymenu\"><a href=\"".$linkprefix."gal=".$gal_request."&amp;index=".$first."\" class=\"$linkclass\">".$lang_gallery_cms->getLanguageHtml("message_firstimage_0")."</a></li>";
         // Link "Voriges Bild"
-        $gallerymenu .= "<div class=\"gallerymenu-item\"><a href=\"".$linkprefix."gal=".$gal_request."&amp;index=".$previous."\" class=\"gallerymenu\">".$lang_gallery_cms->getLanguageHtml("message_previousimage_0")."</a></div>";
+        $gallerymenu .= "<li class=\"gallerymenu\"><a href=\"".$linkprefix."gal=".$gal_request."&amp;index=".$previous."\" class=\"gallerymenu\">".$lang_gallery_cms->getLanguageHtml("message_previousimage_0")."</a></li>";
         // Link "Nächstes Bild"
-        $gallerymenu .= "<div class=\"gallerymenu-item\"><a href=\"".$linkprefix."gal=".$gal_request."&amp;index=".$next."\" class=\"gallerymenu\">".$lang_gallery_cms->getLanguageHtml("message_nextimage_0")."</a></div>";
+        $gallerymenu .= "<li class=\"gallerymenu\"><a href=\"".$linkprefix."gal=".$gal_request."&amp;index=".$next."\" class=\"gallerymenu\">".$lang_gallery_cms->getLanguageHtml("message_nextimage_0")."</a></li>";
         // Link "Letztes Bild"
         if ($index == $last)
             $linkclass = "gallerymenuactive";
         else
             $linkclass = "gallerymenu";
-        $gallerymenu .= "<div class=\"gallerymenu-item\"><a href=\"".$linkprefix."gal=".$gal_request."&amp;index=".$last."\" class=\"$linkclass\">".$lang_gallery_cms->getLanguageHtml("message_lastimage_0")."</a></div>";
+        $gallerymenu .= "<li class=\"gallerymenu\"><a href=\"".$linkprefix."gal=".$gal_request."&amp;index=".$last."\" class=\"$linkclass\">".$lang_gallery_cms->getLanguageHtml("message_lastimage_0")."</a></li>";
         // Rückgabe des Menüs
-        return $gallerymenu."</div>";
+        return $gallerymenu."</ul>";
     }
 
     // ------------------------------------------------------------------------------
@@ -226,20 +212,22 @@ class Galerie extends Plugin {
         if (count($picarray) == 0)
             return "&nbsp;";
     
-        $numbermenu = "<div class=\"gallerynumbermenu\">";
+        $numbermenu = "<ul class=\"gallerynumbermenu\">";
         for ($i=$first; $i<=$last; $i++) {
             $cssclass = $index == $i ? "gallerynumbermenuactive" : "gallerynumbermenu";
-            $numbermenu .= "<div class=\"gallerynumbermenu-item\">"
+            $numbermenu .= "<li class=\"gallerynumbermenu\">"
                 ."<a href=\"".$linkprefix."gal=".$gal_request."&amp;index=".$i."\" class=\"".$cssclass."\">".$i."</a>"
-        ."</div>";
+        ."</li>";
         }
         // Rückgabe des Menüs
-        $numbermenu .= "</div>";
+        $numbermenu .= "</ul>";
         return $numbermenu;
     }
 
         // ------------------------------------------------------------------------------
-    // Thumbnails erzeugen
+
+    // Nummernmenü erzeugen
+
     // ------------------------------------------------------------------------------
 
     function getThumbnails($picarray,$alldescriptions,$GALERIE_DIR,$GALERIE_DIR_SRC) {
@@ -248,11 +236,13 @@ class Galerie extends Plugin {
 
         global $lang_gallery_cms;
 
- //       $picsperrow = $this->settings->get("picsperrow");
+ 
 
- //       if (empty($picsperrow)) $picsperrow = 4;
+        $picsperrow = $this->settings->get("picsperrow");
 
-        $thumbs = "<div class=\"gallerytable\">";
+        if (empty($picsperrow)) $picsperrow = 4;
+
+        $thumbs = "<div class=\"gallerytable\" summary=\"gallery table\"><div class=\"row\">";
 
         $i = 0;
 
@@ -266,36 +256,37 @@ class Galerie extends Plugin {
 
                 $description = "&nbsp;";
 
-            $thumbs .= "<div class=\"gallerytd\">"; 
+            // Neue Tabellenzeile aller picsperrow Zeichen
+
+            if (($i > 0) && ($i % $picsperrow == 0))
+
+                $thumbs .= "</div><div class=\"row\">";
+
+            $thumbs .= "<div class=\"gallerytd\">";
+
+ 
 
             if (file_exists($GALERIE_DIR.PREVIEW_DIR_NAME."/".$specialchars->replaceSpecialChars($picarray[$i],false))) {
 
-                $thumbs .= "<a id=\"".$specialchars->rebuildSpecialChars($picarray[$i],true,true)."\" href=\"#".$specialchars->rebuildSpecialChars($picarray[$i],true,true)."\">";
-                $thumbs .="<img src=\"".$GALERIE_DIR_SRC.PREVIEW_DIR_NAME."/".$specialchars->replaceSpecialChars($picarray[$i],true)."\" alt=\"$description\" title=\"$description\" class=\"thumbnail\" />";
-                $thumbs .="<div class=\"galleryoverlay\">";
-                $thumbs .="<figure><img src=\"".$GALERIE_DIR_SRC.$specialchars->replaceSpecialChars($picarray[$i],true)."\" alt=\"$description\" title=\"$description\">";
-                $thumbs .="<figcaption>".$description."</figcaption></figure>";
-                $thumbs .="</div>";
-                $thumbs .="</a>";
-                $thumbs .="<a class=\"galeryimgclose\" href=\"#!\"></a>";
-         //       $thumbs .="<a class=\"galleryimgprev\" href=\"#image1\">&lt;</a>";
-         //       $thumbs .="<a class=\"galleryimgnext\" href=\"#image3\">&gt;</a>";
+                $thumbs .= "<a href=\"".$GALERIE_DIR_SRC.$specialchars->replaceSpecialChars($picarray[$i],true)."\" target=\"_blank\" title=\"".$lang_gallery_cms->getLanguageHtml("tooltip_gallery_fullscreen_1", $specialchars->rebuildSpecialChars($picarray[$i],true,true))."\"><img src=\"".
+
+$GALERIE_DIR_SRC.PREVIEW_DIR_NAME."/".$specialchars->replaceSpecialChars($picarray[$i],true)."\" alt=\"".$specialchars->rebuildSpecialChars($picarray[$i],true,true)."\" class=\"thumbnail\" /></a>";
 
             } else {
 
-                 $thumbs .= '<div><a style="color:red;" href="'.$GALERIE_DIR_SRC.PREVIEW_DIR_NAME."/".$specialchars->replaceSpecialChars($picarray[$i],true).'" target="_blank" title="'.$lang_gallery_cms->getLanguageHtml("tooltip_gallery_fullscreen_1", $specialchars->rebuildSpecialChars
+                 $thumbs .= '<div style="text-align:center;"><a style="color:red;" href="'.$GALERIE_DIR_SRC.PREVIEW_DIR_NAME."/".$specialchars->replaceSpecialChars($picarray[$i],true).'" target="_blank" title="'.$lang_gallery_cms->getLanguageHtml("tooltip_gallery_fullscreen_1", $specialchars->rebuildSpecialChars
 
 ($picarray[$i],true,true)).'"><b>'.$lang_gallery_cms->getLanguageHtml('message_gallery_no_preview').'</b></a></div>';
 
             }
 
-   //         $thumbs .= "<div class=\"desc\">$description</div>"
+            $thumbs .= "<div class=\"desc\">$description</div>"
 
-           $thumbs .= "</div>";
+            ."</div>";
 
         }
 
-        while ($i<count($picarray)) {
+        while ($i % $picsperrow > 0) {
 
             $thumbs .= "<div class=\"gallerytd\"></div>";
 
@@ -303,7 +294,7 @@ class Galerie extends Plugin {
 
         }
 
-        $thumbs .= "</div>";
+        $thumbs .= "</div></div>";
 
         // Rückgabe der Thumbnails
 
@@ -321,20 +312,11 @@ class Galerie extends Plugin {
         // Keine Bilder im Galerieverzeichnis?
         if (count($picarray) == 0)
             return "&nbsp;";
-            
-        $arraypos = 0;                
-        $currentpos = 0;
-        $currentpos = intval($index); 
-        $arraypos = $currentpos - 1;
-    
         // Link zur Vollbildansicht öffnen
-        $currentpic = "<div class=\"gallerynothumbs\">";
-        $currentpic .="<figure>";
-        $currentpic .= "<img src=\"".$GALERIE_DIR_SRC.$specialchars->replaceSpecialChars($picarray[$arraypos],true)."\" alt=\"".$lang_gallery_cms->getLanguageHtml("alttext_galleryimage_1", $specialchars->rebuildSpecialChars($picarray[$arraypos],true,true))."\" />";
-        $currentpic .="<figcaption>{CURRENTDESCRIPTION}</figcaption>";
-        $currentpic .="</figure>";
+        $currentpic = "<a href=\"".$GALERIE_DIR_SRC.$specialchars->replaceSpecialChars($picarray[$index-1],true)."\" target=\"_blank\" title=\"".$lang_gallery_cms->getLanguageHtml("tooltip_gallery_fullscreen_1", $specialchars->rebuildSpecialChars($picarray[$index-1],true,true))."\">";
+        $currentpic .= "<img src=\"".$GALERIE_DIR_SRC.$specialchars->replaceSpecialChars($picarray[$index-1],true)."\" alt=\"".$lang_gallery_cms->getLanguageHtml("alttext_galleryimage_1", $specialchars->rebuildSpecialChars($picarray[$index-1],true,true))."\" />";
         // Link zur Vollbildansicht schliessen
-        $currentpic .= "</div>";
+        $currentpic .= "</a>";
         // Rückgabe des Bildes
         return $currentpic;
     }
@@ -368,7 +350,7 @@ class Galerie extends Plugin {
         // Keine Bilder im Galerieverzeichnis?
         if (count($picarray) == 0)
         return "&nbsp;";
-        return "<div class=\"imgpos\">".$lang_gallery_cms->getLanguageHtml("message_gallery_xoutofy_2", $index, $last)."</div>";
+        return $lang_gallery_cms->getLanguageHtml("message_gallery_xoutofy_2", $index, $last);
     }
 
     // ------------------------------------------------------------------------------
@@ -413,6 +395,14 @@ class Galerie extends Plugin {
         // Das muß auf jeden Fall geschehen!
         $config = array();
 
+      /*  $config['picsperrow'] = array(
+            "type" => "text",
+            "maxlength" => "2",
+            "size" => "3",
+            "description" => $lang_gallery_admin->get("config_gallery_picsperrow"),
+            "regex" => "/^[1-9][0-9]?/",
+            "regex_error" => $lang_gallery_admin->get("config_gallery_picsperrow_regex_error")
+        );*/
         $config['usethumbs'] = array(
             "type" => "checkbox",
             "description" => $lang_gallery_admin->get("config_gallery_usethumbs"),
@@ -459,7 +449,7 @@ class Galerie extends Plugin {
 
         $info = array(
             // Plugin-Name
-            "<b>".$lang_gallery_admin->get("config_gallery_plugin_name")."</b> \$Revision: 144 $",
+            "<b>".$lang_gallery_admin->get("config_gallery_plugin_name")."</b> \$Revision: 143 $",
             // CMS-Version
             "2.0",
             // Kurzbeschreibung
@@ -469,8 +459,7 @@ class Galerie extends Plugin {
             // Download-URL
             "",
             # Platzhalter => Kurzbeschreibung
-            array('{Galerie|}' => $lang_gallery_admin->get("config_gallery_plugin_name")
-            )
+            array('{Galerie|}' => $lang_gallery_admin->get("config_gallery_plugin_name"))
             );
             return $info;
     } // function getInfo
