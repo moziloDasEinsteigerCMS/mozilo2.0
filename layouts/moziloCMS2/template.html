@@ -1,0 +1,96 @@
+<!-- usesubmenu = 1 -->
+<!DOCTYPE HTML>
+<html lang="de">
+<!--
+|===============================================================================|
+| Template: Standard moziloCMS                                                  |
+| Author: Simone Bechtold, sbDESIGN                                             |
+| Version: 0.1                                                                  | 
+| Version: 0.2 - moziloCMS Update - Porting to HTML 5 Responsive Webdesign      |
+|                                                                               | 
+| *********  Dieser Hinweis darf nicht entfernt werden!  *********              |
+|===============================================================================|
+--> 
+<head>
+    <title>{WEBSITE_TITLE}</title>
+    
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width = device-width, initial-scale = 1.0">     
+
+    <meta name="content-language" content="deutsch,de,at,ch">
+    <meta name="author" content="">
+    <meta name="date" content="">
+    <meta name="keywords" content="{WEBSITE_KEYWORDS}">
+    <meta name="description" content="{WEBSITE_DESCRIPTION}">
+    <meta name="robots" content="index,follow">
+    <link rel="SHORTCUT ICON" href="{LAYOUT_DIR}/favicon.ico">
+    <style>
+        @import "{LAYOUT_DIR}/css/style.css";
+        @import "{LAYOUT_DIR}/css/syntax.css";
+        /* Bei nutzung vom MenuSubsMobile Plugin
+        @import "{LAYOUT_DIR}/css/responsive.css"; */
+    </style>
+    
+	<script>
+		function setSearchFocus() {
+		  if (document.search) {
+  		    document.search.query.focus();
+  		    document.search.query.select();
+  		  }
+		}			
+	</script>
+
+</head>
+
+<body id="a0">
+    <!-- hier kann ein zusaetzliches Hintergrundbild ueber dem body eingefuegt und positioniert werden -->
+    <div id="sb-main">
+        <!-- Logo, Slogan, Suche -->
+        <header id="sb-header">
+            <div class="sb-header_inner">
+                <!-- Logo, Seitentitel -->
+                <div id="sb-titel">
+                    <img src="{LAYOUT_DIR}/grafiken/logo.png" alt="Logo" />
+                </div>
+                <!-- Suche -->
+                <div class="sb-search">{SEARCH}</div>
+            </div>
+        </header>
+        <!-- Container fuer die Navigation und den Inhaltsbereich -->
+        <div class="sb-content">
+        
+            <!-- beginn linke Sidebar, hier kommen Menue, Counter Suche usw. unter -->
+            <aside id="sb-sidebar">
+                <!-- Hier kommt die Navigation / das Menue der Seite rein -->
+                <nav id="sb-nav">
+                  {MAINMENU}
+                </nav>
+                <!-- SidebarInhalt, Platz fuer Sidebar, SidebarPage, Counter etc. 
+                <div class="sb-sidebarblock">
+                </div> -->
+            </aside>
+            
+            <!--beginn Inhalt -->
+            <article id="sb-page">
+              <div id="mobile">
+                {CONTENT}
+              </div>
+            </article>
+            
+            <div id="clearboth">&nbsp;</div>
+            
+        </div>
+    </div>
+    
+    <!-- beginn Footer -->
+    <footer id="footer">
+        <p class="sb-copy">
+            &copy;&nbsp;<script> document.write(new Date().getFullYear()); </script>&nbsp;by&nbsp;{WEBSITE_TITLE}  
+        </p>
+        <p class="sb-credit" >
+            {SITEMAPLINK} | Powered by {CMSINFO} | {MEMORYUSAGE} | {EXECUTETIME} <a href="#sb-header">Top</a>
+        </p>
+    </footer>
+    
+</body>
+</html>

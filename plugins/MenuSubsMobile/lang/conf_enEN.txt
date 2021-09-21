@@ -1,0 +1,5 @@
+no_menusubs_2 = No MenuSubs_2
+menusubs_2 = Choose a category for MenuSubs_2
+sitemap_show_menu2 = Show MenuSubs_2 in Sitemap
+breadcrumb_delimiter = Breadcrumb entry separator. Default is "»"
+hidden = Styles that are executed when the mobile menu is opened. A comma-separated list of ID = CSS property: value

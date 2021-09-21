@@ -1,0 +1,60 @@
+Stvara izbornik s gotovo neograničenim gniježđenjem podizbornika. <br />
+<b> Pažnja: </b> Kategorije koje sadrže "/" (kosa crta) više se ne prikazuju jer za podizbornik koristimo "/" (kosu crtu). <br />
+<br />
+Da biste koristili izbornik pojedinosti, morate upotrijebiti {MenuSubs | main} i {MenuSubs | detail},
+inače samo {MenuSubs} <br />
+<b> Pažnja: </b> Ovdje se ne koristi sklopka "usesubmenu = 0" (unesena u raspored na vrhu) <br />
+<br />
+<b> Opis: </b>
+<ul>
+<li> Čim se pronađe stranica sa skrivenim sadržajem s imenom "/", ona će biti zamijenjena kategorijom s istim nazivom kao i podizbornik. </li>
+<li> <b> Važno </b> Ime se tretira kao put. </li>
+<li> Da biste koristili stranicu sa sadržajem za potkategorije koja je skrivena postavkom "Navedite trebaju li stranice sadržaja s istim nazivom kao kategorija biti skrivene u izborniku pojedinosti:", naziv mora biti poput zadnjeg dijela potkategorija, npr. Podkategorije = Kategorija / Podmenija_1 stranica sadržaja = Podizbor_1 i mora biti prva stranica sadržaja. </li>
+</ul>
+<br />
+<b> Primjer: </b> <br />
+<ul> <li style = "list-style-type: none;"> <b> Kategorija </b>
+<ul>
+    <li> Stranica sa sadržajem_1 </li>
+    <li> Kategorija / podizbornik_1 <b> skriven </b> </li>
+    <li> Sadržajna stranica_2 </li>
+</ul>
+<b> Kategorija / podizbornik_1 </b>
+<ul>
+    <li> Sadržajna stranica_3 </li>
+    <li> Kategorija / podizbornik_1 / podizbornik_2 <b> skriven </b> </li>
+</ul>
+<b> Kategorija / podizbornik_1 / podizbornik_2 </b>
+<ul>
+<li> Sadržaj_4 </li>
+    <li> Sadržajna stranica_5 </li>
+</ul>
+</li> </ul>
+<br />
+<b> Rezultat: </b> <br />
+<ul> <li style = "list-style-type: none;"> <b> Kategorija </b>
+<ul>
+    <li> Stranica sa sadržajem_1 </li>
+    <li> <b> podizbornik_1 </b>
+    <ul>
+        <li> Sadržajna stranica_3 </li>
+        <li> <b> podizbornik_2 </b>
+        <ul>
+            <li> Sadržaj_4 </li>
+            <li> Sadržajna stranica_5 </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li> Sadržajna stranica_2 </li>
+</ul>
+</li> </ul>
+<br />
+Drugi izbornik može se stvoriti pomoću <b> {MenuSubs | menusubs_2} </b>. <br />
+Na primjer za otisak i kontakt u podnožju stranice. <br />
+Jednostavno odaberite kategoriju u konfiguraciji dodatka i na željeno mjesto u predlošku unesite <b> {MenuSubs | menusubs_2} </b> <br />. <br />
+Možete odabrati samo kategorije koje u svom nazivu nemaju "/". <br />
+Potkategorije su naravno također moguće. <br />
+<br />
+Za navigaciju kroz kruh jednostavno unesite <b> {MenuSubs | breadcrumb} </b> na željeno mjesto.
+

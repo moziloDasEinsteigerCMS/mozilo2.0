@@ -1,0 +1,3 @@
+cookieDesc      = We use cookies.
+cookieBtn       = Accept
+cookiePrivacy   = Further information can be found in the data privacy notice.

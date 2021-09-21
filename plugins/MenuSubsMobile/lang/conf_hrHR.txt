@@ -1,0 +1,5 @@
+no_menusubs_2 = Bez MenuSubs_2
+menusubs_2 = Odaberite kategoriju za MenuSubs_2
+sitemap_show_menu2 = Prikaži MenuSubs_2 na karti web stranice
+breadcrumb_delimiter = Razdjelnik unosa Breadcrumb. Zadana vrijednost je "» "
+hidden = stilovi koji se izvršavaju kada se otvori mobilni izbornik. Popis odvojenih zarezom svojstva ID = CSS: vrijednost

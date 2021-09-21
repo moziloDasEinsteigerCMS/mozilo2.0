@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  line-height: 1.4
+}
+
+#cookie {
+  display: none;
+  padding: 20px;
+  background: #232323;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  text-align: center;
+  color: #fff;
+  font-weight: 400
+}
+
+#cookie a {
+	text-decoration: underline;
+  color: #fff;
+  font-weight: 400
+}
+
+#cookie .cookieTitle {
+  font-size: 1.2rem;
+  font-weight: 700
+}
+
+#cookie .cookieDesc {
+  padding-top: .5rem;
+  padding-bottom: .5rem
+}
+
+#cookie .button {
+  display: block;
+  padding: 7px;
+  border: 1px solid;
+  margin-top: 7px;
+  border-radius: 6px;
+  width: 100px;
+  margin: 0 auto
+}
+
+#cookie a.button {
+  text-decoration: none;
+}
+
+#cookie .deadlink {
+color: red;
+font-style: italic
+}
+
+@media only screen and (min-width: 48rem) {
+  #cookie {
+    width: 350px;
+    padding: 30px;
+    left: initial;
+    bottom: 30px;
+    right: 30px;
+  border-radius: 6px
+  }
+}

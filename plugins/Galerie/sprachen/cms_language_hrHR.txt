@@ -1,0 +1,14 @@
+
+alttext_galleryimage_1                  = Slika u galeriji "{PARAM1}"
+message_firstimage_0                    = Prva slika
+message_gallery_no_preview              = Pregled nije dostupan
+message_gallery_xoutofy_2               = (Slika {PARAM1} od {PARAM2})
+message_gallerydir_error_1              = Nepoznati direktorij galerije "{PARAM1}"!
+message_gallerydir_error_0              = Nije dat nijedan direktorij galerije!
+message_galleryempty_0                  = Ova galerija ne sadrži slike.
+message_lastimage_0                     = Zadnja slika
+message_nextimage_0                     = Sljedeća slika
+message_previousimage_0                 = Prethodna slika
+tooltip_gallery_fullscreen_1            = Pogled u punoj veličini: "{PARAM1}"
+tooltip_link_gallery_2                  = Pogledajte galeriju "{PARAM1}" ({PARAM2} slike)
+tooltip_link_gallery_error_1            = Nedostaje galerija "{PARAM1}"

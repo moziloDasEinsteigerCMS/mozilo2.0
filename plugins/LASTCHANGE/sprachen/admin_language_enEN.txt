@@ -1,0 +1,11 @@
+
+config_lastchange_plugin_name              = LastChange
+config_lastchange_plugin_desc              = Displays the last change. <br /> <br /> <span style = "font-weight: bold;"> Usage: </span> <br /> {LASTCHANGE} prints something like: "Last change: Welcome (10/23/2020, 9:07:20 am) "<br /> {LASTCHANGE | text} outputs something like:" Last change "<br /> {LASTCHANGE | page} outputs something like:" Welcome "<br / > {LASTCHANGE | pagelink} outputs something like: "Welcome" (with a link to the content page) <br /> {LASTCHANGE | date} outputs something like: "(23.10.2020, 09:07:20)" <br /> <br /> <span style = "font-weight: bold;"> Configuration: </span> <br /> The plugin takes the text "Last change" and the date format from the CMS language file; but you can also specify both yourself. The date format is based on the PHP function strftime ().
+config_lastchange_plugin_lastchange         = Last change with link and date
+config_lastchange_plugin_text               = Text last change:
+config_lastchange_plugin_page               = Name of the last modified content page
+config_lastchange_plugin_pagelink           = Link to the last changed content page
+config_lastchange_plugin_date               = Date of the last change
+config_lastchange_messagetext               = Own text for last change:
+config_lastchange_date                      = Own date format
+config_lastchange_showhiddenpagesinlastchanged = Include hidden content pages

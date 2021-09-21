@@ -1,70 +1,86 @@
 <!-- usesubmenu = 1 -->
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="de">
+<!DOCTYPE html>
+<html lang="de">
 <!--
 |===============================================================================|
 | Template: Standard moziloCMS                                                  |
-| Author: Simone Bechtold, sbDESIGN                                            |
+| Author: Sven Svetic, Twinix-Design                                            |
 | Version: 0.1                                                                  | 
 | *********  Dieser Hinweis darf nicht entfernt werden!  *********              |
 |===============================================================================|
---> 
+-->
+
 <head>
+    <meta charset="{CHARSET}">
+    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+    <meta name="robots" content="INDEX,FOLLOW" />
+    <meta name="description" content="{WEBSITE_DESCRIPTION}">
+    <meta name="keywords" content="{WEBSITE_KEYWORDS}">
     <title>{WEBSITE_TITLE}</title>
-    <meta http-equiv="Content-Type" content="text/html; charset={CHARSET}" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <meta http-equiv="Content-Script-Type" content="text/javascript" />
-    <meta http-equiv="Content-Style-Type" content="text/css" />
-    <meta name="content-language" content="deutsch,de,at,ch" />
-    <meta name="author" content="" />
-    <meta name="date" content="" />
-    <meta name="keywords" content="{WEBSITE_KEYWORDS}" />
-    <meta name="description" content="{WEBSITE_DESCRIPTION}" />
-    <meta name="robots" content="index,follow" />
     <link rel="SHORTCUT ICON" href="{LAYOUT_DIR}/favicon.ico" />
-    <style type="text/css">
-        @import "{LAYOUT_DIR}/css/style.css";
-        @import "{LAYOUT_DIR}/css/syntax.css";
-        /* Bei nutzung vom MenuSubsMobile Plugin
-        @import "{LAYOUT_DIR}/css/responsive.css"; */
-    </style>
+    <link rel="stylesheet" href="{LAYOUT_DIR}/css/style.css">
 </head>
-<body id="a0">
-    <!-- hier kann ein zusaetzliches Hintergrundbild ueber dem body eingefuegt und positioniert werden -->
-    <div id="sb-main">
-        <!-- Logo, Slogan, Suche -->
-        <div id="sb-header">
-            <div class="sb-header_inner">
-                <!-- Logo, Seitentitel -->
-                <div id="sb-titel">
-                    <img src="{LAYOUT_DIR}/grafiken/logo.png" alt="Logo" />
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <img src="{LAYOUT_DIR}/grafiken/logo1.png" alt="moziloCMS Logo">
+        <h1>{WEBSITE_NAME}</h1>
+    </header>
+    <!-- TopBar -->
+    <div class="topBar">
+    </div>
+
+    <main class="main-row">
+        <!-- Navigation -->
+        <div class="dropdown">
+            <input type="checkbox" id="checkbox_toggle">
+            <label for="checkbox_toggle" class="hamburger">
+                <span class="line line1"></span>
+                <span class="line line2"></span>
+                <span class="line line3"></span>
+            </label>
+            <aside class="side">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="content">
+                            <nav class="nav">
+                                <!-- Menu -->
+                                {MAINMENU}
+                            </nav>
+                            <br>
+                            {SEARCH}
+                        </div>
+                    </div>
                 </div>
-                <!-- Suche -->
-                <div class="sb-search">{SEARCH}</div>
-            </div>
+            </aside>
         </div>
-        <!-- Container fuer die Navigation und den Inhaltsbereich -->
-        <div class="sb-content">
-            <!-- beginn linke Sidebar, hier kommen Menue, Counter Suche usw. unter -->
-            <div id="sb-sidebar">
-                <!-- Hier kommt die Navigation / das Menue der Seite rein -->
-                <div id="sb-nav">{MAINMENU}</div>
-                <!-- SidebarInhalt, Platz fuer Sidebar, SidebarPage, Counter etc. 
-                <div class="sb-sidebarblock">
-                </div> -->
+        <!-- Content -->
+        <div class="main">
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <article class="content">
+                        {CONTENT}
+                    </article>
+                </div>
             </div>
-            <!--beginn Inhalt -->
-            <div id="sb-page">{CONTENT}</div>
+
         </div>
-    </div>
-    <!-- beginn Footer -->
-    <div id="footer">
-        <p class="sb-copy">
-            &copy;&nbsp;<script type="text/javascript"> document.write(new Date().getFullYear()); </script>&nbsp;by&nbsp;{WEBSITE_TITLE}  
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy;
+            <script>
+                document.write(new Date().getFullYear());
+
+            </script> {WEBSITE_NAME}
         </p>
-        <p class="sb-credit" >
-            {SITEMAPLINK} | Powered by {CMSINFO} | {MEMORYUSAGE} | {EXECUTETIME}<a href="#sb-header">Top</a>
-        </p>
-    </div>
+        <p>{MEMORYUSAGE} - {EXECUTETIME}</p>
+        <p>{SITEMAPLINK} - Layout: {CMSINFO}</p>
+    </footer>
 </body>
+
 </html>

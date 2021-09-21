@@ -1,0 +1,3 @@
+no_menusubs_2 = Bez MenuSubs_2
+menusubs_2 = Odaberite kategoriju za MenuSubs_2 
+sitemap_show_menu2 = Prikaži na karti web stranice MenuSubs_2 

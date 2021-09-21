@@ -1,0 +1,11 @@
+
+config_lastchange_plugin_name              = LastChange
+config_lastchange_plugin_desc              = 
+config_lastchange_plugin_lastchange         = 
+config_lastchange_plugin_text               = 
+config_lastchange_plugin_page               = 
+config_lastchange_plugin_pagelink           = 
+config_lastchange_plugin_date               = 
+config_lastchange_messagetext               = 
+config_lastchange_date                      = 
+config_lastchange_showhiddenpagesinlastchanged = 

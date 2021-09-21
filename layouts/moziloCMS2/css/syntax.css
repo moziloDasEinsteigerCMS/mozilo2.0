@@ -1,0 +1,189 @@
+/* [link|...]
+.link { } */
+
+/* [mail|...]
+.mail { } */
+
+/* [seite|...]
+.page { } */
+
+/* [kategorie|...]
+.category { } */
+
+/* [datei|...]
+.file { } */
+
+/* [bild|...] */
+.contentimage {
+    border : none;
+    display:inline-table;
+}
+
+.contentimage br {
+    display:none;
+}
+/* [bildlinks|...] */
+span.leftcontentimage {
+    margin : 8px 8px 8px 0;
+    border : none;
+    float  : left;
+    display:inline-table;
+}
+
+/* [bildrechts|...] */
+span.rightcontentimage {
+    margin : 8px 0 8px 8px;
+    border : none;
+    float  : right;
+    display:inline-table;
+}
+
+/* Untertitle für [bild|...] [bildlinks|...] [bildrechts|...] */
+span.imagesubtitle {
+    text-align : center;
+    font-size  : .6em;
+    display    : block;
+    width      : 100%;
+}
+
+/* [fett|...] */
+.contentbold {
+    font-weight : bold;
+}
+
+/* [kursiv|...] */
+.contentitalic {
+    font-style : italic;
+}
+
+/* [unter|...] */
+.contentunderlined {
+    text-decoration : underline;
+}
+
+/* [durch|...] */
+.contentstrikethrough {
+    text-decoration : line-through;
+}
+
+/* [zentriert|...] */
+.aligncenter {
+    text-align : center;
+}
+
+/* [links|...] */
+.alignleft {
+    text-align : left;
+}
+
+/* [rechts|...] */
+.alignright {
+    text-align : right;
+}
+
+/* [block|...] */
+.alignjustify {
+    text-align : justify;
+}
+
+/* [ueber1|...] */
+.heading1 {
+    font-size     : 1.375em;
+    margin-top    : 10px;
+    margin-bottom : 5px;
+}
+
+/* [ueber2|...] */
+.heading2 {
+    font-size     : 1.25em;
+    margin-top    : 10px;
+    margin-bottom : 5px;
+}
+
+/* [ueber3|...] */
+.heading3 {
+    font-size     : 1.125em;
+    margin-top    : 10px;
+    margin-bottom : 5px;
+}
+
+/* [liste|...] */
+/* [numliste|...] */
+.unorderedlist {
+    margin-top      : 0px;
+    margin-bottom   : 0px;
+    padding-left    : 25px;
+    list-style-type : circle;
+}
+
+.orderedlist {
+    margin-top      : 0px;
+    margin-bottom   : 0px;
+    padding-left    : 40px;
+    list-style-type : decimal-leading-zero;
+}
+
+.unorderedlist li, .orderedlist li {
+    margin-top    : 0px;
+    margin-bottom : 0px;
+}
+
+/* [----] */
+.horizontalrule {
+    border : 1px solid #000;
+}
+
+/* [tabelle|...] */
+table.contenttable {
+    margin:0px auto;
+    border:1px solid #C0C0C0;
+    border-collapse:collapse;
+    width:100%;
+}
+th.contenttable {
+    vertical-align:top;
+    border:1px solid #666666;
+    background-color:#7b7b7b;
+    padding:2px 5px;
+    color:#ffffff;
+}
+td.contenttable1 {
+    vertical-align:top;
+    border:1px solid;
+    background-color:#ffffff;
+    padding:2px 5px;
+}
+td.contenttable2 {
+    vertical-align:top;
+    border:1px solid;
+    background-color:#ffffff;
+    padding:2px 5px;
+}
+
+/* -------------------------------------------------------- */
+/* {TABLEOFCONTENTS} */
+/* ----------------- */
+.tableofcontents ul ul {/*padding-left:15px;*/}
+
+.tableofcontents li.blind {
+    list-style-type  : none;
+    list-style-image : none;
+}
+/* -------------------------------------------------------- */
+/* Fehler in Tag-Attribut oder -Wert */
+/* --------------------------------- */
+.deadlink {
+    color       : #ff4444;
+    font-weight : bold;
+}
+/* -------------------------------------------------------- */
+/* Suchwort-Hervorhebungen */
+/* ----------------------- */
+.highlight {
+    padding          : 0px 1px;
+    font-size        : inherit;
+    background-color : #dd0000;
+    color            : #ffffff;
+    font-size        : inherit;
+}
+

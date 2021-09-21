@@ -49,7 +49,8 @@ function admin_Template($pagecontent,$message) {
     $javaScriptPacker = new JavaScriptPacker();
     $javaScriptPacker->echoPack($packJS);
 
-    echo "</body></html>";
+    echo "</body>"."\n"
+    ."</html>";
 }
 
 function get_HtmlHead() {
@@ -59,33 +60,37 @@ function get_HtmlHead() {
     $packJS = array();
     $packCSS = array();
 
-    echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" '."\n"
-        .'  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">'."\n"
-        .'<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">'."\n"
-        ."<head>"
-        .'<meta http-equiv="Content-Type" content="text/html; charset='.CHARSET.'" />'."\n"
-        .'<meta name="robots" content="noindex" />'."\n"
+    echo '<!DOCTYPE html>'."\n"
+        .'<html lang="de">'."\n"
+        .'<head>'."\n"
+        .'<meta charset="'.CHARSET.'">'."\n"
+        .'<meta name="viewport" content="width = device-width, initial-scale = 1.0">'."\n"
+        .'<meta name="robots" content="noindex">'."\n"
 #        .'<meta http-equiv="Pragma" content="no-cache" />'
 #        .'<meta http-equiv="Cache-Control" content="no-cache" />'
 #        .'<meta http-equiv="Expires" content="-1" />'
         .'<title>'.getLanguageValue("cms_admin_titel",true).' - '.getLanguageValue(ACTION."_button").'</title>'."\n"
-        .'<link type="image/x-icon" rel="SHORTCUT ICON" href="'.URL_BASE.ADMIN_DIR_NAME.'/favicon.ico" />'."\n";
+        .'<link rel="shortcut icon" href="'.URL_BASE.ADMIN_DIR_NAME.'/favicon.ico">'."\n"
+        .'<link rel="stylesheet" href="'.URL_BASE.ADMIN_DIR_NAME.'/css/mozilo/jquery-ui-1.9.2.custom.css">'."\n"
+        .'<link rel="stylesheet" href="'.URL_BASE.ADMIN_DIR_NAME.'/admin.css">'."\n"
+        .'<link rel="stylesheet" href="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/ui-multiselect-widget/jquery.multiselect.css">'."\n"   
+    	  .'<link rel="stylesheet" href="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/ui-multiselect-widget/jquery.multiselect.filter.css">'."\n";
 
-    $packCSS[] = ADMIN_DIR_NAME.'/css/mozilo/jquery-ui-1.9.2.custom.css';
-    $packCSS[] = ADMIN_DIR_NAME.'/admin.css';
-    $packCSS[] = ADMIN_DIR_NAME.'/jquery/ui-multiselect-widget/jquery.multiselect.css';
-    $packCSS[] = ADMIN_DIR_NAME.'/jquery/ui-multiselect-widget/jquery.multiselect.filter.css';
+#    $packCSS[] = ADMIN_DIR_NAME.'/css/mozilo/jquery-ui-1.9.2.custom.css';
+#    $packCSS[] = ADMIN_DIR_NAME.'/admin.css';
+#    $packCSS[] = ADMIN_DIR_NAME.'/jquery/ui-multiselect-widget/jquery.multiselect.css';
+#    $packCSS[] = ADMIN_DIR_NAME.'/jquery/ui-multiselect-widget/jquery.multiselect.filter.css';
 
     if(file_exists(BASE_DIR_ADMIN.ACTION.'.css'))
-        $packCSS[] = ADMIN_DIR_NAME.'/'.ACTION.'.css';
+        echo '<link rel="stylesheet" href="'.URL_BASE.ADMIN_DIR_NAME.'/'.ACTION.'.css">'."\n";
 
     if(ACTION == "files" or ACTION == "gallery" or ACTION == "template") {
-        $packCSS[] = ADMIN_DIR_NAME.'/jquery/File-Upload/jquery.fileupload-ui.css';
-        $packCSS[] = ADMIN_DIR_NAME.'/jquery/File-Upload/bootstrap.cms.css';
+        echo '<link rel="stylesheet" href="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/File-Upload/jquery.fileupload-ui.css">'."\n";
+        echo '<link rel="stylesheet" href="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/File-Upload/bootstrap.cms.css">'."\n";
     }
 
     if(ACTION == "catpage" or ACTION == "config" or ACTION == "template")
-        $packCSS[] = ADMIN_DIR_NAME.'/jquery/coloredit/coloredit.min.css';
+        echo '<link rel="stylesheet" href="'.URL_BASE.ADMIN_DIR_NAME.'/jquery/coloredit/coloredit.min.css">'."\n";
 
     if(defined('PLUGINADMIN') and is_file(BASE_DIR.PLUGIN_DIR_NAME.'/'.PLUGINADMIN.'/plugin.css'))
         $packCSS[] = PLUGIN_DIR_NAME.'/'.PLUGINADMIN.'/plugin.css';
@@ -139,8 +144,8 @@ function get_HtmlHead() {
          echo 'var mo_docu_coloredit = \''.str_replace("/",'\/',getHelpIcon("editsite","color")).'\';';
 
     echo '/*]]>*/</script>'."\n"
-        .'<script type="text/javascript" src="'.URL_BASE.CMS_DIR_NAME.'/jquery/jquery-'.ADMIN_JQUERY.'.min.js"></script>'."\n"
-        .'<script type="text/javascript" src="'.URL_BASE.CMS_DIR_NAME.'/jquery/jquery-ui-'.ADMIN_JQUERY_UI.'.custom.min.js"></script>'."\n";
+        .'<script src="'.URL_BASE.CMS_DIR_NAME.'/jquery/jquery-'.ADMIN_JQUERY.'.min.js"></script>'."\n"
+        .'<script src="'.URL_BASE.CMS_DIR_NAME.'/jquery/jquery-ui-'.ADMIN_JQUERY_UI.'.custom.min.js"></script>'."\n";
 
 /*
     if(LOGIN and defined('MULTI_USER') and MULTI_USER)

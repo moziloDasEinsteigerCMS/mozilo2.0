@@ -231,6 +231,28 @@ a:hover {
   text-decoration: none;
 }
 
+/* Hauptmenü (Galerie) */
+ul.gallerymenu {
+    padding     : 11px 8px 0px 0px;
+    line-height : 23px;
+    text-align  : center;
+}
+
+/* Detailmenü (Galerie) */
+ul.gallerynumbermenu {
+    padding     : 6px 8px 0px 8px;
+    line-height : 20px;
+    text-align  : center;
+    width       : 100%;
+    float       : none;
+    margin      : 2px auto;
+}
+
+li.gallerymenu, li.gallerynumbermenu {
+    display : inline;
+    padding : 0 5px 0 5px;
+}
+
 /*Syntax Ende*/
 
 @media only screen and (min-width: 768px) {

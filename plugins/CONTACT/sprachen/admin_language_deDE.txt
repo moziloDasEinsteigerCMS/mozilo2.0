@@ -18,3 +18,5 @@ config_input_contact_textarea   = Mehrzeiliges Textfeld "Nachricht"
 config_input_contact_privacy    = Checkbox Text "Datenschutz"
 config_input_contact_mail_send_copy = Kopie an diese senden
 config_titel_spam_question      = Spam-Aufgaben<br />in jeder Zeile eine neue<br />Frage = Antwort<br />z.B. 3 + 7 = 10
+config_category                 = Kategorie in welcher sich die Datenschutzseite befindet
+config_data_protection_page     = Name der Datenschutzseite
