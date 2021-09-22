@@ -1,0 +1,625 @@
+/*
+Theme Name: Standard moziloCMS 
+Author: sbDESIGN, S. Bechtold
+Description: Tabellenloses Design
+Version: 0.1
+Version: 0.2 - moziloCMS Update - Porting to HTML 5 Responsive Webdesign
+*/
+
+/*************************** GLOBALE EINSTELLUNGEN ****************************/
+*{
+    margin  : 0;
+    padding : 0;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+    background  : #ebf0f3;
+    color       : #000000;
+    font-family : Corbel, Arial, Helvetica, sans-serif;
+    font-size   : 100%;
+    max-width   : 100%;
+    text-align  : center;
+}
+
+/* Absätze */
+p {
+    padding       : 5px 0 15px 0;
+    margin-bottom : 10px;
+}
+
+/* allgemeine Links */
+a {
+    font-weight     : bold;
+    color           : #73a7cf;
+    text-decoration : none;
+    padding         : 0px 2px 0px 2px;
+}
+
+a:link, a:visited, a:active {
+    color           : #73a7cf;
+    font-weight     : bold;
+    text-decoration : none;
+}
+
+a:hover {
+    color : #9ea666;
+}
+:hover {
+    transition: color 0.2s ease 0s;
+}
+
+/* 
+ * Gilt für alle Geräte 
+ */
+ 
+#clearboth {
+  clear: both;
+} 
+
+/* 
+ * img max-width: 100, Responsive Webdesign 2014
+ * Bilder per CSS skalieren 
+ */
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+/******************************* LAYOUT ***************************************/
+
+/***** main, umschliesst die gesamte Seite *****/
+#sb-main {
+    margin: 0 auto;
+    padding: 0;
+    width     : 100%;
+    min-height: 100%;
+    font-size : 1.0em;
+}
+
+/**** Header, beinhaltet Suche und Seitentitel/Logo ****/
+#sb-header {
+    background-color : #ffffff;
+    border-top       : 20px solid #73a7cf;
+    border-bottom    : 1px solid #73a7cf;
+}
+
+.sb-header_inner {
+    background : #ffffff url('../grafiken/header.png') no-repeat center center;
+    margin     : 0 auto;
+    width      : 84%;
+}
+
+/*** Seitentitel ***/
+#sb-titel {
+    text-align  : left;
+    width       : auto;
+    margin      : 0;
+    padding     : 0;
+    font-size   : 1.3em;
+    font-weight : normal;
+    color       : #000;
+}
+
+/** Seitentitel Ueberschrift **/
+#sb-titel h1 {
+    font-size   : 1.5em;
+    font-weight : bold;
+}
+
+/*** Container fuer Suche ***/
+.sb-search {
+    width    : 220px;
+    position : absolute;
+    right    : 0;
+    top      : 25px;
+}
+
+/**** Container fuer das Menue und den Inhalt ****/
+.sb-content {
+    margin         : 0 auto;
+    width          : 78%;
+    background     : #fff;
+    border-top     : 1em solid #ebf0f3;
+    padding-bottom : 120px; 
+}
+
+/*** linke Sitebar ***/
+#sb-sidebar {
+    float          : left;
+    background     : #ffffff;
+    padding        : 0.5em;
+    width          : 24%;
+}
+
+/** Navigation **/
+#sb-nav {
+    background    : #f7f7f7;
+}
+/** Inhalte in der Sidebar **/
+.sb-sidebarblock {
+    margin-top : 50px;
+    padding    : 0 20px 10px 20px;
+}
+
+.sb-sidebarblock h2 {
+    text-transform : uppercase;
+    border-bottom  : 1px solid #e6e6e6;
+}
+
+/** Container für Inhalt **/
+#sb-page {
+    float          : right;
+    padding        : 0.5em;
+    /* padding        : 10px 25px 55px 15px; */
+    background     : #fff;
+    width          : 70%;
+    text-align     : left;
+    line-height    : 1.3em;
+}
+
+/**** Footer ****/
+#footer {
+    margin-top  : -120px;
+    /* margin-left : auto;
+    margin-right: auto; */
+    width       : 100%;
+    height      : 120px;
+    background  : #444444;
+    color       : rgba(255, 255, 255, 0.57);
+    /* margin      : 0 auto; */
+    font-size   : 0.875em;
+    border-top  : 1em solid #ebf0f3;
+}
+
+#footer p {
+    margin  : 0;
+    padding : 30px 0 0 0;
+}
+
+/*** Footer-Links, Admin-Login, Credits ***/
+.sb-credit a, .sb-credit a:visited {
+    color : rgba(255, 255, 255, 0.78);
+}
+.sb-credit a:hover {
+    color : #ffffff;
+}
+
+/**************** MAINMENU und MenuSubs, MenuSubsMobile ****************/
+/** Hauptmenue **/
+ul.mainmenu, ul.cat-menusubs {
+    margin          : 0 0 0.5em 0;
+    list-style-type : none;
+    padding-left    : 0;
+    font-size       : 1em;
+}
+
+li.mainmenu, li.cat-menusubs {
+    border-bottom : 1px solid #e6e6e6;
+}
+
+/* Hauptmenuepunkt */
+a.menu, a.cat-menusubs-link {
+    padding     : 1em 0 1em 0.5em;
+    color       : #000;
+    font-weight : normal;
+    text-align  : left;
+    display     : block;
+}
+
+/* aktiver Hauptmenuepunkt */
+a.menuactive, a.cat-menusubs-link.menusubs-linkactive {
+    padding       : 1em 0 1em 0.5em;
+    color         : #9da665 !important;
+    text-align    : left;
+    margin        : 0px;
+    font-weight   : normal;
+    display       : block;
+    margin-bottom : 1px;
+}
+
+/* Hover */
+a.menu:hover, a.menuactive:hover, a.cat-menusubs-link:hover {
+    text-decoration  : none;
+    color            : #73a7d0;
+    background-color : #ffffff;
+    transition       : color 0.2s ease 0s;
+}
+
+/** Submenue / Detailmenue **/
+ul.detailmenu, ul.page-menusubs, ul.subcat-menusubs {
+    margin-bottom   : 0px;
+    padding-bottom  : 5px;
+    padding-left    : 1em;
+    list-style-type : none;
+    text-align      : left;
+}
+
+ul.subcat-menusubs {
+    padding-left : 15px;
+}
+
+li.detailmenu, li.page-menusubs, li.subcat-menusubs {
+    padding : 2px;
+}
+
+/* Submenuepunkt */
+a.submenu, a.page-menusubs-link, a.subcat-menusubs-link {
+    display     : block;
+    font-weight : normal;
+    color       : #404040;
+    font-size   : 0.875em;
+}
+
+/* aktiver Submenuepunkt */
+a.submenuactive, a.page-menusubs-link.menusubs-linkactive, a.subcat-menusubs-link.menusubs-linkactive {
+    display     : block;
+    font-weight : normal;
+    color       : #9da665 !important;
+    font-size   : 0.875em;
+}
+
+/* Hover */
+a.submenu:hover, a.submenuactive:hover, a.page-menusubs-link:hover, a.subcat-menusubs-link:hover {
+    color           : #73a7d0;
+    text-decoration : none;
+    transition      : color 0.2s ease 0s;
+}
+
+a.subcat-menusubs-link, a.subcat-menusubs-link.menusubs-linkactive {
+    font-weight : bold;
+}
+
+/********************************** Suchfeld *********************************/
+/* Suchfeld */
+.searchform {
+    width : 220px;}
+
+fieldset#searchfieldset {
+    border  : none;
+    padding : 10px 0 0 0 ;
+}
+
+input.searchtextfield {
+    border                : 1px solid #ffffff;
+    -moz-border-radius    : 5px;
+    -khtml-border-radius  : 5px;
+    -webkit-border-radius : 5px;
+    border-radius         : 5px;
+    width                 : 200px;
+    height                : 24px;
+    background-color      : #ffffff;
+    margin-bottom         : 10px;
+    padding-left          : 5px;
+    color                 : #000000;
+    -moz-box-shadow       : inset 0 0 5px #B0B0B0;
+    -webkit-box-shadow    : inset 0 0 5px #B0B0B0;
+    box-shadow            : inset 0 0 5px #B0B0B0;
+}
+
+/* Suchbutton */
+input.searchbutton {
+    border : none;
+    margin : 5px 0px -5px -20px;
+}
+/********************************** Sitemap *********************************/
+.sitemap {
+    margin : 1.4em 0 0 1em;
+}
+
+.sitemap ul {
+    list-style-type : none;
+    padding-left    : 2.4em;
+}
+
+.sitemap li {
+    margin-top : .5em;
+}
+
+.sitemap h2 {
+    margin-top : 1em;
+}
+
+/******************************* Kontaktformular *****************************/
+form#contact_form { }
+
+table#contact_table {
+    width      : 99%;
+    margin     : 0;
+    background : #F2F2F2;
+    border     : 1px solid #E2E2E2;
+}
+
+table#contact_table td {
+    vertical-align : top;
+    padding        : 5px;
+}
+
+span#contact_errormessage {
+    color       : #880000;
+    font-weight : bold;
+}
+
+span#contact_successmessage {
+    color       : #008800;
+    font-weight : bold;
+}
+
+input#contact_name, input#contact_mail, input#contact_website {
+    /* width      : 200px !important; */
+    background : #E5E5E5 !important;
+    border     : 1px solid #E2E2E2;
+    color      : #000000;
+}
+
+textarea#contact_message {
+    /* width      : 400px !important; */
+    background : #E5E5E5;
+    border     : 1px solid #E2E2E2;
+    color      : #000000;
+}
+
+input#contact_calculation {
+    background : #E5E5E5 !important;
+    border     : 1px solid #E2E2E2;
+    color      : #000000;
+}
+
+input#contact_submit {
+    width : 250px !important;
+}
+
+/*---------------------------------------------------------------------------*/
+/******************************* GALLERY LAYOUT ******************************/
+/*---------------------------------------------------------------------------*/
+/* bei Einstellung "target self" */
+.embeddedgallery {
+    text-align : center;
+    margin     : 5px auto;
+    background : #ffffff;
+}
+
+/* Hauptmenü (Galerie) */
+ul.gallerymenu {
+    padding     : 11px 8px 0px 0px;
+    line-height : 23px;
+    text-align  : center;
+}
+
+/* Detailmenü (Galerie) */
+ul.gallerynumbermenu {
+    padding     : 6px 8px 0px 8px;
+    line-height : 20px;
+    text-align  : center;
+    width       : 100%;
+    float       : none;
+    margin      : 2px auto;
+}
+
+li.gallerymenu, li.gallerynumbermenu {
+    display : inline;
+    padding : 0 5px 0 5px;
+}
+
+/* Galerie-Tabelle (Übersichtsmodus) */
+table.gallerytable {
+    margin          : 0px auto;
+    border-collapse : collapse;
+    width           : 90%;
+}
+
+td.gallerytd {
+    vertical-align : top;
+    text-align     : center;
+    padding        : 3px;
+}
+
+/* 
+ * neues Galerie Plugin ab Dezember 2019 
+ * ohne Tabellen!
+ */
+ 
+.gallerytable {
+  clear: both;
+  display: table;
+  float: left;
+  padding: 0; 
+  margin: 0; 
+  list-style: none; 
+  width: 94%; 
+}
+
+.row {
+  float: left;
+  margin: 0 auto;
+  padding-top: 0.1em;
+  padding-right: 0;
+  padding-bottom: 0.5em;
+  padding-left: 0;
+  color: #333333;
+  background-color: transparent;
+  width: 100%;
+  list-style-type: none;
+}
+
+.gallerytd {
+  float: left; 
+  margin: 5px 17px; 
+  display: inline; 
+  color: #000; 
+  width: 48%;
+  margin: 0 1%;
+  text-align: center;  
+  text-decoration: none; 
+  cursor: default;  
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.gallerytd img {
+  display: block; 
+  margin: 0 auto;
+}
+
+/* -------------------------------------------------------- */
+/* blockquote und code Darstellung */
+/* ------------------------------- */
+
+blockquote {
+	width: 80%;
+	color: #666;
+	margin: 1em 1em;
+	padding: 0 10px;
+	border-left: 5px solid #38bf06;
+	background-color: #ddffdd;
+}
+
+/* pre, code { */
+pre {
+  clear: both;
+	font-family: "courier new", courier, monospace;
+	font-size: 90%;
+	background-color: #ddd;
+	overflow: auto;
+	width: 90%;
+	margin: 1em 1em;
+	padding: 5px 10px;
+  min-height: 1em; /* ignored in IE<7 */
+  height: auto !important; /* everybody else */
+  height: 1%;   /* IE6 */    	
+}
+
+/*---------------------------------------------------------------------------*/
+/**************************** Responsive Layout ******************************/
+/*---------------------------------------------------------------------------*/
+
+/* 
+ * 1024er Version media queries
+ */
+@media only screen and (max-width: 1024px) {
+
+  .sb-header_inner {
+    width      : 100%;
+  }
+
+  .sb-content {
+    margin         : 0 auto;
+    width          : 90%;
+    background     : #fff;
+    border-top     : 1em solid #ebf0f3;
+    padding-bottom : 120px; 
+  }
+
+}
+
+/* 
+ * 768er Version media queries
+ */
+@media only screen and (max-width: 768px) {
+
+  #sb-main {
+    width: 100%;
+    margin: 0;
+  }
+
+  #sb-header {
+    width: 100%;
+  }
+  
+  .sb-header_inner {
+    width: 100%;
+  }
+
+  .sb-content {
+    margin: 0;
+    width: 100%;
+  }
+
+  #sb-sidebar {
+    margin: 0;    
+    width: 100%;
+  }
+
+  #sb-page {
+    margin: 0;  
+    padding: 0;
+    width: 100%; 
+    border: none;
+  }
+ 
+  #mobile {
+    margin: 0;
+    padding: 0.5em;
+  }
+ 
+  #footer {
+    width: 100%;
+  }
+
+  .gallerytable {
+    display: block; 
+    width: 100%; 
+    color: #000;
+    background-color: #fff;
+  }
+
+  .row {
+    display: block; 
+    width: 100%; 
+    list-style-type: none;
+  }
+
+  .gallerytd {
+    display: block; 
+    width: 100%;
+    cursor: default;  
+    vertical-align: middle;
+  }
+
+  .gallerytd img {
+    display: block; 
+    margin: 0 auto;
+  }
+
+}
+
+/* 
+ * 480er Version media queries
+ */
+@media only screen and (max-width: 480px) {
+
+  #sb-page {
+    margin: 0;
+    padding: 0;
+  }
+
+  #mobile {
+    margin: 0;
+    padding: 0.5em;
+  }
+  
+  .gallerytd img {
+	max-width: 100%;
+	height: auto;
+  }
+
+  img .thumbnail {
+	max-width: 100%;
+	height: auto;
+  }
+  
+  
+}
+
+
+fieldset#searchfieldset {
+   border:none;
+   margin:0px;
+   padding:0px;
+}

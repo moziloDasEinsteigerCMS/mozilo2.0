@@ -1,0 +1,71 @@
+﻿# Ne uklanjajte ove redove / Do not remove these lines
+#
+# $Revision: 829 $
+# $LastChangedDate: 2020-09-22 20:21:05 +0100 (Di, 22. Sep 2020) $
+# $Author: moziloCMS $
+#
+_dateformat_0                                   = %Y-%d-%m, %H:%M:%S
+_translator_0                                   = Mighty
+# alttext_galleryimage_1                        = Slika u galeriji "{PARAM1}"
+alttext_image_1                                 = Slika "{PARAM1}"
+anchor_top_0                                    = Povratak na vrh
+message_downloads                               = Preuzimanja
+message_draft_0                                 = Nacrt
+# message_firstimage_0                          = Prva slika
+message_galleries_0                             = Galerije
+message_gallery_1                               = Galerija "{PARAM1}"
+# message_gallery_xoutofy_2                     = (Slika {PARAM1} od {PARAM2})
+# message_gallerydir_error_1                    = Nepoznati direktorij galerije "{PARAM1}"!
+# message_gallerydir_error_0                    = Nije dat nijedan direktorij galerije!
+message_galleryembed_error_0                    = Zbog trenutnih postavki CMS-a, galerija se može koristiti samo ugrađena.
+# message_galleryempty_0                        = Ova galerija ne sadrži slike.
+message_gallerypreviewdir_error_1               = Nedostaje direktorij pregleda "{PARAM1}"!
+# message_gallery_no_preview                    = Pregled nije dostupan
+message_lastchange_0                            = zadnja promjena:
+# message_lastimage_0                           = zadnja slika:
+# message_nextimage_0                           = Sljedeća slika
+message_nodatafound_0                           = Nije pronađen nijedan podudarni sadržaj.
+# message_previousimage_0                       = Prethodna slika
+message_search_0                                = traži
+message_searchresult_1                          = Rezultati pretraživanja za "{PARAM1}"
+message_searchnoresult_1                        = Za ove ključne riječi "{PARAM1}" nisu pronađeni rezultati.
+message_searchhelp_0                            = Za pretraživanje morate unijeti pojmove odvojene razmacima (pogoci su stranice koje sadrže barem jedan od ovih pojmova). Postavite pojmove koji sadrže razmak u navodnicima.
+message_sitemap_0                               = Mapa web stranice
+message_template_error_1                        = Datoteka predloška "{PARAM1}" nedostaje! Molimo kontaktirajte administratora.
+passwordform_title_0                            = potrebna lozinka
+passwordform_pagepasswordplease_0               = Unesite lozinku za ovu stranicu:
+passwordform_message_passwordwrong_0            = Pristup odbijen: Pogrešna lozinka.
+passwordform_send_0                             = Poslati
+plugin_error_1                                  = Pogreška u dodatku {PARAM1}. Molimo kontaktirajte autora dodatka.
+plugin_error_missing_pluginconf_1               = Pogreška u dodatku {PARAM1}: nedostaje plugin.conf. Molimo kontaktirajte autora dodatka.
+plugin_error_missing_method_2                   = Pogreška u dodatku {PARAM1}: Nedostaje metoda {PARAM2}. Molimo kontaktirajte autora dodatka.
+plugin_error_value_1                            = Pogreška u dodatku {PARAM1}: Neispravan prijenos parametara, pogledajte pomoć za dodatak
+thirsty_programmer                              = Pozdrav, volio bih popiti pivo! ;)
+tooltip_anchor_error_1                          = Stavak "{PARAM1}" ne postoji
+tooltip_anchor_goto_1                           = Skoči na odlomak "{PARAM1}"
+tooltip_anchor_gototop_0                        = Vratite se na vrh
+tooltip_attribute_error_1                       = Pogrešna sintaksa: nepoznati atribut "{PARAM1}"
+tooltip_color_error_1                           = Pogrešna vrijednost boje "{PARAM1}"
+# tooltip_gallery_fullscreen_1                  = Pogled u punoj veličini: "{PARAM1}"
+tooltip_image_error_1                           = Nepoznata datoteka ili pogrešna adresa: "{PARAM1}"
+tooltip_image_error_2                           = Nedostaje slikovna datoteka "{PARAM1}" u kategoriji "{PARAM2}"
+tooltip_include_recursion_error_0               = Stranica se ne može uključiti
+# tooltip_include_reinclude_error_0             = Uključuje uključene stranice nije dopušteno
+tooltip_link_category_1                         = Promijeni u kategoriju "{PARAM1}"
+tooltip_link_category_error_1                   = Nedostaje kategorija "{PARAM1}"
+tooltip_link_extern_1                           = otvori vanjsku adresu "{PARAM1}"
+tooltip_link_extern_error_1                     = Pogrešna adresa veze "{PARAM1}"
+tooltip_link_file_1                             = Preuzmi datoteku "{PARAM1}"
+tooltip_link_file_2                             = Preuzmi datoteku "{PARAM1}" iz kategorije "{PARAM2}"
+tooltip_link_file_error_1                       = Nedostaje datoteka "{PARAM1}"
+tooltip_link_file_error_2                       = Nedostaje datoteka "{PARAM1}" u kategoriji "{PARAM2}"
+# tooltip_link_gallery_2                        = Prikaži galeriju "{PARAM1}" ({PARAM2} slike)
+# tooltip_link_gallery_error_1                  = Nedostaje galerija "{PARAM1}"
+tooltip_link_mail_1                             = Poslana e-mail na "{PARAM1}"
+tooltip_link_mail_error_1                       = Pogrešna e-mail adresa "{PARAM1}"
+tooltip_link_page_1                             = Prikaži stranicu "{PARAM1}"
+tooltip_link_page_2                             = Prikaži stranicu "{PARAM1}" iz kategorije "{PARAM2}"
+tooltip_link_page_error_1                       = Nedostaje stranica "{PARAM1}"
+tooltip_link_page_error_2                       = Nedostaje stranica "{PARAM1}" u kategoriji "{PARAM2}"
+tooltip_showsitemap_0                           = Prikaži kartu web mjesta
+tooltip_link_cmsinfo                            = Web stranica kreirana moziloCMS-om

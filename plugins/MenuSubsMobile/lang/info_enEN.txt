@@ -1,0 +1,59 @@
+Creates a menu with almost unlimited submenu nesting.<br />
+<b>Attention:</b> Categories, which contain a "/" (slash) , will not be displayed because we are using "/" (slash) for the submenu.<br />
+<br />
+To use the detail menu you have to use {MenuSubs|main} and {MenuSubs|detail},
+otherwise only {MenuSubs}<br />
+<b>Attention:</b> The option "usesubmenu = 0" (entered at the top in the layouts) will not be used here!<br />
+<br />
+<b>Description:</b>
+<ul>
+<li>As soon as a hidden content page with a "/" in its name is found, it is replaced with the category with the same name as a submenu.</li>
+<li><b>Important</b> The name is considered the path.</li>
+<li>In order to use a content page for sub-categories that is hidden via the setting "Specify whether content pages with the exact same name as the category should be hidden in the detail menu:", the name must be like the last part of the sub-categories, e.g. Sub-categories = Category / Submenu_1 content page = Submenu_1 and must be the first content page.</li>
+</ul>
+<br />
+<b>Example:</b><br />
+<ul><li style="list-style-type:none;"><b>Category</b>
+<ul>
+    <li>Contentpage_1</li>
+    <li>Category / Submenu_1 <b>hidden</b></li>
+    <li>Contentpage_2</li>
+</ul>
+<b>Category / Submenu_1</b>
+<ul>
+    <li>Contentpage_3</li>
+    <li>Category / Submenu_1 / Submenu_2 <b>hidden</b></li>
+</ul>
+<b>Category / Submenu_1 / Submenu_2</b>
+<ul>
+    <li>Contentpage_4</li>
+    <li>Contentpage_5</li>
+</ul>
+</li></ul>
+<br />
+<b>Result:</b><br />
+<ul><li style="list-style-type:none;"><b>Category</b>
+<ul>
+    <li>Contentpage_1</li>
+    <li><b>Submenu_1</b>
+    <ul>
+        <li>Contentpage_3</li>
+        <li><b>Submenu_2</b>
+        <ul>
+            <li>Contentpage_4</li>
+            <li>Contentpage_5</li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li>Contentpage_2</li>
+</ul>
+</li></ul>
+<br />
+Create a second menu with <b>{MenuSubs|menusubs_2}</b>.<br />
+For example, for imprint and contact in the footer of the page.<br />
+Simply select a category in the plugin configuration and enter <b> {MenuSubs|menusubs_2} </b> <br /> in the desired place in the template.<br />
+You can only select categories that do not have a "/" in their name.<br />
+Sub-categories are of course also possible.<br />
+<br />
+For breadcrumb navigation, simply enter <b> {MenuSubs|breadcrumb} </b> in the desired location.

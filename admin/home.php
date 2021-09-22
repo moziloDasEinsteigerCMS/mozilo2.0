@@ -60,6 +60,26 @@ function home() {
     $error[$titel][] = false;
     $template[$titel][] = array(getLanguageValue("home_cmsversion_text"),CMSVERSION.' ("'.CMSNAME.'")<br />'.getLanguageValue("home_cmsrevision_text").' '.CMSREVISION);
 
+    // Zeile "CMS-Update"
+    $versionhere = CMSREVISION;
+    $version = @file_get_contents('https://www.mozilo.de/update-check/check.txt');
+
+    if ($version === false) {
+    // Handle error
+    $error[$titel][] = true;
+    $template[$titel][] = array(getLanguageValue("home_cmsupdate_text"),getLanguageValue("home_cmsupdate_text_failed"));
+        } else {
+            if ($versionhere != trim($version)) {
+        $error[$titel][] = true;
+        $template[$titel][] = array(getLanguageValue("home_cmsupdate_text"),getLanguageValue("home_cmsupdate_text_update").$version. '<br/> <a href="https://github.com/mozilo/mozilo2.0/archive/master.zip" title="neueste Version von moziloCMS herunter laden" download>
+  <button>'.getLanguageValue("home_cmsupdate_text_download").'</button>
+</a>');
+        } else {
+        $error[$titel][] = "ok";
+        $template[$titel][] = array(getLanguageValue("home_cmsupdate_text"),getLanguageValue("home_cmsupdate_text_noupdate"));
+        }
+    }
+
     // Zeile "Gesamtgröße des CMS"
     $cmssize = convertFileSizeUnit(dirsize(BASE_DIR));
     if($cmssize === false) {
@@ -96,12 +116,12 @@ function home() {
      // SERVER-INFOS
     $titel = "home_serverinfo";
 
-    // Aktueles Datum
+    // Aktuelles Datum
     $error[$titel][] = false;
     $time_zone = date("T");
     if(function_exists('date_default_timezone_get'))
         $time_zone = @date_default_timezone_get();
-    $template[$titel][] = array(getLanguageValue("home_date_text"),date("Y-m-d H.i.s")." ".$time_zone);
+    $template[$titel][] = array(getLanguageValue("home_date_text"),date("Y-m-d H:i:s")." ".$time_zone);
 
     // Sprache
     $error[$titel][] = false;

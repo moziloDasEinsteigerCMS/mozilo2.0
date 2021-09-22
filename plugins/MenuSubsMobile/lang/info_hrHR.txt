@@ -1,0 +1,74 @@
+Stvara izbornik s gotovo neograničenim gniježđenjem podizbornika. <br />
+<br />
+Ovaj dodatak je proširenje dodatka MenuSubs <br />
+Ne treba mu Javascript <br />
+S Opera Mini, potvrdni okviri nisu transparentni, pa se tamo koristi malo Javascripta. <br />
+<br />
+<b> Promjene su: </b>
+<ul>
+<li> Sve su kategorije i stranice sa sadržajem uvijek na popisu. Sada ih kontroliraju klase skrivenih izbornika i izbornika-prikaza. </li>
+<li> Svaka kategorija također prima oznaku i okvir za potvrdu unosa HTML element, osim prekidača predloška koristiubmenu = 2. </li>
+<li> Ispred popisa nalazi se i HTML element oznake i okvira za unos kako biste mogli proširiti ili sažeti izbornik. </li>
+<li> U normalnom prikazu svi su elementi HTML oznake i okvira za unos nevidljivi, tako da je to sasvim normalan izbornik </li>
+</ul>
+<br />
+<b> Pažnja: </b> u dodatku.css dokumentirano je nekoliko posebnosti! <br />
+<br />
+<b> Pažnja: </b> Kategorije koje sadrže "/" (kosa crta) više se ne prikazuju jer za podizbornik koristimo "/". <br />
+<br />
+Da biste koristili izbornik pojedinosti, morate upotrijebiti {MenuSubsMobile | main} i {MenuSubsMobile | detail},
+inače samo {MenuSubsMobile} <br />
+<b> Pažnja: </b> Ovdje se ne koristi sklopka "usesubmenu = 0" (unesena u raspored na vrhu) <br />
+<br />
+<b> Opis: </b>
+<ul>
+<li> Čim se pronađe stranica sa skrivenim sadržajem s imenom "/", ona će biti zamijenjena kategorijom s istim nazivom kao i podizbornik. </li>
+<li> <b> Važno: </b> Ime se tretira kao put. </li>
+<li> Da biste koristili stranicu sa sadržajem za potkategorije koja je skrivena postavkom "Navedite trebaju li stranice sadržaja s istim nazivom kao kategorija biti skrivene u izborniku pojedinosti:", naziv mora biti poput zadnjeg dijela potkategorija, npr. Podkategorije = Kategorija / Podmenija_1 stranica sadržaja = Podizbor_1 i mora biti prva stranica sadržaja. </li>
+</ul>
+<br />
+<b> Primjer: </b> <br />
+<ul> <li style = "list-style-type: none;"> <b> Kategorija </b>
+<ul>
+    <li> Stranica sa sadržajem_1 </li>
+    <li> Kategorija / podizbornik_1 <b> skriven </b> </li>
+    <li> Sadržajna stranica_2 </li>
+</ul>
+<b> Kategorija / podizbornik_1 </b>
+<ul>
+    <li> Sadržajna stranica_3 </li>
+    <li> Kategorija / podizbornik_1 / podizbornik_2 <b> skriven </b> </li>
+</ul>
+<b> Kategorija / podizbornik_1 / podizbornik_2 </b>
+<ul>
+    <li> Sadržaj_4 </li>
+    <li> Sadržajna stranica_5 </li>
+</ul>
+</li> </ul>
+<br />
+<b> Rezultat: </b> <br />
+<ul> <li style = "list-style-type: none;"> <b> Kategorija </b>
+<ul>
+    <li> Stranica sa sadržajem_1 </li>
+    <li> <b> podizbornik_1 </b>
+    <ul>
+        <li> Sadržajna stranica_3 </li>
+        <li> <b> podizbornik_2 </b>
+        <ul>
+            <li> Sadržaj_4 </li>
+            <li> Sadržajna stranica_5 </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li> Sadržajna stranica_2 </li>
+</ul>
+</li> </ul>
+<br />
+Drugi izbornik može se stvoriti pomoću <b> {MenuSubsMobile | izbornici_2} </b>. <br />
+Na primjer, za otisak i kontakt u podnožju stranice. <br />
+Jednostavno odaberite kategoriju u konfiguraciji dodatka i na željeno mjesto u predlošku unesite <b> {MenuSubsMobile | menusubs_2} </b> <br />. <br />
+Možete odabrati samo kategorije koje u svom nazivu nemaju "/". <br />
+Moguće su i potkategorije. <br />
+<br />
+Za navigaciju kroz kruh jednostavno unesite <b> {MenuSubsMobile | breadcrumb} </b> na željeno mjesto.

@@ -1,0 +1,5 @@
+config_breadcrumb_text    = Prethodni tekst (standardni: prazno) 
+config_first_entry        = Prvi unos (standardni: početak) 
+config_breadcrumb_divider  = Separator (standardni ») 
+description     = Umeta Breadcrumb bilo gdje u članak ili bilo gdje u predlošku. 
+placeholder     = Umeće Breadcrumb

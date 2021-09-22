@@ -1,0 +1,22 @@
+toolbar_platzhalter_CONTACT     = Kontakt obrazac
+config_titel_contact            = Postavke obrasca za kontakt
+config_text_formularmail        = Ova "E-Mail za unos teksta u jednom retku" bit će primatelj poruka poslanih s obrasca za kontakt. <br /> <span style = "font-style: italic;"> Na početnoj stranici moziloAdmin možete provjeriti je li vaš poslužitelj je u mogućnosti slati E-Mail. </span>
+config_error_formularmail       = Unesite valjanu E-Mail adresu.
+config_text_contactformusespamprotection = Treba li obrazac za kontakt zaštititi od neželjene pošte? Ako je ta opcija označena, vaši će posjetitelji morati riješiti jednostavan zadatak kako bi poslali svoju poruku.
+config_text_contactformwaittime = Koliko sekundi posjetitelj treba čekati dok ne može poslati sljedeću poruku?
+config_help_contact             = Koja polja trebaju biti prikazana u obrascu za kontakt - i koja su obavezna polja? <br /> Također možete dodijeliti vlastite oznake poljima za unos i stvoriti zaštitu od neželjene pošte. <br /> E-Mail s "jednorednim tekstualnim poljem "koristi se kao pošiljatelj koji se koristi za poruke iz obrasca za kontakt. <br /> <i> Na početnoj stranici moziloAdmin možete provjeriti je li podržana pošta. </i> 
+config_text_contact             = Koji bi unos trebao biti vidljiv u obrascu za kontakt, a koji od njih obvezan? Također možete promijeniti nazive prikaza ulaza.
+config_titel_contact_mandatory  = obvezno
+config_titel_contact_show       = pokazati
+config_titel_contact_input      = Prikazno ime
+config_titel_contact_help       = Opis
+config_input_contact_name       = Jednoredni unos teksta "Ime"
+config_input_contact_subject    = Jednoredni unos teksta "Predmet"
+config_input_contact_mail       = Jednoredni unos teksta "E-Mail"
+config_input_contact_website    = Jednoredni unos teksta "Web stranica"
+config_input_contact_textarea   = Višeredni unos teksta "Poruka"
+config_input_contact_privacy    = Tekst potvrdnog okvira "zaštita podataka" 
+config_input_contact_mail_send_copy = Pošaljite kopiju
+config_titel_spam_question      = Zadaci neželjene pošte <br /> u svakom retku novo <br /> pitanje = odgovor <br /> npr. 3 + 7 = 10 
+config_category                 = Kategorija u kojoj se nalazi stranica o zaštiti podataka 
+config_data_protection_page     = Naziv stranice za zaštitu podataka 

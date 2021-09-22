@@ -52,33 +52,27 @@ class LASTCHANGE extends Plugin {
     * Gibt die Konfigurationsoptionen als Array zurück.
     * 
     ***************************************************************/
-    function getConfig() {
-        global $ADMIN_CONF;
-        $language = $ADMIN_CONF->get("language");
+        function getConfig() {
+        global $lang_lastchange_admin;
 
-        $config['deDE'] = array();
-        $config['deDE']['messagetext']  = array(
+        $config = array();
+        $config ['messagetext']  = array(
             "type" => "text",
-            "description" => 'Eigener Text für "Letzte Änderung:"',
+            "description" => $lang_lastchange_admin->get("config_lastchange_messagetext"),
             "maxlength" => "100"
             );
-        $config['deDE']['date']  = array(
+        $config ['date']  = array(
             "type" => "text",
-            "description" => "Eigenes Datumsformat",
+            "description" => $lang_lastchange_admin->get("config_lastchange_date"),
             "maxlength" => "100"
             );
-        $config['deDE']['showhiddenpagesinlastchanged'] = array(
+        $config ['showhiddenpagesinlastchanged'] = array(
             "type" => "checkbox",
-            "description" => "Versteckte Inhaltsseiten mit einbeziehen"
+            "description" => $lang_lastchange_admin->get("config_lastchange_showhiddenpagesinlastchanged")
             );
 
         // Nicht vergessen: Das gesamte Array zurückgeben
-        if(isset($config[$language])) {
-            return $config[$language];
-        } else {
-            return $config['deDE'];
-        }
-
+        return $config;
     } // function getConfig
     /***************************************************************
     * 
@@ -87,43 +81,32 @@ class LASTCHANGE extends Plugin {
     ***************************************************************/
     function getInfo() {
         global $ADMIN_CONF;
-        global $ADMIN_CONF;
-        $adminlanguage = $ADMIN_CONF->get("language");
+        global $lang_lastchange_admin;
 
-        $info['deDE'] = array(
+        $dir = PLUGIN_DIR_REL."LASTCHANGE/";
+        $language = $ADMIN_CONF->get("language");
+        $lang_lastchange_admin = new Properties($dir."sprachen/admin_language_".$language.".txt",false);
+
+        $info = array(
             // Plugin-Name
-            "<b>LastChange</b> \$Revision: 138 $",
+            "<b>".$lang_lastchange_admin->get("config_lastchange_plugin_name")."</b> \$Revision: 139 $",
             // CMS-Version
             "2.0",
             // Kurzbeschreibung
-            'Zeigt die letzte Änderung an.<br />
-            <br />
-            <span style="font-weight:bold;">Nutzung:</span><br />
-            {LASTCHANGE} gibt etwas aus wie: "Letzte Änderung: Willkommen (22.02.2010, 09:07:20)"<br />
-            {LASTCHANGE|text} gibt etwas aus wie: "Letzte Änderung"<br />
-            {LASTCHANGE|page} gibt etwas aus wie: "Willkommen"<br />
-            {LASTCHANGE|pagelink} gibt etwas aus wie: "Willkommen" (mit Link auf die Inhaltsseite)<br />
-            {LASTCHANGE|date} gibt etwas aus wie: "(22.02.2010, 09:07:20)"<br />
-            <br />
-            <span style="font-weight:bold;">Konfiguration:</span><br />
-            Das Plugin bezieht den Text "Letzte Änderung" und das Datumsformat aus der CMS-Sprachdatei; man kann beides aber auch selbst angeben. Dabei orientiert sich das Datumsformat an der PHP-Funktion strftime().',
+            $lang_lastchange_admin->get("config_lastchange_plugin_desc"),
             // Name des Autors
             "mozilo",
             // Download-URL
             "",
             array(
-                '{LASTCHANGE}' => 'Letzte Änderung mit Link und Datum',
-                '{LASTCHANGE|text}' => 'Text "Letzte Änderung:"',
-                '{LASTCHANGE|page}' => 'Name der zuletzt geänderten Inhaltsseite',
-                '{LASTCHANGE|pagelink}' => 'Link auf die zuletzt geänderte Inhaltsseite',
-                '{LASTCHANGE|date}' => 'Datum der letzten Änderung')
+                '{LASTCHANGE}' => $lang_lastchange_admin->get("config_lastchange_plugin_lastchange"),
+                '{LASTCHANGE|text}' => $lang_lastchange_admin->get("config_lastchange_plugin_text"),
+                '{LASTCHANGE|page}' => $lang_lastchange_admin->get("config_lastchange_plugin_page"),
+                '{LASTCHANGE|pagelink}' => $lang_lastchange_admin->get("config_lastchange_plugin_pagelink"),
+                '{LASTCHANGE|date}' => $lang_lastchange_admin->get("config_lastchange_plugin_date")
+                )
             );
-
-        if(isset($info[$adminlanguage])) {
-            return $info[$adminlanguage];
-        } else {
-            return $info['deDE'];
-        }
+            return $info;
     } // function getInfo
     // ------------------------------------------------------------------------------
     // Rueckgabe eines Arrays, bestehend aus:
@@ -170,6 +153,6 @@ class LASTCHANGE extends Plugin {
         return $latestchanged;
     }
 
-} // class LASTCHANGE
+ }// class LASTCHANGE
 
 ?>

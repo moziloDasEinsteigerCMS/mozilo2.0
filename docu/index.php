@@ -1,6 +1,6 @@
 <?php
 
-define("CHARSET","UTF-8");
+define("CHARSET","utf-8");
 define("DOCU_DIR_NAME","docu");
 define("DOCU_PHP","index.php");
 $URL_BASE = substr($_SERVER['SCRIPT_NAME'],0,strpos($_SERVER['SCRIPT_NAME'],DOCU_DIR_NAME."/".DOCU_PHP));
@@ -28,12 +28,11 @@ if(is_readable(BASE_DIR.DOCU_DIR_NAME."/docuClass.php")) {
 if(false !== ($html = $DocuClass->makeDocuArtikel()))
     exit($html);
 
-$html = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" '."\n"
-            .'  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">'."\n"
-            .'<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">'."\n";
-$html .= "<head>";
-$html .= '<meta http-equiv="Content-Type" content="text/html; charset='.CHARSET.'" />';
-$html .= '<title>'.$DocuClass->getDocuLanguage('do_title').'</title>';
+$html = '<!DOCTYPE html>'."\n"
+        .'<html lang="de">'."\n";
+$html .= '<head>'."\n";
+$html .= '<meta charset="'.CHARSET.'">'."\n";
+$html .= '<title>'.$DocuClass->getDocuLanguage('do_title').'</title>'."\n";
 
 $html .= $DocuClass->getDocuHead();
 
@@ -41,7 +40,8 @@ $css = ' do-body-nodialog';
 if($DocuClass->dialog)
     $css = ' do-body-dialog';
 
-$html .= '</head><body class="ui-widget'.$css.'" style="font-size:12px;">';
+$html .= '</head>'."\n";
+$html .= '<body class="ui-widget'.$css.'" style="font-size:12px;">'."\n";
 
 $html .= '<div id="do-box">';
 
@@ -82,7 +82,9 @@ if(!$DocuClass->dialog) {
     $html .= '<div id="do-content" class="ui-tabs mo-ui-tabs">'.$DocuClass->makeSubMenu().$DocuClass->docu_artikel.'</div>';
 }
 
-$html .= "</div></body></html>";
+$html .= '</div>'."\n";
+$html .= '</body>'."\n";
+$html .= '</html>';
 
 header('content-type: text/html; charset='.CHARSET.'');
 

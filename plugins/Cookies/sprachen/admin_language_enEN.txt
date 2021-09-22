@@ -1,0 +1,8 @@
+config_cookieTitle      = Customised Heading (Standard: empty)
+config_cookieDesc     = Customised Description
+config_cookieBtn     = Customised text for button
+config_cookiePrivacy    = Text for link to data privacy page
+config_cookieCat        = Category in which the data privacy page is located
+config_cookiePage       = Name of the data privacy page
+description     = Inserts a cookie notice with {Cookies}. Heading, text, button and duration can be customised.
+placeholder     = Inserts a cookie notice.

@@ -1,0 +1,5 @@
+config_breadcrumb_text    = Preceding text (default: blank)
+config_first_entry        = First entry (default: start)
+config_breadcrumb_divider  = Separator (standard »)
+description     = Inserts a breadcrumb anywhere in an article or anywhere in the template.
+placeholder     = Inserts a breadcrumb

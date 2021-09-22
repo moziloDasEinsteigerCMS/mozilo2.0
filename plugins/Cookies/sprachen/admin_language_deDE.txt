@@ -1,0 +1,10 @@
+config_cookieDays       = Anzahl der Tage, für welche die Meldung nach Akzeptieren ausgeblendet werden soll (Standard:30).
+config_cookieDays_error = Anzahl der Tage: Bitte eine Zahl eingeben.
+config_cookieTitle      = Eigene Überschrift (Standard: leer)
+config_cookieDesc     = Eigene Beschreibung
+config_cookieBtn     = Eigene Beschreibung für Button
+config_cookiePrivacy    = Text für Link zur Datenschutzseite
+config_cookieCat        = Kategorie in welcher sich die Datenschutzseite befindet
+config_cookiePage       = Name der Datenschutzseite
+description     = Fügt mit {Cookies} einen Cookie Hinweis ein. Überschrift, Text, Button und Dauer können individuell konfiguriert werden.
+placeholder     = Fügt einen Cookie Hinweis ein.

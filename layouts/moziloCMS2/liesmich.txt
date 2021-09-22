@@ -1,0 +1,17 @@
+HTML 5 und Validatoren
+-------------------------------------------------------
+
+/cms/syntax.php - Zeile 775 
+return '<table class="'.$tabellecss.'" cellspacing="0" border="0" cellpadding="0" summary="">'.$tablecontent.'</table>';
+
+/plugins/Galerie/index.php - Zeile 263
+$thumbs = "<div class=\"gallerytable\" summary=\"gallery table\"><div class=\"row\">";
+
+
+
+Folgendes muss raus:
+- cellspacing
+- cellpadding 
+- border
+- summary
+
