@@ -1,10 +1,10 @@
-﻿# Ne uklanjajte ove redove / Do not remove these lines
+# Ne uklanjajte ove redove / Do not remove these lines
 #
 # $Revision: 829 $
 # $LastChangedDate: 2020-09-22 20:21:05 +0100 (Di, 22. Sep 2020) $
 # $Author: moziloCMS $
 #
-_dateformat_0                                   = %Y-%d-%m, %H:%M:%S
+_dateformat_0                                   = Y-d-m, H:i:s
 _translator_0                                   = Mighty
 # alttext_galleryimage_1                        = Slika u galeriji "{PARAM1}"
 alttext_image_1                                 = Slika "{PARAM1}"

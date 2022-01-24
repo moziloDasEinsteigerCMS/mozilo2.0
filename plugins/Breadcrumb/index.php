@@ -20,54 +20,70 @@ class Breadcrumb extends Plugin {
   function getContent($value) {
  
     global $CMS_CONF;
+    global $language;
 
     # Vorsatz abfragen
     if (!empty($this->settings->get("breadcrumb_text"))) {
      $entry = $this->settings->get("breadcrumb_text");
      $entry .=':';
-     }
-else {
+     } else {
      $entry = '';
     }
 	
     # Start abfragen
     if ($this->settings->get("first_entry") == true) {
      $start = $this->settings->get("first_entry");
-     }else {
+     } else {
      $start = 'Start';
      }
 
     # Trennzeichen abfragen
     if ($this->settings->get("breadcrumb_divider") == true) {
      $separator = $this->settings->get("breadcrumb_divider");
-     }else {
+     } else {
      $separator = '&raquo;';
      }
 
-    $content = '<div class="breadcrumb">' .$entry. '
-<ol itemscope itemtype="http://schema.org/BreadcrumbList">
-  <li itemprop="itemListElement" itemscope
-      itemtype="http://schema.org/ListItem">
-    <a itemprop="item" href="{BASE_URL}">
-    <span itemprop="name">' .$start. '</span></a>
-    <meta itemprop="position" content="1" />
-  </li>
-'.$separator.'
-  <li itemprop="itemListElement" itemscope
-      itemtype="http://schema.org/ListItem">
-    <a itemprop="item" href="{CATEGORY}.html">
-    <span itemprop="name">{CATEGORY_NAME}</span></a>
-    <meta itemprop="position" content="2" />
-  </li>
-'.$separator.'
-  <li itemprop="itemListElement" itemscope
-      itemtype="http://schema.org/ListItem">
-    <a itemprop="item" href="{PAGE}.html">
-    <span itemprop="name">{PAGE_NAME}</span></a>
-    <meta itemprop="position" content="3" />
-  </li>
-</ol>
-</div>';
+     if ((ACTION_REQUEST == "sitemap") or (ACTION_REQUEST == "search")) {
+       $actionname = "";
+       if (ACTION_REQUEST == "sitemap") {
+         $actionname = $language->getLanguageValue("message_sitemap_0");
+       }
+       if (ACTION_REQUEST == "search") {
+         $actionname = $language->getLanguageValue("message_search_0");
+       }
+       $content = '<div class="breadcrumb">' .$entry. '
+                   <ol itemscope itemtype="http://schema.org/BreadcrumbList">
+                     <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                       <a itemprop="item" href="{BASE_URL}"><span itemprop="name">' . $start . '</span></a>
+                       <meta itemprop="position" content="1" />
+                     </li>
+                     <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                       <span itemprop="name">' . $separator . ' ' . $actionname . '</span>
+                       <meta itemprop="position" content="2" />
+                     </li>
+                   </ol>
+                   </div>';
+     
+     } else {
+       $content = '<div class="breadcrumb">' .$entry. '
+                   <ol itemscope itemtype="http://schema.org/BreadcrumbList">
+                     <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                       <a itemprop="item" href="{BASE_URL}"><span itemprop="name">' .$start. '</span></a>
+                       <meta itemprop="position" content="1" />
+                     </li>
+                     <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                       <a itemprop="item" href="{CATEGORY}.html"><span itemprop="name">' . $separator . ' ' . '{CATEGORY_NAME}</span></a>
+                       <meta itemprop="position" content="2" />
+                     </li>
+                     <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                       <a itemprop="item" href="{PAGE}.html"><span itemprop="name">' . $separator . ' ' . '{PAGE_NAME}</span></a>
+                       <meta itemprop="position" content="3" />
+                     </li>
+                   </ol>
+                   </div>';     
+     }
+
     return $content;
 
     } // function getContent
@@ -119,7 +135,7 @@ else {
  
     $info = array(
       // plugin name and version
-      '<b>Breadcrumb</b> Revision: 1',
+      '<b>Breadcrumb</b> Revision: 2',
       // moziloCMS version
       '2.0',
       // short description, only <span> and <br /> are allowed

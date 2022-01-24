@@ -207,6 +207,11 @@ function sort_cat_page($dateien,$dir,$filetype) {
 }
 
 function mo_rawurlencode($string) {
+
+    if (empty($string)) {
+      $string = "";
+    }
+
     $string = rawurlencode($string);
     $string = str_replace("~","%7E",$string);
     return $string;

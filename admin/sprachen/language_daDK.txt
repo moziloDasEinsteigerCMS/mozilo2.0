@@ -1,4 +1,4 @@
-﻿_dateformat                          = %d-%m-%Y, %H:%M:%S
+_dateformat                          = d-m-Y, H:i:s
 _translator                          = Ole Carlsen
 # der Wert ist für date_default_timezone_set()
 _timezone                            =Europe/Copenhagen
@@ -148,8 +148,10 @@ home_cmsupdate_text_noupdate         =
 home_cmsupdate_text_update           = 
 home_cmsupdate_text_download         = Hent
 home_cmsupdate_text_failed           = 
-home_phpversion_text                 =
-home_error_phpversion_text           =
+home_cmsupdate_unknown_version       = Du bruger en ukendt moziloCMS-version!
+home_cmsupdate_stable_version        = Download den aktuelle version af moziloCMS:
+home_phpversion_text                 = Installeret PHP version
+home_error_phpversion_text           = PHP-versionen er for gammel til moziloCMS, mindst 5.5.1 er påkrævet.
 home_installpath_text                =
 home_help                            =
 home_help_text_docu                  =

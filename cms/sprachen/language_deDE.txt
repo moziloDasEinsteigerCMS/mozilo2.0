@@ -4,7 +4,7 @@
 # $LastChangedDate: 2021-06-16 20:21:05 +0100 (Mi, 16. Jun 2021) $
 # $Author: moziloCMS $
 #
-_dateformat_0                                   = %d.%m.%Y, %H:%M:%S
+_dateformat_0                                   = d.m.Y, H:i:s
 _translator_0                                   = moziloCMS
 # der Wert ist für date_default_timezone_set()
 _timezone                                       = Europe/Berlin

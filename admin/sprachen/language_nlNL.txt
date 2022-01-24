@@ -1,7 +1,7 @@
-﻿_dateformat                          = %H:%M:%S %d-%m-%Y
+_dateformat                          = H:i:s d-m-Y
 _translator                          = T. Verhoef
 # der Wert ist für date_default_timezone_set()
-_timezone                            =Europe/Amsterdam
+_timezone                            = Europe/Amsterdam
 language_name                        = Nederlands
 cms_admin_titel                      =
 file                                 = Bestand
@@ -147,9 +147,11 @@ home_cmsupdate_text                  =
 home_cmsupdate_text_noupdate         = 
 home_cmsupdate_text_update           = 
 home_cmsupdate_text_download         = Downloaden
-home_cmsupdate_text_failed           = 
-home_phpversion_text                 =
-home_error_phpversion_text           =
+home_cmsupdate_text_failed           =
+home_cmsupdate_unknown_version       = U gebruikt een onbekende moziloCMS-versie!
+home_cmsupdate_stable_version        = Download de huidige moziloCMS-versie: 
+home_phpversion_text                 = Geïnstalleerde PHP-versie
+home_error_phpversion_text           = De PHP-versie is te oud voor moziloCMS, minimaal 5.5.1 is vereist.
 home_installpath_text                =
 home_help                            =
 home_help_text_docu                  =

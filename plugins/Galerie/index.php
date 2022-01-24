@@ -352,7 +352,14 @@ class Galerie extends Plugin {
            return "&nbsp;";
         // Bildbeschreibung einlesen
         $description = $alldescriptions->get($picname);
-        if(strlen($description) > 0) {
+        //
+        // Debug: 2021-12-17 - PHP 8.1 error
+        //        
+        if (empty($description)) {
+          return "&nbsp;";
+        }
+        
+        if (strlen($description) > 0) {
                 return $specialchars->rebuildSpecialChars($description,false,true);
         } else {
             return "&nbsp;";

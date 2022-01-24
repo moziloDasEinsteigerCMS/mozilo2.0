@@ -4,7 +4,7 @@
 # $LastChangedDate: 2011-01-06 20:21:05 +0100 (Do, 06. Jan 2011) $
 # $Author: hausl78 $
 #
-_dateformat_0                                   = o %d %m %Y, %H:%M:%S
+_dateformat_0                                   = d m Y, H:i:s
 _translator_0                                   = Etienne Ruedin
 # alttext_galleryimage_1                          = Kɔbɛ́ ya bilílí "{PARAM1}"
 alttext_image_1                                 = Elílí "{PARAM1}"

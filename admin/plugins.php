@@ -264,6 +264,12 @@ function save_plugin_settings($conf_plugin,$config,$currentelement) {
             $conf_plugin->set($name,"");
         }
     }
+    
+    // PHP 8.1 Alpha 1 erzeugt Fehler wenn strlen($messages) = null ist!
+    if (empty($messages)) {
+      $messages = "";
+    }
+    
     if(strlen($messages) > 0)
         return $messages;
     return ajax_return("success",false);
@@ -316,7 +322,14 @@ function get_plugin_config($conf_plugin,$config,$currentelement) {
     foreach($config as $name => $inhalt) {
 
         $value = NULL;
-        if(strlen($conf_plugin->get($name)) > 0) {
+        
+        // PHP 8.1 Alpha 1 erzeugt Fehler wenn $conf_plugin->get($name) = null ist!
+        $get_name = $conf_plugin->get($name);
+        if (empty($get_name)) {
+          $get_name = "";
+        }
+        
+        if(strlen($get_name) > 0) {
             # in einem input feld type text darf der inhalt keine " haben
             if($config[$name]['type'] == "text") $value = ' value="'.str_replace('"',"&#34;",$conf_plugin->get($name)).'"';
             if($config[$name]['type'] == "textarea")

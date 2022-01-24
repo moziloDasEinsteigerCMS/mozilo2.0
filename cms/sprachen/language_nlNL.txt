@@ -1,10 +1,10 @@
-﻿# Verwijder deze regels niet / Do not remove these lines
+# Verwijder deze regels niet / Do not remove these lines
 #
 # $Revision: 829 $
 # $LastChangedDate: 2020-09-22 20:21:05 +0100 (Di, 22. Sep 2020) $
 # $Author: moziloCMS $
 #
-_dateformat_0                                   = %H:%M:%S %d-%m-%Y
+_dateformat_0                                   = H:i:s d-m-Y
 _translator_0                                   = T. Verhoef 
 # der Wert ist für date_default_timezone_set()
 _timezone                                       =

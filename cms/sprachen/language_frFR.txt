@@ -1,10 +1,10 @@
-﻿# Ne supprimez pas ces lignes / Do not remove these lines
+# Ne supprimez pas ces lignes / Do not remove these lines
 #
 # $Revision: 829 $
 # $LastChangedDate: 2020-09-22 20:21:05 +0100 (Di, 22. Sep 2020) $
 # $Author: moziloCMS $
 #
-_dateformat_0                                   = %d.%m.%Y, %H:%M:%S
+_dateformat_0                                   = d.m.Y, H:i:s
 _translator_0                                   = Jens Rieger
 # der Wert ist für date_default_timezone_set()
 _timezone                                       =

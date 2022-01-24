@@ -63,21 +63,36 @@ function home() {
     // Zeile "CMS-Update"
     $versionhere = CMSREVISION;
     $version = @file_get_contents('https://www.mozilo.de/update-check/check.txt');
-
+    
     if ($version === false) {
-    // Handle error
-    $error[$titel][] = true;
-    $template[$titel][] = array(getLanguageValue("home_cmsupdate_text"),getLanguageValue("home_cmsupdate_text_failed"));
-        } else {
-            if ($versionhere != trim($version)) {
+      // Handle error
+      $error[$titel][] = true;
+      $template[$titel][] = array(getLanguageValue("home_cmsupdate_text"),getLanguageValue("home_cmsupdate_text_failed"));
+    } else {    
+      if ($versionhere != trim($version)) {
         $error[$titel][] = true;
-        $template[$titel][] = array(getLanguageValue("home_cmsupdate_text"),getLanguageValue("home_cmsupdate_text_update").$version. '<br/> <a href="https://github.com/mozilo/mozilo2.0/archive/master.zip" title="neueste Version von moziloCMS herunter laden" download>
-  <button>'.getLanguageValue("home_cmsupdate_text_download").'</button>
-</a>');
-        } else {
+        
+        if ($versionhere < trim($version)) {
+          $template[$titel][] = array(getLanguageValue("home_cmsupdate_text"),getLanguageValue("home_cmsupdate_text_update").$version.'<br/> <a href="https://github.com/mozilo/mozilo2.0/archive/master.zip" title="neueste Version von moziloCMS herunter laden" download>
+          <button>'.getLanguageValue("home_cmsupdate_text_download").'</button></a>'); 
+        } else {   
+          //
+          // Debug: 2022-01-01
+          //
+          //        Entweder unbekannt oder höhere Versionsnummer 
+          //        in der Datei cms/DefaultConfCMS.php
+          //     
+          $mozilo_unknown = getLanguageValue("home_cmsupdate_unknown_version");
+          $mozilo_download = getLanguageValue("home_cmsupdate_stable_version");
+          $template[$titel][] = array($mozilo_unknown, $mozilo_download
+          .'<br/> <a href="https://github.com/mozilo/mozilo2.0/archive/master.zip" title="' . $mozilo_download . '" download>
+          <button>'.getLanguageValue("home_cmsupdate_text_download").'</button></a>');
+        }
+
+      } else {
         $error[$titel][] = "ok";
         $template[$titel][] = array(getLanguageValue("home_cmsupdate_text"),getLanguageValue("home_cmsupdate_text_noupdate"));
-        }
+      }
     }
 
     // Zeile "Gesamtgröße des CMS"

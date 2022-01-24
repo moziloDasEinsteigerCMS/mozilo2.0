@@ -1,4 +1,4 @@
-﻿_dateformat                          = %d.%m.%Y, %H:%M:%S
+_dateformat                          = d.m.Y, H:i:s
 _translator                          =moziloCMS
 # der Wert ist für date_default_timezone_set()
 _timezone                            =Europe/Warsaw
@@ -149,8 +149,10 @@ home_cmsupdate_text_noupdate         =
 home_cmsupdate_text_update           = 
 home_cmsupdate_text_download         = Pobieranie
 home_cmsupdate_text_failed           = 
-home_phpversion_text                 =
-home_error_phpversion_text           =
+home_cmsupdate_unknown_version       = Używasz nieznanej wersji moziloCMS!
+home_cmsupdate_stable_version        = Pobierz aktualną wersję moziloCMS:
+home_phpversion_text                 = Zainstalowana wersja PHP
+home_error_phpversion_text           = Wersja PHP jest za stara dla moziloCMS, wymagane jest przynajmniej 5.5.1.
 home_installpath_text                =
 home_help                            =
 home_help_text_docu                  =

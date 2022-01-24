@@ -1,8 +1,7 @@
 /*
-Theme Name: Standard moziloCMS 
-Author: sbDESIGN, S. Bechtold
-Description: Tabellenloses Design
-Version: 0.1
+Theme Name:    Standard moziloCMS Layout 
+Author:        moziloCMS
+Version: 0.1   Simone Bechtold, sbDESIGN - Standard Layout bis 09/2021
 Version: 0.2 - moziloCMS Update - Porting to HTML 5 Responsive Webdesign
 */
 
@@ -83,6 +82,50 @@ img {
     font-size : 1.0em;
 }
 
+/* = CSS for skiplinks to content or sidebar ======== */
+
+#skiplinks {
+  margin: 0 0.5em 0 .05em;
+  padding: 0;
+  text-align: right;
+}
+
+#skiplinks ul {
+  float: left;
+  margin: 0;
+  padding: 0;
+  font-size: 0.8em;
+  width: 100%;
+  list-style-type: none;
+}
+
+#skiplinks li {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  color: white;
+}
+
+#skiplinks a {
+  margin: 0;
+  padding-bottom: 0;
+  padding-left: 0.4em;
+  padding-right: 0.4em;
+  color: white;
+  background-color: transparent;
+  text-decoration: none;
+  border-bottom: 0.1em dotted grey;
+}
+
+#skiplinks a:visited {
+	color: white;
+}
+
+#skiplinks a:hover {
+	color: #00a8ff;  
+  border-bottom: 0.1em solid #00a8ff;
+}
+
 /**** Header, beinhaltet Suche und Seitentitel/Logo ****/
 #sb-header {
     background-color : #ffffff;
@@ -113,12 +156,20 @@ img {
     font-weight : bold;
 }
 
+#sb-titel img {
+  padding-left: 1em;
+}
+
 /*** Container fuer Suche ***/
 .sb-search {
-    width    : 220px;
     position : absolute;
     right    : 0;
     top      : 25px;
+    overflow : hidden;
+}
+
+#searchfieldset {
+   border:none;
 }
 
 /**** Container fuer das Menue und den Inhalt ****/
@@ -277,30 +328,25 @@ a.subcat-menusubs-link, a.subcat-menusubs-link.menusubs-linkactive {
 }
 
 /********************************** Suchfeld *********************************/
-/* Suchfeld */
-.searchform {
-    width : 220px;}
 
-fieldset#searchfieldset {
-    border  : none;
-    padding : 10px 0 0 0 ;
+/*** Container fuer Suche ***/
+.sb-search {
+  overflow: hidden;
 }
 
-input.searchtextfield {
-    border                : 1px solid #ffffff;
-    -moz-border-radius    : 5px;
-    -khtml-border-radius  : 5px;
-    -webkit-border-radius : 5px;
-    border-radius         : 5px;
-    width                 : 200px;
-    height                : 24px;
-    background-color      : #ffffff;
-    margin-bottom         : 10px;
-    padding-left          : 5px;
-    color                 : #000000;
-    -moz-box-shadow       : inset 0 0 5px #B0B0B0;
-    -webkit-box-shadow    : inset 0 0 5px #B0B0B0;
-    box-shadow            : inset 0 0 5px #B0B0B0;
+#searchfieldset {
+   border:none;
+}
+
+/* responsive input search box */
+.searchtextfield {
+  width: 75%;
+  border: 2px solid #73a7cf;
+  padding: 5px;
+  height: 20px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #666;
 }
 
 /* Suchbutton */
@@ -523,6 +569,10 @@ pre {
  */
 @media only screen and (max-width: 768px) {
 
+  #sb-titel img {
+    padding-left: 0;
+  }
+
   #sb-main {
     width: 100%;
     margin: 0;
@@ -542,7 +592,8 @@ pre {
   }
 
   #sb-sidebar {
-    margin: 0;    
+    margin: 0;   
+    padding: 0; 
     width: 100%;
   }
 
@@ -594,6 +645,10 @@ pre {
  */
 @media only screen and (max-width: 480px) {
 
+  #sb-titel img {
+    padding-left: 0;
+  }
+
   #sb-page {
     margin: 0;
     padding: 0;
@@ -615,11 +670,4 @@ pre {
   }
   
   
-}
-
-
-fieldset#searchfieldset {
-   border:none;
-   margin:0px;
-   padding:0px;
 }
