@@ -65,6 +65,12 @@ class SpecialChars {
 // Umlaute in Inhaltsseiten/Kategorien für Anzeige 
 // ------------------------------------------------------------------------------
     function rebuildSpecialChars($text, $rebuildnbsp, $html) {
+    
+        // PHP 8.1 Alpha 2 erzeugt Fehler wenn $text = null ist!
+        if (empty($text)) {
+          $text = "";
+        }    
+    
         $text = rawurldecode($text);
         if($html) {
             $test = htmlentities($text,ENT_COMPAT,CHARSET);

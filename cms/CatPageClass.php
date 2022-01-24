@@ -276,6 +276,12 @@ class CatPageClass {
     # $change_chars = true, es werden sonderzeichen und htmltities nach %?? gewandelt
     # Achtung $change_chars nur benutzen wenn nötig wegen geschwindigkeit
     function get_AsKeyName($name, $change_chars = false) {
+    
+        // PHP 8.1 Alpha 1 erzeugt Fehler wenn $name = null ist!
+        if (empty($name)) {
+          $name = "";
+        }
+    
         $ext = array(EXT_PAGE, EXT_HIDDEN, EXT_LINK, EXT_DRAFT);
         if(strpos($name,"-_self-") > 1)
             $name = substr($name,0,strpos($name,"-_self-"));
@@ -379,16 +385,41 @@ class CatPageClass {
     }
 
     function exists_CatPage($cat,$page) {
-        $cat = $this->get_AsKeyName($cat);
-        if($page !== false) {
-            $page = $this->get_AsKeyName($page);
-            if(isset($this->CatPageArray[$cat]['_pages-'][$page]))
-                return true;
-            else
-                return false;
-        }
-        if(isset($this->CatPageArray[$cat]))
+    
+        global $specialchars;
+    
+        $cat = $this->get_AsKeyName($cat);        
+        if ($page !== false) {
+          $page = $this->get_AsKeyName($page);
+            
+          // echo "get_AsKeyName = " . print_r($page) . "</br />";            
+            
+          if (isset($this->CatPageArray[$cat]['_pages-'][$page])) {
+            // echo "Wert = true<br />";
             return true;
+          } else {
+            //
+            // Debug: 2021-12-26 - Datenschutz [ ] Checkbox 
+            //
+            // Sind Sonderzeichen in cat/page enthalten?
+            //
+            // $specialchars->replaceSpecialChars(...,false) muss auf "false" stehen!
+            //
+            $cat = $specialchars->replaceSpecialChars($cat,false);
+            $page = $specialchars->replaceSpecialChars($page,false);
+            // echo "Page = " . $page . "<br />";
+            if (isset($this->CatPageArray[$cat]['_pages-'][$page])) {
+              // echo "Abfrage Wert 2 = true<br />";
+              return true;            
+            }             
+            // echo "Wert = false<br />";
+            return false;
+          }        
+        }
+        
+        if (isset($this->CatPageArray[$cat]))
+          return true;
+
         return false;
     }
 

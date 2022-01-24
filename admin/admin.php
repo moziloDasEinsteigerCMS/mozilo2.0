@@ -263,8 +263,8 @@ function setPassword($name = false,$pw = false,$pwrep = false,$type = false) {
         and strlen($name) >= 5
         // Neues Paßwort zweimal exakt gleich eingegeben?
         and $pw == $pwrep
-        // Neues Paßwort wenigstens sechs Zeichen lang und mindestens aus kleinen und großen Buchstaben sowie Zahlen bestehend?
-        and strlen($pw) >= 6
+        // Neues Paßwort mindestens 8 Zeichen lang und mindestens aus Groß- und Kleinbuchstaben, sowie Zahlen bestehend!
+        and strlen($pw) >= 8
         and preg_match("/[0-9]/", $pw)
         and preg_match("/[a-z]/", $pw)
         and preg_match("/[A-Z]/", $pw)

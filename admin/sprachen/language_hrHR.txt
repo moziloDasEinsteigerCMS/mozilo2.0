@@ -1,4 +1,4 @@
-﻿_dateformat                          =%Y-%d-%m, %H:%M:%S
+_dateformat                          = Y-d-m, H:i:s
 _translator                          = Mighty
 # der Wert ist für date_default_timezone_set()
 _timezone                            = Europe/Zagreb
@@ -143,8 +143,10 @@ home_text                            = Informacije o sustavu
 home_cmssize_text                    = Ukupna veličina CMS-a na poslužitelju
 home_cmsversion_text                 = Instalirana verzija moziloCMS-a
 home_cmsrevision_text                = revizija
+home_cmsupdate_unknown_version       = Koristite nepoznatu verziju moziloCMS-a!
+home_cmsupdate_stable_version        = Preuzmite trenutnu verziju moziloCMS-a:
 home_phpversion_text                 = Instalirana PHP verzija
-home_error_phpversion_text           = Vaša je PHP verzija zastarjela. Da biste koristili moziloCMS, trebat će vam najmanje 5.x
+home_error_phpversion_text           = Vaša je PHP verzija zastarjela. Da biste koristili moziloCMS, trebat će vam najmanje 5.5.1
 home_installpath_text                = Položaj poslužitelja, instaliran je moziloCMS
 home_help                            = Pomoć
 home_help_text_docu                  = Detaljna dokumentacija u novom prozoru

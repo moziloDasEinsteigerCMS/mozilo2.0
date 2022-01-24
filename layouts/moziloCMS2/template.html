@@ -3,9 +3,9 @@
 <html lang="de">
 <!--
 |===============================================================================|
-| Template: Standard moziloCMS                                                  |
-| Author: Simone Bechtold, sbDESIGN                                             |
-| Version: 0.1                                                                  | 
+| Template:    Standard moziloCMS                                               |
+| Author:      moziloCMS                                                        |
+| Version: 0.1 - Simone Bechtold, sbDESIGN - Standard Layout bis 09/2021        |
 | Version: 0.2 - moziloCMS Update - Porting to HTML 5 Responsive Webdesign      |
 |                                                                               | 
 | *********  Dieser Hinweis darf nicht entfernt werden!  *********              |
@@ -15,14 +15,15 @@
     <title>{WEBSITE_TITLE}</title>
     
     <meta charset="UTF-8">
-	<meta name="viewport" content="width = device-width, initial-scale = 1.0">     
+	  <meta name="viewport" content="width = device-width, initial-scale = 1.0">     
 
     <meta name="content-language" content="deutsch,de,at,ch">
     <meta name="author" content="">
     <meta name="date" content="">
     <meta name="keywords" content="{WEBSITE_KEYWORDS}">
     <meta name="description" content="{WEBSITE_DESCRIPTION}">
-    <meta name="robots" content="index,follow">
+    <meta name="robots" content="noindex">
+    
     <link rel="SHORTCUT ICON" href="{LAYOUT_DIR}/favicon.ico">
     <style>
         @import "{LAYOUT_DIR}/css/style.css";
@@ -45,12 +46,20 @@
 <body id="a0">
     <!-- hier kann ein zusaetzliches Hintergrundbild ueber dem body eingefuegt und positioniert werden -->
     <div id="sb-main">
+    
+       <nav aria-label="Sprunglink" id="skiplinks">
+          <ul>
+            <li><a href="#sb-nav"> Direkt zur Navigation </a></li>
+            <li><a href="#sb-page">| Direkt zum Inhalt </a> </li>
+          </ul>
+        </nav>
+    
         <!-- Logo, Slogan, Suche -->
         <header id="sb-header">
             <div class="sb-header_inner">
                 <!-- Logo, Seitentitel -->
                 <div id="sb-titel">
-                    <img src="{LAYOUT_DIR}/grafiken/logo.png" alt="Logo" />
+                  <a href="{BASE_URL}index.php"><img src="{LAYOUT_DIR}/grafiken/logo.png" alt="Logo" /></a>
                 </div>
                 <!-- Suche -->
                 <div class="sb-search">{SEARCH}</div>
@@ -73,6 +82,7 @@
             <!--beginn Inhalt -->
             <article id="sb-page">
               <div id="mobile">
+                {Breadcrumb}
                 {CONTENT}
               </div>
             </article>
@@ -85,10 +95,9 @@
     <!-- beginn Footer -->
     <footer id="footer">
         <p class="sb-copy">
-            &copy;&nbsp;<script> document.write(new Date().getFullYear()); </script>&nbsp;by&nbsp;{WEBSITE_TITLE}  
-        </p>
-        <p class="sb-credit" >
-            {SITEMAPLINK} | Powered by {CMSINFO} | {MEMORYUSAGE} | {EXECUTETIME} <a href="#sb-header">Top</a>
+          Angetrieben durch &copy;&nbsp;{CMSINFO} | {SITEMAPLINK} | <a href="#sb-header">Nach oben &uarr;</a>
+          <br />  
+          {MEMORYUSAGE} | {EXECUTETIME}
         </p>
     </footer>
     

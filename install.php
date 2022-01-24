@@ -513,7 +513,7 @@ function password() {
         }
 
         // pw-komplexität check
-        if(strlen($_POST['password1']) < 6
+        if(strlen($_POST['password1']) < 8
              or !preg_match("/[0-9]/", $_POST['password1']) 
              or !preg_match("/[a-z]/", $_POST['password1'])
              or !preg_match("/[A-Z]/", $_POST['password1'])

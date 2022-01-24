@@ -54,7 +54,7 @@ if(isset($_SESSION['login_okay']) and $_SESSION['login_okay'] === true
         if(strlen($ADMIN_CONF->get("adminmail")) > 5
                 and ($falselogincounttemp == $FALSELOGINLIMIT or $falselogincounttemp % 100 == 0)) {
             $mailcontent = getLanguageValue("loginlocked_mailcontent")."\r\n\r\n"
-                .strftime(getLanguageValue("_dateformat"), time())."\r\n"
+                .date(getLanguageValue("_dateformat"), time())."\r\n"
                 .$_SERVER['REMOTE_ADDR']." / ".gethostbyaddr($_SERVER['REMOTE_ADDR'])."\r\n"
                 .getLanguageValue("username").": ".getRequestValue('username','post',false);
             require_once(BASE_DIR_CMS."Mail.php");
@@ -137,7 +137,7 @@ function login_formular($enabled,$error_lang = false) {
         ."</tr>"
         ."<tr>"
         .'<td colspan="3" class="mo-align-center">'
-        .'<input name="login" value="Login" class="mo-login_submit" type="submit"'.$enabled_input.' />'
+        .'<input name="login" value="'.getLanguageValue("login_button").'" class="mo-login_submit" type="submit"'.$enabled_input.' />'
         ."</td>"
         ."</tr>"
         ."</table>";

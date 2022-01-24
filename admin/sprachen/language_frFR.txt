@@ -1,4 +1,4 @@
-﻿_dateformat                          = %d.%m.%Y, %H:%M:%S
+_dateformat                          = d.m.Y, H:i:s
 _translator                          =termoyer
 # der Wert ist für date_default_timezone_set()
 _timezone                            = Europe/Paris
@@ -148,8 +148,10 @@ home_cmsupdate_text_noupdate         =
 home_cmsupdate_text_update           = 
 home_cmsupdate_text_download         = Télécharger
 home_cmsupdate_text_failed           = 
+home_cmsupdate_unknown_version       = Vous utilisez une version inconnue de moziloCMS !
+home_cmsupdate_stable_version        = Téléchargez la version actuelle de moziloCMS :
 home_phpversion_text                 = Version de PHP installÃ©e:
-home_error_phpversion_text           = Votre version de PHP est obsolÃ¨te. Pour utiliser moziloCMS, vous avez besoin au minimum de la version 5.???
+home_error_phpversion_text           = Votre version de PHP est obsolÃ¨te. Pour utiliser moziloCMS, vous avez besoin au minimum de la version 5.5.1
 home_installpath_text                = Chemin d'installation de mozilo:
 home_help                            = Aide
 home_help_text_docu                  = Documentation

@@ -27,7 +27,14 @@ class Language {
     // Sprachelement mit keinem, einem oder zwei Parametern aus Sprachdatei holen
     // ------------------------------------------------------------------------------
     function getLanguageValue($phrase, $param1 = "", $param2 = "") {
+    
         $text = $this->LANG_CONF->get($phrase);
+        
+        // PHP 8.1 Alpha 1 erzeugt Fehler wenn $text = null ist!
+        if (empty($text)) {
+          $text = "";
+        }        
+        
         $text = str_replace(array("{PARAM1}","{PARAM2}"), array($param1, $param2), $text);
 ##
 if ($text === "") $text = "Textvar: ". $phrase." gibts nicht!";
@@ -40,6 +47,12 @@ if ($text === "") $text = "Textvar: ". $phrase." gibts nicht!";
     // ------------------------------------------------------------------------------
     function getLanguageHtml($phrase, $param1 = "", $param2 = "") {
         $text = $this->LANG_CONF->get($phrase);
+        
+        // PHP 8.1 Alpha 1 erzeugt Fehler wenn $text = null ist!
+        if (empty($text)) {
+          $text = "";
+        }         
+        
         $text = str_replace(array("{PARAM1}","{PARAM2}"), array($param1, $param2), $text);
         $text = html_entity_decode($text,ENT_QUOTES,CHARSET);
         $text = htmlentities($text, ENT_COMPAT, CHARSET);

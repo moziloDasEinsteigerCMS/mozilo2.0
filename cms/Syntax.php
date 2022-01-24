@@ -266,6 +266,9 @@ class Syntax {
                     $match = str_replace($special_search,$special_replace,$matches[0][$pos]);
                     $replace = '<span style="color:red;font-weight:bold;text-decoration:line-through;">'.$match.'</span>';
                 }
+                if (empty($replace)) {
+                  $replace = "";
+                }
                 $this->content = str_replace($matches[0][$pos],$replace,$this->content);
                 # wenn ein Plugin an sich was übergeben hat
                 $this->replacePluginSelfPlaceholderData();

@@ -234,7 +234,14 @@ if(LOGIN) { #-------------------------------
             exit($hidden_action);
         }*/
         # es gab ein redirect
-        if(false !== ($tmp = strstr($USERS->get($id),"#"))) {
+        
+        // PHP 8.1 Alpha 1 erzeugt Fehler wenn $USERS->get($id) = null ist!
+        $get_user_id = $USERS->get($id);
+        if (empty($get_user_id)) {
+          $get_user_id = ""; 
+        }
+        
+        if(false !== ($tmp = strstr($get_user_id,"#"))) {
             $tmp = substr($tmp,1);
             $message .= returnMessage(false,getLanguageValue("error_multi_user_tab",false,getLanguageValue($tmp."_button"),MULTI_USER_TIME));
             $USERS->set($id,$tmp);

@@ -1,4 +1,4 @@
-﻿<?php if(!defined('IS_CMS')) die();
+<?php if(!defined('IS_CMS')) die();
 // ------------------------------------------------------------------------------
 // Gibt das Kontaktformular zurueck
 // ------------------------------------------------------------------------------
@@ -45,7 +45,7 @@
         }
         else {
             $name       = "";
-            $subject       = "";
+            $subject    = "";
             $mail       = "";
             $website    = "";
             $message    = "";
@@ -55,13 +55,18 @@
         // Das Formular wurde abgesendet
         if (getRequestValue('submit','post', false) <> "") { 
         
-        $hp = $_POST['url'];
-        $hpmessage = "Nice try but we don't like Spam!";
+            if (empty($_POST['url'])) {
+              $hp = "";
+            } else {
+              $hp = $_POST['url'];
+            }
+
+            $hpmessage = "Nice try but we don't like Spam!";
         
-        //hp prüfen
-	if( ! empty( $hp ) ){
-		return $hpmessage;
-	}
+            //hp prüfen
+	          if ( ! empty( $hp ) ){
+		          return $hpmessage;
+	          }
 
             // Bot-Schutz: Wurde das Formular innerhalb von x Sekunden abgeschickt?
             $sendtime = $settings->get("contactformwaittime");
@@ -235,34 +240,56 @@
             // Spamschutz-Aufgabe
             $calculation_data = getRandomCalculationData($settings);
             $_SESSION['calculation_result'] = $calculation_data[1];
-            $form .= "<label for=\"spamprotection\"><span>* ".$lang_contact->getLanguageValue("contactform_spamprotection_text")."</span>"
+            $form .= "<label><span>* ".$lang_contact->getLanguageValue("contactform_spamprotection_text")."</span>"
                 ."<span>&nbsp;".$calculation_data[0]."</span></label>"
                 ."<input type=\"text\" id=\"contact_calculation\" name=\"".$_SESSION['contactform_calculation']."\">";            
         }
         if ($config_privacy[1] == "true") {
+        
         	$cat = $settings->get("category");
-        	$page = $settings->get("data_protection_page");
-			$linkprivacy = "index.php?cat=".$cat."&amp;page=".$page."";		
-			if($CMS_CONF->get("modrewrite") == "true") {
-				$linkprivacy = URL_BASE. $cat."/".$page.".html";          
-			}
-			if(!$CatPage->exists_CatPage($cat,$page)) {
+        	$page = $settings->get("data_protection_page");        
+          
+			    $linkprivacy = "index.php?cat=".$cat."&amp;page=".$page."";		
+			    if ($CMS_CONF->get("modrewrite") == "true") {
+				    $linkprivacy = URL_BASE. $cat."/".$page.".html";          
+			    }
+			    if (!$CatPage->exists_CatPage($cat,$page)) {
             $category_text = $specialchars->rebuildSpecialChars($cat,true,true);
             $page_text = $specialchars->rebuildSpecialChars($page,true,true);
             $deadlink = $language->getLanguageValue("tooltip_link_page_error_2", $page_text, $category_text);
-           $form .= "<label><input type=\"checkbox\" id=\"contact_privacy\" name=\"".$_SESSION['contactform_privacy']."\" value=\"".$_SESSION['contactform_privacy']."\" /><span>".$lang_contact->getLanguageValue("contactform_privacy")." <span class=\"deadlink\">".$deadlink."</span> ".$lang_contact->getLanguageValue("contactform_privacy2")."</span>";       
-        }
-		else {
-			$form .= "<label><input type=\"checkbox\" id=\"contact_privacy\" name=\"".$_SESSION['contactform_privacy']."\" value=\"".$_SESSION['contactform_privacy']."\" />";
-					if ($config_privacy[2] == "true") {
-                $form .= "*&nbsp;";
+            
+            //
+            // Debug: 2021-12-26
+            //
+            // Sind Textinhalte im Plugin CONTACT für die Datenschutz Seite vorhanden?
+            // Wenn nein, 
+            // dann nicht anzeigen, auch keine Fehlertexte, einfach weg lassen.
+            //
+            $test_empty_strings_contact_privacy = false;         
+            if (empty($cat)) {
+              $test_empty_strings_contact_privacy = true;
             }
-			$form .= "<span>".$lang_contact->getLanguageValue("contactform_privacy")." <a href=\"". $linkprivacy . "\">".$lang_contact->getLanguageValue("contactform_privacy1")."</a> ".$lang_contact->getLanguageValue("contactform_privacy2")."</span>";
-			}
-            $form .= "</label>";
+            if (empty($page)) {
+              $test_empty_strings_contact_privacy = true;
+            }            
+            
+            if ($test_empty_strings_contact_privacy == false) {
+              $form .= "<label><input type=\"checkbox\" id=\"contact_privacy\" name=\"".$_SESSION['contactform_privacy']."\" value=\"".$_SESSION['contactform_privacy']."\" /><span>".$lang_contact->getLanguageValue("contactform_privacy")." <span class=\"deadlink\">".$deadlink."</span> ".$lang_contact->getLanguageValue("contactform_privacy2")."</span>";            
+            }
+       
+          }	else {
+			      $form .= "<label><input type=\"checkbox\" id=\"contact_privacy\" name=\"".$_SESSION['contactform_privacy']."\" value=\"".$_SESSION['contactform_privacy']."\" />";
+					  if ($config_privacy[2] == "true") {
+              $form .= "*&nbsp;";
+            }
+			      $form .= "<span>".$lang_contact->getLanguageValue("contactform_privacy")." <a href=\"". $linkprivacy . "\">".$lang_contact->getLanguageValue("contactform_privacy1")."</a> ".$lang_contact->getLanguageValue("contactform_privacy2")."</span>";
+			    }
+          $form .= "</label>";
         }
-        if($mandatory)
-            $form .= "<span>".$lang_contact->getLanguageValue("contactform_mandatory_fields")."</span>";
+        
+        if ($mandatory)
+          $form .= "<span>".$lang_contact->getLanguageValue("contactform_mandatory_fields")."</span>";
+            
         $form .= "<input type=\"submit\" class=\"submit\" id=\"contact_submit\" name=\"submit\" value=\"".$lang_contact->getLanguageValue("contactform_submit")."\" />";
         $form .= "</form>";
         
