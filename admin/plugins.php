@@ -101,6 +101,7 @@ if($showdebug and !empty($debug))
     $pagecontent = '';
 
     $show = $ADMIN_CONF->get("plugins");
+    
     if(!is_array($show))
         $show = array();
 
@@ -174,6 +175,7 @@ if($showdebug and !empty($debug))
             $plugin_css_li_error = NULL;
             $plugin_error = false;
             $plugin_info = $plugin->getInfo();
+           
             # Plugin Info Prüfen
             if(isset($plugin_info) and count($plugin_info) > 0) {
                 $plugin_name = strip_tags($plugin_info[0],'<b>');
@@ -191,22 +193,87 @@ if($showdebug and !empty($debug))
             if($plugin_manage_open)
                 $check_show = '';
             if($plugin_error === false) {
-                $pagecontent .= '<span class="js-plugin-name mo-padding-left mo-middle">'.$plugin_name.'</span>'
+                 
+                $test_plugin_config = "ok";
+                $plugin_setting_active = "";
+                $plugin_config_edit = "";
+                $plugin_active = "";
+                $config = $plugin->getConfig();
+                
+                if (is_null($config)) {
+                
+                  // echo "BUMM..." . $plugin_name . " -> config() array ist NULL !<br />" ;
+ 
+                  $config = array();
+                  $test_plugin_config = "notok";
+                  $plugin_error = '<img class="mo-tool-icon mo-icons-icon mo-icons-error" src="'.ICON_URL_SLICE.'" alt="error" />' . ' <b>' . $plugin_name . '&nbsp;</b>' . getLanguageValue('plugins_error_getconfig');
+                  $pluginwarning = '<span class="js-plugin-name mo-padding-left mo-middle" style="color:red">'.$plugin_error.'</span>';
+                  $plugin_config_edit = "";
+                  $plugin_active = "";
+                  
+                  $conf_plugin = new Properties(PLUGIN_DIR_REL.$currentelement."/plugin.conf.php");
+                  $conf_plugin->set("active","false");
+                  $plugin_setting_active = "";
+                  // print_r($conf_plugin);
+                  $writeplugin = save_plugin_settings($conf_plugin,$config,$currentelement);
+                  
+                } else {
+                  $pluginwarning = '<span class="js-plugin-name mo-padding-left mo-middle">'.$plugin_name.'</span>';
+                  $plugin_setting_active = '<span class="js-plugin-active mo-staus">'.buildCheckBox($currentelement.'[active]', ($plugin->settings->get("active") == $plugin_setting_active),getLanguageValue("plugins_input_active")).'</span>';
+                  $plugin_config_edit = '<img class="js-tools-icon-show-hide js-toggle mo-tool-icon mo-icons-icon mo-icons-edit" src="'.ICON_URL_SLICE.'" alt="edit" />';
+                  $plugin_active = '<input type="checkbox" value="'.$currentelement.'" class="mo-checkbox mo-checkbox-del js-plugin-del"'.$check_show.' />';
+                }
+                
+                // 
+                // Debug: Plugin Version abfragen, 
+                //
+                //        1.1  - altes moziloCMS 1.10/1.11/1.12 
+                //        2.0  - aktuelles moziloCMS 
+                //
+                // print_r($plugin_info);
+                $pl_ver = 0;
+                $needed_mozilo_version = $plugin_info[1];
+                if (str_contains($needed_mozilo_version, '1.1')) {
+                  $pl_ver = 1;
+                } 
+                if (str_contains($needed_mozilo_version, '2.0')) {
+                  $pl_ver = 2;
+                } 
+                               
+                if ($pl_ver < 2) {
+                  // echo "Version: " . $needed_mozilo_version . " <br />";               
+                  $plugin_error = '<img class="mo-tool-icon mo-icons-icon mo-icons-error" src="'.ICON_URL_SLICE.'" alt="error" />' . ' <b>' . $plugin_name . '&nbsp;</b>' . getLanguageValue('plugins_error_version');
+                  $pluginwarning = '<span class="js-plugin-name mo-padding-left mo-middle" style="color:red">'.$plugin_error.'</span>';
+                  $conf_plugin = new Properties(PLUGIN_DIR_REL.$currentelement."/plugin.conf.php");
+                  $conf_plugin->set("active","false");
+                  $plugin_setting_active = "";
+                  // print_r($conf_plugin);
+                  $writeplugin = save_plugin_settings($conf_plugin,$config,$currentelement);
+                  $plugin_active = "";
+                  $plugin_config_edit = "";
+                }
+            
+                $pagecontent .= $pluginwarning
                     .'<div style="float:right;" class="mo-tag-height-from-icon mo-middle mo-nowrap">'
-                    .'<span class="js-plugin-active mo-staus">'.buildCheckBox($currentelement.'[active]', ($plugin->settings->get("active") == "true"),getLanguageValue("plugins_input_active")).'</span>'
-                    .'<img class="js-tools-icon-show-hide js-toggle mo-tool-icon mo-icons-icon mo-icons-edit" src="'.ICON_URL_SLICE.'" alt="edit" />'
-                    .'<input type="checkbox" value="'.$currentelement.'" class="mo-checkbox mo-checkbox-del js-plugin-del"'.$check_show.' />'
+                    .$plugin_setting_active
+                    .$plugin_config_edit
+                    .$plugin_active
                     .'</div>'
                     .'</div>'
                     .'<div class="js-toggle-content mo-in-ul-ul ui-helper-clearfix" style="display:none;">'
                     .get_plugin_info($plugin_info);
-                # geändert damit getConfig() nicht 2mal ausgeführt wird
-                $config = $plugin->getConfig();
+
+                if ($test_plugin_config == "ok") {
+                  # geändert damit getConfig() nicht 2mal ausgeführt wird
+                  $config = $plugin->getConfig();                
+                }
+                
                 # Beschreibung und inputs der Konfiguration Bauen und ausgeben
-                $pagecontent .= get_plugin_config($plugin->settings,$config,$currentelement);
+                $pagecontent .= get_plugin_config($plugin->settings,$config,$currentelement);               
 
             } else
                 $pagecontent .= $plugin_error;
+                
             $pagecontent .= '</div></li>';
             unset($plugin);
         }
@@ -286,11 +353,14 @@ function get_plugin_info($plugin_info) {
         $link = '';
         $link_text = '';
         if(is_array($plugin_info[4]) and count($plugin_info[4]) == 2) {
-            $link = strip_tags($plugin_info[4][0]);
-            $link_text = strip_tags($plugin_info[4][1]);
+            $pli4_0 = $plugin_info[4][0];
+            $pli4_1 = $plugin_info[4][1];
+            $link = strip_tags($pli4_0);
+            $link_text = strip_tags($pli4_1);
         } else {
-            $link = strip_tags($plugin_info[4]);
-            $link_text = strip_tags($plugin_info[4]);
+            $pli4 = $plugin_info[4][0];
+            $link = strip_tags($pli4);
+            $link_text = strip_tags($pli4);
         }
         if(strlen($link_text) > 1 and (stristr($link,"http://") or stristr($link,"https://")))
             $template["plugins_info"][] = array(getLanguageValue("plugins_titel_web"),'<a href="'.$link.'" target="_blank">'.$link_text.'</a>');
@@ -303,7 +373,8 @@ function get_plugin_info($plugin_info) {
     return contend_template($template);
 }
 
-function get_plugin_config($conf_plugin,$config,$currentelement) {
+function get_plugin_config($conf_plugin,$config,$currentelement) {    
+
     if(count($config) < 1)
         return NULL;
     $search = array();
