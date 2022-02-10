@@ -218,8 +218,16 @@ if($showdebug and !empty($debug))
                   $writeplugin = save_plugin_settings($conf_plugin,$config,$currentelement);
                   
                 } else {
+
+                  //
+                  // Plugin Setting active (true/false) Parameter auslesen
+                  //
+                  $plugin_setting_get_active = "";
+                  $plugin_setting_get_active = $plugin->settings->get("active");
+                  // echo "Plugin " . $currentelement . " Setting = " . $plugin_setting_active . "<br />";
+                
                   $pluginwarning = '<span class="js-plugin-name mo-padding-left mo-middle">'.$plugin_name.'</span>';
-                  $plugin_setting_active = '<span class="js-plugin-active mo-staus">'.buildCheckBox($currentelement.'[active]', ($plugin->settings->get("active") == $plugin_setting_active),getLanguageValue("plugins_input_active")).'</span>';
+                  $plugin_setting_active = '<span class="js-plugin-active mo-staus">'.buildCheckBox($currentelement.'[active]',$plugin_setting_get_active,getLanguageValue("plugins_input_active")).'</span>';
                   $plugin_config_edit = '<img class="js-tools-icon-show-hide js-toggle mo-tool-icon mo-icons-icon mo-icons-edit" src="'.ICON_URL_SLICE.'" alt="edit" />';
                   $plugin_active = '<input type="checkbox" value="'.$currentelement.'" class="mo-checkbox mo-checkbox-del js-plugin-del"'.$check_show.' />';
                 }
