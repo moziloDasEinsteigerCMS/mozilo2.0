@@ -1,15 +1,17 @@
 <?php if(!defined('IS_CMS')) die();
 
 /*
-*
-* $Revision: 923 $
-* $LastChangedDate: 2021-05-08 10:00:00 +0200 (So, 8. Mai 2021) $
-* $Author: stefanbe $
-*
-* Korrektur  2021-05-08:
-* Entfernen der Table Cellpadding, cellspacing, border und summary
-*/
-
+ *
+ * $Revision: 923 $
+ * $LastChangedDate: 2021-05-08 10:00:00 +0200 (So, 8. Mai 2021) $
+ * $Author: stefanbe $
+ *
+ * Korrektur  2021-05-08:
+ * Entfernen der Table Cellpadding, cellspacing, border und summary
+ * 
+ * Korrektur  2022-03-27:
+ * function syntax_user(...), Abfangen leere/nicht gesetzte Übergabewerte
+ */
 
 class Syntax {
     
@@ -845,6 +847,19 @@ class Syntax {
         # das war mal in der Properties
         $syntax = $specialchars->encodeProtectedChr($USER_SYNTAX->get($syntax));
 
+        /*
+         * Debug: 2022-03-27
+         *
+         * Prüfung auf leere/nicht vorhandene {DESCRIPTION} und {VALUE}
+         * bei den benutzerdefinierten Syntax Elementen im moziloCMS
+         */
+        if (empty($desciption)) {
+          $desciption = "";
+        }
+        if (empty($value)) {
+          $value = "";
+        }        
+        
         if(strpos($value,FILE_START) !== false and strpos($value,FILE_END) !== false
                 and preg_match('#<(frame|iframe|img|input|a|area|audio|base|link|source|video){1,1}[^>]*?(src|href){1,1}=["\']{VALUE}["\'][^>]*?>#is', $syntax)) {
             global $CatPage;
