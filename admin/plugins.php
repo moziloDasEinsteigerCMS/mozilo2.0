@@ -240,11 +240,18 @@ if($showdebug and !empty($debug))
                 //
                 // print_r($plugin_info);
                 $pl_ver = 0;
-                $needed_mozilo_version = $plugin_info[1];
-                if (str_contains($needed_mozilo_version, '1.1')) {
+                if (!empty($plugin_info[1])) {
+                  $needed_mozilo_version = $plugin_info[1];
+                } else {
                   $pl_ver = 1;
-                } 
-                if (str_contains($needed_mozilo_version, '2.0')) {
+                }
+                
+                $pos = strpos($needed_mozilo_version, '1.1');
+                if ($pos!==false) {
+                  $pl_ver = 1;
+                }                   
+                $pos = strpos($needed_mozilo_version, '2.0');
+                if ($pos!==false) {
                   $pl_ver = 2;
                 } 
                                
