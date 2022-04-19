@@ -81,6 +81,15 @@ padding: .5rem
 #contact_form .hp {
 	display: none!important
 	}
+	
+	@media only screen and (min-width: 36rem) {
+  #contact_form, #contact_errormessage, #contact_successmessage {
+    width: 80%;
+   margin: 0 auto
+  }
+  #contact_form input[type=submit] {
+  width: 10rem
+  }
 
 #contact_form .form-group {
 display: flex;
@@ -108,18 +117,10 @@ display: flex!important
   color: transparent
 }
 
+}
+
 @media only screen and (min-width: 75rem) {
   #contact_form, #contact_errormessage, #contact_successmessage {
     width: 70%
-  }
-}
-
-@media only screen and (min-width: 36rem) {
-  #contact_form, #contact_errormessage, #contact_successmessage {
-    width: 80%;
-   margin: 0 auto
-  }
-  #contact_form input[type=submit] {
-  width: 10rem
   }
 }
