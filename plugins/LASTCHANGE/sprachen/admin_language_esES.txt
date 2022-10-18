@@ -1,11 +1,10 @@
-
 config_lastchange_plugin_name              = LastChange
-config_lastchange_plugin_desc              = 
-config_lastchange_plugin_lastchange         = 
-config_lastchange_plugin_text               = 
-config_lastchange_plugin_page               = 
-config_lastchange_plugin_pagelink           = 
-config_lastchange_plugin_date               = 
-config_lastchange_messagetext               = 
-config_lastchange_date                      = 
-config_lastchange_showhiddenpagesinlastchanged = 
+config_lastchange_plugin_desc              = Muestra el último cambio realizado en el CMS. <br /> <br /> <span style = "font-weight: bold;"> Uso: </span> <br /> {LASTCHANGE} Muestra la cadena compuesta por 'texto'+'página'+'fecha': "Último cambio: Bienvenido (26/08/2022) "<br /> {LASTCHANGE | text} Muestra sólo el texto equivalente -o sobreescrito-: "Último cambio"<br /> {LASTCHANGE | page} Muestra sólo el nombre de la página modificada: "Bienvenido"<br / > {LASTCHANGE | pagelink} Muestra el nombre la página modificada (en formato enlace): <a href="" target="_self">"Bienvenido"</a> <br /> {LASTCHANGE | date} Muestra la fecha/hora del último cambio realizado: "(26/08/2022, 09:07:20)" <br /> <br /> <span style = "font-weight: bold;"> Configuración: </span> <br /> El complemento coge el texto traducido equivalente a "Last change" y el formato de fecha del archivo de idioma del CMS; aunque puedes sobreescribir ambos si lo deseas. <br /><i>El formato de fecha se basa en el definido por la función de PHP <a class="GeneratedLink" href="https://www.php.net/manual/es/function.date.php" target="_blank">date()</a></i>
+config_lastchange_plugin_lastchange         = Último cambio con enlace y fecha
+config_lastchange_plugin_text               = Texto del último cambio:
+config_lastchange_plugin_page               = Nombre de la última página de contenido modificada
+config_lastchange_plugin_pagelink           = Enlace a la última página de contenido modificada
+config_lastchange_plugin_date               = Fecha del último cambio
+config_lastchange_messagetext               = Texto específico a mostrar en lugar de  "Último cambio":
+config_lastchange_date                      = Formato de fecha a mostrar, por defecto: (26-08-2022, 11:57:07):<br /><i>El formato de fecha se basa en el definido por la función de PHP <a class="GeneratedLink" href="https://www.php.net/manual/es/function.date.php" target="_blank">date()</a>.<br />P. ej. 'j/m/Y' mostraría la fecha tal que: (26/08/2022)</i>
+config_lastchange_showhiddenpagesinlastchanged = Incluir páginas de contenido oculto

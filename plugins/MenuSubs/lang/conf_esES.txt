@@ -1,0 +1,4 @@
+no_menusubs_2 = No MenuSubs_2
+menusubs_2 = Selecciona una categoría para MenuSubs_2
+sitemap_show_menu2 = Mostrar MenuSubs_2 en el mapa del sitio web
+breadcrumb_delimiter = Separador en las migas de pan (por defecto: '»')
