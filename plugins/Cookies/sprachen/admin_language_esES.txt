@@ -1,0 +1,10 @@
+config_cookieDays       = Número de días durante los cuales se debe ocultar el mensaje tras su aceptación<br/> Por defecto: 30 <i>(desde 01 a 999)</i>
+config_cookieDays_error = Número de días: Introduzca una cifra.
+config_cookieTitle      = Encabezamiento personalizado (por defecto: vacio)
+config_cookieDesc     = Descripción personalizada
+config_cookieBtn     = Texto del botón personalizado
+config_cookiePrivacy    = Texto del enlace a la página de política de cookies
+config_cookieCat        = Categoría a la que corresponde la página de política de cookies
+config_cookiePage       = Nombre de la página de política de cookies
+description     = Insertar un aviso de cookies {Cookies}. La cabecera, texto, botón y duración pueden personalizarse.
+placeholder     = Insertar un aviso de cookies.

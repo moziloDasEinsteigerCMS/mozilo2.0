@@ -1,0 +1,72 @@
+Crea un menú con un anidamiento casi ilimitado de submenús.<br />
+Este plugin es una extensión del plugin MenuSubs<br />
+No requiere Javascript<br />
+En <a href="https://www.opera.com/es/browsers/opera-mini" target="_blank">Opera mini</a>, los checks de las casillas no son transparentes, por lo que se utiliza un poco de javascript.<br />
+<br />
+<b>Las modificaciones son:</b>
+<ul>
+<li>En la lista están siempre todas las categorías y páginas de contenido. Ahora se manejan a través de las clases menusubs-hidden y menusubs-show.</li>
+<li>Cada categoría también cuenta con un etiqueta HTML y un campo tipo input, excepto en el caso del parámetro useubmenu = 2.</li>
+<li>También hay un etiqueta y un check de verificación en frente de la lista para expandir o colapsar el menú..</li>
+<li>En la vista normal, todos los elementos HTML  y campos de entrada son invisibles, por lo que es un menú normal.</li>
+</ul>
+<br />
+<b>Atención:</b> en el plugin.css se encuentran documentadas algunas características especiales!<br />
+<br />
+<b>Atención:</b> las categoría que contengan  "/" (barra) , no se mostraran debido a que usamos la "/" (barra) para separar los submenus.<br /><br />
+Para utilizar el menú detallado hay que utilizar {MenuSubsMobile|main} y {MenuSubsMobile|detail}, en caso contrario {MenuSubsMobile}<br />
+
+<b>Atención:</b> ¡el parámetro "usesubmenu = 0" (definida al inicio de las plantillas) no se tendrá en cuenta!<br />
+<br />
+<b>Descripción:</b>
+<ul>
+<li>Tan pronto como se encuentra una página de contenido oculto con un "/" en su nombre, se sustituye por la categoría con el mismo nombre como un submenú.</li>
+<li><b>Importante:</b> El nombre se basa en la ruta.</li>
+<li>Para utilizar una página de contenido para las subcategorías que se ocultan a través del ajuste "Especificar si las páginas de contenido con el mismo nombre exacto que la categoría deben ocultarse en el menú detallado:", el nombre debe coincidir con la última parte de las subcategorías, por ejemplo, Subcategorías = Categoría / Página de contenido Submenu_1 = Submenu_1 y debe ser la primera página de contenido.</li>
+</ul>
+<br />
+<b>Ejemplo:</b><br />
+<ul><li style="list-style-type:none;"><b>Categoría</b>
+<ul>
+    <li>Página_de_contenido_1</li>
+    <li>Categoría / Submenu_1 <b>oculto</b></li>
+    <li>Página_de_contenido_2</li>
+</ul>
+<b>Categoría / Submenu_1</b>
+<ul>
+    <li>Página_de_contenido_3</li>
+    <li>Categoría / Submenu_1 / Submenu_2 <b>oculto</b></li>
+</ul>
+<b>Categoría / Submenu_1 / Submenu_2</b>
+<ul>
+    <li>Página_de_contenido_4</li>
+    <li>Página_de_contenido_5</li>
+</ul>
+</li></ul>
+<br />
+<b>Resultado:</b><br />
+<ul><li style="list-style-type:none;"><b>Categoría</b>
+<ul>
+    <li>Página_de_contenido_1</li>
+    <li><b>Submenu_1</b>
+    <ul>
+        <li>Página_de_contenido_3</li>
+        <li><b>Submenu_2</b>
+        <ul>
+            <li>Página_de_contenido_4</li>
+            <li>Página_de_contenido_5</li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li>Página_de_contenido_2</li>
+</ul>
+</li></ul>
+<br />
+Crear un segundo menú con <b>{MenuSubsMobile|menusubs_2}</b>.<br />
+Por ejemplo, para la impresión y el contacto en el pie de página.<br />
+Simplemente selecciona una categoría en la ajustes del complemento y usa <b> {MenuSubsMobile|menusubs_2} </b> <br /> en el lugar deseado de la plantilla.<br />
+Sólo puedes seleccionar categorías que no contengan un barra ("/") en su nombre.<br />
+Por supuesto, también son posibles las sub-categorías .<br />
+<br />
+Para las migas de pan, simplemente usa <b> {MenuSubsMobile|breadcrumb} </b> en el lugar deseado.

@@ -1,5 +1,7 @@
-
-config_gallery_usethumbs                = 
-config_gallery_placeholders             = 
-config_gallery_plugin_name              = 
-config_gallery_plugin_desc              = 
+config_gallery_usethumbs                = ¿Presentar la galería como miniaturas?
+config_gallery_target                   = ¿Debe abrirse la galería en una nueva ventana / pestaña del navegador, o en la ventana actual?
+config_gallery_target_self              = En la ventana / pestaña actual.
+config_gallery_target_blank             = En una nueva ventana / pestaña.
+config_gallery_placeholders             = Aquí puedes definir la presentación de las imágenes individuales de la galería, combinando texto libre con los marcadores correspondientes a los distintos elementos de la misma -se permiten los saltos de línea- (sólo modo individual).
+config_gallery_plugin_name              = Galería por defecto de moziloCMS
+config_gallery_plugin_desc              = Crea la vista por defecto de la galería. <br />  <br />  En los ajustes del complemento, se puede configurar la opción de visualizar en una nueva ventana / pestaña o en la actual. <br />  La opción "¿Presentar la galería como miniaturas?" permite determinar si la imagénes se presentarán de manera individual o bien todas en modo de miniatura <br /> <br /><span style="font-weight:bold;"> Uso:</span> <br / >{Gallery|moziloCMS} añade la galería "moziloCMS" (cuando se abre en la misma ventana) o un enlace (destino en otra pestaña). <br />{Gallery|moziloCMS, Cualquier texto} añade un enlace a la galería "moziloCMS" con el texto especificado (sólo para cuando se abre en otra ventana / pestaña). <br />  <br /> <span style="font-weight:bold;"> Configuracion del modo de presentación individual:</span> la presentación de los distintos elementos disponibles de una galería se consigue mediante el uso de marcadores individuales que serán sustituidos en el cuerpo del texto. Los siguientes marcadores se encuentran disponibles (para usar tal cual -llaves incluidas-): <br />  <ul> <li>{CURRENTGALLERY}: Nombre de la galería</li><li>{GALLERYMENU}: Menú "primera / anterior / siguiente / última" </li><li>{NUMBERMENU} : Número de menú / Todas las imágenes incluidos los textos alternativos </li><li>{CURRENTPIC}: Imagen actual</li> <li>{CURRENTDESCRIPTION}: Texto alternativo de la imagen actual </li><li>{XOUTOFY}: "Imagen x de y" </li><li>{CURRENT_INDEX}: Número de imagen actual </li><li>{PREVIOUS_INDEX}: Número de imagen anterior </li><li>{NEXT_INDEX}: Número de imagen siguiente </li></ul><br />

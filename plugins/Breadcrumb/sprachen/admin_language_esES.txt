@@ -1,0 +1,5 @@
+config_breadcrumb_text    = Texto precedente (por defecto: en blanco)
+config_first_entry        = Primera entrada (por defecto: Inicio)
+config_breadcrumb_divider  = Separador (por defecto: '»')
+description     = Inserta migas de pan en cualquier lugar de un artículo, o en cualquier lugar en la plantilla
+placeholder     = Inserta migas de pan
