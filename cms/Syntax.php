@@ -391,7 +391,7 @@ class Syntax {
     function insert_in_head($data) {
         if(!in_array($data,$this->script_replace)) {
             $dummy = '<!-- dummy script style '.count($this->script_search).' -->';
-            $this->content = str_replace(array("</head>","</HEAD>"),$dummy."\n</head>",$this->content);
+            $this->content = str_replace(array("</head>","</HEAD>"),$dummy."\n</head>",$this->content ?? '');
             $this->script_search[] = $dummy;
             $this->script_replace[] = $data;
         }
@@ -400,7 +400,7 @@ class Syntax {
     function insert_in_tail($data) {
         if(!in_array($data,$this->script_replace)) {
             $dummy = '<!-- dummy script_tail '.count($this->script_search).' -->';
-            $this->content = str_replace(array("</body>","</BODY>"),$dummy."\n</body>",$this->content);
+            $this->content = str_replace(array("</body>","</BODY>"),$dummy."\n</body>",$this->content ?? '');
             $this->script_search[] = $dummy;
             $this->script_replace[] = $data;
         }
