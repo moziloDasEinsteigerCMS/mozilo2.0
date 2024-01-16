@@ -12,7 +12,7 @@
  * Korrektur  2022-03-27:
  * function syntax_user(...), Abfangen leere/nicht gesetzte Übergabewerte
  */
-
+#[AllowDynamicProperties]
 class Syntax {
     
     var $LANG;
