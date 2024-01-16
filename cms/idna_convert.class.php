@@ -49,6 +49,7 @@
  * @copyright 2004-2014 phlyLabs Berlin, http://phlylabs.de
  * @version 0.9.0 2014-12-12
  */
+#[AllowDynamicProperties]
 class idna_convert {
 
     private $version = '0.9.0';
