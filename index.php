@@ -394,6 +394,7 @@ function readTemplate($template,$pagecontent) {
         $search = new SearchClass();
         # wir suchen nur im content teil
         list($content_first,$content,$content_last) = $syntax->splitContent($HTML);
+        $content = str_replace(array('---content~~~','~~~content---'),"",$content);
         $content = $search->highlightSearch($content);
         $HTML = $content_first.$content.$content_last;
         unset($content_first,$content,$content_last);
