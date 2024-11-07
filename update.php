@@ -524,9 +524,9 @@ function makeCONTACTSetings($file) {
             $tmp_name = "";
             $tmp_show = "";
             $tmp_mandatory = "";
-            if($tmp_set[(count($tmp_set) - 1)] and $tmp_set[(count($tmp_set) - 1)] == "true")
+             if($tmp_set[(count($tmp_set) - 1)] ?? '' and $tmp_set[(count($tmp_set) - 1)] == "true")
                 $tmp_mandatory = "true";
-            if($tmp_set[(count($tmp_set) - 2)] and $tmp_set[(count($tmp_set) - 2)] == "true")
+            if($tmp_set[(count($tmp_set) - 2)] ?? '' and $tmp_set[(count($tmp_set) - 2)] == "true")
                 $tmp_show = "true";
             if(count($tmp_set) == 3)
                 $tmp_name = $tmp_set[0];
@@ -699,6 +699,14 @@ function updateTemplate($dir) {
     $content = str_replace($search,$replace,$content);
     $content = toUtf($content);
     file_put_contents($dir.'template.html',$usesubmenu.$content,LOCK_EX);
+}
+
+function updateNoUpload() { 
+$noupload = file_get_contents(.BASE_DIR_ADMIN.'basic.conf.php');
+
+$content = str_replace("php%2Cphp3%2Cphp4%2Cphp5%2Cphp6","php%2Cphp3%2Cphp4%2Cphp5%2Cphp6%2Csvg%2Cxml","php%2Cphp3%2Cphp4%2Cphp5%2Cphp6");
+
+return $content;
 }
 
 ?>

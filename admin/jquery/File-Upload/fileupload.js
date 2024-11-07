@@ -19,9 +19,9 @@ function file_rename(change_item) {
 }
 
 function is_filename_allowed(name) {
-    if(name.search(/[^a-zA-Z0-9._-]/) != -1)
-        return false;
-    return true;
+    if(name.search(/^[A-Za-z0-9\-\_]+\.[a-zA-Z]{3,4}$/) != -1)
+        return true;
+    return false;
 }
 
 function load_files_datajson(that) {
@@ -75,7 +75,7 @@ $(function () {
 
     $('.fu-rename-file').live('dblclick', function (e) {
         e.preventDefault();
-        $(this).addClass('fu-nosearch').hide(0).after("<input class=\"fu-rename-in-file\" type=\"text\" value=\""+$(this).text()+"\">");
+        $(this).addClass('fu-nosearch').hide(0).after("<input class=\"fu-rename-in-file\" type=\"text\" value=\""+$(this).text().split('.php').shift().split('.svg').shift().split('.xml').shift()+"\">");
         $(this).siblings('.fu-rename-in-file').focus();
     });
 
@@ -101,7 +101,7 @@ $(function () {
                     return false;
                 }
                 send_item_status = "file_rename";
-                var para = "newfile="+new_name+"&orgfile="+$(this).siblings('.fu-rename-file').text()+"&curent_dir="+rawurlencode_js($(this).closest('.fileupload').find('input[name="curent_dir"]').val());
+                var para = "newfile="+new_name.split('php').shift().split('svg').shift().split('xml').shift()+"&orgfile="+$(this).siblings('.fu-rename-file').text()+"&curent_dir="+rawurlencode_js($(this).closest('.fileupload').find('input[name="curent_dir"]').val());
                 send_data(para,$(this));
             }
         } else if(e.which == 27) { // esc
