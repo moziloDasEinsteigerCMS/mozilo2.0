@@ -702,7 +702,7 @@ function updateTemplate($dir) {
 }
 
 function updateNoUpload() { 
-$noupload = file_get_contents(.BASE_DIR_ADMIN.'basic.conf.php');
+$noupload = file_get_contents(BASE_DIR_ADMIN.'basic.conf.php');
 
 $content = str_replace("php%2Cphp3%2Cphp4%2Cphp5%2Cphp6","php%2Cphp3%2Cphp4%2Cphp5%2Cphp6%2Csvg%2Cxml","php%2Cphp3%2Cphp4%2Cphp5%2Cphp6");
 
